@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+	<context:component-scan base-package="org.jmu.rspy.module" />
+
+<mvc:annotation-driven />
+
+	<!-- 静态文件 -->
+	<mvc:default-servlet-handler />
+
+	<bean id="contentNegotiationManager"
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="order" value="1" />
+		<property name="ignoreAcceptHeader" value="true" />
+		<property name="favorParameter" value="false" />
+		<property name="defaultContentType" value="text/html" />
+		<property name="mediaTypes">
+			<map>
+				<entry key="json" value="application/json" />
+				<entry key="xml" value="application/xml" />
+				<entry key="html" value="text/html" /><!-- SPR-7504 -->
+			</map>
+		</property>
+
+		<property name="defaultViews">
+			<list>
+				<bean name="jsonView"
+					class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+				<bean id="xstreamMarshaller" name="xstreamMarshaller"
+					class="org.springframework.web.servlet.view.xml.MarshallingView">
+					<property name="marshaller">
+						<bean class="org.springframework.oxm.xstream.XStreamMarshaller" />
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8" />
+		<!-- 默认50MB -->
+		<property name="maxUploadSize" value="52428800" />
+		<!-- 上传路径 -->
+		<property name="uploadTempDir" value="/upload/" />
+	</bean>
+
+	<!-- 本地化设置，中英文可能用得到 -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="cookieName" value="clientLanguage" />
+		<property name="cookieMaxAge" value="100000" />
+		<property name="cookiePath" value="/" />
+		<property name="defaultLocale" value="zh_CN" />
+	</bean>
+
+	<bean id="interResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".jsp" />
+		   <property name="contentType" value="text/html;charset=UTF-8"/>  
+	</bean>
+
+</beans>
