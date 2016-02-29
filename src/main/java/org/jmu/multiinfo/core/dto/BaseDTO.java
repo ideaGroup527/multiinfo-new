@@ -1,15 +1,9 @@
 package org.jmu.multiinfo.core.dto;
 
 public class BaseDTO {
-private Object data;
 private String ret_code = "";
 private String ret_msg = "";
-public Object getData() {
-	return data;
-}
-public void setData(Object data) {
-	this.data = data;
-}
+private String ret_err = "";
 public String getRet_code() {
 	return ret_code;
 }
@@ -21,6 +15,12 @@ public String getRet_msg() {
 }
 public void setRet_msg(String ret_msg) {
 	this.ret_msg = ret_msg;
+}
+public String getRet_err() {
+	return ret_err;
+}
+public void setRet_err(String ret_err) {
+	this.ret_err = ret_err;
 }
 
 }

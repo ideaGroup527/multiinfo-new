@@ -2,16 +2,23 @@ package org.jmu.multiinfo.service.upload.impl;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.dto.upload.ExcelDTO;
 import org.jmu.multiinfo.dto.upload.SheetDTO;
 import org.jmu.multiinfo.service.upload.UploadService;
@@ -19,23 +26,43 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UploadServiceImpl implements UploadService{
-
-	public ExcelDTO readExcel(File file,int n) {
+	public ExcelDTO readExcel(File file,int n) throws Exception{
 		ExcelDTO excelDto = new ExcelDTO();
 		SheetDTO sheetDto = new SheetDTO();
 		excelDto.setFileName(file.getName());
 		excelDto.setCurrenSheetNo(n);
-		try {
-			HSSFWorkbook wb = new HSSFWorkbook(new FileInputStream(file));
+
+			Workbook wb = null;
+			Map<String,Object> condition = new HashMap<String,Object>();
+				try {
+					wb = ExcelUtil.create(new FileInputStream(file),condition);
+					excelDto.setVersion(condition.get("version").toString());
+				} catch (EncryptedDocumentException e) {
+					excelDto.setRet_msg("excel已被加密");
+					excelDto.setRet_err(e.getMessage());
+					return excelDto;
+				} catch (InvalidFormatException e) {
+					excelDto.setRet_msg("格式不合法");
+					excelDto.setRet_err(e.getMessage());
+					return excelDto;
+				} catch (FileNotFoundException e) {
+					excelDto.setRet_msg("文件不存在");
+					excelDto.setRet_err(e.getMessage());
+					return excelDto;
+				} catch (IOException e) {
+					excelDto.setRet_msg("无法读取文件");
+					excelDto.setRet_err(e.getMessage());
+					return excelDto;
+				}
 			int sheetNum = wb.getNumberOfSheets();
 			List<String> sheetNameList = new ArrayList<String>();
 			for (int i = 0; i < sheetNum; i++) {
-				HSSFSheet sheet = wb.getSheetAt(i);
+				HSSFSheet sheet = (HSSFSheet) wb.getSheetAt(i);
 				sheetNameList.add(sheet.getSheetName());
 			}
 			excelDto.setSheetNum(sheetNum);
 			excelDto.setSheetNameList(sheetNameList);
-			HSSFSheet sheet = wb.getSheetAt(n);
+			HSSFSheet sheet = (HSSFSheet) wb.getSheetAt(n);
 
 			int rowcount = sheet.getLastRowNum();// 取得有效的行数
 			int colcount = sheet.getRow(0).getPhysicalNumberOfCells();// 总列数
@@ -50,9 +77,6 @@ public class UploadServiceImpl implements UploadService{
 			sheetDto.setData(str);
 			sheetDto.setSheetName(sheet.getSheetName());
 			excelDto.setSheet(sheetDto);
-		} catch (Exception e) {
-			
-			}
 		return excelDto;
 	}
 	

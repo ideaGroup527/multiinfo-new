@@ -2,11 +2,14 @@ package org.jmu.multiinfo.dto.upload;
 
 import java.util.List;
 
-public class ExcelDTO {
+import org.jmu.multiinfo.core.dto.BaseDTO;
+
+public class ExcelDTO extends BaseDTO{
 private String fileName;
 private int sheetNum;
 private SheetDTO sheet;
 private int currenSheetNo;
+private String version;
 private List<String> sheetNameList;
 public String getFileName() {
 	return fileName;
@@ -38,6 +41,12 @@ public int getCurrenSheetNo() {
 }
 public void setCurrenSheetNo(int currenSheetNo) {
 	this.currenSheetNo = currenSheetNo;
+}
+public String getVersion() {
+	return version;
+}
+public void setVersion(String version) {
+	this.version = version;
 }
 
 }
