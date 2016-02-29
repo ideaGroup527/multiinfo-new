@@ -1,4 +1,4 @@
-package org.jmu.multiinfo.base.dto;
+package org.jmu.multiinfo.core.dto;
 
 
 /***

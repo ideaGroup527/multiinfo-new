@@ -1,11 +1,11 @@
-package org.jmu.multiinfo.upload.dto;
+package org.jmu.multiinfo.dto.upload;
 
 import java.util.List;
 
-public class ExcelDto {
+public class ExcelDTO {
 private String fileName;
 private int sheetNum;
-private SheetDto sheet;
+private SheetDTO sheet;
 private int currenSheetNo;
 private List<String> sheetNameList;
 public String getFileName() {
@@ -27,10 +27,10 @@ public List<String> getSheetNameList() {
 public void setSheetNameList(List<String> sheetNameList) {
 	this.sheetNameList = sheetNameList;
 }
-public SheetDto getSheet() {
+public SheetDTO getSheet() {
 	return sheet;
 }
-public void setSheet(SheetDto sheet) {
+public void setSheet(SheetDTO sheet) {
 	this.sheet = sheet;
 }
 public int getCurrenSheetNo() {

@@ -1,6 +1,6 @@
-package org.jmu.multiinfo.upload.dto;
+package org.jmu.multiinfo.dto.upload;
 
-public class SheetDto {
+public class SheetDTO {
 private String sheetName;
 private int sheetNo;
 private String[][] data;

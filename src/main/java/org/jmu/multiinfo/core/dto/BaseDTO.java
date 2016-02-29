@@ -1,6 +1,6 @@
-package org.jmu.multiinfo.base.dto;
+package org.jmu.multiinfo.core.dto;
 
-public class BaseDto {
+public class BaseDTO {
 private Object data;
 private String ret_code = "";
 private String ret_msg = "";

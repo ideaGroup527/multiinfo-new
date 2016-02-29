@@ -1,4 +1,4 @@
-package org.jmu.multiinfo.utils;
+package org.jmu.multiinfo.web.utils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -172,15 +172,5 @@ public class CommonUtil {
 		return s;
 	}
 	
-	public static String getFullURL(HttpServletRequest request){
-		String url = "";
-		url = request.getScheme() +"://" + request.getServerName()  
-                        + ":" +request.getServerPort() 
-                        + request.getServletPath();
-		if (request.getQueryString() != null){
-			url += "?" + request.getQueryString();
-		}
-		return url;
-	}
 	
 }
