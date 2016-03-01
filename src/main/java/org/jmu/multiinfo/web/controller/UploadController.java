@@ -1,4 +1,4 @@
-package org.jmu.multiinfo.controller;
+package org.jmu.multiinfo.web.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -12,10 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.jmu.multiinfo.base.dto.BaseDto;
-import org.jmu.multiinfo.service.UploadService;
-import org.jmu.multiinfo.upload.dto.ExcelDto;
-import org.jmu.multiinfo.utils.CommonUtil;
+import org.jmu.multiinfo.core.dto.BaseDTO;
+import org.jmu.multiinfo.dto.upload.ExcelDTO;
+import org.jmu.multiinfo.service.upload.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,17 +46,13 @@ public class UploadController {
 	
 	@RequestMapping(value = "/file",method=RequestMethod.POST)
 	@ResponseBody
-	public BaseDto uploadFile(HttpServletRequest request, HttpServletResponse response,HttpSession session,
-			@RequestParam("data_file") MultipartFile file,@RequestParam(required=false,value="sheetNo",defaultValue="0") int sheetNo) throws IOException{
-		logger.warn(CommonUtil.getFullURL(request));
+	public BaseDTO uploadFile(HttpServletRequest request, HttpServletResponse response,HttpSession session,
+			@RequestParam("data_file") MultipartFile file,@RequestParam(required=false,value="sheetNo",defaultValue="0") int sheetNo) throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
-		BaseDto baseDto = new BaseDto();
-		baseDto.setRet_code("0");
 		
 		FileOutputStream fos = FileUtils.openOutputStream(new File(file.getOriginalFilename())); 
 		IOUtils.copy(file.getInputStream(), fos); 
-		ExcelDto  data = uploadService.readExcel(new File(file.getOriginalFilename()),sheetNo);
-		baseDto.setData(data);
-		return baseDto;
+		ExcelDTO  data = uploadService.readExcel(new File(file.getOriginalFilename()),sheetNo);
+		return data;
 	}
 }

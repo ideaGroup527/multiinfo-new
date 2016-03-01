@@ -1,4 +1,4 @@
-package org.jmu.multiinfo.service;
+package org.jmu.multiinfo.service.upload;
 
 /**
  * 
