@@ -77,6 +77,10 @@ public class UploadServiceImpl implements UploadService{
 			sheetDto.setData(str);
 			sheetDto.setSheetName(sheet.getSheetName());
 			excelDto.setSheet(sheetDto);
+			excelDto.setPhysicalRowNum(sheet.getPhysicalNumberOfRows());
+			char lastColIndex = (char) ('A'+colcount-1);
+			excelDto.setLastCellIndex(lastColIndex+rowcount+"");
+			excelDto.setPhysicalCellNum(colcount);
 		return excelDto;
 	}
 	

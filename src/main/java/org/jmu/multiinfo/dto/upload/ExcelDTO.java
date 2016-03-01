@@ -11,6 +11,9 @@ private SheetDTO sheet;
 private int currenSheetNo;
 private String version;
 private List<String> sheetNameList;
+private Integer physicalRowNum;
+private Integer physicalCellNum;
+private String lastCellIndex;
 public String getFileName() {
 	return fileName;
 }
@@ -47,6 +50,24 @@ public String getVersion() {
 }
 public void setVersion(String version) {
 	this.version = version;
+}
+public Integer getPhysicalRowNum() {
+	return physicalRowNum;
+}
+public void setPhysicalRowNum(Integer physicalRowNum) {
+	this.physicalRowNum = physicalRowNum;
+}
+public String getLastCellIndex() {
+	return lastCellIndex;
+}
+public void setLastCellIndex(String lastCellIndex) {
+	this.lastCellIndex = lastCellIndex;
+}
+public Integer getPhysicalCellNum() {
+	return physicalCellNum;
+}
+public void setPhysicalCellNum(Integer physicalCellNum) {
+	this.physicalCellNum = physicalCellNum;
 }
 
 }
