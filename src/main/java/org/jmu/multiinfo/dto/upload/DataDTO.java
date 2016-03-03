@@ -2,6 +2,7 @@ package org.jmu.multiinfo.dto.upload;
 
 public class DataDTO {
 private String position;
+private String positionDes;
 private String typeDes;
 private Integer type;
 private String typeFormat;
@@ -43,5 +44,10 @@ public String getMergedRange() {
 public void setMergedRange(String mergedRange) {
 	this.mergedRange = mergedRange;
 }
-
+public String getPositionDes() {
+	return positionDes;
+}
+public void setPositionDes(String positionDes) {
+	this.positionDes = positionDes;
+}
 }

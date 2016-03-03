@@ -7,6 +7,7 @@ private String sheetName;
 private int sheetNo;
 private DataDTO[][] dataGrid;
 private List<VarietyDTO> variety;
+private boolean isFirstRowVar;
 public String getSheetName() {
 	return sheetName;
 }
@@ -31,6 +32,11 @@ public List<VarietyDTO> getVariety() {
 public void setVariety(List<VarietyDTO> variety) {
 	this.variety = variety;
 }
-
+public boolean isFirstRowVar() {
+	return isFirstRowVar;
+}
+public void setFirstRowVar(boolean isFirstRowVar) {
+	this.isFirstRowVar = isFirstRowVar;
+}
 
 }

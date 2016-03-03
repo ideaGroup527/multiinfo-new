@@ -119,7 +119,7 @@ public class UploadServiceImpl implements UploadService{
 					DataDTO data = new DataDTO();
 					dataGrid[i][j] = data;
 					data.setPosition(pjs + (i+1) +"");
-					
+					data.setPositionDes(pjs +","+ (i+1) );
 					data.setData(datamap.get("value"));
 					data.setType((Integer) datamap.get("type"));
 					data.setMergedRange(mergedRange);
@@ -131,6 +131,7 @@ public class UploadServiceImpl implements UploadService{
 			
 			sheetDto.setVariety(varietyList);
 			sheetDto.setSheetName(sheet.getSheetName());
+			sheetDto.setFirstRowVar(isFirstRowVar);
 			excelDto.setSheet(sheetDto);
 			excelDto.setPhysicalRowNum(sheet.getPhysicalNumberOfRows());
 			String lastColIndex = ExcelUtil.getExcelColName(colcount);
