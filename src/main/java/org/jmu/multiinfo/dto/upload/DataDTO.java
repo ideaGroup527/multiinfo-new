@@ -6,7 +6,7 @@ private String typeDes;
 private Integer type;
 private String typeFormat;
 private Object data;
-
+private String mergedRange = "";
 public String getPosition() {
 	return position;
 }
@@ -36,6 +36,12 @@ public String getTypeFormat() {
 }
 public void setTypeFormat(String typeFormat) {
 	this.typeFormat = typeFormat;
+}
+public String getMergedRange() {
+	return mergedRange;
+}
+public void setMergedRange(String mergedRange) {
+	this.mergedRange = mergedRange;
 }
 
 }

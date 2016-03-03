@@ -76,10 +76,17 @@ public class UploadServiceImpl implements UploadService{
 			for (int i = 0; i < rowcount; i++) {
 				row = sheet.getRow(i); // 获得第i行
 				for (int j = 0; j < colcount; j++) {
-					Map<String,Object> datamap = ExcelUtil.getCellFormatValue(row.getCell(j));
+					Map<String,Object> datamap =null;
+				if(	ExcelUtil.isMergedRegion(sheet, i, j)){
+					datamap=	ExcelUtil.getMergedRegionValue(sheet, i, j);
+				}else{
+					
+					datamap= ExcelUtil.getCellFormatValue(row.getCell(j));
+				}
 					String typeDes =(String) datamap.get("typeDes");
 					String pjs = ExcelUtil.getExcelColName(j+1);
-					logger.debug(pjs);
+					String mergedRange = (String) datamap.get("mergedRange");
+//					logger.debug(pjs);
 					if(i==0){
 						VarietyDTO variety =  new VarietyDTO();
 						
@@ -95,7 +102,7 @@ public class UploadServiceImpl implements UploadService{
 					
 					data.setData(datamap.get("value"));
 					data.setType((Integer) datamap.get("type"));
-					
+					data.setMergedRange(mergedRange);
 					data.setTypeDes(typeDes );
 					
 				}
