@@ -32,7 +32,7 @@ public List<VarietyDTO> getVariety() {
 public void setVariety(List<VarietyDTO> variety) {
 	this.variety = variety;
 }
-public boolean isFirstRowVar() {
+public boolean getIsFirstRowVar() {
 	return isFirstRowVar;
 }
 public void setFirstRowVar(boolean isFirstRowVar) {
