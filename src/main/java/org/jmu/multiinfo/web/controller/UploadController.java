@@ -36,7 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 * @version V1.0
  */
 @Controller
-@RequestMapping("/data")
+@RequestMapping("/upload.do")
 public class UploadController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -44,7 +44,7 @@ public class UploadController {
 	@Autowired
 	public UploadService uploadService;
 	
-	@RequestMapping(value = "/file",method=RequestMethod.POST)
+	@RequestMapping(params = { "method=excel" },method=RequestMethod.POST)
 	@ResponseBody
 	public BaseDTO uploadFile(HttpServletRequest request, HttpServletResponse response,HttpSession session,
 			@RequestParam("data_file") MultipartFile file,@RequestParam(required=false,value="sheetNo",defaultValue="0") int sheetNo) throws Exception{
