@@ -31,7 +31,17 @@ import org.springframework.stereotype.Service;
 public class UploadServiceImpl implements UploadService{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	
+	public ExcelDTO readExcel(File file) throws Exception{
+	return	readExcel(file,0);
+	}
+	
 	public ExcelDTO readExcel(File file,int n) throws Exception{
+	return	readExcel(file,n,true);
+	}
+	
+	
+	public ExcelDTO readExcel(File file,int n,boolean isFirstRowVar) throws Exception{
 		ExcelDTO excelDto = new ExcelDTO();
 		SheetDTO sheetDto = new SheetDTO();
 		excelDto.setFileName(file.getName());
@@ -87,7 +97,7 @@ public class UploadServiceImpl implements UploadService{
 					String pjs = ExcelUtil.getExcelColName(j+1);
 					String mergedRange = (String) datamap.get("mergedRange");
 //					logger.debug(pjs);
-					if(i==0){
+					if(isFirstRowVar&&i==0){
 						VarietyDTO variety =  new VarietyDTO();
 						
 						variety.setPosition(pjs);
@@ -95,6 +105,16 @@ public class UploadServiceImpl implements UploadService{
 						variety.setType((Integer) datamap.get("type"));
 						variety.setTypeDes(typeDes);
 						varietyList.add(variety);
+					}
+					if(!isFirstRowVar&&i==0){
+							VarietyDTO variety =  new VarietyDTO();
+						
+						variety.setPosition(pjs);
+						variety.setVarietyName("V"+(i+1));
+						variety.setType((Integer) datamap.get("type"));
+						variety.setTypeDes(typeDes);
+						varietyList.add(variety);
+						
 					}
 					DataDTO data = new DataDTO();
 					dataGrid[i][j] = data;

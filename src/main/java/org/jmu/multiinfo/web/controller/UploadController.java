@@ -47,12 +47,13 @@ public class UploadController {
 	@RequestMapping(params = { "method=excel" },method=RequestMethod.POST)
 	@ResponseBody
 	public BaseDTO uploadFile(HttpServletRequest request, HttpServletResponse response,HttpSession session,
-			@RequestParam("data_file") MultipartFile file,@RequestParam(required=false,value="sheetNo",defaultValue="0") int sheetNo) throws Exception{
+			@RequestParam("data_file") MultipartFile file,@RequestParam(required=false,value="sheetNo",defaultValue="0") int sheetNo,
+			@RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar) throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		FileOutputStream fos = FileUtils.openOutputStream(new File(file.getOriginalFilename())); 
 		IOUtils.copy(file.getInputStream(), fos); 
-		ExcelDTO  data = uploadService.readExcel(new File(file.getOriginalFilename()),sheetNo);
+		ExcelDTO  data = uploadService.readExcel(new File(file.getOriginalFilename()),sheetNo,isFirstRowVar);
 		return data;
 	}
 }
