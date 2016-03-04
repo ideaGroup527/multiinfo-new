@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.POIXMLDocument;
@@ -66,6 +68,36 @@ public class ExcelUtil {
 		return rtn;
 	}
 
+	/***
+	 * 如A1:B8
+	 * @param range
+	 * @return
+	 */
+	public static PositionBean splitRange(String range){
+		PositionBean positionBean = new PositionBean();
+		String[] rangeArr =	range.split(":");
+		if(rangeArr == null ||rangeArr.length<2) return null;
+		String first = rangeArr[0];
+		String last = rangeArr[1];
+		Pattern pattern = Pattern.compile("[0-9]");
+		 Matcher matcher = pattern.matcher(first);
+		 if (matcher.find()) {
+			  int beginIndex =  first.indexOf(matcher.group());
+			  positionBean.setFirstRowId(Integer.valueOf(first.substring(beginIndex)));
+			  positionBean.setFirstColId(Integer.valueOf(getExcelColIndex(first.substring(0,beginIndex))));
+			 }else{
+				 return null;
+			 }
+		 Matcher matcher2 = pattern.matcher(last);
+		 if (matcher2.find()) {
+			  int beginIndex =  last.indexOf(matcher2.group());
+			  positionBean.setLastRowId(Integer.valueOf(last.substring(beginIndex)));
+			  positionBean.setLastColId(Integer.valueOf(getExcelColIndex(last.substring(0,beginIndex))));
+			 }else{
+				 return null;
+			 }
+		 return positionBean;
+	}
 	
 	/***
 	 * 列号转化为标题，如AA--27

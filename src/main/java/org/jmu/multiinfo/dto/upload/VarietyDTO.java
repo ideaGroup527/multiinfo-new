@@ -6,6 +6,8 @@ public class VarietyDTO {
 	private Integer type;
 	private String typeFormat;
 	private String  varietyName;
+	//数据范围
+	private String range;
 	public String getPosition() {
 		return position;
 	}
@@ -36,5 +38,10 @@ public class VarietyDTO {
 	public void setVarietyName(String varietyName) {
 		this.varietyName = varietyName;
 	}
-	
+	public String getRange() {
+		return range;
+	}
+	public void setRange(String range) {
+		this.range = range;
+	}
 }
