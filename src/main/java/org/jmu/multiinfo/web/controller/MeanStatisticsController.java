@@ -30,7 +30,7 @@ public class MeanStatisticsController {
 	@RequestMapping(params = { "method=median" })
 	@ResponseBody
    public MedianDTO calMedian(MedianCondition condition){
-		
-		return null;
+		MedianDTO medianDTO =	meanStatisticsService.calMedian(condition);
+		return medianDTO;
 	}
 }
