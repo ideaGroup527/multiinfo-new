@@ -61,7 +61,7 @@ public class MeanStatisticsServiceImpl implements MeanStatisticsService{
 					for (int i = 0; i < si; i++) {
 						for (int j = depVarRange.getFirstColId()-1; j < depVarRange.getLastColId(); j++) {
 							if(i== data.length) break;
-							dataList.add((Double)data[tmpList.get(i)][j].getData());
+							dataList.add(Double.valueOf((String) data[tmpList.get(i)][j].getData()));
 						}
 					}
 				Map<String, ResultDataDTO> map = new HashMap<String, ResultDataDTO>();

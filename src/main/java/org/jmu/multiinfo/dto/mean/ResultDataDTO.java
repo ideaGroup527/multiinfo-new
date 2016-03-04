@@ -36,6 +36,11 @@ public String getTypeFormat() {
 public void setTypeFormat(String typeFormat) {
 	this.typeFormat = typeFormat;
 }
+@Override
+public String toString() {
+	return "ResultDataDTO [resultData=" + resultData + ", varietyName=" + varietyName + ", typeDes=" + typeDes
+			+ ", type=" + type + ", typeFormat=" + typeFormat + "]";
+}
 
 
 }

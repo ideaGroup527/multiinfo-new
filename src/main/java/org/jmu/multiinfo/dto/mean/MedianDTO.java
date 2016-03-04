@@ -27,5 +27,8 @@ public String getReportTitle() {
 public void setReportTitle(String reportTitle) {
 	this.reportTitle = reportTitle;
 }
-
+@Override
+public String toString() {
+	return "MedianDTO [resDataMap=" + resDataMap + ", resultType=" + resultType + ", reportTitle=" + reportTitle + "]";
+}
 }
