@@ -19,13 +19,6 @@ public interface BasicStatisticsService {
 	 */
 	public Double median(List<Double> dataList);
 	
-	/***
-	 * 均值
-	 * @param dataList
-	 * @return
-	 */
-	public Double mean(List<Double> dataList);
-	
 	
 	/***
 	 * 最大值
@@ -75,5 +68,19 @@ public interface BasicStatisticsService {
 	 * @return
 	 */
 	public Double average(List<Double> dataList);
+
+	/***
+	 * 总和
+	 * @param dataList
+	 * @return
+	 */
+	public Double sum(List<Double> dataList);
+	
+	/***
+	 * 偏度
+	 * @param dataList
+	 * @return
+	 */
+	public Double skewness(List<Double> dataList);
 	
 }

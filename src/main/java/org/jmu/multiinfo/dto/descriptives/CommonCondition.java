@@ -5,7 +5,7 @@ import java.util.List;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
 
-public class MeanCondition {
+public class CommonCondition {
 	 //变量
 	 private List<VarietyDTO> variableList;
 	 

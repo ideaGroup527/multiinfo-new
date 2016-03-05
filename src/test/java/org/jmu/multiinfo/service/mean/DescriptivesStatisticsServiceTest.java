@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jmu.multiinfo.dto.descriptives.MeanCondition;
+import org.jmu.multiinfo.dto.descriptives.CommonCondition;
 import org.jmu.multiinfo.dto.descriptives.MeanDTO;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.DataVariety;
@@ -32,7 +32,7 @@ private DescriptivesStatisticsService descriptivesStatisticsService;
 
 @Test
 public void calMeanTest() throws JsonGenerationException, JsonMappingException, IOException{
-	MeanCondition condition = new MeanCondition();
+	CommonCondition condition = new CommonCondition();
 	List<VarietyDTO> dependentVariableList = new ArrayList<VarietyDTO>();
 	
 	VarietyDTO deVar = new VarietyDTO();

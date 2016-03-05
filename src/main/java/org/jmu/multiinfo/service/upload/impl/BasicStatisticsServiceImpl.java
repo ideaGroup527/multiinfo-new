@@ -20,15 +20,6 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 		}
 	}
 
-	@Override
-	public Double mean(List<Double> dataList) {
-		Double sum = 0.0;
-		for (int i = 0; i < dataList.size(); i++) {
-			sum += dataList.get(i);
-			
-		}
-		return sum/dataList.size();
-	}
 
 	@Override
 	public Double max(List<Double> dataList) {
@@ -60,8 +51,7 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 
 	@Override
 	public Double arithmeticMean(List<Double> dataList) {
-		// TODO Auto-generated method stub
-		return null;
+		return sum(dataList)/dataList.size();
 	}
 
 	@Override
@@ -69,5 +59,23 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Double sum(List<Double> dataList) {
+		Double sum = 0.0;
+		for (int i = 0; i < dataList.size(); i++) {
+			sum += dataList.get(i);
+			
+		}
+		return sum;
+	}
+
+	@Override
+	public Double skewness(List<Double> dataList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 
 }
