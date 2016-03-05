@@ -1,6 +1,7 @@
 package org.jmu.multiinfo.service.upload.impl;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.jmu.multiinfo.service.upload.BasicStatisticsService;
@@ -21,8 +22,12 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 
 	@Override
 	public Double mean(List<Double> dataList) {
-		// TODO Auto-generated method stub
-		return null;
+		Double sum = 0.0;
+		for (int i = 0; i < dataList.size(); i++) {
+			sum += dataList.get(i);
+			
+		}
+		return sum/dataList.size();
 	}
 
 	@Override

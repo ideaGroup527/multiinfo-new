@@ -43,6 +43,7 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 			retDataDTO.setResultData(retMean);
 			resDataMap.put(varietyDTO.getVarietyName(), retDataDTO);
 		}
+		meanDTO.setResDataMap(resDataMap);
 		return meanDTO;
 	}
 
