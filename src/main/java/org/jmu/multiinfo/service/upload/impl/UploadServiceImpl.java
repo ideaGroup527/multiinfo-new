@@ -21,6 +21,7 @@ import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.DataVariety;
 import org.jmu.multiinfo.dto.upload.ExcelDTO;
 import org.jmu.multiinfo.dto.upload.SheetDTO;
+import org.jmu.multiinfo.dto.upload.TextDTO;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
 import org.jmu.multiinfo.service.upload.UploadService;
 import org.slf4j.Logger;
@@ -139,10 +140,12 @@ public class UploadServiceImpl implements UploadService{
 			excelDto.setPhysicalCellNum(colcount);
 		return excelDto;
 	}
-	
-	
 
+	@Override
+	public TextDTO readText(File file, boolean isFirstRowVar) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
-
 
 }

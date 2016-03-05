@@ -1,4 +1,4 @@
-package org.jmu.multiinfo.dto.mean;
+package org.jmu.multiinfo.dto.comparemean;
 
 import java.util.List;
 

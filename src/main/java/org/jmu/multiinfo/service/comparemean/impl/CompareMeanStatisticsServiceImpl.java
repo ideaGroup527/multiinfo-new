@@ -1,4 +1,4 @@
-package org.jmu.multiinfo.service.mean.impl;
+package org.jmu.multiinfo.service.comparemean.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,18 +9,18 @@ import java.util.Set;
 
 import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.core.util.PositionBean;
-import org.jmu.multiinfo.dto.mean.MedianCondition;
-import org.jmu.multiinfo.dto.mean.MedianDTO;
-import org.jmu.multiinfo.dto.mean.ResultDataDTO;
+import org.jmu.multiinfo.dto.comparemean.MedianCondition;
+import org.jmu.multiinfo.dto.comparemean.MedianDTO;
+import org.jmu.multiinfo.dto.comparemean.ResultDataDTO;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
-import org.jmu.multiinfo.service.mean.MeanStatisticsService;
+import org.jmu.multiinfo.service.comparemean.CompareMeanStatisticsService;
 import org.jmu.multiinfo.service.upload.BasicStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MeanStatisticsServiceImpl implements MeanStatisticsService{
+public class CompareMeanStatisticsServiceImpl implements CompareMeanStatisticsService{
 
 	
 	@Autowired

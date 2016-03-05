@@ -1,9 +1,9 @@
 package org.jmu.multiinfo.web.controller;
 
+import org.jmu.multiinfo.dto.comparemean.MedianCondition;
+import org.jmu.multiinfo.dto.comparemean.MedianDTO;
 import org.jmu.multiinfo.dto.descriptives.MeanCondition;
 import org.jmu.multiinfo.dto.descriptives.MeanDTO;
-import org.jmu.multiinfo.dto.mean.MedianCondition;
-import org.jmu.multiinfo.dto.mean.MedianDTO;
 import org.jmu.multiinfo.service.descriptives.DescriptivesStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

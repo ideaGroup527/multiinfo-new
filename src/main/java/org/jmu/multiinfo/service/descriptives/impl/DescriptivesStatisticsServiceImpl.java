@@ -8,9 +8,9 @@ import java.util.Map;
 
 import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.core.util.PositionBean;
+import org.jmu.multiinfo.dto.comparemean.ResultDataDTO;
 import org.jmu.multiinfo.dto.descriptives.MeanCondition;
 import org.jmu.multiinfo.dto.descriptives.MeanDTO;
-import org.jmu.multiinfo.dto.mean.ResultDataDTO;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
 import org.jmu.multiinfo.service.descriptives.DescriptivesStatisticsService;

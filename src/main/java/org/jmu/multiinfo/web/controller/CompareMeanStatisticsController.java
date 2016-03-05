@@ -1,8 +1,8 @@
 package org.jmu.multiinfo.web.controller;
 
-import org.jmu.multiinfo.dto.mean.MedianCondition;
-import org.jmu.multiinfo.dto.mean.MedianDTO;
-import org.jmu.multiinfo.service.mean.MeanStatisticsService;
+import org.jmu.multiinfo.dto.comparemean.MedianCondition;
+import org.jmu.multiinfo.dto.comparemean.MedianDTO;
+import org.jmu.multiinfo.service.comparemean.CompareMeanStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /***
  * 
  * 
- * @Title: MeanStatisticsController.java
+ * @Title: CompareMeanStatisticsController.java
  * @Package org.jmu.multiinfo.web.controller
  * @Description: 均值统计
  * @author  <a href="mailto:www_1350@163.com">Absurd</a>
@@ -21,16 +21,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
  *
  */
 @Controller
-@RequestMapping("/statistics/mean.do")
-public class MeanStatisticsController {
+@RequestMapping("/statistics/comparemean.do")
+public class CompareMeanStatisticsController {
 	
 	@Autowired
-	private MeanStatisticsService meanStatisticsService;
+	private CompareMeanStatisticsService compareMeanStatisticsService;
 	
 	@RequestMapping(params = { "method=median" })
 	@ResponseBody
    public MedianDTO calMedian(MedianCondition condition){
-		MedianDTO medianDTO =	meanStatisticsService.calMedian(condition);
+		MedianDTO medianDTO =	compareMeanStatisticsService.calMedian(condition);
 		return medianDTO;
 	}
 }

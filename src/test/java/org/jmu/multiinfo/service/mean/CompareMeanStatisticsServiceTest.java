@@ -5,11 +5,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jmu.multiinfo.dto.mean.MedianCondition;
-import org.jmu.multiinfo.dto.mean.MedianDTO;
+import org.jmu.multiinfo.dto.comparemean.MedianCondition;
+import org.jmu.multiinfo.dto.comparemean.MedianDTO;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.DataVariety;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
+import org.jmu.multiinfo.service.comparemean.CompareMeanStatisticsService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -27,10 +28,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:conf/spring/applicationContext.xml"})
-public class MeanStatisticsServiceTest {
+public class CompareMeanStatisticsServiceTest {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 @Autowired
-private MeanStatisticsService meanStatisticsService;
+private CompareMeanStatisticsService compareMeanStatisticsService;
 
 @Test
 public void calMedianTest() throws JsonGenerationException, JsonMappingException, IOException{
@@ -176,7 +177,7 @@ public void calMedianTest() throws JsonGenerationException, JsonMappingException
 	dataGrid[4][2] = i42;
 	
 	condition.setDataGrid(dataGrid);
-	MedianDTO medianDTO =	meanStatisticsService.calMedian(condition );
+	MedianDTO medianDTO =	compareMeanStatisticsService.calMedian(condition );
 	System.out.println(medianDTO.toString());
 	ObjectMapper mapper = new ObjectMapper(); 
 	mapper.writeValue(new File("G://a.json"),condition);

@@ -1,4 +1,4 @@
-package org.jmu.multiinfo.dto.mean;
+package org.jmu.multiinfo.dto.comparemean;
 
 public class ResultDataDTO {
 private Object resultData;

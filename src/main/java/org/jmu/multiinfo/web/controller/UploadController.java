@@ -14,6 +14,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.jmu.multiinfo.core.dto.BaseDTO;
 import org.jmu.multiinfo.dto.upload.ExcelDTO;
+import org.jmu.multiinfo.dto.upload.TextDTO;
 import org.jmu.multiinfo.service.upload.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,6 +55,16 @@ public class UploadController {
 		FileOutputStream fos = FileUtils.openOutputStream(new File(file.getOriginalFilename())); 
 		IOUtils.copy(file.getInputStream(), fos); 
 		ExcelDTO  data = uploadService.readExcel(new File(file.getOriginalFilename()),sheetNo,isFirstRowVar);
+		return data;
+	}
+	
+	@RequestMapping(params = { "method=text" },method=RequestMethod.POST)
+	@ResponseBody
+	public BaseDTO uploadText(HttpServletRequest request, HttpServletResponse response,HttpSession session,
+			@RequestParam("data_file") MultipartFile file,@RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar)throws Exception{
+		FileOutputStream fos = FileUtils.openOutputStream(new File(file.getOriginalFilename())); 
+		IOUtils.copy(file.getInputStream(), fos); 
+		TextDTO data= uploadService.readText(new File(file.getOriginalFilename()),isFirstRowVar);
 		return data;
 	}
 }
