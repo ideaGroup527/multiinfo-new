@@ -1,10 +1,7 @@
 package org.jmu.multiinfo.web.controller;
 
-import org.jmu.multiinfo.dto.comparemean.MedianCondition;
-import org.jmu.multiinfo.dto.comparemean.MedianDTO;
 import org.jmu.multiinfo.dto.descriptives.CommonDTO;
 import org.jmu.multiinfo.dto.descriptives.CommonCondition;
-import org.jmu.multiinfo.dto.descriptives.MeanDTO;
 import org.jmu.multiinfo.service.descriptives.DescriptivesStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,33 +24,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DescriptivesStatisticsController {
 	@Autowired
 	private DescriptivesStatisticsService descriptivesStatisticsService;
-	@RequestMapping(params = { "method=mean" })
+	@RequestMapping(params = { "method=basic" })
 	@ResponseBody
-   public MeanDTO calMean(CommonCondition condition){
-		MeanDTO meanDTO =	descriptivesStatisticsService.calMean(condition);
+   public CommonDTO calMean(CommonCondition condition){
+		CommonDTO meanDTO =	descriptivesStatisticsService.calMean(condition);
 		return meanDTO;
 	}
-	
-	
-	@RequestMapping(params = { "method=max" })
-	@ResponseBody
-   public CommonDTO calMax(CommonCondition condition){
-		CommonDTO maxDTO =	descriptivesStatisticsService.calMax(condition);
-		return maxDTO;
-	}
-	
-	@RequestMapping(params = { "method=min" })
-	@ResponseBody
-   public CommonDTO calMin(CommonCondition condition){
-		CommonDTO maxDTO =	descriptivesStatisticsService.calMin(condition);
-		return maxDTO;
-	}
-	
-	
-	@RequestMapping(params = { "method=sum" })
-	@ResponseBody
-   public CommonDTO calSum(CommonCondition condition){
-		CommonDTO maxDTO =	descriptivesStatisticsService.calSum(condition);
-		return maxDTO;
-	}
+
 }

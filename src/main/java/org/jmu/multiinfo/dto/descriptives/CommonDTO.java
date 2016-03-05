@@ -3,7 +3,7 @@ package org.jmu.multiinfo.dto.descriptives;
 import java.util.Map;
 
 import org.jmu.multiinfo.core.dto.BaseDTO;
-import org.jmu.multiinfo.dto.comparemean.ResultDataDTO;
+import org.jmu.multiinfo.dto.descriptives.ResultDataDTO;
 
 public class CommonDTO  extends BaseDTO{
 	private Map<String,ResultDataDTO> resDataMap;
