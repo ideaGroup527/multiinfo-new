@@ -28,7 +28,7 @@ public class MeanStatisticsServiceImpl implements MeanStatisticsService{
 	@Override
 	public MedianDTO calMedian(MedianCondition condition) {
 		MedianDTO resDTO = new MedianDTO();
-		Map<String, List<Map<String, ResultDataDTO>>> resDataMap = new HashMap<String, List<Map<String, ResultDataDTO>>>();
+		Map<String, Map<String, ResultDataDTO>> resDataMap = new HashMap<String, Map<String, ResultDataDTO>>();
 		//因变量
 		List<VarietyDTO> dependVarList = condition.getDependentVariable();
 		VarietyDTO	independentVar = condition.getIndependentVariable();
@@ -52,8 +52,8 @@ public class MeanStatisticsServiceImpl implements MeanStatisticsService{
 		for (String indep : indepList) {
 			List<Integer> tmpList =	indepIndexMap.get(indep);
 			int si = tmpList.size();
-			List<Map<String, ResultDataDTO>> value = new ArrayList<Map<String, ResultDataDTO>>();
-			
+//			List<Map<String, ResultDataDTO>> value = new ArrayList<Map<String, ResultDataDTO>>();
+			Map<String, ResultDataDTO> map = new HashMap<String, ResultDataDTO>();
 			//遍历每个因变量
 				for (VarietyDTO varietyDTO : dependVarList) {
 					PositionBean depVarRange =ExcelUtil.splitRange(varietyDTO.getRange());
@@ -64,13 +64,13 @@ public class MeanStatisticsServiceImpl implements MeanStatisticsService{
 							dataList.add(Double.valueOf((String) data[tmpList.get(i)][j].getData()));
 						}
 					}
-				Map<String, ResultDataDTO> map = new HashMap<String, ResultDataDTO>();
+				
 				ResultDataDTO reDataDTO = new ResultDataDTO();
 				reDataDTO.setResultData(basicStatisticsService.median(dataList));
 				map.put(varietyDTO.getVarietyName(), reDataDTO );
-					value.add(map);
+				resDataMap.put(indep, map);
 				}
-				resDataMap.put(indep, value);
+				
 		}
 
 		resDTO.setResDataMap(resDataMap);

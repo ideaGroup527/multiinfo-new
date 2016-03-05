@@ -27,14 +27,12 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 
 	@Override
 	public Double max(List<Double> dataList) {
-		// TODO Auto-generated method stub
-		return null;
+		return Collections.max(dataList);
 	}
 
 	@Override
 	public Double min(List<Double> dataList) {
-		// TODO Auto-generated method stub
-		return null;
+		return Collections.min(dataList);
 	}
 
 	@Override
