@@ -26,9 +26,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DescriptivesStatisticsController {
 	@Autowired
 	private DescriptivesStatisticsService descriptivesStatisticsService;
-	@RequestMapping(params = { "method=median" })
+	@RequestMapping(params = { "method=mean" })
 	@ResponseBody
-   public MeanDTO calMedian(MeanCondition condition){
+   public MeanDTO calMean(MeanCondition condition){
 		MeanDTO meanDTO =	descriptivesStatisticsService.calMean(condition);
 		return meanDTO;
 	}
