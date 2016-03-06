@@ -31,6 +31,11 @@ public class DescriptivesStatisticsController {
 		return meanDTO;
 	}
 
-	
+	@RequestMapping(params = { "method=frequency" })
+	@ResponseBody
+   public CommonDTO calFrequency(CommonCondition condition){
+		CommonDTO freDTO =	descriptivesStatisticsService.calFrequency(condition);
+		return freDTO;
+	}
 	
 }

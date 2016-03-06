@@ -9,6 +9,7 @@ private Double standardDeviation;
 private Double total;
 private Double skewness;
 private Double kurtosis;
+private Integer count;
 public Double getMax() {
 	return max;
 }
@@ -56,6 +57,12 @@ public Double getKurtosis() {
 }
 public void setKurtosis(Double kurtosis) {
 	this.kurtosis = kurtosis;
+}
+public Integer getCount() {
+	return count;
+}
+public void setCount(Integer count) {
+	this.count = count;
 }
 
 }

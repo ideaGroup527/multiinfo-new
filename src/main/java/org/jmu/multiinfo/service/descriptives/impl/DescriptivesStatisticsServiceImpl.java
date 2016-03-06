@@ -60,6 +60,7 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 			retDto.setVariance(basicStatisticsService.variance(dataArr));
 			retDto.setSkewness(basicStatisticsService.skewness(dataArr));
 			retDto.setStandardDeviation(basicStatisticsService.standardDeviation(dataArr));
+			retDto.setCount(dataArr.length);
 			ResultDataDTO retDataDTO = new ResultDataDTO();
 			retDataDTO.setResultData(retDto);
 			resDataMap.put(varietyDTO.getVarietyName(), retDataDTO);
