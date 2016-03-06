@@ -1,5 +1,8 @@
 package org.jmu.multiinfo.service.basestatistics.impl;
 
+import java.util.Map;
+
+import org.apache.commons.math3.stat.Frequency;
 import org.apache.commons.math3.stat.descriptive.moment.GeometricMean;
 import org.apache.commons.math3.stat.descriptive.moment.Kurtosis;
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
@@ -84,6 +87,16 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 	public Double kurtosis(double[] dataArr) {
 		  Kurtosis kurtosis = new Kurtosis(); // Kurtosis,峰度  
 		return kurtosis.evaluate(dataArr);
+	}
+
+
+	@Override
+	public Frequency FrequencyCount(Object[] dataArr) {
+		Frequency freq = new Frequency();  
+		for (int i = 0; i < dataArr.length; i++) {
+			freq.addValue(dataArr[i].toString());
+		}
+		return freq;
 	}
 	
 	

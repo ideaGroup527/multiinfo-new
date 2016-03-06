@@ -11,6 +11,8 @@ import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.DataVariety;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
 import org.jmu.multiinfo.service.descriptives.DescriptivesStatisticsService;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -30,9 +32,13 @@ public class DescriptivesStatisticsServiceTest {
 @Autowired
 private DescriptivesStatisticsService descriptivesStatisticsService;
 
-@Test
-public void calMeanTest() throws JsonGenerationException, JsonMappingException, IOException{
-	CommonCondition condition = new CommonCondition();
+
+private CommonCondition condition;
+
+private CommonDTO retDTO ;
+@Before
+public void init(){
+	condition = new CommonCondition();
 	List<VarietyDTO> dependentVariableList = new ArrayList<VarietyDTO>();
 	
 	VarietyDTO deVar = new VarietyDTO();
@@ -167,11 +173,28 @@ public void calMeanTest() throws JsonGenerationException, JsonMappingException, 
 	dataGrid[4][2] = i42;
 	
 	condition.setDataGrid(dataGrid);
-	CommonDTO meanDTO =	descriptivesStatisticsService.calMean(condition );
-	System.out.println(meanDTO.toString());
+}
+
+
+@Test
+public void calMeanTest(){
+	
+	retDTO =	descriptivesStatisticsService.calDesc(condition );
+
+}
+
+@Test
+public void calFrequencyTest(){
+	retDTO =	descriptivesStatisticsService.calFrequency(condition );
+}
+
+
+@After
+public void saveData() throws JsonGenerationException, JsonMappingException, IOException{
+	System.out.println(retDTO.toString());
 	ObjectMapper mapper = new ObjectMapper(); 
 	mapper.writeValue(new File("G://a.json"),condition);
 	System.out.println("");
-	mapper.writeValue(new File("G://b.json"),meanDTO);
+	mapper.writeValue(new File("G://b.json"),retDTO);
 }
 }

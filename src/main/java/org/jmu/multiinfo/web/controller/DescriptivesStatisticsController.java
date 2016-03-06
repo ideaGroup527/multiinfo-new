@@ -24,11 +24,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DescriptivesStatisticsController {
 	@Autowired
 	private DescriptivesStatisticsService descriptivesStatisticsService;
-	@RequestMapping(params = { "method=basic" })
+	@RequestMapping(params = { "method=descriptives" })
 	@ResponseBody
-   public CommonDTO calMean(CommonCondition condition){
-		CommonDTO meanDTO =	descriptivesStatisticsService.calMean(condition);
+   public CommonDTO calDesc(CommonCondition condition){
+		CommonDTO meanDTO =	descriptivesStatisticsService.calDesc(condition);
 		return meanDTO;
 	}
 
+	
+	
 }

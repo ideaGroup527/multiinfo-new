@@ -1,5 +1,9 @@
 package org.jmu.multiinfo.service.basestatistics;
 
+import java.util.Map;
+
+import org.apache.commons.math3.stat.Frequency;
+
 /**
  * 
 * @Title: BasicStatisticsService.java 
@@ -89,5 +93,12 @@ public interface BasicStatisticsService {
 	 * @return
 	 */
 	public Double kurtosis(double[] dataArr);
+	
+	/***
+	 * 频数
+	 * @param dataArr
+	 * @return
+	 */
+	public Frequency FrequencyCount(Object[] dataArr);
 	
 }
