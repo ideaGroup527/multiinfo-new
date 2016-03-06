@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jmu.multiinfo.dto.descriptives.CommonCondition;
-import org.jmu.multiinfo.dto.descriptives.MeanDTO;
+import org.jmu.multiinfo.dto.descriptives.CommonDTO;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.DataVariety;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
@@ -167,7 +167,7 @@ public void calMeanTest() throws JsonGenerationException, JsonMappingException, 
 	dataGrid[4][2] = i42;
 	
 	condition.setDataGrid(dataGrid);
-	MeanDTO meanDTO =	descriptivesStatisticsService.calMean(condition );
+	CommonDTO meanDTO =	descriptivesStatisticsService.calMean(condition );
 	System.out.println(meanDTO.toString());
 	ObjectMapper mapper = new ObjectMapper(); 
 	mapper.writeValue(new File("G://a.json"),condition);
