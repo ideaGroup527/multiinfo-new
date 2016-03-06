@@ -7,6 +7,8 @@ private Double arithmeticMean;
 private Double variance;
 private Double standardDeviation;
 private Double total;
+private Double skewness;
+private Double kurtosis;
 public Double getMax() {
 	return max;
 }
@@ -42,6 +44,18 @@ public Double getTotal() {
 }
 public void setTotal(Double total) {
 	this.total = total;
+}
+public Double getSkewness() {
+	return skewness;
+}
+public void setSkewness(Double skewness) {
+	this.skewness = skewness;
+}
+public Double getKurtosis() {
+	return kurtosis;
+}
+public void setKurtosis(Double kurtosis) {
+	this.kurtosis = kurtosis;
 }
 
 }

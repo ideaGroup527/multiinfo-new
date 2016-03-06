@@ -14,8 +14,8 @@ import org.jmu.multiinfo.dto.descriptives.CommonDTO;
 import org.jmu.multiinfo.dto.descriptives.ResultDescDTO;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
+import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.jmu.multiinfo.service.descriptives.DescriptivesStatisticsService;
-import org.jmu.multiinfo.service.upload.BasicStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +31,7 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 		DataDTO[][] dataGrid = condition.getDataGrid();
 		for (Iterator<VarietyDTO> iterator = variableList.iterator(); iterator.hasNext();) {
 			List<Double> dataList = new ArrayList<Double>();
+			
 			VarietyDTO varietyDTO = (VarietyDTO) iterator.next();
 			PositionBean varRange =ExcelUtil.splitRange(varietyDTO.getRange());
 			for (int i = varRange.getFirstRowId() - 1; i < varRange.getLastRowId(); i++) {
@@ -39,11 +40,19 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 					dataList.add(Double.valueOf(dataDTO.getData().toString()));
 				}
 			}
+			double[] dataArr = new double[dataList.size()];
+			for (int i = 0; i < dataList.size(); i++) {
+				dataArr[i] = dataList.get(i);
+			}
 			ResultDescDTO retDto = new ResultDescDTO();
-			retDto.setMax(basicStatisticsService.max(dataList));
-			retDto.setArithmeticMean(basicStatisticsService.arithmeticMean(dataList));
-			retDto.setMin(basicStatisticsService.min(dataList));
-			retDto.setTotal(basicStatisticsService.sum(dataList));
+			retDto.setMax(basicStatisticsService.max(dataArr));
+			retDto.setArithmeticMean(basicStatisticsService.arithmeticMean(dataArr));
+			retDto.setMin(basicStatisticsService.min(dataArr));
+			retDto.setTotal(basicStatisticsService.sum(dataArr));
+			retDto.setKurtosis(basicStatisticsService.kurtosis(dataArr));
+			retDto.setVariance(basicStatisticsService.variance(dataArr));
+			retDto.setSkewness(basicStatisticsService.skewness(dataArr));
+			retDto.setStandardDeviation(basicStatisticsService.standardDeviation(dataArr));
 			ResultDataDTO retDataDTO = new ResultDataDTO();
 			retDataDTO.setResultData(retDto);
 			resDataMap.put(varietyDTO.getVarietyName(), retDataDTO);

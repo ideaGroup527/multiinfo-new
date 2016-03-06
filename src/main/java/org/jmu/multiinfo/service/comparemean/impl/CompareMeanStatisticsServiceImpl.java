@@ -14,8 +14,8 @@ import org.jmu.multiinfo.dto.comparemean.MedianDTO;
 import org.jmu.multiinfo.dto.comparemean.ResultDataDTO;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
+import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.jmu.multiinfo.service.comparemean.CompareMeanStatisticsService;
-import org.jmu.multiinfo.service.upload.BasicStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,9 +64,12 @@ public class CompareMeanStatisticsServiceImpl implements CompareMeanStatisticsSe
 							dataList.add(Double.valueOf((String) data[tmpList.get(i)][j].getData()));
 						}
 					}
-				
+					double[] dataArr = new double[dataList.size()];
+					for (int i = 0; i < dataList.size(); i++) {
+						dataArr[i] = dataList.get(i);
+					}
 				ResultDataDTO reDataDTO = new ResultDataDTO();
-				reDataDTO.setResultData(basicStatisticsService.median(dataList));
+				reDataDTO.setResultData(basicStatisticsService.median(dataArr));
 				map.put(varietyDTO.getVarietyName(), reDataDTO );
 				resDataMap.put(indep, map);
 				}
