@@ -1,4 +1,6 @@
 package org.jmu.multiinfo.dto.regression;
 
-public class CommonDTO {
+import org.jmu.multiinfo.core.dto.BaseDTO;
+
+public class CommonDTO  extends BaseDTO{
 }

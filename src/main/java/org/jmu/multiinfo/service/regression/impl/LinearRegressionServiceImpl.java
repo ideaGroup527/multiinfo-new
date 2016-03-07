@@ -9,78 +9,104 @@ import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.core.util.PositionBean;
 import org.jmu.multiinfo.dto.regression.CommonCondition;
 import org.jmu.multiinfo.dto.regression.CommonDTO;
+import org.jmu.multiinfo.dto.regression.MultipleLinearDTO;
+import org.jmu.multiinfo.dto.regression.SingleLinearDTO;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
 import org.jmu.multiinfo.service.regression.LinearRegressionService;
-
-public class LinearRegressionServiceImpl implements LinearRegressionService{
+import org.springframework.stereotype.Service;
+@Service
+public class LinearRegressionServiceImpl implements LinearRegressionService {
 
 	@Override
 	public CommonDTO calSingleLinearRegression(double[][] data) {
-		SimpleRegression regression =new SimpleRegression();
+		SingleLinearDTO linearDTO = new SingleLinearDTO();
+		SimpleRegression regression = new SimpleRegression();
 		regression.addData(data);
+		regression.getN();
+		regression.getSlope();
+		regression.getRSquare();
+		regression.getRegressionSumSquares();
+		regression.getXSumSquares();
+		regression.getSlopeStdErr();
+		regression.getR();
+		regression.getMeanSquareError();
 		return null;
 	}
 
 	@Override
 	public CommonDTO calOLSMultipleLinearRegression(double[] y, double[][] x) {
-		OLSMultipleLinearRegression regression =new  OLSMultipleLinearRegression();
+		MultipleLinearDTO linearDTO = new MultipleLinearDTO();
+		OLSMultipleLinearRegression regression = new OLSMultipleLinearRegression();
 		regression.newSampleData(y, x);
-		return null;
+		double[] regressionParameters = regression.estimateRegressionParameters();
+		linearDTO.setAdjustedRSquared(regression.calculateAdjustedRSquared());
+		linearDTO.setRSquared(regression.calculateRSquared());
+		linearDTO.setTotalSumOfSquares(regression.calculateTotalSumOfSquares());
+		linearDTO.setErrorVariance(regression.estimateErrorVariance());
+		linearDTO.setRegressandVariance(regression.estimateRegressandVariance());
+		linearDTO.setRegressionStandardError(regression.estimateRegressionStandardError());
+		linearDTO.setResidualSumOfSquares(regression.calculateResidualSumOfSquares());
+		linearDTO.setRegressionParameters(regressionParameters);
+		return linearDTO;
 	}
 
 	@Override
 	public CommonDTO calLinearRegression(CommonCondition condition) {
-		 VarietyDTO dependVarDTO =	condition.getDependentVariable();
-		 List<VarietyDTO> independVarDTOList =	condition.getIndependentVariable();
-			DataDTO[][] dataGrid =	 condition.getDataGrid();
-			
-			
-			List<Double> dependVarList = new ArrayList<Double>();
-		 PositionBean depvarRange =ExcelUtil.splitRange( dependVarDTO.getRange());
-			for (int i = depvarRange.getFirstRowId() - 1; i < depvarRange.getLastRowId(); i++) {
-				for (int j = depvarRange.getFirstColId() - 1; j < depvarRange.getLastColId(); j++) {
-					dependVarList.add(Double.valueOf(dataGrid[i][j].getData().toString()));
+		VarietyDTO dependVarDTO = condition.getDependentVariable();
+		List<VarietyDTO> independVarDTOList = condition.getIndependentVariable();
+		DataDTO[][] dataGrid = condition.getDataGrid();
+
+		//因变量数据
+		List<Double> dependVarList = new ArrayList<Double>();
+		PositionBean depvarRange = ExcelUtil.splitRange(dependVarDTO.getRange());
+		for (int i = depvarRange.getFirstRowId() - 1; i < depvarRange.getLastRowId(); i++) {
+			for (int j = depvarRange.getFirstColId() - 1; j < depvarRange.getLastColId(); j++) {
+				dependVarList.add(Double.valueOf(dataGrid[i][j].getData().toString()));
+			}
+		}
+
+		if (independVarDTOList.size() == 1) {
+			double[][] data = new double[dependVarList.size()][2];
+
+			for (int i = 0; i < data.length; i++) {
+				data[i][0] = dependVarList.get(i);
+			}
+			List<Double> independVarList = new ArrayList<Double>();
+			VarietyDTO independVarDTO = independVarDTOList.get(0);
+			PositionBean indepvarRange = ExcelUtil.splitRange(independVarDTO.getRange());
+			for (int i = indepvarRange.getFirstRowId() - 1; i < indepvarRange.getLastRowId(); i++) {
+				for (int j = indepvarRange.getFirstColId() - 1; j < indepvarRange.getLastColId(); j++) {
+					independVarList.add(Double.valueOf(dataGrid[i][j].getData().toString()));
 				}
 			}
-			 double[][] data = new double[dependVarList.size()][2];
-			 double[] y =new double[dependVarList.size()];
-for (int i = 0; i < data.length; i++){
-	data[i][0] = dependVarList.get(i);
-	 y[i] = dependVarList.get(i);
-}
-
-		 if(independVarDTOList.size() == 1){
-			 List<Double> independVarList = new ArrayList<Double>();
-			 VarietyDTO independVarDTO =	 independVarDTOList.get(0);
-			 PositionBean indepvarRange =ExcelUtil.splitRange( independVarDTO.getRange());
+			for (int i = 0; i < data.length; i++)
+				data[i][1] = independVarList.get(i);
+			return calSingleLinearRegression(data);
+		} else if (independVarDTOList.size() > 1) {
+			double[] y = new double[dependVarList.size()];
+			for (int i = 0; i < dependVarList.size(); i++) {
+				y[i] = dependVarList.get(i);
+			}
+			
+			//每个自变量
+			double[][] x = new double[independVarDTOList.size()][dependVarList.size()];
+			for (int k = 0; k < independVarDTOList.size(); k++) {
+				List<Double> independVarList = new ArrayList<Double>();
+				VarietyDTO independVarDTO = independVarDTOList.get(k);
+				PositionBean indepvarRange = ExcelUtil.splitRange(independVarDTO.getRange());
 				for (int i = indepvarRange.getFirstRowId() - 1; i < indepvarRange.getLastRowId(); i++) {
 					for (int j = indepvarRange.getFirstColId() - 1; j < indepvarRange.getLastColId(); j++) {
 						independVarList.add(Double.valueOf(dataGrid[i][j].getData().toString()));
 					}
 				}
-				for (int i = 0; i < data.length; i++) 
-					data[i][1] = independVarList.get(i);
-		return	calSingleLinearRegression(data);
-		 }else if(independVarDTOList.size() >1){
-				double[][] x = new double[independVarDTOList.size()][dependVarList.size()];
-			 for (int k = 0; k < independVarDTOList.size(); k++) {
-				 List<Double> independVarList = new ArrayList<Double>();
-				 VarietyDTO independVarDTO =	 independVarDTOList.get(k);
-				 PositionBean indepvarRange =ExcelUtil.splitRange( independVarDTO.getRange());
-					for (int i = indepvarRange.getFirstRowId() - 1; i < indepvarRange.getLastRowId(); i++) {
-						for (int j = indepvarRange.getFirstColId() - 1; j < indepvarRange.getLastColId(); j++) {
-							independVarList.add(Double.valueOf(dataGrid[i][j].getData().toString()));
-						}
-					}
 
-					for (int i = 0; i < data.length; i++) 
-						x [k][i] = independVarList.get(i);
+				for (int i = 0; i < independVarList.size(); i++)
+					x[k][i] = independVarList.get(i);
 			}
-			 calOLSMultipleLinearRegression(y,x);
-			 return null;
-		 }else
-		return null;
+			return calOLSMultipleLinearRegression(y, x);
+		} else
+			return null;
 	}
 
 }
