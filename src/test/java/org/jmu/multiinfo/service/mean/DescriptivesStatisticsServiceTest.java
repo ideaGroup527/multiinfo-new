@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jmu.multiinfo.base.util.MyJUnit4ClassRunner;
 import org.jmu.multiinfo.dto.descriptives.CommonCondition;
 import org.jmu.multiinfo.dto.descriptives.CommonDTO;
 import org.jmu.multiinfo.dto.upload.DataDTO;
@@ -19,13 +20,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(MyJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:conf/spring/applicationContext.xml"})
 public class DescriptivesStatisticsServiceTest {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -178,7 +177,7 @@ public void init(){
 
 @Test
 public void calMeanTest(){
-	
+	logger.warn("测试描述统计");
 	retDTO =	descriptivesStatisticsService.calDesc(condition );
 
 }
@@ -193,8 +192,8 @@ public void calFrequencyTest(){
 public void saveData() throws JsonGenerationException, JsonMappingException, IOException{
 	System.out.println(retDTO.toString());
 	ObjectMapper mapper = new ObjectMapper(); 
-	mapper.writeValue(new File("G://a.json"),condition);
+	mapper.writeValue(new File("E://a.json"),condition);
 	System.out.println("");
-	mapper.writeValue(new File("G://b.json"),retDTO);
+	mapper.writeValue(new File("E://b.json"),retDTO);
 }
 }
