@@ -9,7 +9,7 @@ private Long n;
 private Double slope;
 
 private Double slopeStdErr;
-//
+//可决系数，0≤R^2≤1，若R^2→1，表明解释变量X_2 、X_3对被解释变量Y影响越大，模型的拟合程度越高。
 private Double rSquare;
 
 private Double regressionSumSquares;
@@ -19,7 +19,7 @@ private Double xSumSquares;
 private Double r;
 
 private Double meanSquareError;
-
+//截距
 private Double intercept;
 
 
@@ -31,7 +31,7 @@ private Double slopeConfidenceInterval;
 private double[] regressionParameters;
 //se：standard error，标准误差。
 private double[] regressionParametersStandardErrors;
-
+//R2adj = 1 - [SSR (n - 1)] / [SSTO (n - p)] 修正的可决系数，R ̅^2=1-（1-R^2）(n-1)/(n-k)，同R^2类似，若R ̅^2→1，表明解释变量X_2 、X_3对被解释变量Y影响越大，模型的拟合程度越高。
 private Double adjustedRSquared;
 
 private double[] predict;
