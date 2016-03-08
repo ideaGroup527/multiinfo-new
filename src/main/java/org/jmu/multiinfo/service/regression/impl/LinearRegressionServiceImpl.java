@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression;
+import org.apache.commons.math3.stat.regression.RegressionResults;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.core.util.PositionBean;
@@ -23,6 +24,7 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		SingleLinearDTO linearDTO = new SingleLinearDTO();
 		SimpleRegression regression = new SimpleRegression();
 		regression.addData(data);
+		RegressionResults  results =	regression.regress(); 
 		linearDTO.setIntercept(regression.getIntercept());
 		linearDTO.setN(regression.getN());
 		linearDTO.setSlope(regression.getSlope());
@@ -34,6 +36,14 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		linearDTO.setSlopeStdErr(	regression.getSlopeStdErr());
 		linearDTO.setSignificance(regression.getSignificance());
 		linearDTO.setSlopeConfidenceInterval(regression.getSlopeConfidenceInterval());
+		linearDTO.setAdjustedRSquared(	results.getAdjustedRSquared());
+		linearDTO.setRegressionParameters(results.getParameterEstimates());
+		linearDTO.setRegressionParametersStandardErrors(results.getStdErrorOfEstimates());
+		double[] predict = new double[2];
+		predict[0] = regression.predict(0);
+		predict[1] = regression.predict(1);
+		linearDTO.setPredict(predict);
+		
 		return linearDTO;
 	}
 
@@ -78,7 +88,7 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 			double[][] data = new double[dependVarList.size()][2];
 
 			for (int i = 0; i < data.length; i++) {
-				data[i][0] = dependVarList.get(i);
+				data[i][1] = dependVarList.get(i);
 			}
 			List<Double> independVarList = new ArrayList<Double>();
 			VarietyDTO independVarDTO = independVarDTOList.get(0);
@@ -89,7 +99,7 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 				}
 			}
 			for (int i = 0; i < data.length; i++)
-				data[i][1] = independVarList.get(i);
+				data[i][0] = independVarList.get(i);
 			return calSingleLinearRegression(data);
 		} else if (independVarDTOList.size() > 1) {
 			double[] y = new double[dependVarList.size()];

@@ -1,5 +1,6 @@
 package org.jmu.multiinfo.dto.regression;
 
+import java.util.Arrays;
 
 public class SingleLinearDTO extends CommonDTO{
 //the number of observations that have been added to the model.
@@ -25,6 +26,15 @@ private Double intercept;
 private Double significance;
 
 private Double slopeConfidenceInterval;
+
+//依次β_1 、β_2 、
+private double[] regressionParameters;
+//se：standard error，标准误差。
+private double[] regressionParametersStandardErrors;
+
+private Double adjustedRSquared;
+
+private double[] predict;
 
 public Long getN() {
 	return n;
@@ -113,6 +123,51 @@ public Double getSlopeConfidenceInterval() {
 public void setSlopeConfidenceInterval(Double slopeConfidenceInterval) {
 	this.slopeConfidenceInterval = slopeConfidenceInterval;
 }
+
+public double[] getRegressionParameters() {
+	return regressionParameters;
+}
+
+public void setRegressionParameters(double[] regressionParameters) {
+	this.regressionParameters = regressionParameters;
+}
+
+public double[] getRegressionParametersStandardErrors() {
+	return regressionParametersStandardErrors;
+}
+
+public void setRegressionParametersStandardErrors(double[] regressionParametersStandardErrors) {
+	this.regressionParametersStandardErrors = regressionParametersStandardErrors;
+}
+
+public Double getAdjustedRSquared() {
+	return adjustedRSquared;
+}
+
+public void setAdjustedRSquared(Double adjustedRSquared) {
+	this.adjustedRSquared = adjustedRSquared;
+}
+
+public double[] getPredict() {
+	return predict;
+}
+
+public void setPredict(double[] predict) {
+	this.predict = predict;
+}
+
+@Override
+public String toString() {
+	return "SingleLinearDTO [n=" + n + ", slope=" + slope + ", slopeStdErr=" + slopeStdErr + ", rSquare=" + rSquare
+			+ ", regressionSumSquares=" + regressionSumSquares + ", xSumSquares=" + xSumSquares + ", r=" + r
+			+ ", meanSquareError=" + meanSquareError + ", intercept=" + intercept + ", significance=" + significance
+			+ ", slopeConfidenceInterval=" + slopeConfidenceInterval + ", regressionParameters="
+			+ Arrays.toString(regressionParameters) + ", regressionParametersStandardErrors="
+			+ Arrays.toString(regressionParametersStandardErrors) + ", adjustedRSquared=" + adjustedRSquared
+			+ ", predict=" + Arrays.toString(predict) + "]";
+}
+
+
 
 
 

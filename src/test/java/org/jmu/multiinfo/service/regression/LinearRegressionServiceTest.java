@@ -2,6 +2,7 @@ package org.jmu.multiinfo.service.regression;
 
 import org.jmu.multiinfo.base.util.MyJUnit4ClassRunner;
 import org.jmu.multiinfo.dto.regression.MultipleLinearDTO;
+import org.jmu.multiinfo.dto.regression.SingleLinearDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -44,5 +45,23 @@ public void calOLSMultipleLinearRegression(){
 	   
 	
 }
+	@Test
+public void calSingleLinearRegressionTest(){
+		double[][] data = new double[10][2];
+		data[0][1] = 308;data[0][0] = 314;
+		data[1][1] = 443;data[1][0] = 473;
+		data[2][1] = 432;data[2][0] = 563;
+		data[3][1] = 572;data[3][0] = 747;
+		data[4][1] = 603;data[4][0] = 856;
+		data[5][1] = 624;data[5][0] = 943;
+		data[6][1] = 989;data[6][0] = 1308;
+		data[7][1] = 1164;data[7][0] = 1871;
+		data[8][1] = 1208;data[8][0] = 2265;
+		data[9][1] = 1764;data[9][0] = 3038;
+		
 
+	
+		SingleLinearDTO com = (SingleLinearDTO)	linearRegressionService.calSingleLinearRegression(data );
+		   logger.debug(com.toString());
+}
 }
