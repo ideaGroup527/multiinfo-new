@@ -18,7 +18,7 @@ public class LinearRegressionServiceTest {
 	private LinearRegressionService linearRegressionService;
 	@Test
 public void calOLSMultipleLinearRegression(){
-	 double [] y = {5.92,4.3,3.3,6.23,10.97,9.14,5.77,6.45,7.6,11.46,13.46,10.24,5.99}; // mana cost is y intercept
+	 double [] y = {5.92,4.3,3.3,6.23,10.97,9.14,5.77,6.45,7.6,11.47,13.46,10.24,5.99}; // mana cost is y intercept
 	    double [][] x = new double[13][];
 
 	    //atk,health,charge,divine
@@ -40,7 +40,9 @@ public void calOLSMultipleLinearRegression(){
 	    for (double d : regressionParameters) {
 	    	logger.debug(d+"");
 		}
-	    
+	    logger.debug(com.toString());
+	   
 	
 }
+
 }

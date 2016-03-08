@@ -23,15 +23,18 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		SingleLinearDTO linearDTO = new SingleLinearDTO();
 		SimpleRegression regression = new SimpleRegression();
 		regression.addData(data);
-		regression.getN();
-		regression.getSlope();
-		regression.getRSquare();
-		regression.getRegressionSumSquares();
-		regression.getXSumSquares();
-		regression.getSlopeStdErr();
-		regression.getR();
-		regression.getMeanSquareError();
-		return null;
+		linearDTO.setIntercept(regression.getIntercept());
+		linearDTO.setN(regression.getN());
+		linearDTO.setSlope(regression.getSlope());
+		linearDTO.setRSquare(regression.getRSquare());
+		linearDTO.setRegressionSumSquares(regression.getRegressionSumSquares());
+		linearDTO.setXSumSquares(regression.getXSumSquares());
+		linearDTO.setR(regression.getR());
+		linearDTO.setMeanSquareError(regression.getMeanSquareError());
+		linearDTO.setSlopeStdErr(	regression.getSlopeStdErr());
+		linearDTO.setSignificance(regression.getSignificance());
+		linearDTO.setSlopeConfidenceInterval(regression.getSlopeConfidenceInterval());
+		return linearDTO;
 	}
 
 	@Override
@@ -40,6 +43,8 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		OLSMultipleLinearRegression regression = new OLSMultipleLinearRegression();
 		regression.newSampleData(y, x);
 		double[] regressionParameters = regression.estimateRegressionParameters();
+		double[] regressionParametersStandardErrors = regression.estimateRegressionParametersStandardErrors();
+		double[] residuals = regression.estimateResiduals();
 		linearDTO.setAdjustedRSquared(regression.calculateAdjustedRSquared());
 		linearDTO.setRSquared(regression.calculateRSquared());
 		linearDTO.setTotalSumOfSquares(regression.calculateTotalSumOfSquares());
@@ -47,7 +52,10 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		linearDTO.setRegressandVariance(regression.estimateRegressandVariance());
 		linearDTO.setRegressionStandardError(regression.estimateRegressionStandardError());
 		linearDTO.setResidualSumOfSquares(regression.calculateResidualSumOfSquares());
+		
 		linearDTO.setRegressionParameters(regressionParameters);
+		linearDTO.setRegressionParametersStandardErrors(regressionParametersStandardErrors);
+		linearDTO.setResiduals(residuals);
 		return linearDTO;
 	}
 
