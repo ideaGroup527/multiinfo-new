@@ -13,6 +13,8 @@ private Double slopeStdErr;
 private Double rSquare;
 
 private Double regressionSumSquares;
+//
+private Double sumSquaredErrors;
 
 private Double xSumSquares;
 
@@ -156,17 +158,24 @@ public void setPredict(double[] predict) {
 	this.predict = predict;
 }
 
+public Double getSumSquaredErrors() {
+	return sumSquaredErrors;
+}
+
+public void setSumSquaredErrors(Double sumSquaredErrors) {
+	this.sumSquaredErrors = sumSquaredErrors;
+}
+
 @Override
 public String toString() {
 	return "SingleLinearDTO [n=" + n + ", slope=" + slope + ", slopeStdErr=" + slopeStdErr + ", rSquare=" + rSquare
-			+ ", regressionSumSquares=" + regressionSumSquares + ", xSumSquares=" + xSumSquares + ", r=" + r
-			+ ", meanSquareError=" + meanSquareError + ", intercept=" + intercept + ", significance=" + significance
-			+ ", slopeConfidenceInterval=" + slopeConfidenceInterval + ", regressionParameters="
-			+ Arrays.toString(regressionParameters) + ", regressionParametersStandardErrors="
-			+ Arrays.toString(regressionParametersStandardErrors) + ", adjustedRSquared=" + adjustedRSquared
-			+ ", predict=" + Arrays.toString(predict) + "]";
+			+ ", regressionSumSquares=" + regressionSumSquares + ", sumSquaredErrors=" + sumSquaredErrors
+			+ ", xSumSquares=" + xSumSquares + ", r=" + r + ", meanSquareError=" + meanSquareError + ", intercept="
+			+ intercept + ", significance=" + significance + ", slopeConfidenceInterval=" + slopeConfidenceInterval
+			+ ", regressionParameters=" + Arrays.toString(regressionParameters)
+			+ ", regressionParametersStandardErrors=" + Arrays.toString(regressionParametersStandardErrors)
+			+ ", adjustedRSquared=" + adjustedRSquared + ", predict=" + Arrays.toString(predict) + "]";
 }
-
 
 
 

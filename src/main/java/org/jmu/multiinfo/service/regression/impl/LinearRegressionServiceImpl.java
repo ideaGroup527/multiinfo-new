@@ -30,6 +30,7 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		linearDTO.setSlope(regression.getSlope());
 		linearDTO.setRSquare(regression.getRSquare());
 		linearDTO.setRegressionSumSquares(regression.getRegressionSumSquares());
+		linearDTO.setSumSquaredErrors(regression.getSumSquaredErrors());
 		linearDTO.setXSumSquares(regression.getXSumSquares());
 		linearDTO.setR(regression.getR());
 		linearDTO.setMeanSquareError(regression.getMeanSquareError());
