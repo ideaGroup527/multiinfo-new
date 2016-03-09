@@ -134,19 +134,18 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 			}
 
 			// 每个自变量
-			double[][] x = new double[independVarDTOList.size()][dependVarList.size()];
+			double[][] x = new double[dependVarList.size()][independVarDTOList.size()];
+			
 			for (int k = 0; k < independVarDTOList.size(); k++) {
-				List<Double> independVarList = new ArrayList<Double>();
 				VarietyDTO independVarDTO = independVarDTOList.get(k);
 				PositionBean indepvarRange = ExcelUtil.splitRange(independVarDTO.getRange());
+				int row = 0;
 				for (int i = indepvarRange.getFirstRowId() - 1; i < indepvarRange.getLastRowId(); i++) {
 					for (int j = indepvarRange.getFirstColId() - 1; j < indepvarRange.getLastColId(); j++) {
-						independVarList.add(Double.valueOf(dataGrid[i][j].getData().toString()));
+						x[row++][k] = Double.valueOf(dataGrid[i][j].getData().toString());
 					}
 				}
-
-				for (int i = 0; i < independVarList.size(); i++)
-					x[k][i] = independVarList.get(i);
+				
 			}
 			return calOLSMultipleLinearRegression(y, x);
 		} else
