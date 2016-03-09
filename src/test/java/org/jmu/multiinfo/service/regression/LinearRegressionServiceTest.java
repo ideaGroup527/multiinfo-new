@@ -1,14 +1,28 @@
 package org.jmu.multiinfo.service.regression;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jmu.multiinfo.base.util.MyJUnit4ClassRunner;
+import org.jmu.multiinfo.core.util.ExcelUtil;
+import org.jmu.multiinfo.dto.regression.CommonCondition;
 import org.jmu.multiinfo.dto.regression.MultipleLinearDTO;
 import org.jmu.multiinfo.dto.regression.SingleLinearDTO;
+import org.jmu.multiinfo.dto.upload.DataDTO;
+import org.jmu.multiinfo.dto.upload.DataVariety;
+import org.jmu.multiinfo.dto.upload.VarietyDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(MyJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:conf/spring/applicationContext.xml"})
@@ -67,4 +81,66 @@ public void calSingleLinearRegressionTest(){
 		SingleLinearDTO com = (SingleLinearDTO)	linearRegressionService.calSingleLinearRegression(data );
 		   logger.debug(com.toString());
 }
+	@Test
+	public void calLinearRegressionTest() throws JsonGenerationException, JsonMappingException, IOException{
+		double[][] data = new double[10][2];
+		data[0][1] = 308;data[0][0] = 314;
+		data[1][1] = 443;data[1][0] = 473;
+		data[2][1] = 432;data[2][0] = 563;
+		data[3][1] = 572;data[3][0] = 747;
+		data[4][1] = 603;data[4][0] = 856;
+		data[5][1] = 624;data[5][0] = 943;
+		data[6][1] = 989;data[6][0] = 1308;
+		data[7][1] = 1164;data[7][0] = 1871;
+		data[8][1] = 1208;data[8][0] = 2265;
+		data[9][1] = 1764;data[9][0] = 3038;
+		CommonCondition condition = new CommonCondition();
+		DataDTO[][] dataGrid = new DataDTO[11][2];
+		
+		DataDTO i00 =new DataDTO();
+		i00.setData("Yi");
+		i00.setPosition("A1");
+		i00.setPositionDes("A,1");
+		i00.setTypeDes("字符串型");
+		i00.setType(DataVariety.DATA_TYPE_STRING);
+		dataGrid[0][0] = i00;
+		DataDTO i01 =new DataDTO();
+		i01.setData("Xi");
+		i01.setPosition("B1");
+		i01.setPositionDes("B,1");
+		i01.setTypeDes("字符串型");
+		i01.setType(DataVariety.DATA_TYPE_STRING);
+		dataGrid[0][1] = i01;
+		for (int i = 1; i < dataGrid.length; i++) {
+			for (int j = 0; j < dataGrid[0].length; j++) {
+				dataGrid[i][j] = new DataDTO();
+				dataGrid[i][j].setData(data[i-1][j]);
+				dataGrid[i][j].setType(DataVariety.DATA_TYPE_NUMERIC);
+				dataGrid[i][j].setTypeDes("标准型数字");
+				dataGrid[i][j].setPosition(ExcelUtil.getExcelColName(j+1)+(i+1)+"");
+				dataGrid[i][j].setPosition(ExcelUtil.getExcelColName(j+1)+","+(i+1));
+			}
+		}
+
+
+		condition.setDataGrid(dataGrid);
+		VarietyDTO dependentVariable = new VarietyDTO();
+		dependentVariable.setPosition("A1");
+		dependentVariable.setRange("A2:A11");
+		dependentVariable.setVarietyName("Yi");
+		condition.setDependentVariable(dependentVariable);
+		List<VarietyDTO> independentVariable = new ArrayList<VarietyDTO>();
+		VarietyDTO e = new VarietyDTO();
+		e.setPosition("B1");
+		e.setRange("B2:B11");
+		e.setVarietyName("Xi");
+		independentVariable.add(e );
+		condition.setIndependentVariable(independentVariable );
+		   logger.debug(condition.toString());
+		   SingleLinearDTO comt =(SingleLinearDTO)	linearRegressionService.calLinearRegression(condition );
+		ObjectMapper mapper = new ObjectMapper(); 
+		mapper.writeValue(new File("E://a.json"),condition);
+		System.out.println("");
+		mapper.writeValue(new File("E://b.json"),comt);
+	}
 }
