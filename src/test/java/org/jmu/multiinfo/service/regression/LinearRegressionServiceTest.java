@@ -1,5 +1,6 @@
 package org.jmu.multiinfo.service.regression;
 
+import org.apache.commons.math3.stat.inference.TestUtils;
 import org.jmu.multiinfo.base.util.MyJUnit4ClassRunner;
 import org.jmu.multiinfo.dto.regression.MultipleLinearDTO;
 import org.jmu.multiinfo.dto.regression.SingleLinearDTO;
@@ -37,9 +38,11 @@ public void calOLSMultipleLinearRegression(){
 	    x[11] = new double []{7.6,10.81};
 	    x[12] = new double []{9.7,8};
 	    MultipleLinearDTO com = (MultipleLinearDTO)linearRegressionService.calOLSMultipleLinearRegression(y, x);
+	    int i=0;
 	    double[] regressionParameters = com.getRegressionParameters();
 	    for (double d : regressionParameters) {
 	    	logger.debug(d+"");
+	    	logger.debug((d/com.getRegressionParametersStandardErrors()[i++])+"");
 		}
 	    logger.debug(com.toString());
 	   

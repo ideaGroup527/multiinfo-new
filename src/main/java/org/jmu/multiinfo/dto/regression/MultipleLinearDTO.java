@@ -31,6 +31,9 @@ private double[] regressionParameters;
 //se：standard error，标准误差。
 private double[] regressionParametersStandardErrors;
 
+//t检验  每个系数除以标准误差。se
+private double[] ttests;
+
 //
 private double[] residuals;
 public Double getResidualSumOfSquares() {
@@ -93,6 +96,12 @@ public double[] getResiduals() {
 public void setResiduals(double[] residuals) {
 	this.residuals = residuals;
 }
+public double[] getTtests() {
+	return ttests;
+}
+public void setTtests(double[] ttests) {
+	this.ttests = ttests;
+}
 @Override
 public String toString() {
 	return "MultipleLinearDTO [residualSumOfSquares=" + residualSumOfSquares + ", adjustedRSquared=" + adjustedRSquared
@@ -100,7 +109,8 @@ public String toString() {
 			+ ", regressandVariance=" + regressandVariance + ", regressionStandardError=" + regressionStandardError
 			+ ", regressionParameters=" + Arrays.toString(regressionParameters)
 			+ ", regressionParametersStandardErrors=" + Arrays.toString(regressionParametersStandardErrors)
-			+ ", residuals=" + Arrays.toString(residuals) + "]";
+			+ ", ttests=" + Arrays.toString(ttests) + ", residuals=" + Arrays.toString(residuals) + "]";
 }
+
 
 }

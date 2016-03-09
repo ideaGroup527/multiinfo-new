@@ -24,7 +24,8 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		SingleLinearDTO linearDTO = new SingleLinearDTO();
 		SimpleRegression regression = new SimpleRegression();
 		regression.addData(data);
-		RegressionResults  results =	regression.regress(); 
+
+
 		linearDTO.setIntercept(regression.getIntercept());
 		linearDTO.setN(regression.getN());
 		linearDTO.setSlope(regression.getSlope());
@@ -37,14 +38,24 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		linearDTO.setSlopeStdErr(	regression.getSlopeStdErr());
 		linearDTO.setSignificance(regression.getSignificance());
 		linearDTO.setSlopeConfidenceInterval(regression.getSlopeConfidenceInterval());
+		
+		
+		RegressionResults  results =	regression.regress(); 
+	
 		linearDTO.setAdjustedRSquared(	results.getAdjustedRSquared());
-		linearDTO.setRegressionParameters(results.getParameterEstimates());
-		linearDTO.setRegressionParametersStandardErrors(results.getStdErrorOfEstimates());
+		double[] regressionParameters =	results.getParameterEstimates();
+		double[] regressionParametersStandardErrors =	results.getStdErrorOfEstimates();
+		double[] ttests = new double[regressionParameters.length];
+		for (int i = 0; i < ttests.length; i++) {
+			ttests[i] = regressionParameters[i]/regressionParametersStandardErrors[i];
+		}
+		linearDTO.setRegressionParameters(regressionParameters);
+		linearDTO.setRegressionParametersStandardErrors(regressionParametersStandardErrors);
 		double[] predict = new double[2];
 		predict[0] = regression.predict(0);
 		predict[1] = regression.predict(1);
 		linearDTO.setPredict(predict);
-		
+		linearDTO.setTtests(ttests);
 		return linearDTO;
 	}
 
@@ -56,6 +67,10 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		double[] regressionParameters = regression.estimateRegressionParameters();
 		double[] regressionParametersStandardErrors = regression.estimateRegressionParametersStandardErrors();
 		double[] residuals = regression.estimateResiduals();
+		double[] ttests = new double[regressionParameters.length];
+		for (int i = 0; i < ttests.length; i++) {
+			ttests[i] = regressionParameters[i]/regressionParametersStandardErrors[i];
+		}
 		linearDTO.setAdjustedRSquared(regression.calculateAdjustedRSquared());
 		linearDTO.setRSquared(regression.calculateRSquared());
 		linearDTO.setTotalSumOfSquares(regression.calculateTotalSumOfSquares());
@@ -67,6 +82,7 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		linearDTO.setRegressionParameters(regressionParameters);
 		linearDTO.setRegressionParametersStandardErrors(regressionParametersStandardErrors);
 		linearDTO.setResiduals(residuals);
+		linearDTO.setTtests(ttests);
 		return linearDTO;
 	}
 

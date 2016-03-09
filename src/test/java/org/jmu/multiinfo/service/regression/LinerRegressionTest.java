@@ -1,5 +1,6 @@
 package org.jmu.multiinfo.service.regression;
 
+import org.apache.commons.math3.stat.inference.TestUtils;
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression;
 import org.jmu.multiinfo.base.util.MyJUnit4ClassRunner;
 import org.junit.Test;
@@ -15,7 +16,7 @@ public class LinerRegressionTest {
 	    //double [] manaCost = {4,6,6,3,1,0,4,1};
 	    //double [] [] x = new double[8][];
 
-	    double [] manaCost = {5.92,4.3,3.3,6.23,10.97,9.14,5.77,6.45,7.6,11.46,13.46,10.24,5.99}; // mana cost is y intercept
+	    double [] manaCost = {5.92,4.3,3.3,6.23,10.97,9.14,5.77,6.45,7.6,11.47,13.46,10.24,5.99}; // mana cost is y intercept
 	    double [] [] x = new double[13][];
 
 	    //atk,health,charge,divine
@@ -32,7 +33,11 @@ public class LinerRegressionTest {
 	    x[10] = new double []{7.1,10.01};
 	    x[11] = new double []{7.6,10.81};
 	    x[12] = new double []{9.7,8};
-
+double[][] fortx= new double[2][13];
+for (int i = 0; i < fortx.length; i++) {
+	fortx[0][i]=x[i][0];
+	fortx[1][i]=x[i][1];
+}
 	    ols.newSampleData(manaCost, x);
 
 	    double[] regressionParameters = ols.estimateRegressionParameters();
@@ -41,9 +46,11 @@ public class LinerRegressionTest {
 	        double regressionParameter = regressionParameters[i];
 	        System.out.println(i + " " + regressionParameter);
 	    }
-	    System.out.println(ols.calculateAdjustedRSquared()+"");
-	    System.out.println(ols.calculateResidualSumOfSquares());
-	    System.out.println(ols.estimateErrorVariance());
-	    System.out.println(ols.estimateRegressionStandardError());
+//	    System.out.println(ols.calculateAdjustedRSquared()+"");
+//	    System.out.println(ols.calculateResidualSumOfSquares());
+//	    System.out.println(ols.estimateErrorVariance());
+//	    System.out.println(ols.estimateRegressionStandardError());
+//	    System.out.println(TestUtils.t);
+	    System.out.println(TestUtils.tTest( 3.30,regressionParameters));
 	}
 }

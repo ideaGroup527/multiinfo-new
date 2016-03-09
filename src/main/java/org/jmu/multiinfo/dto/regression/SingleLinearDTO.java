@@ -38,6 +38,8 @@ private Double adjustedRSquared;
 
 private double[] predict;
 
+private double[] ttests;
+
 public Long getN() {
 	return n;
 }
@@ -166,6 +168,14 @@ public void setSumSquaredErrors(Double sumSquaredErrors) {
 	this.sumSquaredErrors = sumSquaredErrors;
 }
 
+public double[] getTtests() {
+	return ttests;
+}
+
+public void setTtests(double[] ttests) {
+	this.ttests = ttests;
+}
+
 @Override
 public String toString() {
 	return "SingleLinearDTO [n=" + n + ", slope=" + slope + ", slopeStdErr=" + slopeStdErr + ", rSquare=" + rSquare
@@ -174,10 +184,9 @@ public String toString() {
 			+ intercept + ", significance=" + significance + ", slopeConfidenceInterval=" + slopeConfidenceInterval
 			+ ", regressionParameters=" + Arrays.toString(regressionParameters)
 			+ ", regressionParametersStandardErrors=" + Arrays.toString(regressionParametersStandardErrors)
-			+ ", adjustedRSquared=" + adjustedRSquared + ", predict=" + Arrays.toString(predict) + "]";
+			+ ", adjustedRSquared=" + adjustedRSquared + ", predict=" + Arrays.toString(predict) + ", ttests="
+			+ Arrays.toString(ttests) + "]";
 }
-
-
 
 
 }
