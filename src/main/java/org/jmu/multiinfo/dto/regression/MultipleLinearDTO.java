@@ -36,6 +36,8 @@ private double[] ttests;
 
 //
 private double[] residuals;
+
+private double f;
 public Double getResidualSumOfSquares() {
 	return residualSumOfSquares;
 }
@@ -102,6 +104,12 @@ public double[] getTtests() {
 public void setTtests(double[] ttests) {
 	this.ttests = ttests;
 }
+public double getF() {
+	return f;
+}
+public void setF(double f) {
+	this.f = f;
+}
 @Override
 public String toString() {
 	return "MultipleLinearDTO [residualSumOfSquares=" + residualSumOfSquares + ", adjustedRSquared=" + adjustedRSquared
@@ -109,7 +117,7 @@ public String toString() {
 			+ ", regressandVariance=" + regressandVariance + ", regressionStandardError=" + regressionStandardError
 			+ ", regressionParameters=" + Arrays.toString(regressionParameters)
 			+ ", regressionParametersStandardErrors=" + Arrays.toString(regressionParametersStandardErrors)
-			+ ", ttests=" + Arrays.toString(ttests) + ", residuals=" + Arrays.toString(residuals) + "]";
+			+ ", ttests=" + Arrays.toString(ttests) + ", residuals=" + Arrays.toString(residuals) + ", f=" + f + "]";
 }
 
 

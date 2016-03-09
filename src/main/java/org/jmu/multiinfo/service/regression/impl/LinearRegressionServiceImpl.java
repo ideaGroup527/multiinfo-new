@@ -16,6 +16,7 @@ import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
 import org.jmu.multiinfo.service.regression.LinearRegressionService;
 import org.springframework.stereotype.Service;
+
 @Service
 public class LinearRegressionServiceImpl implements LinearRegressionService {
 
@@ -24,7 +25,6 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		SingleLinearDTO linearDTO = new SingleLinearDTO();
 		SimpleRegression regression = new SimpleRegression();
 		regression.addData(data);
-
 
 		linearDTO.setIntercept(regression.getIntercept());
 		linearDTO.setN(regression.getN());
@@ -35,19 +35,18 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		linearDTO.setXSumSquares(regression.getXSumSquares());
 		linearDTO.setR(regression.getR());
 		linearDTO.setMeanSquareError(regression.getMeanSquareError());
-		linearDTO.setSlopeStdErr(	regression.getSlopeStdErr());
+		linearDTO.setSlopeStdErr(regression.getSlopeStdErr());
 		linearDTO.setSignificance(regression.getSignificance());
 		linearDTO.setSlopeConfidenceInterval(regression.getSlopeConfidenceInterval());
-		
-		
-		RegressionResults  results =	regression.regress(); 
-	
-		linearDTO.setAdjustedRSquared(	results.getAdjustedRSquared());
-		double[] regressionParameters =	results.getParameterEstimates();
-		double[] regressionParametersStandardErrors =	results.getStdErrorOfEstimates();
+
+		RegressionResults results = regression.regress();
+
+		linearDTO.setAdjustedRSquared(results.getAdjustedRSquared());
+		double[] regressionParameters = results.getParameterEstimates();
+		double[] regressionParametersStandardErrors = results.getStdErrorOfEstimates();
 		double[] ttests = new double[regressionParameters.length];
 		for (int i = 0; i < ttests.length; i++) {
-			ttests[i] = regressionParameters[i]/regressionParametersStandardErrors[i];
+			ttests[i] = regressionParameters[i] / regressionParametersStandardErrors[i];
 		}
 		linearDTO.setRegressionParameters(regressionParameters);
 		linearDTO.setRegressionParametersStandardErrors(regressionParametersStandardErrors);
@@ -56,6 +55,10 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		predict[1] = regression.predict(1);
 		linearDTO.setPredict(predict);
 		linearDTO.setTtests(ttests);
+		
+		
+		linearDTO.setF((linearDTO.getRSquare() / (regressionParameters.length - 1))
+				/ ((1 - linearDTO.getRSquare()) / (data.length - regressionParameters.length)));
 		return linearDTO;
 	}
 
@@ -69,7 +72,7 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		double[] residuals = regression.estimateResiduals();
 		double[] ttests = new double[regressionParameters.length];
 		for (int i = 0; i < ttests.length; i++) {
-			ttests[i] = regressionParameters[i]/regressionParametersStandardErrors[i];
+			ttests[i] = regressionParameters[i] / regressionParametersStandardErrors[i];
 		}
 		linearDTO.setAdjustedRSquared(regression.calculateAdjustedRSquared());
 		linearDTO.setRSquared(regression.calculateRSquared());
@@ -78,11 +81,14 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		linearDTO.setRegressandVariance(regression.estimateRegressandVariance());
 		linearDTO.setRegressionStandardError(regression.estimateRegressionStandardError());
 		linearDTO.setResidualSumOfSquares(regression.calculateResidualSumOfSquares());
-		
+
 		linearDTO.setRegressionParameters(regressionParameters);
 		linearDTO.setRegressionParametersStandardErrors(regressionParametersStandardErrors);
 		linearDTO.setResiduals(residuals);
 		linearDTO.setTtests(ttests);
+
+		linearDTO.setF((linearDTO.getRSquared() / (regressionParameters.length - 1))
+				/ ((1 - linearDTO.getRSquared()) / (y.length - regressionParameters.length)));
 		return linearDTO;
 	}
 
@@ -92,7 +98,7 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		List<VarietyDTO> independVarDTOList = condition.getIndependentVariable();
 		DataDTO[][] dataGrid = condition.getDataGrid();
 
-		//因变量数据
+		// 因变量数据
 		List<Double> dependVarList = new ArrayList<Double>();
 		PositionBean depvarRange = ExcelUtil.splitRange(dependVarDTO.getRange());
 		for (int i = depvarRange.getFirstRowId() - 1; i < depvarRange.getLastRowId(); i++) {
@@ -123,8 +129,8 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 			for (int i = 0; i < dependVarList.size(); i++) {
 				y[i] = dependVarList.get(i);
 			}
-			
-			//每个自变量
+
+			// 每个自变量
 			double[][] x = new double[independVarDTOList.size()][dependVarList.size()];
 			for (int k = 0; k < independVarDTOList.size(); k++) {
 				List<Double> independVarList = new ArrayList<Double>();

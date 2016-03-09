@@ -46,11 +46,5 @@ for (int i = 0; i < fortx.length; i++) {
 	        double regressionParameter = regressionParameters[i];
 	        System.out.println(i + " " + regressionParameter);
 	    }
-//	    System.out.println(ols.calculateAdjustedRSquared()+"");
-//	    System.out.println(ols.calculateResidualSumOfSquares());
-//	    System.out.println(ols.estimateErrorVariance());
-//	    System.out.println(ols.estimateRegressionStandardError());
-//	    System.out.println(TestUtils.t);
-	    System.out.println(TestUtils.tTest( 3.30,regressionParameters));
 	}
 }
