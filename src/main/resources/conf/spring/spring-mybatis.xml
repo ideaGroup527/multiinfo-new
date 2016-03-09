@@ -25,7 +25,29 @@
 		<property name="maxIdleTime" value="${pool.maxIdleTime}" />
 		<property name="acquireIncrement" value="${pool.acquireIncrement}" />
 	</bean>
+<!--     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="url" value="${database.url}" />
+        <property name="username" value="${database.username}" />
+        <property name="password" value="${database.password}" />
 
+        <property name="filters" value="stat" />
+
+        <property name="maxActive" value="${pool.maxPoolSize}" />
+        <property name="initialSize" value="${pool.initialPoolSize}" />
+        <property name="maxWait" value="${druid.maxWait}" />
+        <property name="minIdle" value="${pool.minPoolSize}" />
+
+        <property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}" />
+        <property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}" />
+
+        <property name="validationQuery" value="SELECT 'x'" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+
+        <property name="poolPreparedStatements" value="false" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+    </bean> -->
 
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource" />

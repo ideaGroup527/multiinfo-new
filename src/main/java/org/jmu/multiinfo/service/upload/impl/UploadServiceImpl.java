@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,14 +17,32 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.jmu.multiinfo.core.util.ExcelUtil;
+import org.jmu.multiinfo.dto.upload.DataDTO;
+import org.jmu.multiinfo.dto.upload.DataVariety;
 import org.jmu.multiinfo.dto.upload.ExcelDTO;
 import org.jmu.multiinfo.dto.upload.SheetDTO;
+import org.jmu.multiinfo.dto.upload.TextDTO;
+import org.jmu.multiinfo.dto.upload.VarietyDTO;
 import org.jmu.multiinfo.service.upload.UploadService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UploadServiceImpl implements UploadService{
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	
+	public ExcelDTO readExcel(File file) throws Exception{
+	return	readExcel(file,0);
+	}
+	
 	public ExcelDTO readExcel(File file,int n) throws Exception{
+	return	readExcel(file,n,true);
+	}
+	
+	
+	public ExcelDTO readExcel(File file,int n,boolean isFirstRowVar) throws Exception{
 		ExcelDTO excelDto = new ExcelDTO();
 		SheetDTO sheetDto = new SheetDTO();
 		excelDto.setFileName(file.getName());
@@ -63,72 +79,73 @@ public class UploadServiceImpl implements UploadService{
 			excelDto.setSheetNum(sheetNum);
 			excelDto.setSheetNameList(sheetNameList);
 			HSSFSheet sheet = (HSSFSheet) wb.getSheetAt(n);
-
 			int rowcount = sheet.getLastRowNum();// 取得有效的行数
 			int colcount = sheet.getRow(0).getPhysicalNumberOfCells();// 总列数
-			String[][] str = new String[rowcount][colcount];
+			DataDTO[][] dataGrid = new DataDTO[rowcount][colcount];
+			List<VarietyDTO> varietyList = new ArrayList<VarietyDTO>();
 			HSSFRow row = null;
 			for (int i = 0; i < rowcount; i++) {
 				row = sheet.getRow(i); // 获得第i行
 				for (int j = 0; j < colcount; j++) {
-					str[i][j] = getCellFormatValue(row.getCell(j)).trim();
+					Map<String,Object> datamap =null;
+				if(	ExcelUtil.isMergedRegion(sheet, i, j)){
+					datamap=	ExcelUtil.getMergedRegionValue(sheet, i, j);
+				}else{
+					
+					datamap= ExcelUtil.getCellFormatValue(row.getCell(j));
+				}
+					String typeDes =(String) datamap.get("typeDes");
+					String pjs = ExcelUtil.getExcelColName(j+1);
+					String mergedRange = (String) datamap.get("mergedRange");
+//					logger.debug(pjs);
+					if(isFirstRowVar&&i==0){
+						VarietyDTO variety =  new VarietyDTO();
+						
+						variety.setPosition(pjs);
+						variety.setVarietyName(datamap.get("value").toString());
+						variety.setType((Integer) datamap.get("type"));
+						variety.setTypeDes(typeDes);
+						varietyList.add(variety);
+					}
+					if(!isFirstRowVar&&i==0){
+							VarietyDTO variety =  new VarietyDTO();
+						
+						variety.setPosition(pjs);
+						variety.setVarietyName("V"+(i+1));
+						variety.setType((Integer) datamap.get("type"));
+						variety.setTypeDes(typeDes);
+						varietyList.add(variety);
+						
+					}
+					DataDTO data = new DataDTO();
+					dataGrid[i][j] = data;
+					data.setPosition(pjs + (i+1) +"");
+					data.setPositionDes(pjs +","+ (i+1) );
+					data.setData(datamap.get("value"));
+					data.setType((Integer) datamap.get("type"));
+					data.setMergedRange(mergedRange);
+					data.setTypeDes(typeDes );
+					
 				}
 			}
-			sheetDto.setData(str);
+			sheetDto.setDataGrid(dataGrid);
+			
+			sheetDto.setVariety(varietyList);
 			sheetDto.setSheetName(sheet.getSheetName());
+			sheetDto.setFirstRowVar(isFirstRowVar);
 			excelDto.setSheet(sheetDto);
+			excelDto.setPhysicalRowNum(sheet.getPhysicalNumberOfRows());
+			String lastColIndex = ExcelUtil.getExcelColName(colcount);
+			excelDto.setLastCellIndex(lastColIndex+rowcount+"");
+			excelDto.setPhysicalCellNum(colcount);
 		return excelDto;
 	}
-	
-	
-	/**
-	 * 根据HSSFCell类型设置数据
-	 * 
-	 * @param cell
-	 * @return
-	 */
-	public static String getCellFormatValue(HSSFCell cell) {
-		String cellvalue = "";
-		if (cell != null) {
-			// 判断当前Cell的Type
-			switch (cell.getCellType()) {
-			// 如果当前Cell的Type为NUMERIC
-			case HSSFCell.CELL_TYPE_NUMERIC:
-			case HSSFCell.CELL_TYPE_FORMULA: {
-				// 判断当前的cell是否为Date
-				if (HSSFDateUtil.isCellDateFormatted(cell)) {
-					// 如果是Date类型则，转化为Data格式
 
-					// 方法1：这样子的data格式是带时分秒的：2011-10-12 0:00:00
-					// cellvalue = cell.getDateCellValue().toLocaleString();
-
-					// 方法2：这样子的data格式是不带带时分秒的：2011-10-12
-					Date date = cell.getDateCellValue();
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-					cellvalue = sdf.format(date);
-
-				}
-				// 如果是纯数字
-				else {
-					// 取得当前Cell的数值
-					cellvalue = String.valueOf(cell.getNumericCellValue());
-				}
-				break;
-			}
-			// 如果当前Cell的Type为STRIN
-			case HSSFCell.CELL_TYPE_STRING:
-				// 取得当前的Cell字符串
-				cellvalue = cell.getRichStringCellValue().getString();
-				break;
-			// 默认的Cell值
-			default:
-				cellvalue = " ";
-			}
-		} else {
-			cellvalue = "";
-		}
-		return cellvalue;
-
+	@Override
+	public TextDTO readText(File file, boolean isFirstRowVar) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+	
 
 }

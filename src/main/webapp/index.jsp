@@ -6,7 +6,7 @@
     </head>
 <body>
 <h2>Hello World!</h2>
-        <form action="data/file" method="post" enctype="multipart/form-data">
+        <form action="upload.do?method=excel" method="post" enctype="multipart/form-data">
             <input type="file" name="data_file" id="data_file" />
             <input type="text" name="sheetNo" id="sheetNo" />
             <br/>

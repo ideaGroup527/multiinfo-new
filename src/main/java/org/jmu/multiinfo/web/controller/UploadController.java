@@ -14,6 +14,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.jmu.multiinfo.core.dto.BaseDTO;
 import org.jmu.multiinfo.dto.upload.ExcelDTO;
+import org.jmu.multiinfo.dto.upload.TextDTO;
 import org.jmu.multiinfo.service.upload.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +37,7 @@ import org.springframework.web.multipart.MultipartFile;
 * @version V1.0
  */
 @Controller
-@RequestMapping("/data")
+@RequestMapping("/upload.do")
 public class UploadController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -44,15 +45,26 @@ public class UploadController {
 	@Autowired
 	public UploadService uploadService;
 	
-	@RequestMapping(value = "/file",method=RequestMethod.POST)
+	@RequestMapping(params = { "method=excel" },method=RequestMethod.POST)
 	@ResponseBody
 	public BaseDTO uploadFile(HttpServletRequest request, HttpServletResponse response,HttpSession session,
-			@RequestParam("data_file") MultipartFile file,@RequestParam(required=false,value="sheetNo",defaultValue="0") int sheetNo) throws Exception{
+			@RequestParam("data_file") MultipartFile file,@RequestParam(required=false,value="sheetNo",defaultValue="0") int sheetNo,
+			@RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar) throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		FileOutputStream fos = FileUtils.openOutputStream(new File(file.getOriginalFilename())); 
 		IOUtils.copy(file.getInputStream(), fos); 
-		ExcelDTO  data = uploadService.readExcel(new File(file.getOriginalFilename()),sheetNo);
+		ExcelDTO  data = uploadService.readExcel(new File(file.getOriginalFilename()),sheetNo,isFirstRowVar);
+		return data;
+	}
+	
+	@RequestMapping(params = { "method=text" },method=RequestMethod.POST)
+	@ResponseBody
+	public BaseDTO uploadText(HttpServletRequest request, HttpServletResponse response,HttpSession session,
+			@RequestParam("data_file") MultipartFile file,@RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar)throws Exception{
+		FileOutputStream fos = FileUtils.openOutputStream(new File(file.getOriginalFilename())); 
+		IOUtils.copy(file.getInputStream(), fos); 
+		TextDTO data= uploadService.readText(new File(file.getOriginalFilename()),isFirstRowVar);
 		return data;
 	}
 }

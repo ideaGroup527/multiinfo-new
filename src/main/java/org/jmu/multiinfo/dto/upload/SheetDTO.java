@@ -1,9 +1,13 @@
 package org.jmu.multiinfo.dto.upload;
 
+import java.util.List;
+
 public class SheetDTO {
 private String sheetName;
 private int sheetNo;
-private String[][] data;
+private DataDTO[][] dataGrid;
+private List<VarietyDTO> variety;
+private boolean isFirstRowVar;
 public String getSheetName() {
 	return sheetName;
 }
@@ -16,12 +20,23 @@ public int getSheetNo() {
 public void setSheetNo(int sheetNo) {
 	this.sheetNo = sheetNo;
 }
-public String[][] getData() {
-	return data;
+public DataDTO[][] getDataGrid() {
+	return dataGrid;
 }
-public void setData(String[][] data) {
-	this.data = data;
+public void setDataGrid(DataDTO[][] dataGrid) {
+	this.dataGrid = dataGrid;
 }
-
+public List<VarietyDTO> getVariety() {
+	return variety;
+}
+public void setVariety(List<VarietyDTO> variety) {
+	this.variety = variety;
+}
+public boolean getIsFirstRowVar() {
+	return isFirstRowVar;
+}
+public void setFirstRowVar(boolean isFirstRowVar) {
+	this.isFirstRowVar = isFirstRowVar;
+}
 
 }
