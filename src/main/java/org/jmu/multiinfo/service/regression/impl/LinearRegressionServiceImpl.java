@@ -1,7 +1,9 @@
 package org.jmu.multiinfo.service.regression.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression;
 import org.apache.commons.math3.stat.regression.RegressionResults;
@@ -10,6 +12,7 @@ import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.core.util.PositionBean;
 import org.jmu.multiinfo.dto.regression.CommonCondition;
 import org.jmu.multiinfo.dto.regression.CommonDTO;
+import org.jmu.multiinfo.dto.regression.GraphDTO;
 import org.jmu.multiinfo.dto.regression.MultipleLinearDTO;
 import org.jmu.multiinfo.dto.regression.SingleLinearDTO;
 import org.jmu.multiinfo.dto.upload.DataDTO;
@@ -148,6 +151,47 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 			return calOLSMultipleLinearRegression(y, x);
 		} else
 			return null;
+	}
+
+	@Override
+	public GraphDTO convertForGraph(CommonCondition condition) {
+		GraphDTO g = new GraphDTO();
+		VarietyDTO dependVarDTO = condition.getDependentVariable();
+		List<VarietyDTO> independVarDTOList = condition.getIndependentVariable();
+		DataDTO[][] dataGrid = condition.getDataGrid();
+		Map<String, List<Double>> resDataMap = new HashMap<String, List<Double>>();
+		// 因变量数据
+		List<Double> dependVarList = new ArrayList<Double>();
+		PositionBean depvarRange = ExcelUtil.splitRange(dependVarDTO.getRange());
+		for (int i = depvarRange.getFirstRowId() - 1; i < depvarRange.getLastRowId(); i++) {
+			for (int j = depvarRange.getFirstColId() - 1; j < depvarRange.getLastColId(); j++) {
+				dependVarList.add(Double.valueOf(dataGrid[i][j].getData().toString()));
+			}
+		}
+		resDataMap.put(dependVarDTO.getVarietyName(), dependVarList);
+		
+		for (int k = 0; k < independVarDTOList.size(); k++) {
+			List<Double> independVarList = new ArrayList<Double>();
+			VarietyDTO independVarDTO = independVarDTOList.get(k);
+			PositionBean indepvarRange = ExcelUtil.splitRange(independVarDTO.getRange());
+			for (int i = indepvarRange.getFirstRowId() - 1; i < indepvarRange.getLastRowId(); i++) {
+				for (int j = indepvarRange.getFirstColId() - 1; j < indepvarRange.getLastColId(); j++) {
+					independVarList.add(Double.valueOf(dataGrid[i][j].getData().toString()));
+				}
+			}
+			resDataMap.put(independVarDTO.getVarietyName(), independVarList);
+		}
+		
+		
+		g.setDependentVariable(dependVarDTO);
+		g.setIndependentVariable(independVarDTOList);
+
+
+		
+		
+		g.setResDataMap(resDataMap );
+		return g;
+		
 	}
 
 }
