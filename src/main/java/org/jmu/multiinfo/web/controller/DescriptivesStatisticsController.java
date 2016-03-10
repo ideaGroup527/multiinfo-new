@@ -5,6 +5,7 @@ import org.jmu.multiinfo.dto.descriptives.CommonCondition;
 import org.jmu.multiinfo.service.descriptives.DescriptivesStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,14 +27,14 @@ public class DescriptivesStatisticsController {
 	private DescriptivesStatisticsService descriptivesStatisticsService;
 	@RequestMapping(params = { "method=descriptives" })
 	@ResponseBody
-   public CommonDTO calDesc(CommonCondition condition){
+   public CommonDTO calDesc(@RequestBody CommonCondition condition){
 		CommonDTO meanDTO =	descriptivesStatisticsService.calDesc(condition);
 		return meanDTO;
 	}
 
 	@RequestMapping(params = { "method=frequency" })
 	@ResponseBody
-   public CommonDTO calFrequency(CommonCondition condition){
+   public CommonDTO calFrequency(@RequestBody CommonCondition condition){
 		CommonDTO freDTO =	descriptivesStatisticsService.calFrequency(condition);
 		return freDTO;
 	}

@@ -5,6 +5,7 @@ import org.jmu.multiinfo.dto.comparemean.MedianDTO;
 import org.jmu.multiinfo.service.comparemean.CompareMeanStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,7 +30,7 @@ public class CompareMeanStatisticsController {
 	
 	@RequestMapping(params = { "method=median" })
 	@ResponseBody
-   public MedianDTO calMedian(MedianCondition condition){
+   public MedianDTO calMedian(@RequestBody MedianCondition condition){
 		MedianDTO medianDTO =	compareMeanStatisticsService.calMedian(condition);
 		return medianDTO;
 	}
