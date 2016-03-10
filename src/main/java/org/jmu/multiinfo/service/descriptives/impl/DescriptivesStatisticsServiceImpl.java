@@ -90,7 +90,7 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 			Map<String, Double> frequencyMap = new HashMap<String,Double>();
 			Map<String, Double> percentage = new HashMap<String,Double>();
 			Map<String, Double> accumulationPercentage= new HashMap<String,Double>();
-			Frequency frequency = basicStatisticsService.FrequencyCount(dataArr);
+			Frequency frequency = basicStatisticsService.frequencyCount(dataArr);
 			
 			//去重
 			Set<Object> uniqSet = new HashSet<Object>(dataList);
