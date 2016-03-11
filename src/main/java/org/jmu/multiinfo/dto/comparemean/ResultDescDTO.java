@@ -71,4 +71,11 @@ public Double getMedian() {
 public void setMedian(Double median) {
 		this.median = median;
 	}
+@Override
+public String toString() {
+	return "ResultDescDTO [max=" + max + ", min=" + min + ", arithmeticMean=" + arithmeticMean + ", variance="
+			+ variance + ", standardDeviation=" + standardDeviation + ", total=" + total + ", median=" + median
+			+ ", skewness=" + skewness + ", kurtosis=" + kurtosis + ", count=" + count + "]";
+}
+
 }

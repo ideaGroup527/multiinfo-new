@@ -34,7 +34,7 @@ public class CompareMeanStatisticsServiceTest {
 private CompareMeanStatisticsService compareMeanStatisticsService;
 
 @Test
-public void calMedianTest() throws JsonGenerationException, JsonMappingException, IOException{
+public void calMeanTest() throws JsonGenerationException, JsonMappingException, IOException{
 	MedianCondition condition = new MedianCondition();
 	VarietyDTO independentVariable = new VarietyDTO();
 	independentVariable.setVarietyName("地点");
@@ -177,11 +177,11 @@ public void calMedianTest() throws JsonGenerationException, JsonMappingException
 	dataGrid[4][2] = i42;
 	
 	condition.setDataGrid(dataGrid);
-	MedianDTO medianDTO =	compareMeanStatisticsService.calMedian(condition );
+	MedianDTO medianDTO =	compareMeanStatisticsService.calMean(condition );
 	System.out.println(medianDTO.toString());
 	ObjectMapper mapper = new ObjectMapper(); 
-	mapper.writeValue(new File("G://a.json"),condition);
+	mapper.writeValue(new File("E://a.json"),condition);
 	System.out.println("");
-	mapper.writeValue(new File("G://b.json"),medianDTO);
+	mapper.writeValue(new File("E://b.json"),medianDTO);
 }
 }
