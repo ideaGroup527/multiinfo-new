@@ -12,6 +12,7 @@ import org.jmu.multiinfo.core.util.PositionBean;
 import org.jmu.multiinfo.dto.comparemean.MedianCondition;
 import org.jmu.multiinfo.dto.comparemean.MedianDTO;
 import org.jmu.multiinfo.dto.comparemean.ResultDataDTO;
+import org.jmu.multiinfo.dto.comparemean.ResultDescDTO;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
@@ -26,7 +27,7 @@ public class CompareMeanStatisticsServiceImpl implements CompareMeanStatisticsSe
 	@Autowired
 	private BasicStatisticsService basicStatisticsService;
 	@Override
-	public MedianDTO calMedian(MedianCondition condition) {
+	public MedianDTO calMean(MedianCondition condition) {
 		MedianDTO resDTO = new MedianDTO();
 		Map<String, Map<String, ResultDataDTO>> resDataMap = new HashMap<String, Map<String, ResultDataDTO>>();
 		//因变量
@@ -69,7 +70,15 @@ public class CompareMeanStatisticsServiceImpl implements CompareMeanStatisticsSe
 						dataArr[i] = dataList.get(i);
 					}
 				ResultDataDTO reDataDTO = new ResultDataDTO();
-				reDataDTO.setResultData(basicStatisticsService.median(dataArr));
+					ResultDescDTO reDesDataDTO = new ResultDescDTO();
+					reDataDTO.setResultData(reDesDataDTO);
+					reDesDataDTO.setMedian(basicStatisticsService.median(dataArr));
+					reDesDataDTO.setTotal(basicStatisticsService.sum(dataArr));
+					reDesDataDTO.setMin(basicStatisticsService.min(dataArr));
+					reDesDataDTO.setMax(basicStatisticsService.max(dataArr));
+					reDesDataDTO.setVariance(basicStatisticsService.variance(dataArr));
+					reDesDataDTO.setKurtosis(basicStatisticsService.kurtosis(dataArr));
+					reDesDataDTO.setArithmeticMean(basicStatisticsService.geometricMean(dataArr));
 				map.put(varietyDTO.getVarietyName(), reDataDTO );
 				resDataMap.put(indep, map);
 				}

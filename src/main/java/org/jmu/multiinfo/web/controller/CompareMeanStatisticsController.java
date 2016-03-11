@@ -28,10 +28,10 @@ public class CompareMeanStatisticsController {
 	@Autowired
 	private CompareMeanStatisticsService compareMeanStatisticsService;
 	
-	@RequestMapping(params = { "method=median" })
+	@RequestMapping(params = { "method=mean" })
 	@ResponseBody
-   public MedianDTO calMedian(@RequestBody MedianCondition condition){
-		MedianDTO medianDTO =	compareMeanStatisticsService.calMedian(condition);
+   public MedianDTO calMean(@RequestBody MedianCondition condition){
+		MedianDTO medianDTO =	compareMeanStatisticsService.calMean(condition);
 		return medianDTO;
 	}
 }

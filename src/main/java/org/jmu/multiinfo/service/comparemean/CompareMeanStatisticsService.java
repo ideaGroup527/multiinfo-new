@@ -9,5 +9,5 @@ public interface CompareMeanStatisticsService {
 	 * @param condition
 	 * @return
 	 */
- public MedianDTO calMedian(MedianCondition condition);
+ public MedianDTO calMean(MedianCondition condition);
 }
