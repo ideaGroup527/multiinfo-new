@@ -1,7 +1,10 @@
 package org.jmu.multiinfo.dto.descriptives;
 
+import java.util.Arrays;
+
 public class ResultDataDTO {
 private Object resultData;
+private double[] dataArr;
 private String varietyName;
 private String typeDes;
 private Integer type;
@@ -36,10 +39,16 @@ public String getTypeFormat() {
 public void setTypeFormat(String typeFormat) {
 	this.typeFormat = typeFormat;
 }
+public double[] getDataArr() {
+	return dataArr;
+}
+public void setDataArr(double[] dataArr) {
+	this.dataArr = dataArr;
+}
 @Override
 public String toString() {
-	return "ResultDataDTO [resultData=" + resultData + ", varietyName=" + varietyName + ", typeDes=" + typeDes
-			+ ", type=" + type + ", typeFormat=" + typeFormat + "]";
+	return "ResultDataDTO [resultData=" + resultData + ", dataArr=" + Arrays.toString(dataArr) + ", varietyName="
+			+ varietyName + ", typeDes=" + typeDes + ", type=" + type + ", typeFormat=" + typeFormat + "]";
 }
 
 

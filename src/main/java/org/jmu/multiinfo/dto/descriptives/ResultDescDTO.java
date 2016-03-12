@@ -1,5 +1,7 @@
 package org.jmu.multiinfo.dto.descriptives;
 
+import java.util.List;
+
 public class ResultDescDTO {
 private Double max;
 private Double min;
@@ -10,6 +12,7 @@ private Double total;
 private Double skewness;
 private Double kurtosis;
 private Integer count;
+private List<PercentileDTO> percentiles;
 public Double getMax() {
 	return max;
 }
@@ -64,5 +67,10 @@ public Integer getCount() {
 public void setCount(Integer count) {
 	this.count = count;
 }
-
+public List<PercentileDTO> getPercentiles() {
+	return percentiles;
+}
+public void setPercentiles(List<PercentileDTO> percentiles) {
+	this.percentiles = percentiles;
+}
 }

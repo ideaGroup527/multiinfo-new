@@ -2,6 +2,7 @@ package org.jmu.multiinfo.service.descriptives;
 
 import org.jmu.multiinfo.dto.descriptives.CommonCondition;
 import org.jmu.multiinfo.dto.descriptives.CommonDTO;
+import org.jmu.multiinfo.dto.descriptives.PercentileCondition;
 
 public interface DescriptivesStatisticsService {
 	
@@ -10,7 +11,7 @@ public interface DescriptivesStatisticsService {
 	 * @param condition
 	 * @return
 	 */
-	 public CommonDTO calDesc(CommonCondition condition);
+	 public CommonDTO calDesc(PercentileCondition condition);
 	 
 	 
 	 /***
