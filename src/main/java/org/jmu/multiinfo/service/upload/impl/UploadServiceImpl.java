@@ -111,7 +111,7 @@ public class UploadServiceImpl implements UploadService{
 							VarietyDTO variety =  new VarietyDTO();
 						
 						variety.setPosition(pjs);
-						variety.setVarietyName("V"+(i+1));
+						variety.setVarietyName("V"+(j+1));
 						variety.setType((Integer) datamap.get("type"));
 						variety.setTypeDes(typeDes);
 						varietyList.add(variety);
