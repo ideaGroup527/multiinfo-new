@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
@@ -142,9 +144,66 @@ public class UploadServiceImpl implements UploadService{
 	}
 
 	@Override
-	public TextDTO readText(File file, boolean isFirstRowVar) {
-		// TODO Auto-generated method stub
-		return null;
+	public TextDTO readText(File file, boolean isFirstRowVar) throws IOException {
+		TextDTO textDto = new TextDTO();
+		textDto.setFileName(file.getName());
+		textDto.setIsFirstRowVar(isFirstRowVar);
+		String lastCellIndex ="";
+		List<String>  lines = FileUtils.readLines(file,Charset.forName("UTF-8"));
+		Integer physicalRowNum = lines.size();
+		textDto.setPhysicalRowNum(physicalRowNum);
+		Integer physicalCellNum = lines.get(0).split("\t|\\s+").length;
+		textDto.setPhysicalCellNum(physicalCellNum);
+		DataDTO[][] dataGrid = new DataDTO[physicalRowNum][physicalCellNum];
+		List<VarietyDTO> varietyList = new ArrayList<VarietyDTO>();
+		for (int i = 0; i < physicalRowNum; i++) {
+			String row = lines.get(i);
+			String[] eachDatas = row.split("\t|\\s+");
+			if(i==200){
+				System.out.println(3);
+			}
+			for (int j = 0; j < eachDatas.length; j++) {
+				Map<String,Object> datamap =null;
+				datamap =	ExcelUtil.getCellFormatValue(eachDatas[j]);
+				String typeDes =(String) datamap.get("typeDes");
+				String pjs = ExcelUtil.getExcelColName(j+1);
+				String mergedRange = (String) datamap.get("mergedRange");
+				if(isFirstRowVar&&i==0){
+					VarietyDTO variety =  new VarietyDTO();
+					
+					variety.setPosition(pjs);
+					variety.setVarietyName(datamap.get("value").toString());
+					variety.setType((Integer) datamap.get("type"));
+					variety.setTypeDes(typeDes);
+					varietyList.add(variety);
+				}
+				if(!isFirstRowVar&&i==0){
+						VarietyDTO variety =  new VarietyDTO();
+					variety.setPosition(pjs);
+					variety.setVarietyName("V"+(j+1));
+					variety.setType((Integer) datamap.get("type"));
+					variety.setTypeDes(typeDes);
+					varietyList.add(variety);
+					
+				}
+				
+				DataDTO data = new DataDTO();
+				dataGrid[i][j] = data;
+				data.setPosition(pjs + (i+1) +"");
+				lastCellIndex = pjs + (i+1) +"";
+				data.setPositionDes(pjs +","+ (i+1) );
+				data.setData(datamap.get("value"));
+				data.setType((Integer) datamap.get("type"));
+				data.setMergedRange(mergedRange);
+				data.setTypeDes(typeDes );
+			}
+			
+		}
+		textDto.setDataGrid(dataGrid);
+		textDto.setVariety(varietyList);
+
+		textDto.setLastCellIndex(lastCellIndex);
+		return textDto;
 	}
 	
 

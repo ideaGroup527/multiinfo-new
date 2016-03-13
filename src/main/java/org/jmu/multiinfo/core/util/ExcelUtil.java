@@ -25,6 +25,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jmu.multiinfo.dto.upload.DataVariety;
+import org.jmu.multiinfo.web.utils.CommonUtil;
 
 public class ExcelUtil {
 	public static Workbook create(InputStream inp, Map<String, Object> condition) throws IOException,InvalidFormatException,EncryptedDocumentException {
@@ -308,5 +309,34 @@ public class ExcelUtil {
               }   
         } 
         return false;   
-      } 
+      }
+
+
+
+	public static Map<String,Object> getCellFormatValue(String ora) {
+		if(ora == null )
+			return null;
+		Map<String,Object> map = new HashMap<String,Object>();
+		int type = 0;
+		Object cellvalue =ora;
+		if("".equals(ora)){
+			type =DataVariety.DATA_TYPE_STRING;
+			cellvalue = " ";
+		}else if(CommonUtil.isRealNumber(ora)){
+		    type = DataVariety.DATA_TYPE_NUMERIC;
+		}else if(CommonUtil.isScienceNumber(ora)){
+			type =DataVariety.DATA_TYPE_NUMERIC_SCIENCE;
+			
+		}else if(CommonUtil.isVirgNumber(ora)){
+			type =DataVariety.DATA_TYPE_NUMERIC_VIRG;
+		}else {
+			type = DataVariety.DATA_TYPE_STRING;
+		}
+		map.put("value", cellvalue);
+		map.put("type", type);
+		String typeDes =jdType(type);
+		map.put("typeDes", typeDes);
+		return map;
+		
+	} 
 }

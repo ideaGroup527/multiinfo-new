@@ -1,6 +1,8 @@
 package org.jmu.multiinfo.service.upload;
 
 import java.io.File;
+import java.io.IOException;
+
 import org.jmu.multiinfo.dto.upload.ExcelDTO;
 import org.jmu.multiinfo.dto.upload.TextDTO;
 
@@ -11,5 +13,5 @@ public ExcelDTO readExcel(File file,int n) throws Exception;
 
 public ExcelDTO readExcel(File file) throws Exception;
 
-public TextDTO readText(File file, boolean isFirstRowVar);
+public TextDTO readText(File file, boolean isFirstRowVar) throws IOException;
 }
