@@ -13,16 +13,20 @@ import org.jmu.multiinfo.core.util.PositionBean;
 import org.jmu.multiinfo.dto.regression.CommonCondition;
 import org.jmu.multiinfo.dto.regression.CommonDTO;
 import org.jmu.multiinfo.dto.regression.GraphDTO;
+import org.jmu.multiinfo.dto.regression.GraphDataDTO;
 import org.jmu.multiinfo.dto.regression.MultipleLinearDTO;
 import org.jmu.multiinfo.dto.regression.SingleLinearDTO;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
+import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.jmu.multiinfo.service.regression.LinearRegressionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LinearRegressionServiceImpl implements LinearRegressionService {
-
+	@Autowired
+	private BasicStatisticsService basicStatisticsService;
 	@Override
 	public CommonDTO calSingleLinearRegression(double[][] data) {
 		SingleLinearDTO linearDTO = new SingleLinearDTO();
@@ -158,19 +162,30 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		VarietyDTO dependVarDTO = condition.getDependentVariable();
 		List<VarietyDTO> independVarDTOList = condition.getIndependentVariable();
 		DataDTO[][] dataGrid = condition.getDataGrid();
-		Map<String, List<Double>> resDataMap = new HashMap<String, List<Double>>();
+		Map<String, GraphDataDTO> resDataMap = new HashMap<String, GraphDataDTO>();
 		// 因变量数据
 		List<Double> dependVarList = new ArrayList<Double>();
+		GraphDataDTO gdata = new GraphDataDTO();
 		PositionBean depvarRange = ExcelUtil.splitRange(dependVarDTO.getRange());
 		for (int i = depvarRange.getFirstRowId() - 1; i < depvarRange.getLastRowId(); i++) {
 			for (int j = depvarRange.getFirstColId() - 1; j < depvarRange.getLastColId(); j++) {
 				dependVarList.add(Double.valueOf(dataGrid[i][j].getData().toString()));
 			}
 		}
-		resDataMap.put(dependVarDTO.getVarietyName(), dependVarList);
+		gdata.setData(dependVarList);
+		double[] dataArr = new double[dependVarList.size()];
+		for (int i = 0; i < dataArr.length; i++) {
+			dataArr[i] = dependVarList.get(i);
+		}
+	
+		gdata.setMin(basicStatisticsService.min(dataArr) );
+		gdata.setMax(basicStatisticsService.max(dataArr) );
+		gdata.setMean(basicStatisticsService.arithmeticMean(dataArr) );
+		resDataMap.put(dependVarDTO.getVarietyName(), gdata);
 		
 		for (int k = 0; k < independVarDTOList.size(); k++) {
 			List<Double> independVarList = new ArrayList<Double>();
+			GraphDataDTO igdata = new GraphDataDTO();
 			VarietyDTO independVarDTO = independVarDTOList.get(k);
 			PositionBean indepvarRange = ExcelUtil.splitRange(independVarDTO.getRange());
 			for (int i = indepvarRange.getFirstRowId() - 1; i < indepvarRange.getLastRowId(); i++) {
@@ -178,7 +193,15 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 					independVarList.add(Double.valueOf(dataGrid[i][j].getData().toString()));
 				}
 			}
-			resDataMap.put(independVarDTO.getVarietyName(), independVarList);
+			dataArr = new double[independVarList.size()];
+			for (int i = 0; i < dataArr.length; i++) {
+				dataArr[i] = independVarList.get(i);
+			}
+			igdata.setData(independVarList);
+			igdata.setMin(basicStatisticsService.min(dataArr) );
+			igdata.setMax(basicStatisticsService.max(dataArr) );
+			igdata.setMean(basicStatisticsService.arithmeticMean(dataArr) );
+			resDataMap.put(independVarDTO.getVarietyName(), igdata);
 		}
 		
 		
