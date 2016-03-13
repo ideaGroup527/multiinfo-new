@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.css"/>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <style>
+        select.form-control {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    弹框测试
+</button>
+
+<!-- Modal -->
+<div class="modal fade container" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">弹框名称</h4>
+            </div>
+            <div class="modal-body">
+                <label for="select">变量值选择(按住ctrl多选)</label>
+                <select multiple class="form-control" id="select">
+                    <option value="测试选项1">测试选项1</option>
+                    <option value="测试选项2">测试选项2</option>
+                    <option value="测试选项3">测试选项3</option>
+                    <option value="测试选项4">测试选项4</option>
+                    <option value="测试选项5">测试选项5</option>
+                </select>
+
+                <div class="clearfix" role="group">
+                    <button type="button" class="btn btn-default" id="btn_argument">自变量选择</button>
+                    <button type="button" class="btn btn-default" id="btn_dep_var">因变量选择</button>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" id="list_argument"></div>
+                    <div class="col-md-6" id="list_dep_var"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">选项</button>
+                <button type="button" class="btn btn-primary">下一步</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#btn_argument').click(function () {
+        var arguments = $('#select').val();
+        console.log(arguments);
+        for (var i = 0, len = arguments.length; i < len; i++) {
+            $('#list_argument').append('<div>' + arguments[i] + '</div>');
+        }
+    });
+    $('#btn_dep_var').click(function () {
+        var arguments = $('#select').val();
+        console.log(arguments);
+        for (var i = 0, len = arguments.length; i < len; i++) {
+            $('#list_dep_var').append('<div>' + arguments[i] + '</div>');
+        }
+    });
+</script>
+</body>
+</html>
