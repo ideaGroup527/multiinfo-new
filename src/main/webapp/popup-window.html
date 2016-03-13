@@ -10,6 +10,13 @@
         select.form-control {
             margin-bottom: 10px;
         }
+
+        #list_argument, #list_dep_var {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border: 1px solid #c7ddef;
+        }
     </style>
 </head>
 <body>
@@ -18,7 +25,7 @@
 </button>
 
 <!-- Modal -->
-<div class="modal fade container" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -26,7 +33,7 @@
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">弹框名称</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body container-fluid">
                 <label for="select">变量值选择(按住ctrl多选)</label>
                 <select multiple class="form-control" id="select">
                     <option value="测试选项1">测试选项1</option>
@@ -41,13 +48,19 @@
                     <button type="button" class="btn btn-default" id="btn_dep_var">因变量选择</button>
                 </div>
                 <div class="row">
-                    <div class="col-md-6" id="list_argument"></div>
-                    <div class="col-md-6" id="list_dep_var"></div>
+                    <div class="col-md-6" id="list_argument">
+                        <h4>自变量</h4>
+                        <input type="hidden"/>
+                    </div>
+                    <div class="col-md-6" id="list_dep_var">
+                        <h4>因变量</h4>
+                        <input type="hidden"/>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">选项</button>
-                <button type="button" class="btn btn-primary">下一步</button>
+                <button type="button" class="btn btn-default">选项</button>
+                <button type="button" class="btn btn-primary" id="next">下一步</button>
             </div>
         </div>
     </div>
@@ -59,6 +72,7 @@
         for (var i = 0, len = arguments.length; i < len; i++) {
             $('#list_argument').append('<div>' + arguments[i] + '</div>');
         }
+        $('#list_argument').find('input[type=hidden]').val(arguments);
     });
     $('#btn_dep_var').click(function () {
         var arguments = $('#select').val();
@@ -66,6 +80,14 @@
         for (var i = 0, len = arguments.length; i < len; i++) {
             $('#list_dep_var').append('<div>' + arguments[i] + '</div>');
         }
+        $('#list_dep_var').find('input[type=hidden]').val(arguments);
+    });
+
+    $('#next').click(function () {
+        var str = '';
+        str += '自变量：' + $('#list_argument').find('input[type=hidden]').val() + '\n';
+        str += '因变量：' + $('#list_dep_var').find('input[type=hidden]').val();
+        alert(str);
     });
 </script>
 </body>
