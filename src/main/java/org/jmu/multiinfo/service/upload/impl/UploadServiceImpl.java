@@ -159,9 +159,6 @@ public class UploadServiceImpl implements UploadService{
 		for (int i = 0; i < physicalRowNum; i++) {
 			String row = lines.get(i);
 			String[] eachDatas = row.split("\t|\\s+");
-			if(i==200){
-				System.out.println(3);
-			}
 			for (int j = 0; j < eachDatas.length; j++) {
 				Map<String,Object> datamap =null;
 				datamap =	ExcelUtil.getCellFormatValue(eachDatas[j]);
