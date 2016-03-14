@@ -1,5 +1,16 @@
 package org.jmu.multiinfo.dto.descriptives;
-
+/**
+ * *
+ * 
+ * 
+ * @Title: KSTestDTO.java
+ * @Package org.jmu.multiinfo.dto.descriptives
+ * @Description:  kolmogorov-smirnov检验
+ * @author  <a href="mailto:www_1350@163.com">Absurd</a>
+ * @date 2016年3月14日 下午11:35:10
+ * @version V1.0
+ *
+ */
 public class KSTestDTO {
 private Long n;
 private Double mean;
@@ -56,6 +67,11 @@ public Double getSig() {
 }
 public void setSig(Double sig) {
 	this.sig = sig;
+}
+@Override
+public String toString() {
+	return "KSTestDTO [n=" + n + ", mean=" + mean + ", sd=" + sd + ", absolute=" + absolute + ", positive=" + positive
+			+ ", negative=" + negative + ", ksz=" + ksz + ", sig=" + sig + "]";
 }
 
 
