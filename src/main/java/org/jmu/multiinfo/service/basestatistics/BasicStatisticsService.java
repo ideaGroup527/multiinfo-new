@@ -106,5 +106,13 @@ public interface BasicStatisticsService {
 	 * @return
 	 */
 	public Frequency frequencyCount(Object[] dataArr);
+
+
+	/***
+	 * 频数
+	 * @param dataArr
+	 * @return
+	 */
+	public Frequency frequencyCount(double[] dataArr);
 	
 }

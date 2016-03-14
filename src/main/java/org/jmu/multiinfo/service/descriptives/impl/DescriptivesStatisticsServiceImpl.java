@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import org.apache.commons.math3.stat.Frequency;
 import org.apache.commons.math3.stat.descriptive.rank.Percentile;
@@ -16,6 +17,7 @@ import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.core.util.PositionBean;
 import org.jmu.multiinfo.dto.descriptives.CommonCondition;
 import org.jmu.multiinfo.dto.descriptives.CommonDTO;
+import org.jmu.multiinfo.dto.descriptives.KSTestDTO;
 import org.jmu.multiinfo.dto.descriptives.PercentileCondition;
 import org.jmu.multiinfo.dto.descriptives.PercentileDTO;
 import org.jmu.multiinfo.dto.descriptives.ResultDataDTO;
@@ -25,6 +27,7 @@ import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.DataVariety;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
+import org.jmu.multiinfo.service.basestatistics.DistributionService;
 import org.jmu.multiinfo.service.descriptives.DescriptivesStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +37,9 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 	@Autowired
 	private BasicStatisticsService basicStatisticsService;
 
+	@Autowired
+	private DistributionService distributionService;
+	
 	@Override
 	public CommonDTO calDesc(PercentileCondition condition) {
 		CommonDTO meanDTO = new CommonDTO();
@@ -106,16 +112,23 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 			}
 			Object[] dataArr = dataList.toArray();
 			ResultFrequencyDTO retDto = new ResultFrequencyDTO();
-			Map<String, Double> frequencyMap = new HashMap<String, Double>();
+			Map<String, Long> frequencyMap = new HashMap<String, Long>();
 			Map<String, Double> percentage = new HashMap<String, Double>();
 			Map<String, Double> accumulationPercentage = new HashMap<String, Double>();
 			Frequency frequency = basicStatisticsService.frequencyCount(dataArr);
-
-			// 去重
-			Set<Object> uniqSet = new HashSet<Object>(dataList);
 			List<Object> uniqList = new ArrayList<Object>();
-			uniqList.addAll(uniqSet);
-			if (varietyDTO.getType() == DataVariety.DATA_TYPE_NUMERIC) {
+			Iterator<Entry<Comparable<?>, Long>>  it =	frequency.entrySetIterator();
+			while (it.hasNext()) {
+				Map.Entry<java.lang.Comparable<?>, java.lang.Long> entry = (Map.Entry<java.lang.Comparable<?>, java.lang.Long>) it
+						.next();
+				uniqList.add(entry.getKey());
+				frequencyMap.put(entry.getKey().toString(), entry.getValue());
+				percentage.put(entry.getKey().toString(), frequency.getPct(entry.getKey()));
+				accumulationPercentage.put(entry.getKey().toString(), frequency.getCumPct(entry.getKey()));
+			}
+			
+//			calNormalDistribution(dataArr);
+/*			if (varietyDTO.getType() == DataVariety.DATA_TYPE_NUMERIC) {
 				Collections.sort(uniqList, new Comparator<Object>() {
 					@Override
 					public int compare(Object o1, Object o2) {
@@ -130,15 +143,9 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 						return a1.compareTo(a2);
 					}
 				});
-			}
+			}*/
 
 			retDto.setUniqueData(uniqList);
-			for (int i = 0; i < uniqList.size(); i++) {
-				String key = uniqList.get(i).toString();
-				frequencyMap.put(key, (double) frequency.getCount(key));
-				percentage.put(key, frequency.getPct(key));
-				accumulationPercentage.put(key, frequency.getCumPct(key));
-			}
 
 			retDto.setFrequencyMap(frequencyMap);
 
@@ -150,6 +157,41 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 		}
 		meanDTO.setResDataMap(resDataMap);
 		return meanDTO;
+	}
+	
+	@Override
+	public KSTestDTO calNormalDistribution(double[] data){
+		KSTestDTO ksdto = new KSTestDTO();
+	Double mean =	basicStatisticsService.arithmeticMean(data);
+	ksdto.setMean(mean);
+	Double sd = basicStatisticsService.standardDeviation(data);
+	ksdto.setSd(sd);
+	Frequency f =  basicStatisticsService.frequencyCount(data);
+	int n = data.length;
+	ksdto.setN(Long.valueOf(n));
+	double fcount = 0.0;
+	List<Double> DList = new ArrayList<Double>();
+	Iterator<Entry<Comparable<?>, Long>>  it =	f.entrySetIterator();
+	while (it.hasNext()) {
+		Map.Entry<java.lang.Comparable<?>, java.lang.Long> entry = (Map.Entry<java.lang.Comparable<?>, java.lang.Long>) it
+				.next();
+		double x = Double.valueOf(entry.getKey().toString());
+		//标准化值
+		double z = (x-mean)/sd;
+		//理论分布值
+		double f0 = distributionService.normalDistribution(z).getCumulativeProbability();
+		fcount = fcount + Double.valueOf(entry.getValue().toString());
+		double fn = fcount / n;
+		double D = fn - f0;
+		DList.add(D);
+		
+	}
+	
+	ksdto.setPositive(Collections.max(DList));
+	ksdto.setNegative(Collections.min(DList));
+	ksdto.setAbsolute((Math.abs(ksdto.getPositive()) >Math.abs(ksdto.getNegative())?Math.abs(ksdto.getPositive()):Math.abs(ksdto.getNegative())));
+	ksdto.setKsz(Math.sqrt(n)*ksdto.getAbsolute());
+	return ksdto;
 	}
 
 }

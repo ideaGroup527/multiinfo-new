@@ -9,7 +9,7 @@ import org.jmu.multiinfo.dto.upload.DataDTO;
 public class ResultFrequencyDTO {
 //有效基本数据
 private List<Object> uniqueData;
-private Map<String,Double> frequencyMap;
+private Map<String,Long> frequencyMap;
 private Map<String,Double> percentage;
 //有效百分比
 private Map<String,Double> validatePercentage;
@@ -25,11 +25,11 @@ public void setUniqueData(List<Object> uniqueData) {
 	this.uniqueData = uniqueData;
 }
 
-public Map<String, Double> getFrequencyMap() {
+public Map<String, Long> getFrequencyMap() {
 	return frequencyMap;
 }
 
-public void setFrequencyMap(Map<String, Double> frequencyMap) {
+public void setFrequencyMap(Map<String, Long> frequencyMap) {
 	this.frequencyMap = frequencyMap;
 }
 

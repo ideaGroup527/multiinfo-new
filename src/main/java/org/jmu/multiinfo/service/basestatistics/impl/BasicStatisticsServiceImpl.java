@@ -106,6 +106,13 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 		return freq;
 	}
 	
-	
+	@Override
+	public Frequency frequencyCount(double[] dataArr) {
+		Frequency freq = new Frequency();  
+		for (int i = 0; i < dataArr.length; i++) {
+			freq.addValue(dataArr[i]);
+		}
+		return freq;
+	}
 
 }
