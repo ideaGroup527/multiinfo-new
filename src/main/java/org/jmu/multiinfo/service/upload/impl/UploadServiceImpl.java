@@ -12,15 +12,12 @@ import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.dto.upload.DataDTO;
-import org.jmu.multiinfo.dto.upload.DataVariety;
 import org.jmu.multiinfo.dto.upload.ExcelDTO;
 import org.jmu.multiinfo.dto.upload.SheetDTO;
 import org.jmu.multiinfo.dto.upload.TextDTO;
@@ -75,17 +72,17 @@ public class UploadServiceImpl implements UploadService{
 			int sheetNum = wb.getNumberOfSheets();
 			List<String> sheetNameList = new ArrayList<String>();
 			for (int i = 0; i < sheetNum; i++) {
-				HSSFSheet sheet = (HSSFSheet) wb.getSheetAt(i);
+				Sheet sheet = (Sheet) wb.getSheetAt(i);
 				sheetNameList.add(sheet.getSheetName());
 			}
 			excelDto.setSheetNum(sheetNum);
 			excelDto.setSheetNameList(sheetNameList);
-			HSSFSheet sheet = (HSSFSheet) wb.getSheetAt(n);
+			Sheet sheet = (Sheet) wb.getSheetAt(n);
 			int rowcount = sheet.getLastRowNum();// 取得有效的行数
 			int colcount = sheet.getRow(0).getPhysicalNumberOfCells();// 总列数
 			DataDTO[][] dataGrid = new DataDTO[rowcount][colcount];
 			List<VarietyDTO> varietyList = new ArrayList<VarietyDTO>();
-			HSSFRow row = null;
+			Row row = null;
 			for (int i = 0; i < rowcount; i++) {
 				row = sheet.getRow(i); // 获得第i行
 				for (int j = 0; j < colcount; j++) {
