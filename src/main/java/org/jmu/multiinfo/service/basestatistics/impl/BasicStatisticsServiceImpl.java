@@ -1,7 +1,5 @@
 package org.jmu.multiinfo.service.basestatistics.impl;
 
-import java.util.Map;
-
 import org.apache.commons.math3.stat.Frequency;
 import org.apache.commons.math3.stat.descriptive.moment.GeometricMean;
 import org.apache.commons.math3.stat.descriptive.moment.Kurtosis;

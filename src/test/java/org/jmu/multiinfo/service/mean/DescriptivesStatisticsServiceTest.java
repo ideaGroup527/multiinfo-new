@@ -36,7 +36,7 @@ private DescriptivesStatisticsService descriptivesStatisticsService;
 private CommonCondition condition;
 
 private CommonDTO retDTO ;
-//@Before
+@Before
 public void init(){
 	condition = new PercentileCondition();
 	List<VarietyDTO> dependentVariableList = new ArrayList<VarietyDTO>();
@@ -205,7 +205,7 @@ public void calNormalDistributionTest(){
 }
 
 
-//@After
+@After
 public void saveData() throws JsonGenerationException, JsonMappingException, IOException{
 	System.out.println(retDTO.toString());
 	ObjectMapper mapper = new ObjectMapper(); 

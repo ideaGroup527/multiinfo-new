@@ -3,10 +3,11 @@ package org.jmu.multiinfo.dto.descriptives;
 import java.util.List;
 import java.util.Map;
 
+import org.jmu.multiinfo.dto.basestatistics.ResultDescDTO;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 
 
-public class ResultFrequencyDTO {
+public class ResultFrequencyDTO extends ResultDescDTO{
 //有效基本数据
 private List<Object> uniqueData;
 private Map<String,Long> frequencyMap;

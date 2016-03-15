@@ -9,10 +9,10 @@ import java.util.Set;
 
 import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.core.util.PositionBean;
+import org.jmu.multiinfo.dto.basestatistics.ResultDescDTO;
 import org.jmu.multiinfo.dto.comparemean.MedianCondition;
 import org.jmu.multiinfo.dto.comparemean.MedianDTO;
 import org.jmu.multiinfo.dto.comparemean.ResultDataDTO;
-import org.jmu.multiinfo.dto.comparemean.ResultDescDTO;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;

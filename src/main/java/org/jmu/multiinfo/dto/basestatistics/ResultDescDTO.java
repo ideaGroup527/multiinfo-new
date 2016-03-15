@@ -1,4 +1,8 @@
-package org.jmu.multiinfo.dto.comparemean;
+package org.jmu.multiinfo.dto.basestatistics;
+
+import java.util.List;
+
+import org.jmu.multiinfo.dto.descriptives.PercentileDTO;
 
 public class ResultDescDTO {
 private Double max;
@@ -10,6 +14,7 @@ private Double total;
 private Double median;
 private Double skewness;
 private Double kurtosis;
+private List<PercentileDTO> percentiles;
 private Integer count;
 public Double getMax() {
 	return max;
@@ -71,11 +76,18 @@ public Double getMedian() {
 public void setMedian(Double median) {
 		this.median = median;
 	}
+public List<PercentileDTO> getPercentiles() {
+	return percentiles;
+}
+public void setPercentiles(List<PercentileDTO> percentiles) {
+	this.percentiles = percentiles;
+}
 @Override
 public String toString() {
 	return "ResultDescDTO [max=" + max + ", min=" + min + ", arithmeticMean=" + arithmeticMean + ", variance="
 			+ variance + ", standardDeviation=" + standardDeviation + ", total=" + total + ", median=" + median
 			+ ", skewness=" + skewness + ", kurtosis=" + kurtosis + ", count=" + count + "]";
 }
+
 
 }

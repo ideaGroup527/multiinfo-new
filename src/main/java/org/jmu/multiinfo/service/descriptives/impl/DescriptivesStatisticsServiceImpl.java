@@ -15,13 +15,13 @@ import org.apache.commons.math3.stat.Frequency;
 import org.apache.commons.math3.stat.descriptive.rank.Percentile;
 import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.core.util.PositionBean;
+import org.jmu.multiinfo.dto.basestatistics.ResultDescDTO;
 import org.jmu.multiinfo.dto.descriptives.CommonCondition;
 import org.jmu.multiinfo.dto.descriptives.CommonDTO;
 import org.jmu.multiinfo.dto.descriptives.KSTestDTO;
 import org.jmu.multiinfo.dto.descriptives.PercentileCondition;
 import org.jmu.multiinfo.dto.descriptives.PercentileDTO;
 import org.jmu.multiinfo.dto.descriptives.ResultDataDTO;
-import org.jmu.multiinfo.dto.descriptives.ResultDescDTO;
 import org.jmu.multiinfo.dto.descriptives.ResultFrequencyDTO;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.DataVariety;
@@ -110,12 +110,20 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 					dataList.add(dataDTO.getData());
 				}
 			}
-			Object[] dataArr = dataList.toArray();
+			double[] dataArr = new double[dataList.size()];
+			for (int i = 0; i < dataArr.length; i++) {
+				dataArr[i] = Double.valueOf(dataList.get(i).toString());
+			}
 			ResultFrequencyDTO retDto = new ResultFrequencyDTO();
 			Map<String, Long> frequencyMap = new HashMap<String, Long>();
 			Map<String, Double> percentage = new HashMap<String, Double>();
 			Map<String, Double> accumulationPercentage = new HashMap<String, Double>();
 			Frequency frequency = basicStatisticsService.frequencyCount(dataArr);
+			retDto.setArithmeticMean(basicStatisticsService.arithmeticMean(dataArr));
+			retDto.setStandardDeviation(basicStatisticsService.standardDeviation(dataArr));
+			retDto.setMin(basicStatisticsService.min(dataArr));
+			retDto.setMax(basicStatisticsService.max(dataArr));
+			retDto.setCount(dataArr.length);
 			List<Object> uniqList = new ArrayList<Object>();
 			Iterator<Entry<Comparable<?>, Long>>  it =	frequency.entrySetIterator();
 			while (it.hasNext()) {
