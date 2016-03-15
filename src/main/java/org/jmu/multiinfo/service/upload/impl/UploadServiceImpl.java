@@ -96,6 +96,7 @@ public class UploadServiceImpl implements UploadService{
 					String typeDes =(String) datamap.get("typeDes");
 					String pjs = ExcelUtil.getExcelColName(j+1);
 					String mergedRange = (String) datamap.get("mergedRange");
+					String mergedRangeDes = (String) datamap.get("mergedRangeDes");
 //					logger.debug(pjs);
 					if(isFirstRowVar&&i==0){
 						VarietyDTO variety =  new VarietyDTO();
@@ -123,6 +124,7 @@ public class UploadServiceImpl implements UploadService{
 					data.setData(datamap.get("value"));
 					data.setType((Integer) datamap.get("type"));
 					data.setMergedRange(mergedRange);
+					data.setMergedRangeDes(mergedRangeDes);
 					data.setTypeDes(typeDes );
 					
 				}

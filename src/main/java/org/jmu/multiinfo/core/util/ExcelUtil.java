@@ -279,6 +279,7 @@ public class ExcelUtil {
                      String firstIndex = getExcelColName(firstColumn+1)+(firstRow+1);
                      String lastIndex = getExcelColName(lastColumn+1)+(lastRow+1);
                      map.put("mergedRange", firstIndex+":"+lastIndex);
+					  map.put("mergedRangeDes", getExcelColName(firstColumn+1)+","+(firstRow+1)+":"+getExcelColName(lastColumn+1)+","+(lastRow+1));
                      return   map;
                  }     
              }     
