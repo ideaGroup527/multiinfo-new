@@ -1,5 +1,11 @@
 package org.jmu.multiinfo.web.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.jmu.multiinfo.dto.comparemean.AnovaCondition;
+import org.jmu.multiinfo.dto.comparemean.AnovaDTO;
 import org.jmu.multiinfo.dto.comparemean.MedianCondition;
 import org.jmu.multiinfo.dto.comparemean.MedianDTO;
 import org.jmu.multiinfo.service.comparemean.CompareMeanStatisticsService;
@@ -33,5 +39,16 @@ public class CompareMeanStatisticsController {
    public MedianDTO calMean(@RequestBody MedianCondition condition){
 		MedianDTO medianDTO =	compareMeanStatisticsService.calMean(condition);
 		return medianDTO;
+	}
+	@RequestMapping(params = { "method=onewayanova" })
+	@ResponseBody
+	public Map<String,AnovaDTO> calOneWayAnova(List<AnovaCondition> anovaConditionList){
+		Map<String,AnovaDTO> anovaMap = new HashMap<String,AnovaDTO>();
+		for (AnovaCondition anova : anovaConditionList) {
+			 String varietyName = anova.getDependentVariable().getVarietyName();
+			 AnovaDTO e =compareMeanStatisticsService.calOneWayAnova(anova);
+			anovaMap.put(varietyName, e);
+		}
+		return anovaMap;
 	}
 }

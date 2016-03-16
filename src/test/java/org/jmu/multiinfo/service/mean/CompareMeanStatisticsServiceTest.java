@@ -3,6 +3,7 @@ package org.jmu.multiinfo.service.mean;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.jmu.multiinfo.dto.comparemean.MedianCondition;
@@ -32,6 +33,20 @@ public class CompareMeanStatisticsServiceTest {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 @Autowired
 private CompareMeanStatisticsService compareMeanStatisticsService;
+
+@Test
+public void anovaStatsTest(){
+	Collection<double[]> categoryData = new ArrayList<double[]>();
+	  
+	double[] e = new double[]{22,21,18,21,20};
+	categoryData.add(e );
+	double[] e2 = new double[]{18,20,20,15,20};
+	categoryData.add(e2 );
+	double[] e1 = new double[]{19,18,13,20,20};
+	categoryData.add(e1 );
+	System.out.println(compareMeanStatisticsService.anovaStatsForT(categoryData ).toString());
+}
+
 
 @Test
 public void calMeanTest() throws JsonGenerationException, JsonMappingException, IOException{
