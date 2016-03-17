@@ -71,7 +71,7 @@ public class CompareMeanStatisticsServiceImpl implements CompareMeanStatisticsSe
 					for (int i = 0; i < si; i++) {
 						for (int j = depVarRange.getFirstColId()-1; j < depVarRange.getLastColId(); j++) {
 							if(i== data.length) break;
-							dataList.add(Double.valueOf((String) data[tmpList.get(i)][j].getData()));
+							dataList.add(Double.valueOf(data[tmpList.get(i)][j].getData().toString()));
 						}
 					}
 					double[] dataArr = new double[dataList.size()];
@@ -139,7 +139,7 @@ Map<String,AnovaDTO>  resMap = new HashMap<String,AnovaDTO>();
 				for (int i = 0; i < si; i++) {
 					for (int j = depVarRange.getFirstColId() - 1; j < depVarRange.getLastColId(); j++) {
 						if (i == data.length) break;
-						dataList.add(Double.valueOf((String) data[tmpList.get(i)][j].getData()));
+						dataList.add(Double.valueOf(data[tmpList.get(i)][j].getData().toString()));
 					}
 				}
 

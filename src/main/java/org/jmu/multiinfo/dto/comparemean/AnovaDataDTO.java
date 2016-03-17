@@ -26,6 +26,10 @@ public class AnovaDataDTO extends BaseDTO{
 	public void setReportTitle(String reportTitle) {
 		this.reportTitle = reportTitle;
 	}
-	
+	@Override
+	public String toString() {
+		return "AnovaDataDTO [resDataMap=" + resDataMap + ", resultType=" + resultType + ", reportTitle=" + reportTitle
+				+ "]";
+	}
 	
 }
