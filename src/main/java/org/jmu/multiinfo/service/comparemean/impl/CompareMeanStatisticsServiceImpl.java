@@ -18,6 +18,7 @@ import org.jmu.multiinfo.core.util.PositionBean;
 import org.jmu.multiinfo.dto.basestatistics.ResultDescDTO;
 import org.jmu.multiinfo.dto.comparemean.AnovaCondition;
 import org.jmu.multiinfo.dto.comparemean.AnovaDTO;
+import org.jmu.multiinfo.dto.comparemean.AnovaDataDTO;
 import org.jmu.multiinfo.dto.comparemean.MedianCondition;
 import org.jmu.multiinfo.dto.comparemean.MedianDTO;
 import org.jmu.multiinfo.dto.comparemean.ResultDataDTO;
@@ -103,8 +104,8 @@ public class CompareMeanStatisticsServiceImpl implements CompareMeanStatisticsSe
 	}
 	
 	@Override
-	public ResultDataDTO calOneWayAnova(AnovaCondition anovaCondition) {
-		ResultDataDTO resDataDTO = new ResultDataDTO();
+	public AnovaDataDTO calOneWayAnova(AnovaCondition anovaCondition) {
+		AnovaDataDTO resDataDTO = new AnovaDataDTO();
 Map<String,AnovaDTO>  resMap = new HashMap<String,AnovaDTO>();
 		//因变量
 		List<VarietyDTO> dependVarList = anovaCondition.getDependentVariable();
@@ -150,8 +151,7 @@ Map<String,AnovaDTO>  resMap = new HashMap<String,AnovaDTO>();
 			resDTO = anovaStats(categoryData);
 			resMap.put(dependVar.getVarietyName(),resDTO);
 		}
-
-		resDataDTO.setResultData(resMap);
+		resDataDTO.setResDataMap(resMap);
 		return resDataDTO;
 	}
 	

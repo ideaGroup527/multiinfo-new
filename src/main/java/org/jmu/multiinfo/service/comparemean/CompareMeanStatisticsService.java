@@ -2,7 +2,12 @@ package org.jmu.multiinfo.service.comparemean;
 
 import java.util.Collection;
 
-import org.jmu.multiinfo.dto.comparemean.*;
+import org.jmu.multiinfo.dto.comparemean.AnovaCondition;
+import org.jmu.multiinfo.dto.comparemean.AnovaDTO;
+import org.jmu.multiinfo.dto.comparemean.AnovaDataDTO;
+import org.jmu.multiinfo.dto.comparemean.MedianCondition;
+import org.jmu.multiinfo.dto.comparemean.MedianDTO;
+
 
 public interface CompareMeanStatisticsService {
 	/**
@@ -17,7 +22,7 @@ public interface CompareMeanStatisticsService {
   * @param anovaCondition
   * @return
   */
- public ResultDataDTO calOneWayAnova(AnovaCondition anovaCondition);
+ public AnovaDataDTO calOneWayAnova(AnovaCondition anovaCondition);
 
  /***
   * 单因素方差分析,只用于测试

@@ -1,9 +1,5 @@
 package org.jmu.multiinfo.web.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.jmu.multiinfo.dto.comparemean.*;
 import org.jmu.multiinfo.service.comparemean.CompareMeanStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +35,8 @@ public class CompareMeanStatisticsController {
 	}
 	@RequestMapping(params = { "method=onewayanova" })
 	@ResponseBody
-	public ResultDataDTO calOneWayAnova(AnovaCondition anovaCondition){
-		ResultDataDTO resDTO =compareMeanStatisticsService.calOneWayAnova(anovaCondition);
+	public AnovaDataDTO calOneWayAnova(AnovaCondition anovaCondition){
+		AnovaDataDTO resDTO =compareMeanStatisticsService.calOneWayAnova(anovaCondition);
 		return resDTO;
 	}
 }
