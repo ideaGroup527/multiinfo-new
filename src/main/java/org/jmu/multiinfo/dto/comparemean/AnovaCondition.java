@@ -3,6 +3,8 @@ package org.jmu.multiinfo.dto.comparemean;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
 
+import java.util.List;
+
 /**
  * 
  * 
@@ -20,7 +22,7 @@ public class AnovaCondition {
  private VarietyDTO factorVariable;
  
  //因变量
- private VarietyDTO dependentVariable;
+ private List<VarietyDTO> dependentVariable;
  
  //数据
  private DataDTO[][] dataGrid;
@@ -33,11 +35,11 @@ public void setFactorVariable(VarietyDTO factorVariable) {
 	this.factorVariable = factorVariable;
 }
 
-public VarietyDTO getDependentVariable() {
+public List<VarietyDTO> getDependentVariable() {
 	return dependentVariable;
 }
 
-public void setDependentVariable(VarietyDTO dependentVariable) {
+public void setDependentVariable(List<VarietyDTO> dependentVariable) {
 	this.dependentVariable = dependentVariable;
 }
 

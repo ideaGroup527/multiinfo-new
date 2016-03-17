@@ -103,12 +103,12 @@ public class CompareMeanStatisticsServiceImpl implements CompareMeanStatisticsSe
 	}
 	
 	@Override
-	public AnovaDTO calOneWayAnova(AnovaCondition anovaCondition) {
-		AnovaDTO resDTO = new AnovaDTO();
-		
-		Collection<double[]> categoryData = new ArrayList<double[]>();
+	public ResultDataDTO calOneWayAnova(AnovaCondition anovaCondition) {
+		ResultDataDTO resDataDTO = new ResultDataDTO();
+Map<String,AnovaDTO>  resMap = new HashMap<String,AnovaDTO>();
 		//因变量
-		VarietyDTO dependVar = anovaCondition.getDependentVariable();
+		List<VarietyDTO> dependVarList = anovaCondition.getDependentVariable();
+		//因子
 		VarietyDTO	factorVariable = anovaCondition.getFactorVariable();
 		DataDTO[][] data =	anovaCondition.getDataGrid();
 		PositionBean 	independentVarRange =ExcelUtil.splitRange( factorVariable.getRange());//自变量范围如A1:A8--
@@ -124,28 +124,35 @@ public class CompareMeanStatisticsServiceImpl implements CompareMeanStatisticsSe
 				indepIndexMap.put(data[i][j].getData().toString(), tmpList);
 			}
 		}
-		List<String> indepList = new ArrayList<String>(indepSet); 
-		
-		//遍历每个因子,
-		for (String indep : indepList) {
-			List<Integer> tmpList =	indepIndexMap.get(indep);
-			int si = tmpList.size();
-			PositionBean depVarRange =ExcelUtil.splitRange(dependVar.getRange());
-			List<Double> dataList = new ArrayList<Double>();
-			for (int i = 0; i < si; i++) {
-				for (int j = depVarRange.getFirstColId()-1; j < depVarRange.getLastColId(); j++) {
-					if(i== data.length) break;
-					dataList.add(Double.valueOf((String) data[tmpList.get(i)][j].getData()));
+		List<String> indepList = new ArrayList<String>(indepSet);
+		//每个因变量
+		for(VarietyDTO dependVar:dependVarList) {
+			AnovaDTO resDTO = new AnovaDTO();
+			Collection<double[]> categoryData = new ArrayList<double[]>();
+			//遍历每个因子,
+			for (String indep : indepList) {
+				List<Integer> tmpList = indepIndexMap.get(indep);
+				int si = tmpList.size();
+				PositionBean depVarRange = ExcelUtil.splitRange(dependVar.getRange());
+				List<Double> dataList = new ArrayList<Double>();
+				for (int i = 0; i < si; i++) {
+					for (int j = depVarRange.getFirstColId() - 1; j < depVarRange.getLastColId(); j++) {
+						if (i == data.length) break;
+						dataList.add(Double.valueOf((String) data[tmpList.get(i)][j].getData()));
+					}
 				}
+
+				double[] dataArr = new double[dataList.size()];
+				for (int i = 0; i < dataList.size(); i++)
+					dataArr[i] = dataList.get(i);
+				categoryData.add(dataArr);
 			}
-			
-			double[] dataArr = new double[dataList.size()];
-			for (int i = 0; i < dataList.size(); i++) 
-				dataArr[i] = dataList.get(i);
-			categoryData.add(dataArr);
+			resDTO = anovaStats(categoryData);
+			resMap.put(dependVar.getVarietyName(),resDTO);
 		}
-		resDTO = anovaStats(categoryData);
-		return resDTO;
+
+		resDataDTO.setResultData(resMap);
+		return resDataDTO;
 	}
 	
     private AnovaDTO anovaStats(final Collection<double[]> categoryData)
