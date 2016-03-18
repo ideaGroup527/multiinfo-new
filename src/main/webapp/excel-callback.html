@@ -74,9 +74,8 @@
             <ul class="nav nav-tabs"></ul>
         </div>
 
-        <div class="col-md-10 col-md-offset-1 table-present custom-scrollbar-grey">
-            <!--<table id="test" class="table table-striped table-bordered"></table>-->
-        </div>
+        <div class="col-md-10 col-md-offset-1 table-present custom-scrollbar-grey"></div>
+
         <div class="col-md-10 col-md-offset-1 text-right">
             <button class="btn btn-primary">下一步</button>
         </div>
@@ -94,7 +93,7 @@
             dataType: 'JSON',
             success: function (data) {
                 //标题展示
-                $('#title').text('结果展示 - ' + data.fileName.split('.')[0]);
+                $('#title').text('结果展示 - ' + data.fileName.split('.')[0].trim());
 
                 //sheet分页生成
                 var tabs = $('.nav-tabs');
@@ -102,18 +101,18 @@
 
                 $(tabs).empty();
                 var sheetNameList = data.sheetNameList;
-                for (var sheetNum = 0; sheetNum < data.sheetNum; sheetNum++) {
+                sheetNameList.map(function (sheetName) {
                     var a = $('<a>');
-                    $(a).attr('href', '#' + sheetNameList[sheetNum].split(' ').join(''))
-                            .text(sheetNameList[sheetNum]);
+                    $(a).attr('href', '#' + sheetName.split(' ').join(''))
+                            .text(sheetName);
                     $(tabs).append(a);
                     $(a).wrap('<li role="presentation"></li>');
 
-                    var presentTable = $('<table>');
-                    $(presentTable).attr('id', sheetNameList[sheetNum].split(' ').join(''))
+                    var dataTable = $('<table>');
+                    $(dataTable).attr('id', sheetName.split(' ').join(''))
                             .addClass('table table-striped table-bordered');
-                    $(tablePresentArea).append(presentTable);
-                }
+                    $(tablePresentArea).append(dataTable);
+                });
                 $(tabs).children().first().addClass('active');
                 $(tablePresentArea).children().first().addClass('active');
 
@@ -121,49 +120,40 @@
 
                 var table = $('#' + data.sheet.sheetName);
 
-                var row = data.sheet.dataGrid;
-                var rowLen = row.length;
-                for (var i = 0; i < rowLen; i++) {
+                var grid = data.sheet.dataGrid;
+
+                grid.map(function (row, rowIndex) {
                     var tr = $('<tr>');
 
-                    for (var j = 0; j < row[i].length; j++) {
-                        var success = row[i][j];
-                        var td;
-                        if (i == 0) {
-                            td = $('<th>');
-                        } else {
-                            td = $('<td>');
-                        }
-
-
-                        if (success.mergedRange) {
-                            var range = success.mergedRangeDes.split(':');
+                    row.map(function (cell) {
+                        var td = (!rowIndex) ? $('<th>') : $('<td>');
+                        if (cell.mergedRange) {
+                            var range = cell.mergedRangeDes.split(':');
                             var range_1 = range[0].split(',')[0];
                             var range_2 = range[0].split(',')[1];
                             var range_3 = range[1].split(',')[0];
                             var range_4 = range[1].split(',')[1];
 
-                            var positionDes = success.positionDes.split(',');
+                            var positionDes = cell.positionDes.split(',');
                             if ((positionDes[0].charCodeAt() > range_1.charCodeAt() && positionDes[0].charCodeAt() <= range_3.charCodeAt()) ||
                                     (positionDes[1] > range_2 && positionDes[1] <= range_4)) {
-                                continue;
+                                return false;
                             } else if (positionDes[0] == range_1 && positionDes[1] == range_2) {
                                 $(td).attr('colspan', range_3.charCodeAt() - range_1.charCodeAt() + 1)
                                         .attr('rowspan', Number(range_4) - Number(range_2) + 1);
                             }
                         }
-
-                        $(td).text(success.data);
+                        $(td).text(cell.data);
                         //存储值信息
-                        for (var attr in success) {
-                            $(td).attr('data-' + attr, success[attr]);
+                        for (var attr in cell) {
+                            $(td).attr('data-' + attr, cell[attr]);
                         }
 
                         $(tr).append(td);
-                    }
+                    });
 
                     $(table).append(tr);
-                }
+                });
 
                 var variable = data.sheet.variety;
                 if (variable) {
