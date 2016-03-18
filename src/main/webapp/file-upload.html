@@ -5,25 +5,24 @@
     <title>数据文档上传 - 多元信息挂接系统</title>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
     <style>
-        .container {
+        .container-fluid {
             margin-top: 100px;
         }
 
     </style>
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12">
         <h1>多元信息挂接系统 - 数据文档上传</h1>
 
         <h3>MultiInfo - Data File Upload</h3>
         <hr/>
-        <form action="data/file" method="post" onsubmit="validate()" enctype="multipart/form-data">
+        <form action="data/file" method="post" enctype="multipart/form-data">
             <input type="file" name="data_file" id="data_file" data-toggle="tooltip" title="请上传 xls，xlsx 格式的文件"
                    data-placement="top"/>
-
             <br/>
-            <button type="submit" class="btn btn-primary">提交</button>
+            <button type="submit" class="btn btn-primary" disabled>上传</button>
         </form>
     </div>
 </div>
@@ -31,27 +30,19 @@
 <script src="js/bootstrap/bootstrap.min.js"></script>
 <script>
     //在选择文件之前弹出的提示
-    $("#data_file").tooltip();
-
-    //在上传之前判断文件后缀名
-    var validate = function () {
-        var file = $("#data_file")[0].files[0];
-        if (file == undefined) {
-            alert("请先选择文件");
-            return false;
-        } else {
-            var fileName = file.name;
-            var suffix = fileName.split(".");
-            suffix = suffix[suffix.length - 1];
-            console.log(suffix);
-            if (suffix != "xls" && suffix != "xlsx") {
-                alert("您所上传的文件格式有误请重新上传。");
-                return false;
+    $("#data_file").tooltip().change(function () {
+        var filename = $(this)[0].files[0].name;
+        if (filename) {
+            var suffix = filename.split('.').reverse()[0];
+            var reg = /(xls|xlsx)/i;
+            if (suffix.match(reg)) {
+                $('button.btn').attr('disabled', false);
             } else {
-                return true;
+                alert('选择的文件格式有误，请重新选择。');
+                $('button.btn').attr('disabled', true);
             }
         }
-    }
+    });
 </script>
 </body>
 </html>
