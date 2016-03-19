@@ -71,11 +71,14 @@
 
         var file = new FormData();
         file.append('data_file', fileExpected);
-
+        debugger;
         $.ajax({
             url: 'upload.do?method=excel',
             type: 'post',
             data: file,
+            async: false,
+            processData: false,
+            contentType: false,
             dataType: 'json',
             success: function (data) {
 
