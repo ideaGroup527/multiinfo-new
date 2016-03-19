@@ -32,19 +32,19 @@ public class UploadServiceImpl implements UploadService{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	
-	public ExcelDTO readExcel(File file) throws Exception{
-	return	readExcel(file,0);
+	public ExcelDTO readExcel(File file,String name) throws Exception{
+	return	readExcel(file,name,0);
 	}
 	
-	public ExcelDTO readExcel(File file,int n) throws Exception{
-	return	readExcel(file,n,true);
+	public ExcelDTO readExcel(File file,String name,int n) throws Exception{
+	return	readExcel(file,name,n,true);
 	}
 	
 	
-	public ExcelDTO readExcel(File file,int n,boolean isFirstRowVar) throws Exception{
+	public ExcelDTO readExcel(File file,String name,int n,boolean isFirstRowVar) throws Exception{
 		ExcelDTO excelDto = new ExcelDTO();
 		SheetDTO sheetDto = new SheetDTO();
-		excelDto.setFileName(file.getName());
+		excelDto.setFileName(name);
 		excelDto.setCurrenSheetNo(n);
 
 			Workbook wb = null;
@@ -143,9 +143,9 @@ public class UploadServiceImpl implements UploadService{
 	}
 
 	@Override
-	public TextDTO readText(File file, boolean isFirstRowVar) throws IOException {
+	public TextDTO readText(File file,String name, boolean isFirstRowVar) throws IOException {
 		TextDTO textDto = new TextDTO();
-		textDto.setFileName(file.getName());
+		textDto.setFileName(name);
 		textDto.setIsFirstRowVar(isFirstRowVar);
 		String lastCellIndex ="";
 		List<String>  lines = FileUtils.readLines(file,Charset.forName("UTF-8"));
