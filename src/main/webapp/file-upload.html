@@ -67,11 +67,11 @@
     });
 
     $('#file_upload_btn').click(function () {
-        var fileExpected = $("#data_file")[0].files;
+        var fileExpected = $("#data_file")[0].files[0];
 
         var file = new FormData();
         file.append('data_file', fileExpected);
-        debugger;
+
         $.ajax({
             url: 'upload.do?method=excel',
             type: 'post',
