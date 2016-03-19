@@ -55,6 +55,7 @@ public class UploadController {
 		FileOutputStream fos = FileUtils.openOutputStream(temp); 
 		IOUtils.copy(file.getInputStream(), fos); 
 		ExcelDTO  data = uploadService.readExcel(temp,file.getOriginalFilename(),sheetNo,isFirstRowVar);
+		fos.close();
 		FileUtils.deleteQuietly(temp);
 		return data;
 	}
@@ -68,6 +69,7 @@ public class UploadController {
 		FileOutputStream fos = FileUtils.openOutputStream(temp); 
 		IOUtils.copy(file.getInputStream(), fos); 
 		TextDTO data= uploadService.readText(temp,file.getOriginalFilename(),isFirstRowVar);
+		fos.close();
 		FileUtils.deleteQuietly(temp);
 		return data;
 	}
