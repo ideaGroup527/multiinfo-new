@@ -2,7 +2,6 @@ package org.jmu.multiinfo.web.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,10 +50,13 @@ public class UploadController {
 			@RequestParam("data_file") MultipartFile file,@RequestParam(required=false,value="sheetNo",defaultValue="0") int sheetNo,
 			@RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar) throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		FileOutputStream fos = FileUtils.openOutputStream(new File(file.getOriginalFilename())); 
+		String prefix = request.getServletContext().getRealPath("/upload");
+		File temp = new File(prefix+File.separator+System.nanoTime()+"");
+		FileOutputStream fos = FileUtils.openOutputStream(temp); 
 		IOUtils.copy(file.getInputStream(), fos); 
-		ExcelDTO  data = uploadService.readExcel(new File(file.getOriginalFilename()),sheetNo,isFirstRowVar);
+		ExcelDTO  data = uploadService.readExcel(temp,file.getOriginalFilename(),sheetNo,isFirstRowVar);
+		fos.close();
+		FileUtils.deleteQuietly(temp);
 		return data;
 	}
 	
@@ -62,9 +64,13 @@ public class UploadController {
 	@ResponseBody
 	public BaseDTO uploadText(HttpServletRequest request, HttpServletResponse response,HttpSession session,
 			@RequestParam("data_file") MultipartFile file,@RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar)throws Exception{
-		FileOutputStream fos = FileUtils.openOutputStream(new File(file.getOriginalFilename())); 
+		String prefix = request.getServletContext().getRealPath("/upload");
+		File temp = new File(prefix+File.separator+System.nanoTime()+"");
+		FileOutputStream fos = FileUtils.openOutputStream(temp); 
 		IOUtils.copy(file.getInputStream(), fos); 
-		TextDTO data= uploadService.readText(new File(file.getOriginalFilename()),isFirstRowVar);
+		TextDTO data= uploadService.readText(temp,file.getOriginalFilename(),isFirstRowVar);
+		fos.close();
+		FileUtils.deleteQuietly(temp);
 		return data;
 	}
 }

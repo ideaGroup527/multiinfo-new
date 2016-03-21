@@ -1,8 +1,7 @@
 package org.jmu.multiinfo.service.basestatistics;
 
-import java.util.Map;
-
 import org.apache.commons.math3.stat.Frequency;
+import org.apache.commons.math3.stat.descriptive.rank.Percentile;
 
 /**
  * 
@@ -93,12 +92,27 @@ public interface BasicStatisticsService {
 	 * @return
 	 */
 	public Double kurtosis(double[] dataArr);
-	
+
+
+	/***
+	 * percentile分位
+	 * @param dataArr
+	 * @return
+     */
+	public Percentile percentile(double[]dataArr);
 	/***
 	 * 频数
 	 * @param dataArr
 	 * @return
 	 */
-	public Frequency FrequencyCount(Object[] dataArr);
+	public Frequency frequencyCount(Object[] dataArr);
+
+
+	/***
+	 * 频数
+	 * @param dataArr
+	 * @return
+	 */
+	public Frequency frequencyCount(double[] dataArr);
 	
 }

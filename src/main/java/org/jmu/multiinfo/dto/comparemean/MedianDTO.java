@@ -1,6 +1,5 @@
 package org.jmu.multiinfo.dto.comparemean;
 
-import java.util.List;
 import java.util.Map;
 
 import org.jmu.multiinfo.core.dto.BaseDTO;

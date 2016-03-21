@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.servlet.http.HttpServletRequest;
-
 public class CommonUtil {
 	/**
 	 * 验证是email格式是否合法
@@ -26,7 +24,7 @@ public class CommonUtil {
 		}
 		return tag;
 	}
-	
+
 	/**
 	 * 验证是否为手机号
 	 * 
@@ -34,8 +32,7 @@ public class CommonUtil {
 	 * @return 是否合法
 	 */
 	public static boolean isNumer(String str) {
-		Pattern pattern = Pattern
-				.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");
+		Pattern pattern = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");
 		return pattern.matcher(str).matches();
 	}
 
@@ -146,11 +143,9 @@ public class CommonUtil {
 	public static String getMD5(byte[] source) {
 		String s = null;
 		char hexDigits[] = { // 用来将字节转换成 16 进制表示的字符
-		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd',
-				'e', 'f' };
+				'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
 		try {
-			java.security.MessageDigest md = java.security.MessageDigest
-					.getInstance("MD5");
+			java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
 			md.update(source);
 			byte tmp[] = md.digest(); // MD5 的计算结果是一个 128 位的长整数，
 			// 用字节表示就是 16 个字节
@@ -171,6 +166,94 @@ public class CommonUtil {
 		}
 		return s;
 	}
+
+	private static boolean isMatch(String regex, String orginal) {
+		if (orginal == null || orginal.trim().equals("")) {
+			return false;
+		}
+		Pattern pattern = Pattern.compile(regex);
+		Matcher isNum = pattern.matcher(orginal);
+		return isNum.matches();
+	}
+
+	/***
+	 * 正整数
+	 * 
+	 * @param orginal
+	 * @return
+	 */
+	public static boolean isPositiveInteger(String orginal) {
+		return isMatch("^\\+{0,1}[1-9]\\d*", orginal);
+	}
+
+	/***
+	 * 负整数
+	 * 
+	 * @param orginal
+	 * @return
+	 */
+	public static boolean isNegativeInteger(String orginal) {
+		return isMatch("^-[1-9]\\d*", orginal);
+	}
+
 	
+	/***
+	 * 整数
+	 * 
+	 * @param orginal
+	 * @return
+	 */
+	public static boolean isWholeNumber(String orginal) {
+		return isMatch("[+-]{0,1}0", orginal) || isPositiveInteger(orginal) || isNegativeInteger(orginal);
+	}
+
+	/***
+	 * 正小数
+	 * @param orginal
+	 * @return
+	 */
+	public static boolean isPositiveDecimal(String orginal) {
+		return isMatch("\\+{0,1}[0]\\.[1-9]*|\\+{0,1}[1-9]\\d*\\.\\d*", orginal);
+	}
+
+	/***
+	 * 负小数
+	 * @param orginal
+	 * @return
+	 */
+	public static boolean isNegativeDecimal(String orginal) {
+		return isMatch("^-[0]\\.[1-9]*|^-[1-9]\\d*\\.\\d*", orginal);
+	}
+
+	/***
+	 * 小数
+	 * @param orginal
+	 * @return
+	 */
+	public static boolean isDecimal(String orginal) {
+		return isMatch("[-+]{0,1}\\d+\\.\\d*|[-+]{0,1}\\d*\\.\\d+", orginal);
+	}
+
 	
+	/***
+	 * 实数
+	 * @param orginal
+	 * @return
+	 */
+	public static boolean isRealNumber(String orginal) {
+		return isWholeNumber(orginal) || isDecimal(orginal);
+	}
+	
+	/***
+	 * 是否是科学计数法表示的数
+	 * @param orginal
+	 * @return
+	 */
+	public static boolean isScienceNumber(String orginal) {
+		return isMatch("^(([-+]{0,1}\\d+.?\\d*)[Ee]{1}(-?\\d+))$", orginal);
+	}
+	
+	public static boolean isVirgNumber(String orginal) {
+		return isMatch("^([-+]{0,1}[1-9]([0-9]{1,2})?(,[0-9]{3})*(\\.[0-9]+)?)$", orginal);
+	}
 }

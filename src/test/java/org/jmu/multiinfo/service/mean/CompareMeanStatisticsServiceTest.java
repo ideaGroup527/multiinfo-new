@@ -3,8 +3,11 @@ package org.jmu.multiinfo.service.mean;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+import org.jmu.multiinfo.dto.comparemean.AnovaCondition;
+import org.jmu.multiinfo.dto.comparemean.AnovaDataDTO;
 import org.jmu.multiinfo.dto.comparemean.MedianCondition;
 import org.jmu.multiinfo.dto.comparemean.MedianDTO;
 import org.jmu.multiinfo.dto.upload.DataDTO;
@@ -34,7 +37,91 @@ public class CompareMeanStatisticsServiceTest {
 private CompareMeanStatisticsService compareMeanStatisticsService;
 
 @Test
-public void calMedianTest() throws JsonGenerationException, JsonMappingException, IOException{
+public void anovaStatsTest(){
+	Collection<double[]> categoryData = new ArrayList<double[]>();
+	  
+	double[] e = new double[]{22,21,18,21,20};
+	categoryData.add(e );
+	double[] e2 = new double[]{18,20,20,15,20};
+	categoryData.add(e2 );
+	double[] e1 = new double[]{19,18,13,20,20};
+	categoryData.add(e1 );
+	System.out.println(compareMeanStatisticsService.anovaStatsForT(categoryData ).toString());
+}
+
+
+@Test
+public void calOneWayAnova() throws JsonGenerationException, JsonMappingException, IOException{
+	  
+	double[] e = new double[]{22,18,19,21,20,18,18,20,13,21,15,20,20,20,20};
+	AnovaCondition condition = new AnovaCondition();
+	VarietyDTO independentVariable = new VarietyDTO();
+	independentVariable.setVarietyName("组别");
+	independentVariable.setPosition("A");
+	independentVariable.setType(0);
+	independentVariable.setTypeDes("字符串型");
+	independentVariable.setRange("A2:A16");
+	condition.setFactorVariable(independentVariable );
+	List<VarietyDTO> dependentVariableList = new ArrayList<VarietyDTO>();
+	
+	VarietyDTO deVar = new VarietyDTO();
+	deVar.setVarietyName("降水");
+	deVar.setPosition("B");
+	deVar.setType(1);
+	deVar.setTypeDes("标准型数字");
+	deVar.setRange("B2:B16");
+	dependentVariableList.add(deVar );
+	
+	condition.setDependentVariable(dependentVariableList );
+	DataDTO[][] dataGrid = new DataDTO[16][2];
+	DataDTO i00 =new DataDTO();
+	i00.setData("组别");
+	i00.setPosition("A1");
+	i00.setPositionDes("A,1");
+	i00.setTypeDes("字符串型");
+	i00.setType(DataVariety.DATA_TYPE_STRING);
+	dataGrid[0][0] = i00;
+for( int i=1 ; i<16 ; i++ ){
+	DataDTO dataD =new DataDTO();
+	char aaa = (char) ('A'+((i-1)%3));
+	dataD.setData(aaa + "");
+	dataD.setPosition("A"+(i+1));
+	dataD.setPositionDes("A,"+(i+1));
+	dataD.setTypeDes("字符串型");
+	dataD.setType(DataVariety.DATA_TYPE_STRING);
+	dataGrid[i][0] = dataD;
+	
+	DataDTO dataD1 =new DataDTO();
+	dataD1.setData(e[i-1]);
+	dataD1.setPosition("B"+(i+1));
+	dataD1.setPositionDes("B,"+(i+1));
+	dataD1.setTypeDes("数字型");
+	dataD1.setType(DataVariety.DATA_TYPE_NUMERIC);
+	dataGrid[i][1] = dataD1;
+}
+
+	
+	
+	DataDTO i01 =new DataDTO();
+	i01.setData("降水");
+	i01.setPosition("B1");
+	i01.setPositionDes("B,1");
+	i01.setTypeDes("字符串型");
+	i01.setType(DataVariety.DATA_TYPE_STRING);
+	dataGrid[0][1] = i01;
+	
+	
+	condition.setDataGrid(dataGrid);
+	AnovaDataDTO anova = compareMeanStatisticsService.calOneWayAnova(condition );
+	System.out.println(anova.toString());
+	ObjectMapper mapper = new ObjectMapper(); 
+	mapper.writeValue(new File("E://a.json"),condition);
+	System.out.println("");
+	mapper.writeValue(new File("E://b.json"),anova);
+}
+
+@Test
+public void calMeanTest() throws JsonGenerationException, JsonMappingException, IOException{
 	MedianCondition condition = new MedianCondition();
 	VarietyDTO independentVariable = new VarietyDTO();
 	independentVariable.setVarietyName("地点");
@@ -177,11 +264,11 @@ public void calMedianTest() throws JsonGenerationException, JsonMappingException
 	dataGrid[4][2] = i42;
 	
 	condition.setDataGrid(dataGrid);
-	MedianDTO medianDTO =	compareMeanStatisticsService.calMedian(condition );
+	MedianDTO medianDTO =	compareMeanStatisticsService.calMean(condition );
 	System.out.println(medianDTO.toString());
 	ObjectMapper mapper = new ObjectMapper(); 
-	mapper.writeValue(new File("G://a.json"),condition);
+	mapper.writeValue(new File("E://a.json"),condition);
 	System.out.println("");
-	mapper.writeValue(new File("G://b.json"),medianDTO);
+	mapper.writeValue(new File("E://b.json"),medianDTO);
 }
 }

@@ -1,10 +1,10 @@
 package org.jmu.multiinfo.web.controller;
 
-import org.jmu.multiinfo.dto.comparemean.MedianCondition;
-import org.jmu.multiinfo.dto.comparemean.MedianDTO;
+import org.jmu.multiinfo.dto.comparemean.*;
 import org.jmu.multiinfo.service.comparemean.CompareMeanStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,10 +27,16 @@ public class CompareMeanStatisticsController {
 	@Autowired
 	private CompareMeanStatisticsService compareMeanStatisticsService;
 	
-	@RequestMapping(params = { "method=median" })
+	@RequestMapping(params = { "method=mean" })
 	@ResponseBody
-   public MedianDTO calMedian(MedianCondition condition){
-		MedianDTO medianDTO =	compareMeanStatisticsService.calMedian(condition);
+   public MedianDTO calMean(@RequestBody MedianCondition condition){
+		MedianDTO medianDTO =	compareMeanStatisticsService.calMean(condition);
 		return medianDTO;
+	}
+	@RequestMapping(params = { "method=onewayanova" })
+	@ResponseBody
+	public AnovaDataDTO calOneWayAnova(AnovaCondition anovaCondition){
+		AnovaDataDTO resDTO =compareMeanStatisticsService.calOneWayAnova(anovaCondition);
+		return resDTO;
 	}
 }

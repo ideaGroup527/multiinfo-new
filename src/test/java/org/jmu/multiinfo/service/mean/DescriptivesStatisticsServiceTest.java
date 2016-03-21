@@ -8,6 +8,7 @@ import java.util.List;
 import org.jmu.multiinfo.base.util.MyJUnit4ClassRunner;
 import org.jmu.multiinfo.dto.descriptives.CommonCondition;
 import org.jmu.multiinfo.dto.descriptives.CommonDTO;
+import org.jmu.multiinfo.dto.descriptives.PercentileCondition;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.DataVariety;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
@@ -37,7 +38,7 @@ private CommonCondition condition;
 private CommonDTO retDTO ;
 @Before
 public void init(){
-	condition = new CommonCondition();
+	condition = new PercentileCondition();
 	List<VarietyDTO> dependentVariableList = new ArrayList<VarietyDTO>();
 	
 	VarietyDTO deVar = new VarietyDTO();
@@ -178,13 +179,29 @@ public void init(){
 @Test
 public void calMeanTest(){
 	logger.warn("测试描述统计");
-	retDTO =	descriptivesStatisticsService.calDesc(condition );
+	if(((PercentileCondition) condition).getPercentiles()==null || ((PercentileCondition) condition).getPercentiles().size() == 0){
+		List<Double> percentiles = new ArrayList<Double>();
+		percentiles.add(25.0);
+		percentiles.add(50.0);
+		percentiles.add(70.0);
+		((PercentileCondition) condition).setPercentiles(percentiles );
+	}
+	retDTO =	descriptivesStatisticsService.calDesc((PercentileCondition)condition );
 
 }
 
 @Test
 public void calFrequencyTest(){
 	retDTO =	descriptivesStatisticsService.calFrequency(condition );
+}
+
+@Test
+public void calNormalDistributionTest(){
+	double[] data = new double[]{
+			77,92,86,76,80,81,75,77,72,81,90,84,86,80,68,77,87,76,77,78,92,75,80,78
+	};
+	System.out.println(descriptivesStatisticsService.calNormalDistribution(data));
+	
 }
 
 

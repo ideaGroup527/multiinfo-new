@@ -4,21 +4,20 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.dto.upload.DataDTO;
-import org.jmu.multiinfo.dto.upload.DataVariety;
 import org.jmu.multiinfo.dto.upload.ExcelDTO;
 import org.jmu.multiinfo.dto.upload.SheetDTO;
 import org.jmu.multiinfo.dto.upload.TextDTO;
@@ -33,19 +32,19 @@ public class UploadServiceImpl implements UploadService{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	
-	public ExcelDTO readExcel(File file) throws Exception{
-	return	readExcel(file,0);
+	public ExcelDTO readExcel(File file,String name) throws Exception{
+	return	readExcel(file,name,0);
 	}
 	
-	public ExcelDTO readExcel(File file,int n) throws Exception{
-	return	readExcel(file,n,true);
+	public ExcelDTO readExcel(File file,String name,int n) throws Exception{
+	return	readExcel(file,name,n,true);
 	}
 	
 	
-	public ExcelDTO readExcel(File file,int n,boolean isFirstRowVar) throws Exception{
+	public ExcelDTO readExcel(File file,String name,int n,boolean isFirstRowVar) throws Exception{
 		ExcelDTO excelDto = new ExcelDTO();
 		SheetDTO sheetDto = new SheetDTO();
-		excelDto.setFileName(file.getName());
+		excelDto.setFileName(name);
 		excelDto.setCurrenSheetNo(n);
 
 			Workbook wb = null;
@@ -73,17 +72,17 @@ public class UploadServiceImpl implements UploadService{
 			int sheetNum = wb.getNumberOfSheets();
 			List<String> sheetNameList = new ArrayList<String>();
 			for (int i = 0; i < sheetNum; i++) {
-				HSSFSheet sheet = (HSSFSheet) wb.getSheetAt(i);
+				Sheet sheet = (Sheet) wb.getSheetAt(i);
 				sheetNameList.add(sheet.getSheetName());
 			}
 			excelDto.setSheetNum(sheetNum);
 			excelDto.setSheetNameList(sheetNameList);
-			HSSFSheet sheet = (HSSFSheet) wb.getSheetAt(n);
+			Sheet sheet = (Sheet) wb.getSheetAt(n);
 			int rowcount = sheet.getLastRowNum();// 取得有效的行数
 			int colcount = sheet.getRow(0).getPhysicalNumberOfCells();// 总列数
 			DataDTO[][] dataGrid = new DataDTO[rowcount][colcount];
 			List<VarietyDTO> varietyList = new ArrayList<VarietyDTO>();
-			HSSFRow row = null;
+			Row row = null;
 			for (int i = 0; i < rowcount; i++) {
 				row = sheet.getRow(i); // 获得第i行
 				for (int j = 0; j < colcount; j++) {
@@ -97,6 +96,7 @@ public class UploadServiceImpl implements UploadService{
 					String typeDes =(String) datamap.get("typeDes");
 					String pjs = ExcelUtil.getExcelColName(j+1);
 					String mergedRange = (String) datamap.get("mergedRange");
+					String mergedRangeDes = (String) datamap.get("mergedRangeDes");
 //					logger.debug(pjs);
 					if(isFirstRowVar&&i==0){
 						VarietyDTO variety =  new VarietyDTO();
@@ -111,7 +111,7 @@ public class UploadServiceImpl implements UploadService{
 							VarietyDTO variety =  new VarietyDTO();
 						
 						variety.setPosition(pjs);
-						variety.setVarietyName("V"+(i+1));
+						variety.setVarietyName("V"+(j+1));
 						variety.setType((Integer) datamap.get("type"));
 						variety.setTypeDes(typeDes);
 						varietyList.add(variety);
@@ -124,6 +124,7 @@ public class UploadServiceImpl implements UploadService{
 					data.setData(datamap.get("value"));
 					data.setType((Integer) datamap.get("type"));
 					data.setMergedRange(mergedRange);
+					data.setMergedRangeDes(mergedRangeDes);
 					data.setTypeDes(typeDes );
 					
 				}
@@ -142,9 +143,63 @@ public class UploadServiceImpl implements UploadService{
 	}
 
 	@Override
-	public TextDTO readText(File file, boolean isFirstRowVar) {
-		// TODO Auto-generated method stub
-		return null;
+	public TextDTO readText(File file,String name, boolean isFirstRowVar) throws IOException {
+		TextDTO textDto = new TextDTO();
+		textDto.setFileName(name);
+		textDto.setIsFirstRowVar(isFirstRowVar);
+		String lastCellIndex ="";
+		List<String>  lines = FileUtils.readLines(file,Charset.forName("UTF-8"));
+		Integer physicalRowNum = lines.size();
+		textDto.setPhysicalRowNum(physicalRowNum);
+		Integer physicalCellNum = lines.get(0).split("\t|\\s+").length;
+		textDto.setPhysicalCellNum(physicalCellNum);
+		DataDTO[][] dataGrid = new DataDTO[physicalRowNum][physicalCellNum];
+		List<VarietyDTO> varietyList = new ArrayList<VarietyDTO>();
+		for (int i = 0; i < physicalRowNum; i++) {
+			String row = lines.get(i);
+			String[] eachDatas = row.split("\t|\\s+");
+			for (int j = 0; j < eachDatas.length; j++) {
+				Map<String,Object> datamap =null;
+				datamap =	ExcelUtil.getCellFormatValue(eachDatas[j]);
+				String typeDes =(String) datamap.get("typeDes");
+				String pjs = ExcelUtil.getExcelColName(j+1);
+				String mergedRange = (String) datamap.get("mergedRange");
+				if(isFirstRowVar&&i==0){
+					VarietyDTO variety =  new VarietyDTO();
+					
+					variety.setPosition(pjs);
+					variety.setVarietyName(datamap.get("value").toString());
+					variety.setType((Integer) datamap.get("type"));
+					variety.setTypeDes(typeDes);
+					varietyList.add(variety);
+				}
+				if(!isFirstRowVar&&i==0){
+						VarietyDTO variety =  new VarietyDTO();
+					variety.setPosition(pjs);
+					variety.setVarietyName("V"+(j+1));
+					variety.setType((Integer) datamap.get("type"));
+					variety.setTypeDes(typeDes);
+					varietyList.add(variety);
+					
+				}
+				
+				DataDTO data = new DataDTO();
+				dataGrid[i][j] = data;
+				data.setPosition(pjs + (i+1) +"");
+				lastCellIndex = pjs + (i+1) +"";
+				data.setPositionDes(pjs +","+ (i+1) );
+				data.setData(datamap.get("value"));
+				data.setType((Integer) datamap.get("type"));
+				data.setMergedRange(mergedRange);
+				data.setTypeDes(typeDes );
+			}
+			
+		}
+		textDto.setDataGrid(dataGrid);
+		textDto.setVariety(varietyList);
+
+		textDto.setLastCellIndex(lastCellIndex);
+		return textDto;
 	}
 	
 

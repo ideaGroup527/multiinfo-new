@@ -2,6 +2,8 @@ package org.jmu.multiinfo.service.descriptives;
 
 import org.jmu.multiinfo.dto.descriptives.CommonCondition;
 import org.jmu.multiinfo.dto.descriptives.CommonDTO;
+import org.jmu.multiinfo.dto.descriptives.KSTestDTO;
+import org.jmu.multiinfo.dto.descriptives.PercentileCondition;
 
 public interface DescriptivesStatisticsService {
 	
@@ -10,7 +12,7 @@ public interface DescriptivesStatisticsService {
 	 * @param condition
 	 * @return
 	 */
-	 public CommonDTO calDesc(CommonCondition condition);
+	 public CommonDTO calDesc(PercentileCondition condition);
 	 
 	 
 	 /***
@@ -18,4 +20,12 @@ public interface DescriptivesStatisticsService {
 	  * @param condition
 	  */
 	 public CommonDTO calFrequency(CommonCondition condition);
+
+
+	 /***
+	  * kolmogorov-smirnov检验
+	  * @param data
+	  * @return
+	  */
+	public KSTestDTO calNormalDistribution(double[] data);
 }

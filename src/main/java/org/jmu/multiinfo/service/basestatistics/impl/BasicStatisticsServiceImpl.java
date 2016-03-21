@@ -1,7 +1,5 @@
 package org.jmu.multiinfo.service.basestatistics.impl;
 
-import java.util.Map;
-
 import org.apache.commons.math3.stat.Frequency;
 import org.apache.commons.math3.stat.descriptive.moment.GeometricMean;
 import org.apache.commons.math3.stat.descriptive.moment.Kurtosis;
@@ -12,6 +10,7 @@ import org.apache.commons.math3.stat.descriptive.moment.Variance;
 import org.apache.commons.math3.stat.descriptive.rank.Max;
 import org.apache.commons.math3.stat.descriptive.rank.Median;
 import org.apache.commons.math3.stat.descriptive.rank.Min;
+import org.apache.commons.math3.stat.descriptive.rank.Percentile;
 import org.apache.commons.math3.stat.descriptive.summary.Sum;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.springframework.stereotype.Service;
@@ -89,9 +88,15 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 		return kurtosis.evaluate(dataArr);
 	}
 
+	@Override
+	public Percentile percentile(double[] dataArr) {
+		Percentile p = new Percentile();
+		p.setData(dataArr);
+		return p;
+	}
 
 	@Override
-	public Frequency FrequencyCount(Object[] dataArr) {
+	public Frequency frequencyCount(Object[] dataArr) {
 		Frequency freq = new Frequency();  
 		for (int i = 0; i < dataArr.length; i++) {
 			freq.addValue(dataArr[i].toString());
@@ -99,6 +104,13 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 		return freq;
 	}
 	
-	
+	@Override
+	public Frequency frequencyCount(double[] dataArr) {
+		Frequency freq = new Frequency();  
+		for (int i = 0; i < dataArr.length; i++) {
+			freq.addValue(dataArr[i]);
+		}
+		return freq;
+	}
 
 }
