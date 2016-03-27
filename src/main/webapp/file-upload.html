@@ -18,6 +18,63 @@
         .data-present-area.active {
             display: block;
         }
+
+        td {
+            cursor: cell;
+        }
+
+        td[data-positiondes^="A"] {
+            cursor: e-resize;
+        }
+
+        th {
+            cursor: s-resize;
+        }
+
+        td.active,
+        td.row-selected,
+        td.col-selected {
+            background: #DEECFF !important;
+        }
+
+        td.row-selected.col-selected {
+            background: #C6DCFB !important;
+        }
+
+        .table-present {
+            margin-bottom: 20px;
+        }
+
+        .table-present table {
+            display: none;
+        }
+
+        .table-present table.active {
+            display: table;
+        }
+
+        .custom-scrollbar-grey {
+            overflow-x: scroll;
+        }
+
+        .custom-scrollbar-grey::-webkit-scrollbar {
+            width: 20px;
+        }
+
+        .custom-scrollbar-grey::-webkit-scrollbar-track {
+            background-color: #dde1e6;
+        }
+
+        .custom-scrollbar-grey::-webkit-scrollbar-thumb {
+            height: 20px;
+            border: 4px solid #dde1e6;
+            border-radius: 6px;
+            background-color: #FFFFFF;
+        }
+
+        .custom-scrollbar-grey::-webkit-scrollbar-corner {
+            background: transparent;
+        }
     </style>
 </head>
 <body>
