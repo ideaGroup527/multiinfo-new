@@ -6,9 +6,6 @@
     <title>可挂接信息预测与分析</title>
     <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-submenu.min.css" rel="stylesheet">
-    <link href="css/flexigrid.css" rel="stylesheet">
-    <link href="css/flexigrid.pack.css" rel="stylesheet">
-    <!--<link href="css/normal.css" rel="stylesheet">-->
 
     <style>
         .file-upload-area,
@@ -131,6 +128,21 @@
          <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color: #337ab7;color: #fff;">
+                    上传 <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#">
+                            <input type="file" name="data_file" id="data_file" data-toggle="tooltip" title="请上传 xls，xlsx 格式的文件"
+                                   data-placement="top"/>
+                            <br>
+                            <button type="submit" class="btn btn-primary" id="file_upload_btn" disabled>上传</button>
+                        </a>
+                    </li>
+                </ul>
+              </li>
+              <li class="dropdown">
                   <a href="#" tabindex="0" data-toggle="dropdown" data-submenu aria-expanded="false">
                        文件<span class="caret"></span>
                   </a>
@@ -145,14 +157,6 @@
                                 <a href="#" tabindex="0">脚本</a>
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <input type="file" name="data_file" id="data_file" data-toggle="tooltip" title="请上传 xls，xlsx 格式的文件"
-                               data-placement="top"/>
-                            <br>
-                           <button type="submit" class="btn btn-primary" id="file_upload_btn" disabled>上传</button>
-                        </a>
                     </li>
                     <li><a href="#">打开数据库</a></li>
                     <li><a href="#">打开文本数据</a></li>
@@ -190,38 +194,6 @@
                       <li><a href="#">选项</a></li>
                   </ul>
               </li>
-              <li class="dropdown">
-                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                       视图 <span class="caret"></span>
-                   </a>
-                   <ul class="dropdown-menu">
-                       <li>
-                          <a href="#">
-                              <div class="checkbox">
-                                 <label>
-                                    <input type="checkbox" > 状态栏
-                                 </label>
-                              </div>
-                          </a>
-                        </li>
-                        <li><a href="#">工具栏</a></li>
-                        <li><a href="#">菜单编辑器</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">字体</a></li>
-                        <li>
-                           <a href="#">
-                              <div class="checkbox">
-                                 <label>
-                                    <input type="checkbox" > 网格线
-                                 </label>
-                              </div>
-                           </a>
-                        </li>
-                        <li><a href="#">值标签</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">变量</a></li>
-                   </ul>
-               </li>
               <li class="dropdown">
                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                        数据 <span class="caret"></span>
@@ -500,7 +472,7 @@
                      </ul>
                   </li>
                   <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"style="background-color: #337ab7;color: #fff;">
                           丁氏图 <span class="caret"></span>
                       </a>
                       <ul class="dropdown-menu">
@@ -602,174 +574,7 @@
                  </div>
               </div>
           </nav>
-<!--<h3>Navbar</h3>-->
-<!--<nav class="navbar navbar-default">-->
-    <!--<div class="navbar-header">-->
-        <!--<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">-->
-            <!--<span class="sr-only">Toggle navigation</span>-->
-            <!--<span class="icon-bar"></span>-->
-            <!--<span class="icon-bar"></span>-->
-            <!--<span class="icon-bar"></span>-->
-        <!--</button>-->
 
-        <!--<a class="navbar-brand">Project Name</a>-->
-    <!--</div>-->
-
-    <!--<div class="collapse navbar-collapse">-->
-        <!--<ul class="nav navbar-nav">-->
-            <!--<li class="dropdown">-->
-                <!--<a tabindex="0" data-toggle="dropdown" data-submenu>-->
-                    <!--Dropdown<span class="caret"></span>-->
-                <!--</a>-->
-
-                <!--<ul class="dropdown-menu">-->
-                    <!--<li class="dropdown-submenu">-->
-                        <!--<a tabindex="0">Action</a>-->
-
-                        <!--<ul class="dropdown-menu">-->
-                            <!--<li><a tabindex="0">Sub action</a></li>-->
-                            <!--<li class="dropdown-submenu">-->
-                                <!--<a tabindex="0">Another sub action</a>-->
-
-                                <!--<ul class="dropdown-menu">-->
-                                    <!--<li><a tabindex="0">Sub action</a></li>-->
-                                    <!--<li><a tabindex="0">Another sub action</a></li>-->
-                                    <!--<li><a tabindex="0">Something else here</a></li>-->
-                                <!--</ul>-->
-                            <!--</li>-->
-                            <!--<li><a tabindex="0">Something else here</a></li>-->
-                            <!--<li class="dropdown-submenu">-->
-                                <!--<a tabindex="0">Another action</a>-->
-
-                                <!--<ul class="dropdown-menu">-->
-                                    <!--<li><a tabindex="0">Sub action</a></li>-->
-                                    <!--<li><a tabindex="0">Another sub action</a></li>-->
-                                    <!--<li><a tabindex="0">Something else here</a></li>-->
-                                <!--</ul>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
-                    <!--<li class="dropdown-header">Dropdown header</li>-->
-                    <!--<li class="dropdown-submenu">-->
-                        <!--<a tabindex="0">Another action</a>-->
-
-                        <!--<ul class="dropdown-menu">-->
-                            <!--<li><a tabindex="0">Sub action</a></li>-->
-                            <!--<li><a tabindex="0">Another sub action</a></li>-->
-                            <!--<li><a tabindex="0">Something else here</a></li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
-                    <!--<li><a tabindex="0">Something else here</a></li>-->
-                    <!--<li class="dropdown-divider">-->
-                        <!--<div class="divider"></div>-->
-                    <!--</li>-->
-                    <!--<li><a tabindex="0">Separated link</a></li>-->
-                <!--</ul>-->
-            <!--</li>-->
-            <!--<li class="dropdown">-->
-                <!--<a tabindex="0" data-toggle="dropdown" data-submenu>-->
-                    <!--Dropdown 2<span class="caret"></span>-->
-                <!--</a>-->
-
-                <!--<ul class="dropdown-menu">-->
-                    <!--<li class="dropdown-submenu">-->
-                        <!--<a tabindex="0">Action</a>-->
-
-                        <!--<ul class="dropdown-menu">-->
-                            <!--<li><a tabindex="0">Sub action</a></li>-->
-                            <!--<li class="dropdown-submenu">-->
-                                <!--<a tabindex="0">Another sub action</a>-->
-
-                                <!--<ul class="dropdown-menu">-->
-                                    <!--<li><a tabindex="0">Sub action</a></li>-->
-                                    <!--<li><a tabindex="0">Another sub action</a></li>-->
-                                    <!--<li><a tabindex="0">Something else here</a></li>-->
-                                <!--</ul>-->
-                            <!--</li>-->
-                            <!--<li><a tabindex="0">Something else here</a></li>-->
-                            <!--<li class="dropdown-submenu">-->
-                                <!--<a tabindex="0">Another action</a>-->
-
-                                <!--<ul class="dropdown-menu">-->
-                                    <!--<li><a tabindex="0">Sub action</a></li>-->
-                                    <!--<li><a tabindex="0">Another sub action</a></li>-->
-                                    <!--<li><a tabindex="0">Something else here</a></li>-->
-                                <!--</ul>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
-                    <!--<li class="dropdown-header">Dropdown header</li>-->
-                    <!--<li class="dropdown-submenu">-->
-                        <!--<a tabindex="0">Another action</a>-->
-
-                        <!--<ul class="dropdown-menu">-->
-                            <!--<li><a tabindex="0">Sub action</a></li>-->
-                            <!--<li><a tabindex="0">Another sub action</a></li>-->
-                            <!--<li><a tabindex="0">Something else here</a></li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
-                    <!--<li><a tabindex="0">Something else here</a></li>-->
-                    <!--<li class="dropdown-divider">-->
-                        <!--<div class="divider"></div>-->
-                    <!--</li>-->
-                    <!--<li><a tabindex="0">Separated link</a></li>-->
-                <!--</ul>-->
-            <!--</li>-->
-        <!--</ul>-->
-
-        <!--<ul class="nav navbar-nav navbar-right">-->
-            <!--<li class="dropdown">-->
-                <!--<a tabindex="0" data-toggle="dropdown" data-submenu>-->
-                    <!--Dropdown 3<span class="caret"></span>-->
-                <!--</a>-->
-
-                <!--<ul class="dropdown-menu">-->
-                    <!--<li class="dropdown-submenu">-->
-                        <!--<a tabindex="0">Action</a>-->
-
-                        <!--<ul class="dropdown-menu">-->
-                            <!--<li><a tabindex="0">Sub action</a></li>-->
-                            <!--<li class="dropdown-submenu">-->
-                                <!--<a tabindex="0">Another sub action</a>-->
-
-                                <!--<ul class="dropdown-menu">-->
-                                    <!--<li><a tabindex="0">Sub action</a></li>-->
-                                    <!--<li><a tabindex="0">Another sub action</a></li>-->
-                                    <!--<li><a tabindex="0">Something else here</a></li>-->
-                                <!--</ul>-->
-                            <!--</li>-->
-                            <!--<li><a tabindex="0">Something else here</a></li>-->
-                            <!--<li class="dropdown-submenu">-->
-                                <!--<a tabindex="0">Another action</a>-->
-
-                                <!--<ul class="dropdown-menu">-->
-                                    <!--<li><a tabindex="0">Sub action</a></li>-->
-                                    <!--<li><a tabindex="0">Another sub action</a></li>-->
-                                    <!--<li><a tabindex="0">Something else here</a></li>-->
-                                <!--</ul>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
-                    <!--<li class="dropdown-header">Dropdown header</li>-->
-                    <!--<li class="dropdown-submenu">-->
-                        <!--<a tabindex="0">Another action</a>-->
-
-                        <!--<ul class="dropdown-menu">-->
-                            <!--<li><a tabindex="0">Sub action</a></li>-->
-                            <!--<li><a tabindex="0">Another sub action</a></li>-->
-                            <!--<li><a tabindex="0">Something else here</a></li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
-                    <!--<li><a tabindex="0">Something else here</a></li>-->
-                    <!--<li class="dropdown-divider">-->
-                        <!--<div class="divider"></div>-->
-                    <!--</li>-->
-                    <!--<li><a tabindex="0">Separated link</a></li>-->
-                <!--</ul>-->
-            <!--</li>-->
-        <!--</ul>-->
-    <!--</div>-->
-<!--</nav>-->
    <div class="container" style="margin-top: 58px">
     <!-- 显示单个数据的位置和数值-->
 
@@ -788,30 +593,24 @@
 
    </div>
 
-
        <!--显示真实数据-->
        <div class="row data-present-area">
            <h1 id="title" class="col-md-10 col-md-offset-1"></h1>
 
-           <div class="col-lg-10 col-lg-offset-1">
+           <div class="col-md-10 col-md-offset-1">
                <ul class="nav nav-tabs"></ul>
            </div>
 
-           <div class="col-lg-12 col-lg-offset-1 table-present custom-scrollbar-grey"></div>
+           <div class="col-md-10 col-md-offset-1 table-present custom-scrollbar-grey"></div>
 
-           <!--<div class="col-md-10 col-md-offset-1 text-right">-->
-               <!--<button class="btn btn-primary">下一步</button>-->
-           <!--</div>-->
        </div>
    </div>
 </div><!--container的结尾-->
 
 <script src="../js/jquery-1.11.3.min.js"></script>
 <script src="../js/bootstrap/bootstrap.min.js"></script>
-<script src="js/flexigrid.pack.js"></script>
 <script src="js/jquery.form.min.js"></script>
 <script src="js/bootstrap-submenu.min.js"></script>
-<!--<script src="js/docs.js"></script>-->
 <script>
     //在选择文件之前弹出的提示
     $("#data_file").tooltip().change(function () {
@@ -1019,68 +818,6 @@
         e.preventDefault();
         $(this).tab('show');
     });
-
-    $('.flexme').flexigrid();
-
-function Example4(com, grid) {
-    if (com == 'Delete') {
-        var conf = confirm('Delete ' + $('.trSelected', grid).length + ' items?')
-        if(conf){
-            $.each($('.trSelected', grid),
-                    function(key, value){
-                        $.get('example4.php', { Delete: value.firstChild.innerText}
-                                , function(){
-                                    // when ajax returns (callback), update the grid to refresh the data
-                                    $(".flexme4").flexReload();
-                                });
-                    });
-        }
-    }
-    else if (com == 'Edit') {
-        var conf = confirm('Edit ' + $('.trSelected', grid).length + ' items?')
-        if(conf){
-            $.each($('.trSelected', grid),
-                    function(key, value){
-                        // collect the data
-                        var OrgEmpID = value.children[0].innerText; // in case we're changing the key
-                        var EmpID = prompt("Please enter the New Employee ID",value.children[0].innerText);
-                        var Name = prompt("Please enter the Employee Name",value.children[1].innerText);
-                        var PrimaryLanguage = prompt("Please enter the Employee's Primary Language",value.children[2].innerText);
-                        var FavoriteColor = prompt("Please enter the Employee's Favorite Color",value.children[3].innerText);
-                        var FavoriteAnimal = prompt("Please enter the Employee's Favorite Animal",value.children[4].innerText);
-
-                        // call the ajax to save the data to the session
-                        $.get('example4.php',
-                                { Edit: true
-                                    , OrgEmpID: OrgEmpID
-                                    , EmpID: EmpID
-                                    , Name: Name
-                                    , PrimaryLanguage: PrimaryLanguage
-                                    , FavoriteColor: FavoriteColor
-                                    , FavoritePet: FavoriteAnimal  }
-                                , function(){
-                                    // when ajax returns (callback), update the grid to refresh the data
-                                    $(".flexme4").flexReload();
-                                });
-                    });
-        }
-    }
-    else if (com == 'Add') {
-        // collect the data
-        var EmpID = prompt("Please enter the Employee ID","5");
-        var Name = prompt("Please enter the Employee Name","Mark");
-        var PrimaryLanguage = prompt("Please enter the Employee's Primary Language","php");
-        var FavoriteColor = prompt("Please enter the Employee's Favorite Color","Tan");
-        var FavoriteAnimal = prompt("Please enter the Employee's Favorite Animal","Dog");
-
-        // call the ajax to save the data to the session
-        $.get('example4.php', { Add: true, EmpID: EmpID, Name: Name, PrimaryLanguage: PrimaryLanguage, FavoriteColor: FavoriteColor, FavoritePet: FavoriteAnimal  }
-                , function(){
-                    // when ajax returns (callback), update the grid to refresh the data
-                    $(".flexme4").flexReload();
-                });
-    }
-}
 </script>
 </body>
 </html>
