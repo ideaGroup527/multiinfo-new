@@ -922,40 +922,40 @@
 
             $(table).append(tr);
         });
-        table.flexigrid({
-            dataType : 'json',
-            buttons : [ {
-                name : 'Add',
-                bclass : 'add',
-                onpress : Example4
-            }
-                ,
-                {
-                    name : 'Edit',
-                    bclass : 'edit',
-                    onpress : Example4
-                }
-                ,
-                {
-                    name : 'Delete',
-                    bclass : 'delete',
-                    onpress : Example4
-                }
-                ,
-                {
-                    separator : true
-                }
-            ],
-            sortable : true,
-            sortorder : "asc",
-            usepager : true,
-            title : data.fileName.split('.')[0].trim(),
-            useRp : true,
-            rp : 15,
-            showTableToggleBtn : true,
-            width : 1145,
-            height : 400
-        });
+//        table.flexigrid({
+//            dataType : 'json',
+//            buttons : [ {
+//                name : 'Add',
+//                bclass : 'add',
+//                onpress : Example4
+//            }
+//                ,
+//                {
+//                    name : 'Edit',
+//                    bclass : 'edit',
+//                    onpress : Example4
+//                }
+//                ,
+//                {
+//                    name : 'Delete',
+//                    bclass : 'delete',
+//                    onpress : Example4
+//                }
+//                ,
+//                {
+//                    separator : true
+//                }
+//            ],
+//            sortable : true,
+//            sortorder : "asc",
+//            usepager : true,
+//            title : data.fileName.split('.')[0].trim(),
+//            useRp : true,
+//            rp : 15,
+//            showTableToggleBtn : true,
+//            width : 1145,
+//            height : 400
+//        });
         var variable = data.sheet.variety;
         if (variable) {
             //填充变量名称
