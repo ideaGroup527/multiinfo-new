@@ -1,0 +1,4035 @@
+{
+  "ret_code": "",
+  "ret_msg": "",
+  "ret_err": "",
+  "fileName": "65岁和65岁以上的人口（占总人口的百分比）.xls",
+  "sheetNum": 3,
+  "sheet": {
+    "sheetName": "Data",
+    "sheetNo": 0,
+    "dataGrid": [
+      [
+        {
+          "position": "A1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "年份",
+          "mergedRange": null
+        },
+        {
+          "position": "B1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "阿富汗",
+          "mergedRange": null
+        },
+        {
+          "position": "C1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "中国",
+          "mergedRange": null
+        },
+        {
+          "position": "D1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "法国",
+          "mergedRange": null
+        },
+        {
+          "position": "E1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "印度",
+          "mergedRange": null
+        },
+        {
+          "position": "F1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "伊拉克",
+          "mergedRange": null
+        },
+        {
+          "position": "G1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "日本",
+          "mergedRange": null
+        },
+        {
+          "position": "H1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "马来西亚",
+          "mergedRange": null
+        },
+        {
+          "position": "I1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "沙特",
+          "mergedRange": null
+        },
+        {
+          "position": "J1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "索马里",
+          "mergedRange": null
+        },
+        {
+          "position": "K1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "美国",
+          "mergedRange": null
+        },
+        {
+          "position": "L1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "澳大利亚",
+          "mergedRange": null
+        },
+        {
+          "position": "M1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "利比亚",
+          "mergedRange": null
+        },
+        {
+          "position": "N1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "葡萄牙",
+          "mergedRange": null
+        },
+        {
+          "position": "O1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "巴西",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A2",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "1982",
+          "mergedRange": null
+        },
+        {
+          "position": "B2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.09825587272644",
+          "mergedRange": null
+        },
+        {
+          "position": "C2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.30624866485596",
+          "mergedRange": null
+        },
+        {
+          "position": "D2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.5735921859741",
+          "mergedRange": null
+        },
+        {
+          "position": "E2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.69011688232422",
+          "mergedRange": null
+        },
+        {
+          "position": "F2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.06594276428223",
+          "mergedRange": null
+        },
+        {
+          "position": "G2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "9.48230648040771",
+          "mergedRange": null
+        },
+        {
+          "position": "H2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.60734295845032",
+          "mergedRange": null
+        },
+        {
+          "position": "I2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.7924485206604",
+          "mergedRange": null
+        },
+        {
+          "position": "J2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.29329109191895",
+          "mergedRange": null
+        },
+        {
+          "position": "K2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.556529045105",
+          "mergedRange": null
+        },
+        {
+          "position": "L2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "9.88323879241943",
+          "mergedRange": null
+        },
+        {
+          "position": "M2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.87149405479431",
+          "mergedRange": null
+        },
+        {
+          "position": "N2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.1546678543091",
+          "mergedRange": null
+        },
+        {
+          "position": "O2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.20146036148071",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A3",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "1983",
+          "mergedRange": null
+        },
+        {
+          "position": "B3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.0363621711731",
+          "mergedRange": null
+        },
+        {
+          "position": "C3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.41425323486328",
+          "mergedRange": null
+        },
+        {
+          "position": "D3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.2610006332397",
+          "mergedRange": null
+        },
+        {
+          "position": "E3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.71575164794922",
+          "mergedRange": null
+        },
+        {
+          "position": "F3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.05321884155273",
+          "mergedRange": null
+        },
+        {
+          "position": "G3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "9.70113563537598",
+          "mergedRange": null
+        },
+        {
+          "position": "H3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.62175154685974",
+          "mergedRange": null
+        },
+        {
+          "position": "I3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.70226073265076",
+          "mergedRange": null
+        },
+        {
+          "position": "J3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.29296517372131",
+          "mergedRange": null
+        },
+        {
+          "position": "K3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.6760635375977",
+          "mergedRange": null
+        },
+        {
+          "position": "L3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "10.0019874572754",
+          "mergedRange": null
+        },
+        {
+          "position": "M3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.87015581130981",
+          "mergedRange": null
+        },
+        {
+          "position": "N3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.3421964645386",
+          "mergedRange": null
+        },
+        {
+          "position": "O3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.18834638595581",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A4",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "1984",
+          "mergedRange": null
+        },
+        {
+          "position": "B4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1.9753749370575",
+          "mergedRange": null
+        },
+        {
+          "position": "C4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.50747394561768",
+          "mergedRange": null
+        },
+        {
+          "position": "D4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.0202798843384",
+          "mergedRange": null
+        },
+        {
+          "position": "E4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.74064612388611",
+          "mergedRange": null
+        },
+        {
+          "position": "F4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.03715085983276",
+          "mergedRange": null
+        },
+        {
+          "position": "G4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "9.93657875061035",
+          "mergedRange": null
+        },
+        {
+          "position": "H4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.63158297538757",
+          "mergedRange": null
+        },
+        {
+          "position": "I4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.6370325088501",
+          "mergedRange": null
+        },
+        {
+          "position": "J4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.2902946472168",
+          "mergedRange": null
+        },
+        {
+          "position": "K4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.7942361831665",
+          "mergedRange": null
+        },
+        {
+          "position": "L4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "10.1264715194702",
+          "mergedRange": null
+        },
+        {
+          "position": "M4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.88140058517456",
+          "mergedRange": null
+        },
+        {
+          "position": "N4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.5027103424072",
+          "mergedRange": null
+        },
+        {
+          "position": "O4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.18264627456665",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A5",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "1985",
+          "mergedRange": null
+        },
+        {
+          "position": "B5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1.92252969741821",
+          "mergedRange": null
+        },
+        {
+          "position": "C5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.58135032653809",
+          "mergedRange": null
+        },
+        {
+          "position": "D5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.9234113693237",
+          "mergedRange": null
+        },
+        {
+          "position": "E5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.76479601860046",
+          "mergedRange": null
+        },
+        {
+          "position": "F5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.01587772369385",
+          "mergedRange": null
+        },
+        {
+          "position": "G5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "10.1986303329468",
+          "mergedRange": null
+        },
+        {
+          "position": "H5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.63463997840881",
+          "mergedRange": null
+        },
+        {
+          "position": "I5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.60358262062073",
+          "mergedRange": null
+        },
+        {
+          "position": "J5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.28467440605164",
+          "mergedRange": null
+        },
+        {
+          "position": "K5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.9151134490967",
+          "mergedRange": null
+        },
+        {
+          "position": "L5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "10.2648763656616",
+          "mergedRange": null
+        },
+        {
+          "position": "M5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.90816831588745",
+          "mergedRange": null
+        },
+        {
+          "position": "N5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.6314897537231",
+          "mergedRange": null
+        },
+        {
+          "position": "O5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.19235181808472",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A6",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "1986",
+          "mergedRange": null
+        },
+        {
+          "position": "B6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1.88007235527039",
+          "mergedRange": null
+        },
+        {
+          "position": "C6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.6340217590332",
+          "mergedRange": null
+        },
+        {
+          "position": "D6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.9954671859741",
+          "mergedRange": null
+        },
+        {
+          "position": "E6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.78840780258179",
+          "mergedRange": null
+        },
+        {
+          "position": "F6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.9894745349884",
+          "mergedRange": null
+        },
+        {
+          "position": "G6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "10.4896965026855",
+          "mergedRange": null
+        },
+        {
+          "position": "H6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.63029503822327",
+          "mergedRange": null
+        },
+        {
+          "position": "I6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.60542893409729",
+          "mergedRange": null
+        },
+        {
+          "position": "J6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.27616429328918",
+          "mergedRange": null
+        },
+        {
+          "position": "K6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.0399103164673",
+          "mergedRange": null
+        },
+        {
+          "position": "L6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "10.4178152084351",
+          "mergedRange": null
+        },
+        {
+          "position": "M6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.95112562179565",
+          "mergedRange": null
+        },
+        {
+          "position": "N6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.738091468811",
+          "mergedRange": null
+        },
+        {
+          "position": "O6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.21855401992798",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A7",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "1987",
+          "mergedRange": null
+        },
+        {
+          "position": "B7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1.84878444671631",
+          "mergedRange": null
+        },
+        {
+          "position": "C7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.669837474823",
+          "mergedRange": null
+        },
+        {
+          "position": "D7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.2078323364258",
+          "mergedRange": null
+        },
+        {
+          "position": "E7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.81201505661011",
+          "mergedRange": null
+        },
+        {
+          "position": "F7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.95899772644043",
+          "mergedRange": null
+        },
+        {
+          "position": "G7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "10.8087396621704",
+          "mergedRange": null
+        },
+        {
+          "position": "H7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.6210675239563",
+          "mergedRange": null
+        },
+        {
+          "position": "I7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.63426160812378",
+          "mergedRange": null
+        },
+        {
+          "position": "J7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.264897108078",
+          "mergedRange": null
+        },
+        {
+          "position": "K7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.1649599075317",
+          "mergedRange": null
+        },
+        {
+          "position": "L7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "10.5809078216553",
+          "mergedRange": null
+        },
+        {
+          "position": "M7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.0075569152832",
+          "mergedRange": null
+        },
+        {
+          "position": "N7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.8439750671387",
+          "mergedRange": null
+        },
+        {
+          "position": "O7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.25908613204956",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A8",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "1988",
+          "mergedRange": null
+        },
+        {
+          "position": "B8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1.83431100845337",
+          "mergedRange": null
+        },
+        {
+          "position": "C8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.69806528091431",
+          "mergedRange": null
+        },
+        {
+          "position": "D8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.512300491333",
+          "mergedRange": null
+        },
+        {
+          "position": "E8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.83634614944458",
+          "mergedRange": null
+        },
+        {
+          "position": "F8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.92489433288574",
+          "mergedRange": null
+        },
+        {
+          "position": "G8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.1577701568604",
+          "mergedRange": null
+        },
+        {
+          "position": "H8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.61143970489502",
+          "mergedRange": null
+        },
+        {
+          "position": "I8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.6719536781311",
+          "mergedRange": null
+        },
+        {
+          "position": "J8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.25078392028809",
+          "mergedRange": null
+        },
+        {
+          "position": "K8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.2836008071899",
+          "mergedRange": null
+        },
+        {
+          "position": "L8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "10.7508974075317",
+          "mergedRange": null
+        },
+        {
+          "position": "M8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.07344532012939",
+          "mergedRange": null
+        },
+        {
+          "position": "N8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.9780731201172",
+          "mergedRange": null
+        },
+        {
+          "position": "O8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.31407260894775",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A9",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "1989",
+          "mergedRange": null
+        },
+        {
+          "position": "B9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1.84217607975006",
+          "mergedRange": null
+        },
+        {
+          "position": "C9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.73078060150146",
+          "mergedRange": null
+        },
+        {
+          "position": "D9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.8372774124146",
+          "mergedRange": null
+        },
+        {
+          "position": "E9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.8622682094574",
+          "mergedRange": null
+        },
+        {
+          "position": "F9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.88804292678833",
+          "mergedRange": null
+        },
+        {
+          "position": "G9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.5376930236816",
+          "mergedRange": null
+        },
+        {
+          "position": "H9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.60696721076965",
+          "mergedRange": null
+        },
+        {
+          "position": "I9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.69676780700684",
+          "mergedRange": null
+        },
+        {
+          "position": "J9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.23341703414917",
+          "mergedRange": null
+        },
+        {
+          "position": "K9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.3870182037354",
+          "mergedRange": null
+        },
+        {
+          "position": "L9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "10.9235534667969",
+          "mergedRange": null
+        },
+        {
+          "position": "M9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.14321255683899",
+          "mergedRange": null
+        },
+        {
+          "position": "N9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.1603775024414",
+          "mergedRange": null
+        },
+        {
+          "position": "O9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.38291645050049",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A10",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "1990",
+          "mergedRange": null
+        },
+        {
+          "position": "B10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1.87260580062866",
+          "mergedRange": null
+        },
+        {
+          "position": "C10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.77644300460815",
+          "mergedRange": null
+        },
+        {
+          "position": "D10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "14.1308174133301",
+          "mergedRange": null
+        },
+        {
+          "position": "E10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.89048194885254",
+          "mergedRange": null
+        },
+        {
+          "position": "F10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.84940886497498",
+          "mergedRange": null
+        },
+        {
+          "position": "G10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.9481763839722",
+          "mergedRange": null
+        },
+        {
+          "position": "H10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.61100149154663",
+          "mergedRange": null
+        },
+        {
+          "position": "I10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.69736456871033",
+          "mergedRange": null
+        },
+        {
+          "position": "J10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.21243858337402",
+          "mergedRange": null
+        },
+        {
+          "position": "K10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.4691247940063",
+          "mergedRange": null
+        },
+        {
+          "position": "L10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.0957279205322",
+          "mergedRange": null
+        },
+        {
+          "position": "M10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.21274828910828",
+          "mergedRange": null
+        },
+        {
+          "position": "N10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.3992366790771",
+          "mergedRange": null
+        },
+        {
+          "position": "O10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.46458721160889",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A11",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "1991",
+          "mergedRange": null
+        },
+        {
+          "position": "B11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1.92369306087494",
+          "mergedRange": null
+        },
+        {
+          "position": "C11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.83733367919922",
+          "mergedRange": null
+        },
+        {
+          "position": "D11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "14.3806667327881",
+          "mergedRange": null
+        },
+        {
+          "position": "E11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.92114281654358",
+          "mergedRange": null
+        },
+        {
+          "position": "F11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.80934000015259",
+          "mergedRange": null
+        },
+        {
+          "position": "G11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.3889007568359",
+          "mergedRange": null
+        },
+        {
+          "position": "H11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.62579560279846",
+          "mergedRange": null
+        },
+        {
+          "position": "I11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.66475987434387",
+          "mergedRange": null
+        },
+        {
+          "position": "J11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.18762588500977",
+          "mergedRange": null
+        },
+        {
+          "position": "K11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.5295515060425",
+          "mergedRange": null
+        },
+        {
+          "position": "L11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.2687158584595",
+          "mergedRange": null
+        },
+        {
+          "position": "M11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.28114485740662",
+          "mergedRange": null
+        },
+        {
+          "position": "N11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.6870527267456",
+          "mergedRange": null
+        },
+        {
+          "position": "O11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.56040716171265",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A12",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "1992",
+          "mergedRange": null
+        },
+        {
+          "position": "B12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1.98482084274292",
+          "mergedRange": null
+        },
+        {
+          "position": "C12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.9116849899292",
+          "mergedRange": null
+        },
+        {
+          "position": "D12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "14.6011266708374",
+          "mergedRange": null
+        },
+        {
+          "position": "E12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.95443248748779",
+          "mergedRange": null
+        },
+        {
+          "position": "F12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.76854062080383",
+          "mergedRange": null
+        },
+        {
+          "position": "G12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.8580474853516",
+          "mergedRange": null
+        },
+        {
+          "position": "H12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.6496741771698",
+          "mergedRange": null
+        },
+        {
+          "position": "I12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.61006188392639",
+          "mergedRange": null
+        },
+        {
+          "position": "J12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.15907955169678",
+          "mergedRange": null
+        },
+        {
+          "position": "K12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.5705165863037",
+          "mergedRange": null
+        },
+        {
+          "position": "L12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.4424314498901",
+          "mergedRange": null
+        },
+        {
+          "position": "M12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.34920001029968",
+          "mergedRange": null
+        },
+        {
+          "position": "N12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.0069417953491",
+          "mergedRange": null
+        },
+        {
+          "position": "O12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.66920900344849",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A13",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "1993",
+          "mergedRange": null
+        },
+        {
+          "position": "B13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.04082608222961",
+          "mergedRange": null
+        },
+        {
+          "position": "C13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.99867343902588",
+          "mergedRange": null
+        },
+        {
+          "position": "D13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "14.7988243103027",
+          "mergedRange": null
+        },
+        {
+          "position": "E13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.99102878570557",
+          "mergedRange": null
+        },
+        {
+          "position": "F13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.72871255874634",
+          "mergedRange": null
+        },
+        {
+          "position": "G13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.351523399353",
+          "mergedRange": null
+        },
+        {
+          "position": "H13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.67771148681641",
+          "mergedRange": null
+        },
+        {
+          "position": "I13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.56384468078613",
+          "mergedRange": null
+        },
+        {
+          "position": "J13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.1273946762085",
+          "mergedRange": null
+        },
+        {
+          "position": "K13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.5921144485474",
+          "mergedRange": null
+        },
+        {
+          "position": "L13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.6110372543335",
+          "mergedRange": null
+        },
+        {
+          "position": "M13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.41725063323975",
+          "mergedRange": null
+        },
+        {
+          "position": "N13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.3326463699341",
+          "mergedRange": null
+        },
+        {
+          "position": "O13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.7846508026123",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A14",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "1994",
+          "mergedRange": null
+        },
+        {
+          "position": "B14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.08053755760193",
+          "mergedRange": null
+        },
+        {
+          "position": "C14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6.09621906280518",
+          "mergedRange": null
+        },
+        {
+          "position": "D14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "14.9879121780396",
+          "mergedRange": null
+        },
+        {
+          "position": "E14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.03167343139648",
+          "mergedRange": null
+        },
+        {
+          "position": "F14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.69161176681519",
+          "mergedRange": null
+        },
+        {
+          "position": "G14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.8645248413086",
+          "mergedRange": null
+        },
+        {
+          "position": "H14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.70340394973755",
+          "mergedRange": null
+        },
+        {
+          "position": "I14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.56413531303406",
+          "mergedRange": null
+        },
+        {
+          "position": "J14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.09388041496277",
+          "mergedRange": null
+        },
+        {
+          "position": "K14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.5950307846069",
+          "mergedRange": null
+        },
+        {
+          "position": "L14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.7667818069458",
+          "mergedRange": null
+        },
+        {
+          "position": "M14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.48607993125916",
+          "mergedRange": null
+        },
+        {
+          "position": "N14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.6438989639282",
+          "mergedRange": null
+        },
+        {
+          "position": "O14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.89856624603271",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A15",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "1995",
+          "mergedRange": null
+        },
+        {
+          "position": "B15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.10106039047241",
+          "mergedRange": null
+        },
+        {
+          "position": "C15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6.20274877548218",
+          "mergedRange": null
+        },
+        {
+          "position": "D15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "15.1780261993408",
+          "mergedRange": null
+        },
+        {
+          "position": "E15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.07680988311768",
+          "mergedRange": null
+        },
+        {
+          "position": "F15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.65831136703491",
+          "mergedRange": null
+        },
+        {
+          "position": "G15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "14.3931703567505",
+          "mergedRange": null
+        },
+        {
+          "position": "H15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.72330069541931",
+          "mergedRange": null
+        },
+        {
+          "position": "I15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.63222360610962",
+          "mergedRange": null
+        },
+        {
+          "position": "J15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.06047177314758",
+          "mergedRange": null
+        },
+        {
+          "position": "K15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.5808181762695",
+          "mergedRange": null
+        },
+        {
+          "position": "L15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11.9045476913452",
+          "mergedRange": null
+        },
+        {
+          "position": "M15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.55632996559143",
+          "mergedRange": null
+        },
+        {
+          "position": "N15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.9325647354126",
+          "mergedRange": null
+        },
+        {
+          "position": "O15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.00564670562744",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A16",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "1996",
+          "mergedRange": null
+        },
+        {
+          "position": "B16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.10413551330566",
+          "mergedRange": null
+        },
+        {
+          "position": "C16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6.318199634552",
+          "mergedRange": null
+        },
+        {
+          "position": "D16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "15.3686532974243",
+          "mergedRange": null
+        },
+        {
+          "position": "E16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.12644147872925",
+          "mergedRange": null
+        },
+        {
+          "position": "F16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.62904834747314",
+          "mergedRange": null
+        },
+        {
+          "position": "G16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "14.9381666183472",
+          "mergedRange": null
+        },
+        {
+          "position": "H16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.73523664474487",
+          "mergedRange": null
+        },
+        {
+          "position": "I16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.77907085418701",
+          "mergedRange": null
+        },
+        {
+          "position": "J16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.02797317504883",
+          "mergedRange": null
+        },
+        {
+          "position": "K16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.5511274337769",
+          "mergedRange": null
+        },
+        {
+          "position": "L16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.0219507217407",
+          "mergedRange": null
+        },
+        {
+          "position": "M16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.62787175178528",
+          "mergedRange": null
+        },
+        {
+          "position": "N16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "14.2023506164551",
+          "mergedRange": null
+        },
+        {
+          "position": "O16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.10344934463501",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A17",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "1997",
+          "mergedRange": null
+        },
+        {
+          "position": "B17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.09449172019959",
+          "mergedRange": null
+        },
+        {
+          "position": "C17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6.44318723678589",
+          "mergedRange": null
+        },
+        {
+          "position": "D17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "15.5526752471924",
+          "mergedRange": null
+        },
+        {
+          "position": "E17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.18027448654175",
+          "mergedRange": null
+        },
+        {
+          "position": "F17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.60335350036621",
+          "mergedRange": null
+        },
+        {
+          "position": "G17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "15.4981908798218",
+          "mergedRange": null
+        },
+        {
+          "position": "H17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.74314498901367",
+          "mergedRange": null
+        },
+        {
+          "position": "I17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.98714375495911",
+          "mergedRange": null
+        },
+        {
+          "position": "J17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.9974582195282",
+          "mergedRange": null
+        },
+        {
+          "position": "K17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.5091390609741",
+          "mergedRange": null
+        },
+        {
+          "position": "L17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.1219005584717",
+          "mergedRange": null
+        },
+        {
+          "position": "M17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.69998288154602",
+          "mergedRange": null
+        },
+        {
+          "position": "N17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "14.4583673477173",
+          "mergedRange": null
+        },
+        {
+          "position": "O17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.19450426101685",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A18",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "1998",
+          "mergedRange": null
+        },
+        {
+          "position": "B18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.07703948020935",
+          "mergedRange": null
+        },
+        {
+          "position": "C18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6.57731103897095",
+          "mergedRange": null
+        },
+        {
+          "position": "D18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "15.7256555557251",
+          "mergedRange": null
+        },
+        {
+          "position": "E18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.2380108833313",
+          "mergedRange": null
+        },
+        {
+          "position": "F18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.58055377006531",
+          "mergedRange": null
+        },
+        {
+          "position": "G18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "16.0651683807373",
+          "mergedRange": null
+        },
+        {
+          "position": "H18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.75651478767395",
+          "mergedRange": null
+        },
+        {
+          "position": "I18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.21308469772339",
+          "mergedRange": null
+        },
+        {
+          "position": "J18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.97087121009827",
+          "mergedRange": null
+        },
+        {
+          "position": "K18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.4600954055786",
+          "mergedRange": null
+        },
+        {
+          "position": "L18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.21116065979",
+          "mergedRange": null
+        },
+        {
+          "position": "M18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.7724883556366",
+          "mergedRange": null
+        },
+        {
+          "position": "N18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "14.7109489440918",
+          "mergedRange": null
+        },
+        {
+          "position": "O18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.28448104858398",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A19",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "1999",
+          "mergedRange": null
+        },
+        {
+          "position": "B19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.05821561813354",
+          "mergedRange": null
+        },
+        {
+          "position": "C19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6.7199182510376",
+          "mergedRange": null
+        },
+        {
+          "position": "D19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "15.8815469741821",
+          "mergedRange": null
+        },
+        {
+          "position": "E19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.29922723770142",
+          "mergedRange": null
+        },
+        {
+          "position": "F19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.55971789360046",
+          "mergedRange": null
+        },
+        {
+          "position": "G19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "16.6283893585205",
+          "mergedRange": null
+        },
+        {
+          "position": "H19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.7872519493103",
+          "mergedRange": null
+        },
+        {
+          "position": "I19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.39483428001404",
+          "mergedRange": null
+        },
+        {
+          "position": "J19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.9498770236969",
+          "mergedRange": null
+        },
+        {
+          "position": "K19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.410174369812",
+          "mergedRange": null
+        },
+        {
+          "position": "L19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.2991285324097",
+          "mergedRange": null
+        },
+        {
+          "position": "M19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.84467601776123",
+          "mergedRange": null
+        },
+        {
+          "position": "N19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "14.9674139022827",
+          "mergedRange": null
+        },
+        {
+          "position": "O19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.3812575340271",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A20",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "2000",
+          "mergedRange": null
+        },
+        {
+          "position": "B20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.04294562339783",
+          "mergedRange": null
+        },
+        {
+          "position": "C20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6.86995029449463",
+          "mergedRange": null
+        },
+        {
+          "position": "D20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "16.0163173675537",
+          "mergedRange": null
+        },
+        {
+          "position": "E20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.36348104476929",
+          "mergedRange": null
+        },
+        {
+          "position": "F20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.54011797904968",
+          "mergedRange": null
+        },
+        {
+          "position": "G20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "17.1803722381592",
+          "mergedRange": null
+        },
+        {
+          "position": "H20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.8424813747406",
+          "mergedRange": null
+        },
+        {
+          "position": "I20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.48951363563538",
+          "mergedRange": null
+        },
+        {
+          "position": "J20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.93483805656433",
+          "mergedRange": null
+        },
+        {
+          "position": "K20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.3648567199707",
+          "mergedRange": null
+        },
+        {
+          "position": "L20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.3924827575684",
+          "mergedRange": null
+        },
+        {
+          "position": "M20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.91624331474304",
+          "mergedRange": null
+        },
+        {
+          "position": "N20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "15.2294425964355",
+          "mergedRange": null
+        },
+        {
+          "position": "O20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.49004650115967",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A21",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "2001",
+          "mergedRange": null
+        },
+        {
+          "position": "B21",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.0324969291687",
+          "mergedRange": null
+        },
+        {
+          "position": "C21",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "7.02861404418945",
+          "mergedRange": null
+        },
+        {
+          "position": "D21",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "16.1326351165771",
+          "mergedRange": null
+        },
+        {
+          "position": "E21",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.43080520629883",
+          "mergedRange": null
+        },
+        {
+          "position": "F21",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.52108979225159",
+          "mergedRange": null
+        },
+        {
+          "position": "G21",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "17.7163124084473",
+          "mergedRange": null
+        },
+        {
+          "position": "H21",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.92578411102295",
+          "mergedRange": null
+        },
+        {
+          "position": "I21",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.48574638366699",
+          "mergedRange": null
+        },
+        {
+          "position": "J21",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.92627477645874",
+          "mergedRange": null
+        },
+        {
+          "position": "K21",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.3267068862915",
+          "mergedRange": null
+        },
+        {
+          "position": "L21",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.4963407516479",
+          "mergedRange": null
+        },
+        {
+          "position": "M21",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.98727655410767",
+          "mergedRange": null
+        },
+        {
+          "position": "N21",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "15.4924230575562",
+          "mergedRange": null
+        },
+        {
+          "position": "O21",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.61309432983398",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A22",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "2002",
+          "mergedRange": null
+        },
+        {
+          "position": "B22",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.02617621421814",
+          "mergedRange": null
+        },
+        {
+          "position": "C22",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "7.19472551345825",
+          "mergedRange": null
+        },
+        {
+          "position": "D22",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "16.2338886260986",
+          "mergedRange": null
+        },
+        {
+          "position": "E22",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.50086259841919",
+          "mergedRange": null
+        },
+        {
+          "position": "F22",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.50254249572754",
+          "mergedRange": null
+        },
+        {
+          "position": "G22",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "18.2392864227295",
+          "mergedRange": null
+        },
+        {
+          "position": "H22",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.03239631652832",
+          "mergedRange": null
+        },
+        {
+          "position": "I22",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.40833258628845",
+          "mergedRange": null
+        },
+        {
+          "position": "J22",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.9228880405426",
+          "mergedRange": null
+        },
+        {
+          "position": "K22",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.2988376617432",
+          "mergedRange": null
+        },
+        {
+          "position": "L22",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.6095371246338",
+          "mergedRange": null
+        },
+        {
+          "position": "M22",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.05783176422119",
+          "mergedRange": null
+        },
+        {
+          "position": "N22",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "15.7505664825439",
+          "mergedRange": null
+        },
+        {
+          "position": "O22",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.74805974960327",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A23",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "2003",
+          "mergedRange": null
+        },
+        {
+          "position": "B23",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.02450728416443",
+          "mergedRange": null
+        },
+        {
+          "position": "C23",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "7.36211442947388",
+          "mergedRange": null
+        },
+        {
+          "position": "D23",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "16.3186473846436",
+          "mergedRange": null
+        },
+        {
+          "position": "E23",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.57247304916382",
+          "mergedRange": null
+        },
+        {
+          "position": "F23",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.48492431640625",
+          "mergedRange": null
+        },
+        {
+          "position": "G23",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "18.7593593597412",
+          "mergedRange": null
+        },
+        {
+          "position": "H23",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.15115642547607",
+          "mergedRange": null
+        },
+        {
+          "position": "I23",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.29303359985352",
+          "mergedRange": null
+        },
+        {
+          "position": "J23",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.92126893997192",
+          "mergedRange": null
+        },
+        {
+          "position": "K23",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.2877349853516",
+          "mergedRange": null
+        },
+        {
+          "position": "L23",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.7251472473145",
+          "mergedRange": null
+        },
+        {
+          "position": "M23",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.12732839584351",
+          "mergedRange": null
+        },
+        {
+          "position": "N23",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "15.9955654144287",
+          "mergedRange": null
+        },
+        {
+          "position": "O23",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.89023208618164",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A24",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "2004",
+          "mergedRange": null
+        },
+        {
+          "position": "B24",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.02760076522827",
+          "mergedRange": null
+        },
+        {
+          "position": "C24",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "7.52283954620361",
+          "mergedRange": null
+        },
+        {
+          "position": "D24",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "16.3852863311768",
+          "mergedRange": null
+        },
+        {
+          "position": "E24",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.64422512054443",
+          "mergedRange": null
+        },
+        {
+          "position": "F24",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.46887278556824",
+          "mergedRange": null
+        },
+        {
+          "position": "G24",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "19.2914791107178",
+          "mergedRange": null
+        },
+        {
+          "position": "H24",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.26721954345703",
+          "mergedRange": null
+        },
+        {
+          "position": "I24",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.18155407905579",
+          "mergedRange": null
+        },
+        {
+          "position": "J24",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.91699409484863",
+          "mergedRange": null
+        },
+        {
+          "position": "K24",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.3007564544678",
+          "mergedRange": null
+        },
+        {
+          "position": "L24",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.8330755233765",
+          "mergedRange": null
+        },
+        {
+          "position": "M24",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.19486093521118",
+          "mergedRange": null
+        },
+        {
+          "position": "N24",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "16.2216949462891",
+          "mergedRange": null
+        },
+        {
+          "position": "O24",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6.03312730789185",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A25",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "2005",
+          "mergedRange": null
+        },
+        {
+          "position": "B25",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.03561782836914",
+          "mergedRange": null
+        },
+        {
+          "position": "C25",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "7.67208480834961",
+          "mergedRange": null
+        },
+        {
+          "position": "D25",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "16.4359111785889",
+          "mergedRange": null
+        },
+        {
+          "position": "E25",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.71523380279541",
+          "mergedRange": null
+        },
+        {
+          "position": "F25",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.45444512367249",
+          "mergedRange": null
+        },
+        {
+          "position": "G25",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "19.8467712402344",
+          "mergedRange": null
+        },
+        {
+          "position": "H25",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.37134885787964",
+          "mergedRange": null
+        },
+        {
+          "position": "I25",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.09797859191895",
+          "mergedRange": null
+        },
+        {
+          "position": "J25",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.90763902664185",
+          "mergedRange": null
+        },
+        {
+          "position": "K25",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.3436136245728",
+          "mergedRange": null
+        },
+        {
+          "position": "L25",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.9280252456665",
+          "mergedRange": null
+        },
+        {
+          "position": "M25",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.2600793838501",
+          "mergedRange": null
+        },
+        {
+          "position": "N25",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "16.4283142089844",
+          "mergedRange": null
+        },
+        {
+          "position": "O25",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6.17293834686279",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A26",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "2006",
+          "mergedRange": null
+        },
+        {
+          "position": "B26",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.0481653213501",
+          "mergedRange": null
+        },
+        {
+          "position": "C26",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "7.80955505371094",
+          "mergedRange": null
+        },
+        {
+          "position": "D26",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "16.4652099609375",
+          "mergedRange": null
+        },
+        {
+          "position": "E26",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.78643369674683",
+          "mergedRange": null
+        },
+        {
+          "position": "F26",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.44398069381714",
+          "mergedRange": null
+        },
+        {
+          "position": "G26",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "20.4244480133057",
+          "mergedRange": null
+        },
+        {
+          "position": "H26",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.46039295196533",
+          "mergedRange": null
+        },
+        {
+          "position": "I26",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.04737091064453",
+          "mergedRange": null
+        },
+        {
+          "position": "J26",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.89232873916626",
+          "mergedRange": null
+        },
+        {
+          "position": "K26",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.4175872802734",
+          "mergedRange": null
+        },
+        {
+          "position": "L26",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.0050239562988",
+          "mergedRange": null
+        },
+        {
+          "position": "M26",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.32350444793701",
+          "mergedRange": null
+        },
+        {
+          "position": "N26",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "16.6185989379883",
+          "mergedRange": null
+        },
+        {
+          "position": "O26",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6.3090181350708",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A27",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "2007",
+          "mergedRange": null
+        },
+        {
+          "position": "B27",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.06566476821899",
+          "mergedRange": null
+        },
+        {
+          "position": "C27",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "7.93950843811035",
+          "mergedRange": null
+        },
+        {
+          "position": "D27",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "16.48193359375",
+          "mergedRange": null
+        },
+        {
+          "position": "E27",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.85848808288574",
+          "mergedRange": null
+        },
+        {
+          "position": "F27",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.43666100502014",
+          "mergedRange": null
+        },
+        {
+          "position": "G27",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "21.0208206176758",
+          "mergedRange": null
+        },
+        {
+          "position": "H27",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.54023742675781",
+          "mergedRange": null
+        },
+        {
+          "position": "I27",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.02050232887268",
+          "mergedRange": null
+        },
+        {
+          "position": "J27",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.87273359298706",
+          "mergedRange": null
+        },
+        {
+          "position": "K27",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.5232830047607",
+          "mergedRange": null
+        },
+        {
+          "position": "L27",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.071925163269",
+          "mergedRange": null
+        },
+        {
+          "position": "M27",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.38596105575562",
+          "mergedRange": null
+        },
+        {
+          "position": "N27",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "16.7958221435547",
+          "mergedRange": null
+        },
+        {
+          "position": "O27",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6.44482135772705",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A28",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "2008",
+          "mergedRange": null
+        },
+        {
+          "position": "B28",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.0898449420929",
+          "mergedRange": null
+        },
+        {
+          "position": "C28",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "8.06772994995117",
+          "mergedRange": null
+        },
+        {
+          "position": "D28",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "16.5184173583984",
+          "mergedRange": null
+        },
+        {
+          "position": "E28",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.93022632598877",
+          "mergedRange": null
+        },
+        {
+          "position": "F28",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.42640447616577",
+          "mergedRange": null
+        },
+        {
+          "position": "G28",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "21.6401691436768",
+          "mergedRange": null
+        },
+        {
+          "position": "H28",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.62148523330688",
+          "mergedRange": null
+        },
+        {
+          "position": "I28",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.00762438774109",
+          "mergedRange": null
+        },
+        {
+          "position": "J28",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.85201978683472",
+          "mergedRange": null
+        },
+        {
+          "position": "K28",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.6642379760742",
+          "mergedRange": null
+        },
+        {
+          "position": "L28",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.1509189605713",
+          "mergedRange": null
+        },
+        {
+          "position": "M28",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.44792699813843",
+          "mergedRange": null
+        },
+        {
+          "position": "N28",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "16.9649486541748",
+          "mergedRange": null
+        },
+        {
+          "position": "O28",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6.5856409072876",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A29",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "2009",
+          "mergedRange": null
+        },
+        {
+          "position": "B29",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.12271547317505",
+          "mergedRange": null
+        },
+        {
+          "position": "C29",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "8.20217609405518",
+          "mergedRange": null
+        },
+        {
+          "position": "D29",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "16.6165828704834",
+          "mergedRange": null
+        },
+        {
+          "position": "E29",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.0001220703125",
+          "mergedRange": null
+        },
+        {
+          "position": "F29",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.40566325187683",
+          "mergedRange": null
+        },
+        {
+          "position": "G29",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "22.2870941162109",
+          "mergedRange": null
+        },
+        {
+          "position": "H29",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.71830034255981",
+          "mergedRange": null
+        },
+        {
+          "position": "I29",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.99475955963135",
+          "mergedRange": null
+        },
+        {
+          "position": "J29",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.83425164222717",
+          "mergedRange": null
+        },
+        {
+          "position": "K29",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "12.844165802002",
+          "mergedRange": null
+        },
+        {
+          "position": "L29",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.2703495025635",
+          "mergedRange": null
+        },
+        {
+          "position": "M29",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.51021718978882",
+          "mergedRange": null
+        },
+        {
+          "position": "N29",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "17.1305732727051",
+          "mergedRange": null
+        },
+        {
+          "position": "O29",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6.73841285705566",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A30",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "2010",
+          "mergedRange": null
+        },
+        {
+          "position": "B30",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.16502952575684",
+          "mergedRange": null
+        },
+        {
+          "position": "C30",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "8.35000991821289",
+          "mergedRange": null
+        },
+        {
+          "position": "D30",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "16.8036479949951",
+          "mergedRange": null
+        },
+        {
+          "position": "E30",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.06788158416748",
+          "mergedRange": null
+        },
+        {
+          "position": "F30",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.37102317810059",
+          "mergedRange": null
+        },
+        {
+          "position": "G30",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "22.9621505737305",
+          "mergedRange": null
+        },
+        {
+          "position": "H30",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.84000539779663",
+          "mergedRange": null
+        },
+        {
+          "position": "I30",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.97437620162964",
+          "mergedRange": null
+        },
+        {
+          "position": "J30",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.82213687896729",
+          "mergedRange": null
+        },
+        {
+          "position": "K30",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.0647430419922",
+          "mergedRange": null
+        },
+        {
+          "position": "L30",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.447979927063",
+          "mergedRange": null
+        },
+        {
+          "position": "M30",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.57420539855957",
+          "mergedRange": null
+        },
+        {
+          "position": "N30",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "17.2935523986816",
+          "mergedRange": null
+        },
+        {
+          "position": "O30",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6.90809917449951",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A31",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "2011",
+          "mergedRange": null
+        },
+        {
+          "position": "B31",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.21716666221619",
+          "mergedRange": null
+        },
+        {
+          "position": "C31",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "8.50845432281494",
+          "mergedRange": null
+        },
+        {
+          "position": "D31",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "17.0916805267334",
+          "mergedRange": null
+        },
+        {
+          "position": "E31",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.13213777542114",
+          "mergedRange": null
+        },
+        {
+          "position": "F31",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.31926536560059",
+          "mergedRange": null
+        },
+        {
+          "position": "G31",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "23.6684818267822",
+          "mergedRange": null
+        },
+        {
+          "position": "H31",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.9891357421875",
+          "mergedRange": null
+        },
+        {
+          "position": "I31",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.94402074813843",
+          "mergedRange": null
+        },
+        {
+          "position": "J31",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.81601476669312",
+          "mergedRange": null
+        },
+        {
+          "position": "K31",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.3274698257446",
+          "mergedRange": null
+        },
+        {
+          "position": "L31",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.6906671524048",
+          "mergedRange": null
+        },
+        {
+          "position": "M31",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.64080286026001",
+          "mergedRange": null
+        },
+        {
+          "position": "N31",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "17.4558372497559",
+          "mergedRange": null
+        },
+        {
+          "position": "O31",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "7.09584426879883",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A32",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "2012",
+          "mergedRange": null
+        },
+        {
+          "position": "B32",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.27722239494324",
+          "mergedRange": null
+        },
+        {
+          "position": "C32",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "8.67963027954102",
+          "mergedRange": null
+        },
+        {
+          "position": "D32",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "17.4657878875732",
+          "mergedRange": null
+        },
+        {
+          "position": "E32",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.19536018371582",
+          "mergedRange": null
+        },
+        {
+          "position": "F32",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3.25644040107727",
+          "mergedRange": null
+        },
+        {
+          "position": "G32",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "24.3976993560791",
+          "mergedRange": null
+        },
+        {
+          "position": "H32",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5.16146659851074",
+          "mergedRange": null
+        },
+        {
+          "position": "I32",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.91315484046936",
+          "mergedRange": null
+        },
+        {
+          "position": "J32",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2.81458783149719",
+          "mergedRange": null
+        },
+        {
+          "position": "K32",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.6291246414185",
+          "mergedRange": null
+        },
+        {
+          "position": "L32",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "13.9880304336548",
+          "mergedRange": null
+        },
+        {
+          "position": "M32",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4.71187257766724",
+          "mergedRange": null
+        },
+        {
+          "position": "N32",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "17.6247482299805",
+          "mergedRange": null
+        },
+        {
+          "position": "O32",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "7.30074882507324",
+          "mergedRange": null
+        }
+      ]
+    ],
+    "variety": [
+      {
+        "position": "A",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V1"
+      },
+      {
+        "position": "B",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V1"
+      },
+      {
+        "position": "C",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V1"
+      },
+      {
+        "position": "D",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V1"
+      },
+      {
+        "position": "E",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V1"
+      },
+      {
+        "position": "F",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V1"
+      },
+      {
+        "position": "G",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V1"
+      },
+      {
+        "position": "H",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V1"
+      },
+      {
+        "position": "I",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V1"
+      },
+      {
+        "position": "J",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V1"
+      },
+      {
+        "position": "K",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V1"
+      },
+      {
+        "position": "L",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V1"
+      },
+      {
+        "position": "M",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V1"
+      },
+      {
+        "position": "N",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V1"
+      },
+      {
+        "position": "O",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V1"
+      }
+    ],
+    "isFirstRowVar": false
+  },
+  "currenSheetNo": 0,
+  "version": "2003",
+  "sheetNameList": [
+    "Data",
+    "Metadata - Countries",
+    "Metadata - Indicators"
+  ],
+  "physicalRowNum": 33,
+  "physicalCellNum": 15,
+  "lastCellIndex": "O32"
+}
