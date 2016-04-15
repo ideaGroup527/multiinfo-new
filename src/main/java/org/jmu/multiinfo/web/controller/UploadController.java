@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.jmu.multiinfo.core.controller.BaseController;
 import org.jmu.multiinfo.core.dto.BaseDTO;
 import org.jmu.multiinfo.dto.upload.ExcelDTO;
 import org.jmu.multiinfo.dto.upload.TextDTO;
@@ -37,7 +38,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Controller
 @RequestMapping("/upload.do")
-public class UploadController {
+public class UploadController extends BaseController{
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
