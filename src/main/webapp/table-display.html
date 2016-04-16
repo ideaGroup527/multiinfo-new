@@ -9,9 +9,10 @@
 
 <script>
     $(document).ready(function () {
-        var token = location.href.split('?token=')[1];
+        var token = sessionStorage.getItem('token');
         $.ajax({
-            url: 'test/' + token,
+            url: 'upload.do?method=file',
+            data: {'token': token},
             type: 'GET',
             dataType: 'JSON',
             success: function (data) {

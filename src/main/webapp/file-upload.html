@@ -85,7 +85,8 @@
         <h3>MultiInfo - Data File Upload</h3>
         <hr/>
         <div>
-            <input type="file" name="data_file" id="data_file" data-toggle="tooltip" title="请上传 xls，xlsx 格式的文件"
+            <input type="file" name="data_file" id="data_file" data-toggle="tooltip"
+                   title="请上传 .xls, .xlsx, .dat, .txt格式的文件"
                    data-placement="top"/>
             <br/>
             <button type="submit" class="btn btn-primary" id="file_upload_btn" disabled>上传</button>
@@ -108,13 +109,16 @@
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/bootstrap/bootstrap.min.js"></script>
 <script>
+    var fileNameSuffix = '';
+    var xlsReg = /(xls|xlsx)/i;
+    var txtReg = /(dat|txt)/i;
+
     //在选择文件之前弹出的提示
     $("#data_file").tooltip().change(function () {
         var filename = $(this)[0].files[0].name;
         if (filename) {
-            var suffix = filename.split('.').reverse()[0];
-            var reg = /(xls|xlsx)/i;
-            if (suffix.match(reg)) {
+            fileNameSuffix = filename.split('.').reverse()[0];
+            if (fileNameSuffix.match(xlsReg) || fileNameSuffix.match(txtReg)) {
                 $('button.btn').attr('disabled', false);
             } else {
                 alert('选择的文件格式有误，请重新选择。');
@@ -129,9 +133,16 @@
         var file = new FormData();
         file.append('data_file', fileExpected);
 
+        var fileUploadUrl = '';
+
+        if (fileNameSuffix.match(xlsReg)) {
+            fileUploadUrl = 'upload.do?method=excel';
+        } else if (fileNameSuffix.match(txtReg)) {
+            fileUploadUrl = 'upload.do?method=text';
+        }
+
         $.ajax({
-//            url: 'upload.do?method=excel',
-            url: 'js/testJSON/testToken.json',
+            url: fileUploadUrl,
             type: 'post',
             data: file,
             async: false,
@@ -145,7 +156,8 @@
                 $('.file-upload-area').removeClass('active');
                 $('.data-present-area').addClass('active');
 
-                window.location.href = 'table-display.html?token=' + data.token;
+                sessionStorage.setItem('token', data.token);
+                window.location.href = 'table-display.html';
             }
         })
     });
