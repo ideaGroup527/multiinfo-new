@@ -17,5 +17,5 @@ public class TokenGenServiceImpl implements TokenGenService{
 		dataToken.setCreateTime(tokenDTO.getCreateTime());
 		return dataToken;
 	}
-
+	
 }
