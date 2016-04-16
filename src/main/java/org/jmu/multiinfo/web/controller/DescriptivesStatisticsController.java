@@ -39,7 +39,7 @@ public class DescriptivesStatisticsController extends BaseController{
 			List<Double> percentiles = new ArrayList<Double>();
 			percentiles.add(25.0);
 			percentiles.add(50.0);
-			percentiles.add(70.0);
+			percentiles.add(75.0);
 			condition.setPercentiles(percentiles );
 		}
 		CommonDTO meanDTO =	descriptivesStatisticsService.calDesc(condition);
