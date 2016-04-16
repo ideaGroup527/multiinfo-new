@@ -1,0 +1,120 @@
+<html>
+<head>
+    <title></title>
+
+</head>
+<body>
+<div id="main" style="width: 1000px;height:800px;margin:0 auto;"></div>
+
+<script src="js/base/echarts.min.js"></script>
+<script src="js/base/charts.js"></script>
+<script src="js/boxplot.js"></script>
+<script type="text/javascript">
+    var data = {
+        "ret_code": "",
+        "ret_msg": "",
+        "ret_err": "",
+        "resDataMap": {
+            "湿度": {
+                "resultData": {
+                    "max": 33.3,
+                    "min": 6.4,
+                    "arithmeticMean": 19.349999999999998,
+                    "variance": 122.53666666666663,
+                    "standardDeviation": 11.069628117812568,
+                    "total": 77.4,
+                    "skewness": 0.26318984170841914,
+                    "kurtosis": 1.1547022499972481,
+                    "count": 4,
+                    "percentiles": [
+                        {
+                            "param": 25,
+                            "data": 9.125
+                        },
+                        {
+                            "param": 50,
+                            "data": 18.85
+                        },
+                        {
+                            "param": 75,
+                            "data": 26.849999999999998
+                        }
+                    ]
+                },
+                "dataArr": [
+                    20.4,
+                    17.3,
+                    33.3,
+                    6.4
+                ],
+                "varietyName": null,
+                "typeDes": null,
+                "type": null,
+                "typeFormat": null
+            },
+            "降水": {
+                "resultData": {
+                    "max": 200,
+                    "min": 100,
+                    "arithmeticMean": 150,
+                    "variance": 1666.6666666666667,
+                    "standardDeviation": 40.824829046386306,
+                    "total": 600,
+                    "skewness": 0,
+                    "kurtosis": 1.4999999999999947,
+                    "count": 4,
+                    "percentiles": [
+                        {
+                            "param": 25,
+                            "data": 112.5
+                        },
+                        {
+                            "param": 50,
+                            "data": 150
+                        },
+                        {
+                            "param": 75,
+                            "data": 175
+                        }
+                    ]
+                },
+                "dataArr": [
+                    100,
+                    200,
+                    150,
+                    150
+                ],
+                "varietyName": null,
+                "typeDes": null,
+                "type": null,
+                "typeFormat": null
+            }
+        },
+        "resultType": null,
+        "reportTitle": null
+    };
+//    var dataAll = {xAxis: [], boxData: []};
+//    var i=0;
+//    for (var key in data.resDataMap) {
+//        dataAll.xAxis.push(key);
+//
+//        var value = data.resDataMap[key],j=0;
+//        dataAll.boxData.push([
+//            value.resultData.min,
+//            value.resultData.percentiles[0].data,
+//            value.resultData.percentiles[1].data,
+//            value.resultData.percentiles[2].data,
+//            value.resultData.max
+//        ]);
+//    }
+//    console.log(dataAll.boxData);
+    new Boxplot({
+        data: data,//数据json,
+        opt: "",//配置json
+        content: "main",//图表容器的id
+        title: '箱线图' //图表类型标题
+    }).render();
+
+</script>
+</body>
+</html>

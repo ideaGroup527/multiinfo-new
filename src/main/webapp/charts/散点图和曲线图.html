@@ -1,0 +1,79 @@
+<html>
+<head>
+	<title></title>
+
+</head>
+<body>
+<div id="main" style="width: 1000px;height:800px;margin:0 auto;"></div>
+
+<script src="js/base/echarts.min.js"></script>
+<script src="js/base/charts.js"></script>
+<script src="js/scatter.js"></script>
+<script type="text/javascript">
+var data={
+	"resDataMap":
+	{
+		"Yi":[314.0,473.0,563.0,747.0,856.0,943.0,1308.0,1871.0,2265.0,3038.0],
+		"Xi":[308.0,443.0,432.0,572.0,603.0,624.0,989.0,1164.0,1208.0,1764.0],
+		"xAxis": {min: 300, max: 2000}, //x轴的最大最小值
+	    "yAxis": {min: 314.0, max: 3200} //y轴的最大最小值
+	},
+	"independentVariable":
+		[
+			{
+				"position":"B1",
+				"typeDes":null,
+				"type":null,
+				"typeFormat":null,
+				"varietyName":"Xi",
+				"range":"B2:B11"
+			}
+		],
+	"dependentVariable":
+	{
+		"position":"A1",
+		"typeDes":null,
+		"type":null,
+		"typeFormat":null,
+		"varietyName":"Yi",
+		"range":"A2:A11"
+	}
+};
+var opt={
+	"ret_code": "",
+	"ret_err": "",
+	"n": 10,
+	"slope": 0.5111229160623828,
+	"slopeStdErr": 0.027508114139822928,
+	"regressionSumSquares": 1846745.5681949866,
+	"sumSquaredErrors": 42792.531805014005,
+	"r": 0.9886116092906885,
+	"meanSquareError": 5349.066475626751,
+	"intercept": 178.0320544979826,
+	"significance": 7.259053047548036E-8,
+	"slopeConfidenceInterval": 0.06343382495810089,
+	"regressionParameters": [178.0320544979826,
+	0.5111229160623828],
+	"regressionParametersStandardErrors": [41.16160920729023,
+	0.027508114139822928],
+	"adjustedRSquared": 0.9745220282773653,
+	"predict": [178.0320544979826,
+	178.543177414045],
+	"ttests": [4.325196655976485,
+	18.580805411245578],
+	"f": 345.2463297305728,
+	"rsquare": 0.9773529140243248, 
+	"xsumSquares": 7068973.6
+};
+
+new Scatter({
+    data:data,//数据json,
+    opt:opt,//配置json
+    content:"main",//图表容器的id
+    type:"line",//图表类型：scatter 散点，line 直线(或曲线),
+    title:'直线图' //图表类型标题
+}).render();
+
+</script>
+</body>
+</html>

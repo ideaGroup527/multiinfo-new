@@ -1,0 +1,22 @@
+<html>
+<head>
+	<title></title>
+
+</head>
+<body>
+<div id="main" style="width: 1000px;height:800px;margin:0 auto;"></div>
+
+<script src="js/base/echarts.min.js"></script>
+<script src="js/base/charts.js"></script>
+<script src="js/normalCurve.js"></script>
+<script type="text/javascript">
+	new NormalCurve({
+        data:"",//数据json,
+        opt:"",//配置json
+        content:"main",//图表容器的id
+        title:'标准正态分布' //图表类型标题,当前为标准正态分布
+    }).render();
+
+</script>
+</body>
+</html>
