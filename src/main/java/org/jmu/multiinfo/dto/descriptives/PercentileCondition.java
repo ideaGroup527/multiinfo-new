@@ -2,7 +2,6 @@ package org.jmu.multiinfo.dto.descriptives;
 
 import java.util.List;
 
-
 public class PercentileCondition extends CommonCondition{
 private List<Double> percentiles;
 

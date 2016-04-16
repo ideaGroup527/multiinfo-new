@@ -1,10 +1,7 @@
 package org.jmu.multiinfo.dto.basestatistics;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class NormalDistributionDTO {
 private double density;
-@JsonProperty("cumulativeprobability") 
 private double cumulativeProbability;
 private double mean;
 private double sd;

@@ -3,8 +3,6 @@ package org.jmu.multiinfo.dto.comparemean;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.List;
 
 /**
@@ -21,15 +19,12 @@ import java.util.List;
  */
 public class AnovaCondition {
 	//因子变量
-	@JsonProperty("factorvariable") 
  private VarietyDTO factorVariable;
  
  //因变量
-	@JsonProperty("dependentvariable") 
  private List<VarietyDTO> dependentVariable;
  
  //数据
-	@JsonProperty("dataGrid") 
  private DataDTO[][] dataGrid;
 
 public VarietyDTO getFactorVariable() {

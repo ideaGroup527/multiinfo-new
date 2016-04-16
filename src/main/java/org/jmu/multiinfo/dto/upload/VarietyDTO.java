@@ -1,17 +1,11 @@
 package org.jmu.multiinfo.dto.upload;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class VarietyDTO {
 	private String position;
-	@JsonProperty("typedes") 
 	private String typeDes;
 	private Integer type;
-	@JsonProperty("typeformat") 
 	private String typeFormat;
-	@JsonProperty("varietyname") 
 	private String  varietyName;
-	@JsonProperty("varietydes") 
 	private String varietyDes;
 	//数据范围
 	private String range;
