@@ -3,13 +3,32 @@
 <head lang="zh-cn">
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
     <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
     <script src="js/lib/tableGenerator.js"></script>
 </head>
 <body>
 
+<div class="container-fluid">
+    <div class="row data-present-area">
+        <h1 id="title" class="col-md-10 col-md-offset-1"></h1>
+
+        <div class="col-md-10 col-md-offset-1">
+            <ul class="nav nav-tabs"></ul>
+        </div>
+
+        <div class="col-md-10 col-md-offset-1 table-present custom-scrollbar-grey"></div>
+
+        <div class="col-md-10 col-md-offset-1 text-right">
+            <button class="btn btn-primary">下一步</button>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function () {
+
         $.ajax({
             url: 'upload.do?method=file',
             data: {'token': sessionStorage.getItem('token')},
