@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <title></title>
     <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/lib/tableGenerator.js"></script>
 </head>
 <body>
 
 <script>
     $(document).ready(function () {
-        var token = sessionStorage.getItem('token');
         $.ajax({
             url: 'upload.do?method=file',
-            data: {'token': token},
+            data: {'token': sessionStorage.getItem('token')},
             type: 'GET',
             dataType: 'JSON',
             success: function (data) {
