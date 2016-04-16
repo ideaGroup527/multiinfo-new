@@ -151,7 +151,7 @@
         }
 
         $.ajax({
-            url: fileUploadUrl,
+            url: fileUploadUrl + '&isFirstRowVar=true',
             type: 'post',
             data: file,
             async: false,

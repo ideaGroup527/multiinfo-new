@@ -2,11 +2,6 @@ var tableGenerator = function (data) {
     //标题展示
     $('#title').text('结果展示 - ' + data.sheetNameList[data.currentSheetNo]);
 
-    //存储待分析变量的数组
-    var variableList = [];
-    //获取到的变量素组
-    var varietyList = data.sheet.variety;
-
     //表格生成
     var table = $('<table>');
     $(table).addClass('table table-striped table-bordered active');
@@ -37,18 +32,6 @@ var tableGenerator = function (data) {
                     $(td).attr('colspan', range_3.charCodeAt() - range_1.charCodeAt() + 1)
                         .attr('rowspan', Number(range_4) - Number(range_2) + 1);
                 }
-            }
-
-            //存储变量信息
-            if (cell.type == '0') {
-                varietyList.map(function (elem) {
-                    if (elem.position == positionDes[0]) {
-
-                        variableList.push(cell.data);
-                        varietyList.shift();
-                    }
-                });
-                $('.btn-select-variable').attr('data-variable-list', variableList);
             }
 
             $(td).text(cell.data);
