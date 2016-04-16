@@ -71,6 +71,8 @@ public class UploadController extends BaseController{
 		//生成token
 		String token = TokenProcessor.getInstance()
 				.generateToken(file.getOriginalFilename()+createTime+"");
+		logger.debug("token:"+token);
+		logger.debug("createTime:"+file.getOriginalFilename()+createTime);
 		tokenDTO.setToken(token);
 		tokenDTO.setCreateTime(createTime);
 		

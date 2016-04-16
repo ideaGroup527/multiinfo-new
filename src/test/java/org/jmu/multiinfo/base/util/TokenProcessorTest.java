@@ -11,7 +11,7 @@ public class TokenProcessorTest {
 
 	@Test
 	public void seTest(){
-		System.out.println(TokenProcessor.getInstance().generateToken("dsfjklj"+System.currentTimeMillis()));
+		System.out.println(TokenProcessor.getInstance().generateToken("125vdgdfdg733"+ System.nanoTime()));
 	}
 
 }
