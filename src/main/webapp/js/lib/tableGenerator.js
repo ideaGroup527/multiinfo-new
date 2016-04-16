@@ -13,10 +13,12 @@ var tableGenerator = function (data) {
 
     $(tabs).empty();
     var sheetNammeList = data.sheetNameList;
-    sheetNammeList.map(function (sheetName) {
+    sheetNammeList.map(function (sheetName, i) {
         var a = $('<a>');
         $(a).attr('href', '#' + sheetName.split(' ').join(''))
-            .text(sheetName);
+            .text(sheetName)
+            .attr('data-sheet-num', i)
+            .attr('data-token', (i == 0) ? sessionStorage.getItem('token') + '' : '');
         $(tabs).append(a);
         $(a).wrap('<li role="presentation"></li>');
 

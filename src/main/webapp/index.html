@@ -2,17 +2,18 @@
 <html>
 <head lang="zh-cn">
     <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css"/>
-    <link href="../css/bootstrap/bootstrap-submenu.min.css" rel="stylesheet">
-    <script src="../js/jquery-1.11.3.min.js"></script>
-    <script src="../js/bootstrap/bootstrap.min.js"></script>
-    <script src="../js/bootstrap/bootstrap-submenu.min.js"></script>
+    <title>可挂接信息预测与分析系统</title>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
+    <link href="css/bootstrap/bootstrap-submenu.min.css" rel="stylesheet">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/bootstrap/bootstrap-submenu.min.js"></script>
     <script>
         $(function () {
             $('[data-submenu]').submenupicker(); //二级子菜单
         });
     </script>
+    <script src="js/lib/tableGenerator.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default" role="navigation">
@@ -27,7 +28,6 @@
     </button>
     <a class="navbar-brand" href="#">MulitInfo</a>
 </div>
-<div>
 <div id="navbar" class="navbar-collapse collapse">
 <ul class="nav navbar-nav">
 <li class="dropdown">
@@ -177,10 +177,7 @@
     <a href="#">描述统计</a>
     <ul class="dropdown-menu" style="font-size: 12px;">
         <li><a href="#">频率</a></li>
-        <li><a href="#" data-statistic-name="Descriptive Statistics"
-               data-modal-url="../js/lib/Statistics/Descriptive/"
-               data-modal-name="#Descriptive_Statistics"
-               data-modal-script="js/lib/Statistics/">描述</a></li>
+        <li><a href="#">描述</a></li>
         <li><a href="#">探索</a></li>
         <li><a href="#">交叉表</a></li>
         <li><a href="#">比率</a></li>
@@ -465,7 +462,7 @@
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
         帮助 <span class="caret"></span>
     </a>
-    <ul class="dropdown-menu sub-dropdown-menu">
+    <ul class="dropdown-menu">
         <li><a href="#">主题</a></li>
         <li><a href="#">教程</a></li>
         <li><a href="#">个案研究</a></li>
@@ -480,21 +477,91 @@
 </li>
 </ul>
 </div>
-</div>
 </nav>
+
+<div class="modal fade" id="multi-sheet-select" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <select class="form-control" name="sheet-select" id="sheet-select"></select>
+        </div>
+    </div>
+</div>
 <script>
-    $('.dropdown-submenu .dropdown-menu a').click(function (e) {
-        e.preventDefault();
-        var componentUrl = $(this).attr('data-modal-url') + '/modal.html';
-        var componentName = $(this).attr('data-modal-name');
-        var componentScript = $(this).attr('data-modal-script')+'/script.js';
+    var fileNameSuffix = '';
+    var xlsReg = /(xls|xlsx)/i;
+    var txtReg = /(dat|txt)/i;
 
-        $.get(componentUrl, function (modalHTML) {
-            $('body').append(modalHTML);
-            $(componentName).modal({'show': true});
-        });
+    //在选择文件之前弹出的提示
+    $("#data_file").tooltip().change(function () {
+        var filename = $(this)[0].files[0].name;
+        if (filename) {
+            fileNameSuffix = filename.split('.').reverse()[0];
+            if (fileNameSuffix.match(xlsReg) || fileNameSuffix.match(txtReg)) {
+                $('button.btn').attr('disabled', false);
+            } else {
+                alert('选择的文件格式有误，请重新选择。');
+                $('button.btn').attr('disabled', true);
+            }
+        }
+    });
 
-        $.get)
+    var select = $('#sheet-select');
+
+    $('#file_upload_btn').click(function () {
+        var fileExpected = $("#data_file")[0].files[0];
+
+        var file = new FormData();
+        file.append('data_file', fileExpected);
+
+        var fileUploadUrl = '';
+
+        if (fileNameSuffix.match(xlsReg)) {
+            fileUploadUrl = 'upload.do?method=excel';
+        } else if (fileNameSuffix.match(txtReg)) {
+            fileUploadUrl = 'upload.do?method=text';
+        }
+
+        $.ajax({
+            url: fileUploadUrl,
+            type: 'post',
+            data: file,
+            async: false,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function (data) {
+
+                sessionStorage.clear();
+
+                sessionStorage.setItem('token', data.token);
+                sessionStorage.setItem('isMultiSheet', data.isMultiSheet);
+
+                if (data.isMultiSheet) {
+
+                    var option = $('<option>');
+                    $(option).text('请选择要处理的表格').val('-1');
+                    $(select).append(option);
+
+                    data.sheetNameList.map(function (sheet, i) {
+                        var option = $('<option>');
+                        $(option).text(sheet).val(i);
+                        $(select).append(option);
+                    });
+
+                    $('#multi-sheet-select').modal({
+                        'show': true,
+                        'backdrop': 'static'
+                    });
+                } else {
+                    window.location.href = 'table-display.html';
+                }
+            }
+        })
+    });
+
+    $(select).change(function () {
+        sessionStorage.setItem('sheetNo', $(this).val());
+        window.location.href = 'table-display.html';
     });
 </script>
 </body>

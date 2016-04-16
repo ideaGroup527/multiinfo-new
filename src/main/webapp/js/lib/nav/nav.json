@@ -1,0 +1,23 @@
+[
+  {
+    "Analysis": {
+      "name": "分析",
+      "subMenu": [
+        {
+          "DescriptiveStatistics": {
+            "name": "描述统计",
+            "subMenu": [
+              {
+                "Descriptive": {
+                  "name": "描述",
+                  "modal": "modal.html",
+                  "script": "script.js"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+]

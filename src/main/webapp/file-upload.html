@@ -108,6 +108,13 @@
 </div>
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/bootstrap/bootstrap.min.js"></script>
+<div class="modal fade" id="multi-sheet-select" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <select class="form-control" name="sheet-select" id="sheet-select"></select>
+        </div>
+    </div>
+</div>
 <script>
     var fileNameSuffix = '';
     var xlsReg = /(xls|xlsx)/i;
@@ -126,6 +133,8 @@
             }
         }
     });
+
+    var select = $('#sheet-select');
 
     $('#file_upload_btn').click(function () {
         var fileExpected = $("#data_file")[0].files[0];
@@ -150,16 +159,38 @@
             contentType: false,
             dataType: 'json',
             success: function (data) {
-                console.log(data);
 
-                //面板展示与隐藏
-                $('.file-upload-area').removeClass('active');
-                $('.data-present-area').addClass('active');
+                sessionStorage.clear();
 
                 sessionStorage.setItem('token', data.token);
-                window.location.href = 'table-display.html';
+                sessionStorage.setItem('isMultiSheet', data.isMultiSheet);
+
+                if (data.isMultiSheet) {
+
+                    var option = $('<option>');
+                    $(option).text('请选择要处理的表格').val('-1');
+                    $(select).append(option);
+
+                    data.sheetNameList.map(function (sheet, i) {
+                        var option = $('<option>');
+                        $(option).text(sheet).val(i);
+                        $(select).append(option);
+                    });
+
+                    $('#multi-sheet-select').modal({
+                        'show': true,
+                        'backdrop': 'static'
+                    });
+                } else {
+                    window.location.href = 'table-display.html';
+                }
             }
         })
+    });
+
+    $(select).change(function () {
+        sessionStorage.setItem('sheetNo', $(this).val());
+        window.location.href = 'table-display.html';
     });
 
     $(document).ready(function () {
