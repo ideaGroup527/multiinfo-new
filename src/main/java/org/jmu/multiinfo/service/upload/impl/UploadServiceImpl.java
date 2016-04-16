@@ -45,7 +45,7 @@ public class UploadServiceImpl implements UploadService{
 		ExcelDTO excelDto = new ExcelDTO();
 		SheetDTO sheetDto = new SheetDTO();
 		excelDto.setFileName(name);
-		excelDto.setCurrenSheetNo(n);
+		excelDto.setCurrentSheetNo(n);
 
 			Workbook wb = null;
 			Map<String,Object> condition = new HashMap<String,Object>();
