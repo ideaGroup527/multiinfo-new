@@ -60,10 +60,10 @@ public class UploadController extends BaseController{
 		DataToken dataToken = tokenGenService.cacheData(token, null,null);
 		if(isMultiSheet){
 			ExcelDTO excelDto = (ExcelDTO)dataToken.getData();
+			if(excelDto.getSheet() !=null) return dataToken.getData();
 			File temp = new File(excelDto.getTempFileName());
 			 excelDto =  uploadService.readExcel(temp, excelDto.getFileName(), sheetNo, isFirstRowVar);
 			 dataToken.setData(excelDto);
-			 FileUtils.deleteQuietly(temp);
 		}
 		
 		return dataToken.getData();
