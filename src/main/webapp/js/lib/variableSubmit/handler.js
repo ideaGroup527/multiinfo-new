@@ -11,14 +11,16 @@ var handleSubmitType = function (type, data) {
                 variableList.push(params);
             });
             console.log(variableList);
+            var da = {
+                    'variableList': variableList,
+                    'dataGrid': data
+                }
+            console.log(da);
 
             $.ajax({
                 url: 'statistics/descriptives.do?method=descriptives',
                 //url: 'statistics/descriptives.do?method=frequency',
-                data: {
-                    'variableList': variableList,
-                    'dataGrid': data
-                },
+                data: JSON.stringify(da),
                 //async: false,
                 //processData: false,
                 contentType: 'application/json',
