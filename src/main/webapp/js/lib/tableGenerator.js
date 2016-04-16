@@ -1,37 +1,17 @@
 var tableGenerator = function (data) {
     //标题展示
-    $('#title').text('结果展示 - ' + data.fileName.split('.')[0].trim());
+    $('#title').text('结果展示 - ' + data.sheetNameList[data.currentSheetNo]);
 
     //存储待分析变量的数组
     var variableList = [];
     //获取到的变量素组
     var varietyList = data.sheet.variety;
 
-    //sheet 分页生成
-    var tabs = $('.nav-tabs');
-    var tablePresentArea = $('.table-present');
-
-    $(tabs).empty();
-    var sheetNammeList = data.sheetNameList;
-    sheetNammeList.map(function (sheetName, i) {
-        var a = $('<a>');
-        $(a).attr('href', '#' + sheetName.split(' ').join(''))
-            .text(sheetName)
-            .attr('data-sheet-num', i)
-            .attr('data-token', (i == 0) ? sessionStorage.getItem('token') + '' : '');
-        $(tabs).append(a);
-        $(a).wrap('<li role="presentation"></li>');
-
-        var dataTable = $('<table>');
-        $(dataTable).attr('id', sheetName.split(' ').join(''))
-            .addClass('table table-striped table-bordered');
-        $(tablePresentArea).append(dataTable);
-    });
-    $(tabs).children().first().addClass('active');
-    $(tablePresentArea).children().first().addClass('active');
-
     //表格生成
-    var table = $('#' + data.sheet.sheetName.split(' ').join(''));
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered active');
+    var tablePresentArea = $('.table-present');
+    $(tablePresentArea).append(table);
 
     var grid = data.sheet.dataGrid;
 
