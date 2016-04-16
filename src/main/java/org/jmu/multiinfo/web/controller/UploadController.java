@@ -57,11 +57,10 @@ public class UploadController extends BaseController{
 	public Object uploadFile(HttpServletRequest request, HttpServletResponse response,HttpSession session,
 			@RequestParam("token") String token,@RequestParam(required=false,value="sheetNo",defaultValue="0") int sheetNo,
 			@RequestParam("isMultiSheet") boolean isMultiSheet,@RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar) throws Exception{
-		DataToken dataToken = tokenGenService.cacheData(token+sheetNo, null,null);
+		DataToken dataToken = tokenGenService.cacheData(token, null,null);
 		if(isMultiSheet){
 			ExcelDTO excelDto = (ExcelDTO)dataToken.getData();
 			File temp = new File(excelDto.getTempFileName());
-			if(excelDto.getSheet()!=null) return dataToken.getData();
 			 excelDto =  uploadService.readExcel(temp, excelDto.getFileName(), sheetNo, isFirstRowVar);
 			 dataToken.setData(excelDto);
 			 FileUtils.deleteQuietly(temp);
@@ -95,15 +94,17 @@ public class UploadController extends BaseController{
 		data.setTempFileName(fileName);
 		if(1==data.getSheetNum()){
 			FileUtils.deleteQuietly(temp);
-			tokenGenService.cacheData(token+0, data,tokenDTO);
 			tokenDTO.setIsMultiSheet(false);
-			return tokenDTO;
+			 data =  uploadService.readExcel(temp, file.getOriginalFilename(), 0, isFirstRowVar);
+		}else{
+			tokenDTO.setIsMultiSheet(true);
+
 		}
-		tokenDTO.setIsMultiSheet(true);
 		tokenDTO.setFileName(data.getFileName());
 		tokenDTO.setSheetNameList(data.getSheetNameList());
 		tokenDTO.setVersion(data.getVersion());
 		tokenDTO.setSheetNum(data.getSheetNum());
+		tokenGenService.cacheData(token, data,tokenDTO);
 		return tokenDTO;
 	}
 	
@@ -128,7 +129,7 @@ public class UploadController extends BaseController{
 		TextDTO data= uploadService.readText(temp,file.getOriginalFilename(),isFirstRowVar);
 		fos.close();
 		FileUtils.deleteQuietly(temp);
-		tokenGenService.cacheData(token+0, data,tokenDTO);
+		tokenGenService.cacheData(token, data,tokenDTO);
 		
 		
 		return tokenDTO;

@@ -235,6 +235,7 @@ public class UploadServiceImpl implements UploadService{
 		}
 		excelDto.setSheetNum(sheetNum);
 		excelDto.setSheetNameList(sheetNameList);
+		excelDto.setFileName(name);
 		return excelDto;
 	}
 	
