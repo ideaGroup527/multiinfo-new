@@ -93,9 +93,9 @@ public class UploadController extends BaseController{
 		fos.close();
 		data.setTempFileName(fileName);
 		if(1==data.getSheetNum()){
-			FileUtils.deleteQuietly(temp);
 			tokenDTO.setIsMultiSheet(false);
 			 data =  uploadService.readExcel(temp, file.getOriginalFilename(), 0, isFirstRowVar);
+			 FileUtils.deleteQuietly(temp);
 		}else{
 			tokenDTO.setIsMultiSheet(true);
 
