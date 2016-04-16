@@ -1,13 +1,20 @@
 package org.jmu.multiinfo.dto.upload;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class DataDTO {
 private String position;
+@JsonProperty("positiondes") 
 private String positionDes;
+@JsonProperty("positiondes") 
 private String typeDes;
 private Integer type;
+@JsonProperty("typeformat") 
 private String typeFormat;
 private Object data;
+@JsonProperty("mergedrange") 
 private String mergedRange = "";
+@JsonProperty("mergedrangedes") 
 	private String mergedRangeDes = "";
 public String getPosition() {
 	return position;

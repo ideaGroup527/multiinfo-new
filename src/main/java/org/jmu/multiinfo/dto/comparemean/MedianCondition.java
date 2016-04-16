@@ -5,6 +5,8 @@ import java.util.List;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /****
  * 
@@ -19,12 +21,15 @@ import org.jmu.multiinfo.dto.upload.VarietyDTO;
  */
 public class MedianCondition {
 	//自变量
+	@JsonProperty("independentvariable") 
  private VarietyDTO independentVariable;
  
  //因变量
+	@JsonProperty("dependentvariable") 
  private List<VarietyDTO> dependentVariable;
  
  //数据
+	@JsonProperty("datagrid") 
  private DataDTO[][] dataGrid;
 
 public VarietyDTO getIndependentVariable() {
