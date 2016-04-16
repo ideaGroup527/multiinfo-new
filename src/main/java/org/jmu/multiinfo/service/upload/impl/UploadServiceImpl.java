@@ -201,6 +201,42 @@ public class UploadServiceImpl implements UploadService{
 		textDto.setLastCellIndex(lastCellIndex);
 		return textDto;
 	}
+
+	@Override
+	public ExcelDTO jdeExcelNum(File file, String name)   {
+		ExcelDTO excelDto = new ExcelDTO();
+		Workbook wb = null;
+		Map<String,Object> condition = new HashMap<String,Object>();
+			try {
+				wb = ExcelUtil.create(new FileInputStream(file),condition);
+				excelDto.setVersion(condition.get("version").toString());
+			} catch (EncryptedDocumentException e) {
+				excelDto.setRet_msg("excel已被加密");
+				excelDto.setRet_err(e.getMessage());
+				return excelDto;
+			} catch (InvalidFormatException e) {
+				excelDto.setRet_msg("格式不合法");
+				excelDto.setRet_err(e.getMessage());
+				return excelDto;
+			} catch (FileNotFoundException e) {
+				excelDto.setRet_msg("文件不存在");
+				excelDto.setRet_err(e.getMessage());
+				return excelDto;
+			} catch (IOException e) {
+				excelDto.setRet_msg("无法读取文件");
+				excelDto.setRet_err(e.getMessage());
+				return excelDto;
+			}
+		int sheetNum = wb.getNumberOfSheets();
+		List<String> sheetNameList = new ArrayList<String>();
+		for (int i = 0; i < sheetNum; i++) {
+			Sheet sheet = (Sheet) wb.getSheetAt(i);
+			sheetNameList.add(sheet.getSheetName());
+		}
+		excelDto.setSheetNum(sheetNum);
+		excelDto.setSheetNameList(sheetNameList);
+		return excelDto;
+	}
 	
 
 }

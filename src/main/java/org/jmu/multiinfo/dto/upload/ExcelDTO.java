@@ -14,6 +14,7 @@ private List<String> sheetNameList;
 private Integer physicalRowNum;
 private Integer physicalCellNum;
 private String lastCellIndex;
+private String tempFileName;//缓存文件
 public String getFileName() {
 	return fileName;
 }
@@ -69,5 +70,10 @@ public Integer getPhysicalCellNum() {
 public void setPhysicalCellNum(Integer physicalCellNum) {
 	this.physicalCellNum = physicalCellNum;
 }
-
+public String getTempFileName() {
+	return tempFileName;
+}
+public void setTempFileName(String tempFileName) {
+	this.tempFileName = tempFileName;
+}
 }
