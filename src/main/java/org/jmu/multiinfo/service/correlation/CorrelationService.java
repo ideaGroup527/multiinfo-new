@@ -33,4 +33,13 @@ public Double pearsonRCoefficient(double[] dataArrX,double[] dataArrY) throws Da
  * @return
  */
 public Double pearsonTCoefficient(Double r,Double n);
+
+
+/***
+ * spearman系数R计算双变量
+ * @param dataArr
+ * @return
+ * @throws DataErrException 
+ */
+public Double spearmanRCoefficient(double[] dataArrX,double[] dataArrY) throws DataErrException;
 }

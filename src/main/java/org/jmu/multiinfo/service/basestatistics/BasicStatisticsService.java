@@ -131,6 +131,12 @@ public interface BasicStatisticsService {
 	public Frequency frequencyCount(double[] dataArr);
 	
 	/***
+	 * 平方和
+	 * @param dataArr
+	 * @return
+	 */
+	public Double sumSquares(double[] dataArr);
+	/***
 	 * 离均差平方和
 	 * @param dataArr
 	 * @throws DataErrException 
@@ -147,7 +153,7 @@ public interface BasicStatisticsService {
 	
 	
 	/***
-	 * 
+	 * 秩次
 	 * @param dataArr
 	 * @return
 	 */
@@ -155,10 +161,16 @@ public interface BasicStatisticsService {
 	
 	
 	/***
-	 * 
+	 * 秩次（同名次加权）
 	 * @param dataArr
 	 * @return
 	 */
 	public double[] rankAve(double[] dataArr);
 	
+	/***
+	 * 返回样例数
+	 * @param dataArr
+	 * @return
+	 */
+	public Integer getN(double[] dataArr);
 }
