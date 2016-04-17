@@ -2,26 +2,27 @@ var resultTableGenerator = function () {
 
     var def = $.Deferred();
 
-    var configs = sessionStorage.getItem('PRIVATE_CONFIG').split(',');
+    var algorithmConfigs = sessionStorage.getItem('PRIVATE_ALGORITHM_CONFIG').split(',');
+    var graphConfigs = sessionStorage.getItem('PRIVATE_GRAPH_CONFIG').split(',');
 
     var table = $('<table>');
     $(table).addClass('table table-striped table-bordered active');
 
     var tr = $('<tr>');
 
-    var keyCell = $('<td>');
-    $(tr).append(keyCell);
+    var emptyCell = $('<td>');
+    $(tr).append(emptyCell);
 
-    var countCell = $('<td>');
-    $(countCell).text('N');
-    $(tr).append(countCell);
+    var countHeaderCell = $('<th>');
+    $(countHeaderCell).text('N');
+    $(tr).append(countHeaderCell);
 
-    configs.map(function (config) {
-        var td = $('<td>');
-        $(td).attr('data-i18n-type', 'algorithm')
+    algorithmConfigs.map(function (config) {
+        var th = $('<th>');
+        $(th).attr('data-i18n-type', 'algorithm')
             .attr('data-i18n-tag', config)
             .attr('data-config', config);
-        $(tr).append(td);
+        $(tr).append(th);
     });
     $(table).append(tr);
 
@@ -40,7 +41,7 @@ var resultTableGenerator = function () {
         $(countCell).text(params.count);
         $(tr).append(countCell);
 
-        configs.map(function (config) {
+        algorithmConfigs.map(function (config) {
             var td = $('<td>');
             $(td).text(params[config]);
             $(tr).append(td);

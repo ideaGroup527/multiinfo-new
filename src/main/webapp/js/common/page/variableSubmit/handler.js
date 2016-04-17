@@ -3,15 +3,23 @@ var handleSubmitType = function (type, data) {
 
         case 'Descriptive_Statistics_Descriptive':
             //描述统计 - 描述
-            var configList = $('#Descriptive_Statistics_Descriptive_Config input[type=checkbox]:checked');
-            var configs = [];
-            configList.map(function (i, config) {
+            //算法部分 - 配置
+            var algorithmConfigList = $('#Descriptive_Algorithm_Config input[type=checkbox]:checked');
+            var algorithmConfigs = [];
+            algorithmConfigList.map(function (i, config) {
                 console.log(i, config);
-                configs.push($(config).val());
+                algorithmConfigs.push($(config).val());
             });
+            sessionStorage.setItem('PRIVATE_ALGORITHM_CONFIG', algorithmConfigs);
 
-            console.log(configs);
-            sessionStorage.setItem('PRIVATE_CONFIG', configs);
+            //制图部分 - 配置
+            var graphConfigList = $('#Descriptive_Graph_Config input[type=checkbox]:checked');
+            var graphConfigs = [];
+            graphConfigList.map(function (i, config) {
+                console.log(i, config);
+                graphConfigs.push($(config).val());
+            });
+            sessionStorage.setItem('PRIVATE_GRAPH_CONFIG', graphConfigs);
 
             var variableChosed = $('#descriptive_statistics_descriptive_variables_area .active');
 

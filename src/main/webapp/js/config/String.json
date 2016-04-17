@@ -25,6 +25,20 @@
       "percentiles": "分位值"
     }
   },
+  "graph": {
+    "en-us": {
+      "boxplot": "Box Plot",
+      "histogram": "Histogram",
+      "piegraph": "Pie Graph",
+      "scatterdiagram": "Scatter Diagram"
+    },
+    "zh-cn": {
+      "boxplot": "箱线图",
+      "histogram": "直方图",
+      "piegraph": "饼图",
+      "scatterdiagram": "散点图"
+    }
+  },
   "page": {
     "en-us": {
       "options": "Options",
@@ -33,8 +47,9 @@
       "modal_title_descriptive": "Descriptive",
       "modal_title_frequency": "Frequency",
       "label_choose_sheet": "Select Your Sheet",
-      "label_result_present": "Result Present",
-      "label_choose_variable": "Click to choose variables below"
+      "label_choose_variable": "Click to choose variables below",
+      "label_graph_making": "Graph Making",
+      "label_result_present": "Result Present"
     },
     "zh-cn": {
       "options": "选项",
@@ -43,8 +58,9 @@
       "modal_title_descriptive": "描述性",
       "modal_title_frequency": "频率",
       "label_choose_sheet": "请选择待分析的表格",
-      "label_result_present": "结果展示",
-      "label_choose_variable": "点击选择待选变量"
+      "label_choose_variable": "点击选择待选变量",
+      "label_graph_making": "制图",
+      "label_result_present": "结果展示"
     }
   }
 }

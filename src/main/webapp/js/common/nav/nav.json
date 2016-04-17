@@ -38,6 +38,23 @@
     ]
   },
   {
+    "term": "Graph",
+    "name": {
+      "en-us": "Graph",
+      "zh-cn": "制图"
+    },
+    "subMenu": [
+      {
+        "term": "Boxplot",
+        "name": {
+          "en-us": "Boxplot",
+          "zh-cn": "箱线图"
+        },
+        "script": "script.js"
+      }
+    ]
+  },
+  {
     "term": "Language",
     "name": {
       "zh-cn": "选择语言",
@@ -59,6 +76,29 @@
           "en-us": "<strong>English (Current)</strong>"
         },
         "script": "script.js"
+      }
+    ]
+  },
+  {
+    "term": "About",
+    "name": {
+      "en-us": "About",
+      "zh-cn": "关于"
+    },
+    "subMenu": [
+      {
+        "term": "Website",
+        "name": {
+          "en-us": "This website",
+          "zh-cn": "这个网站"
+        }
+      },
+      {
+        "term": "Authors",
+        "name": {
+          "en-us": "Authors",
+          "zh-cn": "作者们"
+        }
       }
     ]
   }

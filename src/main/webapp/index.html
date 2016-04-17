@@ -14,7 +14,7 @@
 <body>
 <nav class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
-        <a class="navbar-brand" href="">MulitInfo</a>
+        <a class="navbar-brand" href="index.html">MulitInfo</a>
     </div>
     <div class="navbar-header">
         <ul id="nav" class="nav navbar-nav"></ul>
@@ -51,7 +51,7 @@
 <script src="js/libs/navGenerator.js"></script>
 <script src="js/common/page/fileupload.js"></script>
 <script>
-    $('#nav').navGenerator(["language"]).done(function () {
+    $('#nav').navGenerator(["language","about"]).done(function () {
         $('[data-submenu]').submenupicker(); //二级子菜单
     });
     $(document).ready(function () {

@@ -11,7 +11,7 @@ var descriptiveStatisticsVariableChoose = function (variableList) {
 
         $(variableWrapper).attr('data-config', JSON.stringify(variable));
         $(chooseArea).append(variableWrapper);
-    })
+    });
 
     return def.resolve().promise();
 };

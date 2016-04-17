@@ -16,7 +16,7 @@
 
                 </div>
                 <div id="Descriptive_Statistics_Descriptive_Config" data-panel="config">
-                    <fieldset>
+                    <fieldset id="Descriptive_Algorithm_Config">
                         <legend data-i18n-tag="options" data-i18n-type="page">选项</legend>
 
                         <div class="checkbox-inline">
@@ -29,6 +29,18 @@
                             <label>
                                 <input type="checkbox" value="max" checked>
                                 <span data-i18n-type="algorithm" data-i18n-tag="max">最大值</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="median" checked>
+                                <span data-i18n-type="algorithm" data-i18n-tag="median">中位数</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="total" checked>
+                                <span data-i18n-type="algorithm" data-i18n-tag="total">总数</span>
                             </label>
                         </div>
                         <hr/>
@@ -50,19 +62,7 @@
                                 <span data-i18n-type="algorithm" data-i18n-tag="standardDeviation">标准偏差</span>
                             </label>
                         </div>
-                        <div class="checkbox-inline">
-                            <label>
-                                <input type="checkbox" value="total" checked>
-                                <span data-i18n-type="algorithm" data-i18n-tag="total">总数</span>
-                            </label>
-                        </div>
                         <hr/>
-                        <div class="checkbox-inline">
-                            <label>
-                                <input type="checkbox" value="median" checked>
-                                <span data-i18n-type="algorithm" data-i18n-tag="median">中位数</span>
-                            </label>
-                        </div>
                         <div class="checkbox-inline">
                             <label>
                                 <input type="checkbox" value="skewness" checked>
@@ -73,6 +73,34 @@
                             <label>
                                 <input type="checkbox" value="kurtosis" checked>
                                 <span data-i18n-type="algorithm" data-i18n-tag="kurtosis">峰度</span>
+                            </label>
+                        </div>
+                    </fieldset>
+                    <fieldset id="Descriptive_Graph_Config">
+                        <legend data-i18n-type="page" data-i18n-tag="label_graph_making">制图</legend>
+
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="boxplot" checked>
+                                <span data-i18n-type="graph" data-i18n-tag="boxplot">箱线图</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="piegraph" checked>
+                                <span data-i18n-type="graph" data-i18n-tag="piegraph">饼图</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="scatterdiagram" checked>
+                                <span data-i18n-type="graph" data-i18n-tag="scatterdiagram">散点图</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="histogram" checked>
+                                <span data-i18n-type="graph" data-i18n-tag="histogram">直方图</span>
                             </label>
                         </div>
                     </fieldset>

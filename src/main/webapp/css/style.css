@@ -28,6 +28,11 @@
     margin-top: 100px;
 }
 
+/* =2 选择变量*/
+#Descriptive_Statistics_Descriptive_Config fieldset {
+    margin-top: 30px;
+}
+
 .variable-wrapper {
     padding: 2px 15px;
     border: 1px solid #ccc;
