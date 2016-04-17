@@ -11,6 +11,14 @@ $.fn.navGenerator = function (config) {
 
     $.getJSON('js/common/nav/nav.json', function (packageJSON) {
 
+        if (!config) {
+            config = [];
+            packageJSON.map(function (menuName) {
+                config.push(menuName.term);
+            });
+            console.log(config);
+        }
+
         packageJSON.map(function (level_1_menu, i) {
             config.map(function (navName, i) {
                 if (level_1_menu.term.toUpperCase() == navName.toUpperCase()) {
