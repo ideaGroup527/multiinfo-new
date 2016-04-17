@@ -8,13 +8,13 @@ function Boxplot(config) {
         for(var key in data.resDataMap){
             dataAll.xAxis.push(key);
 
-            var value = data.resDataMap[key],j=0;
+            var value = data.resDataMap[key];
             dataAll.boxData.push([
-                value.resultData.min,
                 value.resultData.percentiles[0].data,
                 value.resultData.percentiles[1].data,
                 value.resultData.percentiles[2].data,
-                value.resultData.max
+                value.resultData.percentiles[3].data,
+                value.resultData.percentiles[4].data
             ]);
         }
         return dataAll;
@@ -45,7 +45,7 @@ function Boxplot(config) {
         },
         xAxis: {
             type: 'category',
-            data: this.format(data).xAxis,
+            data: this.format(config.data).xAxis,
             boundaryGap: true,
             nameGap: 30,
             splitArea: {
@@ -69,7 +69,7 @@ function Boxplot(config) {
             {
                 name: 'boxplot',
                 type: 'boxplot',
-                data: this.format(data).boxData,
+                data: this.format(config.data).boxData,
                 tooltip: {
                     formatter: function (param) {
                         return [

@@ -28,6 +28,10 @@
                     "count": 4,
                     "percentiles": [
                         {
+                            "param":0,
+                            "data":"6.4"
+                        },
+                        {
                             "param": 25,
                             "data": 9.125
                         },
@@ -38,6 +42,10 @@
                         {
                             "param": 75,
                             "data": 26.849999999999998
+                        },
+                        {
+                            "param": 100,
+                            "data": 33.3
                         }
                     ]
                 },
@@ -65,6 +73,10 @@
                     "count": 4,
                     "percentiles": [
                         {
+                            "param":0,
+                            "data":100
+                        },
+                        {
                             "param": 25,
                             "data": 112.5
                         },
@@ -75,6 +87,10 @@
                         {
                             "param": 75,
                             "data": 175
+                        },
+                        {
+                            "param": 100,
+                            "data": 200
                         }
                     ]
                 },
@@ -93,21 +109,6 @@
         "resultType": null,
         "reportTitle": null
     };
-//    var dataAll = {xAxis: [], boxData: []};
-//    var i=0;
-//    for (var key in data.resDataMap) {
-//        dataAll.xAxis.push(key);
-//
-//        var value = data.resDataMap[key],j=0;
-//        dataAll.boxData.push([
-//            value.resultData.min,
-//            value.resultData.percentiles[0].data,
-//            value.resultData.percentiles[1].data,
-//            value.resultData.percentiles[2].data,
-//            value.resultData.max
-//        ]);
-//    }
-//    console.log(dataAll.boxData);
     new Boxplot({
         data: data,//数据json,
         opt: "",//配置json
