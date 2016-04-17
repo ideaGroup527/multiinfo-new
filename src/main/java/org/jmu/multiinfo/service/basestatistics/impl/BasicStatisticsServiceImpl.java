@@ -142,7 +142,7 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 	@Override
 	public Double averageMulSumDeviation(double[] dataArrX, double[] dataArrY) throws DataErrException {
 		int size = dataArrX.length;
-		if(size == 0 || size != dataArrY.length) throw new DataErrException("cannot resolve for averageMulSumDeviation");
+		if(size == 0 || size != dataArrY.length) throw new DataErrException("cannot resolve for averageMulSumDeviation because diffrent size");
 		Double xmean = arithmeticMean(dataArrX);		
 		Double ymean = arithmeticMean(dataArrY);	
 		Double sumDeviation= 0.0;
@@ -165,6 +165,24 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 	public double[] rankAve(double[] dataArr) {
 		NaturalRanking nr = new NaturalRanking(NaNStrategy.MAXIMAL,TiesStrategy.AVERAGE);
 		return nr.rank(dataArr);
+	}
+
+
+	@Override
+	public Double sumSquares(double[] dataArr) {
+		int size = dataArr.length;
+		Double sum = 0.0;
+		for (int i = 0; i < size; i++) {
+		sum += dataArr[i] * dataArr[i];
+		}
+		return sum;
+	}
+
+
+	@Override
+	public Integer getN(double[] dataArr) {
+		if(dataArr == null ) return 0;
+		return dataArr.length;
 	}
 
 }
