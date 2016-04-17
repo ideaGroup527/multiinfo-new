@@ -1,9 +1,9 @@
 var handleSubmitType = function (type, data) {
     switch (type) {
 
-        case 'Descriptive_Statistics':
+        case 'Descriptive_Statistics_Descriptive':
             //描述统计 - 描述
-            var configList = $('#Descriptive_Statistics_Config input[type=checkbox]:checked');
+            var configList = $('#Descriptive_Statistics_Descriptive_Config input[type=checkbox]:checked');
             var configs = [];
             configList.map(function (i, config) {
                 console.log(i, config);
@@ -13,7 +13,7 @@ var handleSubmitType = function (type, data) {
             console.log(configs);
             sessionStorage.setItem('PRIVATE_CONFIG', configs);
 
-            var variableChosed = $('#descriptive_statistics_variables_area .active');
+            var variableChosed = $('#descriptive_statistics_descriptive_variables_area .active');
 
             var variableList = [];
             variableChosed.map(function (i, variable) {
@@ -45,7 +45,7 @@ var handleSubmitType = function (type, data) {
                 }
             });
 
-            window.location.href = 'result-display.html';
+            window.location.href = 'result.html';
 
             break;
     }

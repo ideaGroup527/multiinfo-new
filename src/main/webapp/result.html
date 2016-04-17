@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
+    <link href="css/bootstrap/bootstrap-submenu.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="js/lib/bootstrap/bootstrap-submenu.min.js"></script>
+    <script src="js/common/i18n.js"></script>
+    <title></title>
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="">MulitInfo</a>
+    </div>
+    <div class="navbar-header">
+        <ul id="nav" class="nav navbar-nav"></ul>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="col-md-10 col-md-offset-1 result-table"></div>
+</div>
+
+<script src="js/libs/navGenerator.js"></script>
+<script src="js/common/page/resultTableGenerator.js"></script>
+<script>
+    $('#nav').navGenerator().done(function () {
+        $('[data-submenu]').submenupicker(); //二级子菜单
+    });
+
+    var variableList, dataGrid;
+
+    $(document).ready(function () {
+        resultTableGenerator().done(function () {
+            i18n();
+        })
+    }).on('click', '#nav .js-menu-click', function (e) {
+        //菜单可点击项
+        e.preventDefault();
+        var scriptURL = $(e.target).attr('data-script');
+        var modalURL = $(e.target).attr('data-modal');
+        var modalID = $(e.target).attr('data-modal-id');
+
+        if (modalURL) {
+            $.get(modalURL, function (modalHTML) {
+                $('body').append(modalHTML);
+                $(modalID).modal({
+                    'show': true,
+                    'backdrop': 'static',
+                    'keyboard': false
+                }).on('hidden.bs.modal', function (e) {
+                    $(this).remove();
+                });
+            });
+
+            $.getScript(scriptURL, function () {
+                descriptiveStatisticsVariableChoose(variableList).done(function () {
+                    i18n();
+                });
+            });
+        } else {
+            $.getScript(scriptURL);
+        }
+    }).on('click', '.variable-wrapper', function (e) {
+        e.preventDefault();
+        $(this).toggleClass('active');
+    }).on('click', '.variable-submit', function (e) {
+        e.preventDefault();
+        handleSubmitType($(this).attr('data-btn-type'), dataGrid);
+    }).on('click', '.variable-config', function (e) {
+        e.preventDefault();
+        $('[data-panel="config"]').toggle();
+    });
+</script>
+</body>
+</html>

@@ -1,21 +1,24 @@
 <div class="modal fade in" id="Descriptive_Statistics_Frequency" tabindex="-1" role="dialog"
-     aria-labelledby="Descriptive_Statistics_Label" style="display: block;">
+     aria-labelledby="Descriptive_Statistics_FrequencyLabel" style="display: block;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="Descriptive_Statistics_Label">描述性</h4>
+                <h4 class="modal-title" id="Descriptive_Statistics_FrequencyLabel"
+                    data-i18n-type="page"
+                    data-i18n-tag="modal_title_frequency">描述性</h4>
             </div>
             <div class="modal-body">
-                <p>点击选择待选变量</p>
+                <p data-i18n-type="page"
+                   data-i18n-tag="label_choose_variable">点击选择待选变量</p>
 
-                <div id="descriptive_statistics_variables_area">
+                <div id="descriptive_statistics_frequency_variables_area">
 
                 </div>
                 <div id="Descriptive_Statistics_Config" data-panel="config">
                     <fieldset>
-                        <legend>选项</legend>
+                        <legend data-i18n-tag="options" data-i18n-type="page">选项</legend>
 
                         <div class="checkbox-inline">
                             <label>
@@ -68,9 +71,11 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default variable-config">选项</button>
-                <button type="button" class="btn btn-primary variable-submit" data-btn-type="Descriptive_Statistics">
-                    确定
+                <button type="button" class="btn btn-default variable-config" data-i18n-type="page"
+                        data-i18n-tag="options">选项
+                </button>
+                <button type="button" class="btn btn-primary variable-submit" data-btn-type="Descriptive_Statistics_Frequency"
+                        data-i18n-type="page" data-i18n-tag="btn_next">确定
                 </button>
             </div>
         </div>

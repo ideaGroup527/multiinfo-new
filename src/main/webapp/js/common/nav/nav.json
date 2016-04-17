@@ -1,23 +1,65 @@
 [
   {
-    "Analysis": {
-      "name": "分析",
-      "subMenu": [
-        {
-          "DescriptiveStatistics": {
-            "name": "描述统计",
-            "subMenu": [
-              {
-                "Descriptive": {
-                  "name": "描述",
-                  "modal": "modal.html",
-                  "script": "script.js"
-                }
-              }
-            ]
+    "term": "Analysis",
+    "name": {
+      "zh-cn": "分析",
+      "en-us": "Analysis"
+    },
+    "subMenu": [
+      {
+        "term": "DescriptiveStatistics",
+        "name": {
+          "zh-cn": "描述统计",
+          "en-us": "Descriptive Statistics"
+        },
+        "subMenu": [
+          {
+            "term": "Descriptive",
+            "name": {
+              "zh-cn": "描述",
+              "en-us": "Descriptive"
+            },
+            "modalId": "#Descriptive_Statistics_Descriptive",
+            "modal": "modal.html",
+            "script": "script.js"
+          },
+          {
+            "term": "Frequency",
+            "modalId": "#Descriptive_Statistics_Frequency",
+            "modal": "modal.html",
+            "script": "script.js",
+            "name": {
+              "zh-cn": "频率",
+              "en-us": "Frequency"
+            }
           }
-        }
-      ]
-    }
+        ]
+      }
+    ]
+  },
+  {
+    "term": "Language",
+    "name": {
+      "zh-cn": "选择语言",
+      "en-us": "Language"
+    },
+    "subMenu": [
+      {
+        "term": "Chinese",
+        "name": {
+          "zh-cn": "<strong>中文（当前）</strong>",
+          "en-us": "中文"
+        },
+        "script": "script.js"
+      },
+      {
+        "term": "English",
+        "name": {
+          "zh-cn": "English",
+          "en-us": "<strong>English (Current)</strong>"
+        },
+        "script": "script.js"
+      }
+    ]
   }
 ]

@@ -1,5 +1,7 @@
 var descriptiveStatisticsVariableChoose = function (variableList) {
-    var chooseArea = $('#descriptive_statistics_variables_area');
+    var def = $.Deferred();
+
+    var chooseArea = $('#descriptive_statistics_descriptive_variables_area');
 
     variableList.map(function (variable, i) {
         var variableWrapper = $('<span>');
@@ -9,5 +11,7 @@ var descriptiveStatisticsVariableChoose = function (variableList) {
         $(variableWrapper).attr('data-config', JSON.stringify(variable));
         $(chooseArea).append(variableWrapper);
 
-    })
+    });
+
+    return def.resolve().promise();
 };

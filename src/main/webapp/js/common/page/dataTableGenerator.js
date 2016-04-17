@@ -1,6 +1,6 @@
 var dataTableGenerator = function (data) {
     //标题展示
-    $('#title').text('结果展示 - ' + data.sheetNameList[data.currentSheetNo]);
+    $('#title').text(data.sheetNameList[data.currentSheetNo]);
 
     //表格生成
     var table = $('<table>');

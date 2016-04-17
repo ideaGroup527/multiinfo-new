@@ -1,3 +1,33 @@
+
+.custom-scrollbar-grey {
+    overflow-x: scroll;
+}
+
+.custom-scrollbar-grey::-webkit-scrollbar {
+    width: 20px;
+}
+
+.custom-scrollbar-grey::-webkit-scrollbar-track {
+    background-color: #dde1e6;
+}
+
+.custom-scrollbar-grey::-webkit-scrollbar-thumb {
+    height: 20px;
+    border: 4px solid #dde1e6;
+    border-radius: 6px;
+    background-color: #FFFFFF;
+}
+
+.custom-scrollbar-grey::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* =1 文件上传页面*/
+
+.file-upload-area {
+    margin-top: 100px;
+}
+
 .variable-wrapper {
     padding: 2px 15px;
     border: 1px solid #ccc;

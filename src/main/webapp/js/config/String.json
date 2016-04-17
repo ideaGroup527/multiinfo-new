@@ -1,26 +1,50 @@
 {
-  "en-us": {
-    "max": "Maximum",
-    "min": "Minimum",
-    "arithmeticMean": "Arithmetic Mean",
-    "variance": "Variance",
-    "standardDeviation": "Standard Deviation",
-    "total": "Total",
-    "median": "Median",
-    "skewness": "Skewness",
-    "kurtosis": "Kurtosis",
-    "percentiles": "Percentiles"
+  "algorithm": {
+    "en-us": {
+      "max": "Maximum",
+      "min": "Minimum",
+      "arithmeticMean": "Arithmetic Mean",
+      "variance": "Variance",
+      "standardDeviation": "Standard Deviation",
+      "total": "Total",
+      "median": "Median",
+      "skewness": "Skewness",
+      "kurtosis": "Kurtosis",
+      "percentiles": "Percentiles"
+    },
+    "zh-cn": {
+      "max": "最大值",
+      "min": "最小值",
+      "arithmeticMean": "算术平均数",
+      "variance": "方差",
+      "standardDeviation": "标准偏差",
+      "total": "总数",
+      "median": "中位数",
+      "skewness": "偏度",
+      "kurtosis": "峰度",
+      "percentiles": "分位值"
+    }
   },
-  "zh-cn": {
-    "max": "最大值",
-    "min": "最小值",
-    "arithmeticMean": "算术平均数",
-    "variance": "方差",
-    "standardDeviation": "标准偏差",
-    "total": "总数",
-    "median": "中位数",
-    "skewness": "偏度",
-    "kurtosis": "峰度",
-    "percentiles": "分位值"
+  "page": {
+    "en-us": {
+      "options": "Options",
+      "btn_upload": "Upload",
+      "btn_next": "Next",
+      "modal_title_descriptive": "Descriptive",
+      "modal_title_frequency": "Frequency",
+      "label_choose_sheet": "Select Your Sheet",
+      "label_result_present": "Result Present",
+      "label_choose_variable": "Click to choose variables below"
+    },
+    "zh-cn": {
+      "options": "选项",
+      "btn_upload": "上传",
+      "btn_next": "下一步",
+      "modal_title_descriptive": "描述性",
+      "modal_title_frequency": "频率",
+      "label_choose_sheet": "请选择待分析的表格",
+      "label_result_present": "结果展示",
+      "label_choose_variable": "点击选择待选变量"
+    }
   }
 }
