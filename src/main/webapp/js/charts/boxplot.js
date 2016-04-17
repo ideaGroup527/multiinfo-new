@@ -3,19 +3,24 @@ function Boxplot(config) {
 
     this.format = function (data) {//转换格式
 
-        var dataAll = {xAxis:[], boxData: []};
+        var dataAll = {xAxis:[], boxData: [],outliers:[]},j=0;
 
         for(var key in data.resDataMap){
             dataAll.xAxis.push(key);
 
-            var value = data.resDataMap[key],j=0;
+            var value = data.resDataMap[key];
             dataAll.boxData.push([
-                value.resultData.min,
                 value.resultData.percentiles[0].data,
                 value.resultData.percentiles[1].data,
                 value.resultData.percentiles[2].data,
-                value.resultData.max
+                value.resultData.percentiles[3].data,
+                value.resultData.percentiles[4].data
             ]);
+
+            for(var i=0,v=null;(v=value.resultData.errPercentiles[i])!=undefined;i++){
+                dataAll.outliers.push([j,v]);
+            }
+            j++;
         }
         return dataAll;
     };
@@ -45,7 +50,7 @@ function Boxplot(config) {
         },
         xAxis: {
             type: 'category',
-            data: this.format(data).xAxis,
+            data: this.format(config.data).xAxis,
             boundaryGap: true,
             nameGap: 30,
             splitArea: {
@@ -69,7 +74,7 @@ function Boxplot(config) {
             {
                 name: 'boxplot',
                 type: 'boxplot',
-                data: this.format(data).boxData,
+                data: this.format(config.data).boxData,
                 tooltip: {
                     formatter: function (param) {
                         return [
@@ -82,7 +87,13 @@ function Boxplot(config) {
                         ].join('<br/>')
                     }
                 }
+            },
+            {
+                name: 'outlier',
+                type: 'scatter',
+                data: this.format(config.data).outliers
             }
+            
         ]
     };
 }
