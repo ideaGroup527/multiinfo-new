@@ -6,16 +6,16 @@
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
     <link href="css/bootstrap/bootstrap-submenu.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css"/>
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/bootstrap/bootstrap.min.js"></script>
-    <script src="js/bootstrap/bootstrap-submenu.min.js"></script>
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="js/lib/bootstrap/bootstrap-submenu.min.js"></script>
     <script>
         $(function () {
             $('[data-submenu]').submenupicker(); //二级子菜单
         });
     </script>
-    <script src="js/lib/tableGenerator.js"></script>
-    <script src="js/lib/variableSubmit/handler.js"></script>
+    <script src="js/common/dataTableGenerator.js"></script>
+    <script src="js/libs/variableSubmit/handler.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default" role="navigation">
@@ -181,9 +181,9 @@
         <li><a href="#">频率</a></li>
         <li>
             <a href="#" data-statistic-name="Descriptive Statistics"
-               data-modal-url="js/lib/nav/Analysis/DescriptiveStatistics/Descriptive/"
+               data-modal-url="js/common/nav/Analysis/DescriptiveStatistics/Descriptive/"
                data-modal-name="#Descriptive_Statistics"
-               data-modal-script="js/lib/nav/Analysis/DescriptiveStatistics/Descriptive/">描述</a>
+               data-modal-script="js/common/nav/Analysis/DescriptiveStatistics/Descriptive/">描述</a>
         </li>
         <li><a href="#">探索</a></li>
         <li><a href="#">交叉表</a></li>
@@ -506,8 +506,8 @@
     var variableList, dataGrid;
     $(document).ready(function () {
         $.ajax({
-            url: 'upload.do?method=file&isFirstRowVar=true',
-//            url: 'js/testJSON/excel_callback.json',
+//            url: 'upload.do?method=file&isFirstRowVar=true',
+            url: 'js/testJSON/excel_callback.json',
             data: {
                 'isMultiSheet': sessionStorage.getItem('isMultiSheet'),
                 'token': sessionStorage.getItem('token'),
@@ -516,7 +516,7 @@
             type: 'GET',
             dataType: 'JSON',
             success: function (data) {
-                tableGenerator(data);
+                dataTableGenerator(data);
                 variableList = data.sheet.variety;
                 dataGrid = data.sheet.dataGrid;
             }

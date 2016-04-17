@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
     <link href="css/bootstrap/bootstrap-submenu.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css"/>
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/bootstrap/bootstrap.min.js"></script>
-    <script src="js/bootstrap/bootstrap-submenu.min.js"></script>
+    <script src="js/lib/jquery-1.11.3.min.js"></script>
+    <script src="js/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="js/lib/bootstrap/bootstrap-submenu.min.js"></script>
     <script>
         $(function () {
             $('[data-submenu]').submenupicker(); //二级子菜单
@@ -521,7 +521,7 @@
 
         configs.map(function (config) {
             var td = $('<td>');
-            $(td).text(STRING[config])
+            $(td).text(STRING['zh-cn'][config])
                     .attr('data-config', config);
             $(tr).append(td);
         });

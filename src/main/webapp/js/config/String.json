@@ -1,0 +1,26 @@
+{
+  "en-us": {
+    "max": "Maximum",
+    "min": "Minimum",
+    "arithmeticMean": "Arithmetic Mean",
+    "variance": "Variance",
+    "standardDeviation": "Standard Deviation",
+    "total": "Total",
+    "median": "Median",
+    "skewness": "Skewness",
+    "kurtosis": "Kurtosis",
+    "percentiles": "Percentiles"
+  },
+  "zh-cn": {
+    "max": "最大值",
+    "min": "最小值",
+    "arithmeticMean": "算术平均数",
+    "variance": "方差",
+    "standardDeviation": "标准偏差",
+    "total": "总数",
+    "median": "中位数",
+    "skewness": "偏度",
+    "kurtosis": "峰度",
+    "percentiles": "分位值"
+  }
+}
