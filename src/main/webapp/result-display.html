@@ -487,49 +487,79 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="row data-present-area">
-        <h1 id="title" class="col-md-10 col-md-offset-1"></h1>
-
-        <div class="col-md-10 col-md-offset-1">
-            <ul class="nav nav-tabs"></ul>
-        </div>
-
-        <div class="col-md-10 col-md-offset-1 table-present custom-scrollbar-grey"></div>
-
-        <div class="col-md-10 col-md-offset-1 text-right">
-            <button class="btn btn-primary">下一步</button>
-        </div>
-    </div>
+    <div class="col-md-10 col-md-offset-1 result-table"></div>
 </div>
-
 <script>
+    var STRING;
+    $.ajax({
+        url: 'js/lib/String.json',
+        async: false,
+        dataType: 'JSON',
+        type: 'GET',
+        success: function (string) {
+            STRING = string;
+        }
+    });
+
+
     var variableList, dataGrid;
     $(document).ready(function () {
-        $.ajax({
-            url: 'upload.do?method=file&isFirstRowVar=true',
-//            url: 'js/testJSON/excel_callback.json',
-            data: {
-                'isMultiSheet': sessionStorage.getItem('isMultiSheet'),
-                'token': sessionStorage.getItem('token'),
-                'sheetNo': sessionStorage.getItem('sheetNo')
-            },
-            type: 'GET',
-            dataType: 'JSON',
-            success: function (data) {
-                tableGenerator(data);
-                variableList = data.sheet.variety;
-                dataGrid = data.sheet.dataGrid;
-            }
-        })
+
+        var configs = sessionStorage.getItem('PRIVATE_CONFIG').split(',');
+
+        var table = $('<table>');
+        $(table).addClass('table table-striped table-bordered active');
+
+        var tr = $('<tr>');
+
+        var keyCell = $('<td>');
+        $(tr).append(keyCell);
+
+        var countCell = $('<td>');
+        $(countCell).text('N');
+        $(tr).append(countCell);
+
+        configs.map(function (config) {
+            var td = $('<td>');
+            $(td).text(STRING[config])
+                    .attr('data-config', config);
+            $(tr).append(td);
+        });
+        $(table).append(tr);
+
+        var tableResult = JSON.parse(sessionStorage.getItem('PRIVATE_TABLE_RESULT'));
+
+        for (var key in tableResult.resDataMap) {
+            var params = tableResult.resDataMap[key].resultData;
+
+            var tr = $('<tr>');
+
+            var keyCell = $('<td>');
+            $(keyCell).text(key);
+            $(tr).append(keyCell);
+
+            var countCell = $('<td>');
+            $(countCell).text(params.count);
+            $(tr).append(countCell);
+
+            configs.map(function (config) {
+                var td = $('<td>');
+                $(td).text(params[config]);
+                $(tr).append(td);
+            });
+
+            $(table).append(tr);
+        }
+
+        $('.result-table').append(table);
+
+
     }).on('click', '.variable-wrapper', function (e) {
         e.preventDefault();
         $(this).toggleClass('active');
     }).on('click', '.variable-submit', function (e) {
         e.preventDefault();
         handleSubmitType($(this).attr('data-btn-type'), dataGrid);
-    }).on('click','.variable-config', function (e) {
-        e.preventDefault();
-        $('[data-panel="config"]').toggle();
     });
 
     $('.dropdown-submenu .dropdown-menu a').click(function (e) {
