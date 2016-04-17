@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.jmu.multiinfo.base.util.MyJUnit4ClassRunner;
 import org.jmu.multiinfo.core.util.ExcelUtil;
-import org.jmu.multiinfo.dto.regression.CommonCondition;
+import org.jmu.multiinfo.dto.basestatistics.BiVarCondition;
 import org.jmu.multiinfo.dto.regression.MultipleLinearDTO;
 import org.jmu.multiinfo.dto.regression.SingleLinearDTO;
 import org.jmu.multiinfo.dto.upload.DataDTO;
@@ -94,7 +94,7 @@ public void calSingleLinearRegressionTest(){
 		data[7][1] = 1164;data[7][0] = 1871;
 		data[8][1] = 1208;data[8][0] = 2265;
 		data[9][1] = 1764;data[9][0] = 3038;
-		CommonCondition condition = new CommonCondition();
+		BiVarCondition condition = new BiVarCondition();
 		DataDTO[][] dataGrid = new DataDTO[11][2];
 		
 		DataDTO i00 =new DataDTO();
@@ -147,7 +147,7 @@ public void calSingleLinearRegressionTest(){
 	
 	@Test
 	public void calLinearRegressionForMulTest() throws JsonGenerationException, JsonMappingException, IOException{
-		CommonCondition condition = new CommonCondition();
+		BiVarCondition condition = new BiVarCondition();
 		DataDTO[][] dataGrid = new DataDTO[14][3];
 		DataDTO i00 =new DataDTO();
 		i00.setData("实际通货膨胀率Y");

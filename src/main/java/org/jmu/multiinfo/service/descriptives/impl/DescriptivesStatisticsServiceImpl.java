@@ -2,21 +2,18 @@ package org.jmu.multiinfo.service.descriptives.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
 
 import org.apache.commons.math3.stat.Frequency;
 import org.apache.commons.math3.stat.descriptive.rank.Percentile;
 import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.core.util.PositionBean;
+import org.jmu.multiinfo.dto.basestatistics.OneVarCondition;
 import org.jmu.multiinfo.dto.basestatistics.ResultDescDTO;
-import org.jmu.multiinfo.dto.descriptives.CommonCondition;
 import org.jmu.multiinfo.dto.descriptives.CommonDTO;
 import org.jmu.multiinfo.dto.descriptives.KSTestDTO;
 import org.jmu.multiinfo.dto.descriptives.PercentileCondition;
@@ -24,7 +21,6 @@ import org.jmu.multiinfo.dto.descriptives.PercentileDTO;
 import org.jmu.multiinfo.dto.descriptives.ResultDataDTO;
 import org.jmu.multiinfo.dto.descriptives.ResultFrequencyDTO;
 import org.jmu.multiinfo.dto.upload.DataDTO;
-import org.jmu.multiinfo.dto.upload.DataVariety;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.jmu.multiinfo.service.basestatistics.DistributionService;
@@ -74,8 +70,14 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 			retDto.setCount(dataArr.length);
 			retDto.setMedian(basicStatisticsService.median(dataArr));
 			Percentile pt = basicStatisticsService.percentile(dataArr);
+			
 			if (percentileList!=null && percentileList.size() > 0) {
 				List<PercentileDTO> percentiles = new ArrayList<PercentileDTO>();
+				
+				PercentileDTO minp = new PercentileDTO();
+				minp.setParam(0.0);
+				minp.setData(basicStatisticsService.zeroPercentile(pt));
+				percentiles.add(minp);
 				for (int i = 0; i < percentileList.size(); i++) {
 					PercentileDTO e = new PercentileDTO();
 					Double param = percentileList.get(i);
@@ -88,10 +90,7 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 				maxp.setParam(100.0);
 				maxp.setData(basicStatisticsService.fullPercentile(pt));
 				percentiles.add(maxp);
-				PercentileDTO minp = new PercentileDTO();
-				minp.setParam(0.0);
-				minp.setData(basicStatisticsService.zeroPercentile(pt));
-				percentiles.add(minp);
+
 				retDto.setPercentiles(percentiles);
 				
 				for (int i = 0; i < dataList.size(); i++) {
@@ -113,7 +112,7 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 	}
 
 	@Override
-	public CommonDTO calFrequency(CommonCondition condition) {
+	public CommonDTO calFrequency(OneVarCondition condition) {
 		CommonDTO meanDTO = new CommonDTO();
 		Map<String, ResultDataDTO> resDataMap = new HashMap<String, ResultDataDTO>();
 		List<VarietyDTO> variableList = condition.getVariableList();

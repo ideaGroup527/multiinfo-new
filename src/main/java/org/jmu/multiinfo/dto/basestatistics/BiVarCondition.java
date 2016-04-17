@@ -1,11 +1,11 @@
-package org.jmu.multiinfo.dto.regression;
+package org.jmu.multiinfo.dto.basestatistics;
 
 import java.util.List;
 
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.VarietyDTO;
 
-public class CommonCondition {
+public class BiVarCondition {
 	//自变量
  private List<VarietyDTO> independentVariable;
  
