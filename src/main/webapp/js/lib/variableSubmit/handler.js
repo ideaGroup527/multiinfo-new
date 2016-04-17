@@ -21,24 +21,27 @@ var handleSubmitType = function (type, data) {
                 variableList.push(params);
             });
 
-            var data = {
+            var send = {
                 'variableList': variableList,
                 'dataGrid': data
             };
+            console.log('send', send);
 
             $.ajax({
                 url: 'statistics/descriptives.do?method=descriptives',
                 //url: 'statistics/descriptives.do?method=frequency',
                 //url: 'js/testJSON/result-table.json',
-                data: JSON.stringify(data),
-                //async: false,
+                data: JSON.stringify(send),
+                async: false,
                 //processData: false,
                 contentType: 'application/json',
                 type: 'POST',
                 dataType: 'JSON',
-                success: function (data) {
-                    console.log(data);
-                    sessionStorage.setItem('PRIVATE_TABLE_RESULT', JSON.stringify(data));
+                success: function (tableResult) {
+                    console.log(tableResult);
+                    sessionStorage.setItem('PRIVATE_TABLE_RESULT', JSON.stringify(tableResult));
+                }, error: function (err) {
+                    console.log('err', err)
                 }
             });
 
