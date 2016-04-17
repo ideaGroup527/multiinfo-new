@@ -12,6 +12,8 @@ import org.apache.commons.math3.stat.descriptive.rank.Median;
 import org.apache.commons.math3.stat.descriptive.rank.Min;
 import org.apache.commons.math3.stat.descriptive.rank.Percentile;
 import org.apache.commons.math3.stat.descriptive.summary.Sum;
+import org.apache.commons.math3.stat.ranking.NaNStrategy;
+import org.apache.commons.math3.stat.ranking.TiesStrategy;
 import org.jmu.multiinfo.core.exception.DataErrException;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.springframework.stereotype.Service;
@@ -149,6 +151,20 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 			sumDeviation += deviationMul;
 		}
 		return sumDeviation;
+	}
+
+
+	@Override
+	public double[] rank(double[] dataArr) {
+		NaturalRanking nr = new NaturalRanking(NaNStrategy.MINIMAL,TiesStrategy.MAXIMUM);
+		return nr.rank(dataArr);
+	}
+
+
+	@Override
+	public double[] rankAve(double[] dataArr) {
+		NaturalRanking nr = new NaturalRanking(NaNStrategy.MAXIMAL,TiesStrategy.AVERAGE);
+		return nr.rank(dataArr);
 	}
 
 }

@@ -145,4 +145,20 @@ public interface BasicStatisticsService {
 	 */
 	public  Double averageMulSumDeviation(double[] dataArrX,double[] dataArrY) throws DataErrException;
 	
+	
+	/***
+	 * 
+	 * @param dataArr
+	 * @return
+	 */
+	public double[] rank(double[] dataArr);
+	
+	
+	/***
+	 * 
+	 * @param dataArr
+	 * @return
+	 */
+	public double[] rankAve(double[] dataArr);
+	
 }

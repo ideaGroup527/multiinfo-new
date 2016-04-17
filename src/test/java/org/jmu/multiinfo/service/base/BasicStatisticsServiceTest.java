@@ -41,4 +41,26 @@ public class BasicStatisticsServiceTest {
 			System.out.println(entry.getValue());
 		}
 	}
+	
+	@Test
+	public void rankTest(){
+		double[] data = {1,0.2,1.3,1.3,10};
+//		double[] data = {0.8,1.2,1.2,2.3,18};
+//		double[] data ={20, 17, 30, 42.3, 17, 50, Double.NaN, Double.NEGATIVE_INFINITY, 17};
+		double[] ranks = basicStatisticsService.rank(data);
+		for (int i = 0; i < ranks.length; i++) {
+			double d = ranks[i];
+			System.out.print(d+",");
+			
+		}
+		
+		System.out.println(",");
+		ranks = basicStatisticsService.rankAve(data);
+		for (int i = 0; i < ranks.length; i++) {
+			double d = ranks[i];
+			System.out.print(d+",");
+			
+		}
+		
+	}
 }
