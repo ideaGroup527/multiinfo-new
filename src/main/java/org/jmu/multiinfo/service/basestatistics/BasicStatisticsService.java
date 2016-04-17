@@ -100,6 +100,20 @@ public interface BasicStatisticsService {
 	 * @return
      */
 	public Percentile percentile(double[]dataArr);
+	
+	/***
+	 * 求箱线图下边缘
+	 * @param pt
+	 * @return
+	 */
+	public Double zeroPercentile(Percentile pt);
+	
+	/***
+	 * 求箱线图上边缘
+	 * @param pt
+	 * @return
+	 */
+	public Double fullPercentile(Percentile pt);
 	/***
 	 * 频数
 	 * @param dataArr

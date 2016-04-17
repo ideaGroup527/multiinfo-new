@@ -113,4 +113,20 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 		return freq;
 	}
 
+
+	@Override
+	public Double zeroPercentile(Percentile pt) {
+		Double q3 = pt.evaluate(25.0);
+		Double q1 = pt.evaluate(75.0);
+		return q3+(q3-q1)*1.5;
+	}
+
+
+	@Override
+	public Double fullPercentile(Percentile pt) {
+		Double q3 = pt.evaluate(25.0);
+		Double q1 = pt.evaluate(75.0);
+		return q1-(q3-q1)*1.5;
+	}
+
 }
