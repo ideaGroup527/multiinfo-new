@@ -70,8 +70,14 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 			retDto.setCount(dataArr.length);
 			retDto.setMedian(basicStatisticsService.median(dataArr));
 			Percentile pt = basicStatisticsService.percentile(dataArr);
+			
 			if (percentileList!=null && percentileList.size() > 0) {
 				List<PercentileDTO> percentiles = new ArrayList<PercentileDTO>();
+				
+				PercentileDTO minp = new PercentileDTO();
+				minp.setParam(0.0);
+				minp.setData(basicStatisticsService.zeroPercentile(pt));
+				percentiles.add(minp);
 				for (int i = 0; i < percentileList.size(); i++) {
 					PercentileDTO e = new PercentileDTO();
 					Double param = percentileList.get(i);
@@ -84,10 +90,7 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 				maxp.setParam(100.0);
 				maxp.setData(basicStatisticsService.fullPercentile(pt));
 				percentiles.add(maxp);
-				PercentileDTO minp = new PercentileDTO();
-				minp.setParam(0.0);
-				minp.setData(basicStatisticsService.zeroPercentile(pt));
-				percentiles.add(minp);
+
 				retDto.setPercentiles(percentiles);
 				
 				for (int i = 0; i < dataList.size(); i++) {
