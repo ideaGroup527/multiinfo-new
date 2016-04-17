@@ -21,4 +21,12 @@
     timeToIdleSeconds="0"           
     timeToLiveSeconds="600"          
     memoryStoreEvictionPolicy="LFU" />  
+    
+       <cache name="tokenCache"           
+    maxElementsInMemory="10000"           
+    eternal="true"          
+    overflowToDisk="false"           
+    timeToIdleSeconds="0"           
+    timeToLiveSeconds="600"          
+    memoryStoreEvictionPolicy="LFU" />  
 </ehcache>

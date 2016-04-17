@@ -6,6 +6,7 @@ import org.jmu.multiinfo.dto.descriptives.PercentileCondition;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jmu.multiinfo.core.controller.BaseController;
 import org.jmu.multiinfo.dto.descriptives.CommonCondition;
 import org.jmu.multiinfo.service.descriptives.DescriptivesStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/statistics/descriptives.do")
-public class DescriptivesStatisticsController {
+public class DescriptivesStatisticsController extends BaseController{
 	@Autowired
 	private DescriptivesStatisticsService descriptivesStatisticsService;
 	@RequestMapping(params = { "method=descriptives" })
@@ -38,7 +39,7 @@ public class DescriptivesStatisticsController {
 			List<Double> percentiles = new ArrayList<Double>();
 			percentiles.add(25.0);
 			percentiles.add(50.0);
-			percentiles.add(70.0);
+			percentiles.add(75.0);
 			condition.setPercentiles(percentiles );
 		}
 		CommonDTO meanDTO =	descriptivesStatisticsService.calDesc(condition);

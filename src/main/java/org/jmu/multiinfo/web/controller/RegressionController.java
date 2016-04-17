@@ -1,5 +1,6 @@
 package org.jmu.multiinfo.web.controller;
 
+import org.jmu.multiinfo.core.controller.BaseController;
 import org.jmu.multiinfo.dto.regression.CommonCondition;
 import org.jmu.multiinfo.dto.regression.GraphDTO;
 import org.jmu.multiinfo.dto.regression.MultipleLinearDTO;
@@ -27,7 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/statistics/regression.do")
-public class RegressionController {
+public class RegressionController extends BaseController{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private LinearRegressionService linearRegressionService;

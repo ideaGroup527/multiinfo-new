@@ -1,0 +1,2577 @@
+{
+  "ret_code": "",
+  "ret_msg": "",
+  "ret_err": "",
+  "fileName": "Sample_data.xls",
+  "sheetNum": 5,
+  "sheet": {
+    "sheetName": "West CN GDP 85-04 Per Captia ",
+    "sheetNo": 0,
+    "dataGrid": [
+      [
+        {
+          "position": "A1",
+          "positionDes": "A,1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "年份",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B1",
+          "positionDes": "B,1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "广西",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C1",
+          "positionDes": "C,1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "四川",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D1",
+          "positionDes": "D,1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "贵州",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E1",
+          "positionDes": "E,1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "云南",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F1",
+          "positionDes": "F,1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "西藏",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G1",
+          "positionDes": "G,1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "陕西",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H1",
+          "positionDes": "H,1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "甘肃",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I1",
+          "positionDes": "I,1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "青海",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J1",
+          "positionDes": "J,1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "宁夏",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K1",
+          "positionDes": "K,1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "内蒙",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L1",
+          "positionDes": "L,1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "新疆",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A2",
+          "positionDes": "A,2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2004.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B2",
+          "positionDes": "B,2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "7196.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C2",
+          "positionDes": "C,2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "8113.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D2",
+          "positionDes": "D,2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4215.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E2",
+          "positionDes": "E,2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6733.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F2",
+          "positionDes": "F,2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "7779.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G2",
+          "positionDes": "G,2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "7757.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H2",
+          "positionDes": "H,2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5970.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I2",
+          "positionDes": "I,2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "8606.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J2",
+          "positionDes": "J,2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "7880.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K2",
+          "positionDes": "K,2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11305.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L2",
+          "positionDes": "L,2",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "11199.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A3",
+          "positionDes": "A,3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2003.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B3",
+          "positionDes": "B,3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5964.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C3",
+          "positionDes": "C,3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6418.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D3",
+          "positionDes": "D,3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3601.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E3",
+          "positionDes": "E,3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5647.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F3",
+          "positionDes": "F,3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6874.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G3",
+          "positionDes": "G,3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6480.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H3",
+          "positionDes": "H,3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4984.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I3",
+          "positionDes": "I,3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "7276.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J3",
+          "positionDes": "J,3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6685.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K3",
+          "positionDes": "K,3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "8734.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L3",
+          "positionDes": "L,3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "9686.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A4",
+          "positionDes": "A,4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2002.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B4",
+          "positionDes": "B,4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5062.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C4",
+          "positionDes": "C,4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5766.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D4",
+          "positionDes": "D,4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3140.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E4",
+          "positionDes": "E,4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5178.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F4",
+          "positionDes": "F,4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5983.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G4",
+          "positionDes": "G,4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5523.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H4",
+          "positionDes": "H,4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4493.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I4",
+          "positionDes": "I,4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6424.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J4",
+          "positionDes": "J,4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5800.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K4",
+          "positionDes": "K,4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "7233.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L4",
+          "positionDes": "L,4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "8365.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A5",
+          "positionDes": "A,5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2001.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B5",
+          "positionDes": "B,5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4668.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C5",
+          "positionDes": "C,5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5250.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D5",
+          "positionDes": "D,5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2895.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E5",
+          "positionDes": "E,5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4866.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F5",
+          "positionDes": "F,5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5307.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G5",
+          "positionDes": "G,5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5024.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H5",
+          "positionDes": "H,5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4163.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I5",
+          "positionDes": "I,5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5735.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J5",
+          "positionDes": "J,5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5340.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K5",
+          "positionDes": "K,5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6463.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L5",
+          "positionDes": "L,5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "7913.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A6",
+          "positionDes": "A,6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2000.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B6",
+          "positionDes": "B,6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4319.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C6",
+          "positionDes": "C,6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4784.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D6",
+          "positionDes": "D,6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2662.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E6",
+          "positionDes": "E,6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4637.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F6",
+          "positionDes": "F,6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4559.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G6",
+          "positionDes": "G,6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4549.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H6",
+          "positionDes": "H,6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3838.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I6",
+          "positionDes": "I,6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5087.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J6",
+          "positionDes": "J,6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4839.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K6",
+          "positionDes": "K,6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5872.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L6",
+          "positionDes": "L,6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "7470.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A7",
+          "positionDes": "A,7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1999.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B7",
+          "positionDes": "B,7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4148.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C7",
+          "positionDes": "C,7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4452.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D7",
+          "positionDes": "D,7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2475.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E7",
+          "positionDes": "E,7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4452.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F7",
+          "positionDes": "F,7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4262.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G7",
+          "positionDes": "G,7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4101.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H7",
+          "positionDes": "H,7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3668.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I7",
+          "positionDes": "I,7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4662.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J7",
+          "positionDes": "J,7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4473.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K7",
+          "positionDes": "K,7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5350.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L7",
+          "positionDes": "L,7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6470.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A8",
+          "positionDes": "A,8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1998.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B8",
+          "positionDes": "B,8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4076.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C8",
+          "positionDes": "C,8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4339.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D8",
+          "positionDes": "D,8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2342.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E8",
+          "positionDes": "E,8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4355.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F8",
+          "positionDes": "F,8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3716.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G8",
+          "positionDes": "G,8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3834.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H8",
+          "positionDes": "H,8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3456.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I8",
+          "positionDes": "I,8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4367.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J8",
+          "positionDes": "J,8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4270.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K8",
+          "positionDes": "K,8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5068.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L8",
+          "positionDes": "L,8",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "6229.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A9",
+          "positionDes": "A,9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1997.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B9",
+          "positionDes": "B,9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4356.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C9",
+          "positionDes": "C,9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4029.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D9",
+          "positionDes": "D,9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2215.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E9",
+          "positionDes": "E,9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4042.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F9",
+          "positionDes": "F,9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3194.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G9",
+          "positionDes": "G,9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3707.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H9",
+          "positionDes": "H,9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3137.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I9",
+          "positionDes": "I,9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4066.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J9",
+          "positionDes": "J,9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4025.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K9",
+          "positionDes": "K,9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4691.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L9",
+          "positionDes": "L,9",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5904.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A10",
+          "positionDes": "A,10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1996.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B10",
+          "positionDes": "B,10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4081.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C10",
+          "positionDes": "C,10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3763.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D10",
+          "positionDes": "D,10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2093.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E10",
+          "positionDes": "E,10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3715.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F10",
+          "positionDes": "F,10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2732.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G10",
+          "positionDes": "G,10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3313.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H10",
+          "positionDes": "H,10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2901.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I10",
+          "positionDes": "I,10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3748.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J10",
+          "positionDes": "J,10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3731.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K10",
+          "positionDes": "K,10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4259.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L10",
+          "positionDes": "L,10",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "5167.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A11",
+          "positionDes": "A,11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1995.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B11",
+          "positionDes": "B,11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3304.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C11",
+          "positionDes": "C,11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3081.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D11",
+          "positionDes": "D,11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1853.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E11",
+          "positionDes": "E,11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3044.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F11",
+          "positionDes": "F,11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2392.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G11",
+          "positionDes": "G,11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2843.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H11",
+          "positionDes": "H,11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2288.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I11",
+          "positionDes": "I,11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3430.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J11",
+          "positionDes": "J,11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3328.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K11",
+          "positionDes": "K,11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3639.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L11",
+          "positionDes": "L,11",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "4819.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A12",
+          "positionDes": "A,12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1994.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B12",
+          "positionDes": "B,12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2772.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C12",
+          "positionDes": "C,12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2516.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D12",
+          "positionDes": "D,12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1553.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E12",
+          "positionDes": "E,12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2490.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F12",
+          "positionDes": "F,12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1984.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G12",
+          "positionDes": "G,12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2344.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H12",
+          "positionDes": "H,12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1925.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I12",
+          "positionDes": "I,12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2910.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J12",
+          "positionDes": "J,12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2685.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K12",
+          "positionDes": "K,12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3013.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L12",
+          "positionDes": "L,12",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "3953.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A13",
+          "positionDes": "A,13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1993.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B13",
+          "positionDes": "B,13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2031.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C13",
+          "positionDes": "C,13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1911.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D13",
+          "positionDes": "D,13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1034.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E13",
+          "positionDes": "E,13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2006.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F13",
+          "positionDes": "F,13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1642.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G13",
+          "positionDes": "G,13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1041.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H13",
+          "positionDes": "H,13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1600.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I13",
+          "positionDes": "I,13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2337.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J13",
+          "positionDes": "J,13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2123.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K13",
+          "positionDes": "K,13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2382.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L13",
+          "positionDes": "L,13",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2980.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A14",
+          "positionDes": "A,14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1992.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B14",
+          "positionDes": "B,14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1318.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C14",
+          "positionDes": "C,14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1356.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D14",
+          "positionDes": "D,14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1009.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E14",
+          "positionDes": "E,14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1334.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F14",
+          "positionDes": "F,14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1233.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G14",
+          "positionDes": "G,14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1458.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H14",
+          "positionDes": "H,14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1314.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I14",
+          "positionDes": "I,14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1821.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J14",
+          "positionDes": "J,14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1635.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K14",
+          "positionDes": "K,14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1712.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L14",
+          "positionDes": "L,14",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2458.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A15",
+          "positionDes": "A,15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1991.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B15",
+          "positionDes": "B,15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1058.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C15",
+          "positionDes": "C,15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1180.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D15",
+          "positionDes": "D,15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "890.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E15",
+          "positionDes": "E,15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1147.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F15",
+          "positionDes": "F,15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1388.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G15",
+          "positionDes": "G,15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1292.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H15",
+          "positionDes": "H,15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1133.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I15",
+          "positionDes": "I,15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1592.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J15",
+          "positionDes": "J,15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1451.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K15",
+          "positionDes": "K,15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1466.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L15",
+          "positionDes": "L,15",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "2047.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A16",
+          "positionDes": "A,16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1990.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B16",
+          "positionDes": "B,16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1066.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C16",
+          "positionDes": "C,16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1134.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D16",
+          "positionDes": "D,16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "810.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E16",
+          "positionDes": "E,16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1224.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F16",
+          "positionDes": "F,16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1276.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G16",
+          "positionDes": "G,16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1241.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H16",
+          "positionDes": "H,16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1099.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I16",
+          "positionDes": "I,16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1558.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J16",
+          "positionDes": "J,16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1393.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K16",
+          "positionDes": "K,16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1478.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L16",
+          "positionDes": "L,16",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1799.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A17",
+          "positionDes": "A,17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1989.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B17",
+          "positionDes": "B,17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "927.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C17",
+          "positionDes": "C,17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "960.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D17",
+          "positionDes": "D,17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "750.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E17",
+          "positionDes": "E,17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1003.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F17",
+          "positionDes": "F,17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1021.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G17",
+          "positionDes": "G,17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1124.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H17",
+          "positionDes": "H,17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1007.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I17",
+          "positionDes": "I,17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1365.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J17",
+          "positionDes": "J,17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1317.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K17",
+          "positionDes": "K,17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1377.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L17",
+          "positionDes": "L,17",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1493.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A18",
+          "positionDes": "A,18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1988.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B18",
+          "positionDes": "B,18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "770.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C18",
+          "positionDes": "C,18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "861.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D18",
+          "positionDes": "D,18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "683.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E18",
+          "positionDes": "E,18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "845.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F18",
+          "positionDes": "F,18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "964.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G18",
+          "positionDes": "G,18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1004.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H18",
+          "positionDes": "H,18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "905.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I18",
+          "positionDes": "I,18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1260.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J18",
+          "positionDes": "J,18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1143.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K18",
+          "positionDes": "K,18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1291.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L18",
+          "positionDes": "L,18",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1347.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A19",
+          "positionDes": "A,19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1987.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B19",
+          "positionDes": "B,19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "607.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C19",
+          "positionDes": "C,19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "702.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D19",
+          "positionDes": "D,19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "546.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E19",
+          "positionDes": "E,19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "653.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F19",
+          "positionDes": "F,19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "863.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G19",
+          "positionDes": "G,19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "794.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H19",
+          "positionDes": "H,19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "764.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I19",
+          "positionDes": "I,19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1018.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J19",
+          "positionDes": "J,19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "922.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K19",
+          "positionDes": "K,19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1025.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L19",
+          "positionDes": "L,19",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1053.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ],
+      [
+        {
+          "position": "A20",
+          "positionDes": "A,20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1986.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "B20",
+          "positionDes": "B,20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "525.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "C20",
+          "positionDes": "C,20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "614.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "D20",
+          "positionDes": "D,20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "467.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "E20",
+          "positionDes": "E,20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "529.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "F20",
+          "positionDes": "F,20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "842.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "G20",
+          "positionDes": "G,20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "688.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "H20",
+          "positionDes": "H,20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "684.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "I20",
+          "positionDes": "I,20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "916.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "J20",
+          "positionDes": "J,20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "823.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "K20",
+          "positionDes": "K,20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "888.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        },
+        {
+          "position": "L20",
+          "positionDes": "L,20",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "924.0",
+          "mergedRange": null,
+          "mergedRangeDes": null
+        }
+      ]
+    ],
+    "variety": [
+      {
+        "position": "A",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "年份",
+        "varietyDes": null,
+        "range": "A2:A20"
+      },
+      {
+        "position": "B",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "广西",
+        "varietyDes": null,
+        "range": "B2:B20"
+      },
+      {
+        "position": "C",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "四川",
+        "varietyDes": null,
+        "range": "C2:C20"
+      },
+      {
+        "position": "D",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "贵州",
+        "varietyDes": null,
+        "range": "D2:D20"
+      },
+      {
+        "position": "E",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "云南",
+        "varietyDes": null,
+        "range": "E2:E20"
+      },
+      {
+        "position": "F",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "西藏",
+        "varietyDes": null,
+        "range": "F2:F20"
+      },
+      {
+        "position": "G",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "陕西",
+        "varietyDes": null,
+        "range": "G2:G20"
+      },
+      {
+        "position": "H",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "甘肃",
+        "varietyDes": null,
+        "range": "H2:H20"
+      },
+      {
+        "position": "I",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "青海",
+        "varietyDes": null,
+        "range": "I2:I20"
+      },
+      {
+        "position": "J",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "宁夏",
+        "varietyDes": null,
+        "range": "J2:J20"
+      },
+      {
+        "position": "K",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "内蒙",
+        "varietyDes": null,
+        "range": "K2:K20"
+      },
+      {
+        "position": "L",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "新疆",
+        "varietyDes": null,
+        "range": "L2:L20"
+      }
+    ],
+    "isFirstRowVar": true
+  },
+  "currentSheetNo": 4,
+  "version": "2003",
+  "sheetNameList": [
+    "NingXia 10 Indicators in 85-08",
+    "Hunan 12 Indecators in 88-06",
+    "2004 CN consume composing",
+    "2004 CN Town Family Situation",
+    "West CN GDP 85-04 Per Captia "
+  ],
+  "physicalRowNum": 21,
+  "physicalCellNum": 12,
+  "lastCellIndex": "L20",
+  "tempFileName": null
+}

@@ -18,6 +18,63 @@
         .data-present-area.active {
             display: block;
         }
+
+        td {
+            cursor: cell;
+        }
+
+        td[data-positiondes^="A"] {
+            cursor: e-resize;
+        }
+
+        th {
+            cursor: s-resize;
+        }
+
+        td.active,
+        td.row-selected,
+        td.col-selected {
+            background: #DEECFF !important;
+        }
+
+        td.row-selected.col-selected {
+            background: #C6DCFB !important;
+        }
+
+        .table-present {
+            margin-bottom: 20px;
+        }
+
+        .table-present table {
+            display: none;
+        }
+
+        .table-present table.active {
+            display: table;
+        }
+
+        .custom-scrollbar-grey {
+            overflow-x: scroll;
+        }
+
+        .custom-scrollbar-grey::-webkit-scrollbar {
+            width: 20px;
+        }
+
+        .custom-scrollbar-grey::-webkit-scrollbar-track {
+            background-color: #dde1e6;
+        }
+
+        .custom-scrollbar-grey::-webkit-scrollbar-thumb {
+            height: 20px;
+            border: 4px solid #dde1e6;
+            border-radius: 6px;
+            background-color: #FFFFFF;
+        }
+
+        .custom-scrollbar-grey::-webkit-scrollbar-corner {
+            background: transparent;
+        }
     </style>
 </head>
 <body>
@@ -28,7 +85,8 @@
         <h3>MultiInfo - Data File Upload</h3>
         <hr/>
         <div>
-            <input type="file" name="data_file" id="data_file" data-toggle="tooltip" title="请上传 xls，xlsx 格式的文件"
+            <input type="file" name="data_file" id="data_file" data-toggle="tooltip"
+                   title="请上传 .xls, .xlsx, .dat, .txt格式的文件"
                    data-placement="top"/>
             <br/>
             <button type="submit" class="btn btn-primary" id="file_upload_btn" disabled>上传</button>
@@ -50,14 +108,24 @@
 </div>
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/bootstrap/bootstrap.min.js"></script>
+<div class="modal fade" id="multi-sheet-select" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <select class="form-control" name="sheet-select" id="sheet-select"></select>
+        </div>
+    </div>
+</div>
 <script>
+    var fileNameSuffix = '';
+    var xlsReg = /(xls|xlsx)/i;
+    var txtReg = /(dat|txt)/i;
+
     //在选择文件之前弹出的提示
     $("#data_file").tooltip().change(function () {
         var filename = $(this)[0].files[0].name;
         if (filename) {
-            var suffix = filename.split('.').reverse()[0];
-            var reg = /(xls|xlsx)/i;
-            if (suffix.match(reg)) {
+            fileNameSuffix = filename.split('.').reverse()[0];
+            if (fileNameSuffix.match(xlsReg) || fileNameSuffix.match(txtReg)) {
                 $('button.btn').attr('disabled', false);
             } else {
                 alert('选择的文件格式有误，请重新选择。');
@@ -66,14 +134,24 @@
         }
     });
 
+    var select = $('#sheet-select');
+
     $('#file_upload_btn').click(function () {
         var fileExpected = $("#data_file")[0].files[0];
 
         var file = new FormData();
         file.append('data_file', fileExpected);
 
+        var fileUploadUrl = '';
+
+        if (fileNameSuffix.match(xlsReg)) {
+            fileUploadUrl = 'upload.do?method=excel';
+        } else if (fileNameSuffix.match(txtReg)) {
+            fileUploadUrl = 'upload.do?method=text';
+        }
+
         $.ajax({
-            url: 'upload.do?method=excel',
+            url: fileUploadUrl + '&isFirstRowVar=true',
             type: 'post',
             data: file,
             async: false,
@@ -82,86 +160,37 @@
             dataType: 'json',
             success: function (data) {
 
-                //面板展示与隐藏
-                $('.file-upload-area').removeClass('active');
-                $('.data-present-area').addClass('active');
+                sessionStorage.clear();
 
-                //标题展示
-                $('#title').text('结果展示 - ' + data.fileName.split('.')[0].trim());
+                sessionStorage.setItem('token', data.token);
+                sessionStorage.setItem('isMultiSheet', data.isMultiSheet);
 
-                //sheet分页生成
-                var tabs = $('.nav-tabs');
-                var tablePresentArea = $('.table-present');
+                if (data.isMultiSheet) {
 
-                $(tabs).empty();
-                var sheetNameList = data.sheetNameList;
-                sheetNameList.map(function (sheetName) {
-                    var a = $('<a>');
-                    $(a).attr('href', '#' + sheetName.split(' ').join(''))
-                            .text(sheetName);
-                    $(tabs).append(a);
-                    $(a).wrap('<li role="presentation"></li>');
+                    var option = $('<option>');
+                    $(option).text('请选择要处理的表格').val('-1');
+                    $(select).append(option);
 
-                    var dataTable = $('<table>');
-                    $(dataTable).attr('id', sheetName.split(' ').join(''))
-                            .addClass('table table-striped table-bordered');
-                    $(tablePresentArea).append(dataTable);
-                });
-                $(tabs).children().first().addClass('active');
-                $(tablePresentArea).children().first().addClass('active');
-
-                //表格生成
-
-                var table = $('#' + data.sheet.sheetName);
-
-                var grid = data.sheet.dataGrid;
-
-                grid.map(function (row, rowIndex) {
-                    var tr = $('<tr>');
-
-                    row.map(function (cell) {
-                        var td = (!rowIndex) ? $('<th>') : $('<td>');
-                        if (cell.mergedRange) {
-                            var range = cell.mergedRangeDes.split(':');
-                            var range_1 = range[0].split(',')[0];
-                            var range_2 = range[0].split(',')[1];
-                            var range_3 = range[1].split(',')[0];
-                            var range_4 = range[1].split(',')[1];
-
-                            var positionDes = cell.positionDes.split(',');
-                            if ((positionDes[0].charCodeAt() > range_1.charCodeAt() && positionDes[0].charCodeAt() <= range_3.charCodeAt()) ||
-                                    (positionDes[1] > range_2 && positionDes[1] <= range_4)) {
-                                return false;
-                            } else if (positionDes[0] == range_1 && positionDes[1] == range_2) {
-                                $(td).attr('colspan', range_3.charCodeAt() - range_1.charCodeAt() + 1)
-                                        .attr('rowspan', Number(range_4) - Number(range_2) + 1);
-                            }
-                        }
-                        $(td).text(cell.data);
-                        //存储值信息
-                        for (var attr in cell) {
-                            $(td).attr('data-' + attr, cell[attr]);
-                        }
-
-                        $(tr).append(td);
+                    data.sheetNameList.map(function (sheet, i) {
+                        var option = $('<option>');
+                        $(option).text(sheet).val(i);
+                        $(select).append(option);
                     });
 
-                    $(table).append(tr);
-                });
-
-                var variable = data.sheet.variety;
-                if (variable) {
-                    //填充变量名称
-                    var varLen = variable.length;
-                    for (var k = 0; k < varLen; k++) {
-                        var position = variable[k].position;
-                        var name = variable[k].varietyName;
-
-                        $('td[data-positiondes^="' + position + ',"]').attr('data-variety-name', name);
-                    }
+                    $('#multi-sheet-select').modal({
+                        'show': true,
+                        'backdrop': 'static'
+                    });
+                } else {
+                    window.location.href = 'table-display.html';
                 }
             }
         })
+    });
+
+    $(select).change(function () {
+        sessionStorage.setItem('sheetNo', $(this).val());
+        window.location.href = 'table-display.html';
     });
 
     $(document).ready(function () {

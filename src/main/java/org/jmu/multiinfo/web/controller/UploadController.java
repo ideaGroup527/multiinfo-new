@@ -11,9 +11,14 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.jmu.multiinfo.core.controller.BaseController;
 import org.jmu.multiinfo.core.dto.BaseDTO;
+import org.jmu.multiinfo.core.util.TokenProcessor;
+import org.jmu.multiinfo.dto.upload.DataToken;
 import org.jmu.multiinfo.dto.upload.ExcelDTO;
 import org.jmu.multiinfo.dto.upload.TextDTO;
+import org.jmu.multiinfo.dto.upload.TokenDTO;
+import org.jmu.multiinfo.service.upload.TokenGenService;
 import org.jmu.multiinfo.service.upload.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,40 +42,96 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Controller
 @RequestMapping("/upload.do")
-public class UploadController {
+public class UploadController extends BaseController{
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	public UploadService uploadService;
 	
+	@Autowired
+	public TokenGenService tokenGenService;
+	
+	@RequestMapping(params = { "method=file" })
+	@ResponseBody
+	public Object uploadFile(HttpServletRequest request, HttpServletResponse response,HttpSession session,
+			@RequestParam("token") String token,@RequestParam(required=false,value="sheetNo",defaultValue="0") int sheetNo,
+			@RequestParam("isMultiSheet") boolean isMultiSheet,@RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar) throws Exception{
+		DataToken dataToken = tokenGenService.cacheData(token, null,null);
+		if(isMultiSheet){
+			ExcelDTO excelDto = (ExcelDTO)dataToken.getData();
+			if(excelDto.getSheet() !=null) return dataToken.getData();
+			File temp = new File(excelDto.getTempFileName());
+			 excelDto =  uploadService.readExcel(temp, excelDto.getFileName(), sheetNo, isFirstRowVar);
+			 dataToken.setData(excelDto);
+		}
+		
+		return dataToken.getData();
+	}
+	
+	
 	@RequestMapping(params = { "method=excel" },method=RequestMethod.POST)
 	@ResponseBody
-	public BaseDTO uploadFile(HttpServletRequest request, HttpServletResponse response,HttpSession session,
-			@RequestParam("data_file") MultipartFile file,@RequestParam(required=false,value="sheetNo",defaultValue="0") int sheetNo,
-			@RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar) throws Exception{
-		Map<String, Object> map = new HashMap<String, Object>();
+	public TokenDTO uploadExcel(HttpServletRequest request, HttpServletResponse response,HttpSession session,
+			@RequestParam("data_file") MultipartFile file,@RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar) throws Exception{
+		TokenDTO tokenDTO = new TokenDTO();
+		Long createTime = System.nanoTime();
+		//生成token
+		String token = TokenProcessor.getInstance()
+				.generateToken(file.getOriginalFilename()+createTime+"");
+		logger.debug("token:"+token);
+		logger.debug("createTime:"+file.getOriginalFilename()+createTime);
+		tokenDTO.setToken(token);
+		tokenDTO.setCreateTime(createTime);
+		
 		String prefix = request.getServletContext().getRealPath("/upload");
-		File temp = new File(prefix+File.separator+System.nanoTime()+"");
+		String fileName = prefix+File.separator+createTime+"";
+		File temp = new File(fileName);
 		FileOutputStream fos = FileUtils.openOutputStream(temp); 
 		IOUtils.copy(file.getInputStream(), fos); 
-		ExcelDTO  data = uploadService.readExcel(temp,file.getOriginalFilename(),sheetNo,isFirstRowVar);
+		ExcelDTO  data = uploadService.jdeExcelNum(temp,file.getOriginalFilename());
 		fos.close();
-		FileUtils.deleteQuietly(temp);
-		return data;
+		data.setTempFileName(fileName);
+		if(1==data.getSheetNum()){
+			tokenDTO.setIsMultiSheet(false);
+			 data =  uploadService.readExcel(temp, file.getOriginalFilename(), 0, isFirstRowVar);
+			 FileUtils.deleteQuietly(temp);
+		}else{
+			tokenDTO.setIsMultiSheet(true);
+
+		}
+		tokenDTO.setFileName(data.getFileName());
+		tokenDTO.setSheetNameList(data.getSheetNameList());
+		tokenDTO.setVersion(data.getVersion());
+		tokenDTO.setSheetNum(data.getSheetNum());
+		tokenGenService.cacheData(token, data,tokenDTO);
+		return tokenDTO;
 	}
+	
 	
 	@RequestMapping(params = { "method=text" },method=RequestMethod.POST)
 	@ResponseBody
-	public BaseDTO uploadText(HttpServletRequest request, HttpServletResponse response,HttpSession session,
+	public TokenDTO uploadText(HttpServletRequest request, HttpServletResponse response,HttpSession session,
 			@RequestParam("data_file") MultipartFile file,@RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar)throws Exception{
+		TokenDTO tokenDTO = new TokenDTO();
+		Long createTime = System.nanoTime();
+		//生成token
+		String token = TokenProcessor.getInstance()
+				.generateToken(file.getOriginalFilename()+createTime+"");
+		tokenDTO.setToken(token);
+		tokenDTO.setCreateTime(createTime);
+		
 		String prefix = request.getServletContext().getRealPath("/upload");
-		File temp = new File(prefix+File.separator+System.nanoTime()+"");
+		String fileName = prefix+File.separator+createTime+"";
+		File temp = new File(fileName);
 		FileOutputStream fos = FileUtils.openOutputStream(temp); 
 		IOUtils.copy(file.getInputStream(), fos); 
 		TextDTO data= uploadService.readText(temp,file.getOriginalFilename(),isFirstRowVar);
 		fos.close();
 		FileUtils.deleteQuietly(temp);
-		return data;
+		tokenGenService.cacheData(token, data,tokenDTO);
+		
+		
+		return tokenDTO;
 	}
 }

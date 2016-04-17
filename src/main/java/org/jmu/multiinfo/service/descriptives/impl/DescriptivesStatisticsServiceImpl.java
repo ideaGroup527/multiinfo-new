@@ -49,7 +49,7 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 		List<Double> percentileList = condition.getPercentiles();
 		for (Iterator<VarietyDTO> iterator = variableList.iterator(); iterator.hasNext();) {
 			List<Double> dataList = new ArrayList<Double>();
-
+			List<Double> errPercentiles  = new ArrayList<Double>();
 			VarietyDTO varietyDTO = (VarietyDTO) iterator.next();
 			PositionBean varRange = ExcelUtil.splitRange(varietyDTO.getRange());
 			for (int i = varRange.getFirstRowId() - 1; i < varRange.getLastRowId(); i++) {
@@ -72,6 +72,7 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 			retDto.setSkewness(basicStatisticsService.skewness(dataArr));
 			retDto.setStandardDeviation(basicStatisticsService.standardDeviation(dataArr));
 			retDto.setCount(dataArr.length);
+			retDto.setMedian(basicStatisticsService.median(dataArr));
 			Percentile pt = basicStatisticsService.percentile(dataArr);
 			if (percentileList!=null && percentileList.size() > 0) {
 				List<PercentileDTO> percentiles = new ArrayList<PercentileDTO>();
@@ -82,7 +83,25 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 					e.setData(pt.evaluate(param));
 					percentiles.add(e);
 				}
+
+				PercentileDTO maxp = new PercentileDTO();
+				maxp.setParam(100.0);
+				maxp.setData(basicStatisticsService.fullPercentile(pt));
+				percentiles.add(maxp);
+				PercentileDTO minp = new PercentileDTO();
+				minp.setParam(0.0);
+				minp.setData(basicStatisticsService.zeroPercentile(pt));
+				percentiles.add(minp);
 				retDto.setPercentiles(percentiles);
+				
+				for (int i = 0; i < dataList.size(); i++) {
+					Double each = dataList.get(i);
+					if(each >maxp.getData() || each < minp.getData()){
+						errPercentiles.add(each);
+					}
+				}
+				retDto.setErrPercentiles(errPercentiles);
+				
 			}
 			ResultDataDTO retDataDTO = new ResultDataDTO();
 			retDataDTO.setResultData(retDto);

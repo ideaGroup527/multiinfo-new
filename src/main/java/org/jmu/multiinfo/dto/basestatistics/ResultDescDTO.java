@@ -16,6 +16,7 @@ private Double skewness;
 private Double kurtosis;
 private List<PercentileDTO> percentiles;
 private Integer count;
+private List<Double> errPercentiles;
 public Double getMax() {
 	return max;
 }
@@ -82,12 +83,18 @@ public List<PercentileDTO> getPercentiles() {
 public void setPercentiles(List<PercentileDTO> percentiles) {
 	this.percentiles = percentiles;
 }
+public List<Double> getErrPercentiles() {
+	return errPercentiles;
+}
+public void setErrPercentiles(List<Double> errPercentiles) {
+	this.errPercentiles = errPercentiles;
+}
 @Override
 public String toString() {
 	return "ResultDescDTO [max=" + max + ", min=" + min + ", arithmeticMean=" + arithmeticMean + ", variance="
 			+ variance + ", standardDeviation=" + standardDeviation + ", total=" + total + ", median=" + median
-			+ ", skewness=" + skewness + ", kurtosis=" + kurtosis + ", count=" + count + "]";
+			+ ", skewness=" + skewness + ", kurtosis=" + kurtosis + ", percentiles=" + percentiles + ", count=" + count
+			+ ", errPercentiles=" + errPercentiles + "]";
 }
-
 
 }

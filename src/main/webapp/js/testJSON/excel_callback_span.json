@@ -1,0 +1,398 @@
+{
+  "ret_code": "",
+  "ret_msg": "",
+  "ret_err": "",
+  "fileName": "带合并单元格（跨列）.xlsx",
+  "sheetNum": 1,
+  "sheet": {
+    "sheetName": "Sheet1",
+    "sheetNo": 0,
+    "dataGrid": [
+      [
+        {
+          "position": "A1",
+          "positionDes": "A,1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "月份",
+          "mergedRange": "A1:A2",
+          "mergedRangeDes": "A,1:A,2"
+        },
+        {
+          "position": "B1",
+          "positionDes": "B,1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "s0城市",
+          "mergedRange": "B1:D1",
+          "mergedRangeDes": "B,1:D,1"
+        },
+        {
+          "position": "C1",
+          "positionDes": "C,1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "s0城市",
+          "mergedRange": "B1:D1",
+          "mergedRangeDes": "B,1:D,1"
+        },
+        {
+          "position": "D1",
+          "positionDes": "D,1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "s0城市",
+          "mergedRange": "B1:D1",
+          "mergedRangeDes": "B,1:D,1"
+        },
+        {
+          "position": "E1",
+          "positionDes": "E,1",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "合计",
+          "mergedRange": "E1:E2",
+          "mergedRangeDes": "E,1:E,2"
+        }
+      ],
+      [
+        {
+          "position": "A2",
+          "positionDes": "A,2",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "月份",
+          "mergedRange": "A1:A2",
+          "mergedRangeDes": "A,1:A,2"
+        },
+        {
+          "position": "B2",
+          "positionDes": "B,2",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "100北京",
+          "mergedRange": null
+        },
+        {
+          "position": "C2",
+          "positionDes": "C,2",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "200上海",
+          "mergedRange": null
+        },
+        {
+          "position": "D2",
+          "positionDes": "D,2",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "300广州",
+          "mergedRange": null
+        },
+        {
+          "position": "E2",
+          "positionDes": "E,2",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "合计",
+          "mergedRange": "E1:E2",
+          "mergedRangeDes": "E,1:E,2"
+        }
+      ],
+      [
+        {
+          "position": "A3",
+          "positionDes": "A,3",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "2016.01.01",
+          "mergedRange": null
+        },
+        {
+          "position": "B3",
+          "positionDes": "B,3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "100.0",
+          "mergedRange": null
+        },
+        {
+          "position": "C3",
+          "positionDes": "C,3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "100.0",
+          "mergedRange": null
+        },
+        {
+          "position": "D3",
+          "positionDes": "D,3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "100.0",
+          "mergedRange": null
+        },
+        {
+          "position": "E3",
+          "positionDes": "E,3",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "300.0",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A4",
+          "positionDes": "A,4",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "2016.01.02",
+          "mergedRange": null
+        },
+        {
+          "position": "B4",
+          "positionDes": "B,4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "101.0",
+          "mergedRange": null
+        },
+        {
+          "position": "C4",
+          "positionDes": "C,4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "102.0",
+          "mergedRange": null
+        },
+        {
+          "position": "D4",
+          "positionDes": "D,4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "101.0",
+          "mergedRange": null
+        },
+        {
+          "position": "E4",
+          "positionDes": "E,4",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "304.0",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A5",
+          "positionDes": "A,5",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "2016.01.03",
+          "mergedRange": null
+        },
+        {
+          "position": "B5",
+          "positionDes": "B,5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "101.0",
+          "mergedRange": null
+        },
+        {
+          "position": "C5",
+          "positionDes": "C,5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "100.0",
+          "mergedRange": null
+        },
+        {
+          "position": "D5",
+          "positionDes": "D,5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "103.0",
+          "mergedRange": null
+        },
+        {
+          "position": "E5",
+          "positionDes": "E,5",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "304.0",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A6",
+          "positionDes": "A,6",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "2016.01.04",
+          "mergedRange": null
+        },
+        {
+          "position": "B6",
+          "positionDes": "B,6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "50.0",
+          "mergedRange": null
+        },
+        {
+          "position": "C6",
+          "positionDes": "C,6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "70.0",
+          "mergedRange": null
+        },
+        {
+          "position": "D6",
+          "positionDes": "D,6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "119.0",
+          "mergedRange": null
+        },
+        {
+          "position": "E6",
+          "positionDes": "E,6",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "239.0",
+          "mergedRange": null
+        }
+      ],
+      [
+        {
+          "position": "A7",
+          "positionDes": "A,7",
+          "typeDes": "字符串型",
+          "type": 0,
+          "typeFormat": null,
+          "data": "合计",
+          "mergedRange": null
+        },
+        {
+          "position": "B7",
+          "positionDes": "B,7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "352.0",
+          "mergedRange": null
+        },
+        {
+          "position": "C7",
+          "positionDes": "C,7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "372.0",
+          "mergedRange": null
+        },
+        {
+          "position": "D7",
+          "positionDes": "D,7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "423.0",
+          "mergedRange": null
+        },
+        {
+          "position": "E7",
+          "positionDes": "E,7",
+          "typeDes": "标准型数字",
+          "type": 1,
+          "typeFormat": null,
+          "data": "1147.0",
+          "mergedRange": null
+        }
+      ]
+    ],
+    "variety": [
+      {
+        "position": "A",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V1",
+        "range": null
+      },
+      {
+        "position": "B",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V2",
+        "range": null
+      },
+      {
+        "position": "C",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V3",
+        "range": null
+      },
+      {
+        "position": "D",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V4",
+        "range": null
+      },
+      {
+        "position": "E",
+        "typeDes": "字符串型",
+        "type": 0,
+        "typeFormat": null,
+        "varietyName": "V5",
+        "range": null
+      }
+    ],
+    "isFirstRowVar": false
+  },
+  "currenSheetNo": 0,
+  "version": "2007",
+  "sheetNameList": ["Sheet1"],
+  "physicalRowNum": 10,
+  "physicalCellNum": 5,
+  "lastCellIndex": "E9"
+}

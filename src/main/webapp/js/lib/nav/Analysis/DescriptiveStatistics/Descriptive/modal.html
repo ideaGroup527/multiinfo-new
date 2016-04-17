@@ -1,0 +1,78 @@
+<div class="modal fade in" id="Descriptive_Statistics" tabindex="-1" role="dialog"
+     aria-labelledby="Descriptive_Statistics_Label" style="display: block;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="Descriptive_Statistics_Label">描述性</h4>
+            </div>
+            <div class="modal-body">
+                <p>点击选择待选变量</p>
+
+                <div id="descriptive_statistics_variables_area">
+
+                </div>
+                <div id="Descriptive_Statistics_Config" data-panel="config">
+                    <fieldset>
+                        <legend>选项</legend>
+
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="min" checked> 最小值
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="max" checked> 最大值
+                            </label>
+                        </div>
+                        <hr/>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="arithmeticMean" checked> 算术平均值
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="variance" checked> 方差
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="standardDeviation" checked> 标准偏差
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="total" checked> 总数
+                            </label>
+                        </div>
+                        <hr/>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="median" checked> 中位数
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="skewness" checked> 偏度
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="kurtosis" checked> 峰度
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default variable-config">选项</button>
+                <button type="button" class="btn btn-primary variable-submit" data-btn-type="Descriptive_Statistics">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

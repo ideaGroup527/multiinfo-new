@@ -3,6 +3,7 @@ package org.jmu.multiinfo.web.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jmu.multiinfo.core.controller.BaseController;
 import org.jmu.multiinfo.dto.comparemean.MedianCondition;
 import org.jmu.multiinfo.dto.upload.DataDTO;
 import org.jmu.multiinfo.dto.upload.DataVariety;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/test/json.do")
-public class ObToJSONTestController {
+public class ObToJSONTestController extends BaseController{
 	@RequestMapping(params = { "method=median" })
 	@ResponseBody
    public MedianCondition calMedian(){

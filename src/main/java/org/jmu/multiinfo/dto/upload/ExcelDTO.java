@@ -8,12 +8,13 @@ public class ExcelDTO extends BaseDTO{
 private String fileName;
 private int sheetNum;
 private SheetDTO sheet;
-private int currenSheetNo;
+private int currentSheetNo;
 private String version;
 private List<String> sheetNameList;
 private Integer physicalRowNum;
 private Integer physicalCellNum;
 private String lastCellIndex;
+private String tempFileName;//缓存文件
 public String getFileName() {
 	return fileName;
 }
@@ -39,11 +40,11 @@ public SheetDTO getSheet() {
 public void setSheet(SheetDTO sheet) {
 	this.sheet = sheet;
 }
-public int getCurrenSheetNo() {
-	return currenSheetNo;
+public int getCurrentSheetNo() {
+	return currentSheetNo;
 }
-public void setCurrenSheetNo(int currenSheetNo) {
-	this.currenSheetNo = currenSheetNo;
+public void setCurrentSheetNo(int currentSheetNo) {
+	this.currentSheetNo = currentSheetNo;
 }
 public String getVersion() {
 	return version;
@@ -69,5 +70,10 @@ public Integer getPhysicalCellNum() {
 public void setPhysicalCellNum(Integer physicalCellNum) {
 	this.physicalCellNum = physicalCellNum;
 }
-
+public String getTempFileName() {
+	return tempFileName;
+}
+public void setTempFileName(String tempFileName) {
+	this.tempFileName = tempFileName;
+}
 }

@@ -45,7 +45,7 @@ public class UploadServiceImpl implements UploadService{
 		ExcelDTO excelDto = new ExcelDTO();
 		SheetDTO sheetDto = new SheetDTO();
 		excelDto.setFileName(name);
-		excelDto.setCurrenSheetNo(n);
+		excelDto.setCurrentSheetNo(n);
 
 			Workbook wb = null;
 			Map<String,Object> condition = new HashMap<String,Object>();
@@ -105,6 +105,7 @@ public class UploadServiceImpl implements UploadService{
 						variety.setVarietyName(datamap.get("value").toString());
 						variety.setType((Integer) datamap.get("type"));
 						variety.setTypeDes(typeDes);
+						variety.setRange(pjs+2+":"+pjs+(sheet.getPhysicalNumberOfRows()-1));
 						varietyList.add(variety);
 					}
 					if(!isFirstRowVar&&i==0){
@@ -114,6 +115,7 @@ public class UploadServiceImpl implements UploadService{
 						variety.setVarietyName("V"+(j+1));
 						variety.setType((Integer) datamap.get("type"));
 						variety.setTypeDes(typeDes);
+						variety.setRange(pjs+1+":"+pjs+(sheet.getPhysicalNumberOfRows()-1));
 						varietyList.add(variety);
 						
 					}
@@ -145,8 +147,9 @@ public class UploadServiceImpl implements UploadService{
 	@Override
 	public TextDTO readText(File file,String name, boolean isFirstRowVar) throws IOException {
 		TextDTO textDto = new TextDTO();
+		SheetDTO sheetDto = new SheetDTO();
 		textDto.setFileName(name);
-		textDto.setIsFirstRowVar(isFirstRowVar);
+		sheetDto.setFirstRowVar(isFirstRowVar);
 		String lastCellIndex ="";
 		List<String>  lines = FileUtils.readLines(file,Charset.forName("UTF-8"));
 		Integer physicalRowNum = lines.size();
@@ -154,7 +157,9 @@ public class UploadServiceImpl implements UploadService{
 		Integer physicalCellNum = lines.get(0).split("\t|\\s+").length;
 		textDto.setPhysicalCellNum(physicalCellNum);
 		DataDTO[][] dataGrid = new DataDTO[physicalRowNum][physicalCellNum];
+		List<String> sheetNameList = new ArrayList<String>();
 		List<VarietyDTO> varietyList = new ArrayList<VarietyDTO>();
+		sheetNameList.add("text");
 		for (int i = 0; i < physicalRowNum; i++) {
 			String row = lines.get(i);
 			String[] eachDatas = row.split("\t|\\s+");
@@ -171,6 +176,7 @@ public class UploadServiceImpl implements UploadService{
 					variety.setVarietyName(datamap.get("value").toString());
 					variety.setType((Integer) datamap.get("type"));
 					variety.setTypeDes(typeDes);
+					variety.setRange(pjs+2+":"+pjs+(physicalRowNum-1));
 					varietyList.add(variety);
 				}
 				if(!isFirstRowVar&&i==0){
@@ -179,6 +185,7 @@ public class UploadServiceImpl implements UploadService{
 					variety.setVarietyName("V"+(j+1));
 					variety.setType((Integer) datamap.get("type"));
 					variety.setTypeDes(typeDes);
+					variety.setRange(pjs+1+":"+pjs+(physicalRowNum-1));
 					varietyList.add(variety);
 					
 				}
@@ -195,11 +202,51 @@ public class UploadServiceImpl implements UploadService{
 			}
 			
 		}
-		textDto.setDataGrid(dataGrid);
-		textDto.setVariety(varietyList);
-
+		
+		
+		sheetDto.setDataGrid(dataGrid);
+		sheetDto.setVariety(varietyList);
+		textDto.setSheetNameList(sheetNameList);
+		textDto.setSheet(sheetDto);
 		textDto.setLastCellIndex(lastCellIndex);
 		return textDto;
+	}
+
+	@Override
+	public ExcelDTO jdeExcelNum(File file, String name)   {
+		ExcelDTO excelDto = new ExcelDTO();
+		Workbook wb = null;
+		Map<String,Object> condition = new HashMap<String,Object>();
+			try {
+				wb = ExcelUtil.create(new FileInputStream(file),condition);
+				excelDto.setVersion(condition.get("version").toString());
+			} catch (EncryptedDocumentException e) {
+				excelDto.setRet_msg("excel已被加密");
+				excelDto.setRet_err(e.getMessage());
+				return excelDto;
+			} catch (InvalidFormatException e) {
+				excelDto.setRet_msg("格式不合法");
+				excelDto.setRet_err(e.getMessage());
+				return excelDto;
+			} catch (FileNotFoundException e) {
+				excelDto.setRet_msg("文件不存在");
+				excelDto.setRet_err(e.getMessage());
+				return excelDto;
+			} catch (IOException e) {
+				excelDto.setRet_msg("无法读取文件");
+				excelDto.setRet_err(e.getMessage());
+				return excelDto;
+			}
+		int sheetNum = wb.getNumberOfSheets();
+		List<String> sheetNameList = new ArrayList<String>();
+		for (int i = 0; i < sheetNum; i++) {
+			Sheet sheet = (Sheet) wb.getSheetAt(i);
+			sheetNameList.add(sheet.getSheetName());
+		}
+		excelDto.setSheetNum(sheetNum);
+		excelDto.setSheetNameList(sheetNameList);
+		excelDto.setFileName(name);
+		return excelDto;
 	}
 	
 

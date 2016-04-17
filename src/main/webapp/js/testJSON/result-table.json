@@ -1,0 +1,180 @@
+{
+  "ret_code": "",
+  "ret_msg": "",
+  "ret_err": "",
+  "resDataMap": {
+    "二产增加值(亿元)": {
+      "resultData": {
+        "max": 451.82,
+        "min": 12.12,
+        "arithmeticMean": 115.12347826086956,
+        "variance": 13808.078687351779,
+        "standardDeviation": 117.50778139064569,
+        "total": 2647.84,
+        "median": null,
+        "skewness": 1.5655639551896128,
+        "kurtosis": 2.070512905948151,
+        "percentiles": [
+          {
+            "param": 25.0,
+            "data": 25.34
+          },
+          {
+            "param": 50.0,
+            "data": 80.54
+          },
+          {
+            "param": 75.0,
+            "data": 153.06
+          }
+        ],
+        "count": 23
+      },
+      "dataArr": [
+        12.12,
+        12.97,
+        15.77,
+        19.74,
+        24.39,
+        25.34,
+        27.77,
+        34.05,
+        45.52,
+        55.78,
+        74.67,
+        80.54,
+        88.67,
+        95.11,
+        103.82,
+        121.43,
+        135.89,
+        153.06,
+        194.27,
+        244.05,
+        281.23,
+        349.83,
+        451.82
+      ],
+      "varietyName": null,
+      "typeDes": null,
+      "type": null,
+      "typeFormat": null
+    },
+    "三产增加值(亿元)": {
+      "resultData": {
+        "max": 339.49,
+        "min": 9.25,
+        "arithmeticMean": 105.70347826086956,
+        "variance": 9448.149578260869,
+        "standardDeviation": 97.20159246772076,
+        "total": 2431.1799999999994,
+        "median": null,
+        "skewness": 0.9907359273190887,
+        "kurtosis": 0.030999319833734607,
+        "percentiles": [
+          {
+            "param": 25.0,
+            "data": 22.66
+          },
+          {
+            "param": 50.0,
+            "data": 79.09
+          },
+          {
+            "param": 75.0,
+            "data": 171.14
+          }
+        ],
+        "count": 23
+      },
+      "dataArr": [
+        9.25,
+        11.21,
+        13.42,
+        17.16,
+        20.02,
+        22.66,
+        26.11,
+        30.78,
+        37.46,
+        48.26,
+        65.1,
+        79.09,
+        91.05,
+        101.58,
+        112.67,
+        127.56,
+        151.89,
+        171.14,
+        195.46,
+        225.64,
+        252.79,
+        281.39,
+        339.49
+      ],
+      "varietyName": null,
+      "typeDes": null,
+      "type": null,
+      "typeFormat": null
+    },
+    "一产增加值(亿元)": {
+      "resultData": {
+        "max": 97.89,
+        "min": 8.9,
+        "arithmeticMean": 39.27434782608695,
+        "variance": 611.3283802371542,
+        "standardDeviation": 24.725055717574314,
+        "total": 903.31,
+        "median": null,
+        "skewness": 0.6219471406619029,
+        "kurtosis": -0.2309477097930106,
+        "percentiles": [
+          {
+            "param": 25.0,
+            "data": 16.84
+          },
+          {
+            "param": 50.0,
+            "data": 43.28
+          },
+          {
+            "param": 75.0,
+            "data": 52.95
+          }
+        ],
+        "count": 23
+      },
+      "dataArr": [
+        8.9,
+        10.36,
+        10.44,
+        13.39,
+        14.8,
+        16.84,
+        17.9,
+        18.31,
+        20.84,
+        29.93,
+        35.41,
+        43.28,
+        44.87,
+        48.75,
+        48.08,
+        46.03,
+        49.67,
+        52.95,
+        55.63,
+        67.42,
+        72.08,
+        79.54,
+        97.89
+      ],
+      "varietyName": null,
+      "typeDes": null,
+      "type": null,
+      "typeFormat": null
+    }
+  },
+  "resultType": null,
+  "reportTitle": null
+}

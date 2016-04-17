@@ -1,5 +1,6 @@
 package org.jmu.multiinfo.web.controller;
 
+import org.jmu.multiinfo.core.controller.BaseController;
 import org.jmu.multiinfo.dto.comparemean.*;
 import org.jmu.multiinfo.service.comparemean.CompareMeanStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/statistics/comparemean.do")
-public class CompareMeanStatisticsController {
+public class CompareMeanStatisticsController extends BaseController{
 	
 	@Autowired
 	private CompareMeanStatisticsService compareMeanStatisticsService;
