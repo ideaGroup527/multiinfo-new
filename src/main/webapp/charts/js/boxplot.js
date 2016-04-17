@@ -3,7 +3,7 @@ function Boxplot(config) {
 
     this.format = function (data) {//转换格式
 
-        var dataAll = {xAxis:[], boxData: []};
+        var dataAll = {xAxis:[], boxData: [],outliers:[]},j=0;
 
         for(var key in data.resDataMap){
             dataAll.xAxis.push(key);
@@ -16,6 +16,11 @@ function Boxplot(config) {
                 value.resultData.percentiles[3].data,
                 value.resultData.percentiles[4].data
             ]);
+
+            for(var i=0,v=null;(v=value.resultData.errPercentiles[i])!=undefined;i++){
+                dataAll.outliers.push([j,v]);
+            }
+            j++;
         }
         return dataAll;
     };
@@ -82,7 +87,13 @@ function Boxplot(config) {
                         ].join('<br/>')
                     }
                 }
+            },
+            {
+                name: 'outlier',
+                type: 'scatter',
+                data: this.format(config.data).outliers
             }
+            
         ]
     };
 }
