@@ -2,6 +2,7 @@ package org.jmu.multiinfo.service.basestatistics;
 
 import org.apache.commons.math3.stat.Frequency;
 import org.apache.commons.math3.stat.descriptive.rank.Percentile;
+import org.jmu.multiinfo.core.exception.DataErrException;
 
 /**
  * 
@@ -128,5 +129,20 @@ public interface BasicStatisticsService {
 	 * @return
 	 */
 	public Frequency frequencyCount(double[] dataArr);
+	
+	/***
+	 * 离均差平方和
+	 * @param dataArr
+	 * @throws DataErrException 
+	 */
+	public  Double averageSumDeviation(double[] dataArr) throws DataErrException;
+	
+	
+	/***
+	 * 离均差积和
+	 * @param dataArr
+	 * @throws DataErrException 
+	 */
+	public  Double averageMulSumDeviation(double[] dataArrX,double[] dataArrY) throws DataErrException;
 	
 }

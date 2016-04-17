@@ -1,5 +1,6 @@
 package org.jmu.multiinfo.web.controller;
 
+import org.jmu.multiinfo.dto.basestatistics.OneVarCondition;
 import org.jmu.multiinfo.dto.descriptives.CommonDTO;
 import org.jmu.multiinfo.dto.descriptives.PercentileCondition;
 
@@ -7,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jmu.multiinfo.core.controller.BaseController;
-import org.jmu.multiinfo.dto.descriptives.CommonCondition;
 import org.jmu.multiinfo.service.descriptives.DescriptivesStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,7 +48,7 @@ public class DescriptivesStatisticsController extends BaseController{
 	
 	@RequestMapping(params = { "method=frequency" })
 	@ResponseBody
-   public CommonDTO calFrequency(@RequestBody CommonCondition condition){
+   public CommonDTO calFrequency(@RequestBody OneVarCondition condition){
 		CommonDTO freDTO =	descriptivesStatisticsService.calFrequency(condition);
 		return freDTO;
 	}

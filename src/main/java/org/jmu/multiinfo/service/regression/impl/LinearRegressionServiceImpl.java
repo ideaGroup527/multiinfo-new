@@ -10,7 +10,7 @@ import org.apache.commons.math3.stat.regression.RegressionResults;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.core.util.PositionBean;
-import org.jmu.multiinfo.dto.regression.CommonCondition;
+import org.jmu.multiinfo.dto.basestatistics.BiVarCondition;
 import org.jmu.multiinfo.dto.regression.CommonDTO;
 import org.jmu.multiinfo.dto.regression.GraphDTO;
 import org.jmu.multiinfo.dto.regression.GraphDataDTO;
@@ -100,7 +100,7 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 	}
 
 	@Override
-	public CommonDTO calLinearRegression(CommonCondition condition) {
+	public CommonDTO calLinearRegression(BiVarCondition condition) {
 		VarietyDTO dependVarDTO = condition.getDependentVariable();
 		List<VarietyDTO> independVarDTOList = condition.getIndependentVariable();
 		DataDTO[][] dataGrid = condition.getDataGrid();
@@ -157,7 +157,7 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 	}
 
 	@Override
-	public GraphDTO convertForGraph(CommonCondition condition) {
+	public GraphDTO convertForGraph(BiVarCondition condition) {
 		GraphDTO g = new GraphDTO();
 		VarietyDTO dependVarDTO = condition.getDependentVariable();
 		List<VarietyDTO> independVarDTOList = condition.getIndependentVariable();

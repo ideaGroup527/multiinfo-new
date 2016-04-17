@@ -1,7 +1,7 @@
 package org.jmu.multiinfo.web.controller;
 
 import org.jmu.multiinfo.core.controller.BaseController;
-import org.jmu.multiinfo.dto.regression.CommonCondition;
+import org.jmu.multiinfo.dto.basestatistics.BiVarCondition;
 import org.jmu.multiinfo.dto.regression.GraphDTO;
 import org.jmu.multiinfo.dto.regression.MultipleLinearDTO;
 import org.jmu.multiinfo.dto.regression.SingleLinearDTO;
@@ -35,14 +35,14 @@ public class RegressionController extends BaseController{
 	
 	@RequestMapping(params = { "method=singleLinear" })
 	@ResponseBody
-	public SingleLinearDTO calSingleLinearRegression(@RequestBody CommonCondition condition){
+	public SingleLinearDTO calSingleLinearRegression(@RequestBody BiVarCondition condition){
 		SingleLinearDTO linearDTO = 	(SingleLinearDTO)linearRegressionService.calLinearRegression(condition);
 		return linearDTO;
 	}
 	
 	@RequestMapping(params = { "method=multipleLinear" })
 	@ResponseBody
-	public MultipleLinearDTO calOLSMultipleLinearRegression(@RequestBody CommonCondition condition){
+	public MultipleLinearDTO calOLSMultipleLinearRegression(@RequestBody BiVarCondition condition){
 		MultipleLinearDTO linearDTO = 	(MultipleLinearDTO)linearRegressionService.calLinearRegression(condition);
 		return linearDTO;
 		
@@ -51,7 +51,7 @@ public class RegressionController extends BaseController{
 	
 	@RequestMapping(params = { "method=convertForGraph" })
 	@ResponseBody
-	public GraphDTO convertForGraph(@RequestBody CommonCondition condition){
+	public GraphDTO convertForGraph(@RequestBody BiVarCondition condition){
 	return 	linearRegressionService.convertForGraph(condition);
 		
 	}

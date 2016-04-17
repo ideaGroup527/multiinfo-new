@@ -12,6 +12,7 @@ import org.apache.commons.math3.stat.descriptive.rank.Median;
 import org.apache.commons.math3.stat.descriptive.rank.Min;
 import org.apache.commons.math3.stat.descriptive.rank.Percentile;
 import org.apache.commons.math3.stat.descriptive.summary.Sum;
+import org.jmu.multiinfo.core.exception.DataErrException;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.springframework.stereotype.Service;
 
@@ -127,6 +128,27 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 		Double q3 = pt.evaluate(25.0);
 		Double q1 = pt.evaluate(75.0);
 		return q1-(q3-q1)*1.5;
+	}
+
+
+	@Override
+	public Double averageSumDeviation(double[] dataArr) throws DataErrException {
+		return averageMulSumDeviation(dataArr,dataArr);
+	}
+
+
+	@Override
+	public Double averageMulSumDeviation(double[] dataArrX, double[] dataArrY) throws DataErrException {
+		int size = dataArrX.length;
+		if(size == 0 || size != dataArrY.length) throw new DataErrException("cannot resolve for averageMulSumDeviation");
+		Double xmean = arithmeticMean(dataArrX);		
+		Double ymean = arithmeticMean(dataArrY);	
+		Double sumDeviation= 0.0;
+		for( int i = 0 ; i < size ; i++ ){
+			Double deviationMul = (dataArrX[i]-xmean) * (dataArrY[i] - ymean);
+			sumDeviation += deviationMul;
+		}
+		return sumDeviation;
 	}
 
 }

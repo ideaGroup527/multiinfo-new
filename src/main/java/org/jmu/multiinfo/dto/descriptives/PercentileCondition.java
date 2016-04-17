@@ -2,7 +2,9 @@ package org.jmu.multiinfo.dto.descriptives;
 
 import java.util.List;
 
-public class PercentileCondition extends CommonCondition{
+import org.jmu.multiinfo.dto.basestatistics.OneVarCondition;
+
+public class PercentileCondition extends OneVarCondition{
 private List<Double> percentiles;
 
 public List<Double> getPercentiles() {

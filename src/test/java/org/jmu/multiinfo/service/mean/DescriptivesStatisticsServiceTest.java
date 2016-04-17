@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jmu.multiinfo.base.util.MyJUnit4ClassRunner;
-import org.jmu.multiinfo.dto.descriptives.CommonCondition;
+import org.jmu.multiinfo.dto.basestatistics.OneVarCondition;
 import org.jmu.multiinfo.dto.descriptives.CommonDTO;
 import org.jmu.multiinfo.dto.descriptives.PercentileCondition;
 import org.jmu.multiinfo.dto.upload.DataDTO;
@@ -33,7 +33,7 @@ public class DescriptivesStatisticsServiceTest {
 private DescriptivesStatisticsService descriptivesStatisticsService;
 
 
-private CommonCondition condition;
+private OneVarCondition condition;
 
 private CommonDTO retDTO ;
 @Before

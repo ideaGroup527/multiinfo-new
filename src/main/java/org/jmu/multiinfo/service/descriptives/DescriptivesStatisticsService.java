@@ -1,10 +1,23 @@
 package org.jmu.multiinfo.service.descriptives;
 
-import org.jmu.multiinfo.dto.descriptives.CommonCondition;
+import org.jmu.multiinfo.dto.basestatistics.OneVarCondition;
 import org.jmu.multiinfo.dto.descriptives.CommonDTO;
 import org.jmu.multiinfo.dto.descriptives.KSTestDTO;
 import org.jmu.multiinfo.dto.descriptives.PercentileCondition;
 
+
+/***
+ * *
+ * 
+ * 
+ * @Title: DescriptivesStatisticsService.java
+ * @Package org.jmu.multiinfo.service.descriptives
+ * @Description:  描述统计
+ * @author  <a href="mailto:www_1350@163.com">Absurd</a>
+ * @date 2016年4月17日 下午2:19:25
+ * @version V1.0
+ *
+ */
 public interface DescriptivesStatisticsService {
 	
 	/***
@@ -19,7 +32,7 @@ public interface DescriptivesStatisticsService {
 	  * 频率功能
 	  * @param condition
 	  */
-	 public CommonDTO calFrequency(CommonCondition condition);
+	 public CommonDTO calFrequency(OneVarCondition condition);
 
 
 	 /***
