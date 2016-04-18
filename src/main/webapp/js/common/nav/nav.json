@@ -34,6 +34,39 @@
             }
           }
         ]
+      },
+      {
+        "term": "Correlation",
+        "name": {
+          "zh-cn": "相关",
+          "en-us": "Correlation"
+        },
+        "subMenu": [
+          {
+            "term": "BivariateCorrelate",
+            "name": {
+              "zh-cn": "双变量",
+              "en-us": "Bivariate Correlate"
+            },
+            "modalId": "#Correlation_Bivariate",
+            "modal": "modal.html",
+            "script": "script.js"
+          },
+          {
+            "term": "PartialCorrelation",
+            "name": {
+              "zh-cn": "偏相关",
+              "en-us": "Partial Correlation"
+            }
+          },
+          {
+            "term": "Distance",
+            "name": {
+              "zh-cn": "距离",
+              "en-us": "Distance"
+            }
+          }
+        ]
       }
     ]
   },
