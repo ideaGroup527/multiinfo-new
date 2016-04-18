@@ -53,13 +53,13 @@ var resultTableGenerator = function () {
                     $(frequencyCell).text(frequency[unique]);
                     $(tr).append(frequencyCell);
 
-                    var frequencyCell2 = $('<td>');
-                    $(frequencyCell2).text(frequency[unique]);
-                    $(tr).append(frequencyCell2);
-
                     var percentageCell = $('<td>');
                     $(percentageCell).text(percentage[unique]);
                     $(tr).append(percentageCell);
+
+                    var validatePercentageCell = $('<td>');
+                    $(validatePercentageCell).text(percentage[unique]);
+                    $(tr).append(validatePercentageCell);
 
                     var accumulationPercentageCell = $('<td>');
                     $(accumulationPercentageCell).text(accumulationPercentage[unique]);
@@ -67,6 +67,36 @@ var resultTableGenerator = function () {
 
                     $(variableTable).append(tr);
                 });
+
+                var lastRow = $('<tr>');
+
+                var lastRow_1_Cell = $('<th>');
+                $(lastRow_1_Cell).attr('data-i18n-type', 'page')
+                    .attr('data-i18n-tag', 'label_total');
+
+                var frequencyTotal = 0, percentageTotal = 0;
+                uniqueData.map(function (data) {
+                    frequencyTotal += frequency[data];
+                    percentageTotal += percentage[data];
+                });
+
+                var lastRow_2_Cell = $('<th>');
+                $(lastRow_2_Cell).text(frequencyData[variable].resultData.sumFreq);
+
+                var lastRow_3_Cell = $('<th>');
+                $(lastRow_3_Cell).text(frequencyData[variable].resultData.sumPercentage);
+
+                var lastRow_4_Cell = $('<th>');
+                $(lastRow_4_Cell).text(frequencyData[variable].resultData.sumValidatePercentage);
+
+                var lastRow_5_Cell = $('<th>');
+                $(lastRow).append(lastRow_1_Cell)
+                    .append(lastRow_2_Cell)
+                    .append(lastRow_3_Cell)
+                    .append(lastRow_4_Cell)
+                    .append(lastRow_5_Cell);
+
+                $(variableTable).append(lastRow);
 
                 $(container).append(variableTable);
                 $(presentArea).append(container);

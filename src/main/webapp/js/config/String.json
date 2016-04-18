@@ -69,7 +69,8 @@
       "label_frequency": "Frequency",
       "label_percentage": "Percentage",
       "label_validate_percentage": "Validate Percentage",
-      "label_accumulation_percentage": "Accumulation Percentage"
+      "label_accumulation_percentage": "Accumulation Percentage",
+      "label_total": "Total"
     },
     "zh-cn": {
       "options": "选项",
@@ -84,7 +85,8 @@
       "label_frequency": "频率",
       "label_percentage": "百分比",
       "label_validate_percentage": "有效百分比",
-      "label_accumulation_percentage": "累积百分比"
+      "label_accumulation_percentage": "累积百分比",
+      "label_total": "合计"
     }
   }
 }
