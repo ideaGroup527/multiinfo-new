@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jmu.multiinfo.core.controller.BaseController;
+import org.jmu.multiinfo.dto.basestatistics.DataDTO;
+import org.jmu.multiinfo.dto.basestatistics.DataVariety;
+import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
 import org.jmu.multiinfo.dto.comparemean.MedianCondition;
-import org.jmu.multiinfo.dto.upload.DataDTO;
-import org.jmu.multiinfo.dto.upload.DataVariety;
-import org.jmu.multiinfo.dto.upload.VarietyDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

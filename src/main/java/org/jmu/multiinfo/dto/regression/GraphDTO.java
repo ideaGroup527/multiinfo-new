@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jmu.multiinfo.core.dto.BaseDTO;
-import org.jmu.multiinfo.dto.upload.VarietyDTO;
+import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
 
 public class GraphDTO extends BaseDTO {
 private Map<String,GraphDataDTO> resDataMap;

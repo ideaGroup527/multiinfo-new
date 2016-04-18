@@ -1,4 +1,4 @@
-package org.jmu.multiinfo.dto.upload;
+package org.jmu.multiinfo.dto.basestatistics;
 
 public class DataDTO {
 private String position;

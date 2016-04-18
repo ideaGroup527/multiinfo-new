@@ -16,15 +16,15 @@ import org.apache.commons.math3.util.MathUtils;
 import org.jmu.multiinfo.core.util.DataFormatUtil;
 import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.core.util.PositionBean;
+import org.jmu.multiinfo.dto.basestatistics.DataDTO;
 import org.jmu.multiinfo.dto.basestatistics.ResultDescDTO;
+import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
 import org.jmu.multiinfo.dto.comparemean.AnovaCondition;
 import org.jmu.multiinfo.dto.comparemean.AnovaDTO;
 import org.jmu.multiinfo.dto.comparemean.AnovaDataDTO;
 import org.jmu.multiinfo.dto.comparemean.MedianCondition;
 import org.jmu.multiinfo.dto.comparemean.MedianDTO;
 import org.jmu.multiinfo.dto.comparemean.ResultDataDTO;
-import org.jmu.multiinfo.dto.upload.DataDTO;
-import org.jmu.multiinfo.dto.upload.VarietyDTO;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.jmu.multiinfo.service.comparemean.CompareMeanStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +72,7 @@ public class CompareMeanStatisticsServiceImpl implements CompareMeanStatisticsSe
 					for (int i = 0; i < si; i++) {
 						for (int j = depVarRange.getFirstColId()-1; j < depVarRange.getLastColId(); j++) {
 							if(i== data.length) break;
-							dataList.add(DataFormatUtil.converToDouble(data[tmpList.get(i)][j].getData().toString()));
+							dataList.add(DataFormatUtil.converToDouble(data[tmpList.get(i)][j]));
 						}
 					}
 					double[] dataArr = new double[dataList.size()];
@@ -140,7 +140,7 @@ Map<String,AnovaDTO>  resMap = new HashMap<String,AnovaDTO>();
 				for (int i = 0; i < si; i++) {
 					for (int j = depVarRange.getFirstColId() - 1; j < depVarRange.getLastColId(); j++) {
 						if (i == data.length) break;
-						dataList.add(DataFormatUtil.converToDouble(data[tmpList.get(i)][j].getData().toString()));
+						dataList.add(DataFormatUtil.converToDouble(data[tmpList.get(i)][j]));
 					}
 				}
 

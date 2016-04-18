@@ -2,6 +2,9 @@ package org.jmu.multiinfo.dto.upload;
 
 import java.util.List;
 
+import org.jmu.multiinfo.dto.basestatistics.DataDTO;
+import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
+
 public class SheetDTO {
 private String sheetName;
 private int sheetNo;

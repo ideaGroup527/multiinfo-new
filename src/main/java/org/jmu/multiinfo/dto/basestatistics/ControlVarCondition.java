@@ -2,12 +2,12 @@ package org.jmu.multiinfo.dto.basestatistics;
 
 import java.util.List;
 
-public class BiVarCondition {
+public class ControlVarCondition {
 	//自变量
  private List<VarietyDTO> independentVariable;
  
- //因变量
- private VarietyDTO dependentVariable;
+ //控制变量
+ private List<VarietyDTO> controlVariable;
  
  //数据
  private DataDTO[][] dataGrid;
@@ -20,12 +20,12 @@ public void setIndependentVariable(List<VarietyDTO> independentVariable) {
 	this.independentVariable = independentVariable;
 }
 
-public VarietyDTO getDependentVariable() {
-	return dependentVariable;
+public List<VarietyDTO> getControlVariable() {
+	return controlVariable;
 }
 
-public void setDependentVariable(VarietyDTO dependentVariable) {
-	this.dependentVariable = dependentVariable;
+public void setControlVariable(List<VarietyDTO> controlVariable) {
+	this.controlVariable = controlVariable;
 }
 
 public DataDTO[][] getDataGrid() {
@@ -35,6 +35,4 @@ public DataDTO[][] getDataGrid() {
 public void setDataGrid(DataDTO[][] dataGrid) {
 	this.dataGrid = dataGrid;
 }
- 
- 
 }

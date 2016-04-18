@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.jmu.multiinfo.dto.basestatistics.DataDTO;
+import org.jmu.multiinfo.dto.basestatistics.DataVariety;
+import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
 import org.jmu.multiinfo.dto.comparemean.AnovaCondition;
 import org.jmu.multiinfo.dto.comparemean.AnovaDataDTO;
 import org.jmu.multiinfo.dto.comparemean.MedianCondition;
 import org.jmu.multiinfo.dto.comparemean.MedianDTO;
-import org.jmu.multiinfo.dto.upload.DataDTO;
-import org.jmu.multiinfo.dto.upload.DataVariety;
-import org.jmu.multiinfo.dto.upload.VarietyDTO;
 import org.jmu.multiinfo.service.comparemean.CompareMeanStatisticsService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

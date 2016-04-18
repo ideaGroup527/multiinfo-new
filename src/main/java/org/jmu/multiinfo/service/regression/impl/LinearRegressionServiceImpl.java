@@ -12,13 +12,13 @@ import org.jmu.multiinfo.core.util.DataFormatUtil;
 import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.core.util.PositionBean;
 import org.jmu.multiinfo.dto.basestatistics.BiVarCondition;
+import org.jmu.multiinfo.dto.basestatistics.DataDTO;
+import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
 import org.jmu.multiinfo.dto.regression.CommonDTO;
 import org.jmu.multiinfo.dto.regression.GraphDTO;
 import org.jmu.multiinfo.dto.regression.GraphDataDTO;
 import org.jmu.multiinfo.dto.regression.MultipleLinearDTO;
 import org.jmu.multiinfo.dto.regression.SingleLinearDTO;
-import org.jmu.multiinfo.dto.upload.DataDTO;
-import org.jmu.multiinfo.dto.upload.VarietyDTO;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.jmu.multiinfo.service.regression.LinearRegressionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,7 +111,7 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		PositionBean depvarRange = ExcelUtil.splitRange(dependVarDTO.getRange());
 		for (int i = depvarRange.getFirstRowId() - 1; i < depvarRange.getLastRowId(); i++) {
 			for (int j = depvarRange.getFirstColId() - 1; j < depvarRange.getLastColId(); j++) {
-				dependVarList.add(DataFormatUtil.converToDouble(dataGrid[i][j].getData().toString()));
+				dependVarList.add(DataFormatUtil.converToDouble(dataGrid[i][j]));
 			}
 		}
 
@@ -126,7 +126,7 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 			PositionBean indepvarRange = ExcelUtil.splitRange(independVarDTO.getRange());
 			for (int i = indepvarRange.getFirstRowId() - 1; i < indepvarRange.getLastRowId(); i++) {
 				for (int j = indepvarRange.getFirstColId() - 1; j < indepvarRange.getLastColId(); j++) {
-					independVarList.add(DataFormatUtil.converToDouble(dataGrid[i][j].getData().toString()));
+					independVarList.add(DataFormatUtil.converToDouble(dataGrid[i][j]));
 				}
 			}
 			for (int i = 0; i < data.length; i++)
@@ -147,7 +147,7 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 				int row = 0;
 				for (int i = indepvarRange.getFirstRowId() - 1; i < indepvarRange.getLastRowId(); i++) {
 					for (int j = indepvarRange.getFirstColId() - 1; j < indepvarRange.getLastColId(); j++) {
-						x[row++][k] = DataFormatUtil.converToDouble(dataGrid[i][j].getData().toString());
+						x[row++][k] = DataFormatUtil.converToDouble(dataGrid[i][j]);
 					}
 				}
 				
@@ -191,7 +191,7 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 			PositionBean indepvarRange = ExcelUtil.splitRange(independVarDTO.getRange());
 			for (int i = indepvarRange.getFirstRowId() - 1; i < indepvarRange.getLastRowId(); i++) {
 				for (int j = indepvarRange.getFirstColId() - 1; j < indepvarRange.getLastColId(); j++) {
-					independVarList.add(DataFormatUtil.converToDouble(dataGrid[i][j].getData().toString()));
+					independVarList.add(DataFormatUtil.converToDouble(dataGrid[i][j]));
 				}
 			}
 			dataArr = new double[independVarList.size()];

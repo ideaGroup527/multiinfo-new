@@ -13,16 +13,16 @@ import org.apache.commons.math3.stat.descriptive.rank.Percentile;
 import org.jmu.multiinfo.core.util.DataFormatUtil;
 import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.core.util.PositionBean;
+import org.jmu.multiinfo.dto.basestatistics.DataDTO;
 import org.jmu.multiinfo.dto.basestatistics.OneVarCondition;
 import org.jmu.multiinfo.dto.basestatistics.ResultDescDTO;
+import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
 import org.jmu.multiinfo.dto.descriptives.CommonDTO;
 import org.jmu.multiinfo.dto.descriptives.KSTestDTO;
 import org.jmu.multiinfo.dto.descriptives.PercentileCondition;
 import org.jmu.multiinfo.dto.descriptives.PercentileDTO;
 import org.jmu.multiinfo.dto.descriptives.ResultDataDTO;
 import org.jmu.multiinfo.dto.descriptives.ResultFrequencyDTO;
-import org.jmu.multiinfo.dto.upload.DataDTO;
-import org.jmu.multiinfo.dto.upload.VarietyDTO;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.jmu.multiinfo.service.basestatistics.DistributionService;
 import org.jmu.multiinfo.service.descriptives.DescriptivesStatisticsService;
@@ -52,7 +52,7 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 			for (int i = varRange.getFirstRowId() - 1; i < varRange.getLastRowId(); i++) {
 				for (int j = varRange.getFirstColId() - 1; j < varRange.getLastColId(); j++) {
 					DataDTO dataDTO = dataGrid[i][j];
-					dataList.add(DataFormatUtil.converToDouble(dataDTO.getData().toString()));
+					dataList.add(DataFormatUtil.converToDouble(dataDTO));
 				}
 			}
 			double[] dataArr = new double[dataList.size()];
@@ -126,12 +126,12 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 			for (int i = varRange.getFirstRowId() - 1; i < varRange.getLastRowId(); i++) {
 				for (int j = varRange.getFirstColId() - 1; j < varRange.getLastColId(); j++) {
 					DataDTO dataDTO = dataGrid[i][j];
-					dataList.add(dataDTO.getData());
+					dataList.add(dataDTO);
 				}
 			}
 			double[] dataArr = new double[dataList.size()];
 			for (int i = 0; i < dataArr.length; i++) {
-				dataArr[i] =DataFormatUtil.converToDouble(dataList.get(i).toString());
+				dataArr[i] =DataFormatUtil.converToDouble((DataDTO)dataList.get(i));
 			}
 			ResultFrequencyDTO retDto = new ResultFrequencyDTO();
 			Map<String, Long> frequencyMap = new HashMap<String, Long>();

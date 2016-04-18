@@ -1,7 +1,7 @@
 package org.jmu.multiinfo.dto.comparemean;
 
-import org.jmu.multiinfo.dto.upload.DataDTO;
-import org.jmu.multiinfo.dto.upload.VarietyDTO;
+import org.jmu.multiinfo.dto.basestatistics.DataDTO;
+import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
 
 import java.util.List;
 
