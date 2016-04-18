@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 
 import org.apache.commons.math3.stat.Frequency;
 import org.apache.commons.math3.stat.descriptive.rank.Percentile;
+import org.jmu.multiinfo.core.util.DataFormatUtil;
 import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.core.util.PositionBean;
 import org.jmu.multiinfo.dto.basestatistics.OneVarCondition;
@@ -51,7 +52,7 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 			for (int i = varRange.getFirstRowId() - 1; i < varRange.getLastRowId(); i++) {
 				for (int j = varRange.getFirstColId() - 1; j < varRange.getLastColId(); j++) {
 					DataDTO dataDTO = dataGrid[i][j];
-					dataList.add(Double.valueOf(dataDTO.getData().toString()));
+					dataList.add(DataFormatUtil.converToDouble(dataDTO.getData().toString()));
 				}
 			}
 			double[] dataArr = new double[dataList.size()];
@@ -130,7 +131,7 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 			}
 			double[] dataArr = new double[dataList.size()];
 			for (int i = 0; i < dataArr.length; i++) {
-				dataArr[i] = Double.valueOf(dataList.get(i).toString());
+				dataArr[i] =DataFormatUtil.converToDouble(dataList.get(i).toString());
 			}
 			ResultFrequencyDTO retDto = new ResultFrequencyDTO();
 			Map<String, Long> frequencyMap = new HashMap<String, Long>();
@@ -201,12 +202,12 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 	while (it.hasNext()) {
 		Map.Entry<java.lang.Comparable<?>, java.lang.Long> entry = (Map.Entry<java.lang.Comparable<?>, java.lang.Long>) it
 				.next();
-		double x = Double.valueOf(entry.getKey().toString());
+		double x = DataFormatUtil.converToDouble(entry.getKey().toString());
 		//标准化值
 		double z = (x-mean)/sd;
 		//理论分布值
 		double f0 = distributionService.normalDistribution(z).getCumulativeProbability();
-		fcount = fcount + Double.valueOf(entry.getValue().toString());
+		fcount = fcount + DataFormatUtil.converToDouble(entry.getValue().toString());
 		double fn = fcount / n;
 		double D = fn - f0;
 		DList.add(D);

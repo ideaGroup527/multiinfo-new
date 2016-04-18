@@ -13,6 +13,7 @@ import org.apache.commons.math3.exception.NullArgumentException;
 import org.apache.commons.math3.exception.util.LocalizedFormats;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.apache.commons.math3.util.MathUtils;
+import org.jmu.multiinfo.core.util.DataFormatUtil;
 import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.core.util.PositionBean;
 import org.jmu.multiinfo.dto.basestatistics.ResultDescDTO;
@@ -71,7 +72,7 @@ public class CompareMeanStatisticsServiceImpl implements CompareMeanStatisticsSe
 					for (int i = 0; i < si; i++) {
 						for (int j = depVarRange.getFirstColId()-1; j < depVarRange.getLastColId(); j++) {
 							if(i== data.length) break;
-							dataList.add(Double.valueOf(data[tmpList.get(i)][j].getData().toString()));
+							dataList.add(DataFormatUtil.converToDouble(data[tmpList.get(i)][j].getData().toString()));
 						}
 					}
 					double[] dataArr = new double[dataList.size()];
@@ -139,7 +140,7 @@ Map<String,AnovaDTO>  resMap = new HashMap<String,AnovaDTO>();
 				for (int i = 0; i < si; i++) {
 					for (int j = depVarRange.getFirstColId() - 1; j < depVarRange.getLastColId(); j++) {
 						if (i == data.length) break;
-						dataList.add(Double.valueOf(data[tmpList.get(i)][j].getData().toString()));
+						dataList.add(DataFormatUtil.converToDouble(data[tmpList.get(i)][j].getData().toString()));
 					}
 				}
 
