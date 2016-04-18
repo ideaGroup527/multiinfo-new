@@ -13,58 +13,125 @@
                 <p data-i18n-type="page"
                    data-i18n-tag="label_choose_variable">点击选择待选变量</p>
 
-                <div id="descriptive_statistics_frequency_variables_area">
+                <div id="descriptive_statistics_variables_area">
 
                 </div>
-                <div id="Descriptive_Statistics_Config" data-panel="config">
+                <div id="Descriptive_Algorithm_Config" data-panel="config">
                     <fieldset>
                         <legend data-i18n-tag="options" data-i18n-type="page">选项</legend>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="quartile" checked>
+                                <span data-i18n-type="algorithm" data-i18n-tag="quartile">四分位数</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="dividePoint" checked>
+                                <span data-i18n-type="algorithm" data-i18n-tag="dividePoint">割点</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="percentile" checked>
+                                <span data-i18n-type="algorithm" data-i18n-tag="percentile">百分位数</span>
+                            </label>
+                        </div>
+                        <hr>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="standardDeviation" checked>
+                                <span data-i18n-type="algorithm" data-i18n-tag="standardDeviation">标准差</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="variance" checked>
+                                <span data-i18n-type="algorithm" data-i18n-tag="variance">方差</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="ranges" checked>
+                                <span data-i18n-type="algorithm" data-i18n-tag="ranges">范围</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="min" checked>
+                                <span data-i18n-type="algorithm" data-i18n-tag="min">最小值</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="max" checked>
+                                <span data-i18n-type="algorithm" data-i18n-tag="max">最大值</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="standardErrorOfMean" checked>
+                                <span data-i18n-type="algorithm" data-i18n-tag="standardErrorOfMean">均值的标准误</span>
+                            </label>
+                        </div>
+                        <hr>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="means" checked>
+                                <span data-i18n-type="algorithm" data-i18n-tag="means">均值</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="median" checked>
+                                <span data-i18n-type="algorithm" data-i18n-tag="median">中位数</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="mode" checked>
+                                <span data-i18n-type="algorithm" data-i18n-tag="mode">众数</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="total" checked>
+                                <span data-i18n-type="algorithm" data-i18n-tag="total">众数</span>
+                            </label>
+                        </div>
+                        <hr/>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="skewness" checked>
+                                <span data-i18n-type="algorithm" data-i18n-tag="skewness">偏度</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="kurtosis" checked>
+                                <span data-i18n-type="algorithm" data-i18n-tag="kurtosis">峰度</span>
+                            </label>
+                        </div>
+                    </fieldset>
+                    <fieldset id="Descriptive_Graph_Config">
+                        <legend data-i18n-type="page" data-i18n-tag="label_graph_making">制图</legend>
 
                         <div class="checkbox-inline">
                             <label>
-                                <input type="checkbox" value="min" checked> 最小值
+                                <input type="checkbox" value="barchart" checked>
+                                <span data-i18n-type="graph" data-i18n-tag="barchart">条形图</span>
                             </label>
                         </div>
                         <div class="checkbox-inline">
                             <label>
-                                <input type="checkbox" value="max" checked> 最大值
-                            </label>
-                        </div>
-                        <hr/>
-                        <div class="checkbox-inline">
-                            <label>
-                                <input type="checkbox" value="arithmeticMean" checked> 算术平均值
+                                <input type="checkbox" value="piegraph" checked>
+                                <span data-i18n-type="graph" data-i18n-tag="piegraph">饼图</span>
                             </label>
                         </div>
                         <div class="checkbox-inline">
                             <label>
-                                <input type="checkbox" value="variance" checked> 方差
-                            </label>
-                        </div>
-                        <div class="checkbox-inline">
-                            <label>
-                                <input type="checkbox" value="standardDeviation" checked> 标准偏差
-                            </label>
-                        </div>
-                        <div class="checkbox-inline">
-                            <label>
-                                <input type="checkbox" value="total" checked> 总数
-                            </label>
-                        </div>
-                        <hr/>
-                        <div class="checkbox-inline">
-                            <label>
-                                <input type="checkbox" value="median" checked> 中位数
-                            </label>
-                        </div>
-                        <div class="checkbox-inline">
-                            <label>
-                                <input type="checkbox" value="skewness" checked> 偏度
-                            </label>
-                        </div>
-                        <div class="checkbox-inline">
-                            <label>
-                                <input type="checkbox" value="kurtosis" checked> 峰度
+                                <input type="checkbox" value="histogram" checked>
+                                <span data-i18n-type="graph" data-i18n-tag="histogram">直方图</span>
                             </label>
                         </div>
                     </fieldset>
@@ -74,7 +141,8 @@
                 <button type="button" class="btn btn-default variable-config" data-i18n-type="page"
                         data-i18n-tag="options">选项
                 </button>
-                <button type="button" class="btn btn-primary variable-submit" data-btn-type="Descriptive_Statistics_Frequency"
+                <button type="button" class="btn btn-primary variable-submit"
+                        data-btn-type="Descriptive_Statistics_Frequency"
                         data-i18n-type="page" data-i18n-tag="btn_next">确定
                 </button>
             </div>

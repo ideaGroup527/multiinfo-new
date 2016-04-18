@@ -1,7 +1,7 @@
 var descriptiveStatisticsVariableChoose = function (variableList) {
     var def = $.Deferred();
 
-    var chooseArea = $('#descriptive_statistics_descriptive_variables_area');
+    var chooseArea = $('#descriptive_statistics_variables_area');
 
     variableList.map(function (variable, i) {
         var variableWrapper = $('<span>');

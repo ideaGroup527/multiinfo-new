@@ -1,38 +1,54 @@
 {
   "algorithm": {
     "en-us": {
-      "max": "Maximum",
-      "min": "Minimum",
       "arithmeticMean": "Arithmetic Mean",
-      "variance": "Variance",
-      "standardDeviation": "Standard Deviation",
-      "total": "Total",
-      "median": "Median",
-      "skewness": "Skewness",
+      "dividePoint": "Divide Point",
       "kurtosis": "Kurtosis",
-      "percentiles": "Percentiles"
+      "max": "Maximum",
+      "means": "Means",
+      "median": "Median",
+      "min": "Minimum",
+      "mode": "Mode",
+      "percentile": "Percentile",
+      "percentiles": "Percentiles",
+      "quartile": "Quartile",
+      "ranges": "Ranges",
+      "skewness": "Skewness",
+      "standardDeviation": "Standard Deviation",
+      "standardErrorOfMean": "Standard Error of Mean",
+      "total": "Total",
+      "variance": "Variance"
     },
     "zh-cn": {
-      "max": "最大值",
-      "min": "最小值",
       "arithmeticMean": "算术平均数",
-      "variance": "方差",
-      "standardDeviation": "标准偏差",
-      "total": "总数",
-      "median": "中位数",
-      "skewness": "偏度",
+      "dividePoint": "割点",
       "kurtosis": "峰度",
-      "percentiles": "分位值"
+      "max": "最大值",
+      "means": "均值",
+      "median": "中位数",
+      "min": "最小值",
+      "mode": "众数",
+      "percentile": "百分位数",
+      "percentiles": "分位值",
+      "quartile": "四分位数",
+      "ranges": "范围",
+      "skewness": "偏度",
+      "standardDeviation": "标准偏差",
+      "standardErrorOfMean": "均值的标准误",
+      "total": "总数",
+      "variance": "方差"
     }
   },
   "graph": {
     "en-us": {
+      "barchart": "Bar Chart",
       "boxplot": "Box Plot",
       "histogram": "Histogram",
       "piegraph": "Pie Graph",
       "scatterdiagram": "Scatter Diagram"
     },
     "zh-cn": {
+      "barchart": "条形图",
       "boxplot": "箱线图",
       "histogram": "直方图",
       "piegraph": "饼图",
@@ -49,7 +65,11 @@
       "label_choose_sheet": "Select Your Sheet",
       "label_choose_variable": "Click to choose variables below",
       "label_graph_making": "Graph Making",
-      "label_result_present": "Result Present"
+      "label_result_present": "Result Present",
+      "label_frequency": "Frequency",
+      "label_percentage": "Percentage",
+      "label_validate_percentage": "Validate Percentage",
+      "label_accumulation_percentage": "Accumulation Percentage"
     },
     "zh-cn": {
       "options": "选项",
@@ -60,7 +80,11 @@
       "label_choose_sheet": "请选择待分析的表格",
       "label_choose_variable": "点击选择待选变量",
       "label_graph_making": "制图",
-      "label_result_present": "结果展示"
+      "label_result_present": "结果展示",
+      "label_frequency": "频率",
+      "label_percentage": "百分比",
+      "label_validate_percentage": "有效百分比",
+      "label_accumulation_percentage": "累积百分比"
     }
   }
 }
