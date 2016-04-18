@@ -16,12 +16,15 @@ import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.poifs.filesystem.NPOIFSFileSystem;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.util.IOUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jmu.multiinfo.dto.basestatistics.DataVariety;
 import org.jmu.multiinfo.web.utils.CommonUtil;
@@ -31,9 +34,12 @@ public class ExcelUtil {
 	    if (!inp.markSupported()) {
 	        inp = new PushbackInputStream(inp, 8);
 	    }
-	    if (POIFSFileSystem.hasPOIFSHeader(inp)) {
+	     // Ensure that there is at least some data there
+        byte[] header8 = IOUtils.peekFirst8Bytes(inp);
+	    if (POIFSFileSystem.hasPOIFSHeader(header8)) {
+	    	NPOIFSFileSystem fs = new NPOIFSFileSystem(inp);
 	    	condition.put("version", "2003");
-	        return new HSSFWorkbook(inp);
+	        return WorkbookFactory.create(fs);
 	    }
 	    if (POIXMLDocument.hasOOXMLHeader(inp)) {
 	    	condition.put("version", "2007");

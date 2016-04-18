@@ -222,18 +222,28 @@ public class UploadServiceImpl implements UploadService{
 				excelDto.setVersion(condition.get("version").toString());
 			} catch (EncryptedDocumentException e) {
 				excelDto.setRet_msg("excel已被加密");
+				excelDto.setRet_code("-1");
 				excelDto.setRet_err(e.getMessage());
 				return excelDto;
 			} catch (InvalidFormatException e) {
 				excelDto.setRet_msg("格式不合法");
+				excelDto.setRet_code("-1");
 				excelDto.setRet_err(e.getMessage());
 				return excelDto;
 			} catch (FileNotFoundException e) {
 				excelDto.setRet_msg("文件不存在");
+				excelDto.setRet_code("-1");
 				excelDto.setRet_err(e.getMessage());
 				return excelDto;
 			} catch (IOException e) {
 				excelDto.setRet_msg("无法读取文件");
+				excelDto.setRet_code("-1");
+				excelDto.setRet_err(e.getMessage());
+				return excelDto;
+			}catch (IllegalArgumentException e) {
+				e.printStackTrace();
+				excelDto.setRet_msg(e.getMessage());
+				excelDto.setRet_code("-1");
 				excelDto.setRet_err(e.getMessage());
 				return excelDto;
 			}
