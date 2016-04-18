@@ -58,3 +58,8 @@ label {
 [data-panel="config"] {
     display: none;
 }
+
+/* =3 数据展示页面*/
+.frequency-table {
+    margin: 0 auto 40px;
+}
