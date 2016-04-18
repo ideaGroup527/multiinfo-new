@@ -147,7 +147,7 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 			while (it.hasNext()) {
 				Map.Entry<java.lang.Comparable<?>, java.lang.Long> entry = (Map.Entry<java.lang.Comparable<?>, java.lang.Long>) it
 						.next();
-				uniqList.add(entry.getKey());
+				uniqList.add(entry.getKey().toString());
 				frequencyMap.put(entry.getKey().toString(), entry.getValue());
 				percentage.put(entry.getKey().toString(), frequency.getPct(entry.getKey()));
 				accumulationPercentage.put(entry.getKey().toString(), frequency.getCumPct(entry.getKey()));
