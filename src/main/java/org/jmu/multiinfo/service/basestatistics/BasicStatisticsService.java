@@ -173,4 +173,13 @@ public interface BasicStatisticsService {
 	 * @return
 	 */
 	public Integer getN(double[] dataArr);
+	
+
+	/***
+	 * 四舍五入
+	 * @param data
+	 * @param precision 小数位数
+	 * @return
+	 */
+	public Double round(Double data,Integer precision);
 }

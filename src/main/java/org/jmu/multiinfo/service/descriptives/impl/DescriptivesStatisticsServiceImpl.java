@@ -154,12 +154,11 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 						.next();
 				uniqList.add(entry.getKey().toString());
 				frequencyMap.put(entry.getKey().toString(), entry.getValue() );
-//				Double pct = frequency.getPct(entry.getKey())  * 100 ;
-//				sumPercentage += pct;
-//				percentage.put(entry.getKey().toString(), pct);
-				
 				Double pct = frequency.getPct(entry.getKey())  * 100 ;
 				sumPercentage += pct;
+				percentage.put(entry.getKey().toString(), pct);
+				
+				sumValidatePercentage += pct;
 				validatePercentage.put(entry.getKey().toString(), pct);
 				
 				Double cumpct = frequency.getCumPct(entry.getKey())  * 100;
@@ -184,16 +183,15 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 					}
 				});
 			}*/
-			retDto.setSumPercentage(sumPercentage);
-			
-			retDto.setSumValidatePercentage(sumValidatePercentage);
+			retDto.setSumPercentage(basicStatisticsService.round(sumPercentage, 3));
+			retDto.setSumValidatePercentage(basicStatisticsService.round(sumValidatePercentage, 3));
 			retDto.setSumFreq(frequency.getSumFreq());
 			retDto.setUniqueData(uniqList);
 
 			retDto.setFrequencyMap(frequencyMap);
 			retDto.setValidatePercentage(validatePercentage);
 			retDto.setAccumulationPercentage(accumulationPercentage);
-			retDto.setPercentage(validatePercentage);
+			retDto.setPercentage(percentage);
 			ResultDataDTO retDataDTO = new ResultDataDTO();
 			retDataDTO.setResultData(retDto);
 			resDataMap.put(varietyDTO.getVarietyName(), retDataDTO);

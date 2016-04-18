@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.jmu.multiinfo.dto.basestatistics.ResultDescDTO;
-import org.jmu.multiinfo.dto.upload.DataDTO;
 
 
 public class ResultFrequencyDTO extends ResultDescDTO{

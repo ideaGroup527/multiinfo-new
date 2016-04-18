@@ -1,5 +1,7 @@
 package org.jmu.multiinfo.service.basestatistics.impl;
 
+import java.math.BigDecimal;
+
 import org.apache.commons.math3.stat.Frequency;
 import org.apache.commons.math3.stat.descriptive.moment.GeometricMean;
 import org.apache.commons.math3.stat.descriptive.moment.Kurtosis;
@@ -183,6 +185,13 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 	public Integer getN(double[] dataArr) {
 		if(dataArr == null ) return 0;
 		return dataArr.length;
+	}
+
+
+	@Override
+	public Double round(Double data, Integer precision) {
+		 BigDecimal bd = new BigDecimal(data);  
+		return bd.setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue();
 	}
 
 }
