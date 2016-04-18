@@ -18,6 +18,14 @@ private Map<String,Double> validatePercentage;
 //累积百分比
 private Map<String,Double> accumulationPercentage;
 
+//频数总计
+private Long sumFreq;
+
+
+private Object sumPercentage;
+//有效百分比总计
+private Object sumValidatePercentage;
+
 public List<Object> getUniqueData() {
 	return uniqueData;
 }
@@ -58,5 +66,28 @@ public void setAccumulationPercentage(Map<String, Double> accumulationPercentage
 	this.accumulationPercentage = accumulationPercentage;
 }
 
+public Long getSumFreq() {
+	return sumFreq;
+}
+
+public void setSumFreq(Long sumFreq) {
+	this.sumFreq = sumFreq;
+}
+
+public Object getSumPercentage() {
+	return sumPercentage;
+}
+
+public void setSumPercentage(Object sumPercentage) {
+	this.sumPercentage = sumPercentage;
+}
+
+public Object getSumValidatePercentage() {
+	return sumValidatePercentage;
+}
+
+public void setSumValidatePercentage(Object sumValidatePercentage) {
+	this.sumValidatePercentage = sumValidatePercentage;
+}
 
 }

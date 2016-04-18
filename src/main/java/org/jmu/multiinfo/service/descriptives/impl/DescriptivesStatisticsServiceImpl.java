@@ -136,25 +136,38 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 			ResultFrequencyDTO retDto = new ResultFrequencyDTO();
 			Map<String, Long> frequencyMap = new HashMap<String, Long>();
 			Map<String, Double> percentage = new HashMap<String, Double>();
+			Map<String, Double> validatePercentage = new HashMap<String, Double>();
 			Map<String, Double> accumulationPercentage = new HashMap<String, Double>();
+			Double sumPercentage = 0.0;
+			Double sumValidatePercentage = 0.0;
 			Frequency frequency = basicStatisticsService.frequencyCount(dataArr);
 			retDto.setArithmeticMean(basicStatisticsService.arithmeticMean(dataArr));
 			retDto.setStandardDeviation(basicStatisticsService.standardDeviation(dataArr));
 			retDto.setMin(basicStatisticsService.min(dataArr));
 			retDto.setMax(basicStatisticsService.max(dataArr));
 			retDto.setCount(dataArr.length);
+			retDto.setTotal(basicStatisticsService.sum(dataArr));
 			List<Object> uniqList = new ArrayList<Object>();
 			Iterator<Entry<Comparable<?>, Long>>  it =	frequency.entrySetIterator();
 			while (it.hasNext()) {
 				Map.Entry<java.lang.Comparable<?>, java.lang.Long> entry = (Map.Entry<java.lang.Comparable<?>, java.lang.Long>) it
 						.next();
 				uniqList.add(entry.getKey().toString());
-				frequencyMap.put(entry.getKey().toString(), entry.getValue());
-				percentage.put(entry.getKey().toString(), frequency.getPct(entry.getKey()));
-				accumulationPercentage.put(entry.getKey().toString(), frequency.getCumPct(entry.getKey()));
+				frequencyMap.put(entry.getKey().toString(), entry.getValue() );
+//				Double pct = frequency.getPct(entry.getKey())  * 100 ;
+//				sumPercentage += pct;
+//				percentage.put(entry.getKey().toString(), pct);
+				
+				Double pct = frequency.getPct(entry.getKey())  * 100 ;
+				sumPercentage += pct;
+				validatePercentage.put(entry.getKey().toString(), pct);
+				
+				Double cumpct = frequency.getCumPct(entry.getKey())  * 100;
+				accumulationPercentage.put(entry.getKey().toString(), cumpct);
 			}
 			
-//			calNormalDistribution(dataArr);
+
+			//			calNormalDistribution(dataArr);
 /*			if (varietyDTO.getType() == DataVariety.DATA_TYPE_NUMERIC) {
 				Collections.sort(uniqList, new Comparator<Object>() {
 					@Override
@@ -171,13 +184,16 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 					}
 				});
 			}*/
-
+			retDto.setSumPercentage(sumPercentage);
+			
+			retDto.setSumValidatePercentage(sumValidatePercentage);
+			retDto.setSumFreq(frequency.getSumFreq());
 			retDto.setUniqueData(uniqList);
 
 			retDto.setFrequencyMap(frequencyMap);
-
+			retDto.setValidatePercentage(validatePercentage);
 			retDto.setAccumulationPercentage(accumulationPercentage);
-			retDto.setPercentage(percentage);
+			retDto.setPercentage(validatePercentage);
 			ResultDataDTO retDataDTO = new ResultDataDTO();
 			retDataDTO.setResultData(retDto);
 			resDataMap.put(varietyDTO.getVarietyName(), retDataDTO);
