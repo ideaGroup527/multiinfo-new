@@ -2,6 +2,8 @@ package org.jmu.multiinfo.web.controller;
 
 import org.jmu.multiinfo.dto.correlation.BivariateCorrelateCondition;
 import org.jmu.multiinfo.dto.correlation.BivariateCorrelateDTO;
+import org.jmu.multiinfo.dto.correlation.DistanceCorrelationCondition;
+import org.jmu.multiinfo.dto.correlation.DistanceCorrelationDTO;
 import org.jmu.multiinfo.service.correlation.CorrelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,13 @@ public class CorrelationStatisticsController {
 	@ResponseBody
 	public BivariateCorrelateDTO calBivariate(@RequestBody BivariateCorrelateCondition condition) {
 		return correlationService.bivariate(condition);
+	}
+	
+	
+	@RequestMapping(params = { "method=distance" })
+	@ResponseBody
+	public DistanceCorrelationDTO calDistance(@RequestBody DistanceCorrelationCondition condition){
+		return correlationService.distance(condition);
 	}
 
 }

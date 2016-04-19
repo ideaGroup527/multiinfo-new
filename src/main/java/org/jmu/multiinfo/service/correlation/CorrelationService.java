@@ -3,6 +3,8 @@ package org.jmu.multiinfo.service.correlation;
 import org.jmu.multiinfo.core.exception.DataErrException;
 import org.jmu.multiinfo.dto.correlation.BivariateCorrelateCondition;
 import org.jmu.multiinfo.dto.correlation.BivariateCorrelateDTO;
+import org.jmu.multiinfo.dto.correlation.DistanceCorrelationCondition;
+import org.jmu.multiinfo.dto.correlation.DistanceCorrelationDTO;
 
 /***
  * *
@@ -50,4 +52,12 @@ public Double pearsonTCoefficient(Double r,Integer n);
  * @throws DataErrException 
  */
 public Double spearmanRCoefficient(double[] dataArrX,double[] dataArrY) throws DataErrException;
+
+
+/***
+ * 距离相关
+ * @param condition
+ * @return
+ */
+public DistanceCorrelationDTO distance(DistanceCorrelationCondition condition);
 }
