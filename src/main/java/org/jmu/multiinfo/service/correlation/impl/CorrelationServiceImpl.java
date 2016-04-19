@@ -62,10 +62,12 @@ public class CorrelationServiceImpl implements CorrelationService {
 		BivariateCorrelateDTO biDTO = new BivariateCorrelateDTO();
 		DataDTO[][] dataGrid = condition.getDataGrid();
 		List<VarietyDTO> variableList	 = condition.getVariableList();
+		 Map<String, ResultDescDTO> basicDataMap = new HashMap<>();
+		 Map<String, List<Map<String, BiCoDataDTO>>> resDataMap = new HashMap<>();
+		
 		Map<String, List<Double>>  variableMap =	DataFormatUtil.converToDouble(dataGrid, variableList);
 		 for (Map.Entry<String, List<Double>> entry : variableMap.entrySet()) {
-			 Map<String, ResultDescDTO> basicDataMap = new HashMap<>();
-			 Map<String, List<Map<String, BiCoDataDTO>>> resDataMap = new HashMap<>();
+
 			 List<Map<String, BiCoDataDTO>> resDataList = new ArrayList<>(); 
 			 ResultDescDTO basicData = new ResultDescDTO();
 			 String varityName = entry.getKey();
@@ -103,15 +105,15 @@ public class CorrelationServiceImpl implements CorrelationService {
 			
 				resEMap.put(compEntry.getKey(), bidata) ;
 				resDataList.add(resEMap);
+				
 			}
-			 
-			 
 			resDataMap.put(varityName, resDataList);
 
+
+		}
 			biDTO.setBasicDataMap(basicDataMap);
 			 
 			biDTO.setResDataMap(resDataMap);
-		}
 		return biDTO;
 	}
 

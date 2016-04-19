@@ -5,6 +5,7 @@ import org.jmu.multiinfo.dto.correlation.BivariateCorrelateDTO;
 import org.jmu.multiinfo.service.correlation.CorrelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,7 +29,7 @@ public class CorrelationStatisticsController {
 	
 	@RequestMapping(params = { "method=bivariate" })
 	@ResponseBody
-	public BivariateCorrelateDTO calBivariate(BivariateCorrelateCondition condition) {
+	public BivariateCorrelateDTO calBivariate(@RequestBody BivariateCorrelateCondition condition) {
 		return correlationService.bivariate(condition);
 	}
 
