@@ -12,20 +12,51 @@
                 <p data-i18n-type="page"
                    data-i18n-tag="label_choose_variable">点击选择待选变量</p>
 
-                <div id="correlation_bivariate_area">
+                <div class="variable-zone">
 
                 </div>
                 <div id="Descriptive_Statistics_Descriptive_Config" data-panel="config">
-                    <fieldset id="Descriptive_Algorithm_Config">
+                    <fieldset id="Algorithm_Config">
                         <legend data-i18n-tag="options" data-i18n-type="page">选项</legend>
-
+                        <span>相关系数：</span>
                         <div class="checkbox-inline">
                             <label>
-                                <input type="checkbox" value="min" checked>
-                                <span data-i18n-type="algorithm" data-i18n-tag="min">最小值</span>
+                                <input type="checkbox" value="pearson" checked>
+                                <span data-i18n-type="algorithm" data-i18n-tag="pearson">Pearson</span>
                             </label>
                         </div>
-
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="spearman">
+                                <span data-i18n-type="algorithm" data-i18n-tag="spearman">spearman</span>
+                            </label>
+                        </div>
+                        <hr>
+                        <span>统计量：</span>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="arithmeticMean">
+                                <span data-i18n-type="algorithm" data-i18n-tag="arithmeticMean">均值</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="standardDeviation">
+                                <span data-i18n-type="algorithm" data-i18n-tag="standardDeviation">标准偏差</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="croprosumsq">
+                                <span data-i18n-type="algorithm" data-i18n-tag="croprosumsq">叉积偏差.</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-inline">
+                            <label>
+                                <input type="checkbox" value="covariance">
+                                <span data-i18n-type="algorithm" data-i18n-tag="covariance">协方差</span>
+                            </label>
+                        </div>
                     </fieldset>
                 </div>
             </div>

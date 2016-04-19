@@ -16,7 +16,7 @@ $.fn.navGenerator = function (config) {
             packageJSON.map(function (menuName) {
                 config.push(menuName.term);
             });
-            console.log(config);
+            // console.log(config);
         }
 
         packageJSON.map(function (level_1_menu, i) {

@@ -84,9 +84,7 @@
                 });
             }).done(function () {
                 $.getScript(scriptURL, function () {
-                    singleVariableChoose(variableList).done(function () {
-                        i18n();
-                    });
+                    singleVariableChoose(variableList);
                 });
             });
         } else {
