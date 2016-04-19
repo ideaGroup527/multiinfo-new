@@ -12,6 +12,9 @@ var resultTableGenerator = function () {
         case 'Descriptive_Statistics_Frequency':
             handleDescriptiveStatisticsFrequency(tableResult);
             break;
+        case 'Correlation_Bivariate':
+            handleCorrelationBivariate(tableResult);
+            break;
     }
 
     return def.resolve().promise();
@@ -94,13 +97,13 @@ var handleDescriptiveStatisticsDescriptive = function (tableResult) {
         });
     }
 };
-
-
 var handleDescriptiveStatisticsFrequency = function (tableResult) {
 
     var presentArea = $('.result-table');
 
     var frequencyData = tableResult.resDataMap;
+    console.log(frequencyData);
+
     for (var variable in frequencyData) {
         var container = $('<div>');
         $(container).addClass('frequency-table');
@@ -189,4 +192,7 @@ var handleDescriptiveStatisticsFrequency = function (tableResult) {
         $(container).append(variableTable);
         $(presentArea).append(container);
     }
+}
+var handleCorrelationBivariate = function (tableResult) {
+
 }

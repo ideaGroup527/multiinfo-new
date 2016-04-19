@@ -1,5 +1,4 @@
 var singleVariableChoose = function (variableList) {
-    var def = $.Deferred();
 
     var chooseArea = $('#correlation_bivariate_area');
 
@@ -12,6 +11,4 @@ var singleVariableChoose = function (variableList) {
         $(chooseArea).append(variableWrapper);
 
     });
-
-    return def.resolve().promise();
 };
