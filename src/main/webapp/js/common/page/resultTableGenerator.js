@@ -192,7 +192,84 @@ var handleDescriptiveStatisticsFrequency = function (tableResult) {
         $(container).append(variableTable);
         $(presentArea).append(container);
     }
-}
-var handleCorrelationBivariate = function (tableResult) {
+};
 
-}
+var handleCorrelationBivariate = function (tableResult) {
+    console.log(tableResult);
+
+    var presentArea = $('.result-table');
+
+    var bivariateTableData = tableResult.resDataMap;
+
+    var algorithmConfigs = sessionStorage.getItem('PRIVATE_ALGORITHM_CONFIG').split(',');
+
+    //参数名称
+    var PARAMS_KEY = Object.keys(bivariateTableData);
+
+    console.log(algorithmConfigs);
+
+    algorithmConfigs.map(function (config, i) {
+        if (config == 'pearson') {
+            var pearsonContainer = $('<div>');
+
+            var title = $('<h1>');
+            $(title).attr('data-i18n-tag', 'label_correlation')
+                .attr('data-i18n-type', 'page');
+            $(pearsonContainer).append(title);
+
+            var pearsonTable = $('<table>');
+            $(pearsonTable).addClass('table table-striped table-bordered active');
+
+            //打印头部
+            var row = $('<tr>');
+            var cell = $('<td>');
+            var div = $('<div>');
+
+            var headerRow = $(row).clone();
+
+            var emptyHeaderCell = $('<th>');
+            $(headerRow).append(emptyHeaderCell);
+
+            PARAMS_KEY.map(function (header) {
+                var headerCell = $('<th>');
+                $(headerCell).text(header);
+                $(headerRow).append(headerCell);
+            });
+
+            PARAMS_KEY.map(function (header) {
+                var paramRow = $(row).clone();
+
+                var paramCell = $(cell).clone();
+
+                var paramName = $(div).clone();
+                $(paramName).addClass('param-name')
+                    .text(header);
+
+                var paramKey = $(div).clone();
+                $(paramKey).addClass('param-key');
+
+                if (config != 'pearson' && config != 'spearman') {
+                    var keyName = $(div).clone();
+                    $(keyName).attr('data-i18n-type', 'table')
+                        .attr('data-i18n-tag', config);
+                    $(paramKey).append(keyName);
+                }
+                $(paramCell).append(paramName).append(paramKey);
+                $(paramRow).append(paramCell);
+
+                bivariateTableData[header].map(function (paramValue) {
+                    PARAMS_KEY.map(function (paramValueKey) {
+                        var paramDiv = $(div).clone();
+
+//                        paramValue[paramValueKey]
+                    });
+                });
+            });
+
+
+        }
+    });
+
+
+};
+
