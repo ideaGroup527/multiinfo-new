@@ -72,6 +72,31 @@ public static Map<String, List<Double>> converToDouble(DataDTO[][] dataGrid,List
 	return variableDataMap;
 }
 
+public static DataDTO[][] transposition(DataDTO[][] dataGrid){
+	DataDTO[][] tDataGrid = new DataDTO[dataGrid[0].length][dataGrid.length];
+	for (int i = 0; i < dataGrid.length; i++) {
+		for (int j = 0; j < dataGrid[0].length; j++) {
+			tDataGrid[j][i] = dataGrid[i][j];
+		}
+	}
+	return tDataGrid;
+}
+
+
+
+public static double[][] transposition(List<List<Double>> dataGridList){
+	
+	double[][]  tDataGrid = new double[dataGridList.get(0).size()][dataGridList.size()];
+	for (int i = 0; i < dataGridList.size(); i++) {
+		 List<Double> dataGrid =	dataGridList.get(i);
+		for (int j = 0; j < dataGrid.size(); j++) {
+			Double data  = dataGrid.get(j);
+			tDataGrid[j][i] = data;
+		}
+	}
+	return tDataGrid;
+}
+
 public static double[]  converToDouble(List<Double> dataList){
 	double[] dataArr = new double[dataList.size()];
 	for (int i = 0; i < dataList.size(); i++) {

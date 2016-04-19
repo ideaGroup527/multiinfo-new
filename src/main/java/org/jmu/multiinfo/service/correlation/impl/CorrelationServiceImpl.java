@@ -14,6 +14,9 @@ import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
 import org.jmu.multiinfo.dto.correlation.BiCoDataDTO;
 import org.jmu.multiinfo.dto.correlation.BivariateCorrelateCondition;
 import org.jmu.multiinfo.dto.correlation.BivariateCorrelateDTO;
+import org.jmu.multiinfo.dto.correlation.DisCoDataDTO;
+import org.jmu.multiinfo.dto.correlation.DistanceCorrelationCondition;
+import org.jmu.multiinfo.dto.correlation.DistanceCorrelationDTO;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.jmu.multiinfo.service.correlation.CorrelationService;
 import org.slf4j.Logger;
@@ -116,6 +119,89 @@ public class CorrelationServiceImpl implements CorrelationService {
 			 
 			biDTO.setResDataMap(resDataMap);
 		return biDTO;
+	}
+	
+	
+	
+	@Override
+	public DistanceCorrelationDTO distance(DistanceCorrelationCondition condition) {
+		DistanceCorrelationDTO resDTO = new DistanceCorrelationDTO();
+		DataDTO[][] dataGrid =	condition.getDataGrid();
+		List<VarietyDTO> varietyList = condition.getVariableList();
+		Integer rowSize = 0;
+		//变量间
+		Map<String,List<Map<String,DisCoDataDTO>>> resDataMap = new HashMap<>();
+		Map<String,ResultDescDTO> basicDataMap = new HashMap<>();
+		
+		List<List<Double>> dataGridList = new ArrayList<>();
+		
+		Map<String, List<Double>>  variableMap =	DataFormatUtil.converToDouble(dataGrid, varietyList);
+		for (Map.Entry<String, List<Double>> entry : variableMap.entrySet()) {
+			 String varityName = entry.getKey();
+			 List<Double> dataList = entry.getValue();
+			 dataGridList.add(dataList);
+			 
+			 List<Map<String,DisCoDataDTO>> resDataList = new ArrayList<>();
+			 
+			 double[] dataArrX = DataFormatUtil.converToDouble(dataList);
+			 //基本统计量
+			 ResultDescDTO basicData = new ResultDescDTO();
+			 rowSize = basicStatisticsService.getN(dataArrX);
+			 basicData.setCount(rowSize);
+			 basicData.setArithmeticMean(basicStatisticsService.arithmeticMean(dataArrX));
+			 basicDataMap.put(varityName, basicData);
+			 
+			 for (Map.Entry<String, List<Double>> compEntry : variableMap.entrySet()) {
+				 Map<String,DisCoDataDTO> resEDataMap = new HashMap<>();
+				 DisCoDataDTO disCoData = new DisCoDataDTO();
+				 
+				 List<Double> compDataList = compEntry.getValue();
+				 double[] dataArrY = DataFormatUtil.converToDouble(compDataList);
+				 try {
+					 disCoData.setEuclideanDistance(basicStatisticsService.euclideanDistance(dataArrX, dataArrY));
+					 disCoData.setChebyshevDistance(basicStatisticsService.chebyshevDistance(dataArrX, dataArrY));
+					 disCoData.setCityBlockDistance(basicStatisticsService.cityBlockDistance(dataArrX, dataArrY));
+					 disCoData.setSquareEuclideanDistance(basicStatisticsService.squareEuclideanDistance(dataArrX, dataArrY));
+					 disCoData.setMinkowskiDistace(basicStatisticsService.minkowskiDistace(dataArrX, dataArrY, condition.getMinkowskiP(), condition.getMinkowskiQ()));
+				} catch (DataErrException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				 
+				 resEDataMap.put(compEntry.getKey(), disCoData);
+				 resDataList.add(resEDataMap);
+			 }
+			 resDataMap.put(varityName, resDataList);
+		}
+		
+		
+		resDTO.setResDataMap(resDataMap);
+		resDTO.setBasicDataMap(basicDataMap);
+		
+		
+		//个体间
+		double[][] unitOraDataArr = DataFormatUtil.transposition(dataGridList);
+		
+		DisCoDataDTO[][] unitDataArr = new DisCoDataDTO[rowSize][rowSize];
+		for (int i = 0 ;i < rowSize ; i++ ) {
+			for (int j = 0 ;j < rowSize ; j++ ) {
+				DisCoDataDTO disCoData = new DisCoDataDTO();
+				try {
+					disCoData.setEuclideanDistance(basicStatisticsService.euclideanDistance(unitOraDataArr[i], unitOraDataArr[j]));
+					disCoData.setChebyshevDistance(basicStatisticsService.chebyshevDistance(unitOraDataArr[i], unitOraDataArr[j]));
+					 disCoData.setCityBlockDistance(basicStatisticsService.cityBlockDistance(unitOraDataArr[i], unitOraDataArr[j]));
+					 disCoData.setSquareEuclideanDistance(basicStatisticsService.squareEuclideanDistance(unitOraDataArr[i], unitOraDataArr[j]));
+					 disCoData.setMinkowskiDistace(basicStatisticsService.minkowskiDistace(unitOraDataArr[i], unitOraDataArr[j], condition.getMinkowskiP(), condition.getMinkowskiQ()));
+				} catch (DataErrException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				unitDataArr[i][j] = disCoData;
+			}
+		}
+		
+		resDTO.setUnitDataArr(unitDataArr);
+		return resDTO;
 	}
 
 }
