@@ -23,6 +23,4 @@ var singleVariableChoose = function (variableList) {
 
         $(variableZone).append(zone);
     });
-
-
 };

@@ -1,14 +1,26 @@
 var singleVariableChoose = function (variableList) {
 
-    var chooseArea = $('#correlation_bivariate_area');
+    var variableZone = $('.variable-zone');
 
-    variableList.map(function (variable, i) {
-        var variableWrapper = $('<span>');
-        $(variableWrapper).addClass('variable-wrapper')
-            .text(variable.varietyName);
+    var group = [''];
 
-        $(variableWrapper).attr('data-config', JSON.stringify(variable));
-        $(chooseArea).append(variableWrapper);
+    group.map(function (elem) {
+        var zone = $('<div>');
+        $(zone).addClass('zone').attr('data-variable-group', elem);
 
+        var variableName = $('<h4>');
+        $(variableName).text(elem);
+        $(zone).append(variableName);
+
+        variableList.map(function (variable, i) {
+            var variableWrapper = $('<span>');
+            $(variableWrapper).addClass('variable-wrapper')
+                .text(variable.varietyName);
+
+            $(variableWrapper).attr('data-config', JSON.stringify(variable));
+            $(zone).append(variableWrapper);
+        });
+
+        $(variableZone).append(zone);
     });
 };

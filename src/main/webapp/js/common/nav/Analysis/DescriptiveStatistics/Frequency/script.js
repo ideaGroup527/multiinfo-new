@@ -1,17 +1,26 @@
 var singleVariableChoose = function (variableList) {
 
-    var def = $.Deferred();
+    var variableZone = $('.variable-zone');
 
-    var chooseArea = $('#descriptive_statistics_variables_area');
+    var group = [''];
 
-    variableList.map(function (variable, i) {
-        var variableWrapper = $('<span>');
-        $(variableWrapper).addClass('variable-wrapper')
-            .text(variable.varietyName);
+    group.map(function (elem) {
+        var zone = $('<div>');
+        $(zone).addClass('zone').attr('data-variable-group', elem);
 
-        $(variableWrapper).attr('data-config', JSON.stringify(variable));
-        $(chooseArea).append(variableWrapper);
+        var variableName = $('<h4>');
+        $(variableName).text(elem);
+        $(zone).append(variableName);
+
+        variableList.map(function (variable, i) {
+            var variableWrapper = $('<span>');
+            $(variableWrapper).addClass('variable-wrapper')
+                .text(variable.varietyName);
+
+            $(variableWrapper).attr('data-config', JSON.stringify(variable));
+            $(zone).append(variableWrapper);
+        });
+
+        $(variableZone).append(zone);
     });
-
-    return def.resolve().promise();
 };
