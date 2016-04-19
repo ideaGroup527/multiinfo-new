@@ -78,7 +78,7 @@ public class UploadServiceImpl implements UploadService{
 			excelDto.setSheetNum(sheetNum);
 			excelDto.setSheetNameList(sheetNameList);
 			Sheet sheet = (Sheet) wb.getSheetAt(n);
-			int rowcount = sheet.getLastRowNum();// 取得有效的行数
+			int rowcount = sheet.getPhysicalNumberOfRows();// 取得有效的行数
 			int colcount = sheet.getRow(0).getPhysicalNumberOfCells();// 总列数
 			DataDTO[][] dataGrid = new DataDTO[rowcount][colcount];
 			List<VarietyDTO> varietyList = new ArrayList<VarietyDTO>();
