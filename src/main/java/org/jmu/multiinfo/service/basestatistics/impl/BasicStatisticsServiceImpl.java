@@ -2,6 +2,9 @@ package org.jmu.multiinfo.service.basestatistics.impl;
 
 import java.math.BigDecimal;
 
+import org.apache.commons.math3.ml.distance.ChebyshevDistance;
+import org.apache.commons.math3.ml.distance.EuclideanDistance;
+import org.apache.commons.math3.ml.distance.ManhattanDistance;
 import org.apache.commons.math3.stat.Frequency;
 import org.apache.commons.math3.stat.correlation.Covariance;
 import org.apache.commons.math3.stat.descriptive.moment.GeometricMean;
@@ -17,6 +20,7 @@ import org.apache.commons.math3.stat.descriptive.rank.Percentile;
 import org.apache.commons.math3.stat.descriptive.summary.Sum;
 import org.apache.commons.math3.stat.ranking.NaNStrategy;
 import org.apache.commons.math3.stat.ranking.TiesStrategy;
+import org.apache.commons.math3.util.FastMath;
 import org.jmu.multiinfo.core.exception.DataErrException;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.springframework.stereotype.Service;
@@ -204,5 +208,59 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 		Covariance co = new Covariance();
 		return co.covariance(dataArrX, dataArrY);
 	}
+
+
+	@Override
+	public Double euclideanDistance(double[] dataArrX, double[] dataArrY) throws DataErrException {
+		int size = getN(dataArrX);
+		if(size == 0  || size != getN(dataArrY)) throw new DataErrException("cannot resolve for euclideanDistance because diffrent size");
+		EuclideanDistance ed = new EuclideanDistance();
+		return ed.compute(dataArrX, dataArrY);
+	}
+
+
+	@Override
+	public Double squareEuclideanDistance(double[] dataArrX, double[] dataArrY) throws DataErrException {
+		Double e = euclideanDistance(dataArrX, dataArrY);
+		return e * e;
+	}
+
+
+	@Override
+	public Double chebyshevDistance(double[] dataArrX, double[] dataArrY) throws DataErrException {
+		int size = getN(dataArrX);
+		if(size == 0  || size != getN(dataArrY)) throw new DataErrException("cannot resolve for chebyshevDistance because diffrent size");
+		ChebyshevDistance cd = new ChebyshevDistance();
+		return cd.compute(dataArrX, dataArrY);
+	}
+
+
+	@Override
+	public Double cityBlockDistance(double[] dataArrX, double[] dataArrY) throws DataErrException {
+		return manhattanDistance(dataArrX, dataArrY);
+	}
+
+
+	@Override
+	public Double manhattanDistance(double[] dataArrX, double[] dataArrY) throws DataErrException {
+		int size = getN(dataArrX);
+		if(size == 0  || size != getN(dataArrY)) throw new DataErrException("cannot resolve for manhattanDistance because diffrent size");
+		ManhattanDistance md = new ManhattanDistance();
+		return md.compute(dataArrX, dataArrY);
+	}
+
+
+	@Override
+	public Double minkowskiDistace(double[] dataArrX, double[] dataArrY, Integer p, Integer q) throws DataErrException {
+		int size = getN(dataArrX);
+		if(size == 0  || size != getN(dataArrY)) throw new DataErrException("cannot resolve for manhattanDistance because diffrent size");
+		 Double qqsq = 1.0/q;
+		double sum = 0;
+	        for (int i = 0; i < size; i++) {
+	            sum +=FastMath.pow(FastMath.abs(dataArrX[i] - dataArrY[i]), p) ;
+	        }
+		return   FastMath.pow(sum,qqsq);
+	}
+
 
 }

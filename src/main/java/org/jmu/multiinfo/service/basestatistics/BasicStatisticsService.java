@@ -191,4 +191,61 @@ public interface BasicStatisticsService {
 	 * @throws DataErrException 
 	 */
 	public Double covariance(double[] dataArrX,double[] dataArrY) throws DataErrException;
+	
+	/***
+	 * 欧氏距离公式
+	 * @param dataArrX
+	 * @param dataArrY
+	 * @return
+	 * @throws DataErrException 
+	 */
+	public Double euclideanDistance(double[] dataArrX,double[] dataArrY) throws DataErrException;
+	
+	/***
+	 * 平方欧式举例公式
+	 * @param dataArrX
+	 * @param dataArrY
+	 * @return
+	 * @throws DataErrException
+	 */
+	public Double squareEuclideanDistance(double[] dataArrX,double[] dataArrY) throws DataErrException;
+	
+	
+	/***
+	 * 切比雪夫距离
+	 * @param dataArrX
+	 * @param dataArrY
+	 * @return
+	 * @throws DataErrException
+	 */
+	public Double chebyshevDistance(double[] dataArrX,double[] dataArrY) throws DataErrException;
+	
+	/***
+	 * 城市街区距离（曼哈顿距离）
+	 * @param dataArrX
+	 * @param dataArrY
+	 * @return
+	 * @throws DataErrException
+	 */
+	public Double cityBlockDistance(double[] dataArrX,double[] dataArrY) throws DataErrException;
+	
+	/***
+	 * 曼哈顿距离
+	 * @param dataArrX
+	 * @param dataArrY
+	 * @return
+	 * @throws DataErrException
+	 */
+	public Double manhattanDistance(double[] dataArrX,double[] dataArrY) throws DataErrException;
+
+	/***
+	 * 闵可夫斯基距离
+	 * @param dataArrX
+	 * @param dataArrY
+	 * @param p 幂
+	 * @param q 根
+	 * @return
+	 * @throws DataErrException
+	 */
+	public Double minkowskiDistace(double[] dataArrX,double[] dataArrY,Integer p,Integer q) throws DataErrException;
 }

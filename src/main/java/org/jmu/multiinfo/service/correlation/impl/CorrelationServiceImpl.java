@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.math3.util.FastMath;
 import org.jmu.multiinfo.core.exception.DataErrException;
 import org.jmu.multiinfo.core.util.DataFormatUtil;
 import org.jmu.multiinfo.dto.basestatistics.DataDTO;
@@ -32,13 +33,13 @@ public class CorrelationServiceImpl implements CorrelationService {
 		Double lxy = basicStatisticsService.averageMulSumDeviation(dataArrX, dataArrY);
 		Double lxx = basicStatisticsService.averageSumDeviation(dataArrX);
 		Double lyy = basicStatisticsService.averageSumDeviation(dataArrY);
-		Double r = lxy / (Math.sqrt(lxx * lyy));
+		Double r = lxy / (FastMath.sqrt(lxx * lyy));
 		return r;
 	}
 
 	@Override
 	public Double pearsonTCoefficient(Double r, Integer n) {
-		Double tc = r * Math.sqrt(n - 2) / Math.sqrt(1 - r * r);
+		Double tc = r * FastMath.sqrt(n - 2) / FastMath.sqrt(1 - r * r);
 		return tc;
 	}
 

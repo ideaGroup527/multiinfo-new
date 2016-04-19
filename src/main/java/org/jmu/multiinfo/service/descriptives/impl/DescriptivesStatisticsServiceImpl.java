@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 
 import org.apache.commons.math3.stat.Frequency;
 import org.apache.commons.math3.stat.descriptive.rank.Percentile;
+import org.apache.commons.math3.util.FastMath;
 import org.jmu.multiinfo.core.util.DataFormatUtil;
 import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.core.util.PositionBean;
@@ -230,8 +231,8 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 	
 	ksdto.setPositive(Collections.max(DList));
 	ksdto.setNegative(Collections.min(DList));
-	ksdto.setAbsolute((Math.abs(ksdto.getPositive()) >Math.abs(ksdto.getNegative())?Math.abs(ksdto.getPositive()):Math.abs(ksdto.getNegative())));
-	ksdto.setKsz(Math.sqrt(n)*ksdto.getAbsolute());
+	ksdto.setAbsolute((FastMath.abs(ksdto.getPositive()) >FastMath.abs(ksdto.getNegative())?FastMath.abs(ksdto.getPositive()):Math.abs(ksdto.getNegative())));
+	ksdto.setKsz(FastMath.sqrt(n)*ksdto.getAbsolute());
 	return ksdto;
 	}
 

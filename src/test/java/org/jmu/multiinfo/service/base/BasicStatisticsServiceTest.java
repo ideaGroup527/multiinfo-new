@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import org.apache.commons.math3.stat.Frequency;
 import org.apache.commons.math3.stat.descriptive.rank.Percentile;
 import org.jmu.multiinfo.base.util.MyJUnit4ClassRunner;
+import org.jmu.multiinfo.core.exception.DataErrException;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -62,5 +63,41 @@ public class BasicStatisticsServiceTest {
 			
 		}
 		
+	}
+	
+	@Test
+	public void euclideanDistanceTest() throws DataErrException{
+		double[] dataArrX = {1.0,4,1};
+		double[] dataArrY={2,4,2};
+		System.out.println(basicStatisticsService.euclideanDistance(dataArrX, dataArrY));
+	}
+	
+	@Test
+	public void squareEuclideanDistanceTest() throws DataErrException{
+		double[] dataArrX = {1.0,4,1};
+		double[] dataArrY={2,4,2};
+		System.out.println(basicStatisticsService.squareEuclideanDistance(dataArrX, dataArrY));
+	}
+	
+	
+	@Test
+	public void chebyshevDistanceTest() throws DataErrException{
+		double[] dataArrX = {1.0,4,1};
+		double[] dataArrY={2,4,2};
+		System.out.println(basicStatisticsService.chebyshevDistance(dataArrX, dataArrY));
+	}
+	
+	@Test
+	public void cityBlockDistanceTest() throws DataErrException{
+		double[] dataArrX = {1.0,4,1};
+		double[] dataArrY={2,4,2};
+		System.out.println(basicStatisticsService.cityBlockDistance(dataArrX, dataArrY));
+	}
+	
+	@Test
+	public void minkowskiDistaceTest() throws DataErrException{
+		double[] dataArrX = {1,2,4,5,6};
+		double[] dataArrY={2.2,3.1,4.4,3.5,4.6};
+		System.out.println(basicStatisticsService.minkowskiDistace(dataArrX, dataArrY,3,4));
 	}
 }

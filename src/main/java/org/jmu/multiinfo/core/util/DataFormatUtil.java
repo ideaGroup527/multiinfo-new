@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.math3.util.FastMath;
 import org.jmu.multiinfo.dto.basestatistics.DataDTO;
 import org.jmu.multiinfo.dto.basestatistics.DataVariety;
 import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
@@ -29,7 +30,7 @@ public static Double converToDouble(DataDTO dataDTO){
 		String[] scienceData = oraData.split("[Ee]");
 		Double a = converToDouble(scienceData[0]);
 		Double e =	converToDouble(scienceData[1]);
-		data = 	a * Math.pow(10 , e );
+		data = 	a * FastMath.pow(10 , e );
 		break;	
 	case DataVariety.DATA_TYPE_NUMERIC_DOT:
 		//TODO

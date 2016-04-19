@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.math3.util.FastMath;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.POIXMLDocument;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
@@ -68,7 +69,7 @@ public class ExcelUtil {
 		for (int i = value.length() - 1; i >= 0; i--) {
 			int tmpInt = value.charAt(i);
 			tmpInt -= 64;
-			rtn += (int) Math.pow(26, powIndex) * tmpInt;
+			rtn += (int) FastMath.pow(26, powIndex) * tmpInt;
 			powIndex++;
 		}
 		return rtn;
