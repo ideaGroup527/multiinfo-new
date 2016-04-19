@@ -3,6 +3,7 @@ package org.jmu.multiinfo.service.basestatistics.impl;
 import java.math.BigDecimal;
 
 import org.apache.commons.math3.stat.Frequency;
+import org.apache.commons.math3.stat.correlation.Covariance;
 import org.apache.commons.math3.stat.descriptive.moment.GeometricMean;
 import org.apache.commons.math3.stat.descriptive.moment.Kurtosis;
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
@@ -183,7 +184,7 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 
 	@Override
 	public Integer getN(double[] dataArr) {
-		if(dataArr == null ) return 0;
+		if(dataArr == null ) return  0;
 		return dataArr.length;
 	}
 
@@ -192,6 +193,16 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 	public Double round(Double data, Integer precision) {
 		 BigDecimal bd = new BigDecimal(data);  
 		return bd.setScale(precision, BigDecimal.ROUND_HALF_UP).doubleValue();
+	}
+
+
+	@Override
+	public Double covariance(double[] dataArrX, double[] dataArrY) throws DataErrException {
+		int size = getN(dataArrX);
+		if(size == 0  || size != getN(dataArrY)) throw new DataErrException("cannot resolve for covariance because diffrent size");
+		if(size < 2) throw new DataErrException("cannot resolve for covariance because to little sample ");
+		Covariance co = new Covariance();
+		return co.covariance(dataArrX, dataArrY);
 	}
 
 }

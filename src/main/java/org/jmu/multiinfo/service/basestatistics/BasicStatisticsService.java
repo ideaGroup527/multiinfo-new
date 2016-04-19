@@ -182,4 +182,13 @@ public interface BasicStatisticsService {
 	 * @return
 	 */
 	public Double round(Double data,Integer precision);
+	
+	/***
+	 * 协方差
+	 * @param dataArrX
+	 * @param dataArrY
+	 * @return
+	 * @throws DataErrException 
+	 */
+	public Double covariance(double[] dataArrX,double[] dataArrY) throws DataErrException;
 }

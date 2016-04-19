@@ -1,6 +1,8 @@
 package org.jmu.multiinfo.service.correlation;
 
 import org.jmu.multiinfo.core.exception.DataErrException;
+import org.jmu.multiinfo.dto.correlation.BivariateCorrelateCondition;
+import org.jmu.multiinfo.dto.correlation.BivariateCorrelateDTO;
 
 /***
  * *
@@ -15,7 +17,13 @@ import org.jmu.multiinfo.core.exception.DataErrException;
  *
  */
 public interface CorrelationService {
-//public  bivariate();
+	
+	/***
+	 * 相关分析-双变量
+	 * @param condition
+	 * @return
+	 */
+public BivariateCorrelateDTO bivariate(BivariateCorrelateCondition condition);
 
 	/***
 	 * person系数R计算双变量
@@ -32,7 +40,7 @@ public Double pearsonRCoefficient(double[] dataArrX,double[] dataArrY) throws Da
  * @param n 案例数
  * @return
  */
-public Double pearsonTCoefficient(Double r,Double n);
+public Double pearsonTCoefficient(Double r,Integer n);
 
 
 /***
