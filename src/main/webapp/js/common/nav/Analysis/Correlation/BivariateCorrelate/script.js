@@ -1,4 +1,4 @@
-var descriptiveStatisticsVariableChoose = function (variableList) {
+var singleVariableChoose = function (variableList) {
     var def = $.Deferred();
 
     var chooseArea = $('#correlation_bivariate_area');

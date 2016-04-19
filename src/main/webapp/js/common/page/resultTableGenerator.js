@@ -25,7 +25,7 @@ var handleDescriptiveStatisticsDescriptive = function (tableResult) {
     var graphConfigs = sessionStorage.getItem('PRIVATE_GRAPH_CONFIG').split(',');
 
     var table = $('<table>');
-    $(table).addClass('table table-striped table-bordered active');
+    $(table).addClass('table table-striped table-bordered table-condensed');
 
     var tr = $('<tr>');
 
