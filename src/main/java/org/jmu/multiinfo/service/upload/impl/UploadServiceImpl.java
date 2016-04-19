@@ -105,7 +105,7 @@ public class UploadServiceImpl implements UploadService{
 						variety.setVarietyName(datamap.get("value").toString());
 						variety.setType((Integer) datamap.get("type"));
 						variety.setTypeDes(typeDes);
-						variety.setRange(pjs+2+":"+pjs+(sheet.getPhysicalNumberOfRows()-1));
+						variety.setRange(pjs+2+":"+pjs+(sheet.getPhysicalNumberOfRows()));
 						varietyList.add(variety);
 					}
 					if(!isFirstRowVar&&i==0){
@@ -115,7 +115,7 @@ public class UploadServiceImpl implements UploadService{
 						variety.setVarietyName("V"+(j+1));
 						variety.setType((Integer) datamap.get("type"));
 						variety.setTypeDes(typeDes);
-						variety.setRange(pjs+1+":"+pjs+(sheet.getPhysicalNumberOfRows()-1));
+						variety.setRange(pjs+1+":"+pjs+(sheet.getPhysicalNumberOfRows()));
 						varietyList.add(variety);
 						
 					}
