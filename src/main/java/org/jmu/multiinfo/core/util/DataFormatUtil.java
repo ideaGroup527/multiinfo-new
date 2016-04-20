@@ -1,6 +1,7 @@
 package org.jmu.multiinfo.core.util;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -10,6 +11,7 @@ import org.apache.commons.math3.util.FastMath;
 import org.jmu.multiinfo.dto.basestatistics.DataDTO;
 import org.jmu.multiinfo.dto.basestatistics.DataVariety;
 import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
+import org.springframework.util.CollectionUtils;
 
 public class DataFormatUtil {
 public static Double converToDouble(String data) throws NumberFormatException{
@@ -54,6 +56,13 @@ public static Double converToDouble(DataDTO dataDTO){
 	return data;
 }
 
+
+/***
+ * 数据转换根据变量制成键值 <变量名，数据>
+ * @param dataGrid
+ * @param variableList
+ * @return
+ */
 public static Map<String, List<Double>> converToDouble(DataDTO[][] dataGrid,List<VarietyDTO> variableList){
 	Map<String,List<Double>> variableDataMap = new HashMap<>();
 	for (Iterator<VarietyDTO> iterator = variableList.iterator(); iterator.hasNext();) {
@@ -72,6 +81,37 @@ public static Map<String, List<Double>> converToDouble(DataDTO[][] dataGrid,List
 	return variableDataMap;
 }
 
+public static Map<String, List<Double>> converToDouble(DataDTO[][] dataGrid,List<VarietyDTO> variableList,VarietyDTO factorVariable){
+	Map<String,List<Double>> resDataMap = new HashMap<>();
+	PositionBean 	factorVarRange =ExcelUtil.splitRange( factorVariable.getRange());//因子变量范围如A1:G1--
+	
+	for (Iterator<VarietyDTO> iterator = variableList.iterator(); iterator.hasNext();) {
+		VarietyDTO varietyDTO = (VarietyDTO) iterator.next();
+		PositionBean varRange = ExcelUtil.splitRange(varietyDTO.getRange());
+		for (int i = factorVarRange.getFirstRowId() - 1; i < factorVarRange.getLastRowId(); i++) {
+			for (int j = factorVarRange.getFirstColId() - 1; j < factorVarRange.getLastColId(); j++) {
+				DataDTO varDTO = dataGrid[i][j];
+				String factName = varDTO.getData().toString();
+				List<Double> list =	resDataMap.get(factName);
+				if(CollectionUtils.isEmpty(list)) list = new ArrayList<>();
+				resDataMap.put(factName, list);
+				for (int k = varRange.getFirstColId() - 1; k < varRange.getLastColId(); k++) {
+					DataDTO dataDTO = dataGrid[i][k];
+					list.add(DataFormatUtil.converToDouble(dataDTO));
+					
+				}
+			}
+		}
+		
+	}
+	return resDataMap;
+}
+
+/***
+ * 转置数据
+ * @param dataGrid
+ * @return
+ */
 public static DataDTO[][] transposition(DataDTO[][] dataGrid){
 	DataDTO[][] tDataGrid = new DataDTO[dataGrid[0].length][dataGrid.length];
 	for (int i = 0; i < dataGrid.length; i++) {

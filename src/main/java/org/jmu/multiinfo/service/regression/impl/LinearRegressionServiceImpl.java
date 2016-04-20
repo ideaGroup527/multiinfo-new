@@ -29,7 +29,7 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 	@Autowired
 	private BasicStatisticsService basicStatisticsService;
 	@Override
-	public CommonDTO calSingleLinearRegression(double[][] data) {
+	public SingleLinearDTO calSingleLinearRegression(double[][] data) {
 		SingleLinearDTO linearDTO = new SingleLinearDTO();
 		SimpleRegression regression = new SimpleRegression();
 		regression.addData(data);

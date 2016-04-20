@@ -3,6 +3,7 @@ package org.jmu.multiinfo.service.regression;
 import org.jmu.multiinfo.dto.basestatistics.BiVarCondition;
 import org.jmu.multiinfo.dto.regression.CommonDTO;
 import org.jmu.multiinfo.dto.regression.GraphDTO;
+import org.jmu.multiinfo.dto.regression.SingleLinearDTO;
 
 
 /***
@@ -19,7 +20,7 @@ import org.jmu.multiinfo.dto.regression.GraphDTO;
  */
 public interface LinearRegressionService {
 	
-public CommonDTO calSingleLinearRegression(double[][] data);
+public SingleLinearDTO calSingleLinearRegression(double[][] data);
 
 public CommonDTO calOLSMultipleLinearRegression(double[] y, double[][] x);
 
