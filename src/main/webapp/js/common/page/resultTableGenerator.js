@@ -2,9 +2,14 @@ var resultTableGenerator = function () {
 
     var def = $.Deferred();
 
+    var presentArea = $('.result-table');
+
     var resultType = sessionStorage.getItem('PRIVATE_RESULT_TYPE');
     var tableResult = JSON.parse(sessionStorage.getItem('PRIVATE_TABLE_RESULT'));
 
+    var graphConfigs = sessionStorage.getItem('PRIVATE_GRAPH_CONFIG').split(',');
+
+    //制表区
     switch (resultType) {
         case 'Descriptive_Statistics_Descriptive':
             handleDescriptiveStatisticsDescriptive(tableResult);
@@ -17,6 +22,38 @@ var resultTableGenerator = function () {
             break;
     }
 
+    //绘图区
+    if (graphConfigs) {
+        graphConfigs.map(function (graph, i) {
+            console.log(graph);
+            var graphArea = $('<div>');
+            $(graphArea).css({
+                'height': 800
+            }).addClass('col-md-12').attr('id', 'graph_' + i);
+
+            $(presentArea).append(graphArea);
+
+            switch (graph) {
+                case 'boxplot':
+                    new Boxplot({
+                        data: tableResult,
+                        opt: "",
+                        content: 'graph_' + i,
+                        title: '箱线图'
+                    }).render();
+                    break;
+                case 'piegraph':
+                    new Pie({
+                        data: tableResult,//数据json,
+                        opt: "",//配置json
+                        content: 'graph_' + i,//图表容器的id
+                        title: '饼图' //图表类型标题
+                    }).render();
+                    break;
+            }
+        });
+    }
+
     return def.resolve().promise();
 };
 
@@ -25,7 +62,6 @@ var handleDescriptiveStatisticsDescriptive = function (tableResult) {
     var presentArea = $('.result-table');
 
     var algorithmConfigs = sessionStorage.getItem('PRIVATE_ALGORITHM_CONFIG').split(',');
-    var graphConfigs = sessionStorage.getItem('PRIVATE_GRAPH_CONFIG').split(',');
 
     var table = $('<table>');
     $(table).addClass('table table-striped table-bordered table-condensed');
@@ -73,29 +109,6 @@ var handleDescriptiveStatisticsDescriptive = function (tableResult) {
 
     $(presentArea).append(table);
 
-    //绘图区
-    if (graphConfigs) {
-        graphConfigs.map(function (graph, i) {
-            console.log(graph);
-            var graphArea = $('<div>');
-            $(graphArea).css({
-                'height': 800
-            }).addClass('col-md-12').attr('id', 'graph_' + i);
-
-            $(presentArea).append(graphArea);
-
-            switch (graph) {
-                case 'boxplot':
-                    new Boxplot({
-                        data: tableResult,
-                        opt: "",
-                        content: 'graph_' + i,
-                        title: '箱线图'
-                    }).render();
-                    break;
-            }
-        });
-    }
 };
 var handleDescriptiveStatisticsFrequency = function (tableResult) {
 
