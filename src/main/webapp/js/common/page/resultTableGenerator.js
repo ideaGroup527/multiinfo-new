@@ -113,7 +113,7 @@ var handleDescriptiveStatisticsFrequency = function (tableResult) {
         $(container).append(title);
 
         var variableTable = $('<table>');
-        $(variableTable).addClass('table table-striped table-bordered active');
+        $(variableTable).addClass('table table-striped table-bordered');
 
         var tr = $('<tr>');
 
@@ -200,76 +200,84 @@ var handleCorrelationBivariate = function (tableResult) {
     var presentArea = $('.result-table');
 
     var bivariateTableData = tableResult.resDataMap;
+    var paramsList = Object.keys(bivariateTableData);
 
+    //配置显示的参数数组
     var algorithmConfigs = sessionStorage.getItem('PRIVATE_ALGORITHM_CONFIG').split(',');
 
-    //参数名称
-    var PARAMS_KEY = Object.keys(bivariateTableData);
+    //Pearson 与Spearman 参数数组
+    var tableConfigsList = sessionStorage.getItem('PRIVATE_PLUGIN_CONFIG_COR_BIV').split(',');
 
-    console.log(algorithmConfigs);
+    tableConfigsList.map(function (option) {
+        console.log(option);
+        var container = $('<div>');
+        $(container).addClass('frequency-table');
 
-    algorithmConfigs.map(function (config, i) {
-        if (config == 'pearson') {
-            var pearsonContainer = $('<div>');
+        var header = $('<h1>');
+        $(header).text(option);
 
-            var title = $('<h1>');
-            $(title).attr('data-i18n-tag', 'label_correlation')
-                .attr('data-i18n-type', 'page');
-            $(pearsonContainer).append(title);
+        var table = $('<table>');
+        $(table).addClass('table table-striped table-bordered');
 
-            var pearsonTable = $('<table>');
-            $(pearsonTable).addClass('table table-striped table-bordered active');
+        var row = $('<tr>');
+        var cell = $('<td>');
+        var headerCell = $('<th>');
 
-            //打印头部
-            var row = $('<tr>');
-            var cell = $('<td>');
-            var div = $('<div>');
+        //打印第一行
+        var headerRow = $(row).clone();
+        var emptyHeaderCell = $(headerCell).clone();
+        $(emptyHeaderCell).attr('colspan', '2');
+        $(headerRow).append(emptyHeaderCell);
 
-            var headerRow = $(row).clone();
+        //打印头部
+        paramsList.map(function (paramKey) {
+            //有几个变量打几个头部
+            var headerParamsCell = $(headerCell).clone();
+            $(headerParamsCell).text(paramKey);
+            $(headerRow).append(headerParamsCell);
+        });
+        $(table).append(headerRow);
 
-            var emptyHeaderCell = $('<th>');
-            $(headerRow).append(emptyHeaderCell);
+        //打印变量信息 - 有几个变量打几行
+        paramsList.map(function (bivData) {
+            var dataRow = $(row).clone();
 
-            PARAMS_KEY.map(function (header) {
-                var headerCell = $('<th>');
-                $(headerCell).text(header);
-                $(headerRow).append(headerCell);
-            });
+            paramsList.map(function (dataKey) {
+                if (bivData[dataKey]) {
+                    //打印变量名
+                    var variableFirstCell = $(td).clone();
+                    $(variableFirstCell).text(dataKey);
+                    $(dataRow).append(variableFirstCell);
 
-            PARAMS_KEY.map(function (header) {
-                var paramRow = $(row).clone();
-
-                var paramCell = $(cell).clone();
-
-                var paramName = $(div).clone();
-                $(paramName).addClass('param-name')
-                    .text(header);
-
-                var paramKey = $(div).clone();
-                $(paramKey).addClass('param-key');
-
-                if (config != 'pearson' && config != 'spearman') {
-                    var keyName = $(div).clone();
-                    $(keyName).attr('data-i18n-type', 'table')
-                        .attr('data-i18n-tag', config);
-                    $(paramKey).append(keyName);
-                }
-                $(paramCell).append(paramName).append(paramKey);
-                $(paramRow).append(paramCell);
-
-                bivariateTableData[header].map(function (paramValue) {
-                    PARAMS_KEY.map(function (paramValueKey) {
-                        var paramDiv = $(div).clone();
-
-//                        paramValue[paramValueKey]
+                    //打印算法选项名
+                    var variableSecCell = $(td).clone();
+                    algorithmConfigs.map(function (config) {
+                        var configWrapper = $('<div>');
+                        $(configWrapper).text(config)
+                            .attr('data-i18n-tag', config)
+                            .attr('data-i18n-type', 'table');
+                        $(variableSecCell).append(configWrapper);
                     });
-                });
+                    $(dataRow).append(variableSecCell);
+
+                    //打印参数值
+                    bivData[dataKey].map(function (singleData) {
+                        var paramValueCell = $(td).clone();
+                        paramsList.map(function (singleDataKey) {
+                            algorithmConfigs.map(function (alConfig) {
+                                var paramValueWrapper = $('<div>');
+                                $(paramValueWrapper).text(singleData[singleDataKey][alConfig]);
+                                $(paramValueCell).append(paramValueWrapper);
+                            });
+                            $(dataRow).append(paramValueCell);
+                        });
+                    })
+                }
             });
+        });
 
-
-        }
-    });
-
-
+        $(container).append(header).append(table);
+        $(presentArea).append(container);
+    })
 };
 

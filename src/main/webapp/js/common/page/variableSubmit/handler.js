@@ -1,4 +1,9 @@
-var handleSubmitType = function (type, data) {
+var handleSubmit = function (config) {
+
+    console.log(config);
+
+    var type = config.submitType;
+    var data = config.gridData;
 
     //0.存储分析的类型，以便后续操作
     sessionStorage.setItem('PRIVATE_RESULT_TYPE', type);
@@ -55,7 +60,17 @@ var handleSubmitType = function (type, data) {
         sessionStorage.setItem('PRIVATE_GRAPH_CONFIG', graphConfigs);
     }
 
-    //4.配置发送数据包
+    //4.PLUGIN 根据不同配置的增加项
+    if (config.pluginContainer) {
+        var pluginConfigsList = [];
+        var pluginConfigItem = $(config.pluginContainer).find(config.configType);
+        pluginConfigItem.map(function (i, plugin) {
+            pluginConfigsList.push($(plugin).val());
+        });
+        sessionStorage.setItem(config.storageKey, pluginConfigsList);
+    }
+
+    //5.配置发送数据包
     var dataPackage = {
         dataGrid: data,
         variableList: variablesLists[0]
