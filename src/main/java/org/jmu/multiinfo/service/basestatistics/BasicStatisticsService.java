@@ -248,4 +248,31 @@ public interface BasicStatisticsService {
 	 * @throws DataErrException
 	 */
 	public Double minkowskiDistace(double[] dataArrX,double[] dataArrY,Integer p,Integer q) throws DataErrException;
+	
+	/***
+	 * 级比
+	 * 第一个数除以后面每个数得到的
+	 * @param dataArr
+	 * @return
+	 * @throws DataErrException 
+	 */
+	public double[] stepwiseRatio(double[] dataArr) throws DataErrException;
+	
+	
+	/***
+	 * 累计和
+	 * @param dataArr
+	 * @return
+	 * @throws DataErrException
+	 */
+	public double[]  cumulativeSum(double[] dataArr) throws DataErrException;
+	
+	
+	/***
+	 * 均值生成
+	 * @param dataArr
+	 * @param formCoefficient
+	 * @return
+	 */
+	public double[] averageGeneration(double[] dataArr,double formCoefficient) throws DataErrException;
 }

@@ -263,4 +263,42 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 	}
 
 
+	@Override
+	public double[] stepwiseRatio(double[] dataArr) throws DataErrException {
+		int size = getN(dataArr)-1;
+		if(size <= 0 ) throw new DataErrException("cannot resolve for stepwiseRatio because too little size");
+		double[] resDataArr = new double[size];
+		for (int i = 0; i < size; i++) {
+			resDataArr[i] = dataArr[i] / dataArr[i+1] ;  
+		}
+		return resDataArr;
+	}
+
+
+	@Override
+	public double[] cumulativeSum(double[] dataArr) throws DataErrException {
+		int size = getN(dataArr);
+		if(size <= 0 ) throw new DataErrException("cannot resolve for cumulativeSum because too little size");
+		double[] resDataArr = new double[size];
+		double sum = 0.0;
+		for (int i = 0; i < size; i++) {
+			sum += dataArr[i];
+			resDataArr[i] = sum ;  
+		}
+		return resDataArr;
+	}
+
+
+	@Override
+	public double[] averageGeneration(double[] dataArr, double formCoefficient) throws DataErrException {
+		int size = getN(dataArr)-1;
+		if(size <= 0 ) throw new DataErrException("cannot resolve for averageGeneration because too little size");
+		double[] resDataArr = new double[size];
+		for (int i = 0; i < size; i++) {
+			resDataArr[i] = dataArr[i] * (1-formCoefficient) + dataArr[i+1] * formCoefficient;  
+		}
+		return resDataArr;
+}
+
+	
 }
