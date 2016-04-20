@@ -109,14 +109,14 @@
         "en-us": {
             "pearsonR": "Pearson Correlation",
             "pearsonT": "Pearson T Statistics",
-            "croprosumsq": "Sum of Squares and Cross-products",
+            "croProSumSq": "Sum of Squares and Cross-products",
             "covariance": "Covariance",
             "n": "N"
         },
         "zh-cn": {
             "pearsonR": "Pearson 相关性",
             "pearsonT": "Pearson T统计值",
-            "croprosumsq": "叉积偏差",
+            "croProSumSq": "叉积偏差",
             "covariance": "协方差",
             "n": "N"
         }

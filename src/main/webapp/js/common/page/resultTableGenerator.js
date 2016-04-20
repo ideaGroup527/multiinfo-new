@@ -23,7 +23,7 @@ var resultTableGenerator = function () {
     }
 
     //绘图区
-    if (graphConfigs) {
+    if (graphConfigs.length !== 0) {
         graphConfigs.map(function (graph, i) {
             console.log(graph);
             var graphArea = $('<div>');
@@ -49,6 +49,15 @@ var resultTableGenerator = function () {
                         content: 'graph_' + i,//图表容器的id
                         title: '饼图' //图表类型标题
                     }).render();
+                    break;
+                case 'histogram':
+                    new Bar({
+                        data: tableResult,//数据json,
+                        opt: "",//配置json
+                        content: 'graph_' + i,//图表容器的id
+                        title: '直方图' //图表类型标题
+                    }).render();
+
                     break;
             }
         });
@@ -206,7 +215,6 @@ var handleDescriptiveStatisticsFrequency = function (tableResult) {
         $(presentArea).append(container);
     }
 };
-
 var handleCorrelationBivariate = function (tableResult) {
     console.log(tableResult);
 
@@ -252,41 +260,42 @@ var handleCorrelationBivariate = function (tableResult) {
         $(table).append(headerRow);
 
         //打印变量信息 - 有几个变量打几行
-        paramsList.map(function (bivData) {
+        paramsList.map(function (mainKey) {
             var dataRow = $(row).clone();
 
-            paramsList.map(function (dataKey) {
-                if (bivData[dataKey]) {
-                    //打印变量名
-                    var variableFirstCell = $(td).clone();
-                    $(variableFirstCell).text(dataKey);
-                    $(dataRow).append(variableFirstCell);
+            //打印变量名
+            var variableFirstCell = $(cell).clone();
+            $(variableFirstCell).text(mainKey);
+            $(dataRow).append(variableFirstCell);
 
-                    //打印算法选项名
-                    var variableSecCell = $(td).clone();
-                    algorithmConfigs.map(function (config) {
-                        var configWrapper = $('<div>');
-                        $(configWrapper).text(config)
-                            .attr('data-i18n-tag', config)
-                            .attr('data-i18n-type', 'table');
-                        $(variableSecCell).append(configWrapper);
-                    });
-                    $(dataRow).append(variableSecCell);
-
-                    //打印参数值
-                    bivData[dataKey].map(function (singleData) {
-                        var paramValueCell = $(td).clone();
-                        paramsList.map(function (singleDataKey) {
-                            algorithmConfigs.map(function (alConfig) {
-                                var paramValueWrapper = $('<div>');
-                                $(paramValueWrapper).text(singleData[singleDataKey][alConfig]);
-                                $(paramValueCell).append(paramValueWrapper);
-                            });
-                            $(dataRow).append(paramValueCell);
-                        });
-                    })
-                }
+            //打印算法选项名
+            var variableSecCell = $(cell).clone();
+            algorithmConfigs.map(function (config) {
+                var configWrapper = $('<div>');
+                $(configWrapper).text(config)
+                    .attr('data-i18n-tag', config)
+                    .attr('data-i18n-type', 'table');
+                $(variableSecCell).append(configWrapper);
             });
+            $(dataRow).append(variableSecCell);
+
+            //打印参数值
+            var paramLength = bivariateTableData[mainKey].length;
+            for (var i = 0; i < paramLength; i++) {
+                var paramValueCell = $(cell).clone();
+
+                algorithmConfigs.map(function (alConfig) {
+                    var paramValueWrapper = $('<div>');
+                    for (var paramVariableKey in bivariateTableData[mainKey][i]) {
+                        $(paramValueWrapper).html(
+                            (bivariateTableData[mainKey][i][paramVariableKey][alConfig]) ? bivariateTableData[mainKey][i][paramVariableKey][alConfig] : '&nbsp;'
+                        ).attr('data-config-type', alConfig);
+                    }
+                    $(paramValueCell).append(paramValueWrapper);
+                });
+                $(dataRow).append(paramValueCell);
+            }
+            $(table).append(dataRow);
         });
 
         $(container).append(header).append(table);
