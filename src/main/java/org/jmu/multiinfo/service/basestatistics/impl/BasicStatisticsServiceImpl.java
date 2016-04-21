@@ -350,7 +350,7 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 		if(rows < 1 || cols < 1) throw new DataErrException("cannot resolve for regularization because too little size");
 		double[][] resData = new double[rows][cols];
 		for (int i = 0; i < rows; i++) {
-			for (int j = 0; j < rows; j++){
+			for (int j = 0; j < cols; j++){
 			resData[i][j] = ( dataArr[i][j] - amin) / ( amax - amin );
 			}
 		}

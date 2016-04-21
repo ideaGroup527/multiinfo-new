@@ -86,7 +86,7 @@ public class DingChartServiceImpl implements DingChartService {
 			break;
 		case DingChartCondition.CALCULATE_METHOD_ALL:
 			try {
-				basicStatisticsService.regularization(dataArr);
+				resData = basicStatisticsService.regularization(dataArr);
 			} catch (DataErrException e) {
 				dingDto.setRet_code("-1");
 				e.printStackTrace();
