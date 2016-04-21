@@ -29,12 +29,27 @@ public interface BasicStatisticsService {
 	 */
 	public Double max(double[] dataArr);
 	
+	
+	/***
+	 * 最大值
+	 * @param dataArr
+	 * @return
+	 */
+	public Double max(double[][] dataArr);
+	
 	/***
 	 * 最小值
 	 * @param dataArr
 	 * @return
 	 */
 	public Double min(double[] dataArr);
+	
+	/***
+	 * 最小值
+	 * @param dataArr
+	 * @return
+	 */
+	public Double min(double[][] dataArr);
 	
 	
 	/***
@@ -275,4 +290,22 @@ public interface BasicStatisticsService {
 	 * @return
 	 */
 	public double[] averageGeneration(double[] dataArr,double formCoefficient) throws DataErrException;
+	
+	
+	/**
+	 * 正规化
+	 * @param dataArr
+	 * @return
+	 * @throws DataErrException
+	 */
+	public double[] regularization(double[] dataArr) throws DataErrException;
+	
+	
+	/**
+	 * 正规化
+	 * @param dataArr
+	 * @return
+	 * @throws DataErrException
+	 */
+	public double[][] regularization(double[][] dataArr) throws DataErrException;
 }
