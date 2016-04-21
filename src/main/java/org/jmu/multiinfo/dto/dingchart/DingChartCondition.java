@@ -1,6 +1,9 @@
 package org.jmu.multiinfo.dto.dingchart;
 
+import java.util.List;
+
 import org.jmu.multiinfo.dto.basestatistics.DataDTO;
+import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
 
 public class DingChartCondition {
  
@@ -9,6 +12,12 @@ public class DingChartCondition {
  
  //计算方法
  private Integer calculateMethod;
+ 
+	//行变量
+private List<VarietyDTO> rowVarList;
+
+//列变量
+private List<VarietyDTO> colVarList;
  
 	/****
 	 * 按行计算
@@ -42,7 +51,24 @@ public Integer getCalculateMethod() {
 public void setCalculateMethod(Integer calculateMethod) {
 	this.calculateMethod = calculateMethod;
 }
- 
+
+public List<VarietyDTO> getRowVarList() {
+	return rowVarList;
+}
+
+public void setRowVarList(List<VarietyDTO> rowVarList) {
+	this.rowVarList = rowVarList;
+}
+
+public List<VarietyDTO> getColVarList() {
+	return colVarList;
+}
+
+public void setColVarList(List<VarietyDTO> colVarList) {
+	this.colVarList = colVarList;
+}
+
+
  
  
 }

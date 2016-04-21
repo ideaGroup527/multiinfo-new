@@ -1,8 +1,12 @@
 package org.jmu.multiinfo.service.dingchart;
 
+import java.util.List;
+
 import org.jmu.multiinfo.core.exception.DataErrException;
 import org.jmu.multiinfo.core.util.DataFormatUtil;
+import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.dto.basestatistics.DataDTO;
+import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
 import org.jmu.multiinfo.dto.dingchart.DingChartCondition;
 import org.jmu.multiinfo.dto.dingchart.DingChartDTO;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
@@ -30,7 +34,23 @@ public class DingChartServiceImpl implements DingChartService {
 	public DingChartDTO ding(DingChartCondition condition) {
 		DingChartDTO dingDto = new DingChartDTO();
 		Integer calculateMethod = condition.getCalculateMethod();
-		DataDTO[][] dataGrid = condition.getDataGrid();
+		DataDTO[][] oraDataGrid = condition.getDataGrid();
+		
+	  List<VarietyDTO> colVarList = condition.getColVarList();
+		List<VarietyDTO> rowVarList  =	condition.getRowVarList();
+		DataDTO[][] dataGrid = new DataDTO[rowVarList.size()][colVarList.size()];
+		int posRowInd = 0;
+		int posColInd = 0 ;
+		for (VarietyDTO rowVarietyDTO : rowVarList) {
+		int row=	Integer.valueOf(rowVarietyDTO.getPosition());
+		posColInd = 0;
+			for (VarietyDTO colVarietyDTO : colVarList) {
+			int col =	ExcelUtil.getExcelColIndex(colVarietyDTO.getPosition());
+			dataGrid[posRowInd][posColInd] = oraDataGrid[row-1][col-1];
+			posColInd++;
+			}
+			posRowInd++;
+		}
 		double[][] dataArr =DataFormatUtil.converToDouble(dataGrid);
 		double[][] resData = null;
 		switch (calculateMethod) {
