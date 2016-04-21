@@ -57,6 +57,20 @@ public static Double converToDouble(DataDTO dataDTO){
 }
 
 
+public static double[][] converToDouble(DataDTO[][] dataGrid){
+	int rows = dataGrid.length;
+	int cols = dataGrid[0].length;
+	double[][] dataArr = new double[rows][cols];
+	for (int i = 0; i < rows; i++) {
+		for (int j = 0; j < cols; j++) {
+			dataArr[i][j] = converToDouble(dataGrid[i][j]);
+		}
+	}
+	
+	return dataArr;
+	
+}
+
 /***
  * 数据转换根据变量制成键值 <变量名，数据>
  * @param dataGrid
@@ -123,6 +137,21 @@ public static DataDTO[][] transposition(DataDTO[][] dataGrid){
 }
 
 
+/***
+ * 转置数据
+ * @param dataGrid
+ * @return
+ */
+public static double[][] transposition(double[][] dataGrid){
+	double[][] tDataGrid = new double[dataGrid[0].length][dataGrid.length];
+	for (int i = 0; i < dataGrid.length; i++) {
+		for (int j = 0; j < dataGrid[0].length; j++) {
+			tDataGrid[j][i] = dataGrid[i][j];
+		}
+	}
+	return tDataGrid;
+}
+
 
 public static double[][] transposition(List<List<Double>> dataGridList){
 	
@@ -144,5 +173,4 @@ public static double[]  converToDouble(List<Double> dataList){
 	}
 	return dataArr;
 }
-
 }

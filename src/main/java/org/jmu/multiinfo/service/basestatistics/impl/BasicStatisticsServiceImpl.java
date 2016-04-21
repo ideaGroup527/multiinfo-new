@@ -300,5 +300,63 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 		return resDataArr;
 }
 
+
+	@Override
+	public double[] regularization(double[] dataArr) throws DataErrException {
+		int size = getN(dataArr);
+		if(size < 1 ) throw new DataErrException("cannot resolve for regularization because too little size");
+		double[] resData = new double[size];
+		for (int i = 0; i < size; i++) {
+			Double amin =  min(dataArr);
+			Double amax = max(dataArr);
+			resData[i] = ( dataArr[i] - amin) / ( amax - amin );
+		}
+		
+		return resData;
+	}
+
+
+	@Override
+	public Double max(double[][] dataArr) {
+		int size = dataArr.length;
+		double[] rowArr = new double[size];
+		for (int i = 0; i < dataArr.length; i++) {
+			rowArr[i] =	max(dataArr[i]);
+		}
+		
+		return max(rowArr);
+	}
+
+
+	@Override
+	public Double min(double[][] dataArr) {
+		int size = dataArr.length;
+		double[] rowArr = new double[size];
+		for (int i = 0; i < dataArr.length; i++) {
+			rowArr[i] =	min(dataArr[i]);
+		}
+		
+		return min(rowArr);
+	}
+
+
+	@Override
+	public double[][] regularization(double[][] dataArr) throws DataErrException {
+		Double amin =  min(dataArr);
+		Double amax = max(dataArr);
+		
+		int rows = dataArr.length;
+		int cols = dataArr[0].length;
+		if(rows < 1 || cols < 1) throw new DataErrException("cannot resolve for regularization because too little size");
+		double[][] resData = new double[rows][cols];
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++){
+			resData[i][j] = ( dataArr[i][j] - amin) / ( amax - amin );
+			}
+		}
+		
+		return resData;
+	}
+
 	
 }

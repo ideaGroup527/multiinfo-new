@@ -1,124 +1,132 @@
 {
-    "algorithm": {
-        "en-us": {
-            "arithmeticMean": "Arithmetic Mean",
-            "covariance": "Covariance",
-            "croprosumsq": "Sum of Squares and Cross-products",
-            "dividePoint": "Divide Point",
-            "kurtosis": "Kurtosis",
-            "max": "Maximum",
-            "means": "Means",
-            "median": "Median",
-            "min": "Minimum",
-            "mode": "Mode",
-            "pearson": "Pearson",
-            "percentile": "Percentile",
-            "percentiles": "Percentiles",
-            "quartile": "Quartile",
-            "ranges": "Ranges",
-            "skewness": "Skewness",
-            "spearman": "Spearman",
-            "standardDeviation": "Standard Deviation",
-            "standardErrorOfMean": "Standard Error of Mean",
-            "total": "Total",
-            "variance": "Variance"
-        },
-        "zh-cn": {
-            "arithmeticMean": "算术平均数",
-            "covariance": "协方差",
-            "croprosumsq": "叉积偏差",
-            "dividePoint": "割点",
-            "kurtosis": "峰度",
-            "max": "最大值",
-            "means": "均值",
-            "median": "中位数",
-            "min": "最小值",
-            "mode": "众数",
-            "pearson": "Pearson",
-            "percentile": "百分位数",
-            "percentiles": "分位值",
-            "quartile": "四分位数",
-            "ranges": "范围",
-            "skewness": "偏度",
-            "spearman": "Spearman",
-            "standardDeviation": "标准偏差",
-            "standardErrorOfMean": "均值的标准误",
-            "total": "总数",
-            "variance": "方差"
-        }
+  "algorithm": {
+    "en-us": {
+      "arithmeticMean": "Arithmetic Mean",
+      "count": "N",
+      "covariance": "Covariance",
+      "croprosumsq": "Sum of Squares and Cross-products",
+      "dividePoint": "Divide Point",
+      "kurtosis": "Kurtosis",
+      "max": "Maximum",
+      "means": "Means",
+      "median": "Median",
+      "min": "Minimum",
+      "mode": "Mode",
+      "pearson": "Pearson",
+      "percentile": "Percentile",
+      "percentiles": "Percentiles",
+      "quartile": "Quartile",
+      "ranges": "Ranges",
+      "skewness": "Skewness",
+      "spearman": "Spearman",
+      "standardDeviation": "Standard Deviation",
+      "standardErrorOfMean": "Standard Error of Mean",
+      "total": "Total",
+      "variance": "Variance"
     },
-    "graph": {
-        "en-us": {
-            "barchart": "Bar Chart",
-            "boxplot": "Box Plot",
-            "histogram": "Histogram",
-            "piegraph": "Pie Graph",
-            "scatterdiagram": "Scatter Diagram"
-        },
-        "zh-cn": {
-            "barchart": "条形图",
-            "boxplot": "箱线图",
-            "histogram": "直方图",
-            "piegraph": "饼图",
-            "scatterdiagram": "散点图"
-        }
-    },
-    "page": {
-        "en-us": {
-            "options": "Options",
-            "btn_upload": "Upload",
-            "btn_next": "Next",
-            "modal_title_descriptive": "Descriptive",
-            "modal_title_frequency": "Frequency",
-            "modal_title_bivariate_correlations": "Bivariate Correlations",
-            "label_choose_sheet": "Select Your Sheet",
-            "label_choose_variable": "Click to choose variables below",
-            "label_graph_making": "Graph Making",
-            "label_result_present": "Result Present",
-            "label_frequency": "Frequency",
-            "label_percentage": "Percentage",
-            "label_validate_percentage": "Validate Percentage",
-            "label_accumulation_percentage": "Accumulation Percentage",
-            "label_total": "Total",
-            "label_correlation": "Correlation",
-            "label_correlation_coefficients": "Correlation Coefficients",
-            "label_statistics": "Statistics"
-        },
-        "zh-cn": {
-            "options": "选项",
-            "btn_upload": "上传",
-            "btn_next": "下一步",
-            "modal_title_descriptive": "描述性",
-            "modal_title_frequency": "频率",
-            "modal_title_bivariate_correlations": "双变量",
-            "label_choose_sheet": "请选择待分析的表格",
-            "label_choose_variable": "点击选择待选变量",
-            "label_graph_making": "制图",
-            "label_result_present": "结果展示",
-            "label_frequency": "频率",
-            "label_percentage": "百分比",
-            "label_validate_percentage": "有效百分比",
-            "label_accumulation_percentage": "累积百分比",
-            "label_total": "合计",
-            "label_correlation": "相关性",
-            "label_correlation_coefficients": "相关系数",
-            "label_statistics": "统计量"
-        }
-    },
-    "table": {
-        "en-us": {
-            "pearsonR": "Pearson Correlation",
-            "pearsonT": "Pearson T Statistics",
-            "croProSumSq": "Sum of Squares and Cross-products",
-            "covariance": "Covariance",
-            "n": "N"
-        },
-        "zh-cn": {
-            "pearsonR": "Pearson 相关性",
-            "pearsonT": "Pearson T统计值",
-            "croProSumSq": "叉积偏差",
-            "covariance": "协方差",
-            "n": "N"
-        }
+    "zh-cn": {
+      "arithmeticMean": "算术平均数",
+      "covariance": "协方差",
+      "count": "N",
+      "croprosumsq": "叉积偏差",
+      "dividePoint": "割点",
+      "kurtosis": "峰度",
+      "max": "最大值",
+      "means": "均值",
+      "median": "中位数",
+      "min": "最小值",
+      "mode": "众数",
+      "pearson": "Pearson",
+      "percentile": "百分位数",
+      "percentiles": "分位值",
+      "quartile": "四分位数",
+      "ranges": "范围",
+      "skewness": "偏度",
+      "spearman": "Spearman",
+      "standardDeviation": "标准偏差",
+      "standardErrorOfMean": "均值的标准误",
+      "total": "总数",
+      "variance": "方差"
     }
+  },
+  "graph": {
+    "en-us": {
+      "barchart": "Bar Chart",
+      "boxplot": "Box Plot",
+      "histogram": "Histogram",
+      "linechart": "Line Chart",
+      "piegraph": "Pie Graph",
+      "scatterdiagram": "Scatter Diagram"
+    },
+    "zh-cn": {
+      "barchart": "条形图",
+      "boxplot": "箱线图",
+      "histogram": "直方图",
+      "linechart": "折线图",
+      "piegraph": "饼图",
+      "scatterdiagram": "散点图"
+    }
+  },
+  "page": {
+    "en-us": {
+      "options": "Options",
+      "btn_upload": "Upload",
+      "btn_next": "Next",
+      "modal_title_descriptive": "Descriptive",
+      "modal_title_frequency": "Frequency",
+      "modal_title_bivariate_correlations": "Bivariate Correlations",
+      "label_choose_sheet": "Select Your Sheet",
+      "label_choose_variable": "Click to choose variables below",
+      "label_graph_making": "Graph Making",
+      "label_result_present": "Result Present",
+      "label_frequency": "Frequency",
+      "label_percentage": "Percentage",
+      "label_validate_percentage": "Validate Percentage",
+      "label_accumulation_percentage": "Accumulation Percentage",
+      "label_total": "Total",
+      "label_correlation": "Correlation",
+      "label_correlation_coefficients": "Correlation Coefficients",
+      "label_statistics": "Statistics"
+    },
+    "zh-cn": {
+      "options": "选项",
+      "btn_upload": "上传",
+      "btn_next": "下一步",
+      "modal_title_descriptive": "描述性",
+      "modal_title_frequency": "频率",
+      "modal_title_bivariate_correlations": "双变量",
+      "label_choose_sheet": "请选择待分析的表格",
+      "label_choose_variable": "点击选择待选变量",
+      "label_graph_making": "制图",
+      "label_result_present": "结果展示",
+      "label_frequency": "频率",
+      "label_percentage": "百分比",
+      "label_validate_percentage": "有效百分比",
+      "label_accumulation_percentage": "累积百分比",
+      "label_total": "合计",
+      "label_correlation": "相关性",
+      "label_correlation_coefficients": "相关系数",
+      "label_statistics": "统计量"
+    }
+  },
+  "table": {
+    "en-us": {
+      "pearsonR": "Pearson Correlation",
+      "pearsonT": "Pearson T Statistics",
+      "spearmanR": "Spearman Correlation",
+      "spearmanT": "Spearman T Statistics",
+      "croProSumSq": "Sum of Squares and Cross-products",
+      "covariance": "Covariance",
+      "n": "N"
+    },
+    "zh-cn": {
+      "pearsonR": "Pearson 相关性",
+      "pearsonT": "Pearson T统计值",
+      "spearmanR": "Spearman 相关性",
+      "spearmanT": "Spearman T统计值",
+      "croProSumSq": "叉积偏差",
+      "covariance": "协方差",
+      "n": "N"
+    }
+  }
 }
