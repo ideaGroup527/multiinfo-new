@@ -5,5 +5,5 @@
 *.iml
 /.idea/
 /bin/
-
+/logs/*
 src/main/webapp/DKQ
