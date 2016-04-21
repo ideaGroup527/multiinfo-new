@@ -38,6 +38,8 @@ public class DingChartServiceImpl implements DingChartService {
 		
 	  List<VarietyDTO> colVarList = condition.getColVarList();
 		List<VarietyDTO> rowVarList  =	condition.getRowVarList();
+		dingDto.setColVarList(colVarList);
+		dingDto.setRowVarList(rowVarList);
 		DataDTO[][] dataGrid = new DataDTO[rowVarList.size()][colVarList.size()];
 		int posRowInd = 0;
 		int posColInd = 0 ;
