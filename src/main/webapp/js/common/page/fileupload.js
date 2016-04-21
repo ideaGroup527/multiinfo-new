@@ -41,7 +41,10 @@ $(function () {
             processData: false,
             contentType: false,
             dataType: 'json',
-            success: function (data) {
+            beforeSend: function () {
+                $('#file_upload_btn').attr('data-i18n-tag', 'btn_uploading');
+                i18n();
+            }, success: function (data) {
 
                 sessionStorage.clear();
 

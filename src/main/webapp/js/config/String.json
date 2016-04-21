@@ -71,6 +71,7 @@
     "en-us": {
       "options": "Options",
       "btn_upload": "Upload",
+      "btn_uploading": "Uploading...",
       "btn_next": "Next",
       "modal_title_descriptive": "Descriptive",
       "modal_title_frequency": "Frequency",
@@ -91,6 +92,7 @@
     "zh-cn": {
       "options": "选项",
       "btn_upload": "上传",
+      "btn_uploading": "正在上传...",
       "btn_next": "下一步",
       "modal_title_descriptive": "描述性",
       "modal_title_frequency": "频率",
