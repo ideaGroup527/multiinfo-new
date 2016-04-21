@@ -1,4 +1,4 @@
-function Bar(config) {
+function BarOrLine(config) {
     Charts.call(this, config.data, config.opt, config.content);
 
     this.format = function (data) {//转换格式
@@ -29,7 +29,7 @@ function Bar(config) {
 
             var value = {};
             value.name = data.reportTitle;
-            value.type = "bar";
+            value.type = config.type;
             var dd = [];
             for (var key in data.resDataMap) {
                 dd.push(data.resDataMap[key].resultData.total);
@@ -41,7 +41,7 @@ function Bar(config) {
             for (var i = 0, v = null; (v = dataAll.sub_key[i]) != undefined; i++) {
                 var value = {};
                 value.name = v;
-                value.type = "bar";
+                value.type = config.type;
                 var dd = [];
                 for (var key in data.resDataMap) {
                     dd.push(data.resDataMap[key][v].resultData.total);
