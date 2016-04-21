@@ -23,7 +23,7 @@ var resultTableGenerator = function () {
     }
 
     //绘图区
-    if (graphConfigs.length !== 0) {
+    if (graphConfigs[0] !== "") {
         graphConfigs.map(function (graph, i) {
             console.log(graph);
             var graphArea = $('<div>');
@@ -223,6 +223,8 @@ var handleCorrelationBivariate = function (tableResult) {
     var bivariateTableData = tableResult.resDataMap;
     var paramsList = Object.keys(bivariateTableData);
 
+    var resConfigs = Object.keys(bivariateTableData[paramsList[0]][0][paramsList[0]]);
+
     //配置显示的参数数组
     var algorithmConfigs = sessionStorage.getItem('PRIVATE_ALGORITHM_CONFIG').split(',');
 
@@ -235,7 +237,9 @@ var handleCorrelationBivariate = function (tableResult) {
         $(container).addClass('frequency-table');
 
         var header = $('<h1>');
-        $(header).text(option);
+
+        $(header).attr('data-i18n-type', "page")
+            .attr('data-i18n-tag', (option == 'pearson') ? "label_correlation" : "label_correlation_coefficients");
 
         var table = $('<table>');
         $(table).addClass('table table-striped table-bordered');
@@ -247,7 +251,8 @@ var handleCorrelationBivariate = function (tableResult) {
         //打印第一行
         var headerRow = $(row).clone();
         var emptyHeaderCell = $(headerCell).clone();
-        $(emptyHeaderCell).attr('colspan', '2');
+        $(emptyHeaderCell).attr('colspan', '2')
+            .text((option == 'pearson') ? "" : "Spearman's rho");
         $(headerRow).append(emptyHeaderCell);
 
         //打印头部
@@ -271,11 +276,25 @@ var handleCorrelationBivariate = function (tableResult) {
             //打印算法选项名
             var variableSecCell = $(cell).clone();
             algorithmConfigs.map(function (config) {
-                var configWrapper = $('<div>');
-                $(configWrapper).text(config)
-                    .attr('data-i18n-tag', config)
-                    .attr('data-i18n-type', 'table');
-                $(variableSecCell).append(configWrapper);
+                if ($.inArray(config, resConfigs) != -1) {
+                    if (option == 'pearson') {
+                        if ($.inArray(config, ['spearmanR', 'spearmanT']) == -1) {
+                            var pearsonConfigWrapper = $('<div>');
+                            $(pearsonConfigWrapper).text(config)
+                                .attr('data-i18n-tag', config)
+                                .attr('data-i18n-type', 'table');
+                            $(variableSecCell).append(pearsonConfigWrapper);
+                        }
+                    } else if (option == 'spearman') {
+                        if ($.inArray(config, ['pearsonR', 'pearsonT']) == -1) {
+                            var spearmanConfigWrapper = $('<div>');
+                            $(spearmanConfigWrapper).text(config)
+                                .attr('data-i18n-tag', config)
+                                .attr('data-i18n-type', 'table');
+                            $(variableSecCell).append(spearmanConfigWrapper);
+                        }
+                    }
+                }
             });
             $(dataRow).append(variableSecCell);
 
@@ -285,13 +304,30 @@ var handleCorrelationBivariate = function (tableResult) {
                 var paramValueCell = $(cell).clone();
 
                 algorithmConfigs.map(function (alConfig) {
-                    var paramValueWrapper = $('<div>');
-                    for (var paramVariableKey in bivariateTableData[mainKey][i]) {
-                        $(paramValueWrapper).html(
-                            (bivariateTableData[mainKey][i][paramVariableKey][alConfig]) ? bivariateTableData[mainKey][i][paramVariableKey][alConfig] : '&nbsp;'
-                        ).attr('data-config-type', alConfig);
+                    if ($.inArray(alConfig, resConfigs) != -1) {
+
+                        if (option == 'pearson') {
+                            if ($.inArray(alConfig, ['spearmanR', 'spearmanT']) == -1) {
+                                var pearsonParamValueWrapper = $('<div>');
+                                for (var paramVariableKey in bivariateTableData[mainKey][i]) {
+                                    $(pearsonParamValueWrapper).html(
+                                        (bivariateTableData[mainKey][i][paramVariableKey][alConfig] == 'Infinity') ? '&nbsp;' : bivariateTableData[mainKey][i][paramVariableKey][alConfig]
+                                    ).attr('data-config-type', alConfig);
+                                }
+                                $(paramValueCell).append(pearsonParamValueWrapper);
+                            }
+                        } else if (option == 'spearman') {
+                            if ($.inArray(alConfig, ['pearsonR', 'pearsonT']) == -1) {
+                                var spearmanParamValueWrapper = $('<div>');
+                                for (var paramVariableKey in bivariateTableData[mainKey][i]) {
+                                    $(spearmanParamValueWrapper).html(
+                                        (bivariateTableData[mainKey][i][paramVariableKey][alConfig] == 'Infinity') ? '&nbsp;' : bivariateTableData[mainKey][i][paramVariableKey][alConfig]
+                                    ).attr('data-config-type', alConfig);
+                                }
+                                $(paramValueCell).append(spearmanParamValueWrapper);
+                            }
+                        }
                     }
-                    $(paramValueCell).append(paramValueWrapper);
                 });
                 $(dataRow).append(paramValueCell);
             }
@@ -300,6 +336,56 @@ var handleCorrelationBivariate = function (tableResult) {
 
         $(container).append(header).append(table);
         $(presentArea).append(container);
-    })
+    });
+
+    //打印 均值 & 标准偏差 表格
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered');
+
+    var row = $('<tr>');
+    var cell = $('<td>');
+    var headerCell = $('<th>');
+
+    //打印第一行
+    var headerRow = $(row).clone();
+    var emptyHeaderCell = $(headerCell).clone();
+    $(headerRow).append(emptyHeaderCell);
+
+    //打印头部
+    var basicData = tableResult.basicDataMap;
+    //有几个变量打几个头部
+    var basicAlgorithmConfig = [];
+    algorithmConfigs.map(function (alConfig) {
+        if (basicData[paramsList[0]][alConfig]) {
+            basicAlgorithmConfig.push(alConfig);
+            var headerParamsCell = $(headerCell).clone();
+            $(headerParamsCell).attr('data-i18n-type', 'algorithm')
+                .attr('data-i18n-tag', alConfig);
+            $(headerRow).append(headerParamsCell);
+        }
+    });
+    $(table).append(headerRow);
+
+    //打印数值
+    paramsList.map(function (mainKey) {
+        var dataRow = $(row).clone();
+
+        var paramName = $(cell).clone();
+        $(paramName).text(mainKey);
+        $(dataRow).append(paramName);
+
+        basicAlgorithmConfig.map(function (alConfig) {
+            var paramValue = $(cell).clone();
+            $(paramValue).text(basicData[mainKey][alConfig]);
+            $(dataRow).append(paramValue);
+        });
+
+        $(table).append(dataRow);
+    });
+
+    if (basicAlgorithmConfig.length != 0) {
+        $(presentArea).append(table);
+    }
+
 };
 
