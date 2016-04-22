@@ -1,4 +1,4 @@
-function BarOrLine(config) {
+function HistogramOrLine(config) {
     Charts.call(this, config.data, config.opt, config.content);
 
     this.format = function (data) {//转换格式
