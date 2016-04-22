@@ -1,7 +1,20 @@
-var getConfigs = function () {
-    return {
-        container: '#biv_config_container',
-        configType: 'input[type=checkbox]:checked',
-        storageKey: 'PRIVATE_PLUGIN_CONFIG_COR_BIV'
-    }
-};
+$(function () {
+    var CONFIG = {};
+    $('[data-config-group]').each(function () {
+        var groupName = $(this).attr('data-group-name');
+        var checkedFlag = $(this).attr('data-config-val-flag');
+
+        var selector = '[name=' + groupName + ']';
+        if (checkedFlag) {
+            selector += checkedFlag;
+        }
+
+        var configsList = [];
+        $(selector).each(function () {
+            configsList.push($(this).val());
+        });
+        CONFIG[groupName] = configsList;
+    });
+    sessionStorage.setItem('PRIVATE_CONFIG_CORRELATION_BIVARIATE', JSON.stringify(CONFIG));
+    console.log(CONFIG);
+});

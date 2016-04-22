@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -41,7 +42,7 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 	@Override
 	public CommonDTO calDesc(PercentileCondition condition) {
 		CommonDTO meanDTO = new CommonDTO();
-		Map<String, ResultDataDTO> resDataMap = new HashMap<String, ResultDataDTO>();
+		Map<String, ResultDataDTO> resDataMap = new LinkedHashMap<String, ResultDataDTO>();
 		List<VarietyDTO> variableList = condition.getVariableList();
 		DataDTO[][] dataGrid = condition.getDataGrid();
 		List<Double> percentileList = condition.getPercentiles();
@@ -116,7 +117,7 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 	@Override
 	public CommonDTO calFrequency(OneVarCondition condition) {
 		CommonDTO meanDTO = new CommonDTO();
-		Map<String, ResultDataDTO> resDataMap = new HashMap<String, ResultDataDTO>();
+		Map<String, ResultDataDTO> resDataMap = new LinkedHashMap<String, ResultDataDTO>();
 		List<VarietyDTO> variableList = condition.getVariableList();
 		DataDTO[][] dataGrid = condition.getDataGrid();
 		for (Iterator<VarietyDTO> iterator = variableList.iterator(); iterator.hasNext();) {

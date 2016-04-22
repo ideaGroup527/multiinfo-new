@@ -15,19 +15,19 @@
                 <div class="variable-zone">
 
                 </div>
-                <div id="biv_config_container">
+                <div data-config-group data-group-name="correlationCoefficients" data-config-val-flag=":checked">
                     <hr>
                     <span data-i18n-tag="label_correlation_coefficients" data-i18n-type="page">相关系数</span>
 
                     <div class="checkbox-inline">
                         <label>
-                            <input type="checkbox" value="pearson" checked>
+                            <input name="correlationCoefficients" type="checkbox" value="pearson" checked>
                             <span data-i18n-type="algorithm" data-i18n-tag="pearson">Pearson</span>
                         </label>
                     </div>
                     <div class="checkbox-inline">
                         <label>
-                            <input type="checkbox" value="spearman">
+                            <input name="correlationCoefficients" type="checkbox" value="spearman" checked>
                             <span data-i18n-type="algorithm" data-i18n-tag="spearman">Spearman</span>
                         </label>
                     </div>
@@ -37,66 +37,67 @@
                         <legend data-i18n-tag="options" data-i18n-type="page">选项</legend>
 
                         <span data-i18n-type="page" data-i18n-tag="label_statistics">统计量</span>
-
-                        <div class="checkbox-inline hide">
-                            <label>
-                                <input type="checkbox" value="pearsonR" checked readonly>
-                                <span data-i18n-type="table" data-i18n-tag="pearsonR">PearsonR</span>
-                            </label>
-                        </div>
-                        <div class="checkbox-inline hide">
-                            <label>
-                                <input type="checkbox" value="pearsonT" checked readonly>
-                                <span data-i18n-type="table" data-i18n-tag="pearsonT">pearsonT</span>
-                            </label>
-                        </div>
-                        <div class="checkbox-inline hide">
-                            <label>
-                                <input type="checkbox" value="spearmanR" checked readonly>
-                                <span data-i18n-type="table" data-i18n-tag="spearmanR">SpearmanR</span>
-                            </label>
-                        </div>
-                        <div class="checkbox-inline hide">
-                            <label>
-                                <input type="checkbox" value="spearmanT" checked readonly>
-                                <span data-i18n-type="table" data-i18n-tag="spearmanT">SpearmanT</span>
-                            </label>
-                        </div>
-                        <div class="checkbox-inline">
-                            <label>
-                                <input type="checkbox" value="arithmeticMean">
-                                <span data-i18n-type="algorithm" data-i18n-tag="arithmeticMean">均值</span>
-                            </label>
-                        </div>
-                        <div class="checkbox-inline">
-                            <label>
-                                <input type="checkbox" value="standardDeviation">
-                                <span data-i18n-type="algorithm" data-i18n-tag="standardDeviation">标准偏差</span>
-                            </label>
-                        </div>
-                        <div class="checkbox-inline">
-                            <label>
-                                <input type="checkbox" value="croProSumSq">
-                                <span data-i18n-type="table" data-i18n-tag="croProSumSq">叉积偏差</span>
-                            </label>
-                        </div>
-                        <div class="checkbox-inline">
-                            <label>
-                                <input type="checkbox" value="covariance">
-                                <span data-i18n-type="algorithm" data-i18n-tag="covariance">协方差</span>
-                            </label>
-                        </div>
-                        <div class="checkbox-inline hide">
-                            <label>
-                                <input type="checkbox" value="n" checked readonly>
-                                <span data-i18n-type="table" data-i18n-tag="n">N</span>
-                            </label>
-                        </div>
-                        <div class="checkbox-inline hide">
-                            <label>
-                                <input type="checkbox" value="count" checked readonly>
-                                <span data-i18n-type="table" data-i18n-tag="n">N</span>
-                            </label>
+                        <div data-config-group data-group-name="algorithmConfigs" data-config-val-flag=":checked">
+                            <div class="checkbox-inline hide">
+                                <label>
+                                    <input name="algorithmConfigs" type="checkbox" value="pearsonR" checked readonly>
+                                    <span data-i18n-type="table" data-i18n-tag="pearsonR">PearsonR</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-inline hide">
+                                <label>
+                                    <input name="algorithmConfigs" type="checkbox" value="pearsonT" checked readonly>
+                                    <span data-i18n-type="table" data-i18n-tag="pearsonT">pearsonT</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-inline hide">
+                                <label>
+                                    <input name="algorithmConfigs" type="checkbox" value="spearmanR" checked readonly>
+                                    <span data-i18n-type="table" data-i18n-tag="spearmanR">SpearmanR</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-inline hide">
+                                <label>
+                                    <input name="algorithmConfigs" type="checkbox" value="spearmanT" checked readonly>
+                                    <span data-i18n-type="table" data-i18n-tag="spearmanT">SpearmanT</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input name="algorithmConfigs" type="checkbox" value="arithmeticMean">
+                                    <span data-i18n-type="algorithm" data-i18n-tag="arithmeticMean">均值</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input name="algorithmConfigs" type="checkbox" value="standardDeviation">
+                                    <span data-i18n-type="algorithm" data-i18n-tag="standardDeviation">标准偏差</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input name="algorithmConfigs" type="checkbox" value="croProSumSq">
+                                    <span data-i18n-type="table" data-i18n-tag="croProSumSq">叉积偏差</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input name="algorithmConfigs" type="checkbox" value="covariance">
+                                    <span data-i18n-type="algorithm" data-i18n-tag="covariance">协方差</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-inline hide">
+                                <label>
+                                    <input name="algorithmConfigs" type="checkbox" value="n" checked readonly>
+                                    <span data-i18n-type="table" data-i18n-tag="n">N</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-inline hide">
+                                <label>
+                                    <input name="algorithmConfigs" type="checkbox" value="count" checked readonly>
+                                    <span data-i18n-type="table" data-i18n-tag="n">N</span>
+                                </label>
+                            </div>
                         </div>
                     </fieldset>
                 </div>

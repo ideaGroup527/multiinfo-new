@@ -1,0 +1,94 @@
+<div class="modal fade in" id="Correlation_Distance" tabindex="-1" role="dialog"
+     aria-labelledby="Correlation_Distance_Label" style="display: block;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="Correlation_Distance_Label" data-i18n-type="page"
+                    data-i18n-tag="modal_title_distance_correlations">距离</h4>
+            </div>
+            <div class="modal-body">
+                <p data-i18n-type="page"
+                   data-i18n-tag="label_choose_variable">点击选择待选变量</p>
+
+                <div class="variable-zone">
+
+                </div>
+                <div data-panel="config">
+                    <fieldset class="algorithm-config-zone" data-algorithm-config-type="Correlation_Distance">
+                        <legend data-i18n-tag="options" data-i18n-type="page">选项</legend>
+
+                        <div class="row" data-config-group data-group-name="distanceCalcType"
+                             data-config-val-flag=":checked">
+                            <span class="col-md-2" data-i18n-type="page"
+                                  data-i18n-tag="label_distance_calculate">计算距离</span>
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input type="radio" name="distanceCalcType" value="unit" checked>
+                                    <span data-i18n-type="page" data-i18n-tag="label_distance_unit_case">个案间</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input type="radio" name="distanceCalcType" value="variable">
+                                    <span data-i18n-type="page" data-i18n-tag="label_distance_variable_case">变量间</span>
+                                </label>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row" data-config-group data-group-name="measureMethod">
+                            <span class="col-md-2" data-i18n-type="page"
+                                  data-i18n-tag="label_distance_measure_method">度量方法</span>
+                            <select name="measureMethod" class="form-control" style="width: 80%;">
+                                <option value="euclideanDistance" data-i18n-type="page"
+                                        data-i18n-tag="label_euclidean_distance"></option>
+                                <option value="squareEuclideanDistance" data-i18n-type="page"
+                                        data-i18n-tag="label_square_euclidean_distance"></option>
+                                <option value="chebyshevDistance" data-i18n-type="page"
+                                        data-i18n-tag="label_chebyshev_distance"></option>
+                                <option value="cityBlockDistance" data-i18n-type="page"
+                                        data-i18n-tag="label_city_block_distance"></option>
+                                <option value="minkowskiDistace" data-i18n-type="page"
+                                        data-i18n-tag="label_minkowski_distance"></option>
+                                <option value="modifyDistance" data-i18n-type="page"
+                                        data-i18n-tag="label_modify_distance"></option>
+                            </select>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="row col-md-6" data-config-group data-group-name="minkowskiP">
+                                <span class="col-md-2" data-i18n-type="page"
+                                      data-i18n-tag="label_distance_power">幂</span>
+                                <select name="minkowskiP" class="form-control" style="width: 80%;">
+                                    <option value="1">1</option>
+                                    <option value="2" selected>2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                            <div class="row col-md-6" data-config-group data-group-name="minkowskiQ">
+                                <span class="col-md-2" data-i18n-type="page"
+                                      data-i18n-tag="label_distance_root">根</span>
+                                <select name="minkowskiQ" class="form-control" style="width: 80%;">
+                                    <option value="1">1</option>
+                                    <option value="2" selected>2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default variable-config" data-i18n-type="page"
+                        data-i18n-tag="options">选项
+                </button>
+                <button type="button" class="btn btn-primary variable-submit" data-btn-type="Correlation_Distance"
+                        data-i18n-type="page" data-i18n-tag="btn_next">确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

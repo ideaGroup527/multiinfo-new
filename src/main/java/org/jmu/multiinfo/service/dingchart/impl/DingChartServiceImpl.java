@@ -1,4 +1,4 @@
-package org.jmu.multiinfo.service.dingchart;
+package org.jmu.multiinfo.service.dingchart.impl;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
 import org.jmu.multiinfo.dto.dingchart.DingChartCondition;
 import org.jmu.multiinfo.dto.dingchart.DingChartDTO;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
+import org.jmu.multiinfo.service.dingchart.DingChartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

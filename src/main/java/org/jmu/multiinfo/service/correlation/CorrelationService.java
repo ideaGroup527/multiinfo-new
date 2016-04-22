@@ -6,13 +6,10 @@ import org.jmu.multiinfo.dto.correlation.BivariateCorrelateDTO;
 import org.jmu.multiinfo.dto.correlation.DistanceCorrelationCondition;
 import org.jmu.multiinfo.dto.correlation.DistanceCorrelationDTO;
 
-/***
- * *
- * 
- * 
+/**
+ * 相关分析
  * @Title: CorrelationService.java
  * @Package org.jmu.multiinfo.service.correlation
- * @Description:  相关分析
  * @author  <a href="mailto:www_1350@163.com">Absurd</a>
  * @date 2016年4月17日 下午2:22:24
  * @version V1.0

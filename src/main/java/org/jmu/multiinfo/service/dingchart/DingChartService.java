@@ -4,13 +4,10 @@ import org.jmu.multiinfo.dto.dingchart.DingChartCondition;
 import org.jmu.multiinfo.dto.dingchart.DingChartDTO;
 
 
-/***
- * *
- * 
- * 
+/**
+ * 丁氏图
  * @Title: DingChartService.java
  * @Package org.jmu.multiinfo.service.dingchart
- * @Description:  丁氏图
  * @author  <a href="mailto:www_1350@163.com">Absurd</a>
  * @date 2016年4月21日 下午4:18:57
  * @version V1.0

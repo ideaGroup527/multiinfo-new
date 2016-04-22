@@ -8,13 +8,10 @@ import org.jmu.multiinfo.dto.comparemean.AnovaDataDTO;
 import org.jmu.multiinfo.dto.comparemean.MedianCondition;
 import org.jmu.multiinfo.dto.comparemean.MedianDTO;
 
-/***
- * *
- * 
- * 
+/**
+ * 均值统计
  * @Title: CompareMeanStatisticsService.java
  * @Package org.jmu.multiinfo.service.comparemean
- * @Description:  均值统计
  * @author  <a href="mailto:www_1350@163.com">Absurd</a>
  * @date 2016年4月17日 下午2:19:05
  * @version V1.0

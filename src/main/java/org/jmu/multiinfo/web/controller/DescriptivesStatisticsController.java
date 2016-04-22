@@ -16,11 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /***
- * 
- * 
+ *  <a href="http://www.seekbio.com/biotech/soft/SPSS/2012/j819365850.html">描述统计</a>
  * @Title: DescriptivesStatisticsController.java
  * @Package org.jmu.multiinfo.web.controller
- * @Description:  描述统计  需求连接http://www.seekbio.com/biotech/soft/SPSS/2012/j819365850.html
  * @author  <a href="mailto:www_1350@163.com">Absurd</a>
  * @date 2016年3月5日 下午4:55:56
  * @version V1.0
@@ -31,6 +29,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DescriptivesStatisticsController extends BaseController{
 	@Autowired
 	private DescriptivesStatisticsService descriptivesStatisticsService;
+	
+	/***
+	 * 描述统计
+	 * 路径/statistics/descriptives.do?method=descriptives
+	 * @param condition
+	 * @return
+	 */
 	@RequestMapping(params = { "method=descriptives" })
 	@ResponseBody
    public CommonDTO calDesc(@RequestBody PercentileCondition condition){
@@ -46,6 +51,12 @@ public class DescriptivesStatisticsController extends BaseController{
 		return meanDTO;
 	}
 	
+	/***
+	 * 频率分析
+	 * 路径/statistics/descriptives.do?method=frequency
+	 * @param condition
+	 * @return
+	 */
 	@RequestMapping(params = { "method=frequency" })
 	@ResponseBody
    public CommonDTO calFrequency(@RequestBody OneVarCondition condition){

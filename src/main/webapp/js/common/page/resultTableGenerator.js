@@ -20,6 +20,9 @@ var resultTableGenerator = function () {
         case 'Correlation_Bivariate':
             handleCorrelationBivariate(tableResult);
             break;
+        case 'Correlation_Distance':
+            handleCorrelationDistance(tableResult);
+            break;
     }
 
     //绘图区
@@ -35,6 +38,7 @@ var resultTableGenerator = function () {
 
             switch (graph) {
                 case 'boxplot':
+                    //箱线图
                     new Boxplot({
                         data: tableResult,
                         opt: "",
@@ -43,6 +47,7 @@ var resultTableGenerator = function () {
                     }).render();
                     break;
                 case 'piegraph':
+                    //饼图
                     new Pie({
                         data: tableResult,//数据json,
                         opt: "",//配置json
@@ -51,13 +56,27 @@ var resultTableGenerator = function () {
                     }).render();
                     break;
                 case 'histogram':
-                    new Bar({
+                    //直方图
+                    new HistogramOrLine({
                         data: tableResult,//数据json,
                         opt: "",//配置json
                         content: 'graph_' + i,//图表容器的id
-                        title: '直方图' //图表类型标题
+                        title: '直方图', //图表类型标题
+                        type: 'bar' //图表类型，line折线图，bar条形图
                     }).render();
-
+                    break;
+                case 'linechart':
+                    //折线图
+                    new HistogramOrLine({
+                        data: tableResult,//数据json,
+                        opt: "",//配置json
+                        content: 'graph_' + i,//图表容器的id
+                        title: '折线图', //图表类型标题
+                        type: 'line' //图表类型，line折线图，bar条形图
+                    }).render();
+                    break;
+                case 'scatterdiagram':
+                    //散点图
                     break;
             }
         });
@@ -225,11 +244,13 @@ var handleCorrelationBivariate = function (tableResult) {
 
     var resConfigs = Object.keys(bivariateTableData[paramsList[0]][0][paramsList[0]]);
 
+    //获取存储所有配置的JSON
+    var ALL_CONFIGS = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CORRELATION_BIVARIATE'));
     //配置显示的参数数组
-    var algorithmConfigs = sessionStorage.getItem('PRIVATE_ALGORITHM_CONFIG').split(',');
+    var algorithmConfigs = ALL_CONFIGS.algorithmConfigs;
 
     //Pearson 与Spearman 参数数组
-    var tableConfigsList = sessionStorage.getItem('PRIVATE_PLUGIN_CONFIG_COR_BIV').split(',');
+    var tableConfigsList = ALL_CONFIGS.correlationCoefficients;
 
     tableConfigsList.map(function (option) {
         console.log(option);
@@ -387,5 +408,64 @@ var handleCorrelationBivariate = function (tableResult) {
         $(presentArea).append(table);
     }
 
+};
+var handleCorrelationDistance = function (tableResult) {
+
+    var presentArea = $('.result-table');
+
+    console.log(tableResult);
+
+    var ALL_CONFIG = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CORRELATION_DISTANCE'));
+
+    //获取个案间数据
+    var unitData = tableResult.unitDataArr;
+
+    //获取制表方式: 个案间 || 变量间
+    var distanceCalcType = ALL_CONFIG.distanceCalcType[0];
+
+    //获取度量类型:Euclidean 距离 || 平方 Euclidean 距离 || Chebyshev || 块 || Minkowski || 设定距离
+    var measureMethod = ALL_CONFIG.measureMethod[0];
+
+    //个案间 表格生成
+    if (distanceCalcType == 'unit') {
+        var container = $('<div>');
+        $(container).addClass('frequency-table');
+
+        var header = $('<h1>');
+
+        $(header).text('近似矩阵');
+
+        var table = $('<table>');
+        $(table).addClass('table table-striped table-bordered');
+
+        var row = $('<tr>');
+        var cell = $('<td>');
+        var headerCell = $('<th>');
+
+        //打印头部
+        var headerRow = $(row).clone();
+        var emptyHeaderCell = $(headerCell).clone();
+        $(emptyHeaderCell).attr('rowspan', '2');
+        $(headerRow).append(emptyHeaderCell);
+        
+        unitData.map(function (unit, index) {
+            var tr = $(row).clone();
+
+            var td = $(cell).clone();
+            $(td).text(index + 1);
+            $(tr).append(td);
+
+            unit.map(function (data) {
+                var td = $(cell).clone();
+                $(td).text(data[measureMethod]);
+                $(tr).append(td);
+            });
+            $(table).append(tr);
+        });
+
+        $(container).append(header).append(table);
+        $(presentArea).append(container);
+
+    }
 };
 
