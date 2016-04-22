@@ -442,12 +442,30 @@ var handleCorrelationDistance = function (tableResult) {
         var cell = $('<td>');
         var headerCell = $('<th>');
 
+        var variableLenth = unitData.length;
+
         //打印头部
         var headerRow = $(row).clone();
         var emptyHeaderCell = $(headerCell).clone();
         $(emptyHeaderCell).attr('rowspan', '2');
         $(headerRow).append(emptyHeaderCell);
-        
+
+        var headerTitle = $(headerCell).clone();
+        $(headerTitle).attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', measureMethod)
+            .attr('colspan', variableLenth)
+            .attr('align', 'center');
+        $(headerRow).append(headerTitle);
+
+        //打印第二行
+        var headerSecRow = $(row).clone();
+        for (var i = 0; i < variableLenth; i++) {
+            var indexCell = $(cell).clone();
+            $(indexCell).attr('align', 'center').text(i + 1);
+            $(headerSecRow).append(indexCell);
+        }
+        $(table).append(headerRow).append(headerSecRow);
+
         unitData.map(function (unit, index) {
             var tr = $(row).clone();
 
