@@ -15,12 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-/***
- * 
- * 
+/**
+ *  回归分析
  * @Title: RegressionController.java
  * @Package org.jmu.multiinfo.web.controller
- * @Description: 回归分析
  * @author  <a href="mailto:www_1350@163.com">Absurd</a>
  * @date 2016年3月8日 下午2:22:39
  * @version V1.0
@@ -33,6 +31,13 @@ public class RegressionController extends BaseController{
 	@Autowired
 	private LinearRegressionService linearRegressionService;
 	
+	
+	/***
+	 * 一元线性回归
+	 * 路径/statistics/regression.do?method=singleLinear
+	 * @param condition
+	 * @return
+	 */
 	@RequestMapping(params = { "method=singleLinear" })
 	@ResponseBody
 	public SingleLinearDTO calSingleLinearRegression(@RequestBody BiVarCondition condition){
@@ -40,6 +45,12 @@ public class RegressionController extends BaseController{
 		return linearDTO;
 	}
 	
+	/***
+	 * 多元线性回归
+	 * 路径/statistics/regression.do?method=multipleLinear
+	 * @param condition
+	 * @return
+	 */
 	@RequestMapping(params = { "method=multipleLinear" })
 	@ResponseBody
 	public MultipleLinearDTO calOLSMultipleLinearRegression(@RequestBody BiVarCondition condition){
@@ -48,7 +59,12 @@ public class RegressionController extends BaseController{
 		
 	}
 	
-	
+	/***
+	 * 散点图数据转换
+	 * 路径/statistics/regression.do?method=convertForGraph
+	 * @param condition
+	 * @return
+	 */
 	@RequestMapping(params = { "method=convertForGraph" })
 	@ResponseBody
 	public GraphDTO convertForGraph(@RequestBody BiVarCondition condition){

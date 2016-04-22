@@ -23,6 +23,7 @@ org.jmu.multiinfo.service.correlation.impl
 org.jmu.multiinfo.service.descriptives
 org.jmu.multiinfo.service.descriptives.impl
 org.jmu.multiinfo.service.dingchart
+org.jmu.multiinfo.service.dingchart.impl
 org.jmu.multiinfo.service.mean
 org.jmu.multiinfo.service.prediction
 org.jmu.multiinfo.service.prediction.impl

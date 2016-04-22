@@ -28,13 +28,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 /***
- * 
-* @Title: UploadAction.java 
-* @Package org.jmu.multiinfo.component.controller 
-* @Description: 文件上传
-* @author  <a href="mailto:www_1350@163.com">Absurd</a>
-* @date 2015年11月3日 下午3:53:33 
-* @version V1.0
+ * 文件上传
+ * @Title: UploadAction.java 
+ * @Package org.jmu.multiinfo.component.controller 
+ * @author  <a href="mailto:www_1350@163.com">Absurd</a>
+ * @date 2015年11月3日 下午3:53:33 
+ * @version V1.0
  */
 @Controller
 @RequestMapping("/upload.do")
@@ -48,6 +47,20 @@ public class UploadController extends BaseController{
 	@Autowired
 	public TokenGenService tokenGenService;
 	
+	
+	/***
+	 * 根据token返回数据
+	 * 路径 /upload.do?method=file
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @param token
+	 * @param sheetNo
+	 * @param isMultiSheet
+	 * @param isFirstRowVar
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(params = { "method=file" })
 	@ResponseBody
 	public Object uploadFile(HttpServletRequest request, HttpServletResponse response,HttpSession session,
@@ -65,7 +78,17 @@ public class UploadController extends BaseController{
 		return dataToken.getData();
 	}
 	
-	
+	/***
+	 * 上传excel
+	 * 路径 /upload.do?method=excel
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @param file
+	 * @param isFirstRowVar
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(params = { "method=excel" },method=RequestMethod.POST)
 	@ResponseBody
 	public TokenDTO uploadExcel(HttpServletRequest request, HttpServletResponse response,HttpSession session,
@@ -104,7 +127,17 @@ public class UploadController extends BaseController{
 		return tokenDTO;
 	}
 	
-	
+	/***
+	 * 上传dat、data 二进制文本类型
+	 * 路径 /upload.do?method=text
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @param file
+	 * @param isFirstRowVar
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(params = { "method=text" },method=RequestMethod.POST)
 	@ResponseBody
 	public TokenDTO uploadText(HttpServletRequest request, HttpServletResponse response,HttpSession session,
