@@ -29,6 +29,12 @@ public class CorrelationStatisticsController {
 	@Autowired
 	private CorrelationService correlationService;
 	
+	
+	/***
+	 * 双变量
+	 * @param condition {@link org.jmu.multiinfo.dto.correlation.BivariateCorrelateCondition}
+	 * @return
+	 */
 	@RequestMapping(params = { "method=bivariate" })
 	@ResponseBody
 	public BivariateCorrelateDTO calBivariate(@RequestBody BivariateCorrelateCondition condition) {
@@ -36,6 +42,11 @@ public class CorrelationStatisticsController {
 	}
 	
 	
+	/***
+	 * 距离 
+	 * @param condition {@link org.jmu.multiinfo.dto.correlation.DistanceCorrelationCondition}
+	 * @return
+	 */
 	@RequestMapping(params = { "method=distance" })
 	@ResponseBody
 	public DistanceCorrelationDTO calDistance(@RequestBody DistanceCorrelationCondition condition){

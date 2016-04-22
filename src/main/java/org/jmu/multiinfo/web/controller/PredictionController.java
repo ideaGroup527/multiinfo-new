@@ -26,6 +26,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class PredictionController {
 	@Autowired
 	private GreyPredictionService greyPredictionService;
+	
+	
+	/***
+	 * <a href="https://github.com/ideaGroup527/multiinfo-data/tree/master/%E7%81%B0%E8%89%B2%E7%90%86%E8%AE%BA/%E7%81%B0%E8%89%B2%E7%90%86%E8%AE%BA.doc">灰色预测</a>
+	 * @param condition {@link org.jmu.multiinfo.dto.prediction.GreyPredictionCondition}
+	 * @return
+	 */
 	@RequestMapping(params = { "method=grey" })
 	@ResponseBody
 	public GreyPredictionDTO calGrey(@RequestBody GreyPredictionCondition condition) {

@@ -28,12 +28,25 @@ public class CompareMeanStatisticsController extends BaseController{
 	@Autowired
 	private CompareMeanStatisticsService compareMeanStatisticsService;
 	
+	
+	/***
+	 * 比较均值
+	 * @param condition
+	 * @return
+	 */
 	@RequestMapping(params = { "method=mean" })
 	@ResponseBody
    public MedianDTO calMean(@RequestBody MedianCondition condition){
 		MedianDTO medianDTO =	compareMeanStatisticsService.calMean(condition);
 		return medianDTO;
 	}
+	
+	
+	/***
+	 * 单因素方差分析
+	 * @param anovaCondition
+	 * @return
+	 */
 	@RequestMapping(params = { "method=onewayanova" })
 	@ResponseBody
 	public AnovaDataDTO calOneWayAnova(AnovaCondition anovaCondition){
