@@ -117,7 +117,7 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 	@Override
 	public CommonDTO calFrequency(OneVarCondition condition) {
 		CommonDTO meanDTO = new CommonDTO();
-		Map<String, ResultDataDTO> resDataMap = new HashMap<String, ResultDataDTO>();
+		Map<String, ResultDataDTO> resDataMap = new LinkedHashMap<String, ResultDataDTO>();
 		List<VarietyDTO> variableList = condition.getVariableList();
 		DataDTO[][] dataGrid = condition.getDataGrid();
 		for (Iterator<VarietyDTO> iterator = variableList.iterator(); iterator.hasNext();) {

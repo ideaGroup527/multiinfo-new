@@ -2,6 +2,7 @@ package org.jmu.multiinfo.service.regression.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -163,7 +164,7 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		VarietyDTO dependVarDTO = condition.getDependentVariable();
 		List<VarietyDTO> independVarDTOList = condition.getIndependentVariable();
 		DataDTO[][] dataGrid = condition.getDataGrid();
-		Map<String, GraphDataDTO> resDataMap = new HashMap<String, GraphDataDTO>();
+		Map<String, GraphDataDTO> resDataMap = new LinkedHashMap<String, GraphDataDTO>();
 		// 因变量数据
 		List<Double> dependVarList = new ArrayList<Double>();
 		GraphDataDTO gdata = new GraphDataDTO();
