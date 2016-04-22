@@ -413,6 +413,20 @@ var handleCorrelationDistance = function (tableResult) {
 
     var presentArea = $('.result-table');
 
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var header = $('<h1>');
+
+    $(header).text('近似矩阵');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered');
+
+    var row = $('<tr>');
+    var cell = $('<td>');
+    var headerCell = $('<th>');
+
     console.log(tableResult);
 
     var ALL_CONFIG = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CORRELATION_DISTANCE'));
@@ -420,46 +434,43 @@ var handleCorrelationDistance = function (tableResult) {
     //获取个案间数据
     var unitData = tableResult.unitDataArr;
 
+    //获取变量间数据
+    var resData = tableResult.resDataMap;
+    //变量间数据主键值
+    var paramKeysList = Object.keys(resData);
+
     //获取制表方式: 个案间 || 变量间
     var distanceCalcType = ALL_CONFIG.distanceCalcType[0];
 
     //获取度量类型:Euclidean 距离 || 平方 Euclidean 距离 || Chebyshev || 块 || Minkowski || 设定距离
     var measureMethod = ALL_CONFIG.measureMethod[0];
 
+    //变量长度
+    var variableLength = 0;
+
+    //打印头部空白格
+    var headerRow = $(row).clone();
+    var emptyHeaderCell = $(headerCell).clone();
+    $(emptyHeaderCell).attr('rowspan', '2');
+    $(headerRow).append(emptyHeaderCell);
+
     //个案间 表格生成
     if (distanceCalcType == 'unit') {
-        var container = $('<div>');
-        $(container).addClass('frequency-table');
 
-        var header = $('<h1>');
-
-        $(header).text('近似矩阵');
-
-        var table = $('<table>');
-        $(table).addClass('table table-striped table-bordered');
-
-        var row = $('<tr>');
-        var cell = $('<td>');
-        var headerCell = $('<th>');
-
-        var variableLenth = unitData.length;
+        variableLength = unitData.length;
 
         //打印头部
-        var headerRow = $(row).clone();
-        var emptyHeaderCell = $(headerCell).clone();
-        $(emptyHeaderCell).attr('rowspan', '2');
-        $(headerRow).append(emptyHeaderCell);
 
         var headerTitle = $(headerCell).clone();
         $(headerTitle).attr('data-i18n-type', 'table')
             .attr('data-i18n-tag', measureMethod)
-            .attr('colspan', variableLenth)
+            .attr('colspan', variableLength)
             .attr('align', 'center');
         $(headerRow).append(headerTitle);
 
         //打印第二行
         var headerSecRow = $(row).clone();
-        for (var i = 0; i < variableLenth; i++) {
+        for (var i = 0; i < variableLength; i++) {
             var indexCell = $(cell).clone();
             $(indexCell).attr('align', 'center').text(i + 1);
             $(headerSecRow).append(indexCell);
@@ -480,10 +491,52 @@ var handleCorrelationDistance = function (tableResult) {
             });
             $(table).append(tr);
         });
+    } else if (distanceCalcType == 'variable') {
 
-        $(container).append(header).append(table);
-        $(presentArea).append(container);
+        variableLength = paramKeysList.length;
 
+        //打印头部
+        var headerTitle = $(headerCell).clone();
+        $(headerTitle).attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', measureMethod)
+            .attr('colspan', variableLength)
+            .attr('align', 'center');
+        $(headerRow).append(headerTitle);
+
+        //打印第二行
+        var headerSecRow = $(row).clone();
+        paramKeysList.map(function (mainKey) {
+            var keyName = $(cell).clone();
+            $(keyName).attr('align', 'center')
+                .text(mainKey);
+            $(headerSecRow).append(keyName);
+        });
+        $(table).append(headerRow).append(headerSecRow);
+
+        //打印变量名和值
+        paramKeysList.map(function (mainKey) {
+            //有几个变量打印几行
+            var variableRow = $(row).clone();
+
+            //先打印变量名
+            var keyName = $(cell).clone();
+            $(keyName).text(mainKey);
+            $(variableRow).append(keyName);
+
+            resData[mainKey].map(function (indieValue) {
+                paramKeysList.map(function (paramKey) {
+                    if (indieValue[paramKey]) {
+                        var valueCell = $(cell).clone();
+                        $(valueCell).text(indieValue[paramKey][measureMethod]);
+                        $(variableRow).append(valueCell);
+                    }
+                });
+                $(table).append(variableRow);
+            });
+        });
     }
+
+    $(container).append(header).append(table);
+    $(presentArea).append(container);
 };
 
