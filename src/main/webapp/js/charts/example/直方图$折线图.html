@@ -8,7 +8,7 @@
 
 <script src="../../lib/echarts.min.js"></script>
 <script src="../base/charts.js"></script>
-<script src="../bar.js"></script>
+<script src="../Histogram_Line.js"></script>
 <script type="text/javascript">
 
     var data = {
@@ -329,11 +329,12 @@
 //    "resultType": null,
 //    "reportTitle": null
 //}
-    new Bar({
+    new HistogramOrLine({
         data: data,//数据json,
         opt: "",//配置json
         content: "main",//图表容器的id
-        title: '直方图' //图表类型标题
+        title: '直方图', //图表类型标题
+        type:'bar' //图表类型，line折线图，bar条形图
     }).render();
 
 </script>

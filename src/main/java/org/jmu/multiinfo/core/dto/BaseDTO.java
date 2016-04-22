@@ -1,7 +1,7 @@
 package org.jmu.multiinfo.core.dto;
 
 public class BaseDTO {
-private String ret_code = "";
+private String ret_code = "0";
 private String ret_msg = "";
 private String ret_err = "";
 public String getRet_code() {
