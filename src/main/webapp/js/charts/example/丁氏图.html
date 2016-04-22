@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>丁氏图</title>
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #canvas {
+            display: block;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="1000" height="500"></canvas>
+<script>
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    var width = canvas.width,
+            height = canvas.height;
+    ctx.lineWidth = 1;
+
+    //横线
+    for (var i = 0; i <= 12; i++) {
+        ctx.beginPath();
+        ctx.moveTo(0, i*height/12);
+        ctx.lineTo(width, i*height/12);
+        ctx.stroke();
+    }
+
+    //纵线
+    for (var i = 0;i<=20; i++) {
+        ctx.beginPath();
+        ctx.moveTo(i*width/20, 0);
+        ctx.lineTo(i*width/20, height);
+        ctx.stroke();
+    }
+
+    //椭圆
+    for(var i=0;i<12;i++){
+        EllipseTwo(ctx,50,i*20+10,30,10);
+    }
+
+    function EllipseTwo(context, x, y, a, b) {
+        context.save();
+        context.fillStyle="#980707";
+        var r = (a > b) ? a : b;
+        var ratioX = a / r;
+        var ratioY = b / r;
+        context.scale(ratioX, ratioY);
+        context.beginPath();
+        context.arc(x / ratioX, y / ratioY, r, 0, 2 * Math.PI, false);
+        context.closePath();
+        context.fill();
+        context.restore();
+    }
+</script>
+</body>
+</html>
