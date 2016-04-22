@@ -64,7 +64,10 @@
             "name": {
               "zh-cn": "距离",
               "en-us": "Distance"
-            }
+            },
+            "modalId": "#Correlation_Distance",
+            "modal": "modal.html",
+            "script": "script.js"
           }
         ]
       },

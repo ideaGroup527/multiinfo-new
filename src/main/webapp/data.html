@@ -79,15 +79,13 @@
                 $('body').append(modalHTML);
                 $(modalID).modal({
                     'show': true,
-                    'backdrop': 'static',
-                    'keyboard': false
+                    'backdrop': 'static'
                 }).on('hidden.bs.modal', function (e) {
                     $(this).remove();
                     sessionStorage.removeItem('PRIVATE_MODAL_SCRIPT_URL');
                 });
             }).done(function () {
                 i18n();
-
                 variableChoose(variableList);
             });
         } else {
@@ -100,20 +98,11 @@
         e.preventDefault();
         $.getScript(sessionStorage.getItem('PRIVATE_MODAL_SCRIPT_URL'), function () {
 
+
             var handlerConfig = {
                 submitType: $('.variable-submit').attr('data-btn-type'),
                 gridData: dataGrid
             };
-
-            if (typeof getConfigs === 'function') {
-                var config = getConfigs();
-                if (config) {
-                    handlerConfig.pluginContainer = config.container;
-                    handlerConfig.configType = config.configType;
-                    handlerConfig.storageKey = config.storageKey;
-                }
-            }
-
             handleSubmit(handlerConfig);
         });
     }).on('click', '.variable-config', function (e) {

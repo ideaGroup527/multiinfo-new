@@ -35,6 +35,7 @@ var resultTableGenerator = function () {
 
             switch (graph) {
                 case 'boxplot':
+                    //箱线图
                     new Boxplot({
                         data: tableResult,
                         opt: "",
@@ -43,6 +44,7 @@ var resultTableGenerator = function () {
                     }).render();
                     break;
                 case 'piegraph':
+                    //饼图
                     new Pie({
                         data: tableResult,//数据json,
                         opt: "",//配置json
@@ -51,13 +53,27 @@ var resultTableGenerator = function () {
                     }).render();
                     break;
                 case 'histogram':
-                    new Bar({
+                    //直方图
+                    new HistogramOrLine({
                         data: tableResult,//数据json,
                         opt: "",//配置json
                         content: 'graph_' + i,//图表容器的id
-                        title: '直方图' //图表类型标题
+                        title: '直方图', //图表类型标题
+                        type: 'bar' //图表类型，line折线图，bar条形图
                     }).render();
-
+                    break;
+                case 'linechart':
+                    //折线图
+                    new HistogramOrLine({
+                        data: tableResult,//数据json,
+                        opt: "",//配置json
+                        content: 'graph_' + i,//图表容器的id
+                        title: '折线图', //图表类型标题
+                        type: 'line' //图表类型，line折线图，bar条形图
+                    }).render();
+                    break;
+                case 'scatterdiagram':
+                    //散点图
                     break;
             }
         });
@@ -225,11 +241,13 @@ var handleCorrelationBivariate = function (tableResult) {
 
     var resConfigs = Object.keys(bivariateTableData[paramsList[0]][0][paramsList[0]]);
 
+    //获取存储所有配置的JSON
+    var ALL_CONFIGS = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CORRELATION_BIVARIATE'));
     //配置显示的参数数组
-    var algorithmConfigs = sessionStorage.getItem('PRIVATE_ALGORITHM_CONFIG').split(',');
+    var algorithmConfigs = ALL_CONFIGS.algorithmConfigs;
 
     //Pearson 与Spearman 参数数组
-    var tableConfigsList = sessionStorage.getItem('PRIVATE_PLUGIN_CONFIG_COR_BIV').split(',');
+    var tableConfigsList = ALL_CONFIGS.correlationCoefficients;
 
     tableConfigsList.map(function (option) {
         console.log(option);
