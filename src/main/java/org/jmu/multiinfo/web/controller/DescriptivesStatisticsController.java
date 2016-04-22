@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 
  * @Title: DescriptivesStatisticsController.java
  * @Package org.jmu.multiinfo.web.controller
- * @Description:  描述统计  需求连接http://www.seekbio.com/biotech/soft/SPSS/2012/j819365850.html
+ * @Description: <a href="http://www.seekbio.com/biotech/soft/SPSS/2012/j819365850.html">描述统计</a>
  * @author  <a href="mailto:www_1350@163.com">Absurd</a>
  * @date 2016年3月5日 下午4:55:56
  * @version V1.0
