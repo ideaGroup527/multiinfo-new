@@ -6,13 +6,10 @@ import org.jmu.multiinfo.dto.descriptives.KSTestDTO;
 import org.jmu.multiinfo.dto.descriptives.PercentileCondition;
 
 
-/***
- * *
- * 
- * 
+/**
+ * 描述统计
  * @Title: DescriptivesStatisticsService.java
  * @Package org.jmu.multiinfo.service.descriptives
- * @Description:  描述统计
  * @author  <a href="mailto:www_1350@163.com">Absurd</a>
  * @date 2016年4月17日 下午2:19:25
  * @version V1.0
