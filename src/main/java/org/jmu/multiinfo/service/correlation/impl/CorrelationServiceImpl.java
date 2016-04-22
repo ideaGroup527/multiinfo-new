@@ -2,6 +2,7 @@ package org.jmu.multiinfo.service.correlation.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -66,8 +67,8 @@ public class CorrelationServiceImpl implements CorrelationService {
 		BivariateCorrelateDTO biDTO = new BivariateCorrelateDTO();
 		DataDTO[][] dataGrid = condition.getDataGrid();
 		List<VarietyDTO> variableList	 = condition.getVariableList();
-		 Map<String, ResultDescDTO> basicDataMap = new HashMap<>();
-		 Map<String, List<Map<String, BiCoDataDTO>>> resDataMap = new HashMap<>();
+		 Map<String, ResultDescDTO> basicDataMap = new LinkedHashMap<>();
+		 Map<String, List<Map<String, BiCoDataDTO>>> resDataMap = new LinkedHashMap<>();
 		
 		Map<String, List<Double>>  variableMap =	DataFormatUtil.converToDouble(dataGrid, variableList);
 		 for (Map.Entry<String, List<Double>> entry : variableMap.entrySet()) {
@@ -86,7 +87,7 @@ public class CorrelationServiceImpl implements CorrelationService {
 			
 			 Integer N = basicStatisticsService.getN(dataArrX);
 			 for (Map.Entry<String, List<Double>> compEntry : variableMap.entrySet()) {
-				 Map<String, BiCoDataDTO> resEMap = new HashMap<>();
+				 Map<String, BiCoDataDTO> resEMap = new LinkedHashMap<>();
 				 BiCoDataDTO bidata = new BiCoDataDTO();
 				 List<Double> compDataList = compEntry.getValue();
 				 double[] dataArrY = DataFormatUtil.converToDouble(compDataList);
@@ -130,8 +131,8 @@ public class CorrelationServiceImpl implements CorrelationService {
 		List<VarietyDTO> varietyList = condition.getVariableList();
 		Integer rowSize = 0;
 		//变量间
-		Map<String,List<Map<String,DisCoDataDTO>>> resDataMap = new HashMap<>();
-		Map<String,ResultDescDTO> basicDataMap = new HashMap<>();
+		Map<String,List<Map<String,DisCoDataDTO>>> resDataMap = new LinkedHashMap<>();
+		Map<String,ResultDescDTO> basicDataMap = new LinkedHashMap<>();
 		
 		List<List<Double>> dataGridList = new ArrayList<>();
 		
@@ -152,7 +153,7 @@ public class CorrelationServiceImpl implements CorrelationService {
 			 basicDataMap.put(varityName, basicData);
 			 
 			 for (Map.Entry<String, List<Double>> compEntry : variableMap.entrySet()) {
-				 Map<String,DisCoDataDTO> resEDataMap = new HashMap<>();
+				 Map<String,DisCoDataDTO> resEDataMap = new LinkedHashMap<>();
 				 DisCoDataDTO disCoData = new DisCoDataDTO();
 				 
 				 List<Double> compDataList = compEntry.getValue();

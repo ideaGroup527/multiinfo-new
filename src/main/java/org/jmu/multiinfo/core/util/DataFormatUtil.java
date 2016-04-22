@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -78,7 +79,7 @@ public static double[][] converToDouble(DataDTO[][] dataGrid){
  * @return
  */
 public static Map<String, List<Double>> converToDouble(DataDTO[][] dataGrid,List<VarietyDTO> variableList){
-	Map<String,List<Double>> variableDataMap = new HashMap<>();
+	Map<String,List<Double>> variableDataMap = new LinkedHashMap<>();
 	for (Iterator<VarietyDTO> iterator = variableList.iterator(); iterator.hasNext();) {
 		List<Double> dataList = new ArrayList<Double>();
 		VarietyDTO varietyDTO = (VarietyDTO) iterator.next();
@@ -96,7 +97,7 @@ public static Map<String, List<Double>> converToDouble(DataDTO[][] dataGrid,List
 }
 
 public static Map<String, List<Double>> converToDouble(DataDTO[][] dataGrid,List<VarietyDTO> variableList,VarietyDTO factorVariable){
-	Map<String,List<Double>> resDataMap = new HashMap<>();
+	Map<String,List<Double>> resDataMap = new LinkedHashMap<>();
 	PositionBean 	factorVarRange =ExcelUtil.splitRange( factorVariable.getRange());//因子变量范围如A1:G1--
 	
 	for (Iterator<VarietyDTO> iterator = variableList.iterator(); iterator.hasNext();) {

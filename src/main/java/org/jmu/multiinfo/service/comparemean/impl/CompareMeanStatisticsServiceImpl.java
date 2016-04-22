@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -39,7 +40,7 @@ public class CompareMeanStatisticsServiceImpl implements CompareMeanStatisticsSe
 	@Override
 	public MedianDTO calMean(MedianCondition condition) {
 		MedianDTO resDTO = new MedianDTO();
-		Map<String, Map<String, ResultDataDTO>> resDataMap = new HashMap<String, Map<String, ResultDataDTO>>();
+		Map<String, Map<String, ResultDataDTO>> resDataMap = new LinkedHashMap<String, Map<String, ResultDataDTO>>();
 		//因变量
 		List<VarietyDTO> dependVarList = condition.getDependentVariable();
 		VarietyDTO	independentVar = condition.getIndependentVariable();
@@ -47,7 +48,7 @@ public class CompareMeanStatisticsServiceImpl implements CompareMeanStatisticsSe
 		PositionBean 	independentVarRange =ExcelUtil.splitRange( independentVar.getRange());//自变量范围如A1:A8--
 		Set<String> indepSet = new HashSet<String>();
 		//自变量坐标
-		Map<String,List<Integer>> indepIndexMap = new HashMap<String,List<Integer>>();
+		Map<String,List<Integer>> indepIndexMap = new LinkedHashMap<String,List<Integer>>();
 		for (int i = independentVarRange.getFirstRowId()-1; i < independentVarRange.getLastRowId(); i++) {
 			for (int j = independentVarRange.getFirstColId()-1; j < independentVarRange.getLastColId(); j++) {
 				indepSet.add(data[i][j].getData().toString());
@@ -64,7 +65,7 @@ public class CompareMeanStatisticsServiceImpl implements CompareMeanStatisticsSe
 			List<Integer> tmpList =	indepIndexMap.get(indep);
 			int si = tmpList.size();
 //			List<Map<String, ResultDataDTO>> value = new ArrayList<Map<String, ResultDataDTO>>();
-			Map<String, ResultDataDTO> map = new HashMap<String, ResultDataDTO>();
+			Map<String, ResultDataDTO> map = new LinkedHashMap<String, ResultDataDTO>();
 			//遍历每个因变量
 				for (VarietyDTO varietyDTO : dependVarList) {
 					PositionBean depVarRange =ExcelUtil.splitRange(varietyDTO.getRange());
@@ -107,7 +108,7 @@ public class CompareMeanStatisticsServiceImpl implements CompareMeanStatisticsSe
 	@Override
 	public AnovaDataDTO calOneWayAnova(AnovaCondition anovaCondition) {
 		AnovaDataDTO resDataDTO = new AnovaDataDTO();
-Map<String,AnovaDTO>  resMap = new HashMap<String,AnovaDTO>();
+Map<String,AnovaDTO>  resMap = new LinkedHashMap<String,AnovaDTO>();
 		//因变量
 		List<VarietyDTO> dependVarList = anovaCondition.getDependentVariable();
 		//因子
@@ -116,7 +117,7 @@ Map<String,AnovaDTO>  resMap = new HashMap<String,AnovaDTO>();
 		PositionBean 	independentVarRange =ExcelUtil.splitRange( factorVariable.getRange());//自变量范围如A1:A8--
 		Set<String> indepSet = new HashSet<String>();
 		//自变量坐标
-		Map<String,List<Integer>> indepIndexMap = new HashMap<String,List<Integer>>();
+		Map<String,List<Integer>> indepIndexMap = new LinkedHashMap<String,List<Integer>>();
 		for (int i = independentVarRange.getFirstRowId()-1; i < independentVarRange.getLastRowId(); i++) {
 			for (int j = independentVarRange.getFirstColId()-1; j < independentVarRange.getLastColId(); j++) {
 				indepSet.add(data[i][j].getData().toString());
