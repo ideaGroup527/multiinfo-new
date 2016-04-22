@@ -20,6 +20,9 @@ var resultTableGenerator = function () {
         case 'Correlation_Bivariate':
             handleCorrelationBivariate(tableResult);
             break;
+        case 'Correlation_Distance':
+            handleCorrelationDistance(tableResult);
+            break;
     }
 
     //绘图区
@@ -405,5 +408,64 @@ var handleCorrelationBivariate = function (tableResult) {
         $(presentArea).append(table);
     }
 
+};
+var handleCorrelationDistance = function (tableResult) {
+
+    var presentArea = $('.result-table');
+
+    console.log(tableResult);
+
+    var ALL_CONFIG = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CORRELATION_DISTANCE'));
+
+    //获取个案间数据
+    var unitData = tableResult.unitDataArr;
+
+    //获取制表方式: 个案间 || 变量间
+    var distanceCalcType = ALL_CONFIG.distanceCalcType[0];
+
+    //获取度量类型:Euclidean 距离 || 平方 Euclidean 距离 || Chebyshev || 块 || Minkowski || 设定距离
+    var measureMethod = ALL_CONFIG.measureMethod[0];
+
+    //个案间 表格生成
+    if (distanceCalcType == 'unit') {
+        var container = $('<div>');
+        $(container).addClass('frequency-table');
+
+        var header = $('<h1>');
+
+        $(header).text('近似矩阵');
+
+        var table = $('<table>');
+        $(table).addClass('table table-striped table-bordered');
+
+        var row = $('<tr>');
+        var cell = $('<td>');
+        var headerCell = $('<th>');
+
+        //打印头部
+        var headerRow = $(row).clone();
+        var emptyHeaderCell = $(headerCell).clone();
+        $(emptyHeaderCell).attr('rowspan', '2');
+        $(headerRow).append(emptyHeaderCell);
+        
+        unitData.map(function (unit, index) {
+            var tr = $(row).clone();
+
+            var td = $(cell).clone();
+            $(td).text(index + 1);
+            $(tr).append(td);
+
+            unit.map(function (data) {
+                var td = $(cell).clone();
+                $(td).text(data[measureMethod]);
+                $(tr).append(td);
+            });
+            $(table).append(tr);
+        });
+
+        $(container).append(header).append(table);
+        $(presentArea).append(container);
+
+    }
 };
 

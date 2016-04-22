@@ -60,17 +60,6 @@ var handleSubmit = function (config) {
         sessionStorage.setItem('PRIVATE_GRAPH_CONFIG', graphConfigs);
     }
 
-    // TODO 双变量的要记得修改
-    // //4.PLUGIN 根据不同配置的增加项
-    // if (config.pluginContainer) {
-    //     var pluginConfigsList = [];
-    //     var pluginConfigItem = $(config.pluginContainer).find(config.configType);
-    //     pluginConfigItem.map(function (i, plugin) {
-    //         pluginConfigsList.push($(plugin).val());
-    //     });
-    //     sessionStorage.setItem(config.storageKey, pluginConfigsList);
-    // }
-
     //5.配置发送数据包
     var dataPackage = {
         dataGrid: data,
@@ -97,7 +86,6 @@ var handleSubmit = function (config) {
             var distanceConfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CORRELATION_DISTANCE'));
             dataPackage.minkowskiP = distanceConfig.minkowskiP[0];
             dataPackage.minkowskiQ = distanceConfig.minkowskiQ[0];
-            console.log(dataPackage);
             break;
     }
 
