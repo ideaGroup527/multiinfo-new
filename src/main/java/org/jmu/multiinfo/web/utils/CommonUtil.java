@@ -253,6 +253,11 @@ public class CommonUtil {
 		return isMatch("^(([-+]{0,1}\\d+.?\\d*)[Ee]{1}(-?\\d+))$", orginal);
 	}
 	
+	/***
+	 * 是否是逗号型数值
+	 * @param orginal
+	 * @return
+	 */
 	public static boolean isVirgNumber(String orginal) {
 		return isMatch("^([-+]{0,1}[1-9]([0-9]{1,2})?(,[0-9]{3})*(\\.[0-9]+)?)$", orginal);
 	}
