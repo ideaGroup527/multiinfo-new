@@ -101,6 +101,25 @@
         ]
       },
       {
+        "term": "ReducingDimensions",
+        "name": {
+          "en-us": "Reducing Dimensions",
+          "zh-cn": "降维"
+        },
+        "subMenu": [
+          {
+            "term": "PrincipalComponentAnalysis",
+            "name": {
+              "en-us": "Principal Component Analysis",
+              "zh-cn": "主成分分析"
+            },
+            "modalId": "#Principal_Component_Analysis",
+            "modal": "modal.html",
+            "script": "script.js"
+          }
+        ]
+      },
+      {
         "term": "GeneralLinerModels",
         "name": {
           "zh-cn": "一般线性模型",
