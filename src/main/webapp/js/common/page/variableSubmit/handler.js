@@ -87,6 +87,14 @@ var handleSubmit = function (config) {
             dataPackage.minkowskiP = distanceConfig.minkowskiP[0];
             dataPackage.minkowskiQ = distanceConfig.minkowskiQ[0];
             break;
+        case 'Ding_Chart':
+            handleURL = 'statistics/chart.do?method=ding';
+            var dingChartConfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_DING_CHART'));
+            dataPackage.calculateMethod = dingChartConfig.calculateMethod[0];
+            dataPackage.rowVarList = dingChartConfig.rowVarList;
+            dataPackage.colVarList = dingChartConfig.colVarList;
+            dataPackage.variableList = null;
+            break;
     }
 
     $.ajax({

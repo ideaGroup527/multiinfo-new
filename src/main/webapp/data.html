@@ -52,7 +52,6 @@
     $(document).ready(function () {
         $.ajax({
             url: 'upload.do?method=file&isFirstRowVar=true',
-//            url: 'js/testJSON/excel_callback.json',
             data: {
                 'isMultiSheet': sessionStorage.getItem('isMultiSheet'),
                 'token': sessionStorage.getItem('token'),
@@ -63,6 +62,7 @@
             success: function (data) {
                 dataTableGenerator(data);
                 variableList = data.sheet.variety;
+                sessionStorage.setItem('PRIVATE_VARIABLE_LIST', JSON.stringify(variableList));
                 dataGrid = data.sheet.dataGrid;
             }
         })

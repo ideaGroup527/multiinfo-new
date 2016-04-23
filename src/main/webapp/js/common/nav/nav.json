@@ -86,6 +86,7 @@
             "en-us": "Ding Chart",
             "zh-cn": "丁氏图"
         },
+        "modalId": "#Ding_Chart",
         "modal": "modal.html",
         "script": "script.js"
     },
