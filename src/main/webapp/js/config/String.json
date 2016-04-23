@@ -79,6 +79,7 @@
       "modal_title_distance_correlations": "Distance",
       "modal_title_ding_chart": "Ding Chart",
       "modal_title_oneway_anova": "One-way Analysis of Variance",
+      "modal_title_means": "Means",
       "label_choose_sheet": "Select Your Sheet",
       "label_choose_variable": "Click to choose variable(s) below",
       "label_choose_col_variable": "Click to choose Column variable(s) below",
@@ -105,7 +106,8 @@
       "label_distance_measure_method": "Measure Method",
       "label_calculate_method": "Calculate Method",
       "label_dep_var_list": "Dependent Variable(s) List",
-      "label_factor": "Factor"
+      "label_factor": "Factor",
+      "label_indep_var_list": "Independent Variable(s) List"
     },
     "zh-cn": {
       "options": "选项",
@@ -118,6 +120,7 @@
       "modal_title_distance_correlations": "距离",
       "modal_title_ding_chart": "丁氏图",
       "modal_title_oneway_anova": "单因素方差分析",
+      "modal_title_means": "均值",
       "label_choose_sheet": "请选择待分析的表格",
       "label_choose_variable": "点击选择待选变量",
       "label_choose_col_variable": "点击选择 列变量",
@@ -146,7 +149,8 @@
       "label_distance_variable_case": "变量间",
       "label_calculate_method": "计算方法",
       "label_dep_var_list": "因变量列表",
-      "label_factor": "因子"
+      "label_factor": "因子",
+      "label_indep_var_list": "自变量列表"
     }
   },
   "table": {
