@@ -11,6 +11,7 @@ org.jmu.multiinfo.dto.correlation
 org.jmu.multiinfo.dto.descriptives
 org.jmu.multiinfo.dto.dingchart
 org.jmu.multiinfo.dto.prediction
+org.jmu.multiinfo.dto.reducingdim
 org.jmu.multiinfo.dto.regression
 org.jmu.multiinfo.dto.upload
 org.jmu.multiinfo.service.base
