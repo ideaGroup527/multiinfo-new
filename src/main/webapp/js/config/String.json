@@ -78,6 +78,7 @@
       "modal_title_bivariate_correlations": "Bivariate Correlations",
       "modal_title_distance_correlations": "Distance",
       "modal_title_ding_chart": "Ding Chart",
+      "modal_title_oneway_anova": "One-way Analysis of Variance",
       "label_choose_sheet": "Select Your Sheet",
       "label_choose_variable": "Click to choose variable(s) below",
       "label_choose_col_variable": "Click to choose Column variable(s) below",
@@ -102,7 +103,9 @@
       "label_distance_power": "Power",
       "label_distance_root": "Root",
       "label_distance_measure_method": "Measure Method",
-      "label_calculate_method": "Calculate Method"
+      "label_calculate_method": "Calculate Method",
+      "label_dep_var_list": "Dependent Variable(s) List",
+      "label_factor": "Factor"
     },
     "zh-cn": {
       "options": "选项",
@@ -114,6 +117,7 @@
       "modal_title_bivariate_correlations": "双变量",
       "modal_title_distance_correlations": "距离",
       "modal_title_ding_chart": "丁氏图",
+      "modal_title_oneway_anova": "单因素方差分析",
       "label_choose_sheet": "请选择待分析的表格",
       "label_choose_variable": "点击选择待选变量",
       "label_choose_col_variable": "点击选择 列变量",
@@ -140,7 +144,9 @@
       "label_distance_measure_method": "度量方法",
       "label_distance_unit_case": "个案间",
       "label_distance_variable_case": "变量间",
-      "label_calculate_method": "计算方法"
+      "label_calculate_method": "计算方法",
+      "label_dep_var_list": "因变量列表",
+      "label_factor": "因子"
     }
   },
   "table": {

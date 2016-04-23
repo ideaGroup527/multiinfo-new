@@ -95,6 +95,13 @@ var handleSubmit = function (config) {
             dataPackage.colVarList = dingChartConfig.colVarList;
             dataPackage.variableList = null;
             break;
+        case 'Oneway_ANOVA':
+            handleURL = 'statistics/comparemean.do?method=onewayanova';
+            var ANOVA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_ONEWAY_ANOVA'));
+            dataPackage.factorVariable = ANOVA.factorVariable[0];
+            dataPackage.dependentVariable = ANOVA.dependentVariable;
+            dataPackage.variableList = null;
+            break;
     }
 
     $.ajax({

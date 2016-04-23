@@ -68,6 +68,9 @@
         var variableList = JSON.parse(sessionStorage.getItem('PRIVATE_VARIABLE_LIST'));
 
         variableList.map(function (variable, i) {
+            //第一栏第一列的值不要
+            if (i == 0) return;
+
             var variableWrapper = $('<span>');
             $(variableWrapper).addClass('variable-wrapper')
                     .attr('name', 'colVarList')
