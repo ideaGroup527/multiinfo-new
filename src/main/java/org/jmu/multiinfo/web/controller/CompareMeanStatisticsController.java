@@ -49,7 +49,7 @@ public class CompareMeanStatisticsController extends BaseController{
 	 */
 	@RequestMapping(params = { "method=onewayanova" })
 	@ResponseBody
-	public AnovaDataDTO calOneWayAnova(AnovaCondition anovaCondition){
+	public AnovaDataDTO calOneWayAnova(@RequestBody AnovaCondition anovaCondition){
 		AnovaDataDTO resDTO =compareMeanStatisticsService.calOneWayAnova(anovaCondition);
 		return resDTO;
 	}
