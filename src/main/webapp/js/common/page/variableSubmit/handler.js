@@ -102,6 +102,12 @@ var handleSubmit = function (config) {
             dataPackage.dependentVariable = ANOVA.dependentVariable;
             dataPackage.variableList = null;
             break;
+        case 'Means':
+            handleURL = 'statistics/comparemean.do?method=mean';
+            var means = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_MEANS'));
+            dataPackage.independentVariable = means.independentVariable[0];
+            dataPackage.dependentVariable = means.dependentVariable;
+            break;
     }
 
     $.ajax({
