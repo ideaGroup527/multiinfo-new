@@ -1,148 +1,157 @@
 [
-  {
-    "term": "Analysis",
-    "name": {
-      "zh-cn": "分析",
-      "en-us": "Analysis"
-    },
-    "subMenu": [
-      {
-        "term": "DescriptiveStatistics",
+    {
+        "term": "Analysis",
         "name": {
-          "zh-cn": "描述统计",
-          "en-us": "Descriptive Statistics"
+            "zh-cn": "分析",
+            "en-us": "Analysis"
         },
         "subMenu": [
-          {
-            "term": "Descriptive",
-            "name": {
-              "zh-cn": "描述",
-              "en-us": "Descriptive"
+            {
+                "term": "DescriptiveStatistics",
+                "name": {
+                    "zh-cn": "描述统计",
+                    "en-us": "Descriptive Statistics"
+                },
+                "subMenu": [
+                    {
+                        "term": "Descriptive",
+                        "name": {
+                            "zh-cn": "描述",
+                            "en-us": "Descriptive"
+                        },
+                        "modalId": "#Descriptive_Statistics_Descriptive",
+                        "modal": "modal.html",
+                        "script": "script.js"
+                    },
+                    {
+                        "term": "Frequency",
+                        "modalId": "#Descriptive_Statistics_Frequency",
+                        "modal": "modal.html",
+                        "script": "script.js",
+                        "name": {
+                            "zh-cn": "频率",
+                            "en-us": "Frequency"
+                        }
+                    }
+                ]
             },
-            "modalId": "#Descriptive_Statistics_Descriptive",
-            "modal": "modal.html",
-            "script": "script.js"
-          },
-          {
-            "term": "Frequency",
-            "modalId": "#Descriptive_Statistics_Frequency",
-            "modal": "modal.html",
-            "script": "script.js",
-            "name": {
-              "zh-cn": "频率",
-              "en-us": "Frequency"
+            {
+                "term": "Correlation",
+                "name": {
+                    "zh-cn": "相关",
+                    "en-us": "Correlation"
+                },
+                "subMenu": [
+                    {
+                        "term": "BivariateCorrelate",
+                        "name": {
+                            "zh-cn": "双变量",
+                            "en-us": "Bivariate Correlate"
+                        },
+                        "modalId": "#Correlation_Bivariate",
+                        "modal": "modal.html",
+                        "script": "script.js"
+                    },
+                    {
+                        "term": "PartialCorrelation",
+                        "name": {
+                            "zh-cn": "偏相关",
+                            "en-us": "Partial Correlation"
+                        }
+                    },
+                    {
+                        "term": "Distance",
+                        "name": {
+                            "zh-cn": "距离",
+                            "en-us": "Distance"
+                        },
+                        "modalId": "#Correlation_Distance",
+                        "modal": "modal.html",
+                        "script": "script.js"
+                    }
+                ]
+            },
+            {
+                "term": "GeneralLinerModels",
+                "name": {
+                    "zh-cn": "一般线性模型",
+                    "en-us": "General Liner Models"
+                }
             }
-          }
         ]
-      },
-      {
-        "term": "Correlation",
+    },
+    {
+        "term": "DingChart",
         "name": {
-          "zh-cn": "相关",
-          "en-us": "Correlation"
+            "en-us": "Ding Chart",
+            "zh-cn": "丁氏图"
+        },
+        "modal": "modal.html",
+        "script": "script.js"
+    },
+    {
+        "term": "Graph",
+        "name": {
+            "en-us": "Graph",
+            "zh-cn": "制图"
         },
         "subMenu": [
-          {
-            "term": "BivariateCorrelate",
-            "name": {
-              "zh-cn": "双变量",
-              "en-us": "Bivariate Correlate"
-            },
-            "modalId": "#Correlation_Bivariate",
-            "modal": "modal.html",
-            "script": "script.js"
-          },
-          {
-            "term": "PartialCorrelation",
-            "name": {
-              "zh-cn": "偏相关",
-              "en-us": "Partial Correlation"
+            {
+                "term": "Boxplot",
+                "name": {
+                    "en-us": "Boxplot",
+                    "zh-cn": "箱线图"
+                },
+                "script": "script.js"
             }
-          },
-          {
-            "term": "Distance",
-            "name": {
-              "zh-cn": "距离",
-              "en-us": "Distance"
-            },
-            "modalId": "#Correlation_Distance",
-            "modal": "modal.html",
-            "script": "script.js"
-          }
         ]
-      },
-      {
-        "term": "GeneralLinerModels",
-        "name": {
-          "zh-cn": "一般线性模型",
-          "en-us": "General Liner Models"
-        }
-      }
-    ]
-  },
-  {
-    "term": "Graph",
-    "name": {
-      "en-us": "Graph",
-      "zh-cn": "制图"
     },
-    "subMenu": [
-      {
-        "term": "Boxplot",
+    {
+        "term": "Language",
         "name": {
-          "en-us": "Boxplot",
-          "zh-cn": "箱线图"
+            "zh-cn": "选择语言",
+            "en-us": "Language"
         },
-        "script": "script.js"
-      }
-    ]
-  },
-  {
-    "term": "Language",
-    "name": {
-      "zh-cn": "选择语言",
-      "en-us": "Language"
+        "subMenu": [
+            {
+                "term": "Chinese",
+                "name": {
+                    "zh-cn": "<strong>中文（当前）</strong>",
+                    "en-us": "中文"
+                },
+                "script": "script.js"
+            },
+            {
+                "term": "English",
+                "name": {
+                    "zh-cn": "English",
+                    "en-us": "<strong>English (Current)</strong>"
+                },
+                "script": "script.js"
+            }
+        ]
     },
-    "subMenu": [
-      {
-        "term": "Chinese",
+    {
+        "term": "About",
         "name": {
-          "zh-cn": "<strong>中文（当前）</strong>",
-          "en-us": "中文"
+            "en-us": "About",
+            "zh-cn": "关于"
         },
-        "script": "script.js"
-      },
-      {
-        "term": "English",
-        "name": {
-          "zh-cn": "English",
-          "en-us": "<strong>English (Current)</strong>"
-        },
-        "script": "script.js"
-      }
-    ]
-  },
-  {
-    "term": "About",
-    "name": {
-      "en-us": "About",
-      "zh-cn": "关于"
-    },
-    "subMenu": [
-      {
-        "term": "Website",
-        "name": {
-          "en-us": "This website",
-          "zh-cn": "这个网站"
-        }
-      },
-      {
-        "term": "Authors",
-        "name": {
-          "en-us": "Authors",
-          "zh-cn": "作者们"
-        }
-      }
-    ]
-  }
+        "subMenu": [
+            {
+                "term": "Website",
+                "name": {
+                    "en-us": "This website",
+                    "zh-cn": "这个网站"
+                }
+            },
+            {
+                "term": "Authors",
+                "name": {
+                    "en-us": "Authors",
+                    "zh-cn": "作者们"
+                }
+            }
+        ]
+    }
 ]
