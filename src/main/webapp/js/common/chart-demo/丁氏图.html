@@ -16,8 +16,8 @@
     </style>
 </head>
 <body>
-<canvas id="canvas" width="1200" height="1200"></canvas>
-<script src="../DingChart.js"></script>
+<canvas id="main" width="1200" height="1200"></canvas>
+<script src="../charts.js"></script>
 <script>
     var data = {
         "ret_code": "0",
@@ -960,6 +960,7 @@
 <script>
     new DingChart({
         data:data,
+        container:'main',
         calculateMethod: 1//0行，1列，2全
     }).render();
 </script>
