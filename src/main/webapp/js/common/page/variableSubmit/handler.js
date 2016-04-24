@@ -108,6 +108,14 @@ var handleSubmit = function (config) {
             dataPackage.independentVariable = means.independentVariable[0];
             dataPackage.dependentVariable = means.dependentVariable;
             break;
+        case 'Principal_Component_Analysis':
+            handleURL = 'statistics/analysis.do?method=principalComponent';
+            var PCA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_PRINCIPAL_COMPONENT'));
+            dataPackage.variableList = PCA.variableList;
+            dataPackage.extractMethod = PCA.extractMethod[0];
+            dataPackage.eigExtraNum = PCA.eigExtraNum[0];
+            dataPackage.factorExtraNum = PCA.factorExtraNum[0];
+            break;
     }
 
     $.ajax({

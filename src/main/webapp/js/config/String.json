@@ -80,6 +80,7 @@
       "modal_title_ding_chart": "Ding Chart",
       "modal_title_oneway_anova": "One-way Analysis of Variance",
       "modal_title_means": "Means",
+      "modal_title_principal_component_analysis": "Principal Component Analysis",
       "label_choose_sheet": "Select Your Sheet",
       "label_choose_variable": "Click to choose variable(s) below",
       "label_choose_col_variable": "Click to choose Column variable(s) below",
@@ -107,7 +108,13 @@
       "label_calculate_method": "Calculate Method",
       "label_dep_var_list": "Dependent Variable(s) List",
       "label_factor": "Factor",
-      "label_indep_var_list": "Independent Variable(s) List"
+      "label_indep_var_list": "Independent Variable(s) List",
+      "label_variable": "Variable(s)",
+      "label_extraction": "Extraction",
+      "label_based_on_eigenvalues": "Base on the Eigenvalues",
+      "label_factor_fixed_number": "Fixed Number of Factor(s)",
+      "label_eigenvalues_more_than": "The eigenvalues is more than: ",
+      "label_extraction_factors_num": "The extraction factor(s): "
     },
     "zh-cn": {
       "options": "选项",
@@ -121,6 +128,7 @@
       "modal_title_ding_chart": "丁氏图",
       "modal_title_oneway_anova": "单因素方差分析",
       "modal_title_means": "均值",
+      "modal_title_principal_component_analysis": "主成分分析",
       "label_choose_sheet": "请选择待分析的表格",
       "label_choose_variable": "点击选择待选变量",
       "label_choose_col_variable": "点击选择 列变量",
@@ -150,7 +158,13 @@
       "label_calculate_method": "计算方法",
       "label_dep_var_list": "因变量列表",
       "label_factor": "因子",
-      "label_indep_var_list": "自变量列表"
+      "label_indep_var_list": "自变量列表",
+      "label_variable": "变量",
+      "label_extraction": "抽取",
+      "label_based_on_eigenvalues": "基于特征值",
+      "label_factor_fixed_number": "因子的固定数量",
+      "label_eigenvalues_more_than": "特征值大于：",
+      "label_extraction_factors_num": "要提取的因子："
     }
   },
   "table": {
