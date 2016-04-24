@@ -114,7 +114,19 @@
       "label_based_on_eigenvalues": "Base on the Eigenvalues",
       "label_factor_fixed_number": "Fixed Number of Factor(s)",
       "label_eigenvalues_more_than": "The eigenvalues is more than: ",
-      "label_extraction_factors_num": "The extraction factor(s): "
+      "label_extraction_factors_num": "The extraction factor(s): ",
+      "label_initial": "Initial",
+      "label_extract": "Extract",
+      "label_initial_eigenvalue": "Initial Eigenvalue",
+      "label_correlation_matrix": "Correlation Matrix",
+      "label_communalities": "Communalities",
+      "label_determinant": "Determinant",
+      "label_total_variance_explained": "Total Variance Explained",
+      "label_component": "Component",
+      "label_component_matrix": "Component Matrix",
+      "label_extraction_sums_of_squared_loading": "Extraction Sums of Squared Loading",
+      "label_percent_of_variance": "% of Variance",
+      "label_percent_of_Cumulative": "% of Cumulative"
     },
     "zh-cn": {
       "options": "选项",
@@ -164,7 +176,20 @@
       "label_based_on_eigenvalues": "基于特征值",
       "label_factor_fixed_number": "因子的固定数量",
       "label_eigenvalues_more_than": "特征值大于：",
-      "label_extraction_factors_num": "要提取的因子："
+      "label_extraction_factors_num": "要提取的因子：",
+      "label_initial": "初始",
+      "label_extract": "提取",
+      "label_initial_eigenvalue": "初始特征值",
+      "label_correlation_matrix": "相关矩阵",
+      "label_communalities": "公因子方差",
+      "label_determinant": "行列式",
+      "label_total_variance_explained": "总方差解释",
+      "label_component": "成份",
+      "label_component_matrix": "主成分矩阵",
+      "label_eigenvalue": "特征值",
+      "label_extraction_sums_of_squared_loading": "提取平方和载入",
+      "label_percent_of_variance": "方差的 %",
+      "label_percent_of_Cumulative": "累积的 %"
     }
   },
   "table": {

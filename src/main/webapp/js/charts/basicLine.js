@@ -1,4 +1,4 @@
-function HistogramOrLine(config) {
+function Line(config) {
     Charts.call(this, config.data, config.opt, config.content);
 
     this.format = function (data) {//转换格式
@@ -29,7 +29,7 @@ function HistogramOrLine(config) {
 
             var value = {};
             value.name = data.reportTitle;
-            value.type = config.type;
+            value.type = "line";
             var dd = [];
             for (var key in data.resDataMap) {
                 dd.push(data.resDataMap[key].resultData.total);
@@ -41,7 +41,7 @@ function HistogramOrLine(config) {
             for (var i = 0, v = null; (v = dataAll.sub_key[i]) != undefined; i++) {
                 var value = {};
                 value.name = v;
-                value.type = config.type;
+                value.type = "line";
                 var dd = [];
                 for (var key in data.resDataMap) {
                     dd.push(data.resDataMap[key][v].resultData.total);
@@ -68,16 +68,14 @@ function HistogramOrLine(config) {
                 fontWeight: 'normal'
             }
         },
-        toolbox: {
-            feature: {
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar']},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
         legend: {
             data: this.data.sub_key
+        },
+        tooltip: {
+            trigger: 'item',
+            axisPointer: {
+                type: 'shadow'
+            }
         },
         xAxis: [
             {
@@ -89,12 +87,10 @@ function HistogramOrLine(config) {
             {
                 type: 'value',
                 name: config.data.reportTitle | "总量",
-                min: 0,
-                max: '{dataMax}',
-                interval: 50,
                 axisLabel: {
-                    formatter: '{value}'
-                }
+                },
+                splitNumber: 20
+
             }
         ],
         series: this.data.value
