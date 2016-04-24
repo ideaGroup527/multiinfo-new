@@ -15,6 +15,5 @@ $(function () {
         });
         CONFIG[groupName] = configsList;
     });
-    alert('van');
     sessionStorage.setItem('PRIVATE_CONFIG_DING_CHART', JSON.stringify(CONFIG));
 });
