@@ -7,8 +7,7 @@
 <div id="main" style="width: 1000px;height:800px;margin:0 auto;"></div>
 
 <script src="../../lib/echarts.min.js"></script>
-<script src="../base/charts.js"></script>
-<script src="../pie.js"></script>
+<script src="../charts.js"></script>
 <script type="text/javascript">
     var data = {
         "ret_code": "",
@@ -247,7 +246,7 @@
     new Pie({
         data: data,//数据json,
         opt: "",//配置json
-        content: "main",//图表容器的id
+        container: "main",//图表容器的id
         title: '饼图' //图表类型标题
     }).render();
 

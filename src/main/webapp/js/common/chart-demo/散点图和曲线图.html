@@ -6,9 +6,8 @@
 <body>
 <div id="main" style="width: 1000px;height:800px;margin:0 auto;"></div>
 
-<script src="../../../js/lib/echarts.min.js"></script>
-<script src="../base/charts.js"></script>
-<script src="../scatter.js"></script>
+<script src="../../lib/echarts.min.js"></script>
+<script src="../charts.js"></script>
 <script type="text/javascript">
     var data = {
         "resDataMap": {
@@ -66,8 +65,7 @@
     new Scatter({
         data: data,//数据json,
         opt: opt,//配置json
-        content: "main",//图表容器的id
-        type: "line",//图表类型：scatter 散点，line 直线(或曲线),
+        container: "main",//图表容器的id
         title: '直线图' //图表类型标题
     }).render();
 
