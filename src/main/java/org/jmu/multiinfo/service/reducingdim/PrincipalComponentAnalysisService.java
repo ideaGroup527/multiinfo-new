@@ -69,4 +69,19 @@ public interface PrincipalComponentAnalysisService {
 	 * @return
 	 */
 	public double kmo(double[][] correlationArr);
+	
+	/***
+	 * df自由度
+	 * @param correlationArr
+	 * @return
+	 */
+	public int dofBartlett(double[][] correlationArr);
+	
+	/**
+	 * 巴特利特球形检验的近似卡方
+	 * https://en.wikipedia.org/wiki/Bartlett%27s_test
+	 * @param correlationArr
+	 * @return
+	 */
+	public double chiSquareBartlett(double[][] correlationArr);
 }

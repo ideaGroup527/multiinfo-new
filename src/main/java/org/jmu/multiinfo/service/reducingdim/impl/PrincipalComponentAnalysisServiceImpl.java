@@ -1,5 +1,6 @@
 package org.jmu.multiinfo.service.reducingdim.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -174,12 +175,10 @@ double[][] oraComArr =	eigDTO.getComponentArr();
 			double[] varEigExtra = new double[tmpSize];
 			double[][] componentArr = new double[tmpSize][varDTOList.size()];
 			for (int i = 0; i < tmpSize; i++) {
-				if(sortEigvalues[i] > condition.getEigExtraNum()){
 					eigTotalExtra[i] = sortEigvalues[i];
 					accEigExtra[i] = acceigs[i];
 					varEigExtra[i] = vareigs[i];
 					componentArr[i] = oraComArr[i];
-				}
 			}
 			
 			pcaDTO.setEigTotalExtra(eigTotalExtra);
@@ -212,6 +211,35 @@ double[][] oraComArr =	eigDTO.getComponentArr();
 	double cofac =	basicStatisticsService.crossSquareSum(pcArr);
 	double kmo = rSum / (rSum + cofac);
 		return kmo;
+	}
+	@Override
+	public int dofBartlett(double[][] correlationArr) {
+		int n = correlationArr.length;
+		return n * (n-1) /2;
+	}
+	@Override
+	public double chiSquareBartlett(double[][] correlationArr) {
+		double[][] oraArr = correlationArr.clone();
+		double si = 0.0;
+		double nki = 0.0;
+		int N = 0;
+		int K = oraArr.length;
+		double spi = 0.0;
+		for (int i = 0; i < K; i++) {
+			double[] ds = oraArr[i];
+			int ni = basicStatisticsService.getN(ds);
+			si += (ni - 1) * FastMath.log(basicStatisticsService.variance(ds));
+			spi+=(ni - 1) * basicStatisticsService.variance(ds);
+			nki += 1.0/(ni - 1); 
+			N += ni;
+		}
+		double nkt = 1.0 / (N - K);
+		double bartlett = ( (N - K) * FastMath.log( nkt * spi ) - si )/( 1.0 + (1.0/3.0*(K-1))* (nki - nkt) );
+		
+		
+		
+//		bartlett = -((double)(N -1) - ((double)(2*K + 5)/(double)6))*FastMath.log(FastMath.abs(MatrixUtil.determinant(correlationArr)));
+		return bartlett;
 	}
 
 }
