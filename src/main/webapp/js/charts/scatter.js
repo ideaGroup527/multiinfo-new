@@ -35,7 +35,7 @@ function Scatter(config) {
             {
                 smooth: true,
                 name: '点', //系列名称，用于tooltip的显示
-                type: config.type, //设置绘制的为散点图，默认为直线
+                type: "scatter", //设置绘制的为散点图，默认为直线
                 data: this.format(this.data),  //设置每一个散点的位置
                 markLine: null //图表标线
                 //TODO 画线的再添加
