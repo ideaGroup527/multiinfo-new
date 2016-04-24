@@ -79,6 +79,15 @@ var resultTableGenerator = function () {
                 case 'scatterdiagram':
                     //散点图
                     break;
+                case 'dingchart':
+                    var dingConfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_DING_CHART'));
+
+                    new DingChart({
+                        data: tableResult,
+                        content: 'graph_' + i,//图表容器的id
+                        calculateMethod: dingConfig.calculateMethod//0行，1列，2全
+                    }).render();
+                    break;
             }
         });
     }
