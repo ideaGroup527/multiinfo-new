@@ -307,4 +307,12 @@ public interface BasicStatisticsService {
 	 * @throws DataErrException
 	 */
 	public double[][] regularization(double[][] dataArr) throws DataErrException;
+	
+	
+	/***
+	 * E(r^2)(i!=j)
+	 * @param dataArr
+	 * @return
+	 */
+	public double crossSquareSum(double[][] dataArr);
 }

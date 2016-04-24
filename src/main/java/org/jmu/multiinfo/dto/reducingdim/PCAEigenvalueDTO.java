@@ -32,7 +32,10 @@ public class PCAEigenvalueDTO {
 	//行列式
 	private double determinant;
 	
+	//kmo
+	private double kmo;
 	
+	private String kmoDesc;
 	//公因子方差表
 	private double[][] communalityArr;
 
@@ -133,5 +136,22 @@ public class PCAEigenvalueDTO {
 	public void setCommunalityArr(double[][] communalityArr) {
 		this.communalityArr = communalityArr;
 	}
+
+	public double getKmo() {
+		return kmo;
+	}
+
+	public void setKmo(double kmo) {
+		this.kmo = kmo;
+	}
+
+	public String getKmoDesc() {
+		return kmoDesc;
+	}
+
+	public void setKmoDesc(String kmoDesc) {
+		this.kmoDesc = kmoDesc;
+	}
+	
 	
 }

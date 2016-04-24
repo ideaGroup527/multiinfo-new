@@ -17,8 +17,21 @@ import org.jmu.multiinfo.dto.prediction.GreyPredictionDTO;
 public interface GreyPredictionService {
 	
 	
+	
+	/***
+	 * 连续性 灰色预测
+	 * @param condition
+	 * @return
+	 */
 public GreyPredictionDTO grey(GreyPredictionCondition condition);
 
+
+/***
+ * 独立型 灰色预测
+ * @param condition
+ * @return
+ */
+public GreyPredictionDTO inpGrey(GreyPredictionCondition condition);
 
 public Double gm(Double formCoefficient, double[] dataArr) throws DataErrException;
 }

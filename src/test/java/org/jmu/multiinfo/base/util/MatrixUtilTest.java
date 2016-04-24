@@ -67,4 +67,18 @@ public class MatrixUtilTest {
 		}
 		
 	}
+	
+	@Test
+	public void createSubMatrix(){
+		double[][] dataArr={{1,4,7},{3,0,5},{-1,9,11}};
+		double[][] sub = MatrixUtil.createSubMatrix(dataArr, 2, 3);
+		System.out.println();
+	}
+	
+	@Test
+	public void cofactor(){
+		double[][] dataArr={{1,4,7},{3,0,5},{-1,9,11}};
+		double[][] focArr = MatrixUtil.cofactor(dataArr);
+		System.out.println();
+	}
 }

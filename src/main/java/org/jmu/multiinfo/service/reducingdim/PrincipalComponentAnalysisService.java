@@ -62,4 +62,11 @@ public interface PrincipalComponentAnalysisService {
 	 * @return
 	 */
 	public double[] communality(double[][] componentArr);
+	
+	/***
+	 * 求kmo
+	 * @param correlationArr
+	 * @return
+	 */
+	public double kmo(double[][] correlationArr);
 }

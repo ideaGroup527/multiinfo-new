@@ -1,9 +1,11 @@
 package org.jmu.multiinfo.core.util;
 
+import org.apache.commons.math3.util.FastMath;
 import org.jmu.multiinfo.core.dto.EigenvalueDTO;
 
 import Jama.EigenvalueDecomposition;
 import Jama.Matrix;
+import no.uib.cipr.matrix.DenseMatrix;
 
 /***
  * 
@@ -87,5 +89,79 @@ public class MatrixUtil {
 	public static double determinant(double[][] dataArr){
 		Matrix matrix = new Matrix(dataArr);
 		return matrix.det();
+	}
+
+	
+	
+	/***
+	 * 
+	 * @param dataArr
+	 * @param excuseRow
+	 * @param excuseCol
+	 * @return
+	 */
+	public static double[][] createSubMatrix(double[][] dataArr,int excuseRow,int excuseCol){
+		excuseRow--;excuseCol--;
+		double[][] subArr = new double[dataArr.length-1][dataArr[0].length-1];
+		    int r = -1;
+		    for (int i=0;i<dataArr.length;i++) {
+		        if (i==excuseRow)
+		            continue;
+		            r++;
+		            int c = -1;
+		        for (int j=0;j<dataArr[0].length;j++) {
+		            if (j==excuseCol)
+		                continue;
+		            subArr[r][++c] = dataArr[i][j];
+		        }
+		    }
+		    return subArr;
+	}
+	
+	
+	
+	/***
+	 * 代数余子式
+	 * @param dataArr
+	 * @return
+	 */
+	public static double[][] cofactor(double[][] dataArr){
+		int row = dataArr.length;
+		int col = dataArr[0].length;
+		double[][] focArr = new double[row][col];
+		for (int i=0;i<row;i++) {
+	        for (int j=0; j<col;j++) {
+	    		Matrix subMatrix = new Matrix(createSubMatrix(dataArr, i+1, j+1));
+	    		double det = subMatrix.det();
+	    		focArr[i][j] = changeSign(i+1,j+1) * det;
+	        }
+	    }
+		return focArr;
+	}
+	
+	/***
+	 * 偏相关矩阵
+	 * -Cij/(sqrt(Cii*Cjj))
+	 * @param dataArr
+	 * @return
+	 */
+	public static double[][] partialCorrelation(double[][] dataArr){
+		int row = dataArr.length;
+		int col = dataArr[0].length;
+		double[][] pcArr = new double[row][col];
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				pcArr[i][j] = - dataArr[i][j]/(FastMath.sqrt(dataArr[i][i]*dataArr[j][j]));
+			}
+		}
+		return pcArr;
+	}
+	
+	
+
+	//假如i是偶数返回1
+	private static int changeSign(int i , int j) {
+		if((i+j)%2 == 0) return 1;
+		return -1;
 	}
 }

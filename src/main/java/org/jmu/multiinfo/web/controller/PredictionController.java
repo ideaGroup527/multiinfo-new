@@ -35,7 +35,22 @@ public class PredictionController extends BaseController{
 	@RequestMapping(params = { "method=grey" })
 	@ResponseBody
 	public GreyPredictionDTO calGrey(@RequestBody GreyPredictionCondition condition) {
-		return greyPredictionService.grey(condition);
+		GreyPredictionDTO  gpDTO = new GreyPredictionDTO();
+		Integer type = condition.getAssociationType();
+		switch (type) {
+		case GreyPredictionCondition.ASSOCIATION_INDEPENDENT:
+			gpDTO= greyPredictionService.inpGrey(condition);
+			break;
+		case GreyPredictionCondition.ASSOCIATION_CONTINUOUS:
+			gpDTO=  greyPredictionService.grey(condition);
+			break;
+		default:
+			gpDTO.setRet_msg("类型选择错误");
+			gpDTO.setRet_code("-1");
+			break;
+		}
+		return gpDTO;
+		
 
 	}
 }

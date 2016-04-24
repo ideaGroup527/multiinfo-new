@@ -64,6 +64,7 @@ public class GreyPredictionServiceImpl implements GreyPredictionService{
 			e.printStackTrace();
 			gpDTO.setRet_err(e.getMessage());
 			gpDTO.setRet_code("-1");
+			gpDTO.setRet_msg("数据检验失败");
 		}
     	
 	    
@@ -128,6 +129,45 @@ public class GreyPredictionServiceImpl implements GreyPredictionService{
 			if(d > xmax || d < xmin) return false;
 		}
 		return true;
+	}
+
+	@Override
+	public GreyPredictionDTO inpGrey(GreyPredictionCondition condition) {
+		GreyPredictionDTO gpDTO = new GreyPredictionDTO();
+		//因子
+		VarietyDTO	factorVariable =condition.getFactorVarVariable();
+		DataDTO[][] dataGrid =	condition.getDataGrid();
+		List<VarietyDTO> independVarList  = condition.getIndependentVariable();
+		Double formCoefficient = condition.getFormCoefficient();
+		gpDTO.setIndependVarList(independVarList);
+		Double xlast = 0.0;
+		
+		List<String> factNameList = new ArrayList<>();
+		PositionBean factorVarRange = ExcelUtil.splitRange(factorVariable.getRange());
+		for (int i = factorVarRange.getFirstRowId() - 1; i < factorVarRange.getLastRowId(); i++) {
+			for (int j = factorVarRange.getFirstColId() - 1; j < factorVarRange.getLastColId(); j++) {
+				factNameList.add(dataGrid[i][j].getData().toString());
+				}
+			}
+		gpDTO.setPridictName((DataFormatUtil.converToDouble(factNameList.get(factNameList.size()-1))+1) +"");
+		Map<String, List<Double>> dataMap = DataFormatUtil.converToDouble(dataGrid, independVarList);
+		double[] sumArr = new double[independVarList.size()];
+	    int pos=0;
+		for (VarietyDTO indepDto : independVarList) {
+			double[] dataArr = 	DataFormatUtil.converToDouble(dataMap.get(indepDto.getVarietyName()));
+		    try {
+		    	 xlast =  gm(formCoefficient, dataArr);
+		    	 sumArr[pos++] = xlast;
+			} catch (DataErrException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				gpDTO.setRet_err(e.getMessage());
+				gpDTO.setRet_code("-1");
+			}
+		}
+	   gpDTO.setResData(sumArr);
+	   gpDTO.setRet_code("0");
+		return gpDTO;
 	}
 
 	

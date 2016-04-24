@@ -118,6 +118,8 @@ private CorrelationService correlationService;
 			}
 		}
 		pcaDTO.setCorrelationArr(pearsonArr);
+		pcaDTO.setKmo(kmo(pearsonArr));
+		pcaDTO.setKmoDesc("0.9以上表示非常适合；0.8表示适合；0.7表示一般；0.6表示不太适合；0.5以下表示极不适合");
 		pcaDTO.setDeterminant(MatrixUtil.determinant(pearsonArr));
 		
 		EigenvalueDTO eigDTO = new EigenvalueDTO();
@@ -201,6 +203,15 @@ double[][] oraComArr =	eigDTO.getComponentArr();
 		pcaDTO.setCommunalityArr(DataFormatUtil.transposition(communalityArr));
 		rePcaDTO.setData(pcaDTO);
 		return rePcaDTO;
+	}
+	@Override
+	public double kmo(double[][] correlationArr) {
+	double rSum = 	basicStatisticsService.crossSquareSum(correlationArr);
+	double[][] cofactorArr = MatrixUtil.cofactor(correlationArr);
+	double[][] pcArr = MatrixUtil.partialCorrelation(cofactorArr);
+	double cofac =	basicStatisticsService.crossSquareSum(pcArr);
+	double kmo = rSum / (rSum + cofac);
+		return kmo;
 	}
 
 }
