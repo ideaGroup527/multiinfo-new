@@ -237,6 +237,12 @@ public class ExcelUtil {
 			case Cell.CELL_TYPE_STRING:
 				// 取得当前的Cell字符串
 				cellvalue = cell.getRichStringCellValue().getString();
+				if(CommonUtil.isVirgNumber(cellvalue.toString())){
+					type = DataVariety.DATA_TYPE_NUMERIC_VIRG;
+				}else if(CommonUtil.isScienceNumber(cellvalue.toString())){
+					type = DataVariety.DATA_TYPE_NUMERIC_SCIENCE;
+					
+				}else
 				type = DataVariety.DATA_TYPE_STRING;
 				break;
             case Cell.CELL_TYPE_BOOLEAN: // Boolean     

@@ -12,6 +12,7 @@ import org.apache.commons.math3.util.FastMath;
 import org.jmu.multiinfo.dto.basestatistics.DataDTO;
 import org.jmu.multiinfo.dto.basestatistics.DataVariety;
 import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
+import org.jmu.multiinfo.web.utils.CommonUtil;
 import org.springframework.util.CollectionUtils;
 
 public class DataFormatUtil {
@@ -25,6 +26,8 @@ public static Double converToDouble(DataDTO dataDTO){
 	String oraData = dataDTO.getData().toString();
 	switch (dataType) {
 	case DataVariety.DATA_TYPE_STRING:
+		oraData = 	oraData.replaceAll(" ", "");
+		if(CommonUtil.isRealNumber(oraData)) return Double.valueOf(oraData);
 		throw new NumberFormatException("position:"+dataDTO.getPosition()+"data:"+dataDTO.getData().toString()+"! is not a number");
 	case DataVariety.DATA_TYPE_NUMERIC_VIRG:
 		data = converToDouble(oraData.replaceAll(",", ""));

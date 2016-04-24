@@ -358,5 +358,18 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 		return resData;
 	}
 
+
+	@Override
+	public double crossSquareSum(double[][] dataArr) {
+		double rSum = 0.0;
+		for (int i = 0; i < dataArr.length; i++) {
+			for (int j = 0; j < dataArr[0].length; j++) {
+				if(i != j)
+				rSum+=dataArr[i][j] * dataArr[i][j] ;
+			}
+		}
+		return rSum;
+	}
+
 	
 }

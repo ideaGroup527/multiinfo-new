@@ -4,7 +4,7 @@ var dataTableGenerator = function (data) {
 
     //表格生成
     var table = $('<table>');
-    $(table).addClass('table table-striped table-bordered active');
+    $(table).addClass('table table-striped table-bordered multiinfo-table-display');
     var tablePresentArea = $('.table-present');
     $(tablePresentArea).append(table);
 

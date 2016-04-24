@@ -454,6 +454,8 @@ var handleCorrelationDistance = function (tableResult) {
     $(emptyHeaderCell).attr('rowspan', '2');
     $(headerRow).append(emptyHeaderCell);
 
+    var headerTitle = $(headerCell).clone();
+
     //个案间 表格生成
     if (distanceCalcType == 'unit') {
 
@@ -461,11 +463,11 @@ var handleCorrelationDistance = function (tableResult) {
 
         //打印头部
 
-        var headerTitle = $(headerCell).clone();
         $(headerTitle).attr('data-i18n-type', 'table')
-            .attr('data-i18n-tag', measureMethod)
+            .attr('data-i18n-tag', (measureMethod == 'modifyDistance') ? 'DONTMATCH' : measureMethod)
             .attr('colspan', variableLength)
-            .attr('align', 'center');
+            .attr('align', 'center')
+            .text((measureMethod == 'modifyDistance') ? 'Minkowski(' + ALL_CONFIG.minkowskiP[0] + ',' + ALL_CONFIG.minkowskiQ[0] + ')' : measureMethod);
         $(headerRow).append(headerTitle);
 
         //打印第二行
@@ -486,21 +488,22 @@ var handleCorrelationDistance = function (tableResult) {
 
             unit.map(function (data) {
                 var td = $(cell).clone();
-                $(td).text(data[measureMethod]);
+                $(td).text(data[(measureMethod == 'modifyDistance') ? 'minkowskiDistace' : measureMethod]);
                 $(tr).append(td);
             });
             $(table).append(tr);
         });
     } else if (distanceCalcType == 'variable') {
 
+        //变量间 表格生成
         variableLength = paramKeysList.length;
 
         //打印头部
-        var headerTitle = $(headerCell).clone();
         $(headerTitle).attr('data-i18n-type', 'table')
-            .attr('data-i18n-tag', measureMethod)
+            .attr('data-i18n-tag', (measureMethod == 'modifyDistance') ? 'DONTMATCH' : measureMethod)
             .attr('colspan', variableLength)
-            .attr('align', 'center');
+            .attr('align', 'center')
+            .text((measureMethod == 'modifyDistance') ? 'Minkowski(' + ALL_CONFIG.minkowskiP[0] + ',' + ALL_CONFIG.minkowskiQ[0] + ')' : measureMethod);
         $(headerRow).append(headerTitle);
 
         //打印第二行
@@ -527,7 +530,7 @@ var handleCorrelationDistance = function (tableResult) {
                 paramKeysList.map(function (paramKey) {
                     if (indieValue[paramKey]) {
                         var valueCell = $(cell).clone();
-                        $(valueCell).text(indieValue[paramKey][measureMethod]);
+                        $(valueCell).text(indieValue[paramKey][(measureMethod == 'modifyDistance') ? 'minkowskiDistace' : measureMethod]);
                         $(variableRow).append(valueCell);
                     }
                 });

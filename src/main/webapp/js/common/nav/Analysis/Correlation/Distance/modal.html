@@ -23,6 +23,7 @@
                              data-config-val-flag=":checked">
                             <span class="col-md-2" data-i18n-type="page"
                                   data-i18n-tag="label_distance_calculate">计算距离</span>
+
                             <div class="checkbox-inline">
                                 <label>
                                     <input type="radio" name="distanceCalcType" value="unit" checked>
@@ -55,12 +56,12 @@
                                         data-i18n-tag="label_modify_distance"></option>
                             </select>
                         </div>
-                        <hr>
-                        <div class="row">
+                        <div class="row" id="power_and_root" style="display: none;">
+                            <hr>
                             <div class="row col-md-6" data-config-group data-group-name="minkowskiP">
                                 <span class="col-md-2" data-i18n-type="page"
                                       data-i18n-tag="label_distance_power">幂</span>
-                                <select name="minkowskiP" class="form-control" style="width: 80%;">
+                                <select name="minkowskiP" class="form-control" style="width: 80%;" disabled>
                                     <option value="1">1</option>
                                     <option value="2" selected>2</option>
                                     <option value="3">3</option>
@@ -70,7 +71,7 @@
                             <div class="row col-md-6" data-config-group data-group-name="minkowskiQ">
                                 <span class="col-md-2" data-i18n-type="page"
                                       data-i18n-tag="label_distance_root">根</span>
-                                <select name="minkowskiQ" class="form-control" style="width: 80%;">
+                                <select name="minkowskiQ" class="form-control" style="width: 80%;" disabled>
                                     <option value="1">1</option>
                                     <option value="2" selected>2</option>
                                     <option value="3">3</option>
@@ -92,3 +93,14 @@
         </div>
     </div>
 </div>
+<script>
+    $(function () {
+        $('select[name=measureMethod]').change(function () {
+            if ($(this).val() == 'modifyDistance') {
+                $('#power_and_root').show().find('select').attr('disabled', false);
+            } else {
+                $('#power_and_root').hide().find('select').attr('disabled', true);
+            }
+        });
+    });
+</script>

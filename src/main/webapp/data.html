@@ -38,7 +38,7 @@
     </div>
 </div>
 
-<script src="js/libs/navGenerator.js"></script>
+<script src="js/common/navGenerator.js"></script>
 <script src="js/common/page/dataTableGenerator.js"></script>
 <script src="js/common/page/variableSubmit/variableChoose.js"></script>
 <script src="js/common/page/variableSubmit/handler.js"></script>
@@ -52,7 +52,6 @@
     $(document).ready(function () {
         $.ajax({
             url: 'upload.do?method=file&isFirstRowVar=true',
-//            url: 'js/testJSON/excel_callback.json',
             data: {
                 'isMultiSheet': sessionStorage.getItem('isMultiSheet'),
                 'token': sessionStorage.getItem('token'),
@@ -63,6 +62,7 @@
             success: function (data) {
                 dataTableGenerator(data);
                 variableList = data.sheet.variety;
+                sessionStorage.setItem('PRIVATE_VARIABLE_LIST', JSON.stringify(variableList));
                 dataGrid = data.sheet.dataGrid;
             }
         })
@@ -93,7 +93,11 @@
         }
     }).on('click', '.variable-wrapper', function (e) {
         e.preventDefault();
-        $(this).toggleClass('active');
+        if (!$(this).attr('disabled')) {
+            $(this).toggleClass('active');
+        }else{
+            e.stopPropagation();
+        }
     }).on('click', '.variable-submit', function (e) {
         e.preventDefault();
         $.getScript(sessionStorage.getItem('PRIVATE_MODAL_SCRIPT_URL'), function () {

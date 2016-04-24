@@ -87,6 +87,35 @@ var handleSubmit = function (config) {
             dataPackage.minkowskiP = distanceConfig.minkowskiP[0];
             dataPackage.minkowskiQ = distanceConfig.minkowskiQ[0];
             break;
+        case 'Ding_Chart':
+            handleURL = 'statistics/chart.do?method=ding';
+            var dingChartConfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_DING_CHART'));
+            dataPackage.calculateMethod = dingChartConfig.calculateMethod[0];
+            dataPackage.rowVarList = dingChartConfig.rowVarList;
+            dataPackage.colVarList = dingChartConfig.colVarList;
+            dataPackage.variableList = null;
+            break;
+        case 'Oneway_ANOVA':
+            handleURL = 'statistics/comparemean.do?method=onewayanova';
+            var ANOVA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_ONEWAY_ANOVA'));
+            dataPackage.factorVariable = ANOVA.factorVariable[0];
+            dataPackage.dependentVariable = ANOVA.dependentVariable;
+            dataPackage.variableList = null;
+            break;
+        case 'Means':
+            handleURL = 'statistics/comparemean.do?method=mean';
+            var means = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_MEANS'));
+            dataPackage.independentVariable = means.independentVariable[0];
+            dataPackage.dependentVariable = means.dependentVariable;
+            break;
+        case 'Principal_Component_Analysis':
+            handleURL = 'statistics/analysis.do?method=principalComponent';
+            var PCA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_PRINCIPAL_COMPONENT'));
+            dataPackage.variableList = PCA.variableList;
+            dataPackage.extractMethod = PCA.extractMethod[0];
+            dataPackage.eigExtraNum = PCA.eigExtraNum[0];
+            dataPackage.factorExtraNum = PCA.factorExtraNum[0];
+            break;
     }
 
     $.ajax({

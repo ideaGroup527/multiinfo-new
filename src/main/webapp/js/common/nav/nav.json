@@ -72,6 +72,54 @@
         ]
       },
       {
+        "term": "CompareMeans",
+        "name": {
+          "zh-cn": "均值比较",
+          "en-us": "Compare Means"
+        },
+        "subMenu": [
+          {
+            "term": "Means",
+            "name": {
+              "zh-cn": "均值",
+              "en-us": "Means"
+            },
+            "modalId": "#Means",
+            "modal": "modal.html",
+            "script": "script.js"
+          },
+          {
+            "term": "OnewayANOVA",
+            "name": {
+              "zh-cn": "单因素方差分析",
+              "en-us": "Oneway ANOVA"
+            },
+            "modalId": "#Oneway_ANOVA",
+            "modal": "modal.html",
+            "script": "script.js"
+          }
+        ]
+      },
+      {
+        "term": "ReducingDimensions",
+        "name": {
+          "en-us": "Reducing Dimensions",
+          "zh-cn": "降维"
+        },
+        "subMenu": [
+          {
+            "term": "PrincipalComponentAnalysis",
+            "name": {
+              "en-us": "Principal Component Analysis",
+              "zh-cn": "主成分分析"
+            },
+            "modalId": "#Principal_Component_Analysis",
+            "modal": "modal.html",
+            "script": "script.js"
+          }
+        ]
+      },
+      {
         "term": "GeneralLinerModels",
         "name": {
           "zh-cn": "一般线性模型",
@@ -79,6 +127,16 @@
         }
       }
     ]
+  },
+  {
+    "term": "DingChart",
+    "name": {
+      "en-us": "Ding Chart",
+      "zh-cn": "丁氏图"
+    },
+    "modalId": "#Ding_Chart",
+    "modal": "modal.html",
+    "script": "script.js"
   },
   {
     "term": "Graph",

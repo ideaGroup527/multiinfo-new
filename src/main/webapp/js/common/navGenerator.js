@@ -24,24 +24,25 @@ $.fn.navGenerator = function (config) {
                 if (level_1_menu.term.toUpperCase() == navName.toUpperCase()) {
 
                     var level_1_item = $('<li>');
-                    $(level_1_item).addClass('dropdown');
-
-                    var level_1_item_name = $('<a>');
-                    $(level_1_item_name).addClass('dropdown-toggle')
-                        .attr('data-toggle', 'dropdown')
-                        .attr('role', 'button')
-                        .attr('aria-haspopup', true)
-                        .attr('aria-expanded', true)
-                        .html(level_1_menu.name[lang]);
-
-                    var caret = $('<span>');
-                    $(caret).addClass('caret');
-
-                    $(level_1_item_name).append(caret);
-
-                    $(level_1_item).append(level_1_item_name);
 
                     if (level_1_menu.subMenu) {
+
+                        $(level_1_item).addClass('dropdown');
+
+                        var level_1_item_name = $('<a>');
+                        $(level_1_item_name).addClass('dropdown-toggle')
+                            .attr('data-toggle', 'dropdown')
+                            .attr('role', 'button')
+                            .attr('aria-haspopup', true)
+                            .attr('aria-expanded', true)
+                            .html(level_1_menu.name[lang]);
+
+                        var caret = $('<span>');
+                        $(caret).addClass('caret');
+
+                        $(level_1_item_name).append(caret);
+
+                        $(level_1_item).append(level_1_item_name);
 
                         var level_2_menu_list = $('<ul>');
                         $(level_2_menu_list).addClass('dropdown-menu');
@@ -94,6 +95,15 @@ $.fn.navGenerator = function (config) {
                         });
 
                         $(level_1_item).append(level_2_menu_list);
+                    } else {
+                        var linkName = $('<a>');
+                        $(linkName).text(level_1_menu.name[lang])
+                            .addClass('js-menu-click')
+                            .attr('data-modal-id', level_1_menu.modalId)
+                            .attr('href', 'javascript:')
+                            .attr('data-modal', 'js/common/nav/' + level_1_menu.term + '/' + level_1_menu.modal)
+                            .attr('data-script', 'js/common/nav/' + level_1_menu.term + '/' + level_1_menu.script);
+                        $(level_1_item).append(linkName);
                     }
 
                     $(that).append(level_1_item);
