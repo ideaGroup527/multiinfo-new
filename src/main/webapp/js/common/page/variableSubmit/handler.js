@@ -89,6 +89,7 @@ var handleSubmit = function (config) {
             break;
         case 'Ding_Chart':
             handleURL = 'statistics/chart.do?method=ding';
+            sessionStorage.setItem('PRIVATE_GRAPH_CONFIG', 'dingchart');
             var dingChartConfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_DING_CHART'));
             dataPackage.calculateMethod = dingChartConfig.calculateMethod[0];
             dataPackage.rowVarList = dingChartConfig.rowVarList;

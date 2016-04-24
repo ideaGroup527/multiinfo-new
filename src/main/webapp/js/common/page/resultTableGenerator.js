@@ -2,6 +2,9 @@ var resultTableGenerator = function () {
 
     var def = $.Deferred();
 
+    var lang = localStorage.getItem('MULTIINFO_CONFIG_LANGUAGE');
+    var String = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_LANGUAGE_STRINGS'));
+
     var presentArea = $('.result-table');
 
     var resultType = sessionStorage.getItem('PRIVATE_RESULT_TYPE');
@@ -39,6 +42,8 @@ var resultTableGenerator = function () {
 
             $(presentArea).append(graphArea);
 
+            var graphName = String['graph'][lang][graph];
+
             switch (graph) {
                 case 'boxplot':
                     //箱线图
@@ -46,7 +51,7 @@ var resultTableGenerator = function () {
                         data: tableResult,
                         opt: "",
                         container: 'graph_' + i,
-                        title: '箱线图'
+                        title: graphName
                     }).render();
                     break;
                 case 'piegraph':
@@ -55,7 +60,7 @@ var resultTableGenerator = function () {
                         data: tableResult,//数据json,
                         opt: "",//配置json
                         container: 'graph_' + i,//图表容器的id
-                        title: '饼图' //图表类型标题
+                        title: graphName
                     }).render();
                     break;
                 case 'histogram':
@@ -64,7 +69,7 @@ var resultTableGenerator = function () {
                         data: tableResult,//数据json,
                         opt: "",//配置json
                         container: 'graph_' + i,//图表容器的id
-                        title: '直方图' //图表类型标题
+                        title: graphName
                     }).render();
                     break;
                 case 'linechart':
@@ -73,7 +78,7 @@ var resultTableGenerator = function () {
                         data: tableResult,//数据json,
                         opt: "",//配置json
                         container: 'graph_' + i,//图表容器的id
-                        title: '折线图' //图表类型标题
+                        title: graphName
                     }).render();
                     break;
                 case 'scatterdiagram':
@@ -81,7 +86,7 @@ var resultTableGenerator = function () {
                     new Scatter({
                         data: tableResult,//数据json,
                         container: 'graph_' + i,//图表容器的id
-                        title: '散点图' //图表类型标题
+                        title: graphName
                     }).render();
                     break;
                 case 'dingchart':

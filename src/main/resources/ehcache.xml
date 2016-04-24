@@ -27,6 +27,6 @@
     eternal="true"          
     overflowToDisk="false"           
     timeToIdleSeconds="0"           
-    timeToLiveSeconds="600"          
+    timeToLiveSeconds="43200"          
     memoryStoreEvictionPolicy="LFU" />  
 </ehcache>
