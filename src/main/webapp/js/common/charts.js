@@ -586,8 +586,7 @@ function DingChart(config) {
     this.calculateMethod = config.calculateMethod;
     this.container=config.container;
     this.render = function () {
-        var canvas = document.getElementById(this.container);
-        var ctx = canvas.getContext('2d');
+
 
         var col = config.data.colVarList.length,//行数和列数
             row = config.data.rowVarList.length;
@@ -596,9 +595,14 @@ function DingChart(config) {
 
         var width = (col + 1) * m_width,
             height = (row + 1) * m_height;
+        var canvas = document.createElement("canvas");
+
         canvas.setAttribute('width', width.toString());
         canvas.setAttribute('height', height.toString());
-
+        var container=document.getElementById(this.container);
+        container.style.width=width+'px';
+        container.appendChild(canvas);
+        var ctx = canvas.getContext('2d');
         //坐标轴样式配置
         ctx.lineWidth = 1;
         ctx.strokeStyle = "#aaa";
