@@ -596,12 +596,10 @@ function DingChart(config) {
         var width = (col + 1) * m_width,
             height = (row + 1) * m_height;
         var canvas = document.createElement("canvas");
-
+        canvas.css({'display':'block','margin':"0 auto"});
         canvas.setAttribute('width', width.toString());
         canvas.setAttribute('height', height.toString());
-        var container=document.getElementById(this.container);
-        container.style.width=width+'px';
-        container.appendChild(canvas);
+        document.getElementById(this.container).appendChild(canvas);
         var ctx = canvas.getContext('2d');
         //坐标轴样式配置
         ctx.lineWidth = 1;
