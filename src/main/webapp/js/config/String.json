@@ -126,7 +126,9 @@
       "label_component_matrix": "Component Matrix",
       "label_extraction_sums_of_squared_loading": "Extraction Sums of Squared Loading",
       "label_percent_of_variance": "% of Variance",
-      "label_percent_of_Cumulative": "% of Cumulative"
+      "label_percent_of_Cumulative": "% of Cumulative",
+      "label_kmo_bartlett_test": "KMO and Bartlett's Test",
+      "label_kmo_measure": "The Kaiser-Meyer-Olkin Measure of Sampling Adequacy Tests"
     },
     "zh-cn": {
       "options": "选项",
@@ -189,7 +191,9 @@
       "label_eigenvalue": "特征值",
       "label_extraction_sums_of_squared_loading": "提取平方和载入",
       "label_percent_of_variance": "方差的 %",
-      "label_percent_of_Cumulative": "累积的 %"
+      "label_percent_of_Cumulative": "累积的 %",
+      "label_kmo_bartlett_test": "KMO和Bartlett检验",
+      "label_kmo_measure": "取样做够度的Kaiser-Meyer-Olkin 度量"
     }
   },
   "table": {

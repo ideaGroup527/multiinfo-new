@@ -775,13 +775,13 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
     var kmoArea = $(container).clone();
 
     var kmoHeader = $(tableHeader).clone();
-    $(kmoHeader).text('KMO和Bartlett检验');
+    $(kmoHeader).attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_kmo_bartlett_test');
     $(kmoArea).append(kmoHeader);
 
     var kmoTable = $(table).clone();
 
     var kmoFirstRow = $(row).clone();
-    $(kmoFirstRow).append($(cell).clone().text('取样做够度的Kaiser-Meyer-Olkin度量'))
+    $(kmoFirstRow).append($(cell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_kmo_measure'))
         .append($(cell).clone().text(kmo));
     $(kmoTable).append(kmoFirstRow);
 
