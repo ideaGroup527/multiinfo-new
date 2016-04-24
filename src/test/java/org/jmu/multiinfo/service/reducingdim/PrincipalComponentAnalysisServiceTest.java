@@ -17,4 +17,11 @@ public  void kmo(){
 	double k = pcaService.kmo(correlationArr);
 	System.out.println(k);
 }
+
+@Test
+public void chiSquareBartlett(){
+	double[][] correlationArr = {{1,0.816,0.749},{0.816,1,0.624},{0.749,0.624,1}};
+	 double csn = pcaService.chiSquareBartlett(correlationArr);
+	 System.out.println(csn); 
+}
 }
