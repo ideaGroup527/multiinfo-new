@@ -15,5 +15,7 @@ $(function () {
         });
         CONFIG[groupName] = configsList;
     });
+    sessionStorage.removeItem('PRIVATE_GRAPH_CONFIG');
+    sessionStorage.setItem('PRIVATE_GRAPH_CONFIG', 'dingchart');
     sessionStorage.setItem('PRIVATE_CONFIG_DING_CHART', JSON.stringify(CONFIG));
 });

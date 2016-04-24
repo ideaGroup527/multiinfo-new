@@ -72,7 +72,7 @@
             if (i == 0) return;
 
             var variableWrapper = $('<span>');
-            $(variableWrapper).addClass('variable-wrapper')
+            $(variableWrapper).addClass('variable-wrapper active')
                     .attr('name', 'colVarList')
                     .val(variable)
                     .text(variable.varietyName);
@@ -85,7 +85,7 @@
             var dataConfig = {};
             dataConfig.position = $(elem).attr('data-positiondes').split(',')[1];
             dataConfig.varietyName = $(elem).attr('data-data');
-            $(variableWrapper).addClass('variable-wrapper')
+            $(variableWrapper).addClass('variable-wrapper active')
                     .attr('data-config', JSON.stringify(dataConfig))
                     .attr('name', 'rowVarList')
                     .val(dataConfig)
