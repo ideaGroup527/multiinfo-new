@@ -45,7 +45,7 @@ var resultTableGenerator = function () {
                     new Boxplot({
                         data: tableResult,
                         opt: "",
-                        content: 'graph_' + i,
+                        container: 'graph_' + i,
                         title: '箱线图'
                     }).render();
                     break;
@@ -54,7 +54,7 @@ var resultTableGenerator = function () {
                     new Pie({
                         data: tableResult,//数据json,
                         opt: "",//配置json
-                        content: 'graph_' + i,//图表容器的id
+                        container: 'graph_' + i,//图表容器的id
                         title: '饼图' //图表类型标题
                     }).render();
                     break;
@@ -63,7 +63,7 @@ var resultTableGenerator = function () {
                     new Bar({
                         data: tableResult,//数据json,
                         opt: "",//配置json
-                        content: 'graph_' + i,//图表容器的id
+                        container: 'graph_' + i,//图表容器的id
                         title: '直方图' //图表类型标题
                     }).render();
                     break;
@@ -72,20 +72,25 @@ var resultTableGenerator = function () {
                     new Line({
                         data: tableResult,//数据json,
                         opt: "",//配置json
-                        content: 'graph_' + i,//图表容器的id
+                        container: 'graph_' + i,//图表容器的id
                         title: '折线图' //图表类型标题
                     }).render();
                     break;
                 case 'scatterdiagram':
                     //散点图
+                    new Scatter({
+                        data: tableResult,//数据json,
+                        container: 'graph_' + i,//图表容器的id
+                        title: '散点图' //图表类型标题
+                    }).render();
                     break;
                 case 'dingchart':
+                    //丁氏图
                     var dingConfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_DING_CHART'));
-
                     new DingChart({
                         data: tableResult,
-                        content: 'graph_' + i,//图表容器的id
-                        calculateMethod: dingConfig.calculateMethod//0行，1列，2全
+                        container: 'graph_' + i,//图表容器的id
+                        calculateMethod: dingConfig.calculateMethod[0]//0行，1列，2全
                     }).render();
                     break;
             }
@@ -632,6 +637,27 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
     }
     $(presentArea).append(correlationArea);
 
+    //5 KMO和Bartlett检验
+    //5.1 获取相关数据
+    var kmo = tableResult.data.kmo;
+
+    var kmoArea = $(container).clone();
+
+    var kmoHeader = $(tableHeader).clone();
+    $(kmoHeader).attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_kmo_bartlett_test');
+    $(kmoArea).append(kmoHeader);
+
+    var kmoTable = $(table).clone();
+
+    var kmoFirstRow = $(row).clone();
+    $(kmoFirstRow).append($(cell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_kmo_measure'))
+        .append($(cell).clone().text(kmo));
+    $(kmoTable).append(kmoFirstRow);
+
+    $(kmoArea).append(kmoTable)
+        .append($(block).clone().text(tableResult.data.kmoDesc));
+    $(presentArea).append(kmoArea);
+
     //2. 打印『公因子方差表』
     //2.1 获取『公因子方差』值
     var communalityArr = tableResult.data.communalityArr;
@@ -776,26 +802,5 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
     $(componentArea).append(componentTable)
         .append($(block).clone().text('已提取了' + componentMatrix[0].length + '个成份'));
     $(presentArea).append(componentArea);
-
-    //5 KMO和Bartlett检验
-    //5.1 获取相关数据
-    var kmo = tableResult.data.kmo;
-
-    var kmoArea = $(container).clone();
-
-    var kmoHeader = $(tableHeader).clone();
-    $(kmoHeader).attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_kmo_bartlett_test');
-    $(kmoArea).append(kmoHeader);
-
-    var kmoTable = $(table).clone();
-
-    var kmoFirstRow = $(row).clone();
-    $(kmoFirstRow).append($(cell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_kmo_measure'))
-        .append($(cell).clone().text(kmo));
-    $(kmoTable).append(kmoFirstRow);
-
-    $(kmoArea).append(kmoTable)
-        .append($(block).clone().text(tableResult.data.kmoDesc));
-    $(presentArea).append(kmoArea);
 
 };
