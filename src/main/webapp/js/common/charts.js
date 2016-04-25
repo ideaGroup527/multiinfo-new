@@ -1,5 +1,5 @@
 /*基类*/
-function Charts (data, opt, container) {
+function Charts(data, opt, container) {
 
     this.data = data;//数据json
     this.opt = opt;//配置json
@@ -28,7 +28,7 @@ function Scatter(config) {
         }
         return dataAll;
     };
-    this.option={
+    this.option = {
         title: {
             text: config.title, //主标题文本
             x: 'center', //标题文本的位置
@@ -66,14 +66,14 @@ function Pie(config) {
 
     this.format = function (data) {//转换格式
 
-        var dataAll = {k: [],kv:[]};
+        var dataAll = {k: [], kv: []};
 
-        for(var key in data.resDataMap){
+        for (var key in data.resDataMap) {
             dataAll.k.push(key);
 
-            var _kv={};
-            _kv.name=key;
-            _kv.value=data.resDataMap[key].resultData.total;
+            var _kv = {};
+            _kv.name = key;
+            _kv.value = data.resDataMap[key].resultData.total;
             dataAll.kv.push(_kv);
         }
         return dataAll;
@@ -99,13 +99,13 @@ function Pie(config) {
                 type: 'shadow'
             }
         },
-        series : [
+        series: [
             {
                 name: config.data.reportTitle,
                 type: 'pie',
-                radius : '55%',
+                radius: '55%',
                 center: ['50%', '60%'],
-                data:this.format(config.data).kv,
+                data: this.format(config.data).kv,
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -208,8 +208,7 @@ function Bar(config) {
             {
                 type: 'value',
                 name: config.data.reportTitle | "总量",
-                axisLabel: {
-                },
+                axisLabel: {},
                 splitNumber: 20
 
             }
@@ -224,9 +223,9 @@ function Boxplot(config) {
 
     this.format = function (data) {//转换格式
 
-        var dataAll = {xAxis:[], boxData: [],outliers:[]},j=0;
+        var dataAll = {xAxis: [], boxData: [], outliers: []}, j = 0;
 
-        for(var key in data.resDataMap){
+        for (var key in data.resDataMap) {
             dataAll.xAxis.push(key);
 
             var value = data.resDataMap[key];
@@ -238,8 +237,8 @@ function Boxplot(config) {
                 value.resultData.percentiles[4].data
             ]);
 
-            for(var i=0,v=null;(v=value.resultData.errPercentiles[i])!=undefined;i++){
-                dataAll.outliers.push([j,v]);
+            for (var i = 0, v = null; (v = value.resultData.errPercentiles[i]) != undefined; i++) {
+                dataAll.outliers.push([j, v]);
             }
             j++;
         }
@@ -325,23 +324,23 @@ function NormalCurve(config) {
 
     this.N_POINT = 1000;//点数量
 
-    this.easingFunc=function (x) {
-        var q=1,u=0;
-        var a = 1.0/(Math.sqrt(2*Math.PI)*q);
-        var b = Math.exp((-1)*((x-u)*(x-u))/(2*q*q));
-        return a*b;
+    this.easingFunc = function (x) {
+        var q = 1, u = 0;
+        var a = 1.0 / (Math.sqrt(2 * Math.PI) * q);
+        var b = Math.exp((-1) * ((x - u) * (x - u)) / (2 * q * q));
+        return a * b;
     };
     this.format = function () {
         var dataAll = [];
         for (var i = -this.N_POINT; i <= this.N_POINT; i++) {
-            var x = i/100;
+            var x = i / 100;
             var y = this.easingFunc(x);
             dataAll.push([x, y]);
         }
 
         return dataAll;
     };
-    this.option={
+    this.option = {
         title: {
             text: config.title,
             x: 'center', //标题文本的位置
@@ -470,8 +469,7 @@ function Line(config) {
             {
                 type: 'value',
                 name: config.data.reportTitle | "总量",
-                axisLabel: {
-                },
+                axisLabel: {},
                 splitNumber: 20
 
             }
@@ -570,8 +568,7 @@ function BasicLine(config) {
             {
                 type: 'value',
                 name: config.data.reportTitle | "总量",
-                axisLabel: {
-                },
+                axisLabel: {},
                 splitNumber: 20
 
             }
@@ -584,10 +581,10 @@ function BasicLine(config) {
 function DingChart(config) {
     this.data = config.data;
     this.calculateMethod = config.calculateMethod;
-    this.container=config.container;
+    this.container = config.container;
     this.render = function () {
 
-
+        var curvePoint = {}, curvePoint2 = [];//曲线的点集合
         var col = config.data.colVarList.length,//行数和列数
             row = config.data.rowVarList.length;
         var m_width = 80, m_height = 40; //一小格子的高宽
@@ -596,7 +593,7 @@ function DingChart(config) {
         var width = (col + 1) * m_width,
             height = (row + 1) * m_height;
         var canvas = document.createElement("canvas");
-        $(canvas).css({'display':'block','margin':"0 auto"});
+        $(canvas).css({'display': 'block', 'margin': "0 auto"});
         canvas.setAttribute('width', width.toString());
         canvas.setAttribute('height', height.toString());
         document.getElementById(this.container).appendChild(canvas);
@@ -627,18 +624,19 @@ function DingChart(config) {
         for (var i = 0; i < row; i++) {
             var y = (i + 1) * m_height;
             ctx.save();
-            ctx.textAlign="right";
-            this.wrapText(ctx,config.data.rowVarList[i].varietyName, 70, y + m_height,m_width,15);
+            ctx.textAlign = "right";
+            this.wrapText(ctx, config.data.rowVarList[i].varietyName, 70, y + m_height, m_width, 15);
             ctx.stroke();
         }
         //x轴
         for (var i = 0; i < col; i++) {
             var x = (i + 1) * m_width;
             ctx.save();
-            ctx.textAlign="center";
-            this.wrapText(ctx,config.data.colVarList[i].varietyName, x + m_width / 2, m_height,m_width,15);
+            ctx.textAlign = "center";
+            this.wrapText(ctx, config.data.colVarList[i].varietyName, x + m_width / 2, m_height, m_width, 15);
             ctx.stroke();
         }
+
 
         //椭圆
         for (var i = 0; i < col; i++) {
@@ -659,43 +657,38 @@ function DingChart(config) {
                 }
                 _a = _a < .04 ? .04 : _a;
                 _b = _b < .04 ? .04 : _b;
-                this.EllipseTwo(ctx, (i + 1) * m_width + a, (j + 1) * m_height + b, _a, _b);
 
+                curvePoint.push({x: (i + 1) * m_width + a - _a, y: (j + 1) * m_height + b - _b});
+
+                this.EllipseTwo(ctx, (i + 1) * m_width + a, (j + 1) * m_height + b, _a, _b);
             }
         }
 
-        // //曲线
-        // for (var i = 0; i < col-1; i++) {
-        //     for (var j = 0; j < row-1; j++) {
-        //         var _a, _b, _a2, _b2;
-        //         if (this.calculateMethod == 0) {
-        //             _a = _a2 = a;
-        //             _b = b * config.data.resData[j][i+1];
-        //         } else if (this.calculateMethod == 1) {
-        //             _a = a * config.data.resData[j][i];
-        //             _a2= a * config.data.resData[j][i+1];
-        //             _b = _b2 = b;
-        //         } else if (this.calculateMethod == 2) {
-        //             _a = a * config.data.resData[j][i+1];
-        //             _b = b * config.data.resData[j][i+1];
-        //         } else {
-        //             alert('calculateMethod参数错误！');
-        //             return false;
-        //         }
-        //
-        //         ctx.strokeStyle = "#f0f";
-        //         ctx.beginPath();
-        //         console.log((i + 1) * m_width + _a, (j + 1) * m_height+b,
-        //             (i + 2) * m_width + _a2, (j + 2) * m_height + b,
-        //             (i + 1) * m_width, (j + 1) * m_height);
-        //
-        //         ctx.bezierCurveTo((i + 1) * m_width + _a, (j + 1) * m_height+b,
-        //             (i + 1) * m_width + _a2, (j + 2) * m_height + b,
-        //             (i + 1) * m_width, (j + 1) * m_height);
-        //         ctx.stroke();
-        //     }
-        // }
+        console.log(curvePoint)
+
+        //曲线
+        var paper = Raphael("main", width, height);
+        var p;
+        for (var i = 0, ii = curvePoint.length; i < curvePoint.length; i++) {
+            var point = curvePoint[i];
+            var x = point.x;
+            var y = point.y;
+            if (!i) {
+                p = ["M", x, y, "C", x, y];
+            }
+            if (i && i < ii - 1) {
+                var point1 = curvePoint[i - 1];
+                var point2 = curvePoint[i + 1];
+                var a = this.getAnchors(point1.x, point1.y, x, y, point2.x, point2.y);//获取锚点
+                p = p.concat([a.x1, a.y1, x, y, a.x2, a.y2]);
+            }
+            paper.circle(x, y).attr({fill: "#00FF00", stroke: "#00FF00", r: 3});
+        }
+        p = p.concat([x, y, x, y]);
+        paper.path().attr({'path': p}).attr({stroke: "#33aa33"});
+
     };
+    //画一个椭圆
     this.EllipseTwo = function (context, x, y, a, b) {
         context.save();
         context.fillStyle = "#980707";
@@ -709,22 +702,39 @@ function DingChart(config) {
         context.fill();
         context.restore();
     };
-    this.Curve = function () {
-
+    //获取锚点
+    this.getAnchors = function (p1x, p1y, p2x, p2y, p3x, p3y) {
+        var l1 = (p2x - p1x) / 2,
+            l2 = (p3x - p2x) / 2,
+            a = Math.atan((p2x - p1x) / Math.abs(p2y - p1y)),
+            b = Math.atan((p3x - p2x) / Math.abs(p2y - p3y));
+        a = p1y < p2y ? Math.PI - a : a;
+        b = p3y < p2y ? Math.PI - b : b;
+        var alpha = Math.PI / 2 - ((a + b) % (Math.PI * 2)) / 2,
+            dx1 = l1 * Math.sin(alpha + a),
+            dy1 = l1 * Math.cos(alpha + a),
+            dx2 = l2 * Math.sin(alpha + b),
+            dy2 = l2 * Math.cos(alpha + b);
+        return {
+            x1: p2x - dx1,
+            y1: p2y + dy1,
+            x2: p2x + dx2,
+            y2: p2y + dy2
+        };
     };
-
+    //填充文字
     this.wrapText = function (context, text, x, y, maxWidth, lineHeight) {
-        var line = [],n=0;
+        var line = [], n = 0;
         for (var i = 0; i < text.length; i++) {
-            if(n==2) break;
+            if (n == 2) break;
             if (i % 6 == 0) {
                 line.push(text.substring(i, i + 6));
                 n++;
             }
         }
-        var len=line.length;
-        for(var ii=0;ii<len;ii++){
-            context.fillText(line[ii],x,y-lineHeight*(len-ii));
+        var len = line.length;
+        for (var ii = 0; ii < len; ii++) {
+            context.fillText(line[ii], x, y - lineHeight * (len - ii));
         }
     };
 }
