@@ -42,6 +42,12 @@ private double[] ttests;
 
 private double f;
 
+//标准估计的误差
+private Double regressionStandardError;
+
+//回归平方和加残差平方和
+private Double totalSumOfSquares;
+
 public Long getN() {
 	return n;
 }
@@ -186,16 +192,22 @@ public void setF(double f) {
 	this.f = f;
 }
 
-@Override
-public String toString() {
-	return "SingleLinearDTO [n=" + n + ", slope=" + slope + ", slopeStdErr=" + slopeStdErr + ", rSquare=" + rSquare
-			+ ", regressionSumSquares=" + regressionSumSquares + ", sumSquaredErrors=" + sumSquaredErrors
-			+ ", xSumSquares=" + xSumSquares + ", r=" + r + ", meanSquareError=" + meanSquareError + ", intercept="
-			+ intercept + ", significance=" + significance + ", slopeConfidenceInterval=" + slopeConfidenceInterval
-			+ ", regressionParameters=" + Arrays.toString(regressionParameters)
-			+ ", regressionParametersStandardErrors=" + Arrays.toString(regressionParametersStandardErrors)
-			+ ", adjustedRSquared=" + adjustedRSquared + ", predict=" + Arrays.toString(predict) + ", ttests="
-			+ Arrays.toString(ttests) + ", f=" + f + "]";
+
+public Double getRegressionStandardError() {
+	return regressionStandardError;
 }
+
+public void setRegressionStandardError(Double regressionStandardError) {
+	this.regressionStandardError = regressionStandardError;
+}
+
+public Double getTotalSumOfSquares() {
+	return totalSumOfSquares;
+}
+
+public void setTotalSumOfSquares(Double totalSumOfSquares) {
+	this.totalSumOfSquares = totalSumOfSquares;
+}
+
 
 }

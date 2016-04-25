@@ -47,9 +47,8 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		linearDTO.setSlopeStdErr(regression.getSlopeStdErr());
 		linearDTO.setSignificance(regression.getSignificance());
 		linearDTO.setSlopeConfidenceInterval(regression.getSlopeConfidenceInterval());
-
 		RegressionResults results = regression.regress();
-
+		
 		linearDTO.setAdjustedRSquared(results.getAdjustedRSquared());
 		double[] regressionParameters = results.getParameterEstimates();
 		double[] regressionParametersStandardErrors = results.getStdErrorOfEstimates();
@@ -57,6 +56,10 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		for (int i = 0; i < ttests.length; i++) {
 			ttests[i] = regressionParameters[i] / regressionParametersStandardErrors[i];
 		}
+		
+		Double regressionStandardError = regression.getSlopeConfidenceInterval();
+//		linearDTO.setRegressionStandardError(regressionStandardError);
+		linearDTO.setTotalSumOfSquares(linearDTO.getRegressionSumSquares() + linearDTO.getSumSquaredErrors());
 		linearDTO.setRegressionParameters(regressionParameters);
 		linearDTO.setRegressionParametersStandardErrors(regressionParametersStandardErrors);
 		double[] predict = new double[2];
