@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.commons.math3.stat.regression.OLSMultipleLinearRegression;
 import org.apache.commons.math3.stat.regression.RegressionResults;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
+import org.apache.commons.math3.util.FastMath;
 import org.jmu.multiinfo.core.util.DataFormatUtil;
 import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.core.util.PositionBean;
@@ -57,7 +58,7 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 			ttests[i] = regressionParameters[i] / regressionParametersStandardErrors[i];
 		}
 
-		//		linearDTO.setRegressionStandardError(regressionStandardError);
+				linearDTO.setRegressionStandardError(FastMath.sqrt(linearDTO.getMeanSquareError()));
 		linearDTO.setTotalSumOfSquares(linearDTO.getRegressionSumSquares() + linearDTO.getSumSquaredErrors());
 		linearDTO.setRegressionParameters(regressionParameters);
 		linearDTO.setRegressionParametersStandardErrors(regressionParametersStandardErrors);
