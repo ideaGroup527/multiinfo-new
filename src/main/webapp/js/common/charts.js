@@ -11,18 +11,18 @@ function Charts (data, opt, container) {
         var myChart = echarts.init(document.getElementById(this.container)); //这里dom选择需要为js对象
         myChart.setOption(this.option);
     }
-};
+}
 
 /*散点图*/
 function Scatter(config) {
     Charts.call(this, config.data, config.opt, config.container);
     this.format = function (data) {//转换格式
-        
+
         var dataAll = [];
         var depend = data.dependentVariable.varietyName,
             independent = data.independentVariable[0].varietyName;
         //TODO 这里暂时先写为一个因变量的情况
-            
+
         for (var i = 0; i < data.resDataMap[depend].length; i++) {
             dataAll.push([data.resDataMap[depend][i], data.resDataMap[independent][i]]);
         }
@@ -628,7 +628,7 @@ function DingChart(config) {
             var y = (i + 1) * m_height;
             ctx.save();
             ctx.textAlign="right";
-            ctx.fillText(config.data.rowVarList[i].varietyName, 70, y + m_height / 2);
+            this.wrapText(ctx,config.data.rowVarList[i].varietyName, 70, y + m_height,m_width,15);
             ctx.stroke();
         }
         //x轴
@@ -636,7 +636,7 @@ function DingChart(config) {
             var x = (i + 1) * m_width;
             ctx.save();
             ctx.textAlign="center";
-            ctx.fillText(config.data.colVarList[i].varietyName, x + m_width / 2, 30);
+            this.wrapText(ctx,config.data.colVarList[i].varietyName, x + m_width / 2, m_height,m_width,15);
             ctx.stroke();
         }
 
@@ -695,7 +695,6 @@ function DingChart(config) {
         //         ctx.stroke();
         //     }
         // }
-
     };
     this.EllipseTwo = function (context, x, y, a, b) {
         context.save();
@@ -712,5 +711,20 @@ function DingChart(config) {
     };
     this.Curve = function () {
 
+    };
+
+    this.wrapText = function (context, text, x, y, maxWidth, lineHeight) {
+        var line = [],n=0;
+        for (var i = 0; i < text.length; i++) {
+            if(n==2) break;
+            if (i % 6 == 0) {
+                line.push(text.substring(i, i + 6));
+                n++;
+            }
+        }
+        var len=line.length;
+        for(var ii=0;ii<len;ii++){
+            context.fillText(line[ii],x,y-lineHeight*(len-ii));
+        }
     };
 }
