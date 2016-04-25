@@ -56,9 +56,8 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		for (int i = 0; i < ttests.length; i++) {
 			ttests[i] = regressionParameters[i] / regressionParametersStandardErrors[i];
 		}
-		
-		Double regressionStandardError = regression.getSlopeConfidenceInterval();
-//		linearDTO.setRegressionStandardError(regressionStandardError);
+
+		//		linearDTO.setRegressionStandardError(regressionStandardError);
 		linearDTO.setTotalSumOfSquares(linearDTO.getRegressionSumSquares() + linearDTO.getSumSquaredErrors());
 		linearDTO.setRegressionParameters(regressionParameters);
 		linearDTO.setRegressionParametersStandardErrors(regressionParametersStandardErrors);
