@@ -50,6 +50,7 @@ $(function () {
 
                 sessionStorage.setItem('token', data.token);
                 sessionStorage.setItem('isMultiSheet', data.isMultiSheet);
+                sessionStorage.setItem('sheetNameList', JSON.stringify(data.sheetNameList));
 
                 if (data.isMultiSheet) {
 
@@ -61,7 +62,8 @@ $(function () {
 
                     $('#multi-sheet-select').modal({
                         'show': true,
-                        'backdrop': 'static'
+                        'backdrop': 'static',
+                        'keyboard': false
                     });
                 } else {
                     window.location.href = 'data.html';

@@ -39,6 +39,7 @@ var dataTableGenerator = function (data) {
             for (var attr in cell) {
                 $(td).attr('data-' + attr, cell[attr]);
             }
+            $(td).attr('data-all-params', JSON.stringify(cell));
 
             $(tr).append(td);
         });
