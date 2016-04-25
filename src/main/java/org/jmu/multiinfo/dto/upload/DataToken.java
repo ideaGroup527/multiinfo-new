@@ -2,7 +2,7 @@ package org.jmu.multiinfo.dto.upload;
 
 public class DataToken {
 	private Object data;
-	private long createTime;
+	private Long createTime;
 	public Object getData() {
 		return data;
 	}
@@ -11,11 +11,11 @@ public class DataToken {
 		this.data = data;
 	}
 
-	public long getCreateTime() {
+	public Long getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(long createTime) {
+	public void setCreateTime(Long createTime) {
 		this.createTime = createTime;
 	}
 

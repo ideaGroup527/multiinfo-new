@@ -38,6 +38,17 @@ private double[] ttests;
 private double[] residuals;
 
 private double f;
+
+
+//回归df
+private Long regressionDf;
+
+//残差df
+private Long errorsDf;
+
+//
+private Long totalDf;
+
 public Double getResidualSumOfSquares() {
 	return residualSumOfSquares;
 }
@@ -110,14 +121,23 @@ public double getF() {
 public void setF(double f) {
 	this.f = f;
 }
-@Override
-public String toString() {
-	return "MultipleLinearDTO [residualSumOfSquares=" + residualSumOfSquares + ", adjustedRSquared=" + adjustedRSquared
-			+ ", rSquared=" + rSquared + ", totalSumOfSquares=" + totalSumOfSquares + ", errorVariance=" + errorVariance
-			+ ", regressandVariance=" + regressandVariance + ", regressionStandardError=" + regressionStandardError
-			+ ", regressionParameters=" + Arrays.toString(regressionParameters)
-			+ ", regressionParametersStandardErrors=" + Arrays.toString(regressionParametersStandardErrors)
-			+ ", ttests=" + Arrays.toString(ttests) + ", residuals=" + Arrays.toString(residuals) + ", f=" + f + "]";
+public Long getRegressionDf() {
+	return regressionDf;
+}
+public void setRegressionDf(Long regressionDf) {
+	this.regressionDf = regressionDf;
+}
+public Long getErrorsDf() {
+	return errorsDf;
+}
+public void setErrorsDf(Long errorsDf) {
+	this.errorsDf = errorsDf;
+}
+public Long getTotalDf() {
+	return totalDf;
+}
+public void setTotalDf(Long totalDf) {
+	this.totalDf = totalDf;
 }
 
 

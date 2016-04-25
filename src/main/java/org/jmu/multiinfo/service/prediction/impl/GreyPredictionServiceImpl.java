@@ -59,7 +59,7 @@ public class GreyPredictionServiceImpl implements GreyPredictionService{
 				factNameList.add(dataGrid[i][j].getData().toString());
 				}
 			}
-		gpDTO.setPridictName((DataFormatUtil.converToDouble(factNameList.get(factNameList.size()-1))+1) +"");
+		gpDTO.setPredictName((DataFormatUtil.converToDouble(factNameList.get(factNameList.size()-1))+1) +"");
 		double[] dataArr = new double[factNameList.size()];
 		for (String facName : factNameList) {
 			    List<Double> dataList = resDataMap.get(facName);
@@ -159,7 +159,7 @@ public class GreyPredictionServiceImpl implements GreyPredictionService{
 				factNameList.add(dataGrid[i][j].getData().toString());
 				}
 			}
-		gpDTO.setPridictName((DataFormatUtil.converToDouble(factNameList.get(factNameList.size()-1))+1) +"");
+		gpDTO.setPredictName((DataFormatUtil.converToDouble(factNameList.get(factNameList.size()-1))+1) +"");
 		Map<String, List<Double>> dataMap = DataFormatUtil.converToDouble(dataGrid, independVarList);
 		double[] sumArr = new double[independVarList.size()];
 	    int pos=0;
