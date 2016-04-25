@@ -86,7 +86,7 @@ public class UploadController extends BaseController{
 			 }
 			return dataToken.getData();
 		}else{
-			DataToken dataToken = tokenGenService.cacheData(token, null,null,sheetNo);
+			DataToken dataToken = tokenGenService.cacheData(token, null,null);
 			return dataToken.getData();
 		}
 		
