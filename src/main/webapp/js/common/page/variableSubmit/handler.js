@@ -129,7 +129,6 @@ var handleSubmit = function (config) {
             dataPackage.factorVarVariable = JSON.parse(RV.factorVarVariable[0]);
             dataPackage.independentVariable = RV.independentVariable;
             dataPackage.formCoefficient = RV.formCoefficient[0];
-            console.log(dataPackage);
             break;
         case 'Independent_Variable':
             //灰色预测 - 独立变量

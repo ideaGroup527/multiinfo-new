@@ -52,16 +52,16 @@
             //第一栏第一列作为选框第一个值
             if (i == 0) {
                 $('[name=factorVarVariable]').append($('<option>').clone().text(variable.varietyName));
+            } else {
+                //TODO 变量的顺序要连续，不能断
+                var variableWrapper = $('<span>');
+                $(variableWrapper).addClass('variable-wrapper active')
+                        .attr('name', 'independentVariable')
+                        .val(variable)
+                        .text(variable.varietyName);
+
+                $('[data-group-name=independentVariable]').append(variableWrapper);
             }
-
-            //TODO 变量的顺序要连续，不能断
-            var variableWrapper = $('<span>');
-            $(variableWrapper).addClass('variable-wrapper active')
-                    .attr('name', 'independentVariable')
-                    .val(variable)
-                    .text(variable.varietyName);
-
-            $('[data-group-name=independentVariable]').append(variableWrapper);
         });
 
         $('.multiinfo-table-display').find('td:first-child').map(function (index, elem) {
