@@ -1,6 +1,7 @@
 package org.jmu.multiinfo.service.basestatistics.impl;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 import org.apache.commons.math3.ml.distance.ChebyshevDistance;
 import org.apache.commons.math3.ml.distance.EuclideanDistance;
@@ -370,6 +371,54 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 		}
 		return rSum;
 	}
+
+
+	@Override
+	public double[] nondimensionalize(double[] dataArr) {
+		double[] nondimArr = new double[dataArr.length];
+		double s = arithmeticMean(dataArr);
+		for (int i = 0; i < nondimArr.length; i++) {
+			nondimArr[i] = dataArr[i] / s;
+		}
+		
+		return nondimArr;
+	}
+
+
+	@Override
+	public double[] minus(double[] dataArrX, double[] dataArrY) throws DataErrException {
+		int size = getN(dataArrX);
+		if(size == 0  || size != getN(dataArrY)) throw new DataErrException("cannot resolve for minus because diffrent size");
+		double[] resArr = new double[size];
+		for (int i = 0; i < size; i++) {
+			resArr[i] = dataArrX[i] - dataArrY[i];
+		}
+		return resArr;
+	}
+
+
+	@Override
+	public double[] abs(double[] dataArr) {
+		int size = getN(dataArr);
+		double[] resArr = new double[size];
+		for (int i = 0; i < size; i++) {
+			resArr[i] = FastMath.abs(dataArr[i]);
+		}
+		return resArr;
+	}
+
+
+	@Override
+	public double[] minusAbs(double[] dataArrX, double[] dataArrY) throws DataErrException {
+		int size = getN(dataArrX);
+		if(size == 0  || size != getN(dataArrY)) throw new DataErrException("cannot resolve for minusAbs because diffrent size");
+		double[] resArr = new double[size];
+		for (int i = 0; i < size; i++) {
+			resArr[i] = FastMath.abs(dataArrX[i] - dataArrY[i]);
+		}
+		return resArr;
+	}
+
 
 	
 }

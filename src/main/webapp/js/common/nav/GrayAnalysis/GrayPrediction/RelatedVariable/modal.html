@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="../../../../../../css/bootstrap/bootstrap.css">
 <div class="modal fade in" id="Related_Variable" tabindex="-1" role="dialog"
      aria-labelledby="Related_Variable_Label" style="display: block;">
     <div class="modal-dialog" role="document">
@@ -54,8 +53,6 @@
             if (i == 0) {
                 $('[name=factorVarVariable]').append($('<option>').clone().text(variable.varietyName));
             }
-            var optionWrapper = $('<option>');
-            $(optionWrapper).val(JSON.parse(variable)).text(variable.varietyName);
 
             //TODO 变量的顺序要连续，不能断
             var variableWrapper = $('<span>');
@@ -69,8 +66,9 @@
 
         $('.multiinfo-table-display').find('td:first-child').map(function (index, elem) {
             var variableWrapper = $('<option>');
-            var dataConfig = {};
-            $(variableWrapper).val(dataConfig).text($(elem).attr('data-data'));
+            var dataConfig = variableList[0];
+            dataConfig.range = dataConfig.range.split(':')[0] + ':' + $(elem).attr('data-position');
+            $(variableWrapper).val(JSON.stringify(dataConfig)).text($(elem).attr('data-data'));
 
             $('[name=factorVarVariable]').append(variableWrapper);
         });

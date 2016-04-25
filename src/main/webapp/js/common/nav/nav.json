@@ -101,6 +101,36 @@
         ]
       },
       {
+        "term": "Regression",
+        "name": {
+          "en-us": "Regression",
+          "zh-cn": "回归"
+        },
+        "subMenu": [
+          {
+            "term": "UnitaryLinearRegression",
+            "name": {
+              "en-us": "Unitary Linear Regression",
+              "zh-cn": "一元线性回归"
+            }
+          },
+          {
+            "term": "MultipleLinearRegression",
+            "name": {
+              "en-us": "Multiple Linear Regression",
+              "zh-cn": "多元线性回归"
+            }
+          },
+          {
+            "term": "PredictiveRegression",
+            "name": {
+              "en-us": "Predictive Regression",
+              "zh-cn":"预测型回归"
+            }
+          }
+        ]
+      },
+      {
         "term": "ReducingDimensions",
         "name": {
           "en-us": "Reducing Dimensions",
