@@ -592,7 +592,12 @@ function DingChart(config) {
         var width = (col + 1) * m_width,
             height = (row + 1) * m_height;
         var canvas = document.createElement("canvas");
-        $(canvas).css({'display': 'block', 'position': "absolute","left":'50%',"margin-left":"-"+width/2+"px"});
+        $(canvas).css({
+            'display': 'block',
+            'position': "absolute",
+            "left": '50%',
+            "margin-left": "-" + width / 2 + "px"
+        });
         canvas.setAttribute('width', width.toString());
         canvas.setAttribute('height', height.toString());
         document.getElementById(this.container).appendChild(canvas);
@@ -686,12 +691,15 @@ function DingChart(config) {
         }
 
 
-
-
         //曲线
         var paper = Raphael("main", width, height);
-        $(paper.canvas).css({'display': 'block', 'position': "absolute","left":'50%',"margin-left":"-"+width/2+"px"});
-        ;
+        $(paper.canvas).css({
+            'display': 'block',
+            'z-index': '1000',
+            'position': "absolute",
+            "left": '50%',
+            "margin-left": "-" + width / 2 + "px"
+        });
         var tip = paper.rect(10, 20, 100, 60).attr({
             'stroke': "#333",
             "fill": "rgba(0,0,0,0.5)",
@@ -770,13 +778,13 @@ function DingChart(config) {
             }
         }
         //控制按钮
-        var btn = '<svg style="position: absolute;left: 0;"><g class="button" cursor="pointer"\
+        var btn = '<svg style="position: absolute;left: 0;z-index: 99999;width: 75px;height: 23px;"><g class="button" cursor="pointer"\
             onmouseup="showCurve()">\
             <rect x="20" y="1" rx="5" ry="5"\
             width="52" height="22" fill="#00FF00"/>\
             </g></svg>';
         console.log(btn);
-        $("#"+this.container).append(btn);
+        $("#" + this.container).append(btn);
     };
     //画一个椭圆
     this.EllipseTwo = function (context, x, y, a, b) {
