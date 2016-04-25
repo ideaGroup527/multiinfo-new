@@ -78,13 +78,31 @@ public class UploadServiceImpl implements UploadService{
 			excelDto.setSheetNum(sheetNum);
 			excelDto.setSheetNameList(sheetNameList);
 			Sheet sheet = (Sheet) wb.getSheetAt(n);
-			int rowcount = sheet.getPhysicalNumberOfRows();// 取得有效的行数
+			int physicalNumberOfRows = sheet.getPhysicalNumberOfRows();// 取得总有效的行数
+			int blankRow = 0;
+			for (int i = 0; i < physicalNumberOfRows; i++){
+				Row row = sheet.getRow(i); // 获得第i行
+				//遇到空行
+				if(row.getFirstCellNum() < 0) {
+					blankRow++;
+					continue;
+				}
+			}
+			
+			
+			int rowcount = physicalNumberOfRows - blankRow;
 			int colcount = sheet.getRow(0).getPhysicalNumberOfCells();// 总列数
 			DataDTO[][] dataGrid = new DataDTO[rowcount][colcount];
 			List<VarietyDTO> varietyList = new ArrayList<VarietyDTO>();
 			Row row = null;
-			for (int i = 0; i < rowcount; i++) {
+			int blankRow2 = 0;
+			for (int i = 0; i < physicalNumberOfRows; i++) {
 				row = sheet.getRow(i); // 获得第i行
+				//遇到空行
+				if(row.getFirstCellNum() < 0) {
+					blankRow2++;
+					continue;
+				}
 				for (int j = 0; j < colcount; j++) {
 					Map<String,Object> datamap =null;
 				if(	ExcelUtil.isMergedRegion(sheet, i, j)){
@@ -105,7 +123,7 @@ public class UploadServiceImpl implements UploadService{
 						variety.setVarietyName(datamap.get("value").toString());
 						variety.setType((Integer) datamap.get("type"));
 						variety.setTypeDes(typeDes);
-						variety.setRange(pjs+2+":"+pjs+(sheet.getPhysicalNumberOfRows()));
+						variety.setRange(pjs+2+":"+pjs+(sheet.getPhysicalNumberOfRows()-blankRow));
 						varietyList.add(variety);
 					}
 					if(!isFirstRowVar&&i==0){
@@ -115,14 +133,14 @@ public class UploadServiceImpl implements UploadService{
 						variety.setVarietyName("V"+(j+1));
 						variety.setType((Integer) datamap.get("type"));
 						variety.setTypeDes(typeDes);
-						variety.setRange(pjs+1+":"+pjs+(sheet.getPhysicalNumberOfRows()));
+						variety.setRange(pjs+1+":"+pjs+(sheet.getPhysicalNumberOfRows()-blankRow));
 						varietyList.add(variety);
 						
 					}
 					DataDTO data = new DataDTO();
-					dataGrid[i][j] = data;
-					data.setPosition(pjs + (i+1) +"");
-					data.setPositionDes(pjs +","+ (i+1) );
+					dataGrid[i-blankRow2][j] = data;
+					data.setPosition(pjs + (i-blankRow2+1) +"");
+					data.setPositionDes(pjs +","+ (i-blankRow2+1) );
 					data.setData(datamap.get("value"));
 					data.setType((Integer) datamap.get("type"));
 					data.setMergedRange(mergedRange);
@@ -137,7 +155,7 @@ public class UploadServiceImpl implements UploadService{
 			sheetDto.setSheetName(sheet.getSheetName());
 			sheetDto.setFirstRowVar(isFirstRowVar);
 			excelDto.setSheet(sheetDto);
-			excelDto.setPhysicalRowNum(sheet.getPhysicalNumberOfRows());
+			excelDto.setPhysicalRowNum(rowcount);
 			String lastColIndex = ExcelUtil.getExcelColName(colcount);
 			excelDto.setLastCellIndex(lastColIndex+rowcount+"");
 			excelDto.setPhysicalCellNum(colcount);

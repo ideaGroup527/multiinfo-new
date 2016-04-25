@@ -82,7 +82,7 @@ public class ExcelUtil {
 	 */
 	public static PositionBean splitRange(String range){
 		PositionBean positionBean = new PositionBean();
-		String[] rangeArr =	range.split(":");
+		String[] rangeArr =	range.trim().split(":");
 		if(rangeArr == null ||rangeArr.length<2) return null;
 		String first = rangeArr[0];
 		String last = rangeArr[1];
