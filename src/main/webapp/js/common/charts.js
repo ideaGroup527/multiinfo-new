@@ -584,7 +584,6 @@ function DingChart(config) {
     this.container = config.container;
     this.render = function () {
 
-        var curvePoint = {}, curvePoint2 = [];//曲线的点集合
         var col = config.data.colVarList.length,//行数和列数
             row = config.data.rowVarList.length;
         var m_width = 80, m_height = 40; //一小格子的高宽
@@ -593,7 +592,7 @@ function DingChart(config) {
         var width = (col + 1) * m_width,
             height = (row + 1) * m_height;
         var canvas = document.createElement("canvas");
-        $(canvas).css({'display': 'block', 'margin': "0 auto"});
+        $(canvas).css({'display': 'block', 'position': "absolute","left":'50%',"margin-left":"-"+width/2+"px"});
         canvas.setAttribute('width', width.toString());
         canvas.setAttribute('height', height.toString());
         document.getElementById(this.container).appendChild(canvas);
@@ -603,6 +602,11 @@ function DingChart(config) {
         ctx.strokeStyle = "#aaa";
         ctx.textAlign = 'center';
 
+        var curvePoint = new Array(), curvePoint2 = new Array();//曲线的点集合
+        for (var i = 0; i < row; i++) {
+            curvePoint[i] = new Array();
+            curvePoint2[i] = new Array();
+        }
 
         //横线
         for (var i = 1; i <= row + 1; i++) {
@@ -638,55 +642,141 @@ function DingChart(config) {
         }
 
 
+        var n_point = point = -1;
+        var _a, _b;
         //椭圆
-        for (var i = 0; i < col; i++) {
-            for (var j = 0; j < row; j++) {
-                var _a, _b;
-                if (this.calculateMethod == 0) {
+        if (this.calculateMethod == 0) { //行
+            for (var i = 0; i < row; i++) {
+                for (var j = 0; j < col; j++) {
+
                     _a = a;
-                    _b = b * config.data.resData[j][i];
-                } else if (this.calculateMethod == 1) {
+                    _b = b * config.data.resData[i][j];
+                    _a = _a < .04 ? .04 : _a;
+                    _b = _b < .04 ? .04 : _b;
+                    if ((++n_point) % col == 0) {
+                        point++;
+                    }
+                    curvePoint[point].push({x: (j + 1) * m_width + a, y: (i + 1) * m_height + b - _b});
+                    curvePoint2[point].push({x: (j + 1) * m_width + a, y: (i + 2) * m_height - b + _b});
+                    this.EllipseTwo(ctx, (j + 1) * m_width + a, (i + 1) * m_height + b, _a, _b);
+                }
+            }
+        } else if (this.calculateMethod == 1) {  //列
+            for (var i = 0; i < col; i++) {
+                for (var j = 0; j < row; j++) {
                     _a = a * config.data.resData[j][i];
                     _b = b;
-                } else if (this.calculateMethod == 2) {
-                    _a = a * config.data.resData[j][i];
-                    _b = b * config.data.resData[j][i];
-                } else {
-                    alert('calculateMethod参数错误！');
-                    return false;
+                    _a = _a < .04 ? .04 : _a;
+                    _b = _b < .04 ? .04 : _b;
+
+                    if ((++n_point) % row == 0) {
+                        point++;
+                    }
+                    curvePoint[point].push({x: (i + 1) * m_width + a - _a, y: (j + 2) * m_height - _b});
+                    curvePoint2[point].push({x: (i + 1) * m_width + a + _a, y: (j + 1) * m_height + _b});
+                    this.EllipseTwo(ctx, (i + 1) * m_width + a, (j + 1) * m_height + b, _a, _b);
                 }
-                _a = _a < .04 ? .04 : _a;
-                _b = _b < .04 ? .04 : _b;
-
-                curvePoint.push({x: (i + 1) * m_width + a - _a, y: (j + 1) * m_height + b - _b});
-
-                this.EllipseTwo(ctx, (i + 1) * m_width + a, (j + 1) * m_height + b, _a, _b);
             }
+        } else if (this.calculateMethod == 2) {  //全
+            _a = a * config.data.resData[j][i];
+            _b = b * config.data.resData[j][i];
+        } else {
+            alert('calculateMethod参数错误！');
+            return false;
         }
 
-        console.log(curvePoint)
+
+
 
         //曲线
         var paper = Raphael("main", width, height);
-        var p;
-        for (var i = 0, ii = curvePoint.length; i < curvePoint.length; i++) {
-            var point = curvePoint[i];
-            var x = point.x;
-            var y = point.y;
-            if (!i) {
-                p = ["M", x, y, "C", x, y];
+        $(paper.canvas).css({'display': 'block', 'position': "absolute","left":'50%',"margin-left":"-"+width/2+"px"});
+        ;
+        var tip = paper.rect(10, 20, 100, 60).attr({
+            'stroke': "#333",
+            "fill": "rgba(0,0,0,0.5)",
+            'stroke-width': 1,
+            r: 5,
+            'z-index': '1000'
+        }).hide();
+        //曲线-左侧
+        for (var n = 0, v = null; (v = curvePoint[n]) != undefined; n++) {
+            var p;
+            var cirs = [];//圆点集合
+            for (var i = 0, ii = v.length; i < v.length; i++) {
+                var point = v[i];
+                var x = point.x;
+                var y = point.y;
+                if (!i) {
+                    p = ["M", x, y, "C", x, y];
+                }
+                if (i && i < ii - 1) {
+                    var point1 = v[i - 1];
+                    var point2 = v[i + 1];
+                    var a = this.getAnchors(point1.x, point1.y, x, y, point2.x, point2.y);//获取锚点
+                    p = p.concat([a.x1, a.y1, x, y, a.x2, a.y2]);
+                }
+                cirs.push(paper.circle(x, y).attr({fill: "#00FF00", stroke: "#00FF00", r: 3}));
             }
-            if (i && i < ii - 1) {
-                var point1 = curvePoint[i - 1];
-                var point2 = curvePoint[i + 1];
-                var a = this.getAnchors(point1.x, point1.y, x, y, point2.x, point2.y);//获取锚点
-                p = p.concat([a.x1, a.y1, x, y, a.x2, a.y2]);
-            }
-            paper.circle(x, y).attr({fill: "#00FF00", stroke: "#00FF00", r: 3});
-        }
-        p = p.concat([x, y, x, y]);
-        paper.path().attr({'path': p}).attr({stroke: "#33aa33"});
 
+            paper.path(p.concat([x, y, x, y])).attr({stroke: "#33aa33"});
+
+            //修改cirs层级和事件
+            for (var i = 0; i < cirs.length; i++) {
+                cirs[i].node.parentNode.appendChild(cirs[i].node);
+                cirs[i].hover(function (e) {
+                    this.animate({'r': 6}, 100, 'easeInBounce');
+                    tip.show().animate({"x": e.layerX, "y": e.layerY}, 200, "wiggle");
+                    tip.node.parentNode.appendChild(tip.node)
+                }, function () {
+                    this.animate({'r': 3}, 100, 'easeInBounce');
+                    tip.hide();
+                })
+            }
+        }
+        //曲线-右侧
+        for (var n = 0, v = null; (v = curvePoint2[n]) != undefined; n++) {
+            var p;
+            var cirs = [];//圆点集合
+            for (var i = 0, ii = v.length; i < v.length; i++) {
+                var point = v[i];
+                var x = point.x;
+                var y = point.y;
+                if (!i) {
+                    p = ["M", x, y, "C", x, y];
+                }
+                if (i && i < ii - 1) {
+                    var point1 = v[i - 1];
+                    var point2 = v[i + 1];
+                    var a = this.getAnchors(point1.x, point1.y, x, y, point2.x, point2.y);//获取锚点
+                    p = p.concat([a.x1, a.y1, x, y, a.x2, a.y2]);
+                }
+                cirs.push(paper.circle(x, y).attr({fill: "#00FF00", stroke: "#00FF00", r: 3}));
+            }
+
+            paper.path(p.concat([x, y, x, y])).attr({stroke: "#33aa33"});
+
+            //修改cirs层级和事件
+            for (var i = 0; i < cirs.length; i++) {
+                cirs[i].node.parentNode.appendChild(cirs[i].node);
+                cirs[i].hover(function (e) {
+                    this.animate({'r': 6}, 100, 'easeInBounce');
+                    tip.show().animate({"x": e.layerX, "y": e.layerY}, 200, "wiggle");
+                    tip.node.parentNode.appendChild(tip.node)
+                }, function () {
+                    this.animate({'r': 3}, 100, 'easeInBounce');
+                    tip.hide();
+                })
+            }
+        }
+        //控制按钮
+        var btn = '<svg style="position: absolute;left: 0;"><g class="button" cursor="pointer"\
+            onmouseup="showCurve()">\
+            <rect x="20" y="1" rx="5" ry="5"\
+            width="52" height="22" fill="#00FF00"/>\
+            </g></svg>';
+        console.log(btn);
+        $("#"+this.container).append(btn);
     };
     //画一个椭圆
     this.EllipseTwo = function (context, x, y, a, b) {
@@ -737,4 +827,8 @@ function DingChart(config) {
             context.fillText(line[ii], x, y - lineHeight * (len - ii));
         }
     };
+}
+
+function showCurve() {
+    $('#main svg').first().toggle();
 }
