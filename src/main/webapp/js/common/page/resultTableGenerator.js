@@ -862,7 +862,7 @@ var handleRelatedVariable = function (tableResult) {
         $(table).append(predictionRow);
 
         //打印表名和表格
-        $(container).append($(tableHeader).clone().text(tableResult.pridictName)).append(table);
+        $(container).append($(tableHeader).clone().text(tableResult.predictName)).append(table);
         $(presentArea).append(container);
     } else {
         alert('Data illegal! Please check your data first');
