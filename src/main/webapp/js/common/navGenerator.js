@@ -7,7 +7,7 @@ $.fn.navGenerator = function (config) {
 
     var that = this;
 
-    var defer = $.Deferred();
+    var def = $.Deferred();
 
     $.getJSON('js/common/nav/nav.json', function (packageJSON) {
 
@@ -107,11 +107,11 @@ $.fn.navGenerator = function (config) {
                     }
 
                     $(that).append(level_1_item);
-                    defer.resolve();
                 }
             });
         });
+        def.resolve();
     });
 
-    return defer.promise();
+    return def.promise();
 };

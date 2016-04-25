@@ -43,13 +43,15 @@
 <script src="js/common/page/variableSubmit/variableChoose.js"></script>
 <script src="js/common/page/variableSubmit/handler.js"></script>
 <script>
-    $('#nav').navGenerator().done(function () {
-        $('[data-submenu]').submenupicker(); //二级子菜单
-    });
 
     var variableList, dataGrid;
 
     $(document).ready(function () {
+
+        $('#nav').navGenerator().done(function () {
+            $('[data-submenu]').submenupicker();
+        });
+
         $.ajax({
             url: 'upload.do?method=file&isFirstRowVar=true',
             data: {
@@ -95,7 +97,7 @@
         e.preventDefault();
         if (!$(this).attr('disabled')) {
             $(this).toggleClass('active');
-        }else{
+        } else {
             e.stopPropagation();
         }
     }).on('click', '.variable-submit', function (e) {

@@ -1,0 +1,31 @@
+<div class="modal fade" id="Switch_Sheet" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <select class="form-control" name="sheet-select" id="sheet-select">
+                <option data-i18n-type="page" data-i18n-tag="label_choose_sheet" value="-1"></option>
+            </select>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            var isMultiSheet = sessionStorage.getItem('isMultiSheet');
+            var sheetNameList = JSON.parse(sessionStorage.getItem('sheetNameList'));
+
+            if (isMultiSheet) {
+
+                sheetNameList.map(function (sheet, i) {
+                    var option = $('<option>');
+                    $(option).text(sheet).val(i);
+                    $('#sheet-select').append(option);
+                });
+            } else {
+                alert('Multi-Sheet ERROR');
+            }
+
+            $('#sheet-select').change(function () {
+                sessionStorage.setItem('sheetNo', $(this).val());
+                window.location.reload();
+            });
+        })
+    </script>
+</div>
