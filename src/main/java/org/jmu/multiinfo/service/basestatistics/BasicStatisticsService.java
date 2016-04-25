@@ -315,4 +315,40 @@ public interface BasicStatisticsService {
 	 * @return
 	 */
 	public double crossSquareSum(double[][] dataArr);
+	
+	
+	/***
+	 * 无量纲化
+	 * @param dataArr
+	 * @return
+	 */
+	public double[] nondimensionalize(double[] dataArr);
+	
+	/***
+	 * 相减 dataArrX-dataArrY
+	 * @param dataArrX
+	 * @param dataArrY
+	 * @return
+	 * @throws DataErrException 
+	 */
+	public double[] minus(double[] dataArrX,double[] dataArrY) throws DataErrException;
+	
+	
+	/***
+	 * 相减取绝对值 | dataArrX-dataArrY|
+	 * @param dataArrX
+	 * @param dataArrY
+	 * @return
+	 * @throws DataErrException 
+	 */
+	public double[] minusAbs(double[] dataArrX,double[] dataArrY) throws DataErrException;
+	
+	/***
+	 * 
+	 * @param dataArr
+	 * @return
+	 */
+	public double[] abs(double[] dataArr);
+	
+	
 }

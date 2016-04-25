@@ -20,6 +20,21 @@ public static Double converToDouble(String data) throws NumberFormatException{
 	return Double.valueOf(data);
 }
 
+public static void print(double[][] data){
+	for (int i = 0; i < data.length; i++) {
+		for (int j = 0; j < data[i].length; j++) {
+			System.out.print(data[i][j]+" ");
+		}
+		System.out.println();
+	}
+}
+
+public static void print(double[] data){
+	for (int i = 0; i < data.length; i++) {
+			System.out.print(data[i]+" ");
+	}
+}
+
 public static Double converToDouble(DataDTO dataDTO){
 	Double data = null ;
 	Integer dataType = dataDTO.getType();

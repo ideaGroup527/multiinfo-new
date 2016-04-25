@@ -1,6 +1,8 @@
 package org.jmu.multiinfo.web.controller;
 
 import org.jmu.multiinfo.core.controller.BaseController;
+import org.jmu.multiinfo.dto.prediction.GreyCorrelationDegreeCondition;
+import org.jmu.multiinfo.dto.prediction.GreyCorrelationDegreeDTO;
 import org.jmu.multiinfo.dto.prediction.GreyPredictionCondition;
 import org.jmu.multiinfo.dto.prediction.GreyPredictionDTO;
 import org.jmu.multiinfo.service.prediction.GreyPredictionService;
@@ -52,5 +54,17 @@ public class PredictionController extends BaseController{
 		return gpDTO;
 		
 
+	}
+	
+	/***
+	 * 灰色关联度
+	 * 路径/statistics/prediction.do?method=greydegree
+	 * @param condition {@link org.jmu.multiinfo.dto.prediction.GreyCorrelationDegreeCondition}
+	 * @return 
+	 */
+	@RequestMapping(params = { "method=greydegree" })
+	@ResponseBody
+	public GreyCorrelationDegreeDTO greyCorrelationDegree(@RequestBody GreyCorrelationDegreeCondition condition){
+		return greyPredictionService.greyCorrelationDegree(condition);
 	}
 }
