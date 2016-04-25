@@ -66,7 +66,9 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		predict[1] = regression.predict(1);
 		linearDTO.setPredict(predict);
 		linearDTO.setTtests(ttests);
-		
+		linearDTO.setRegressionDf((long)1);
+		linearDTO.setErrorsDf(linearDTO.getN()-2);
+		linearDTO.setTotalDf(1+linearDTO.getErrorsDf());
 		
 		linearDTO.setF((linearDTO.getRSquare() / (regressionParameters.length - 1))
 				/ ((1 - linearDTO.getRSquare()) / (data.length - regressionParameters.length)));
@@ -78,6 +80,8 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		MultipleLinearDTO linearDTO = new MultipleLinearDTO();
 		OLSMultipleLinearRegression regression = new OLSMultipleLinearRegression();
 		regression.newSampleData(y, x);
+		long N = y.length;
+		long M = x[0].length + 1;
 		double[] regressionParameters = regression.estimateRegressionParameters();
 		double[] regressionParametersStandardErrors = regression.estimateRegressionParametersStandardErrors();
 		double[] residuals = regression.estimateResiduals();
@@ -97,7 +101,10 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		linearDTO.setRegressionParametersStandardErrors(regressionParametersStandardErrors);
 		linearDTO.setResiduals(residuals);
 		linearDTO.setTtests(ttests);
-
+		
+		linearDTO.setErrorsDf(N - M);
+		linearDTO.setRegressionDf(M - 1);
+		linearDTO.setTotalDf(N -1);
 		linearDTO.setF((linearDTO.getRSquared() / (regressionParameters.length - 1))
 				/ ((1 - linearDTO.getRSquared()) / (y.length - regressionParameters.length)));
 		return linearDTO;
