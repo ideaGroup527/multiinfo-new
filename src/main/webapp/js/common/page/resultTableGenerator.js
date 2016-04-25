@@ -15,19 +15,28 @@ var resultTableGenerator = function () {
     //制表区
     switch (resultType) {
         case 'Descriptive_Statistics_Descriptive':
+            //描述统计 - 描述
             handleDescriptiveStatisticsDescriptive(tableResult);
             break;
         case 'Descriptive_Statistics_Frequency':
+            //描述统计 - 频率
             handleDescriptiveStatisticsFrequency(tableResult);
             break;
         case 'Correlation_Bivariate':
+            //相关分析 - 双变量
             handleCorrelationBivariate(tableResult);
             break;
         case 'Correlation_Distance':
+            //相关分析 - 距离
             handleCorrelationDistance(tableResult);
             break;
         case 'Principal_Component_Analysis':
+            //降维 - 主成分
             handlePrincipalComponentAnalysis(tableResult);
+            break;
+        case 'Related_Variable':
+            //灰色预测 - 关联变量
+            handleRelatedVariable(tableResult);
             break;
     }
 
@@ -101,7 +110,6 @@ var resultTableGenerator = function () {
             }
         });
     }
-
     return def.resolve().promise();
 };
 
@@ -255,8 +263,6 @@ var handleDescriptiveStatisticsFrequency = function (tableResult) {
     }
 };
 var handleCorrelationBivariate = function (tableResult) {
-    console.log(tableResult);
-
     var presentArea = $('.result-table');
 
     var bivariateTableData = tableResult.resDataMap;
@@ -808,4 +814,58 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
         .append($(block).clone().text('已提取了' + componentMatrix[0].length + '个成份'));
     $(presentArea).append(componentArea);
 
+};
+var handleRelatedVariable = function (tableResult) {
+
+    //声明放置区域
+    var presentArea = $('.result-table');
+
+    //声明DOM 元素
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var tableHeader = $('<h1>');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered table-condensed');
+
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
+    var emptyCell = $(headerCell).clone();
+
+    var block = $('<div>');
+    var span = $('<span>');
+
+    //是否可预测
+    if (tableResult.examineSuccess) {
+        //变量数组
+        var variableList = [];
+        tableResult.independVarList.map(function (variable) {
+            variableList.push(variable.varietyName);
+        });
+
+        //变量行
+        var variableRow = $(row).clone();
+        $(variableRow).append(emptyCell);
+        variableList.map(function (variableName) {
+            $(variableRow).append($(headerCell).clone().text(variableName));
+        });
+        $(table).append(variableRow);
+
+        //打印预测值
+        var predictionRow = $(row).clone();
+        $(predictionRow).append($(cell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_prediction_value'));
+        tableResult.resData.map(function (value) {
+            $(predictionRow).append($(cell).clone().text(value));
+        });
+        $(table).append(predictionRow);
+
+        //打印表名和表格
+        $(container).append($(tableHeader).clone().text(tableResult.predictName)).append(table);
+        $(presentArea).append(container);
+    } else {
+        alert('Data illegal! Please check your data first');
+        window.history.go(-1);
+    }
 };
