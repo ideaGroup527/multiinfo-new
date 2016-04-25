@@ -66,16 +66,31 @@ public class UploadController extends BaseController{
 	public Object uploadFile(HttpServletRequest request, HttpServletResponse response,HttpSession session,
 			@RequestParam("token") String token,@RequestParam(required=false,value="sheetNo",defaultValue="0") int sheetNo,
 			@RequestParam("isMultiSheet") boolean isMultiSheet,@RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar) throws Exception{
-		DataToken dataToken = tokenGenService.cacheData(token, null,null);
+		
 		if(isMultiSheet){
-			ExcelDTO excelDto = (ExcelDTO)dataToken.getData();
-			if(excelDto.getSheet() !=null) return dataToken.getData();
-			File temp = new File(excelDto.getTempFileName());
-			 excelDto =  uploadService.readExcel(temp, excelDto.getFileName(), sheetNo, isFirstRowVar);
-			 dataToken.setData(excelDto);
+			DataToken dataToken = tokenGenService.cacheData(token, null,null,sheetNo);
+			if(dataToken.getData() == null){
+				dataToken = tokenGenService.cacheData(token, null,null);
+				ExcelDTO excelDto = (ExcelDTO)dataToken.getData();
+				String tempFileName = excelDto.getTempFileName();
+				File temp = new File(tempFileName);
+				excelDto =  uploadService.readExcel(temp, excelDto.getFileName(), sheetNo, isFirstRowVar);
+				excelDto.setTempFileName(tempFileName);
+				dataToken.setData(excelDto);
+				tokenGenService.freshData(token, sheetNo);
+				
+				 TokenDTO tokenDTO = new TokenDTO();
+				 tokenDTO.setIsMultiSheet(true);
+				 tokenDTO.setCreateTime(System.nanoTime());
+			 tokenGenService.cacheData(token, excelDto,tokenDTO,sheetNo);
+			 }
+			return dataToken.getData();
+		}else{
+			DataToken dataToken = tokenGenService.cacheData(token, null,null,sheetNo);
+			return dataToken.getData();
 		}
 		
-		return dataToken.getData();
+		
 	}
 	
 	/***
@@ -117,7 +132,6 @@ public class UploadController extends BaseController{
 			 FileUtils.deleteQuietly(temp);
 		}else{
 			tokenDTO.setIsMultiSheet(true);
-
 		}
 		tokenDTO.setFileName(data.getFileName());
 		tokenDTO.setSheetNameList(data.getSheetNameList());

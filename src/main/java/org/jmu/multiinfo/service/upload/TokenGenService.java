@@ -13,4 +13,8 @@ import org.jmu.multiinfo.dto.upload.TokenDTO;
  */
 public interface TokenGenService {
 public DataToken cacheData(String tokenId,Object data, TokenDTO tokenDTO);
+
+public boolean freshData(String tokenId,Integer sheetNo);
+
+public DataToken cacheData(String tokenId,Object data, TokenDTO tokenDTO,Integer sheetNo);
 }
