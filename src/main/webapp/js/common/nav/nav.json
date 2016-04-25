@@ -139,6 +139,54 @@
     "script": "script.js"
   },
   {
+    "term": "GrayAnalysis",
+    "name": {
+      "en-us": "Gray Analysis",
+      "zh-cn": "灰色分析"
+    },
+    "subMenu": [
+      {
+        "term": "GrayCorrelation",
+        "name": {
+          "en-us": "Gray Correlation",
+          "zh-cn": "灰色关联度"
+        },
+        "modalId": "#Gray_Correlation",
+        "modal": "modal.html",
+        "script": "script.js"
+      },
+      {
+        "term": "GrayPrediction",
+        "name": {
+          "en-us": "Gray Prediction",
+          "zh-cn": "灰色预测"
+        },
+        "subMenu": [
+          {
+            "term": "RelatedVariable",
+            "name": {
+              "en-us": "Related Variable(s)",
+              "zh-cn": "关联变量"
+            },
+            "modalId": "#Related_Variable",
+            "modal": "modal.html",
+            "script": "script.js"
+          },
+          {
+            "term": "IndependentVariable",
+            "name": {
+              "en-us": "Independent Variable(s)",
+              "zh-cn": "独立变量"
+            },
+            "modalId": "#Independent_Variable",
+            "modal": "modal.html",
+            "script": "script.js"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "term": "Graph",
     "name": {
       "en-us": "Graph",
@@ -156,10 +204,20 @@
     ]
   },
   {
+    "term": "Switch",
+    "name": {
+      "en-us": "Switch Sheet",
+      "zh-cn": "切换表格"
+    },
+    "modalId": "#Switch_Sheet",
+    "modal": "modal.html",
+    "script": "script.js"
+  },
+  {
     "term": "Language",
     "name": {
-      "zh-cn": "选择语言",
-      "en-us": "Language"
+      "zh-cn": "<span class='glyphicon glyphicon-globe' aria-hidden='true'></span> 选择语言",
+      "en-us": "<span class='glyphicon glyphicon-globe' aria-hidden='true'></span> Language"
     },
     "subMenu": [
       {

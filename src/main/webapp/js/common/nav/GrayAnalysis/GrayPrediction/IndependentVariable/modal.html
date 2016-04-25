@@ -1,0 +1,97 @@
+<div class="modal fade in" id="Independent_Variable" tabindex="-1" role="dialog"
+     aria-labelledby="Independent_Variable_Label" style="display: block;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="Independent_Variable_Label"
+                    data-i18n-type="page"
+                    data-i18n-tag="modal_title_independent_variable">独立变量</h4>
+            </div>
+            <div class="modal-body">
+                <p data-i18n-type="page"
+                   data-i18n-tag="label_choose_col_variable">点击选择 列变量</p>
+
+                <div data-config-group data-group-name="colVarList" data-config-val-flag=".active">
+
+                </div>
+                <hr/>
+                <p data-i18n-type="page"
+                   data-i18n-tag="label_choose_row_variable">点击选择 行变量</p>
+
+                <div data-config-group data-group-name="rowVarList" data-config-val-flag=".active">
+
+                </div>
+                <div data-panel="config">
+                    <fieldset class="algorithm-config-zone">
+                        <legend data-i18n-tag="options" data-i18n-type="page">选项</legend>
+                        <div data-config-group data-group-name="calculateMethod" data-config-val-flag=":checked">
+                            <span data-i18n-type="page" data-i18n-tag="label_calculate_method">计算方法</span>
+
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input value="0" type="radio" name="calculateMethod" checked/>
+                                    <span data-i18n-type="page" data-i18n-tag="label_by_row">按行</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input value="1" type="radio" name="calculateMethod"/>
+                                    <span data-i18n-type="page" data-i18n-tag="label_by_col">按列</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input value="2" type="radio" name="calculateMethod"/>
+                                    <span data-i18n-type="page" data-i18n-tag="label_by_table">按全表</span>
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default variable-config" data-i18n-type="page"
+                        data-i18n-tag="options">选项
+                </button>
+                <button type="button" class="btn btn-primary variable-submit"
+                        data-btn-type="Independent_Variable"
+                        data-i18n-type="page" data-i18n-tag="btn_next">确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var variableList = JSON.parse(sessionStorage.getItem('PRIVATE_VARIABLE_LIST'));
+
+        variableList.map(function (variable, i) {
+            //第一栏第一列的值不要
+            if (i == 0) return;
+
+            var variableWrapper = $('<span>');
+            $(variableWrapper).addClass('variable-wrapper active')
+                    .attr('name', 'colVarList')
+                    .val(variable)
+                    .text(variable.varietyName);
+
+            $('[data-group-name=colVarList]').append(variableWrapper);
+        });
+
+        $('.multiinfo-table-display').find('td:first-child').map(function (index, elem) {
+            var variableWrapper = $('<div>');
+            var dataConfig = {};
+            dataConfig.position = $(elem).attr('data-positiondes').split(',')[1];
+            dataConfig.varietyName = $(elem).attr('data-data');
+            $(variableWrapper).addClass('variable-wrapper active')
+                    .attr('data-config', JSON.stringify(dataConfig))
+                    .attr('name', 'rowVarList')
+                    .val(dataConfig)
+                    .text($(elem).attr('data-data'));
+
+            $('[data-group-name=rowVarList]').append(variableWrapper);
+        });
+    })
+</script>
