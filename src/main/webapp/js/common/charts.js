@@ -724,10 +724,10 @@ function DingChart(config) {
                     var a = this.getAnchors(point1.x, point1.y, x, y, point2.x, point2.y);//获取锚点
                     p = p.concat([a.x1, a.y1, x, y, a.x2, a.y2]);
                 }
-                cirs.push(paper.circle(x, y).attr({fill: "#00FF00", stroke: "#00FF00", r: 3}));
+                cirs.push(paper.circle(x, y).attr({fill: "#576874", stroke: "#576874", r: 2}));
             }
 
-            paper.path(p.concat([x, y, x, y])).attr({stroke: "#33aa33"});
+            paper.path(p.concat([x, y, x, y])).attr({stroke: "#576874"});
 
             //修改cirs层级和事件
             for (var i = 0; i < cirs.length; i++) {
@@ -737,7 +737,7 @@ function DingChart(config) {
                     tip.show().animate({"x": e.layerX, "y": e.layerY}, 200, "wiggle");
                     tip.node.parentNode.appendChild(tip.node)
                 }, function () {
-                    this.animate({'r': 3}, 100, 'easeInBounce');
+                    this.animate({'r': 2}, 100, 'easeInBounce');
                     tip.hide();
                 })
             }
@@ -759,10 +759,10 @@ function DingChart(config) {
                     var a = this.getAnchors(point1.x, point1.y, x, y, point2.x, point2.y);//获取锚点
                     p = p.concat([a.x1, a.y1, x, y, a.x2, a.y2]);
                 }
-                cirs.push(paper.circle(x, y).attr({fill: "#00FF00", stroke: "#00FF00", r: 3}));
+                cirs.push(paper.circle(x, y).attr({fill: "#576874", stroke: "#576874", r: 2}));
             }
 
-            paper.path(p.concat([x, y, x, y])).attr({stroke: "#33aa33"});
+            paper.path(p.concat([x, y, x, y])).attr({stroke: "#576874"});
 
             //修改cirs层级和事件
             for (var i = 0; i < cirs.length; i++) {
@@ -772,7 +772,7 @@ function DingChart(config) {
                     tip.show().animate({"x": e.layerX, "y": e.layerY}, 200, "wiggle");
                     tip.node.parentNode.appendChild(tip.node)
                 }, function () {
-                    this.animate({'r': 3}, 100, 'easeInBounce');
+                    this.animate({'r': 2}, 100, 'easeInBounce');
                     tip.hide();
                 })
             }
@@ -789,7 +789,7 @@ function DingChart(config) {
     //画一个椭圆
     this.EllipseTwo = function (context, x, y, a, b) {
         context.save();
-        context.fillStyle = "#980707";
+        context.fillStyle = "#CC5B58";
         var r = (a > b) ? a : b;
         var ratioX = a / r;
         var ratioY = b / r;
