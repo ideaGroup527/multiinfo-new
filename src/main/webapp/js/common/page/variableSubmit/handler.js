@@ -115,6 +115,7 @@ var handleSubmit = function (config) {
         case 'Principal_Component_Analysis':
             //主成分分析
             handleURL = 'statistics/analysis.do?method=principalComponent';
+            sessionStorage.setItem('PRIVATE_GRAPH_CONFIG', 'basicline');
             var PCA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_PRINCIPAL_COMPONENT'));
             dataPackage.variableList = PCA.variableList;
             dataPackage.extractMethod = PCA.extractMethod[0];

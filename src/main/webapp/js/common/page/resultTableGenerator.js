@@ -107,6 +107,14 @@ var resultTableGenerator = function () {
                         calculateMethod: dingConfig.calculateMethod[0]//0行，1列，2全
                     }).render();
                     break;
+                case 'basicline':
+                    //碎石图
+                    new BasicLine({
+                        data: tableResult.data.eigTotalInit,
+                        container: 'graph_' + i,
+                        title: graphName
+                    }).render();
+                    break;
             }
         });
     }
@@ -813,6 +821,8 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
     $(componentArea).append(componentTable)
         .append($(block).clone().text('已提取了' + componentMatrix[0].length + '个成份'));
     $(presentArea).append(componentArea);
+
+    //打印碎石图
 
 };
 var handleRelatedVariable = function (tableResult) {
