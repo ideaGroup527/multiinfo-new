@@ -19,6 +19,67 @@
     <div class="navbar-header">
         <ul id="nav" class="nav navbar-nav"></ul>
     </div>
+    <div class="navbar-right" style="margin-right: 20px">
+        <ul class="nav navbar-nav">
+            <li id="switch_sheet_nav">
+                <a class="js-menu-click" data-modal-id="#Switch_Sheet" href="javascript:"
+                   data-modal="js/common/nav/Switch/modal.html" data-script="js/common/nav/Switch/script.js"
+                   data-i18n-type="nav" data-i18n-tag="switch_sheet">切换表格
+                </a>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="true" data-submenu>
+                    <span data-i18n-type="nav" data-i18n-tag="setting">设置</span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown">
+                        <a href="javascript:" data-i18n-type="nav" data-i18n-tag="setting_accuracy">
+                            <i class="glyphicon glyphicon-dashboard"></i> 设置精确度
+                        </a>
+                    </li>
+                    <li class="dropdown-submenu">
+                        <a href="javascript:" data-i18n-type="nav" data-i18n-tag="setting_language">
+                            <i class="glyphicon glyphicon-globe"></i> 设置语言
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown">
+                                <a href="javascript:" class="js-menu-click"
+                                   data-script="js/common/nav/Language/Chinese/script.js" data-i18n-type="nav"
+                                   data-i18n-tag="lang_zh">
+                                    <strong>中文（当前）</strong>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="javascript:" class="js-menu-click"
+                                   data-script="js/common/nav/Language/English/script.js" data-i18n-type="nav"
+                                   data-i18n-tag="lang_en">English</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="true" data-i18n-type="nav" data-i18n-tag="about">关于
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown">
+                        <a href="javascript:" class="js-menu-click"
+                           data-script="js/common/nav/About/Website/undefined" data-i18n-type="nav"
+                           data-i18n-tag="about_website">这个网站</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:" class="js-menu-click"
+                           data-script="js/common/nav/About/Authors/undefined" data-i18n-type="nav"
+                           data-i18n-tag="about_authors">作者们</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </nav>
 
 <div class="container-fluid">
@@ -37,7 +98,6 @@
         <div class="col-md-10 col-md-offset-1 table-present custom-scrollbar-grey"></div>
     </div>
 </div>
-
 <script src="js/common/navGenerator.js"></script>
 <script src="js/common/page/dataTableGenerator.js"></script>
 <script src="js/common/page/variableSubmit/variableChoose.js"></script>
@@ -47,6 +107,10 @@
     var variableList, dataGrid;
 
     $(document).ready(function () {
+
+        if (!sessionStorage.getItem('isMultiSheet')) {
+            $('#switch_sheet_nav').remove();
+        }
 
         $('#nav').navGenerator().done(function () {
             $('[data-submenu]').submenupicker();
@@ -68,7 +132,7 @@
                 dataGrid = data.sheet.dataGrid;
             }
         })
-    }).on('click', '#nav .js-menu-click', function (e) {
+    }).on('click', '.js-menu-click', function (e) {
         //菜单可点击项
         e.preventDefault();
         var scriptURL = $(e.target).attr('data-script');
