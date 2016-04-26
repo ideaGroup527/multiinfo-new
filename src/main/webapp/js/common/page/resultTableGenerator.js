@@ -2,14 +2,17 @@ var resultTableGenerator = function () {
 
     var def = $.Deferred();
 
+    //语言配置
     var lang = localStorage.getItem('MULTIINFO_CONFIG_LANGUAGE');
     var String = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_LANGUAGE_STRINGS'));
 
     var presentArea = $('.result-table');
 
+    //结果变量
     var resultType = sessionStorage.getItem('PRIVATE_RESULT_TYPE');
     var tableResult = JSON.parse(sessionStorage.getItem('PRIVATE_TABLE_RESULT'));
 
+    //制图参数
     var graphConfigs = sessionStorage.getItem('PRIVATE_GRAPH_CONFIG').split(',');
 
     //制表区
@@ -273,6 +276,9 @@ var handleDescriptiveStatisticsFrequency = function (tableResult) {
 var handleCorrelationBivariate = function (tableResult) {
     var presentArea = $('.result-table');
 
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
     var bivariateTableData = tableResult.resDataMap;
     var paramsList = Object.keys(bivariateTableData);
 
@@ -447,6 +453,9 @@ var handleCorrelationDistance = function (tableResult) {
 
     var presentArea = $('.result-table');
 
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
     var container = $('<div>');
     $(container).addClass('frequency-table');
 
@@ -522,7 +531,10 @@ var handleCorrelationDistance = function (tableResult) {
 
             unit.map(function (data) {
                 var td = $(cell).clone();
-                $(td).text(data[(measureMethod == 'modifyDistance') ? 'minkowskiDistace' : measureMethod]);
+                var fixedValue = (Number(data[(measureMethod == 'modifyDistance') ? 'minkowskiDistace' : measureMethod]) != NaN) ?
+                    Number(data[(measureMethod == 'modifyDistance') ? 'minkowskiDistace' : measureMethod]).toFixed(numReservation) :
+                    data[(measureMethod == 'modifyDistance') ? 'minkowskiDistace' : measureMethod];
+                $(td).text(fixedValue);
                 $(tr).append(td);
             });
             $(table).append(tr);
@@ -564,7 +576,10 @@ var handleCorrelationDistance = function (tableResult) {
                 paramKeysList.map(function (paramKey) {
                     if (indieValue[paramKey]) {
                         var valueCell = $(cell).clone();
-                        $(valueCell).text(indieValue[paramKey][(measureMethod == 'modifyDistance') ? 'minkowskiDistace' : measureMethod]);
+                        var fixedValue = (Number(indieValue[paramKey][(measureMethod == 'modifyDistance') ? 'minkowskiDistace' : measureMethod]) != NaN) ?
+                            Number(indieValue[paramKey][(measureMethod == 'modifyDistance') ? 'minkowskiDistace' : measureMethod]).toFixed(numReservation) :
+                            indieValue[paramKey][(measureMethod == 'modifyDistance') ? 'minkowskiDistace' : measureMethod];
+                        $(valueCell).text(fixedValue);
                         $(variableRow).append(valueCell);
                     }
                 });
@@ -580,6 +595,9 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
 
     //声明放置区域
     var presentArea = $('.result-table');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
 
     //声明DOM 元素
     var container = $('<div>');
@@ -639,7 +657,7 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
         //每行的值
         correlationMatrix[index].map(function (value) {
             var valueCell = $(cell).clone();
-            $(valueCell).text(value);
+            $(valueCell).text((Number(value) != NaN) ? Number(value).toFixed(numReservation) : value);
             $(variableRow).append(valueCell);
         });
         $(correlationMatrixTable).append(variableRow);
@@ -670,7 +688,7 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
 
     var kmoFirstRow = $(row).clone();
     $(kmoFirstRow).append($(cell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_kmo_measure'))
-        .append($(cell).clone().text(kmo));
+        .append($(cell).clone().text((Number(kmo) != NaN) ? Number(kmo).toFixed(numReservation) : kmo));
     $(kmoTable).append(kmoFirstRow);
 
     $(kmoArea).append(kmoTable)
@@ -706,7 +724,7 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
 
         communalityArr[index].map(function (value) {
             var valueCell = $(cell).clone();
-            $(valueCell).text(value);
+            $(valueCell).text((Number(value) != NaN) ? Number(value).toFixed(numReservation) : value);
             $(variableRow).append(valueCell);
         });
         $(communalityTable).append(variableRow);
@@ -767,12 +785,12 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
         $(commonRow).append(titleCell);
 
         //值
-        $(commonRow).append($(cell).clone().text(variable))
-            .append($(cell).clone().text((varEigInit[index]) ? varEigInit[index] : ''))
-            .append($(cell).clone().text((accEigInit[index]) ? accEigInit[index] : ''))
-            .append($(cell).clone().text((eigTotalExtra[index]) ? eigTotalExtra[index] : ''))
-            .append($(cell).clone().text((varEigExtra[index]) ? varEigExtra[index] : ''))
-            .append($(cell).clone().text((accEigExtra[index]) ? accEigExtra[index] : ''));
+        $(commonRow).append($(cell).clone().text(Number(variable).toFixed(numReservation)))
+            .append($(cell).clone().text((varEigInit[index]) ? Number(varEigInit[index]).toFixed(numReservation) : ''))
+            .append($(cell).clone().text((accEigInit[index]) ? Number(accEigInit[index]).toFixed(numReservation) : ''))
+            .append($(cell).clone().text((eigTotalExtra[index]) ? Number(eigTotalExtra[index]).toFixed(numReservation) : ''))
+            .append($(cell).clone().text((varEigExtra[index]) ? Number(varEigExtra[index]).toFixed(numReservation) : ''))
+            .append($(cell).clone().text((accEigExtra[index]) ? Number(accEigExtra[index]).toFixed(numReservation) : ''));
         $(explainTotalVarTable).append(commonRow);
     });
 
@@ -811,7 +829,7 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
         $(variableRow).append($(cell).clone().text(variable));
 
         componentMatrix[index].map(function (value) {
-            $(variableRow).append($(cell).clone().text((value) ? value : " "));
+            $(variableRow).append($(cell).clone().text((value) ? Number(value).toFixed(numReservation) : " "));
         });
 
         $(componentTable).append(variableRow);
@@ -829,6 +847,9 @@ var handleRelatedVariable = function (tableResult) {
 
     //声明放置区域
     var presentArea = $('.result-table');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
 
     //声明DOM 元素
     var container = $('<div>');
@@ -867,7 +888,9 @@ var handleRelatedVariable = function (tableResult) {
         var predictionRow = $(row).clone();
         $(predictionRow).append($(cell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_prediction_value'));
         tableResult.resData.map(function (value) {
-            $(predictionRow).append($(cell).clone().text(value));
+            if (Number(value) != NaN) {
+                $(predictionRow).append($(cell).clone().text(Number(value).toFixed(numReservation)));
+            }
         });
         $(table).append(predictionRow);
 

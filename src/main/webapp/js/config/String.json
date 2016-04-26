@@ -73,6 +73,7 @@
       "btn_upload": "Upload",
       "btn_uploading": "Uploading...",
       "btn_next": "Next",
+      "btn_confirm": "Confirm",
       "modal_title_descriptive": "Descriptive",
       "modal_title_frequency": "Frequency",
       "modal_title_bivariate_correlations": "Bivariate Correlations",
@@ -81,6 +82,7 @@
       "modal_title_oneway_anova": "One-way Analysis of Variance",
       "modal_title_means": "Means",
       "modal_title_principal_component_analysis": "Principal Component Analysis",
+      "modal_title_set_accuracy": "Set Value Accuracy",
       "label_choose_sheet": "Select Your Sheet",
       "label_choose_variable": "Click to choose variable(s) below",
       "label_choose_col_variable": "Click to choose Column variable(s) below",
@@ -134,13 +136,15 @@
       "label_kmo_measure": "The Kaiser-Meyer-Olkin Measure of Sampling Adequacy Tests",
       "label_form_coefficient": "Form Coefficient α",
       "label_prediction": "Pridiction",
-      "label_prediction_value": "Prediction Value(s)"
+      "label_prediction_value": "Prediction Value(s)",
+      "label_reservation_of_decimal_place": "Reservations of Decimal Place"
     },
     "zh-cn": {
       "options": "选项",
       "btn_upload": "上传",
       "btn_uploading": "正在上传...",
       "btn_next": "下一步",
+      "btn_confirm": "确定",
       "modal_title_descriptive": "描述性",
       "modal_title_frequency": "频率",
       "modal_title_bivariate_correlations": "双变量",
@@ -151,6 +155,7 @@
       "modal_title_principal_component_analysis": "主成分分析",
       "modal_title_related_variable": "关联变量",
       "modal_title_independent_variable": "独立变量",
+      "modal_title_set_accuracy": "设置精确度",
       "label_choose_sheet": "请选择待分析的表格",
       "label_choose_variable": "点击选择待选变量",
       "label_choose_col_variable": "点击选择 列变量",
@@ -207,7 +212,8 @@
       "label_kmo_measure": "取样做够度的Kaiser-Meyer-Olkin 度量",
       "label_form_coefficient": "生成系数 α",
       "label_prediction": "预测",
-      "label_prediction_value": "预测值"
+      "label_prediction_value": "预测值",
+      "label_reservation_of_decimal_place": "保留小数位数"
     }
   },
   "table": {
