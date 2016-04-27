@@ -116,10 +116,12 @@ Map<String,AnovaDTO>  resMap = new LinkedHashMap<String,AnovaDTO>();
 		DataDTO[][] data =	anovaCondition.getDataGrid();
 		PositionBean 	independentVarRange =ExcelUtil.splitRange( factorVariable.getRange());//自变量范围如A1:A8--
 		Set<String> indepSet = new HashSet<String>();
+		int N = 0;
 		//自变量坐标
 		Map<String,List<Integer>> indepIndexMap = new LinkedHashMap<String,List<Integer>>();
 		for (int i = independentVarRange.getFirstRowId()-1; i < independentVarRange.getLastRowId(); i++) {
 			for (int j = independentVarRange.getFirstColId()-1; j < independentVarRange.getLastColId(); j++) {
+				N++;
 				indepSet.add(data[i][j].getData().toString());
 				List<Integer> tmpList =	indepIndexMap.get(data[i][j].getData().toString());
 				if(tmpList==null ||tmpList.isEmpty()) tmpList = new ArrayList<Integer>();
@@ -129,7 +131,7 @@ Map<String,AnovaDTO>  resMap = new LinkedHashMap<String,AnovaDTO>();
 		}
 		List<String> indepList = new ArrayList<String>(indepSet);
 		int K = indepList.size();
-		int N = 0;
+		
 		//每个因变量
 		for(VarietyDTO dependVar:dependVarList) {
 			AnovaDTO resDTO = new AnovaDTO();
@@ -146,9 +148,8 @@ Map<String,AnovaDTO>  resMap = new LinkedHashMap<String,AnovaDTO>();
 						dataList.add(DataFormatUtil.converToDouble(data[tmpList.get(i)][j]));
 					}
 				}
-				N = dataList.size();
-				double[] dataArr = new double[N];
-				for (int i = 0; i < N ; i++)
+				double[] dataArr = new double[dataList.size()];
+				for (int i = 0; i < dataList.size() ; i++)
 					dataArr[i] = dataList.get(i);
 				categoryData.add(dataArr);
 			}
