@@ -232,7 +232,14 @@
       "chebyshevDistance": "Chebyshev",
       "cityBlockDistance": "Block",
       "minkowskiDistace": "Minkowski",
-      "modifyDistance": "Modify Distance"
+      "modifyDistance": "Modify Distance",
+      "sum_of_squares": "Sum of Squares",
+      "mean_squares": "Mean Squares",
+      "df": "df",
+      "between_groups": "Between Groups",
+      "within_group": "Within Group",
+      "total": "Total",
+      "f": "F"
     },
     "zh-cn": {
       "pearsonR": "Pearson 相关性",
@@ -247,7 +254,14 @@
       "chebyshevDistance": "Chebyshev",
       "cityBlockDistance": "块",
       "minkowskiDistace": "Minkowski",
-      "modifyDistance": "设定距离"
+      "modifyDistance": "设定距离",
+      "sum_of_squares": "平方和",
+      "mean_squares": "均方",
+      "df": "df",
+      "between_groups": "组间",
+      "within_group": "组内",
+      "total": "总数",
+      "f": "F"
     }
   },
   "nav": {

@@ -917,6 +917,26 @@ var handleANOVA = function (tableResult) {
     //获取待处理对象
     var handleData = tableResult.resDataMap;
 
+    //获取变量名
+    var variableList = Object.keys(handleData);
+    var s = {
+        "resDataMap": {
+            "降水": {
+                "sst": 78,
+                "ssbg": 15.600000000000136,
+                "sswg": 62.399999999999864,
+                "msbg": 7.800000000000068,
+                "mswg": 5.199999999999989,
+                "dfbg": 2,
+                "dfwg": 2,
+                "dft": 4,
+                "f": 1.5000000000000164
+            }
+        }
+    }
+    //参数列表【骂后台把，变量名太散】
+    var ANOVAconfigs = ['sum_of_squares', 'df', 'mean_squares', 'f'];
+
     //保留小数配置
     var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
 
@@ -945,11 +965,84 @@ var handleANOVA = function (tableResult) {
     );
 
     //打印表格
+    //打印第一行
     var headerRow = $(row).clone();
+    $(headerRow).append($(emptyCell).clone().attr('colspan', '2'));
+    ANOVAconfigs.map(function (config) {
+        $(headerRow).append(
+            $(headerCell).clone()
+                .attr('data-i18n-type', 'table')
+                .attr('data-i18n-tag', config)
+        )
+    });
+    $(table).append(headerRow);
 
+    //打印变量行
+    variableList.map(function (variableName) {
+        //存储值
+        var variable = handleData[variableName];
 
+        var variableRow = $(row).clone();
+        $(variableRow).append(
+            $(cell).clone().text(variableName)
+        );
+
+        var titleCell = $(cell).clone();
+        ['between_groups', 'within_group', 'total'].map(function (title) {
+            $(titleCell).append(
+                $(block).clone()
+                    .attr('data-i18n-type', 'table')
+                    .attr('data-i18n-tag', title)
+            );
+        });
+
+        //平方和这一块
+        var sumSquareCell = $(cell).clone();
+        [variable.ssbg, variable.sswg, variable.sst].map(function (value) {
+            $(sumSquareCell).append(
+                $(block).clone().html(
+                    (Number(value) != NaN) ? Number(value).toFixed(numReservation) : value
+                )
+            )
+        });
+
+        //df这一块
+        var dfCell = $(cell).clone();
+        [variable.dfbg, variable.dfwg, variable.dft].map(function (value) {
+            $(dfCell).append(
+                $(block).clone().html(
+                    (Number(value) != NaN) ? Number(value).toFixed(numReservation) : value
+                )
+            )
+        });
+
+        //均方这一块
+        var msCell = $(cell).clone();
+        [variable.msbg, variable.mswg].map(function (value) {
+            $(msCell).append(
+                $(block).clone().html(
+                    (Number(value) != NaN) ? Number(value).toFixed(numReservation) : value
+                )
+            )
+        });
+
+        //F值这一块
+        var fCell = $(cell).clone();
+        $(fCell).html(
+            (Number(variable.f) != NaN) ? Number(variable.f).toFixed(numReservation) : variable.f
+        )
+
+        $(variableRow).append(titleCell)
+            .append(sumSquareCell)
+            .append(dfCell)
+            .append(msCell)
+            .append(fCell);
+        $(table).append(variableRow);
+    });
+
+    $(container).append(table);
+    $(presentArea).append(container);
 };
-
 var handleMeans = function (tableResult) {
 
     //声明打印区域
