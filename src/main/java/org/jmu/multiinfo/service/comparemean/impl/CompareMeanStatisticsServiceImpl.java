@@ -128,6 +128,8 @@ Map<String,AnovaDTO>  resMap = new LinkedHashMap<String,AnovaDTO>();
 			}
 		}
 		List<String> indepList = new ArrayList<String>(indepSet);
+		int K = indepList.size();
+		int N = 0;
 		//每个因变量
 		for(VarietyDTO dependVar:dependVarList) {
 			AnovaDTO resDTO = new AnovaDTO();
@@ -144,13 +146,28 @@ Map<String,AnovaDTO>  resMap = new LinkedHashMap<String,AnovaDTO>();
 						dataList.add(DataFormatUtil.converToDouble(data[tmpList.get(i)][j]));
 					}
 				}
-
-				double[] dataArr = new double[dataList.size()];
-				for (int i = 0; i < dataList.size(); i++)
+				N = dataList.size();
+				double[] dataArr = new double[N];
+				for (int i = 0; i < N ; i++)
 					dataArr[i] = dataList.get(i);
 				categoryData.add(dataArr);
 			}
-			resDTO = anovaStats(categoryData);
+			try {
+				resDTO = anovaStats(categoryData);
+				resDTO.setDft(N-1);
+				resDTO.setDfbg(K-1);
+				resDTO.setDfwg(N-K);
+			} catch (DimensionMismatchException e) {
+				resDataDTO.setRet_err(e.getMessage());
+				resDataDTO.setRet_code("-1");
+				resDataDTO.setRet_msg("two or more categories required");
+//				e.printStackTrace();
+			} catch (NullArgumentException e) {
+				resDataDTO.setRet_err(e.getMessage());
+				resDataDTO.setRet_code("-1");
+				resDataDTO.setRet_msg("not a number");
+				e.printStackTrace();
+			}
 			resMap.put(dependVar.getVarietyName(),resDTO);
 		}
 		resDataDTO.setResDataMap(resMap);
@@ -174,7 +191,7 @@ Map<String,AnovaDTO>  resMap = new LinkedHashMap<String,AnovaDTO>();
                 }
             }
 
-            return anovaStats(categoryDataSummaryStatistics, false);
+            return anovaStats(categoryDataSummaryStatistics, true);
 
         }
 	private AnovaDTO anovaStats(final Collection<SummaryStatistics> categoryData, final boolean allowOneElementData)
