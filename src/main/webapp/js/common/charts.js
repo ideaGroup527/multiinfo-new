@@ -178,7 +178,6 @@ function Bar(config) {
 
     this.data = this.format(config.data);
 
-    console.log(this.data);
     this.option = {
         title: {
             text: config.title, //主标题文本
@@ -646,7 +645,6 @@ function DingChart(config) {
             ctx.stroke();
         }
 
-
         var n_point = point = -1;
         var _a, _b;
         //椭圆
@@ -687,26 +685,25 @@ function DingChart(config) {
 //            _b = b * config.data.resData[j][i];
             for (var i = 0; i < col; i++) {
                 for (var j = 0; j < row; j++) {
-            _a = a * config.data.resData[j][i];
-            _b = b * config.data.resData[j][i];
-            _a = _a < .04 ? .04 : _a;
-            _b = _b < .04 ? .04 : _b;
-            if ((++n_point) % row == 0) {
-                point++;
-            }
+                    _a = a * config.data.resData[j][i];
+                    _b = b * config.data.resData[j][i];
+                    _a = _a < .04 ? .04 : _a;
+                    _b = _b < .04 ? .04 : _b;
+                    if ((++n_point) % row == 0) {
+                        point++;
+                    }
 //            curvePoint[point].push({x: (i + 1) * m_width + a - _a, y: (j + 2) * m_height - _b});
 //            curvePoint2[point].push({x: (i + 1) * m_width + a + _a, y: (j + 1) * m_height + _b});
-            this.EllipseTwo(ctx, (i + 1) * m_width + a, (j + 1) * m_height + b, _a, _b);
+                    this.EllipseTwo(ctx, (i + 1) * m_width + a, (j + 1) * m_height + b, _a, _b);
                 }
-           }
+            }
         } else {
             alert('calculateMethod参数错误！');
             return false;
         }
 
-
         //曲线
-        var paper = Raphael("main", width, height);
+        var paper = Raphael(this.container, width, height);
         $(paper.canvas).css({
             'display': 'block',
             'z-index': '1000',
@@ -721,6 +718,7 @@ function DingChart(config) {
             r: 5,
             'z-index': '1000'
         }).hide();
+
         //曲线-左侧
         for (var n = 0, v = null; (v = curvePoint[n]) != undefined; n++) {
             var p;
@@ -738,10 +736,10 @@ function DingChart(config) {
                     var a = this.getAnchors(point1.x, point1.y, x, y, point2.x, point2.y);//获取锚点
                     p = p.concat([a.x1, a.y1, x, y, a.x2, a.y2]);
                 }
-                cirs.push(paper.circle(x, y).attr({fill: "#576874", stroke: "#576874", r: 2}));
+                cirs.push(paper.circle(x, y).attr({fill: "#D48366", stroke: "#D48366", r: 1}));
             }
 
-            paper.path(p.concat([x, y, x, y])).attr({stroke: "#576874"});
+            paper.path(p.concat([x, y, x, y])).attr({stroke: "#D48366"});
 
             //修改cirs层级和事件
             for (var i = 0; i < cirs.length; i++) {
@@ -751,7 +749,7 @@ function DingChart(config) {
                     tip.show().animate({"x": e.layerX, "y": e.layerY}, 200, "wiggle");
                     tip.node.parentNode.appendChild(tip.node)
                 }, function () {
-                    this.animate({'r': 2}, 100, 'easeInBounce');
+                    this.animate({'r': 1}, 100, 'easeInBounce');
                     tip.hide();
                 })
             }
@@ -773,10 +771,10 @@ function DingChart(config) {
                     var a = this.getAnchors(point1.x, point1.y, x, y, point2.x, point2.y);//获取锚点
                     p = p.concat([a.x1, a.y1, x, y, a.x2, a.y2]);
                 }
-                cirs.push(paper.circle(x, y).attr({fill: "#576874", stroke: "#576874", r: 2}));
+                cirs.push(paper.circle(x, y).attr({fill: "#D48366", stroke: "#D48366", r: 1}));
             }
 
-            paper.path(p.concat([x, y, x, y])).attr({stroke: "#576874"});
+            paper.path(p.concat([x, y, x, y])).attr({stroke: "#D48366"});
 
             //修改cirs层级和事件
             for (var i = 0; i < cirs.length; i++) {
@@ -786,18 +784,17 @@ function DingChart(config) {
                     tip.show().animate({"x": e.layerX, "y": e.layerY}, 200, "wiggle");
                     tip.node.parentNode.appendChild(tip.node)
                 }, function () {
-                    this.animate({'r': 2}, 100, 'easeInBounce');
+                    this.animate({'r': 1}, 100, 'easeInBounce');
                     tip.hide();
                 })
             }
         }
         //控制按钮
         var btn = '<svg style="position: absolute;left: 0;z-index: 99999;width: 75px;height: 23px;"><g class="button" cursor="pointer"\
-            onmouseup="showCurve()">\
+            onmouseup="showCurve(this)">\
             <rect x="20" y="1" rx="5" ry="5"\
-            width="52" height="22" fill="#00FF00"/>\
+            width="52" height="22" fill="#D48366"/>\
             </g></svg>';
-        console.log(btn);
         $("#" + this.container).append(btn);
     };
     //画一个椭圆
@@ -851,6 +848,6 @@ function DingChart(config) {
     };
 }
 
-function showCurve() {
-    $('#main svg').first().toggle();
+function showCurve(obj) {
+    $(obj).parent().prev().prev().toggle();
 }
