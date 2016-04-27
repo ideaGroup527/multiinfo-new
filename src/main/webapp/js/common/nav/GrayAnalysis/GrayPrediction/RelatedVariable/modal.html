@@ -68,7 +68,7 @@
             var variableWrapper = $('<option>');
             var dataConfig = variableList[0];
             dataConfig.range = dataConfig.range.split(':')[0] + ':' + $(elem).attr('data-position');
-            $(variableWrapper).val(JSON.stringify(dataConfig)).text($(elem).attr('data-data'));
+            $(variableWrapper).val(JSON.stringify(dataConfig)).text(Number($(elem).attr('data-data')) + 1);
 
             $('[name=factorVarVariable]').append(variableWrapper);
         });

@@ -137,7 +137,8 @@
       "label_form_coefficient": "Form Coefficient α",
       "label_prediction": "Pridiction",
       "label_prediction_value": "Prediction Value(s)",
-      "label_reservation_of_decimal_place": "Reservations of Decimal Place"
+      "label_reservation_of_decimal_place": "Reservations of Decimal Place",
+      "label_report": "Report"
     },
     "zh-cn": {
       "options": "选项",
@@ -174,7 +175,7 @@
       "label_euclidean_distance": "Euclidean 距离",
       "label_square_euclidean_distance": "平方 Euclidean 距离",
       "label_chebyshev_distance": "Chebyshev",
-      "label_city_block_distance": "块",
+      "label_city_block_distance": "城市街区距离（曼哈顿距离）",
       "label_minkowski_distance": "Minkowski",
       "label_modify_distance": "设定距离",
       "label_distance_power": "幂",
@@ -213,7 +214,8 @@
       "label_form_coefficient": "生成系数 α",
       "label_prediction": "预测",
       "label_prediction_value": "预测值",
-      "label_reservation_of_decimal_place": "保留小数位数"
+      "label_reservation_of_decimal_place": "保留小数位数",
+      "label_report": "报告"
     }
   },
   "table": {

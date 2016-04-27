@@ -41,6 +41,13 @@ var resultTableGenerator = function () {
             //灰色预测 - 关联变量
             handleRelatedVariable(tableResult);
             break;
+        case 'Oneway_ANOVA':
+            //均值比较 - 单因素方差分析 (哎呀，ANOVA 这名字是台式太好听了~)
+            handleANOVA(tableResult);
+            break;
+        case 'Means':
+            handleMeans(tableResult);
+            break;
     }
 
     //绘图区
@@ -898,7 +905,128 @@ var handleRelatedVariable = function (tableResult) {
         $(container).append($(tableHeader).clone().text(tableResult.predictName)).append(table);
         $(presentArea).append(container);
     } else {
-        alert('Data illegal! Please check your data first');
+        alert('该数据不符合灰色预测的数据检验要求');
         window.history.go(-1);
     }
+};
+var handleANOVA = function (tableResult) {
+
+    //声明打印区域
+    var presentArea = $('.result-table');
+
+    //获取待处理对象
+    var handleData = tableResult.resDataMap;
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
+    //声明DOM 元素
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var tableHeader = $('<h1>');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered table-condensed');
+
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
+    var emptyCell = $(headerCell).clone();
+
+    var block = $('<div>');
+    var span = $('<span>');
+
+    //打印标题
+    $(container).append(
+        $(tableHeader).clone()
+            .attr('data-i18n-type', 'page')
+            .attr('data-i18n-tag', 'modal_title_oneway_anova')
+    );
+
+    //打印表格
+    var headerRow = $(row).clone();
+
+
+};
+
+var handleMeans = function (tableResult) {
+
+    //声明打印区域
+    var presentArea = $('.result-table');
+
+    //获取待处理对象
+    var handleData = tableResult.resDataMap;
+
+    //变量的名字列表
+    var objectKeys = Object.keys(handleData);
+    //参数的名字列表
+    var paramKeys = Object.keys(handleData[objectKeys[0]]);
+
+    //获取显示的算法配置
+    var meansConfigs = sessionStorage.getItem('PRIVATE_ALGORITHM_CONFIG').split(',');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
+    //声明DOM 元素
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var tableHeader = $('<h1>');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered table-condensed');
+
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
+    var emptyCell = $(headerCell).clone();
+
+    var block = $('<div>');
+    var span = $('<span>');
+
+    //打印标题
+    $(container).append(
+        $(tableHeader).clone()
+            .attr('data-i18n-type', 'page')
+            .attr('data-i18n-tag', 'label_report')
+    );
+
+    //打印表格
+    //打印参数名行
+    var headerRow = $(row).clone();
+    $(headerRow).append($(emptyCell).clone().attr('colspan', '2'));
+    paramKeys.map(function (param) {
+        $(headerRow).append($(headerCell).clone().text(param));
+    });
+    $(table).append(headerRow);
+
+    //打印变量行
+    objectKeys.map(function (variableName) {
+        var variableRow = $(row).clone();
+        $(variableRow).append($(cell).clone().text(variableName));
+
+        var configCell = $(cell).clone();
+        meansConfigs.map(function (config) {
+            $(configCell).append($(block).clone().attr('data-i18n-type', 'algorithm').attr('data-i18n-tag', config));
+        });
+        $(variableRow).append(configCell);
+
+        //打印值
+        paramKeys.map(function (param) {
+            var valueCell = $(cell).clone();
+            meansConfigs.map(function (config) {
+                var printValue = (handleData[variableName][param]['resultData'][config]) ? handleData[variableName][param]['resultData'][config] : ' ';
+                $(valueCell).append($(block).clone().html(
+                    (Number(printValue) != NaN) ? Number(printValue).toFixed(numReservation) : printValue
+                ));
+            });
+            $(variableRow).append(valueCell);
+        });
+        $(table).append(variableRow);
+    });
+
+    $(container).append(table);
+    $(presentArea).append(container);
 };
