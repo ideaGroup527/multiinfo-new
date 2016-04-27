@@ -993,6 +993,7 @@ var handleANOVA = function (tableResult) {
                 $(block).clone()
                     .attr('data-i18n-type', 'table')
                     .attr('data-i18n-tag', title)
+                    .attr('align', 'center')
             );
         });
 
