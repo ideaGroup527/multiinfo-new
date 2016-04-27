@@ -683,8 +683,22 @@ function DingChart(config) {
                 }
             }
         } else if (this.calculateMethod == 2) {  //全
+//            _a = a * config.data.resData[j][i];
+//            _b = b * config.data.resData[j][i];
+            for (var i = 0; i < col; i++) {
+                for (var j = 0; j < row; j++) {
             _a = a * config.data.resData[j][i];
             _b = b * config.data.resData[j][i];
+            _a = _a < .04 ? .04 : _a;
+            _b = _b < .04 ? .04 : _b;
+            if ((++n_point) % row == 0) {
+                point++;
+            }
+//            curvePoint[point].push({x: (i + 1) * m_width + a - _a, y: (j + 2) * m_height - _b});
+//            curvePoint2[point].push({x: (i + 1) * m_width + a + _a, y: (j + 1) * m_height + _b});
+            this.EllipseTwo(ctx, (i + 1) * m_width + a, (j + 1) * m_height + b, _a, _b);
+                }
+           }
         } else {
             alert('calculateMethod参数错误！');
             return false;
