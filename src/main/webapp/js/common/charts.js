@@ -218,7 +218,6 @@ function Bar(config) {
 /*箱线图*/
 function Boxplot(config) {
     Charts.call(this, config.data, config.opt, config.container);
-    console.log(config);
     this.format = function (data) {//转换格式
 
         var dataAll = {xAxis: [], boxData: [], outliers: []}, j = 0;
@@ -240,11 +239,9 @@ function Boxplot(config) {
             }
             j++;
         }
-        console.log("dataall:"+dataAll);
         return dataAll;
     };
     var dataAll=this.format(config.data);
-    console.log(dataAll);
     this.option = {
         title: {
             text: config.title, //主标题文本
@@ -280,7 +277,10 @@ function Boxplot(config) {
             axisLabel: {
                 show:true,
                 interval: 0,
-                formatter:"{value}"
+                // formatter:getEchartBarXAxisTitle(val,dataAll.xAxis,null,1000)
+                formatter:function (val) {
+                     return getEchartBarXAxisTitle(val,dataAll.xAxis,null,1000)
+                }
             },
             splitLine: {
                 show: false
@@ -541,7 +541,6 @@ function BasicLine(config) {
 
     this.data = this.format(config.data);
 
-    console.log(this.data);
     this.option = {
         title: {
             text: config.title, //主标题文本
@@ -900,16 +899,14 @@ function getEchartBarXAxisTitle(title, datas, fontSize, barContainerWidth, xWidt
     } else if(preBarFontCount <= 3 && preBarFontCount >= 2) {//若每个间隔距离刚好能放两个或者字符时，则让其只放一个字符
         preBarFontCount -= 1;
     }
-console.log(preBarFontCount)
     var newTitle = "";      //拼接每次截取的内容，直到最后为完整的值
     var titleSuf = "";      //用于存放每次截取后剩下的部分
     var rowCount = Math.ceil(title.length / preBarFontCount);   //标题显示需要换行的次数
     if(rowCount > 1) {       //标题字数大于柱状图每个柱子x轴间隔所能容纳的字数，则将标题换行
         for(var j = 1; j <= rowCount; j++) {
             if(j == 1) {
-                console.log(title)
-                newTitle += title[j].substring(0, preBarFontCount) + insertContent;
-                titleSuf = title[j].substring(preBarFontCount);    //存放将截取后剩下的部分，便于下次循环从这剩下的部分中又从头截取固定长度
+                newTitle += title.substring(0, preBarFontCount) + insertContent;
+                titleSuf = title.substring(preBarFontCount);    //存放将截取后剩下的部分，便于下次循环从这剩下的部分中又从头截取固定长度
             } else {
 
                 var startIndex = 0;
@@ -926,6 +923,5 @@ console.log(preBarFontCount)
     } else {
         newTitle = title;
     }
-    console.log("newTitle:"+newTitle);
     return newTitle;
 }
