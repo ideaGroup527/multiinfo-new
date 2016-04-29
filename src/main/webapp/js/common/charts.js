@@ -175,7 +175,7 @@ function Bar(config) {
         return dataAll;
     };
 
-    this.data = this.format(config.data);
+    var dataAll = this.format(config.data);
 
     this.option = {
         title: {
@@ -188,7 +188,7 @@ function Bar(config) {
             }
         },
         legend: {
-            data: this.data.sub_key
+            data: dataAll.sub_key
         },
         tooltip: {
             trigger: 'item',
@@ -199,7 +199,14 @@ function Bar(config) {
         xAxis: [
             {
                 type: 'category',
-                data: this.data.xAxis
+                data: dataAll.xAxis,
+                axisLabel: {
+                    show: true,
+                    interval: 0,
+                    formatter: function (val) {
+                        return getEchartBarXAxisTitle(val, dataAll.xAxis, null, 1000)
+                    }
+                },
             }
         ],
         yAxis: [
@@ -211,7 +218,7 @@ function Bar(config) {
 
             }
         ],
-        series: this.data.value
+        series: dataAll.value
     };
 }
 
@@ -241,7 +248,7 @@ function Boxplot(config) {
         }
         return dataAll;
     };
-    var dataAll=this.format(config.data);
+    var dataAll = this.format(config.data);
     this.option = {
         title: {
             text: config.title, //主标题文本
@@ -275,11 +282,10 @@ function Boxplot(config) {
                 show: false
             },
             axisLabel: {
-                show:true,
+                show: true,
                 interval: 0,
-                // formatter:getEchartBarXAxisTitle(val,dataAll.xAxis,null,1000)
-                formatter:function (val) {
-                     return getEchartBarXAxisTitle(val,dataAll.xAxis,null,1000)
+                formatter: function (val) {
+                    return getEchartBarXAxisTitle(val, dataAll.xAxis, null, 1000)
                 }
             },
             splitLine: {
@@ -297,7 +303,7 @@ function Boxplot(config) {
             {
                 name: 'boxplot',
                 type: 'boxplot',
-                data: this.format(config.data).boxData,
+                data: dataAll.boxData,
                 tooltip: {
                     formatter: function (param) {
                         return [
@@ -314,7 +320,7 @@ function Boxplot(config) {
             {
                 name: 'outlier',
                 type: 'scatter',
-                data: this.format(config.data).outliers
+                data: dataAll.outliers
             }
 
         ]
@@ -441,7 +447,7 @@ function Line(config) {
         return dataAll;
     };
 
-    this.data = this.format(config.data);
+    var dataAll = this.format(config.data);
 
     this.option = {
         title: {
@@ -454,7 +460,7 @@ function Line(config) {
             }
         },
         legend: {
-            data: this.data.sub_key
+            data: dataAll.sub_key
         },
         tooltip: {
             trigger: 'item',
@@ -465,7 +471,14 @@ function Line(config) {
         xAxis: [
             {
                 type: 'category',
-                data: this.data.xAxis
+                data: dataAll.xAxis,
+                axisLabel: {
+                    show: true,
+                    interval: 0,
+                    formatter: function (val) {
+                        return getEchartBarXAxisTitle(val, dataAll.xAxis, null, 1000)
+                    }
+                },
             }
         ],
         yAxis: [
@@ -477,7 +490,7 @@ function Line(config) {
 
             }
         ],
-        series: this.data.value
+        series: dataAll.value
     };
 }
 
@@ -865,57 +878,60 @@ function showCurve(obj) {
  * @param insertContent     每次截取后要拼接插入的内容， 不传则默认为换行符：\n
  * @returns titleStr        截取拼接指定内容后的完整字符串
  */
-function getEchartBarXAxisTitle(title, datas, fontSize, barContainerWidth, xWidth, x2Width, insertContent){
+function getEchartBarXAxisTitle(title, datas, fontSize, barContainerWidth, xWidth, x2Width, insertContent) {
 
-    if(!title || title.length == 0) {
-        alert("截取拼接的参数值不能为空！");return false;
+    if (!title || title.length == 0) {
+        alert("截取拼接的参数值不能为空！");
+        return false;
     }
-    if(!datas || datas.length == 0) {
-        alert("用于计算柱状图柱子个数的参数datas不合法！"); return false;
+    if (!datas || datas.length == 0) {
+        alert("用于计算柱状图柱子个数的参数datas不合法！");
+        return false;
     }
-    if(isNaN(barContainerWidth)) {
-        alert("初始化所在的容器的宽度不是一个数字");return false;
+    if (isNaN(barContainerWidth)) {
+        alert("初始化所在的容器的宽度不是一个数字");
+        return false;
     }
-    if(!fontSize){
+    if (!fontSize) {
         fontSize = 12;
     }
-    if(isNaN(xWidth)) {
+    if (isNaN(xWidth)) {
         xWidth = 80;//默认与echarts的默认值一致
     }
-    if(isNaN(x2Width)) {
+    if (isNaN(x2Width)) {
         x2Width = 80;//默认与echarts的默认值一致
     }
-    if(!insertContent) {
+    if (!insertContent) {
         insertContent = "\n";
     }
 
-    var xAxisWidth =  parseInt(barContainerWidth) - (parseInt(xWidth) + parseInt(x2Width));//柱状图x轴宽度=统计页面宽度-柱状图x轴的空白间隙(x + x2)
+    var xAxisWidth = parseInt(barContainerWidth) - (parseInt(xWidth) + parseInt(x2Width));//柱状图x轴宽度=统计页面宽度-柱状图x轴的空白间隙(x + x2)
     var barCount = datas.length;                                //x轴单元格的个数（即为获取x轴的数据的条数）
     var preBarWidth = Math.floor(xAxisWidth / barCount);        //统计x轴每个单元格的间隔
 
-    var preBarFontCount = Math.floor(preBarWidth / fontSize) ;  //柱状图每个柱所在x轴间隔能容纳的字数 = 每个柱子 x 轴间隔宽度 / 每个字的宽度（12px）
-    if(preBarFontCount > 3) {    //为了x轴标题显示美观，每个标题显示留两个字的间隙，如：原本一个格能一样显示5个字，处理后一行就只显示3个字
+    var preBarFontCount = Math.floor(preBarWidth / fontSize);  //柱状图每个柱所在x轴间隔能容纳的字数 = 每个柱子 x 轴间隔宽度 / 每个字的宽度（12px）
+    if (preBarFontCount > 3) {    //为了x轴标题显示美观，每个标题显示留两个字的间隙，如：原本一个格能一样显示5个字，处理后一行就只显示3个字
         preBarFontCount -= 2;
-    } else if(preBarFontCount <= 3 && preBarFontCount >= 2) {//若每个间隔距离刚好能放两个或者字符时，则让其只放一个字符
+    } else if (preBarFontCount <= 3 && preBarFontCount >= 2) {//若每个间隔距离刚好能放两个或者字符时，则让其只放一个字符
         preBarFontCount -= 1;
     }
     var newTitle = "";      //拼接每次截取的内容，直到最后为完整的值
     var titleSuf = "";      //用于存放每次截取后剩下的部分
     var rowCount = Math.ceil(title.length / preBarFontCount);   //标题显示需要换行的次数
-    if(rowCount > 1) {       //标题字数大于柱状图每个柱子x轴间隔所能容纳的字数，则将标题换行
-        for(var j = 1; j <= rowCount; j++) {
-            if(j == 1) {
+    if (rowCount > 1) {       //标题字数大于柱状图每个柱子x轴间隔所能容纳的字数，则将标题换行
+        for (var j = 1; j <= rowCount; j++) {
+            if (j == 1) {
                 newTitle += title.substring(0, preBarFontCount) + insertContent;
                 titleSuf = title.substring(preBarFontCount);    //存放将截取后剩下的部分，便于下次循环从这剩下的部分中又从头截取固定长度
             } else {
 
                 var startIndex = 0;
                 var endIndex = preBarFontCount;
-                if(titleSuf.length > preBarFontCount) {  //检查截取后剩下的部分的长度是否大于柱状图单个柱子间隔所容纳的字数
+                if (titleSuf.length > preBarFontCount) {  //检查截取后剩下的部分的长度是否大于柱状图单个柱子间隔所容纳的字数
 
                     newTitle += titleSuf.substring(startIndex, endIndex) + insertContent;
                     titleSuf = titleSuf.substring(endIndex);    //更新截取后剩下的部分，便于下次继续从这剩下的部分中截取固定长度
-                } else if(titleSuf.length > 0){
+                } else if (titleSuf.length > 0) {
                     newTitle += titleSuf.substring(startIndex);
                 }
             }
