@@ -5,7 +5,6 @@ import org.jmu.multiinfo.core.dto.EigenvalueDTO;
 
 import Jama.EigenvalueDecomposition;
 import Jama.Matrix;
-import no.uib.cipr.matrix.DenseMatrix;
 
 /***
  * 
