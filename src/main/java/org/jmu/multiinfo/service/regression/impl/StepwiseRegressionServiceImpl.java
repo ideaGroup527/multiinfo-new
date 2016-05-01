@@ -3,9 +3,10 @@ package org.jmu.multiinfo.service.regression.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.math3.util.FastMath;
 import org.jmu.multiinfo.core.exception.DataErrException;
 import org.jmu.multiinfo.core.exception.TestNotPassException;
-import org.jmu.multiinfo.core.util.DataFormatUtil;
+import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.jmu.multiinfo.service.correlation.CorrelationService;
 import org.jmu.multiinfo.service.regression.StepwiseRegressionService;
 import org.slf4j.Logger;
@@ -18,6 +19,9 @@ public class StepwiseRegressionServiceImpl implements StepwiseRegressionService 
 Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private CorrelationService correlationService;
+	
+	@Autowired
+	private BasicStatisticsService basicStatisticsService;
 	@Override
 	public double[][] initCorrelationMatrix(double[] dataArrY, List<double[]> dataArrXList) throws DataErrException {
 	int N =	dataArrXList.size();
@@ -90,7 +94,21 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 		return icMatrix;
 	}
 	@Override
-	public void stepwise(double[] dataArrY, List<double[]> dataArrXList, double entryF, double delF) throws DataErrException {
+	public List<Double> stepwise(double[] dataArrY, List<double[]> dataArrXList, double entryF, double delF) throws DataErrException {
+		 List<Double> meanList = new ArrayList<Double>();
+		 List<Double> sdList = new ArrayList<Double>();
+		for (int i = 0; i < dataArrXList.size(); i++) {
+			meanList.add(basicStatisticsService.arithmeticMean(dataArrXList.get(i)));
+			sdList.add(FastMath.sqrt(basicStatisticsService.averageSumDeviation(dataArrXList.get(i))));
+		}
+
+		meanList.add(basicStatisticsService.arithmeticMean(dataArrY));
+		sdList.add(FastMath.sqrt(basicStatisticsService.averageSumDeviation(dataArrY)));
+		
+		 List<Double> bList = new ArrayList<Double>(dataArrXList.size()+1);
+		for (int i = 0; i <dataArrXList.size()+1; i++) {
+			bList.add(0.0);
+		}
 		 double[][] initclMatArr =	initCorrelationMatrix(dataArrY,dataArrXList);
 		 double[][] tmpMat =initclMatArr;
 		 int N = initclMatArr.length;
@@ -118,10 +136,20 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 			}
 //		 DataFormatUtil.print(tmpMat);
 		 }
+		 double b0 = 0.0;
 		 for (int i = 0; i < posList.size(); i++) {
 			 logger.debug(posList.get(i)+":"+tmpMat[posList.get(i) - 1][yp]);
+			 
+			 
+			 double bi = sdList.get(sdList.size() - 1) / sdList.get(posList.get(i)- 1) * tmpMat[posList.get(i) - 1][yp];
+			 bList.set(posList.get(i), bi);
+			 b0 = b0 - bi * meanList.get(posList.get(i)- 1);
 		}
-		 DataFormatUtil.print(tmpMat);
+		 
+			double meanY =basicStatisticsService.arithmeticMean(dataArrY);
+		 bList.set(0, meanY + b0 );
+//		 DataFormatUtil.print(tmpMat);
+		 return bList;
 	}
 	@Override
 	public boolean outlier(double[][] clMatrix, int N, int l,int yp, double delF,List<Integer> posList,List<Integer> delList) throws TestNotPassException {

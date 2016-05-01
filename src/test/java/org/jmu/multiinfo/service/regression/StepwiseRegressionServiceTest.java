@@ -1,7 +1,6 @@
 package org.jmu.multiinfo.service.regression;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.jmu.multiinfo.base.util.MyJUnit4ClassRunner;
@@ -249,6 +248,9 @@ public void inverseCompactTransform() throws DataErrException{
 
 @Test
 public void stepwise() throws DataErrException{
-	stpService.stepwise(dataArrY, dataArrXList, 4.10, 4.1);
+	List<Double> bList=	stpService.stepwise(dataArrY, dataArrXList, 4,4);
+	for (int i = 0; i < bList.size(); i++) {
+		System.out.println(bList.get(i));
+	}
 }
 }

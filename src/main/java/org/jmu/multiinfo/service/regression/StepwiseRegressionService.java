@@ -63,5 +63,5 @@ public double[][]  inverseCompactTransform(double[][] clMatrix ,int l);
 public boolean outlier(double[][] clMatrix,int N,int l,int yp,double delF,List<Integer> posList,List<Integer> delList) throws TestNotPassException;
 
 
-public void stepwise(double[] dataArrY,List<double[]> dataArrXList,double entryF,double delF) throws DataErrException;
+public List<Double> stepwise(double[] dataArrY,List<double[]> dataArrXList,double entryF,double delF) throws DataErrException;
 }
