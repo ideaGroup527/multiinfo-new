@@ -5,6 +5,8 @@ import org.jmu.multiinfo.dto.basestatistics.BiVarCondition;
 import org.jmu.multiinfo.dto.regression.GraphDTO;
 import org.jmu.multiinfo.dto.regression.MultipleLinearDTO;
 import org.jmu.multiinfo.dto.regression.SingleLinearDTO;
+import org.jmu.multiinfo.dto.regression.SlipStepwiseCondition;
+import org.jmu.multiinfo.dto.regression.SlipStepwiseDTO;
 import org.jmu.multiinfo.dto.regression.StepwiseCondition;
 import org.jmu.multiinfo.dto.regression.StepwiseMultipleDTO;
 import org.jmu.multiinfo.service.regression.LinearRegressionService;
@@ -68,6 +70,13 @@ public class RegressionController extends BaseController{
 	@ResponseBody
 	public StepwiseMultipleDTO calStepwiseMultipleLinearRegression(@RequestBody StepwiseCondition condition){
 		return stpRegressionService.stepwise(condition);
+		
+	}
+	
+	@RequestMapping(params = { "method=slipstepwise" })
+	@ResponseBody
+	public SlipStepwiseDTO calSlipStepwiseLinearRegression(@RequestBody SlipStepwiseCondition condition){
+		return stpRegressionService.slipStepwise(condition);
 		
 	}
 	
