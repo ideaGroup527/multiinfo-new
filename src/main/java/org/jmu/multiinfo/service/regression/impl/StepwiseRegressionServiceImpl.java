@@ -2,11 +2,17 @@ package org.jmu.multiinfo.service.regression.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.math3.util.FastMath;
 import org.jmu.multiinfo.core.exception.DataErrException;
 import org.jmu.multiinfo.core.exception.TestNotPassException;
 import org.jmu.multiinfo.core.util.DataFormatUtil;
+import org.jmu.multiinfo.core.util.ExcelUtil;
+import org.jmu.multiinfo.core.util.PositionBean;
+import org.jmu.multiinfo.dto.basestatistics.DataDTO;
+import org.jmu.multiinfo.dto.basestatistics.StepwiseCondition;
+import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
 import org.jmu.multiinfo.dto.regression.StepwiseMultipleDTO;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.jmu.multiinfo.service.correlation.CorrelationService;
@@ -180,6 +186,36 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 		delList.add(posList.get(depos));
 		posList.remove(depos);
 		return false;
+	}
+	@Override
+	public StepwiseMultipleDTO stepwise(StepwiseCondition condition) {
+		StepwiseMultipleDTO stpDTO = new StepwiseMultipleDTO();
+		VarietyDTO dependVarDTO = condition.getDependentVariable();
+		List<VarietyDTO> independVarDTOList = condition.getIndependentVariable();
+		DataDTO[][] dataGrid = condition.getDataGrid();
+		// 因变量数据
+		List<Double> dependVarList = new ArrayList<Double>();
+		PositionBean depvarRange = ExcelUtil.splitRange(dependVarDTO.getRange());
+		for (int i = depvarRange.getFirstRowId() - 1; i < depvarRange.getLastRowId(); i++) {
+			for (int j = depvarRange.getFirstColId() - 1; j < depvarRange.getLastColId(); j++) {
+				dependVarList.add(DataFormatUtil.converToDouble(dataGrid[i][j]));
+			}
+		}
+		List<double[]> dataArrXList = new ArrayList<>();
+		Map<String, List<Double>> xMap =	DataFormatUtil.converToDouble(dataGrid, independVarDTOList);
+		for (VarietyDTO inpDto:independVarDTOList) {
+			dataArrXList.add(DataFormatUtil.converToDouble(xMap.get(inpDto.getVarietyName())));
+		}
+		
+		double[] dataArrY = DataFormatUtil.converToDouble(dependVarList);
+		try {
+			stpDTO= stepwise(dataArrY , dataArrXList, condition.getEntryF(), condition.getDelF());
+		} catch (DataErrException e) {
+			stpDTO.setRet_code("-1");
+			stpDTO.setRet_msg(e.getMessage());
+			e.printStackTrace();
+		}
+		return stpDTO;
 	}
 
 }

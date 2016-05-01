@@ -2,10 +2,13 @@ package org.jmu.multiinfo.web.controller;
 
 import org.jmu.multiinfo.core.controller.BaseController;
 import org.jmu.multiinfo.dto.basestatistics.BiVarCondition;
+import org.jmu.multiinfo.dto.basestatistics.StepwiseCondition;
 import org.jmu.multiinfo.dto.regression.GraphDTO;
 import org.jmu.multiinfo.dto.regression.MultipleLinearDTO;
 import org.jmu.multiinfo.dto.regression.SingleLinearDTO;
+import org.jmu.multiinfo.dto.regression.StepwiseMultipleDTO;
 import org.jmu.multiinfo.service.regression.LinearRegressionService;
+import org.jmu.multiinfo.service.regression.StepwiseRegressionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,8 @@ public class RegressionController extends BaseController{
 	@Autowired
 	private LinearRegressionService linearRegressionService;
 	
+	@Autowired
+	private StepwiseRegressionService stpRegressionService;
 	
 	/***
 	 * 一元线性回归
@@ -56,6 +61,13 @@ public class RegressionController extends BaseController{
 	public MultipleLinearDTO calOLSMultipleLinearRegression(@RequestBody BiVarCondition condition){
 		MultipleLinearDTO linearDTO = 	(MultipleLinearDTO)linearRegressionService.calLinearRegression(condition);
 		return linearDTO;
+		
+	}
+	
+	@RequestMapping(params = { "method=stepwise" })
+	@ResponseBody
+	public StepwiseMultipleDTO calStepwiseMultipleLinearRegression(@RequestBody StepwiseCondition condition){
+		return stpRegressionService.stepwise(condition);
 		
 	}
 	
