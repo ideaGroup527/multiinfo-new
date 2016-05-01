@@ -133,7 +133,12 @@ var handleSubmit = function (config) {
             break;
         case 'Independent_Variable':
             //灰色预测 - 独立变量
+            handleURL = 'statistics/prediction.do?method=grey';
+            var IV = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_GRAY_PREDICTION_INDEPENDENT_VAR'));
             dataPackage.associationType = 0;
+            dataPackage.factorVarVariable = JSON.parse(IV.factorVarVariable[0]);
+            dataPackage.independentVariable = IV.independentVariable;
+            dataPackage.formCoefficient = IV.formCoefficient[0];
             break;
     }
 

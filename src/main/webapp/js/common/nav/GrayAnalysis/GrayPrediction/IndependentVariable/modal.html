@@ -10,43 +10,24 @@
                     data-i18n-tag="modal_title_independent_variable">独立变量</h4>
             </div>
             <div class="modal-body">
-                <p data-i18n-type="page"
-                   data-i18n-tag="label_choose_col_variable">点击选择 列变量</p>
-
-                <div data-config-group data-group-name="colVarList" data-config-val-flag=".active">
-
+                <div data-config-group data-group-name="factorVarVariable">
+                    <p data-i18n-type="page"
+                       data-i18n-tag="label_prediction">预测</p>
+                    <select name="factorVarVariable" class="form-control" style="width: 80%;"></select>
                 </div>
-                <hr/>
-                <p data-i18n-type="page"
-                   data-i18n-tag="label_choose_row_variable">点击选择 行变量</p>
-
-                <div data-config-group data-group-name="rowVarList" data-config-val-flag=".active">
+                <div data-config-group data-group-name="independentVariable" data-config-val-flag=".active">
+                    <hr>
+                    <p data-i18n-type="page"
+                       data-i18n-tag="label_choose_variable">点击选择变量</p>
 
                 </div>
                 <div data-panel="config">
                     <fieldset class="algorithm-config-zone">
                         <legend data-i18n-tag="options" data-i18n-type="page">选项</legend>
-                        <div data-config-group data-group-name="calculateMethod" data-config-val-flag=":checked">
-                            <span data-i18n-type="page" data-i18n-tag="label_calculate_method">计算方法</span>
-
-                            <div class="checkbox-inline">
-                                <label>
-                                    <input value="0" type="radio" name="calculateMethod" checked/>
-                                    <span data-i18n-type="page" data-i18n-tag="label_by_row">按行</span>
-                                </label>
-                            </div>
-                            <div class="checkbox-inline">
-                                <label>
-                                    <input value="1" type="radio" name="calculateMethod"/>
-                                    <span data-i18n-type="page" data-i18n-tag="label_by_col">按列</span>
-                                </label>
-                            </div>
-                            <div class="checkbox-inline">
-                                <label>
-                                    <input value="2" type="radio" name="calculateMethod"/>
-                                    <span data-i18n-type="page" data-i18n-tag="label_by_table">按全表</span>
-                                </label>
-                            </div>
+                        <div data-config-group data-group-name="formCoefficient">
+                            <span data-i18n-type="page" data-i18n-tag="label_form_coefficient">生成系数 α</span>
+                            <input class="form-control small" type="number" name="formCoefficient" min="0" max="1"
+                                   step="0.1" value="0.5">
                         </div>
                     </fieldset>
                 </div>
@@ -68,30 +49,27 @@
         var variableList = JSON.parse(sessionStorage.getItem('PRIVATE_VARIABLE_LIST'));
 
         variableList.map(function (variable, i) {
-            //第一栏第一列的值不要
-            if (i == 0) return;
+            //第一栏第一列作为选框第一个值
+            if (i == 0) {
+                $('[name=factorVarVariable]').append($('<option>').clone().text(variable.varietyName));
+            } else {
+                var variableWrapper = $('<span>');
+                $(variableWrapper).addClass('variable-wrapper active')
+                        .attr('name', 'independentVariable')
+                        .val(variable)
+                        .text(variable.varietyName);
 
-            var variableWrapper = $('<span>');
-            $(variableWrapper).addClass('variable-wrapper active')
-                    .attr('name', 'colVarList')
-                    .val(variable)
-                    .text(variable.varietyName);
-
-            $('[data-group-name=colVarList]').append(variableWrapper);
+                $('[data-group-name=independentVariable]').append(variableWrapper);
+            }
         });
 
         $('.multiinfo-table-display').find('td:first-child').map(function (index, elem) {
-            var variableWrapper = $('<div>');
-            var dataConfig = {};
-            dataConfig.position = $(elem).attr('data-positiondes').split(',')[1];
-            dataConfig.varietyName = $(elem).attr('data-data');
-            $(variableWrapper).addClass('variable-wrapper active')
-                    .attr('data-config', JSON.stringify(dataConfig))
-                    .attr('name', 'rowVarList')
-                    .val(dataConfig)
-                    .text($(elem).attr('data-data'));
+            var variableWrapper = $('<option>');
+            var dataConfig = variableList[0];
+            dataConfig.range = dataConfig.range.split(':')[0] + ':' + $(elem).attr('data-position');
+            $(variableWrapper).val(JSON.stringify(dataConfig)).text(Number($(elem).attr('data-data')) + 1);
 
-            $('[data-group-name=rowVarList]').append(variableWrapper);
+            $('[name=factorVarVariable]').append(variableWrapper);
         });
     })
 </script>

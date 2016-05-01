@@ -38,6 +38,7 @@ var resultTableGenerator = function () {
             handlePrincipalComponentAnalysis(tableResult);
             break;
         case 'Related_Variable':
+        case 'Independent_Variable':
             //灰色预测 - 关联变量
             handleRelatedVariable(tableResult);
             break;
@@ -876,7 +877,7 @@ var handleRelatedVariable = function (tableResult) {
     var span = $('<span>');
 
     //是否可预测
-    if (tableResult.examineSuccess) {
+    //if (tableResult.examineSuccess) {
         //变量数组
         var variableList = [];
         tableResult.independVarList.map(function (variable) {
@@ -904,10 +905,10 @@ var handleRelatedVariable = function (tableResult) {
         //打印表名和表格
         $(container).append($(tableHeader).clone().text(tableResult.predictName)).append(table);
         $(presentArea).append(container);
-    } else {
-        alert('该数据不符合灰色预测的数据检验要求');
-        window.history.go(-1);
-    }
+    //} else {
+    //    alert('该数据不符合灰色预测的数据检验要求');
+    //    window.history.go(-1);
+    //}
 };
 var handleANOVA = function (tableResult) {
 
@@ -919,21 +920,7 @@ var handleANOVA = function (tableResult) {
 
     //获取变量名
     var variableList = Object.keys(handleData);
-    var s = {
-        "resDataMap": {
-            "降水": {
-                "sst": 78,
-                "ssbg": 15.600000000000136,
-                "sswg": 62.399999999999864,
-                "msbg": 7.800000000000068,
-                "mswg": 5.199999999999989,
-                "dfbg": 2,
-                "dfwg": 2,
-                "dft": 4,
-                "f": 1.5000000000000164
-            }
-        }
-    }
+
     //参数列表【骂后台把，变量名太散】
     var ANOVAconfigs = ['sum_of_squares', 'df', 'mean_squares', 'f'];
 
