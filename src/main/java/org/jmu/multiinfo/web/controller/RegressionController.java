@@ -2,10 +2,10 @@ package org.jmu.multiinfo.web.controller;
 
 import org.jmu.multiinfo.core.controller.BaseController;
 import org.jmu.multiinfo.dto.basestatistics.BiVarCondition;
-import org.jmu.multiinfo.dto.basestatistics.StepwiseCondition;
 import org.jmu.multiinfo.dto.regression.GraphDTO;
 import org.jmu.multiinfo.dto.regression.MultipleLinearDTO;
 import org.jmu.multiinfo.dto.regression.SingleLinearDTO;
+import org.jmu.multiinfo.dto.regression.StepwiseCondition;
 import org.jmu.multiinfo.dto.regression.StepwiseMultipleDTO;
 import org.jmu.multiinfo.service.regression.LinearRegressionService;
 import org.jmu.multiinfo.service.regression.StepwiseRegressionService;

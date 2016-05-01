@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.jmu.multiinfo.core.exception.DataErrException;
 import org.jmu.multiinfo.core.exception.TestNotPassException;
-import org.jmu.multiinfo.dto.basestatistics.StepwiseCondition;
+import org.jmu.multiinfo.dto.regression.SlipStepwiseCondition;
+import org.jmu.multiinfo.dto.regression.SlipStepwiseDTO;
+import org.jmu.multiinfo.dto.regression.StepwiseCondition;
 import org.jmu.multiinfo.dto.regression.StepwiseMultipleDTO;
 
 /***
@@ -67,6 +69,19 @@ public boolean outlier(double[][] clMatrix,int N,int l,int yp,double delF,List<I
 
 public StepwiseMultipleDTO stepwise(double[] dataArrY,List<double[]> dataArrXList,double entryF,double delF) throws DataErrException;
 
+
+/****
+ * 一般逐步回归
+ * @param condition
+ * @return
+ */
 public StepwiseMultipleDTO stepwise(StepwiseCondition condition);
+
+/***
+ * 滑移逐步回归
+ * @param condition
+ * @return
+ */
+public SlipStepwiseDTO slipStepwise(SlipStepwiseCondition condition);
 
 }

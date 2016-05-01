@@ -1,4 +1,6 @@
-package org.jmu.multiinfo.dto.basestatistics;
+package org.jmu.multiinfo.dto.regression;
+
+import org.jmu.multiinfo.dto.basestatistics.BiVarCondition;
 
 public class StepwiseCondition extends BiVarCondition{
 private Double entryF;

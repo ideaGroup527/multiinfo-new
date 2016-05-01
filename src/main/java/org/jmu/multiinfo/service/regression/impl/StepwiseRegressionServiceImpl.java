@@ -1,6 +1,7 @@
 package org.jmu.multiinfo.service.regression.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,8 +12,10 @@ import org.jmu.multiinfo.core.util.DataFormatUtil;
 import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.core.util.PositionBean;
 import org.jmu.multiinfo.dto.basestatistics.DataDTO;
-import org.jmu.multiinfo.dto.basestatistics.StepwiseCondition;
 import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
+import org.jmu.multiinfo.dto.regression.SlipStepwiseCondition;
+import org.jmu.multiinfo.dto.regression.SlipStepwiseDTO;
+import org.jmu.multiinfo.dto.regression.StepwiseCondition;
 import org.jmu.multiinfo.dto.regression.StepwiseMultipleDTO;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.jmu.multiinfo.service.correlation.CorrelationService;
@@ -216,6 +219,174 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 			e.printStackTrace();
 		}
 		return stpDTO;
+	}
+	@Override
+	public SlipStepwiseDTO slipStepwise(SlipStepwiseCondition condition) {
+		SlipStepwiseDTO slDTO = new SlipStepwiseDTO();
+		VarietyDTO dependVarDTO = condition.getDependentVariable();
+		List<VarietyDTO> independVarDTOList = condition.getIndependentVariable();
+		VarietyDTO timeVarDTO =	condition.getTimeVariable();
+		DataDTO[][] dataGrid = condition.getDataGrid();
+		//自变量
+		List<double[]> dataArrXList = new ArrayList<>();
+
+		//时间变量
+		List<Double> timeVarList = new ArrayList<>();
+		PositionBean timevarRange = ExcelUtil.splitRange(timeVarDTO.getRange());
+		for (int i = timevarRange.getFirstRowId() - 1; i < timevarRange.getLastRowId(); i++) {
+			for (int j = timevarRange.getFirstColId() - 1; j < timevarRange.getLastColId(); j++) {
+				timeVarList.add(DataFormatUtil.converToDouble(dataGrid[i][j]));
+			}
+		}
+		double[] timeArr = DataFormatUtil.converToDouble(timeVarList);
+		
+		// 因变量数据
+		List<Double> dependVarList = new ArrayList<Double>();
+		PositionBean depvarRange = ExcelUtil.splitRange(dependVarDTO.getRange());
+		for (int i = depvarRange.getFirstRowId() - 1; i < depvarRange.getLastRowId(); i++) {
+			for (int j = depvarRange.getFirstColId() - 1; j < depvarRange.getLastColId(); j++) {
+				dependVarList.add(DataFormatUtil.converToDouble(dataGrid[i][j]));
+			}
+		}
+		StepwiseMultipleDTO preDTO = new StepwiseMultipleDTO();
+		switch (condition.getPreviousMethod()) {
+		
+		case SlipStepwiseCondition.SLIP_PREVIOUS_ASC:{
+			double nextYear = timeArr[timeArr.length-1] +1;
+			dependVarList.remove(0);
+			double[] dataArrY = DataFormatUtil.converToDouble(dependVarList);
+			Map<String, List<Double>> xMap =	DataFormatUtil.converToDouble(dataGrid, independVarDTOList);
+			for (int i = 0; i < independVarDTOList.size(); i++) {
+				List<Double> tempList =	xMap.get(independVarDTOList.get(i).getVarietyName());
+				tempList.remove(tempList.size() - 1);
+				dataArrXList.add(DataFormatUtil.converToDouble(tempList));
+			}
+			
+			try {
+				preDTO= stepwise(dataArrY , dataArrXList, condition.getEntryF(), condition.getDelF());
+				Map<String, Double> preForecast = new HashMap<>();
+				
+				double[] parameters = preDTO.getRegressionParameters();
+				List<Double> fuInpList=	xMap.get(independVarDTOList.size() - 1);
+				double value = parameters[0];
+				for (int i = 1; i < parameters.length; i++) {
+					value+=fuInpList.get(i-1) * parameters[i];
+				}
+				preForecast.put(nextYear+"", value);
+				slDTO.setPreForecast(preForecast );
+				
+			} catch (DataErrException e) {
+				preDTO.setRet_code("-1");
+				preDTO.setRet_msg(e.getMessage());
+				e.printStackTrace();
+			}
+			break;
+		}
+		case SlipStepwiseCondition.SLIP_PREVIOUS_DESC:{
+			double nextYear = timeArr[0] +1;
+			dependVarList.remove(dependVarList.size()-1);
+			double[] dataArrY = DataFormatUtil.converToDouble(dependVarList);
+			Map<String, List<Double>> xMap =	DataFormatUtil.converToDouble(dataGrid, independVarDTOList);
+			for (int i = 0; i < independVarDTOList.size(); i++) {
+				List<Double> tempList =	xMap.get(independVarDTOList.get(i).getVarietyName());
+				tempList.remove(0);
+				dataArrXList.add(DataFormatUtil.converToDouble(tempList));
+			}
+			
+			try {
+				preDTO= stepwise(dataArrY , dataArrXList, condition.getEntryF(), condition.getDelF());
+				Map<String, Double> preForecast = new HashMap<>();
+				
+				double[] parameters = preDTO.getRegressionParameters();
+				List<Double> fuInpList=	xMap.get(independVarDTOList.size() - 1);
+				double value = parameters[0];
+				for (int i = 1; i < parameters.length; i++) {
+					value+=fuInpList.get(i-1) * parameters[i];
+				}
+				preForecast.put(nextYear+"", value);
+				slDTO.setPreForecast(preForecast );
+				
+			} catch (DataErrException e) {
+				preDTO.setRet_code("-1");
+				preDTO.setRet_msg(e.getMessage());
+				e.printStackTrace();
+			}
+			
+		}
+		default:
+			break;
+		}
+		
+		StepwiseMultipleDTO backDTO = new StepwiseMultipleDTO();
+		switch(condition.getBackwardMethod()){
+		
+		case SlipStepwiseCondition.SLIP_BACKWARD_ASC:{
+			double preYear = timeArr[0] -1;
+			dependVarList.remove(dependVarList.size()-1);
+			double[] dataArrY = DataFormatUtil.converToDouble(dependVarList);
+			Map<String, List<Double>> xMap =	DataFormatUtil.converToDouble(dataGrid, independVarDTOList);
+			for (int i = 0; i < independVarDTOList.size(); i++) {
+				List<Double> tempList =	xMap.get(independVarDTOList.get(i).getVarietyName());
+				tempList.remove(0);
+				dataArrXList.add(DataFormatUtil.converToDouble(tempList));
+			}
+			
+			try {
+				backDTO= stepwise(dataArrY , dataArrXList, condition.getEntryF(), condition.getDelF());
+				double[] parameters = backDTO.getRegressionParameters();
+				List<Double> fuInpList=	xMap.get(0);
+				double value = parameters[0];
+				for (int i = 1; i < parameters.length; i++) {
+					value+=fuInpList.get(i-1) * parameters[i];
+				}
+				Map<String, Double> backForecast = new HashMap<>();
+				backForecast.put(preYear+"", value);
+				slDTO.setBackForecast(backForecast);
+			} catch (DataErrException e) {
+				preDTO.setRet_code("-1");
+				preDTO.setRet_msg(e.getMessage());
+				e.printStackTrace();
+			}
+		
+			break;
+			}
+			
+		case SlipStepwiseCondition.SLIP_BACKWARD_DESC:{
+			double preYear = timeArr[timeArr.length-1] -1;
+			dependVarList.remove(dependVarList.size()-1);
+			double[] dataArrY = DataFormatUtil.converToDouble(dependVarList);
+			Map<String, List<Double>> xMap =	DataFormatUtil.converToDouble(dataGrid, independVarDTOList);
+			for (int i = 0; i < independVarDTOList.size(); i++) {
+				List<Double> tempList =	xMap.get(independVarDTOList.get(i).getVarietyName());
+				tempList.remove(0);
+				dataArrXList.add(DataFormatUtil.converToDouble(tempList));
+			}
+			
+			try {
+				backDTO= stepwise(dataArrY , dataArrXList, condition.getEntryF(), condition.getDelF());
+				double[] parameters = backDTO.getRegressionParameters();
+				List<Double> fuInpList=	xMap.get(0);
+				double value = parameters[0];
+				for (int i = 1; i < parameters.length; i++) {
+					value+=fuInpList.get(i-1) * parameters[i];
+				}
+				Map<String, Double> backForecast = new HashMap<>();
+				backForecast.put(preYear+"", value);
+				slDTO.setBackForecast(backForecast);
+			} catch (DataErrException e) {
+				preDTO.setRet_code("-1");
+				preDTO.setRet_msg(e.getMessage());
+				e.printStackTrace();
+			}
+			break;
+			}
+		default:
+			break;
+		
+		}
+		slDTO.setPreData(preDTO);
+		slDTO.setBackData(backDTO);
+		return slDTO;
 	}
 
 }
