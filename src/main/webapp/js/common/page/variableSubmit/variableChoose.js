@@ -1,5 +1,7 @@
 var variableChoose = function (variableList) {
 
+    var def = $.Deferred();
+
     var variableZone = $('.variable-zone');
 
     var group = [''];
@@ -23,4 +25,8 @@ var variableChoose = function (variableList) {
 
         $(variableZone).append(zone);
     });
+
+    def.resolve();
+
+    return def.promise();
 };
