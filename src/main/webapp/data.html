@@ -9,6 +9,7 @@
     <script src="js/lib/bootstrap/bootstrap.min.js"></script>
     <script src="js/lib/bootstrap/bootstrap-submenu.min.js"></script>
     <script src="js/common/i18n.js"></script>
+    <script src="js/common/page/variableAttr.js"></script>
     <title></title>
 </head>
 <body>
@@ -155,7 +156,9 @@
                 });
             }).done(function () {
                 i18n();
-                variableChoose(variableList);
+                variableChoose(variableList).done(function () {
+                    variableRule();
+                });
             });
         } else {
             $.getScript(scriptURL);
