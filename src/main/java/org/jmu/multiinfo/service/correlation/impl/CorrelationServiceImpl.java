@@ -1,11 +1,11 @@
 package org.jmu.multiinfo.service.correlation.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
 import org.apache.commons.math3.util.FastMath;
 import org.jmu.multiinfo.core.exception.DataErrException;
 import org.jmu.multiinfo.core.util.DataFormatUtil;
@@ -203,6 +203,15 @@ public class CorrelationServiceImpl implements CorrelationService {
 		
 		resDTO.setUnitDataArr(unitDataArr);
 		return resDTO;
+	}
+
+	@Override
+	public double[][] PearsonsCorrelationMatrix(double[] dataArrX, double[] dataArrY) throws DataErrException {
+		PearsonsCorrelation pc = new PearsonsCorrelation();
+		double a = pc.correlation(dataArrX, dataArrY);
+		System.out.println(a);
+		DataFormatUtil.print(pc.getCorrelationMatrix().getData());;
+		return null;
 	}
 
 }
