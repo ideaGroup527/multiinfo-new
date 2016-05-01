@@ -7,6 +7,7 @@ import org.jmu.multiinfo.base.util.MyJUnit4ClassRunner;
 import org.jmu.multiinfo.core.exception.DataErrException;
 import org.jmu.multiinfo.core.util.DataFormatUtil;
 import org.jmu.multiinfo.core.util.MatrixUtil;
+import org.jmu.multiinfo.dto.regression.StepwiseMultipleDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +20,7 @@ public class StepwiseRegressionServiceTest {
 private StepwiseRegressionService stpService;
 double[] dataArrY=null;
 List<double[]> dataArrXList = null;
-//@Before
+@Before
 public void init(){
 	double[]  dataArrY_c={900,354,566,521,333,
 			359,589,416,289,254,
@@ -131,7 +132,7 @@ public void init(){
 	dataArrXList.add(dataArrX7);
 }
 
-@Before
+//@Before
 public void init2(){
 	double[]  dataArrY_c={78.5,
 	74.3,
@@ -248,9 +249,7 @@ public void inverseCompactTransform() throws DataErrException{
 
 @Test
 public void stepwise() throws DataErrException{
-	List<Double> bList=	stpService.stepwise(dataArrY, dataArrXList, 4,4);
-	for (int i = 0; i < bList.size(); i++) {
-		System.out.println(bList.get(i));
-	}
+	StepwiseMultipleDTO smDTO = stpService.stepwise(dataArrY, dataArrXList, 2.5,2.5);
+	System.err.println();
 }
 }

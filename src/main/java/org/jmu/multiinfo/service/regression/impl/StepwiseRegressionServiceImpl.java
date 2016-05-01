@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.commons.math3.util.FastMath;
 import org.jmu.multiinfo.core.exception.DataErrException;
 import org.jmu.multiinfo.core.exception.TestNotPassException;
+import org.jmu.multiinfo.core.util.DataFormatUtil;
+import org.jmu.multiinfo.dto.regression.StepwiseMultipleDTO;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.jmu.multiinfo.service.correlation.CorrelationService;
 import org.jmu.multiinfo.service.regression.StepwiseRegressionService;
@@ -94,16 +96,17 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 		return icMatrix;
 	}
 	@Override
-	public List<Double> stepwise(double[] dataArrY, List<double[]> dataArrXList, double entryF, double delF) throws DataErrException {
+	public StepwiseMultipleDTO stepwise(double[] dataArrY, List<double[]> dataArrXList, double entryF, double delF) throws DataErrException {
+		StepwiseMultipleDTO smDTO = new StepwiseMultipleDTO();
 		 List<Double> meanList = new ArrayList<Double>();
 		 List<Double> sdList = new ArrayList<Double>();
 		for (int i = 0; i < dataArrXList.size(); i++) {
 			meanList.add(basicStatisticsService.arithmeticMean(dataArrXList.get(i)));
-			sdList.add(FastMath.sqrt(basicStatisticsService.averageSumDeviation(dataArrXList.get(i))));
+			sdList.add(basicStatisticsService.averageSumDeviation(dataArrXList.get(i)));
 		}
 
 		meanList.add(basicStatisticsService.arithmeticMean(dataArrY));
-		sdList.add(FastMath.sqrt(basicStatisticsService.averageSumDeviation(dataArrY)));
+		sdList.add(basicStatisticsService.averageSumDeviation(dataArrY));
 		
 		 List<Double> bList = new ArrayList<Double>(dataArrXList.size()+1);
 		for (int i = 0; i <dataArrXList.size()+1; i++) {
@@ -149,7 +152,16 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 			double meanY =basicStatisticsService.arithmeticMean(dataArrY);
 		 bList.set(0, meanY + b0 );
 //		 DataFormatUtil.print(tmpMat);
-		 return bList;
+		 double Rkk = tmpMat[yp][yp];
+		 smDTO.setResidualSumOfSquares(Rkk * sdList.get(sdList.size() - 1));
+		 smDTO.setRegressionStandardError( FastMath.sqrt(smDTO.getResidualSumOfSquares()/(dataArrY.length - (posList.size()) -1.0)));
+		 smDTO.setRSquared(1 - Rkk);
+		 double Sk = sdList.get(sdList.size() - 1) ;
+		 double U = Sk * (1 - Rkk);
+		 double Q = Sk -  U;
+		 smDTO.setF((U / (posList.size()))*(Q /(dataArrY.length - (posList.size()) -1.0)) );
+		 smDTO.setRegressionParameters(DataFormatUtil.converToDouble(bList));
+		 return smDTO;
 	}
 	@Override
 	public boolean outlier(double[][] clMatrix, int N, int l,int yp, double delF,List<Integer> posList,List<Integer> delList) throws TestNotPassException {
