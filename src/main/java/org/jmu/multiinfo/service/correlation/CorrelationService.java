@@ -33,6 +33,8 @@ public BivariateCorrelateDTO bivariate(BivariateCorrelateCondition condition);
 	 */
 public Double pearsonRCoefficient(double[] dataArrX,double[] dataArrY) throws DataErrException;
 
+public double[][] PearsonsCorrelationMatrix(double[] dataArrX,double[] dataArrY) throws DataErrException;
+
 /***
  * person系数t计算双变量
  * @param r 系数R

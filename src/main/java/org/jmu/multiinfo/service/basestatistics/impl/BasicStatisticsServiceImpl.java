@@ -3,9 +3,11 @@ package org.jmu.multiinfo.service.basestatistics.impl;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
+import org.apache.commons.math3.distribution.GammaDistribution;
 import org.apache.commons.math3.ml.distance.ChebyshevDistance;
 import org.apache.commons.math3.ml.distance.EuclideanDistance;
 import org.apache.commons.math3.ml.distance.ManhattanDistance;
+import org.apache.commons.math3.special.Gamma;
 import org.apache.commons.math3.stat.Frequency;
 import org.apache.commons.math3.stat.correlation.Covariance;
 import org.apache.commons.math3.stat.descriptive.moment.GeometricMean;
@@ -19,6 +21,7 @@ import org.apache.commons.math3.stat.descriptive.rank.Median;
 import org.apache.commons.math3.stat.descriptive.rank.Min;
 import org.apache.commons.math3.stat.descriptive.rank.Percentile;
 import org.apache.commons.math3.stat.descriptive.summary.Sum;
+import org.apache.commons.math3.stat.inference.ChiSquareTest;
 import org.apache.commons.math3.stat.ranking.NaNStrategy;
 import org.apache.commons.math3.stat.ranking.TiesStrategy;
 import org.apache.commons.math3.util.FastMath;
@@ -417,6 +420,25 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 			resArr[i] = FastMath.abs(dataArrX[i] - dataArrY[i]);
 		}
 		return resArr;
+	}
+
+
+	@Override
+	public double gamma(double x) {
+		return Gamma.gamma(x);
+	}
+
+
+	@Override
+	public double logGamma(double x) {
+		return Gamma.logGamma(x);
+	}
+
+
+	@Override
+	public double chiSquare(double[] expected, long[] observed) {
+		ChiSquareTest csTest = new ChiSquareTest();
+		return csTest.chiSquare(expected, observed);
 	}
 
 

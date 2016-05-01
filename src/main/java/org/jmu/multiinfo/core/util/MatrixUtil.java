@@ -158,6 +158,36 @@ public class MatrixUtil {
 	}
 	
 	
+	public static double[][] product(double[][] dataArr,double l){
+		Matrix mt = new Matrix(dataArr);
+		return mt.times(l).getArray();
+	}
+	
+	/***
+	 * 增广矩阵
+	 * @param dataArr
+	 * @return
+	 */
+	public static double[][] augmentedMatrix(double[][] dataArr){
+		int row = dataArr.length;
+		int col = dataArr[0].length;
+		int col2 =  col * 2;
+		double[][] resArr = new double[row][col2];
+		for (int i = 0; i < row ; i++) {
+			for (int j = 0; j < col; j++) {
+				resArr[i][j] = dataArr[i][j];
+			}
+			for (int j = col; j < col2; j++) {
+				int k = j - col;
+				if( k == i )
+				resArr[i][j] = 1;
+				else 
+					resArr[i][j] = 0 ;
+			}
+		}
+		
+		return resArr;
+	}
 
 	//假如i是偶数返回1
 	private static int changeSign(int i , int j) {

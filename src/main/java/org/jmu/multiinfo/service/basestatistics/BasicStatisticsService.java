@@ -350,5 +350,21 @@ public interface BasicStatisticsService {
 	 */
 	public double[] abs(double[] dataArr);
 	
+	/**
+	 * Γ(x)
+	 * @param x
+	 * @return
+	 */
+	public double gamma(double x);
 	
+	public double logGamma(double x);
+	
+	
+	/***
+	 * 卡方分布函数
+	 * @param expected
+	 * @param observed
+	 * @return
+	 */
+	public double chiSquare(final double[] expected, final long[] observed);
 }
