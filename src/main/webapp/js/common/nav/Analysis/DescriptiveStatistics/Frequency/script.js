@@ -1,26 +1,19 @@
-var singleVariableChoose = function (variableList) {
+$(function () {
+    var CONFIG = {};
+    $('[data-config-group]').each(function () {
+        var groupName = $(this).attr('data-group-name');
+        var checkedFlag = $(this).attr('data-config-val-flag');
 
-    var variableZone = $('.variable-zone');
+        var selector = '[name=' + groupName + ']';
+        if (checkedFlag) {
+            selector += checkedFlag;
+        }
 
-    var group = [''];
-
-    group.map(function (elem) {
-        var zone = $('<div>');
-        $(zone).addClass('zone').attr('data-variable-group', elem);
-
-        var variableName = $('<h4>');
-        $(variableName).text(elem);
-        $(zone).append(variableName);
-
-        variableList.map(function (variable, i) {
-            var variableWrapper = $('<span>');
-            $(variableWrapper).addClass('variable-wrapper')
-                .text(variable.varietyName);
-
-            $(variableWrapper).attr('data-config', JSON.stringify(variable));
-            $(zone).append(variableWrapper);
+        var configsList = [];
+        $(selector).each(function () {
+            configsList.push($(this).val());
         });
-
-        $(variableZone).append(zone);
+        CONFIG[groupName] = configsList;
     });
-};
+    sessionStorage.setItem('PRIVATE_CONFIG_DESCRIPTIVE', JSON.stringify(CONFIG));
+});

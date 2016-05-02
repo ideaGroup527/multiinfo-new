@@ -108,11 +108,14 @@
         },
         "subMenu": [
           {
-            "term": "UnitaryLinearRegression",
+            "term": "SimpleLinearRegression",
             "name": {
-              "en-us": "Unitary Linear Regression",
+              "en-us": "Simple Linear Regression",
               "zh-cn": "一元线性回归"
-            }
+            },
+            "modalId": "#Simple_Linear_Regression",
+            "modal": "modal.html",
+            "script": "script.js"
           },
           {
             "term": "MultipleLinearRegression",

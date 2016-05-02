@@ -62,28 +62,30 @@ var handleSubmit = function (config) {
 
     //5.配置发送数据包
     var dataPackage = {
-        dataGrid: data,
-        variableList: variablesLists[0]
+        dataGrid: data
     };
-    // dataPackage.variableList = (variablesLists.length==1)?variablesLists[0]:   //TODO 等有多组参数列表再说
+
     var handleURL = '';
     switch (type) {
         case 'Descriptive_Statistics_Descriptive':
-            //描述统计 - 描述
-            handleURL = 'statistics/descriptives.do?method=descriptives';
-            break;
         case 'Descriptive_Statistics_Frequency':
+            //描述统计 - 描述
             //描述统计 - 频率
-            handleURL = 'statistics/descriptives.do?method=frequency';
+            handleURL = (type == 'Descriptive_Statistics_Descriptive') ? 'statistics/descriptives.do?method=descriptives' : 'statistics/descriptives.do?method=frequency';
+            var descriptive = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_DESCRIPTIVE'));
+            dataPackage.variableList = descriptive.variableList;
             break;
         case 'Correlation_Bivariate':
             //相关分析 - 双变量
             handleURL = 'statistics/correlation.do?method=bivariate';
+            var bivariate = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CORRELATION_BIVARIATE'));
+            dataPackage.variableList = bivariate.variableList;
             break;
         case 'Correlation_Distance':
             //相关分析 - 距离
             handleURL = 'statistics/correlation.do?method=distance';
             var distanceConfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CORRELATION_DISTANCE'));
+            dataPackage.variableList = distanceConfig.variableList;
             dataPackage.minkowskiP = distanceConfig.minkowskiP[0];
             dataPackage.minkowskiQ = distanceConfig.minkowskiQ[0];
             break;
@@ -95,7 +97,6 @@ var handleSubmit = function (config) {
             dataPackage.calculateMethod = dingChartConfig.calculateMethod[0];
             dataPackage.rowVarList = dingChartConfig.rowVarList;
             dataPackage.colVarList = dingChartConfig.colVarList;
-            dataPackage.variableList = null;
             break;
         case 'Oneway_ANOVA':
             //单因素方差分析
@@ -103,7 +104,6 @@ var handleSubmit = function (config) {
             var ANOVA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_ONEWAY_ANOVA'));
             dataPackage.factorVariable = ANOVA.factorVariable[0];
             dataPackage.dependentVariable = ANOVA.dependentVariable;
-            dataPackage.variableList = null;
             break;
         case 'Means':
             //均值
@@ -139,6 +139,13 @@ var handleSubmit = function (config) {
             dataPackage.factorVarVariable = JSON.parse(IV.factorVarVariable[0]);
             dataPackage.independentVariable = IV.independentVariable;
             dataPackage.formCoefficient = IV.formCoefficient[0];
+            break;
+        case 'Simple_Linear_Regression':
+            //一元线性回归
+            handleURL = 'statistics/regression.do?method=singleLinear';
+            var SLR = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_SINGLE_LINEAR_REGRESSION'));
+            dataPackage.independentVariable = SLR.independentVariable;
+            dataPackage.dependentVariable = SLR.dependentVariable[0];
             break;
     }
 

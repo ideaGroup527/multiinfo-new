@@ -16,5 +16,4 @@ $(function () {
         CONFIG[groupName] = configsList;
     });
     sessionStorage.setItem('PRIVATE_CONFIG_CORRELATION_BIVARIATE', JSON.stringify(CONFIG));
-    console.log(CONFIG);
 });

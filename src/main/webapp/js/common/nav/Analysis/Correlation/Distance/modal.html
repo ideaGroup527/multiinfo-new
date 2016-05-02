@@ -12,7 +12,9 @@
                 <p data-i18n-type="page"
                    data-i18n-tag="label_choose_variable">点击选择待选变量</p>
 
-                <div class="variable-zone">
+                <div data-config-group data-group-name="variableList"
+                     data-config-val-flag=".active"
+                     data-variable-select-rule="normal">
 
                 </div>
                 <div data-panel="config">
@@ -95,6 +97,19 @@
 </div>
 <script>
     $(function () {
+        var variableList = JSON.parse(sessionStorage.getItem('PRIVATE_VARIABLE_LIST'));
+
+        variableList.map(function (variable, i) {
+            var variableWrapper = $('<span>');
+            $(variableWrapper).addClass('variable-wrapper')
+                    .attr('name', 'variableList')
+                    .attr('data-config', JSON.stringify(variable))
+                    .val(variable)
+                    .text(variable.varietyName);
+
+            $('[data-group-name=variableList]').append(variableWrapper);
+        });
+
         $('select[name=measureMethod]').change(function () {
             if ($(this).val() == 'modifyDistance') {
                 $('#power_and_root').show().find('select').attr('disabled', false);
@@ -103,4 +118,5 @@
             }
         });
     });
+
 </script>
