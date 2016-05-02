@@ -306,7 +306,7 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 
 
 	@Override
-	public double[] regularization(double[] dataArr) throws DataErrException {
+	public double[] regularizationRange(double[] dataArr) throws DataErrException {
 		int size = getN(dataArr);
 		if(size < 1 ) throw new DataErrException("cannot resolve for regularization because too little size");
 		double[] resData = new double[size];
@@ -345,7 +345,7 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 
 
 	@Override
-	public double[][] regularization(double[][] dataArr) throws DataErrException {
+	public double[][] regularizationRange(double[][] dataArr) throws DataErrException {
 		Double amin =  min(dataArr);
 		Double amax = max(dataArr);
 		
@@ -459,6 +459,35 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 			sum+= dataArrX[i] * dataArrY[i];
 		}
 		return sum;
+	}
+
+
+	@Override
+	public double[] StandardDeviationNormalization(final double[] dataArr) throws DataErrException {
+		int size = getN(dataArr);
+		if(size < 2  ) throw new DataErrException("cannot resolve for StandardDeviationNormalization because too little size");
+	double[] sdn = new double[size];
+		Double mean =	arithmeticMean(dataArr);
+	Double sd = standardDeviation(dataArr);
+	for (int i = 0; i < size; i++) {
+		sdn[i] = (dataArr[i] - mean) / sd;
+	}
+		return sdn;
+	}
+
+
+	@Override
+	public double[] RangeNormalization(double[] dataArr) throws DataErrException {
+		int size = getN(dataArr);
+		if(size < 2  ) throw new DataErrException("cannot resolve for RangeNormalization because too little size");
+		double[] rn = new double[size];
+		Double mean =	arithmeticMean(dataArr);
+		Double maxi = max(dataArr);
+		Double mini = min(dataArr);
+		for (int i = 0; i < size; i++) {
+			rn[i] = (dataArr[i] - mean) / (maxi - mini);
+		}
+		return rn;
 	}
 
 

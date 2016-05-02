@@ -292,22 +292,37 @@ public interface BasicStatisticsService {
 	
 	
 	/**
-	 * 正规化
+	 * 极差正规化
 	 * @param dataArr
 	 * @return
 	 * @throws DataErrException
 	 */
-	public double[] regularization(double[] dataArr) throws DataErrException;
+	public double[] regularizationRange(double[] dataArr) throws DataErrException;
 	
 	
 	/**
-	 * 正规化
+	 * 极差正规化
 	 * @param dataArr
 	 * @return
 	 * @throws DataErrException
 	 */
-	public double[][] regularization(double[][] dataArr) throws DataErrException;
+	public double[][] regularizationRange(double[][] dataArr) throws DataErrException;
 	
+	/***
+	 * 标准差标准化
+	 * @param dataArr
+	 * @return
+	 * @throws DataErrException
+	 */
+	public double[] StandardDeviationNormalization(final double[] dataArr) throws DataErrException;
+	
+	/***
+	 * 极差标准化
+	 * @param dataArr
+	 * @return
+	 * @throws DataErrException
+	 */
+	public double[] RangeNormalization(final double[] dataArr) throws DataErrException;
 	
 	/***
 	 * E(r^2)(i!=j)
