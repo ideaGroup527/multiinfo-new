@@ -925,7 +925,7 @@ var handleANOVA = function (tableResult) {
     var variableList = Object.keys(handleData);
 
     //参数列表【骂后台把，变量名太散】
-    var ANOVAconfigs = ['sum_of_squares', 'df', 'mean_squares', 'f'];
+    var ANOVAconfigs = ['sum_of_squares', 'df', 'mean_square', 'f'];
 
     //保留小数配置
     var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
@@ -1183,17 +1183,88 @@ var handleSimpleLinearRegression = function (tableResult) {
     var SLRconfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_SINGLE_LINEAR_REGRESSION'));
     $(modelSummaryArea).append(modelSummaryTable)
         .append($(block).clone()
-            .append($(span).clone().data('data-i18n-type', 'page').data('data-i18n-tag', 'label_dependent_variable_is'))
+            .append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_dependent_variable_is'))
             .append($(span).clone().text(SLRconfig.dependentVariable[0].varietyName)))
         .append($(block).clone()
-            .append($(span).clone().data('data-i18n-type', 'page').data('data-i18n-tag', 'label_independent_variable_is'))
+            .append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_independent_variable_is'))
             .append($(span).clone().text(SLRconfig.independentVariable[0].varietyName)));
 
     $(presentArea).append(modelSummaryArea);
 
     //第二格表格：ANOVA表
+    var ANOVAList = ['sum_of_squares', 'mean_square', 'f'];
     var ANOVAArea = $(container).clone();
+    $(ANOVAArea).append(
+        $(tableHeader).clone()
+            .attr('data-i18n-type', 'page')
+            .attr('data-i18n-tag', 'label_anova')
+    );
     var ANOVATable = $(table).clone();
+    var ANOVATitleRow = $(row).clone();
+    $(ANOVATitleRow).append(
+        $(headerCell).clone()
+            .attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', 'model')
+    );
+    ANOVAList.map(function (name) {
+        $(ANOVATitleRow).append(
+            $(headerCell).clone()
+                .attr('data-i18n-type', 'table')
+                .attr('data-i18n-tag', name)
+        );
+    });
+    $(ANOVATable).append(ANOVATitleRow);
+
+    var ANOVAValueRow = $(row).clone();
+    $(ANOVAValueRow).append(
+        $(cell).clone().append(
+            $(block).clone()
+                .attr('data-i18n-type', 'table')
+                .attr('data-i18n-tag', 'regression')
+        ).append(
+            $(block).clone()
+                .attr('data-i18n-type', 'table')
+                .attr('data-i18n-tag', 'residual')
+        )
+    );
+    ANOVAList.map(function (value) {
+        switch (value) {
+            case 'sum_of_squares':
+                $(ANOVAValueRow).append(
+                    $(cell).clone().append(
+                        $(block).clone().text(Number(tableResult.regressionSumSquares).toFixed(numReservation))
+                    ).append(
+                        $(block).clone().text(Number(tableResult.sumSquaredErrors).toFixed(numReservation))
+                    )
+                );
+                break;
+            case 'mean_square':
+                $(ANOVAValueRow).append(
+                    $(cell).clone().append(
+                        $(block).clone().text(Number(tableResult.regressionSumSquares).toFixed(numReservation))
+                    ).append(
+                        $(block).clone().text(Number(tableResult.meanSquareError).toFixed(numReservation))
+                    )
+                );
+                break;
+            case 'f':
+                $(ANOVAValueRow).append(
+                    $(cell).clone().append(
+                        $(block).clone().text(Number(tableResult.f).toFixed(numReservation))
+                    )
+                );
+                break;
+        }
+    });
+    $(ANOVATable).append(ANOVAValueRow);
+    $(ANOVAArea).append(ANOVATable)
+        .append($(block).clone()
+            .append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_dependent_variable_is'))
+            .append($(span).clone().text(SLRconfig.dependentVariable[0].varietyName)))
+        .append($(block).clone()
+            .append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_independent_variable_is'))
+            .append($(span).clone().text(SLRconfig.independentVariable[0].varietyName)));
+    $(presentArea).append(ANOVAArea);
 
     //第三个表格：系数表
     var coefficientArea = $(container).clone();

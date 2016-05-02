@@ -141,8 +141,10 @@
             "label_reservation_of_decimal_place": "Reservations of Decimal Place",
             "label_report": "Report",
             "label_model_summary": "Model Summary",
-            "label_dependent_variable_is": "The Dependent Variable: "
-            "label_independent_variable_is": "The Independent Variable: "
+            "label_dependent_variable_is": "The Dependent Variable: ",
+            "label_independent_variable_is": "The Independent Variable: ",
+            "label_anova": "ANOVA",
+            "label_coefficients": "Coefficients"
         },
         "zh-cn": {
             "options": "选项",
@@ -223,7 +225,9 @@
             "label_report": "报告",
             "label_model_summary": "模型汇总",
             "label_dependent_variable_is": "因变量：",
-            "label_independent_variable_is": "自变量："
+            "label_independent_variable_is": "自变量：",
+            "label_anova": "方差分析",
+            "label_coefficients": "系数"
         }
     },
     "table": {
@@ -242,7 +246,7 @@
             "minkowskiDistace": "Minkowski",
             "modifyDistance": "Modify Distance",
             "sum_of_squares": "Sum of Squares",
-            "mean_squares": "Mean Squares",
+            "mean_square": "Mean Square",
             "df": "df",
             "between_groups": "Between Groups",
             "within_group": "Within Group",
@@ -252,7 +256,9 @@
             "model": "Model",
             "rsquare": "R Square",
             "adjustedRSquared": "Adjusted R Squared",
-            "linear": "Linear"
+            "linear": "Linear",
+            "regression": "Regression",
+            "residual": "Residual"
         },
         "zh-cn": {
             "pearsonR": "Pearson 相关性",
@@ -279,7 +285,9 @@
             "model": "模型",
             "rsquare": "R方",
             "adjustedRSquared": "调整R方",
-            "linear": "线性"
+            "linear": "线性",
+            "regression": "回归",
+            "residual": "残差"
         }
     },
     "nav": {
