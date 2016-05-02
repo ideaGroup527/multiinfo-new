@@ -111,11 +111,11 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 		 List<Double> sdList = new ArrayList<Double>();
 		for (int i = 0; i < dataArrXList.size(); i++) {
 			meanList.add(basicStatisticsService.arithmeticMean(dataArrXList.get(i)));
-			sdList.add(basicStatisticsService.averageSumDeviation(dataArrXList.get(i)));
+			sdList.add(FastMath.sqrt(basicStatisticsService.averageSumDeviation(dataArrXList.get(i))));
 		}
 
 		meanList.add(basicStatisticsService.arithmeticMean(dataArrY));
-		sdList.add(basicStatisticsService.averageSumDeviation(dataArrY));
+		sdList.add(FastMath.sqrt(basicStatisticsService.averageSumDeviation(dataArrY)));
 		
 		 List<Double> bList = new ArrayList<Double>(dataArrXList.size()+1);
 		for (int i = 0; i <dataArrXList.size()+1; i++) {
@@ -162,7 +162,7 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 		 bList.set(0, meanY + b0 );
 //		 DataFormatUtil.print(tmpMat);
 		 double Rkk = tmpMat[yp][yp];
-		 smDTO.setResidualSumOfSquares(Rkk * sdList.get(sdList.size() - 1));
+		 smDTO.setResidualSumOfSquares(Rkk * sdList.get(sdList.size() - 1)* sdList.get(sdList.size() - 1));
 		 smDTO.setRegressionStandardError( FastMath.sqrt(smDTO.getResidualSumOfSquares()/(dataArrY.length - (posList.size()) -1.0)));
 		 smDTO.setRSquared(1 - Rkk);
 		 double Sk = sdList.get(sdList.size() - 1) ;
