@@ -1,6 +1,7 @@
 package org.jmu.multiinfo.service.regression.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -241,11 +242,11 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 		double[] timeArr = DataFormatUtil.converToDouble(timeVarList);
 		
 		// 因变量数据
-		List<Double> dependVarList = new ArrayList<Double>();
+		List<Double> oraDependVarList = new ArrayList<Double>();
 		PositionBean depvarRange = ExcelUtil.splitRange(dependVarDTO.getRange());
 		for (int i = depvarRange.getFirstRowId() - 1; i < depvarRange.getLastRowId(); i++) {
 			for (int j = depvarRange.getFirstColId() - 1; j < depvarRange.getLastColId(); j++) {
-				dependVarList.add(DataFormatUtil.converToDouble(dataGrid[i][j]));
+				oraDependVarList.add(DataFormatUtil.converToDouble(dataGrid[i][j]));
 			}
 		}
 		StepwiseMultipleDTO preDTO = new StepwiseMultipleDTO();
@@ -253,12 +254,19 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 		
 		case SlipStepwiseCondition.SLIP_PREVIOUS_ASC:{
 			double nextYear = timeArr[timeArr.length-1] +1;
+			List<Double> dependVarList = new ArrayList<>(); 
+			for (int i = 0; i < oraDependVarList.size(); i++) 
+				dependVarList.add(oraDependVarList.get(i));
+			
 			dependVarList.remove(0);
+			dataArrXList = new ArrayList<>();
 			double[] dataArrY = DataFormatUtil.converToDouble(dependVarList);
 			Map<String, List<Double>> xMap =	DataFormatUtil.converToDouble(dataGrid, independVarDTOList);
+			List<Double> fuInpList= new ArrayList<>();
 			for (int i = 0; i < independVarDTOList.size(); i++) {
 				List<Double> tempList =	xMap.get(independVarDTOList.get(i).getVarietyName());
-				tempList.remove(tempList.size() - 1);
+				Double removeData = tempList.remove(tempList.size() - 1);
+				fuInpList.add(removeData);
 				dataArrXList.add(DataFormatUtil.converToDouble(tempList));
 			}
 			
@@ -267,7 +275,6 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 				Map<String, Double> preForecast = new HashMap<>();
 				
 				double[] parameters = preDTO.getRegressionParameters();
-				List<Double> fuInpList=	xMap.get(independVarDTOList.size() - 1);
 				double value = parameters[0];
 				for (int i = 1; i < parameters.length; i++) {
 					value+=fuInpList.get(i-1) * parameters[i];
@@ -284,12 +291,18 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 		}
 		case SlipStepwiseCondition.SLIP_PREVIOUS_DESC:{
 			double nextYear = timeArr[0] +1;
+			List<Double> dependVarList = new ArrayList<>(); 
+			for (int i = 0; i < oraDependVarList.size(); i++) 
+				dependVarList.add(oraDependVarList.get(i));
 			dependVarList.remove(dependVarList.size()-1);
+			dataArrXList = new ArrayList<>();
 			double[] dataArrY = DataFormatUtil.converToDouble(dependVarList);
 			Map<String, List<Double>> xMap =	DataFormatUtil.converToDouble(dataGrid, independVarDTOList);
+			List<Double> fuInpList= new ArrayList<>();
 			for (int i = 0; i < independVarDTOList.size(); i++) {
 				List<Double> tempList =	xMap.get(independVarDTOList.get(i).getVarietyName());
-				tempList.remove(0);
+				Double removeData = tempList.remove(0);
+				fuInpList.add(removeData);
 				dataArrXList.add(DataFormatUtil.converToDouble(tempList));
 			}
 			
@@ -298,7 +311,6 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 				Map<String, Double> preForecast = new HashMap<>();
 				
 				double[] parameters = preDTO.getRegressionParameters();
-				List<Double> fuInpList=	xMap.get(independVarDTOList.size() - 1);
 				double value = parameters[0];
 				for (int i = 1; i < parameters.length; i++) {
 					value+=fuInpList.get(i-1) * parameters[i];
@@ -316,25 +328,29 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 		default:
 			break;
 		}
-		
 		StepwiseMultipleDTO backDTO = new StepwiseMultipleDTO();
 		switch(condition.getBackwardMethod()){
 		
 		case SlipStepwiseCondition.SLIP_BACKWARD_ASC:{
 			double preYear = timeArr[0] -1;
+			List<Double> dependVarList = new ArrayList<>(); 
+			for (int i = 0; i < oraDependVarList.size(); i++) 
+				dependVarList.add(oraDependVarList.get(i));
 			dependVarList.remove(dependVarList.size()-1);
+			dataArrXList = new ArrayList<>();
 			double[] dataArrY = DataFormatUtil.converToDouble(dependVarList);
 			Map<String, List<Double>> xMap =	DataFormatUtil.converToDouble(dataGrid, independVarDTOList);
+			List<Double> fuInpList= new ArrayList<>();
 			for (int i = 0; i < independVarDTOList.size(); i++) {
 				List<Double> tempList =	xMap.get(independVarDTOList.get(i).getVarietyName());
-				tempList.remove(0);
+				Double removeData = tempList.remove(0);
+				fuInpList.add(removeData);
 				dataArrXList.add(DataFormatUtil.converToDouble(tempList));
 			}
 			
 			try {
 				backDTO= stepwise(dataArrY , dataArrXList, condition.getEntryF(), condition.getDelF());
 				double[] parameters = backDTO.getRegressionParameters();
-				List<Double> fuInpList=	xMap.get(0);
 				double value = parameters[0];
 				for (int i = 1; i < parameters.length; i++) {
 					value+=fuInpList.get(i-1) * parameters[i];
@@ -353,19 +369,24 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 			
 		case SlipStepwiseCondition.SLIP_BACKWARD_DESC:{
 			double preYear = timeArr[timeArr.length-1] -1;
+			List<Double> dependVarList = new ArrayList<>(); 
+			for (int i = 0; i < oraDependVarList.size(); i++) 
+				dependVarList.add(oraDependVarList.get(i));
 			dependVarList.remove(dependVarList.size()-1);
+			dataArrXList = new ArrayList<>();
 			double[] dataArrY = DataFormatUtil.converToDouble(dependVarList);
 			Map<String, List<Double>> xMap =	DataFormatUtil.converToDouble(dataGrid, independVarDTOList);
+			List<Double> fuInpList= new ArrayList<>();
 			for (int i = 0; i < independVarDTOList.size(); i++) {
 				List<Double> tempList =	xMap.get(independVarDTOList.get(i).getVarietyName());
-				tempList.remove(0);
+				Double removeData = tempList.remove(tempList.size() - 1);
+				fuInpList.add(removeData);
 				dataArrXList.add(DataFormatUtil.converToDouble(tempList));
 			}
 			
 			try {
 				backDTO= stepwise(dataArrY , dataArrXList, condition.getEntryF(), condition.getDelF());
 				double[] parameters = backDTO.getRegressionParameters();
-				List<Double> fuInpList=	xMap.get(0);
 				double value = parameters[0];
 				for (int i = 1; i < parameters.length; i++) {
 					value+=fuInpList.get(i-1) * parameters[i];
