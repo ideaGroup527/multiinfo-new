@@ -9,7 +9,7 @@
     <script src="js/lib/bootstrap/bootstrap.min.js"></script>
     <script src="js/lib/bootstrap/bootstrap-submenu.min.js"></script>
     <script src="js/common/i18n.js"></script>
-    <script src="js/common/page/variableAttr.js"></script>
+    <script src="js/common/page/variableRule.js"></script>
     <title></title>
 </head>
 <body>
@@ -112,7 +112,7 @@
 
     $(document).ready(function () {
 
-        if (!sessionStorage.getItem('isMultiSheet')) {
+        if (!Boolean(sessionStorage.getItem('isMultiSheet'))) {
             $('#switch_sheet_nav').remove();
         }
 
@@ -164,12 +164,12 @@
             $.getScript(scriptURL);
         }
     }).on('click', '.variable-wrapper', function (e) {
-        e.preventDefault();
-        if (!$(this).attr('disabled')) {
-            $(this).toggleClass('active');
-        } else {
-            e.stopPropagation();
-        }
+//        e.preventDefault();
+//        if (!$(this).attr('disabled')) {
+//            $(this).toggleClass('active');
+//        } else {
+//            e.stopPropagation();
+//        }
     }).on('click', '.variable-submit', function (e) {
         e.preventDefault();
         $.getScript(sessionStorage.getItem('PRIVATE_MODAL_SCRIPT_URL'), function () {

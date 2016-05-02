@@ -15,5 +15,5 @@ $(function () {
         });
         CONFIG[groupName] = configsList;
     });
-    sessionStorage.setItem('PRIVATE_CONFIG_DESCRIPTIVE', JSON.stringify(CONFIG));
+    sessionStorage.setItem('PRIVATE_CONFIG_SINGLE_LINEAR_REGRESSION', JSON.stringify(CONFIG));
 });
