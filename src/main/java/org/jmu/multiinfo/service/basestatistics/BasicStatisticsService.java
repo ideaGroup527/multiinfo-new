@@ -367,4 +367,22 @@ public interface BasicStatisticsService {
 	 * @return
 	 */
 	public double chiSquare(final double[] expected, final long[] observed);
+	
+	/***
+	 * 余弦公式
+	 * @param dataArrX
+	 * @param dataArrY
+	 * @return
+	 * @throws DataErrException
+	 */
+	public double cos(final double[]dataArrX,final double[]dataArrY) throws DataErrException;
+	
+	/***
+	 * 积和
+	 * @param dataArrX
+	 * @param dataArrY
+	 * @return
+	 * @throws DataErrException
+	 */
+	public double sumMul(final double[]dataArrX,final double[]dataArrY) throws DataErrException;
 }

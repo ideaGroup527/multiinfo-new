@@ -442,5 +442,25 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 	}
 
 
+	@Override
+	public double cos(double[] dataArrX, double[] dataArrY) throws DataErrException {
+		int size = getN(dataArrX);
+		if(size == 0  || size != getN(dataArrY)) throw new DataErrException("cannot resolve for cos because diffrent size");
+		return sumMul(dataArrX,dataArrY) /	(FastMath.sqrt(sumSquares(dataArrX)) * FastMath.sqrt(sumSquares(dataArrY)));
+	}
+
+
+	@Override
+	public double sumMul(double[] dataArrX, double[] dataArrY) throws DataErrException {
+		int size = getN(dataArrX);
+		if(size == 0  || size != getN(dataArrY)) throw new DataErrException("cannot resolve for sumMul because diffrent size");
+		double sum =0.0;
+		for (int i = 0; i < size; i++) {
+			sum+= dataArrX[i] * dataArrY[i];
+		}
+		return sum;
+	}
+
+
 	
 }
