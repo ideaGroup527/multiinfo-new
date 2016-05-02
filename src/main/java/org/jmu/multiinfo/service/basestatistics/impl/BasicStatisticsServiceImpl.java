@@ -306,7 +306,7 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 
 
 	@Override
-	public double[] regularization(double[] dataArr) throws DataErrException {
+	public double[] regularizationRange(double[] dataArr) throws DataErrException {
 		int size = getN(dataArr);
 		if(size < 1 ) throw new DataErrException("cannot resolve for regularization because too little size");
 		double[] resData = new double[size];
@@ -345,7 +345,7 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 
 
 	@Override
-	public double[][] regularization(double[][] dataArr) throws DataErrException {
+	public double[][] regularizationRange(double[][] dataArr) throws DataErrException {
 		Double amin =  min(dataArr);
 		Double amax = max(dataArr);
 		
@@ -439,6 +439,55 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 	public double chiSquare(double[] expected, long[] observed) {
 		ChiSquareTest csTest = new ChiSquareTest();
 		return csTest.chiSquare(expected, observed);
+	}
+
+
+	@Override
+	public double cos(double[] dataArrX, double[] dataArrY) throws DataErrException {
+		int size = getN(dataArrX);
+		if(size == 0  || size != getN(dataArrY)) throw new DataErrException("cannot resolve for cos because diffrent size");
+		return sumMul(dataArrX,dataArrY) /	(FastMath.sqrt(sumSquares(dataArrX)) * FastMath.sqrt(sumSquares(dataArrY)));
+	}
+
+
+	@Override
+	public double sumMul(double[] dataArrX, double[] dataArrY) throws DataErrException {
+		int size = getN(dataArrX);
+		if(size == 0  || size != getN(dataArrY)) throw new DataErrException("cannot resolve for sumMul because diffrent size");
+		double sum =0.0;
+		for (int i = 0; i < size; i++) {
+			sum+= dataArrX[i] * dataArrY[i];
+		}
+		return sum;
+	}
+
+
+	@Override
+	public double[] StandardDeviationNormalization(final double[] dataArr) throws DataErrException {
+		int size = getN(dataArr);
+		if(size < 2  ) throw new DataErrException("cannot resolve for StandardDeviationNormalization because too little size");
+	double[] sdn = new double[size];
+		Double mean =	arithmeticMean(dataArr);
+	Double sd = standardDeviation(dataArr);
+	for (int i = 0; i < size; i++) {
+		sdn[i] = (dataArr[i] - mean) / sd;
+	}
+		return sdn;
+	}
+
+
+	@Override
+	public double[] RangeNormalization(double[] dataArr) throws DataErrException {
+		int size = getN(dataArr);
+		if(size < 2  ) throw new DataErrException("cannot resolve for RangeNormalization because too little size");
+		double[] rn = new double[size];
+		Double mean =	arithmeticMean(dataArr);
+		Double maxi = max(dataArr);
+		Double mini = min(dataArr);
+		for (int i = 0; i < size; i++) {
+			rn[i] = (dataArr[i] - mean) / (maxi - mini);
+		}
+		return rn;
 	}
 
 

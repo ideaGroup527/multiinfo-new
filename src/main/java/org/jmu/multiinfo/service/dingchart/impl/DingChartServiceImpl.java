@@ -61,7 +61,7 @@ public class DingChartServiceImpl implements DingChartService {
 			try {
 				resData = new double[dataArr.length][dataArr[0].length];
 				for (int i = 0; i < dataArr.length; i++) {
-					resData[i] = basicStatisticsService.regularization(dataArr[i]);
+					resData[i] = basicStatisticsService.regularizationRange(dataArr[i]);
 				}
 			} catch (DataErrException e) {
 				dingDto.setRet_code("-1");
@@ -77,7 +77,7 @@ public class DingChartServiceImpl implements DingChartService {
 			try {
 				resData = new double[dataArr.length][dataArr[0].length];
 				for (int i = 0; i < dataArr.length; i++) {
-					resData[i] = basicStatisticsService.regularization(dataArr[i]);
+					resData[i] = basicStatisticsService.regularizationRange(dataArr[i]);
 				}
 				resData = DataFormatUtil.transposition(resData);
 			} catch (DataErrException e) {
@@ -89,7 +89,7 @@ public class DingChartServiceImpl implements DingChartService {
 			break;
 		case DingChartCondition.CALCULATE_METHOD_ALL:
 			try {
-				resData = basicStatisticsService.regularization(dataArr);
+				resData = basicStatisticsService.regularizationRange(dataArr);
 			} catch (DataErrException e) {
 				dingDto.setRet_code("-1");
 				e.printStackTrace();
