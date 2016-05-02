@@ -49,6 +49,9 @@ var resultTableGenerator = function () {
         case 'Means':
             handleMeans(tableResult);
             break;
+        case 'Simple_Linear_Regression':
+            handleSimpleLinearRegression(tableResult);
+            break;
     }
 
     //绘图区
@@ -878,33 +881,33 @@ var handleRelatedVariable = function (tableResult) {
 
     //是否可预测
     //if (tableResult.examineSuccess) {
-        //变量数组
-        var variableList = [];
-        tableResult.independVarList.map(function (variable) {
-            variableList.push(variable.varietyName);
-        });
+    //变量数组
+    var variableList = [];
+    tableResult.independVarList.map(function (variable) {
+        variableList.push(variable.varietyName);
+    });
 
-        //变量行
-        var variableRow = $(row).clone();
-        $(variableRow).append(emptyCell);
-        variableList.map(function (variableName) {
-            $(variableRow).append($(headerCell).clone().text(variableName));
-        });
-        $(table).append(variableRow);
+    //变量行
+    var variableRow = $(row).clone();
+    $(variableRow).append(emptyCell);
+    variableList.map(function (variableName) {
+        $(variableRow).append($(headerCell).clone().text(variableName));
+    });
+    $(table).append(variableRow);
 
-        //打印预测值
-        var predictionRow = $(row).clone();
-        $(predictionRow).append($(cell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_prediction_value'));
-        tableResult.resData.map(function (value) {
-            if (Number(value) != NaN) {
-                $(predictionRow).append($(cell).clone().text(Number(value).toFixed(numReservation)));
-            }
-        });
-        $(table).append(predictionRow);
+    //打印预测值
+    var predictionRow = $(row).clone();
+    $(predictionRow).append($(cell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_prediction_value'));
+    tableResult.resData.map(function (value) {
+        if (Number(value) != NaN) {
+            $(predictionRow).append($(cell).clone().text(Number(value).toFixed(numReservation)));
+        }
+    });
+    $(table).append(predictionRow);
 
-        //打印表名和表格
-        $(container).append($(tableHeader).clone().text(tableResult.predictName)).append(table);
-        $(presentArea).append(container);
+    //打印表名和表格
+    $(container).append($(tableHeader).clone().text(tableResult.predictName)).append(table);
+    $(presentArea).append(container);
     //} else {
     //    alert('该数据不符合灰色预测的数据检验要求');
     //    window.history.go(-1);
@@ -922,7 +925,7 @@ var handleANOVA = function (tableResult) {
     var variableList = Object.keys(handleData);
 
     //参数列表【骂后台把，变量名太散】
-    var ANOVAconfigs = ['sum_of_squares', 'df', 'mean_squares', 'f'];
+    var ANOVAconfigs = ['sum_of_squares', 'df', 'mean_square', 'f'];
 
     //保留小数配置
     var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
@@ -1110,4 +1113,160 @@ var handleMeans = function (tableResult) {
 
     $(container).append(table);
     $(presentArea).append(container);
+};
+
+var handleSimpleLinearRegression = function (tableResult) {
+    //声明打印区域
+    var presentArea = $('.result-table');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
+    //声明DOM 元素
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var tableHeader = $('<h1>');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered table-condensed');
+
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
+    var emptyCell = $(headerCell).clone();
+
+    var block = $('<div>');
+    var span = $('<span>');
+
+    //打印三个表格
+    //第一个表格：模型汇总
+    //需要打印的变量列表
+    var modelSummaryList = ['r', 'rsquare', 'adjustedRSquared'];
+    var modelSummaryArea = $(container).clone();
+    $(modelSummaryArea).append(
+        $(tableHeader).clone()
+            .attr('data-i18n-type', 'page')
+            .attr('data-i18n-tag', 'label_model_summary')
+    );
+
+    var modelSummaryTable = $(table).clone();
+    var titleRow = $(row).clone();
+    $(titleRow).append(
+        $(headerCell).clone()
+            .attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', 'model')
+    );
+    modelSummaryList.map(function (name) {
+        $(titleRow).append(
+            $(headerCell).clone()
+                .attr('data-i18n-type', 'table')
+                .attr('data-i18n-tag', name)
+        )
+    });
+    $(modelSummaryTable).append(titleRow);
+    //变量值
+    var valueRow = $(row).clone();
+    $(valueRow).append(
+        $(cell).clone()
+            .attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', 'linear')
+    );
+    modelSummaryList.map(function (key) {
+        $(valueRow).append(
+            $(cell).clone().text(
+                (Number(tableResult[key]) != NaN) ? Number(tableResult[key]).toFixed(numReservation) : tableResult[key]
+            )
+        );
+    });
+    $(modelSummaryTable).append(valueRow);
+    var SLRconfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_SINGLE_LINEAR_REGRESSION'));
+    $(modelSummaryArea).append(modelSummaryTable)
+        .append($(block).clone()
+            .append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_dependent_variable_is'))
+            .append($(span).clone().text(SLRconfig.dependentVariable[0].varietyName)))
+        .append($(block).clone()
+            .append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_independent_variable_is'))
+            .append($(span).clone().text(SLRconfig.independentVariable[0].varietyName)));
+
+    $(presentArea).append(modelSummaryArea);
+
+    //第二格表格：ANOVA表
+    var ANOVAList = ['sum_of_squares', 'mean_square', 'f'];
+    var ANOVAArea = $(container).clone();
+    $(ANOVAArea).append(
+        $(tableHeader).clone()
+            .attr('data-i18n-type', 'page')
+            .attr('data-i18n-tag', 'label_anova')
+    );
+    var ANOVATable = $(table).clone();
+    var ANOVATitleRow = $(row).clone();
+    $(ANOVATitleRow).append(
+        $(headerCell).clone()
+            .attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', 'model')
+    );
+    ANOVAList.map(function (name) {
+        $(ANOVATitleRow).append(
+            $(headerCell).clone()
+                .attr('data-i18n-type', 'table')
+                .attr('data-i18n-tag', name)
+        );
+    });
+    $(ANOVATable).append(ANOVATitleRow);
+
+    var ANOVAValueRow = $(row).clone();
+    $(ANOVAValueRow).append(
+        $(cell).clone().append(
+            $(block).clone()
+                .attr('data-i18n-type', 'table')
+                .attr('data-i18n-tag', 'regression')
+        ).append(
+            $(block).clone()
+                .attr('data-i18n-type', 'table')
+                .attr('data-i18n-tag', 'residual')
+        )
+    );
+    ANOVAList.map(function (value) {
+        switch (value) {
+            case 'sum_of_squares':
+                $(ANOVAValueRow).append(
+                    $(cell).clone().append(
+                        $(block).clone().text(Number(tableResult.regressionSumSquares).toFixed(numReservation))
+                    ).append(
+                        $(block).clone().text(Number(tableResult.sumSquaredErrors).toFixed(numReservation))
+                    )
+                );
+                break;
+            case 'mean_square':
+                $(ANOVAValueRow).append(
+                    $(cell).clone().append(
+                        $(block).clone().text(Number(tableResult.regressionSumSquares).toFixed(numReservation))
+                    ).append(
+                        $(block).clone().text(Number(tableResult.meanSquareError).toFixed(numReservation))
+                    )
+                );
+                break;
+            case 'f':
+                $(ANOVAValueRow).append(
+                    $(cell).clone().append(
+                        $(block).clone().text(Number(tableResult.f).toFixed(numReservation))
+                    )
+                );
+                break;
+        }
+    });
+    $(ANOVATable).append(ANOVAValueRow);
+    $(ANOVAArea).append(ANOVATable)
+        .append($(block).clone()
+            .append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_dependent_variable_is'))
+            .append($(span).clone().text(SLRconfig.dependentVariable[0].varietyName)))
+        .append($(block).clone()
+            .append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_independent_variable_is'))
+            .append($(span).clone().text(SLRconfig.independentVariable[0].varietyName)));
+    $(presentArea).append(ANOVAArea);
+
+    //第三个表格：系数表
+    var coefficientArea = $(container).clone();
+    var coefficientTable = $(table).clone();
 };
