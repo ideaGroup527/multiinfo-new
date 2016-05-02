@@ -1,7 +1,9 @@
 package org.jmu.multiinfo.web.controller;
 
-import org.jmu.multiinfo.core.controller.BaseController;
-import org.jmu.multiinfo.dto.comparemean.*;
+import org.jmu.multiinfo.dto.comparemean.AnovaCondition;
+import org.jmu.multiinfo.dto.comparemean.AnovaDataDTO;
+import org.jmu.multiinfo.dto.comparemean.MedianCondition;
+import org.jmu.multiinfo.dto.comparemean.MedianDTO;
 import org.jmu.multiinfo.service.comparemean.CompareMeanStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
