@@ -23,8 +23,7 @@
                    data-i18n-tag="label_indep_var_list">自变量列表</p>
 
                 <div data-config-group data-group-name="independentVariable" data-config-val-flag=".active"
-                     data-variable-select-rule="single"
-                     data-variable-select-group="dependentVariable,independentVariable">
+                     data-variable-select-rule="single">
                 </div>
             </div>
             <div class="modal-footer">
@@ -59,31 +58,6 @@
 
             $('[data-group-name=dependentVariable]').append(depVariableWrapper);
             $('[data-group-name=independentVariable]').append(indVariableWrapper);
-        });
-
-        $('[data-group-name=independentVariable]').on('click', '.variable-wrapper', function (e) {
-            //从无到选中
-            if (!$(e.target).hasClass('active') && !$(e.target).attr('disabled')) {
-                $('[data-group-name=dependentVariable]').find('[data-toggle-select=' + $(e.target).attr('data-toggle-select') + ']')
-                        .attr('disabled', true);
-            } else {
-                //从选中到无
-                $('[data-group-name=dependentVariable]').find('[data-toggle-select=' + $(e.target).attr('data-toggle-select') + ']')
-                        .attr('disabled', false);
-            }
-
-        });
-
-        $('[data-group-name=dependentVariable]').on('click', '.variable-wrapper', function (e) {
-            //从无到选中
-            if (!$(e.target).hasClass('active') && !$(e.target).attr('disabled')) {
-                $('[data-group-name=independentVariable]').find('[data-toggle-select=' + $(e.target).attr('data-toggle-select') + ']')
-                        .attr('disabled', true);
-            } else {
-                //从选中到无
-                $('[data-group-name=independentVariable]').find('[data-toggle-select=' + $(e.target).attr('data-toggle-select') + ']')
-                        .attr('disabled', false);
-            }
         });
     })
 </script>

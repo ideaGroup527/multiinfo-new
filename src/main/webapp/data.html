@@ -104,7 +104,6 @@
 </div>
 <script src="js/common/navGenerator.js"></script>
 <script src="js/common/page/dataTableGenerator.js"></script>
-<script src="js/common/page/variableSubmit/variableChoose.js"></script>
 <script src="js/common/page/variableSubmit/handler.js"></script>
 <script>
 
@@ -156,25 +155,14 @@
                 });
             }).done(function () {
                 i18n();
-                variableChoose(variableList).done(function () {
-                    variableRule();
-                });
+                variableRule();
             });
         } else {
             $.getScript(scriptURL);
         }
-    }).on('click', '.variable-wrapper', function (e) {
-//        e.preventDefault();
-//        if (!$(this).attr('disabled')) {
-//            $(this).toggleClass('active');
-//        } else {
-//            e.stopPropagation();
-//        }
     }).on('click', '.variable-submit', function (e) {
         e.preventDefault();
         $.getScript(sessionStorage.getItem('PRIVATE_MODAL_SCRIPT_URL'), function () {
-
-
             var handlerConfig = {
                 submitType: $('.variable-submit').attr('data-btn-type'),
                 gridData: dataGrid

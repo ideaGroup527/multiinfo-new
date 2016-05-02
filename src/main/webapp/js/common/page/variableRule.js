@@ -36,34 +36,38 @@ var variableRule = function () {
     $('[data-variable-select-rule="single"]').each(function () {
 
         var that = this;
-        $(this).find('.variable-wrapper').on('click', function (e) {
+        $(this).find('.variable-wrapper').on('click', function () {
             //取消之前选择的
             $(that).find('.variable-wrapper').removeClass('active');
             $(this).toggleClass('active');
         });
-
-        //组合型情况
-        //TODO 现在的情况只有两个分组
-        if ($(this).attr("data-variable-select-group")) {
-            var groupList = $(this).attr('data-variable-select-group').split('.');
-
-            groupList.map(function (group, index) {
-
-                $('[data-group-name=' + groupList[1 - index] + ']').on('click', '.variable-wrapper', function (e) {
-                    if (!$(e.target).hasClass('active') && !$(e.target).attr('disabled')) {
-                        $('[data-group-name=' + groupList[index] + ']').find('[data-toggle-select=' + $(e.target).attr('data-toggle-select') + ']')
-                            .attr('disabled', true);
-                    } else {
-                        //从选中到无
-                        $('[data-group-name=' + groupList[index] + ']').find('[data-toggle-select=' + $(e.target).attr('data-toggle-select') + ']')
-                            .attr('disabled', false);
-                    }
-                });
-
-            });
-        }
-
     });
 
     //变量选择规则 - 组合型
+    //TODO 现在只应对两个group的情况，待后期优化
+    if ($('[data-variable-select-group]')) {
+        var groupList = $('[data-variable-select-group]').attr('data-variable-select-group').split(',');
+
+        $('[data-group-name=' + groupList[0] + ']').on('click', '.variable-wrapper', function (e) {
+            e.stopPropagation();
+            if (!$(e.target).hasClass('active') && !$(e.target).attr('disabled')) {
+                $('[data-group-name=' + groupList[1] + ']').find('[data-toggle-select=' + $(e.target).attr('data-toggle-select') + ']')
+                    .attr('disabled', true);
+            } else {
+                $('[data-group-name=' + groupList[1] + ']').find('[data-toggle-select=' + $(e.target).attr('data-toggle-select') + ']')
+                    .attr('disabled', true);
+            }
+        });
+
+        $('[data-group-name=' + groupList[1] + ']').on('click', '.variable-wrapper', function (e) {
+            e.stopPropagation();
+            if (!$(e.target).hasClass('active') && !$(e.target).attr('disabled')) {
+                $('[data-group-name=' + groupList[0] + ']').find('[data-toggle-select=' + $(e.target).attr('data-toggle-select') + ']')
+                    .attr('disabled', true);
+            } else {
+                $('[data-group-name=' + groupList[0] + ']').find('[data-toggle-select=' + $(e.target).attr('data-toggle-select') + ']')
+                    .attr('disabled', true);
+            }
+        });
+    }
 };
