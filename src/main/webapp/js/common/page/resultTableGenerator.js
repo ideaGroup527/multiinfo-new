@@ -1326,7 +1326,7 @@ var handleSimpleLinearRegression = function (tableResult) {
 
     var valueSecondRow = $(row).clone();
     $(valueSecondRow).append(
-        $(cell).clone().text('x')
+        $(cell).clone().text(SLRconfig.independentVariable[0].varietyName)
     ).append(
         $(cell).clone()
             .text(Number(tableResult.regressionParameters[1]).toFixed(numReservation))
@@ -1387,8 +1387,7 @@ var handleMultiLinearRegression = function (tableResult) {
     //打印三个表格
     //第一个表格：模型汇总
     //需要打印的变量列表
-    //TODO 这边后台缺少一个R值
-    var modelSummaryList = ['rsquared', 'adjustedRSquared', 'regressionStandardError'];
+    var modelSummaryList = ['r', 'rsquared', 'adjustedRSquared', 'regressionStandardError'];
     var modelSummaryArea = $(container).clone();
     $(modelSummaryArea).append(
         $(tableHeader).clone()
