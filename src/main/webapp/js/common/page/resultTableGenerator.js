@@ -1268,5 +1268,89 @@ var handleSimpleLinearRegression = function (tableResult) {
 
     //第三个表格：系数表
     var coefficientArea = $(container).clone();
+    $(coefficientArea).append(
+        $(tableHeader).clone()
+            .attr('data-i18n-type', 'page')
+            .attr('data-i18n-tag', 'label_coefficients')
+    );
     var coefficientTable = $(table).clone();
+    var coTitleFirstRow = $(row).clone();
+    $(coTitleFirstRow).append(
+        $(headerCell).clone()
+            .attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', 'model')
+            .attr('rowspan', '2')
+    ).append(
+        $(headerCell).clone()
+            .attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', 'unstandardized_coefficients')
+            .attr('colspan', '2')
+    ).append(
+        $(headerCell).clone()
+            .attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', 't')
+            .attr('rowspan', '2')
+    );
+    var coTitleSecondRow = $(row).clone();
+    $(coTitleSecondRow).append(
+        $(headerCell).clone()
+            .attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', 'b')
+    ).append(
+        $(headerCell).clone()
+            .attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', 'standard_error')
+    );
+    $(coefficientTable).append(coTitleFirstRow).append(coTitleSecondRow);
+
+    var valueFirstRow = $(row).clone();
+    $(valueFirstRow).append(
+        $(cell).clone()
+            .attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', 'constant')
+    ).append(
+        $(cell).clone()
+            .text(Number(tableResult.regressionParameters[0]).toFixed(numReservation))
+    ).append(
+        $(cell).clone()
+            .text(Number(tableResult.regressionParametersStandardErrors[0]).toFixed(numReservation))
+    ).append(
+        $(cell).clone()
+            .text(Number(tableResult.ttests[0]).toFixed(numReservation))
+    );
+
+    var valueSecondRow = $(row).clone();
+    $(valueSecondRow).append(
+        $(cell).clone().text('x')
+    ).append(
+        $(cell).clone()
+            .text(Number(tableResult.regressionParameters[1]).toFixed(numReservation))
+    ).append(
+        $(cell).clone()
+            .text(Number(tableResult.regressionParametersStandardErrors[1]).toFixed(numReservation))
+    ).append(
+        $(cell).clone()
+            .text(Number(tableResult.ttests[1]).toFixed(numReservation))
+    );
+    $(coefficientTable).append(valueFirstRow).append(valueSecondRow);
+    $(coefficientArea).append(coefficientTable)
+        .append($(block).clone().css({
+                'font-weight': '700',
+                'margin-bottom': '10px'
+            })
+            .append($(span).clone().text(SLRconfig.dependentVariable[0].varietyName))
+            .append($(span).clone().text(' = '))
+            .append($(span).clone().text(Number(tableResult.regressionParameters[0]).toFixed(numReservation)))
+            .append((Number(tableResult.regressionParameters[1]) > 0) ? ' + ' : ' - ')
+            .append($(span).clone().text(Number(tableResult.regressionParameters[1]).toFixed(numReservation)))
+            .append($(span).clone().text(' × '))
+            .append($(span).clone().text(SLRconfig.independentVariable[0].varietyName))
+        )
+        .append($(block).clone()
+            .append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_dependent_variable_is'))
+            .append($(span).clone().text(SLRconfig.dependentVariable[0].varietyName)))
+        .append($(block).clone()
+            .append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_independent_variable_is'))
+            .append($(span).clone().text(SLRconfig.independentVariable[0].varietyName)));
+    $(presentArea).append(coefficientArea);
 };

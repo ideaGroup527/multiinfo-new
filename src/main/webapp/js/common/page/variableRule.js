@@ -4,8 +4,10 @@ var variableRule = function () {
     $('[data-variable-select-rule="normal"]').each(function () {
         var that = this;
         $(this).find('.variable-wrapper').on('click', function (e) {
-            $(this).toggleClass('active');
-            e.stopPropagation();
+            if (!$(this).attr('disabled')) {
+                $(this).toggleClass('active');
+                e.stopPropagation();
+            }
         });
     });
 
@@ -38,8 +40,10 @@ var variableRule = function () {
         var that = this;
         $(this).find('.variable-wrapper').on('click', function () {
             //取消之前选择的
-            $(that).find('.variable-wrapper').removeClass('active');
-            $(this).toggleClass('active');
+            if (!$(this).attr('disabled')) {
+                $(that).find('.variable-wrapper').removeClass('active');
+                $(this).toggleClass('active');
+            }
         });
     });
 
@@ -50,24 +54,18 @@ var variableRule = function () {
 
         $('[data-group-name=' + groupList[0] + ']').on('click', '.variable-wrapper', function (e) {
             e.stopPropagation();
-            if (!$(e.target).hasClass('active') && !$(e.target).attr('disabled')) {
-                $('[data-group-name=' + groupList[1] + ']').find('[data-toggle-select=' + $(e.target).attr('data-toggle-select') + ']')
-                    .attr('disabled', true);
-            } else {
-                $('[data-group-name=' + groupList[1] + ']').find('[data-toggle-select=' + $(e.target).attr('data-toggle-select') + ']')
-                    .attr('disabled', true);
-            }
+            $('[data-group-name=' + groupList[0] + ']').find('.variable-wrapper').map(function (index, variable) {
+                $('[data-group-name=' + groupList[1] + ']').find('[data-toggle-select=' + $(variable).attr('data-toggle-select') + ']')
+                    .attr('disabled', ($(this).hasClass('active')) ? true : false);
+            });
         });
 
         $('[data-group-name=' + groupList[1] + ']').on('click', '.variable-wrapper', function (e) {
             e.stopPropagation();
-            if (!$(e.target).hasClass('active') && !$(e.target).attr('disabled')) {
-                $('[data-group-name=' + groupList[0] + ']').find('[data-toggle-select=' + $(e.target).attr('data-toggle-select') + ']')
-                    .attr('disabled', true);
-            } else {
-                $('[data-group-name=' + groupList[0] + ']').find('[data-toggle-select=' + $(e.target).attr('data-toggle-select') + ']')
-                    .attr('disabled', true);
-            }
+            $('[data-group-name=' + groupList[1] + ']').find('.variable-wrapper').map(function (index, variable) {
+                $('[data-group-name=' + groupList[0] + ']').find('[data-toggle-select=' + $(variable).attr('data-toggle-select') + ']')
+                    .attr('disabled', ($(this).hasClass('active')) ? true : false);
+            });
         });
     }
 };
