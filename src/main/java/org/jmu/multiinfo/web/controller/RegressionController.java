@@ -66,13 +66,25 @@ public class RegressionController extends BaseController{
 		
 	}
 	
+	
+	/***
+	 * 一般逐步回归
+	 * 路径/statistics/regression.do?method=stepwise
+	 * @param condition
+	 * @return
+	 */
 	@RequestMapping(params = { "method=stepwise" })
 	@ResponseBody
 	public StepwiseMultipleDTO calStepwiseMultipleLinearRegression(@RequestBody StepwiseCondition condition){
 		return stpRegressionService.stepwise(condition);
 		
 	}
-	
+	/***
+	 * 滑移逐步回归
+	 * 路径/statistics/regression.do?method=stepwise
+	 * @param condition
+	 * @return
+	 */
 	@RequestMapping(params = { "method=slipstepwise" })
 	@ResponseBody
 	public SlipStepwiseDTO calSlipStepwiseLinearRegression(@RequestBody SlipStepwiseCondition condition){
