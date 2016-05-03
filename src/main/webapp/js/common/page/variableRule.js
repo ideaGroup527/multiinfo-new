@@ -2,11 +2,9 @@ var variableRule = function () {
 
     //变量选择规则 - 普通型
     $('[data-variable-select-rule="normal"]').each(function () {
-        var that = this;
         $(this).find('.variable-wrapper').on('click', function (e) {
             if (!$(this).attr('disabled')) {
                 $(this).toggleClass('active');
-                e.stopPropagation();
             }
         });
     });

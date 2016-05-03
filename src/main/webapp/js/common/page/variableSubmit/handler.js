@@ -147,6 +147,13 @@ var handleSubmit = function (config) {
             dataPackage.independentVariable = SLR.independentVariable;
             dataPackage.dependentVariable = SLR.dependentVariable[0];
             break;
+        case 'Multi_Linear_Regression':
+            //多远线性回归
+            handleURL = 'statistics/regression.do?method=multipleLinear';
+            var MLR = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_MULTI_LINEAR_REGRESSION'));
+            dataPackage.independentVariable = MLR.independentVariable;
+            dataPackage.dependentVariable = MLR.dependentVariable[0];
+            break;
     }
 
     $.ajax({

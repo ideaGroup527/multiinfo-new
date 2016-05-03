@@ -122,13 +122,15 @@
             "name": {
               "en-us": "Multiple Linear Regression",
               "zh-cn": "多元线性回归"
-            }
+            },
+            "modal": "modal.html",
+            "script": "script.js"
           },
           {
             "term": "PredictiveRegression",
             "name": {
               "en-us": "Predictive Regression",
-              "zh-cn":"预测型回归"
+              "zh-cn": "预测型回归"
             }
           }
         ]
