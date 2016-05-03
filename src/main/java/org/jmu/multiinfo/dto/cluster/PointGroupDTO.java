@@ -6,17 +6,17 @@ import org.jmu.multiinfo.core.dto.BaseDTO;
 
 public class PointGroupDTO extends BaseDTO{
 private List<StepClusterDTO> stepList;
-private List<Double> factorVarList;
+private List<Object> factorVarList;
 public List<StepClusterDTO> getStepList() {
 	return stepList;
 }
 public void setStepList(List<StepClusterDTO> stepList) {
 	this.stepList = stepList;
 }
-public List<Double> getFactorVarList() {
+public List<Object> getFactorVarList() {
 	return factorVarList;
 }
-public void setFactorVarList(List<Double> factorVarList) {
+public void setFactorVarList(List<Object> factorVarList) {
 	this.factorVarList = factorVarList;
 }
 

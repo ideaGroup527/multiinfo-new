@@ -1,5 +1,9 @@
 package org.jmu.multiinfo.base.util;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.jmu.multiinfo.core.util.MatrixUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -80,5 +84,18 @@ public class MatrixUtilTest {
 		double[][] dataArr={{1,4,7},{3,0,5},{-1,9,11}};
 		double[][] focArr = MatrixUtil.cofactor(dataArr);
 		System.out.println();
+	}
+	
+	
+	@Test
+	public void mapSameRemove(){
+		Map<String, Double> map = new LinkedHashMap<>();
+		if(!map.containsKey("1"))
+		map.put("1", 2.0);
+		if(!map.containsKey("1"))
+		map.put("1", 33.3);
+		for (Map.Entry<String, Double> entry : map.entrySet()) {
+			System.err.println(entry.getKey()+":"+entry.getValue());
+		}
 	}
 }

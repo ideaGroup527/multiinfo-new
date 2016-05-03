@@ -3,8 +3,10 @@ package org.jmu.multiinfo.service.cluster.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.jmu.multiinfo.core.exception.DataErrException;
 import org.jmu.multiinfo.core.util.DataFormatUtil;
@@ -44,14 +46,8 @@ public class ClusterServiceImpl implements ClusterService{
 		}
 		
 		// 样本号数据
-		List<Double> factorVarList = new ArrayList<Double>();
-		// 样本号
-		PositionBean factorRange = ExcelUtil.splitRange(factorVar.getRange());
-		for (int i = factorRange.getFirstRowId() - 1; i < factorRange.getLastRowId(); i++) {
-			for (int j = factorRange.getFirstColId() - 1; j < factorRange.getLastColId(); j++) {
-				factorVarList.add(DataFormatUtil.converToDouble(dataGrid[i][j]));
-			}
-		}
+		List<Object> factorVarList = new ArrayList<Object>();
+
 		
 		
 		double[][] dataArr=null;
@@ -59,6 +55,13 @@ public class ClusterServiceImpl implements ClusterService{
 		case PointGroupCondition.TYPE_Q:{
 			//个体间
 			 dataArr = DataFormatUtil.transposition(dataGridList);
+				// 样本号
+				PositionBean factorRange = ExcelUtil.splitRange(factorVar.getRange());
+				for (int i = factorRange.getFirstRowId() - 1; i < factorRange.getLastRowId(); i++) {
+					for (int j = factorRange.getFirstColId() - 1; j < factorRange.getLastColId(); j++) {
+						factorVarList.add(dataGrid[i][j].getData());
+					}
+				}
 			break;
 		}
 		case PointGroupCondition.TYPE_R:{
@@ -67,6 +70,10 @@ public class ClusterServiceImpl implements ClusterService{
 			dataArr = new double[dataGridList.size()][dataGridList.get(0).size()];
 			for (int i = 0; i < dataGridList.size(); i++) {
 				dataArr[i] =	DataFormatUtil.converToDouble(dataGridList.get(i));
+			}
+			
+			for (int i = 0; i < independVarList.size(); i++) {
+				factorVarList.add(independVarList.get(i).getVarietyName());
 			}
 			break;
 			}
@@ -123,16 +130,14 @@ public class ClusterServiceImpl implements ClusterService{
 		switch (condition.getStatisticsMethod()) {
 		case PointGroupCondition.STATISTICS_CORRELATION:{
 			for (int i = 0; i < row; i++) {
-				for (int j = 0; j < row; j++) {
+				for (int j = i+1; j < row; j++) {
 					try {
-						if(j == i+1){
 							StepClusterDTO e =  new StepClusterDTO();
 						Double data = correlationService.pearsonRCoefficient(dataArr[i], dataArr[j]);
 						e.setData(data);
 						e.setRowIndex(i+1);
 						e.setColIndex(j+1);
 						stepList.add(e);
-						}
 					} catch (DataErrException e) {
 						e.printStackTrace();
 						pointDTO.setRet_code("-1");
@@ -141,19 +146,34 @@ public class ClusterServiceImpl implements ClusterService{
 					}
 				}
 			}
+			Collections.sort(stepList,new Comparator<StepClusterDTO>() {
+				@Override
+				public int compare(StepClusterDTO o1, StepClusterDTO o2) {
+					return o2.getData().compareTo(o1.getData());
+				}
+			});
+			Map<Integer,StepClusterDTO> stepMap = new LinkedHashMap<>();
+			for (int i = 0; i < stepList.size(); i++) {
+				StepClusterDTO scDTO =	stepList.get(i);
+				if(!stepMap.containsKey(scDTO.getColIndex())){
+					stepMap.put(scDTO.getColIndex(), scDTO);
+				}
+			}
+			stepList.clear();
+			for (Entry<Integer, StepClusterDTO> entry : stepMap.entrySet()) {
+				stepList.add( entry.getValue());
+			}
 			break;}
 		case PointGroupCondition.STATISTICS_ANGLE_COSINE:{
 			for (int i = 0; i < row; i++) {
-				for (int j = 0; j < row; j++) {
+				for (int j = i+1; j < row; j++) {
 					try {
-						if(j == i+1){
 							StepClusterDTO e =  new StepClusterDTO();
 						Double data = basicStatisticsService.cos(dataArr[i], dataArr[j]);
 						e.setData(data);
 						e.setRowIndex(i+1);
 						e.setColIndex(j+1);
 						stepList.add(e);
-						}
 					} catch (DataErrException e) {
 						e.printStackTrace();
 						pointDTO.setRet_code("-1");
@@ -162,19 +182,35 @@ public class ClusterServiceImpl implements ClusterService{
 					}
 				}
 			}
+			Collections.sort(stepList,new Comparator<StepClusterDTO>() {
+				@Override
+				public int compare(StepClusterDTO o1, StepClusterDTO o2) {
+					return o2.getData().compareTo(o1.getData());
+				}
+			});
+			Map<Integer,StepClusterDTO> stepMap = new LinkedHashMap<>();
+			for (int i = 0; i < stepList.size(); i++) {
+				StepClusterDTO scDTO =	stepList.get(i);
+				if(!stepMap.containsKey(scDTO.getColIndex())){
+					stepMap.put(scDTO.getColIndex(), scDTO);
+				}
+			}
+			stepList.clear();
+			for (Entry<Integer, StepClusterDTO> entry : stepMap.entrySet()) {
+				stepList.add( entry.getValue());
+			}
 			break;}
 		case PointGroupCondition.STATISTICS_DISTANCE:{
 			for (int i = 0; i < row; i++) {
-				for (int j = 0; j < row; j++) {
+				for (int j = i+1; j < row; j++) {
 					try {
-						if(j == i+1){
 							StepClusterDTO e =  new StepClusterDTO();
 						Double data = basicStatisticsService.euclideanDistance(dataArr[i], dataArr[j]);
 						e.setData(data);
 						e.setRowIndex(i+1);
 						e.setColIndex(j+1);
 						stepList.add(e);
-						}
+						
 					} catch (DataErrException e) {
 						e.printStackTrace();
 						pointDTO.setRet_code("-1");
@@ -183,17 +219,30 @@ public class ClusterServiceImpl implements ClusterService{
 					}
 				}
 			}
+			
+			Collections.sort(stepList,new Comparator<StepClusterDTO>() {
+				@Override
+				public int compare(StepClusterDTO o1, StepClusterDTO o2) {
+					return o1.getData().compareTo(o2.getData());
+				}
+			});
+			Map<Integer,StepClusterDTO> stepMap = new LinkedHashMap<>();
+			for (int i = 0; i < stepList.size(); i++) {
+				StepClusterDTO scDTO =	stepList.get(i);
+				if(!stepMap.containsKey(scDTO.getColIndex())){
+					stepMap.put(scDTO.getColIndex(), scDTO);
+				}
+			}
+			stepList.clear();
+			for (Entry<Integer, StepClusterDTO> entry : stepMap.entrySet()) {
+				stepList.add( entry.getValue());
+			}
 			break;}
 		default:
 			break;
 		}
 		
-		Collections.sort(stepList,new Comparator<StepClusterDTO>() {
-			@Override
-			public int compare(StepClusterDTO o1, StepClusterDTO o2) {
-				return o1.getData().compareTo(o2.getData());
-			}
-		});
+
 		pointDTO.setFactorVarList(factorVarList);
 		pointDTO.setStepList(stepList);
 		
