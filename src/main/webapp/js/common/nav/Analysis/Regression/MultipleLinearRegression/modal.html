@@ -1,0 +1,63 @@
+<div class="modal fade in" id="Multi_Linear_Regression" tabindex="-1" role="dialog"
+     aria-labelledby="Multi_Linear_Regression_Label" style="display: block;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="Multi_Linear_Regression_Label"
+                    data-i18n-type="page"
+                    data-i18n-tag="modal_title_multi_linear_regression">多元线性回归</h4>
+            </div>
+            <div class="modal-body">
+                <p data-i18n-type="page"
+                   data-i18n-tag="label_dep_var_list">因变量列表</p>
+
+                <div data-config-group data-group-name="dependentVariable" data-config-val-flag=".active"
+                     data-variable-select-rule="single"
+                     data-variable-select-group="dependentVariable,independentVariable">
+
+                </div>
+                <hr/>
+                <p data-i18n-type="page"
+                   data-i18n-tag="label_indep_var_list">自变量列表</p>
+
+                <div data-config-group data-group-name="independentVariable" data-config-val-flag=".active"
+                     data-variable-select-rule="normal">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary variable-submit"
+                        data-btn-type="Multi_Linear_Regression"
+                        data-i18n-type="page" data-i18n-tag="btn_next">确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var variableList = JSON.parse(sessionStorage.getItem('PRIVATE_VARIABLE_LIST'));
+
+        variableList.map(function (variable, i) {
+            var depVariableWrapper = $('<span>');
+            var indVariableWrapper = $('<span>');
+            $(depVariableWrapper).addClass('variable-wrapper')
+                    .attr('name', 'dependentVariable')
+                    .attr('data-config', JSON.stringify(variable))
+                    .attr('data-toggle-select', i)
+                    .val(variable)
+                    .text(variable.varietyName);
+
+            $(indVariableWrapper).addClass('variable-wrapper')
+                    .attr('name', 'independentVariable')
+                    .attr('data-config', JSON.stringify(variable))
+                    .attr('data-toggle-select', i)
+                    .val(variable)
+                    .text(variable.varietyName);
+
+            $('[data-group-name=dependentVariable]').append(depVariableWrapper);
+            $('[data-group-name=independentVariable]').append(indVariableWrapper);
+        });
+    })
+</script>

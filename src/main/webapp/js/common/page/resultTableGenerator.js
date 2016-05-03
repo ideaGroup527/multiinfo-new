@@ -43,14 +43,19 @@ var resultTableGenerator = function () {
             handleRelatedVariable(tableResult);
             break;
         case 'Oneway_ANOVA':
-            //均值比较 - 单因素方差分析 (哎呀，ANOVA 这名字是台式太好听了~)
+            //均值比较 - 单因素方差分析 (哎呀，ANOVA 这名字实在是太好听了~)
             handleANOVA(tableResult);
             break;
         case 'Means':
             handleMeans(tableResult);
             break;
         case 'Simple_Linear_Regression':
+            //一元线性回归
             handleSimpleLinearRegression(tableResult);
+            break;
+        case 'Multi_Linear_Regression':
+            //多元线性回归
+            handleMultiLinearRegression(tableResult);
             break;
     }
 
@@ -1268,5 +1273,172 @@ var handleSimpleLinearRegression = function (tableResult) {
 
     //第三个表格：系数表
     var coefficientArea = $(container).clone();
+    $(coefficientArea).append(
+        $(tableHeader).clone()
+            .attr('data-i18n-type', 'page')
+            .attr('data-i18n-tag', 'label_coefficients')
+    );
     var coefficientTable = $(table).clone();
+    var coTitleFirstRow = $(row).clone();
+    $(coTitleFirstRow).append(
+        $(headerCell).clone()
+            .attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', 'model')
+            .attr('rowspan', '2')
+    ).append(
+        $(headerCell).clone()
+            .attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', 'unstandardized_coefficients')
+            .attr('colspan', '2')
+    ).append(
+        $(headerCell).clone()
+            .attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', 't')
+            .attr('rowspan', '2')
+    );
+    var coTitleSecondRow = $(row).clone();
+    $(coTitleSecondRow).append(
+        $(headerCell).clone()
+            .attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', 'b')
+    ).append(
+        $(headerCell).clone()
+            .attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', 'regressionStandardError')
+    );
+    $(coefficientTable).append(coTitleFirstRow).append(coTitleSecondRow);
+
+    var valueFirstRow = $(row).clone();
+    $(valueFirstRow).append(
+        $(cell).clone()
+            .attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', 'constant')
+    ).append(
+        $(cell).clone()
+            .text(Number(tableResult.regressionParameters[0]).toFixed(numReservation))
+    ).append(
+        $(cell).clone()
+            .text(Number(tableResult.regressionParametersStandardErrors[0]).toFixed(numReservation))
+    ).append(
+        $(cell).clone()
+            .text(Number(tableResult.ttests[0]).toFixed(numReservation))
+    );
+
+    var valueSecondRow = $(row).clone();
+    $(valueSecondRow).append(
+        $(cell).clone().text('x')
+    ).append(
+        $(cell).clone()
+            .text(Number(tableResult.regressionParameters[1]).toFixed(numReservation))
+    ).append(
+        $(cell).clone()
+            .text(Number(tableResult.regressionParametersStandardErrors[1]).toFixed(numReservation))
+    ).append(
+        $(cell).clone()
+            .text(Number(tableResult.ttests[1]).toFixed(numReservation))
+    );
+    $(coefficientTable).append(valueFirstRow).append(valueSecondRow);
+    $(coefficientArea).append(coefficientTable)
+        .append($(block).clone().css({
+                'font-weight': '700',
+                'margin-bottom': '10px'
+            })
+            .append($(span).clone().text(SLRconfig.dependentVariable[0].varietyName))
+            .append($(span).clone().text(' = '))
+            .append($(span).clone().text(Number(tableResult.regressionParameters[0]).toFixed(numReservation)))
+            .append((Number(tableResult.regressionParameters[1]) > 0) ? ' + ' : ' - ')
+            .append($(span).clone().text(Number(tableResult.regressionParameters[1]).toFixed(numReservation)))
+            .append($(span).clone().text(' × '))
+            .append($(span).clone().text(SLRconfig.independentVariable[0].varietyName))
+        )
+        .append($(block).clone()
+            .append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_dependent_variable_is'))
+            .append($(span).clone().text(SLRconfig.dependentVariable[0].varietyName)))
+        .append($(block).clone()
+            .append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_independent_variable_is'))
+            .append($(span).clone().text(SLRconfig.independentVariable[0].varietyName)));
+    $(presentArea).append(coefficientArea);
+};
+
+var handleMultiLinearRegression = function (tableResult) {
+    //声明打印区域
+    var presentArea = $('.result-table');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
+    //声明DOM 元素
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var tableHeader = $('<h1>');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered table-condensed');
+
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
+    var emptyCell = $(headerCell).clone();
+
+    var block = $('<div>');
+    var span = $('<span>');
+
+    //打印三个表格
+    //第一个表格：模型汇总
+    //需要打印的变量列表
+    //TODO 这边后台缺少一个R值
+    var modelSummaryList = ['rsquared', 'adjustedRSquared', 'regressionStandardError'];
+    var modelSummaryArea = $(container).clone();
+    $(modelSummaryArea).append(
+        $(tableHeader).clone()
+            .attr('data-i18n-type', 'page')
+            .attr('data-i18n-tag', 'label_model_summary')
+    );
+
+    var modelSummaryTable = $(table).clone();
+    var titleRow = $(row).clone();
+    $(titleRow).append(
+        $(headerCell).clone()
+            .attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', 'model')
+    );
+    modelSummaryList.map(function (name) {
+        $(titleRow).append(
+            $(headerCell).clone()
+                .attr('data-i18n-type', 'table')
+                .attr('data-i18n-tag', name)
+        )
+    });
+    $(modelSummaryTable).append(titleRow);
+    //变量值
+    var valueRow = $(row).clone();
+    $(valueRow).append(
+        $(cell).clone()
+            .attr('data-i18n-type', 'table')
+            .attr('data-i18n-tag', 'linear')
+    );
+    modelSummaryList.map(function (key) {
+        $(valueRow).append(
+            $(cell).clone().text(
+                (Number(tableResult[key]) != NaN) ? Number(tableResult[key]).toFixed(numReservation) : tableResult[key]
+            )
+        );
+    });
+    $(modelSummaryTable).append(valueRow);
+    var MLRconfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_MULTI_LINEAR_REGRESSION'));
+    var independentVariablesName = '';
+    MLRconfig.independentVariable.map(function (variable, index) {
+        independentVariablesName += (MLRconfig.independentVariable[index + 1]) ? variable.varietyName + ',' : variable.varietyName;
+    });
+    $(modelSummaryArea).append(modelSummaryTable)
+        .append($(block).clone()
+            .append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_dependent_variable_is'))
+            .append($(span).clone().text(MLRconfig.dependentVariable[0].varietyName)))
+        .append($(block).clone()
+            .append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_independent_variable_is'))
+            .append($(span).clone().text(independentVariablesName)));
+
+    $(presentArea).append(modelSummaryArea);
+
 };
