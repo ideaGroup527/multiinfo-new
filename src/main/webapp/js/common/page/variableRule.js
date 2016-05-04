@@ -40,7 +40,7 @@ var variableRule = function () {
             //取消之前选择的
             if (!$(this).attr('disabled')) {
                 $(that).find('.variable-wrapper').removeClass('active');
-                $(this).toggleClass('active');
+                $(this).addClass('active');
             }
         });
     });

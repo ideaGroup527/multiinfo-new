@@ -58,37 +58,5 @@
             $('[data-group-name=dependentVariable]').append(depVariableWrapper);
             $('[data-group-name=factorVariable]').append(facVariableWrapper);
         });
-
-        $('[data-group-name=factorVariable]').on('click', '.variable-wrapper', function (e) {
-            //单选
-            e.stopPropagation();
-            var oldSelectedItem = $('[data-group-name=factorVariable]').find('.variable-wrapper.active');
-            var oldSelectedIndex = $(oldSelectedItem).attr('data-toggle-select');
-
-            if (!$(e.target).attr('disabled')) {
-                $(e.target).addClass('active');
-                $(oldSelectedItem).removeClass('active');
-                //取消上方相同参数被选中的可能 并还原之前不能选中的可能
-                //还有方法二，添加.hide 使不可见
-                $('[data-group-name=dependentVariable]').find('[data-toggle-select=' + $(e.target).attr('data-toggle-select') + ']')
-                        .attr('disabled', true);
-                $('[data-group-name=dependentVariable]').find('[data-toggle-select=' + oldSelectedIndex + ']')
-                        .attr('disabled', false);
-            }
-
-        });
-
-        $('[data-group-name=dependentVariable]').on('click', '.variable-wrapper', function (e) {
-            //可多选，但上下不能同时选中
-            //从无到选中
-            if (!$(e.target).hasClass('active') && !$(e.target).attr('disabled')) {
-                $('[data-group-name=factorVariable]').find('[data-toggle-select=' + $(e.target).attr('data-toggle-select') + ']')
-                        .attr('disabled', true);
-            } else {
-                //从选中到无
-                $('[data-group-name=factorVariable]').find('[data-toggle-select=' + $(e.target).attr('data-toggle-select') + ']')
-                        .attr('disabled', false);
-            }
-        });
     })
 </script>
