@@ -84,7 +84,8 @@
       "modal_title_principal_component_analysis": "Principal Component Analysis",
       "modal_title_set_accuracy": "Set Value Accuracy",
       "modal_title_simple_linear_regression": "Simple Linear Regression",
-      "modal_title_multi_linear_regression": "多元线性回归",
+      "modal_title_multi_linear_regression": "Multi Linear Regression",
+      "modal_title_gray_correlation": "Gray Correlation",
       "label_choose_sheet": "Select Your Sheet",
       "label_choose_variable": "Click to choose variable(s) below",
       "label_choose_col_variable": "Click to choose Column variable(s) below",
@@ -145,7 +146,9 @@
       "label_dependent_variable_is": "The Dependent Variable: ",
       "label_independent_variable_is": "The Independent Variable: ",
       "label_anova": "ANOVA",
-      "label_coefficients": "Coefficients"
+      "label_coefficients": "Coefficients",
+      "label_choose_comparative_sequence": "Comparative Sequence",
+      "label_choose_parent_sequence": "Parent Sequence"
     },
     "zh-cn": {
       "options": "选项",
@@ -166,6 +169,7 @@
       "modal_title_set_accuracy": "设置精确度",
       "modal_title_simple_linear_regression": "一元线性回归",
       "modal_title_multi_linear_regression": "多元线性回归",
+      "modal_title_gray_correlation": "灰色关联度",
       "label_choose_sheet": "请选择待分析的表格",
       "label_choose_variable": "点击选择待选变量",
       "label_choose_col_variable": "点击选择 列变量",
@@ -229,7 +233,9 @@
       "label_dependent_variable_is": "因变量：",
       "label_independent_variable_is": "自变量：",
       "label_anova": "方差分析",
-      "label_coefficients": "系数"
+      "label_coefficients": "系数",
+      "label_choose_comparative_sequence": "比较序列",
+      "label_choose_parent_sequence": "母序列"
     }
   },
   "table": {

@@ -61,7 +61,12 @@ $.fn.navGenerator = function (config) {
                                 $(level_2_item).addClass('dropdown');
 
                                 $(level_2_item_name).addClass('js-menu-click')
-                                    .attr('data-script', 'js/common/nav/' + level_1_menu.term + '/' + level_2_menu.term + '/' + level_2_menu.script);
+                                    .attr('data-script', 'js/common/nav/' + level_1_menu.term + '/' + level_2_menu.term + '/' + level_2_menu.script)
+                                    .attr('href', 'javascript:')
+                                    .attr('data-modal', 'js/common/nav/' + level_1_menu.term + '/' + level_2_menu.term + '/' + level_2_menu.modal)
+                                    .attr('data-modal-id', level_2_menu.modalId);
+
+
                                 $(level_2_item).append(level_2_item_name);
 
                             } else {

@@ -1,0 +1,78 @@
+<div class="modal fade in" id="Gray_Correlation" tabindex="-1" role="dialog"
+     aria-labelledby="Gray_Correlation_Label" style="display: block;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="Gray_Correlation_Label"
+                    data-i18n-type="page"
+                    data-i18n-tag="modal_title_gray_correlation">灰色关联度</h4>
+            </div>
+            <div class="modal-body">
+                <p data-i18n-type="page"
+                   data-i18n-tag="label_choose_comparative_sequence">比较序列</p>
+
+                <div data-config-group data-group-name="sonSeqArr" data-config-val-flag=".active"
+                     data-variable-select-rule="normal"
+                     data-variable-select-group="sonSeqArr,motherSeq">
+
+                </div>
+                <hr/>
+                <p data-i18n-type="page"
+                   data-i18n-tag="label_choose_parent_sequence">母序列</p>
+
+                <div data-config-group data-group-name="motherSeq" data-config-val-flag=".active"
+                     data-variable-select-rule="single">
+
+                </div>
+                <div data-panel="config">
+                    <fieldset class="algorithm-config-zone">
+                        <legend data-i18n-tag="options" data-i18n-type="page">选项</legend>
+                        <div data-config-group data-group-name="resolutionRatio">
+                            <span>ρ</span>
+                            <input class="form-control small" type="number" name="resolutionRatio" min="0" max="1"
+                                   step="0.1" value="0.5">
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default variable-config" data-i18n-type="page"
+                        data-i18n-tag="options">选项
+                </button>
+                <button type="button" class="btn btn-primary variable-submit"
+                        data-btn-type="Gray_Correlation"
+                        data-i18n-type="page" data-i18n-tag="btn_next">确定
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            var variableList = JSON.parse(sessionStorage.getItem('PRIVATE_VARIABLE_LIST'));
+
+            variableList.map(function (variable, i) {
+                var depVariableWrapper = $('<span>');
+                var facVariableWrapper = $('<span>');
+                $(depVariableWrapper).addClass('variable-wrapper')
+                        .attr('name', 'sonSeqArr')
+                        .attr('data-config', JSON.stringify(variable))
+                        .attr('data-toggle-select', i)
+                        .val(variable)
+                        .text(variable.varietyName);
+
+                $(facVariableWrapper).addClass('variable-wrapper')
+                        .attr('name', 'motherSeq')
+                        .attr('data-config', JSON.stringify(variable))
+                        .attr('data-toggle-select', i)
+                        .val(variable)
+                        .text(variable.varietyName);
+
+                $('[data-group-name=sonSeqArr]').append(depVariableWrapper);
+                $('[data-group-name=motherSeq]').append(facVariableWrapper);
+            });
+        })
+    </script>
+</div>

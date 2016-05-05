@@ -122,6 +122,14 @@ var handleSubmit = function (config) {
             dataPackage.eigExtraNum = PCA.eigExtraNum[0];
             dataPackage.factorExtraNum = PCA.factorExtraNum[0];
             break;
+        case 'Gray_Correlation':
+            //灰色关联度
+            handleURL = 'statistics/prediction.do?method=greydegree';
+            var GC = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_GRAY_CORRELATION'));
+            dataPackage.sonSeqArr = GC.sonSeqArr;
+            dataPackage.motherSeq = GC.motherSeq[0];
+            dataPackage.resolutionRatio = GC.resolutionRatio[0];
+            break;
         case 'Related_Variable':
             //灰色预测 - 关联变量
             handleURL = 'statistics/prediction.do?method=grey';
