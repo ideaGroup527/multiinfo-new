@@ -86,6 +86,7 @@
             "modal_title_simple_linear_regression": "Simple Linear Regression",
             "modal_title_multi_linear_regression": "Multi Linear Regression",
             "modal_title_gray_correlation": "Gray Correlation",
+            "modal_title_general_stepwise_regression": "General Stepwise Regression",
             "label_choose_sheet": "Select Your Sheet",
             "label_choose_variable": "Click to choose variable(s) below",
             "label_choose_col_variable": "Click to choose Column variable(s) below",
@@ -151,7 +152,9 @@
             "label_choose_parent_sequence": "Parent Sequence",
             "label_gray_correlation_table": "Table of Gray Correlation",
             "label_sequence": "Sequence",
-            "label_conclusion": "Conclusion"
+            "label_conclusion": "Conclusion",
+            "label_entry_f": "Entry",
+            "label_del_f": "Excluding"
         },
         "zh-cn": {
             "options": "选项",
@@ -173,6 +176,7 @@
             "modal_title_simple_linear_regression": "一元线性回归",
             "modal_title_multi_linear_regression": "多元线性回归",
             "modal_title_gray_correlation": "灰色关联度",
+            "modal_title_general_stepwise_regression": "一般逐步回归",
             "label_choose_sheet": "请选择待分析的表格",
             "label_choose_variable": "点击选择待选变量",
             "label_choose_col_variable": "点击选择 列变量",
@@ -241,7 +245,9 @@
             "label_choose_parent_sequence": "母序列",
             "label_gray_correlation_table": "灰色关联度表",
             "label_sequence": "排序",
-            "label_conclusion": "结论"
+            "label_conclusion": "结论",
+            "label_entry_f": "引入",
+            "label_del_f": "剔除"
         }
     },
     "table": {

@@ -162,6 +162,14 @@ var handleSubmit = function (config) {
             dataPackage.independentVariable = MLR.independentVariable;
             dataPackage.dependentVariable = MLR.dependentVariable[0];
             break;
+        case 'General_Stepwise_Regression':
+            //回归 - 逐步回归 - 一般逐步回归
+            var GSR = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_GENERAL_STEPWISE_REGRESSION'));
+            dataPackage.independentVariable = GSR.independentVariable;
+            dataPackage.dependentVariable = GSR.dependentVariable[0];
+            dataPackage.entryF = GSR.entryF[0];
+            dataPackage.delF = GSR.delF[0];
+            break;
     }
 
     $.ajax({

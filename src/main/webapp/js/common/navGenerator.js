@@ -78,18 +78,41 @@ $.fn.navGenerator = function (config) {
                                 $(level_3_menu_list).addClass('dropdown-menu');
 
                                 level_2_menu.subMenu.map(function (level_3_menu) {
+
                                     var level_3_item = $('<li>');
-
                                     var level_3_item_name = $('<a>');
-                                    $(level_3_item_name).addClass('js-menu-click')
-                                        .html(level_3_menu.name[lang])
-                                        .attr('data-modal-id', level_3_menu.modalId)
-                                        .attr('href', 'javascript:')
-                                        .attr('data-modal', 'js/common/nav/' + level_1_menu.term + '/' + level_2_menu.term + '/' + level_3_menu.term + '/' + level_3_menu.modal)
-                                        .attr('data-script', 'js/common/nav/' + level_1_menu.term + '/' + level_2_menu.term + '/' + level_3_menu.term + '/' + level_3_menu.script);
 
-                                    $(level_3_item).append(level_3_item_name);
+                                    if (!level_3_menu.subMenu) {
+                                        $(level_3_item_name).addClass('js-menu-click')
+                                            .html(level_3_menu.name[lang])
+                                            .attr('data-modal-id', level_3_menu.modalId)
+                                            .attr('href', 'javascript:')
+                                            .attr('data-modal', 'js/common/nav/' + level_1_menu.term + '/' + level_2_menu.term + '/' + level_3_menu.term + '/' + level_3_menu.modal)
+                                            .attr('data-script', 'js/common/nav/' + level_1_menu.term + '/' + level_2_menu.term + '/' + level_3_menu.term + '/' + level_3_menu.script);
 
+                                        $(level_3_item).append(level_3_item_name);
+                                    } else {
+                                        $(level_3_item).attr('data-submenu', '').addClass('dropdown-submenu');
+                                        $(level_3_item_name).html(level_3_menu.name[lang]).attr('href', 'javascript:');
+                                        $(level_3_item).append(level_3_item_name);
+                                        var level_4_menu_list = $('<ul>');
+                                        $(level_4_menu_list).addClass('dropdown-menu');
+
+                                        level_3_menu.subMenu.map(function (level_4_menu) {
+                                            var level_4_item = $('<li>');
+                                            var level_4_item_name = $('<a>');
+
+                                            $(level_4_item_name).addClass('js-menu-click')
+                                                .html(level_4_menu.name[lang])
+                                                .attr('href', 'javascript:')
+                                                .attr('data-modal', 'js/common/nav/' + level_1_menu.term + '/' + level_2_menu.term + '/' + level_3_menu.term + '/' + level_4_menu.term + '/' + level_4_menu.modal)
+                                                .attr('data-script', 'js/common/nav/' + level_1_menu.term + '/' + level_2_menu.term + '/' + level_3_menu.term + '/' + level_4_menu.term + '/' + level_4_menu.script);
+
+                                            $(level_4_item).append(level_4_item_name);
+                                            $(level_4_menu_list).append(level_4_item);
+                                        });
+                                        $(level_3_item).append(level_4_menu_list);
+                                    }
                                     $(level_3_menu_list).append(level_3_item);
                                 });
 
