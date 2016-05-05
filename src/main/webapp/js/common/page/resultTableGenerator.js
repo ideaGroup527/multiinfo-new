@@ -37,6 +37,10 @@ var resultTableGenerator = function () {
             //降维 - 主成分
             handlePrincipalComponentAnalysis(tableResult);
             break;
+        case 'Gray_Correlation':
+            //灰色关联度
+            handleGrayCorrelation(tableResult);
+            break;
         case 'Related_Variable':
         case 'Independent_Variable':
             //灰色预测 - 关联变量
@@ -918,6 +922,85 @@ var handleRelatedVariable = function (tableResult) {
     //    window.history.go(-1);
     //}
 };
+var handleGrayCorrelation = function (tableResult) {
+    //声明放置区域
+    var presentArea = $('.result-table');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
+    //声明DOM 元素
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var tableHeader = $('<h1>');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered table-condensed');
+
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
+
+    var block = $('<div>');
+    var span = $('<span>');
+
+    $(container).append($(tableHeader).attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_gray_correlation_table'));
+
+    //获取本地参数
+    var GC = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_GRAY_CORRELATION'));
+    var variableList = GC.sonSeqArr;
+    //后台没传变量名，自行封装一个值-名对象
+    var gcObject = {};
+    tableResult.correlationArr.map(function (corralation, index) {
+        gcObject[corralation] = variableList[index].varietyName;
+    });
+
+    //打印变量行
+    var variableRow = $(row).clone();
+    $(variableRow).append($(headerCell).clone());
+    variableList.map(function (variable) {
+        $(variableRow).append($(headerCell).clone().text(variable.varietyName));
+    });
+    $(table).append(variableRow);
+
+    //打印关联度值
+    var corrRow = $(row).clone();
+    $(corrRow).append($(cell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_correlation'));
+    tableResult.correlationArr.map(function (corralation) {
+        $(corrRow).append($(cell).clone().text(Number(corralation).toFixed(numReservation)));
+    });
+    $(table).append(corrRow);
+
+    //打印大小关系
+    var relationRow = $(row).clone();
+    $(relationRow).append($(cell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_sequence'));
+    var sequenceStr = '';
+    tableResult.sortCorrelationArr.map(function (sort, index) {
+        sequenceStr += Number(sort).toFixed(numReservation);
+        if (tableResult.sortCorrelationArr[++index]) {
+            sequenceStr += ' > ';
+        }
+    });
+    $(relationRow).append($(cell).clone().text(sequenceStr).attr('colspan', variableList.length));
+    $(table).append(relationRow);
+
+    //打印结论
+    var conclusionRow = $(row).clone();
+    $(conclusionRow).append($(cell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_conclusion'));
+    var conclusionStr = '';
+    if (localStorage.getItem('MULTIINFO_CONFIG_LANGUAGE') == 'zh-cn') {
+        conclusionStr = '<strong>' + GC.motherSeq[0].varietyName + '</strong>' + ' 受到 ' + '<strong>' + gcObject[tableResult.maxCorrelation] + '</strong>' + ' 的影响最大';
+    } else {
+        conclusionStr = '<strong>' + gcObject[tableResult.maxCorrelation] + '</strong>' + ' has the greatest effect on ' + '<strong>' + GC.motherSeq[0].varietyName + '</strong>';
+    }
+    $(conclusionRow).append($(cell).clone().html(conclusionStr).attr('colspan', variableList.length));
+    $(table).append(conclusionRow);
+
+    $(container).append(table);
+    $(presentArea).append(container);
+};
+
 var handleANOVA = function (tableResult) {
 
     //声明打印区域
@@ -1119,7 +1202,6 @@ var handleMeans = function (tableResult) {
     $(container).append(table);
     $(presentArea).append(container);
 };
-
 var handleSimpleLinearRegression = function (tableResult) {
     //声明打印区域
     var presentArea = $('.result-table');
@@ -1340,9 +1422,9 @@ var handleSimpleLinearRegression = function (tableResult) {
     $(coefficientTable).append(valueFirstRow).append(valueSecondRow);
     $(coefficientArea).append(coefficientTable)
         .append($(block).clone().css({
-                'font-weight': '700',
-                'margin-bottom': '10px'
-            })
+            'font-weight': '700',
+            'margin-bottom': '10px'
+        })
             .append($(span).clone().text(SLRconfig.dependentVariable[0].varietyName))
             .append($(span).clone().text(' = '))
             .append($(span).clone().text(Number(tableResult.regressionParameters[0]).toFixed(numReservation)))
@@ -1350,7 +1432,7 @@ var handleSimpleLinearRegression = function (tableResult) {
             .append($(span).clone().text(Number(tableResult.regressionParameters[1]).toFixed(numReservation)))
             .append($(span).clone().text(' × '))
             .append($(span).clone().text(SLRconfig.independentVariable[0].varietyName))
-        )
+    )
         .append($(block).clone()
             .append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_dependent_variable_is'))
             .append($(span).clone().text(SLRconfig.dependentVariable[0].varietyName)))
@@ -1359,7 +1441,6 @@ var handleSimpleLinearRegression = function (tableResult) {
             .append($(span).clone().text(SLRconfig.independentVariable[0].varietyName)));
     $(presentArea).append(coefficientArea);
 };
-
 var handleMultiLinearRegression = function (tableResult) {
     //声明打印区域
     var presentArea = $('.result-table');
