@@ -164,6 +164,7 @@ var handleSubmit = function (config) {
             break;
         case 'General_Stepwise_Regression':
             //回归 - 逐步回归 - 一般逐步回归
+            handleURL = 'statistics/regression.do?method=stepwise';
             var GSR = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_GENERAL_STEPWISE_REGRESSION'));
             dataPackage.independentVariable = GSR.independentVariable;
             dataPackage.dependentVariable = GSR.dependentVariable[0];

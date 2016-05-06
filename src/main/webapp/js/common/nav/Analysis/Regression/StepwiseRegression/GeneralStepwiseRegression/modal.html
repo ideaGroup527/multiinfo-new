@@ -16,7 +16,6 @@
                 <div data-config-group data-group-name="dependentVariable" data-config-val-flag=".active"
                      data-variable-select-rule="single"
                      data-variable-select-group="dependentVariable,independentVariable">
-
                 </div>
                 <hr/>
                 <p data-i18n-type="page"
@@ -32,11 +31,11 @@
 
                         <div data-config-group data-group-name="entryF">
                             <span data-i18n-type="page" data-i18n-tag="label_entry_f">引入</span>
-                            <input type="number" name="entryF" min="0.0001" max="99998"/>
+                            <input class="form-group-sm" type="number" name="entryF" min="0.0001" max="99998"/>
                         </div>
                         <div data-config-group data-group-name="delF">
                             <span data-i18n-type="page" data-i18n-tag="label_del_f">剔除</span>
-                            <input type="number" name="delF" min="0.0001" max="99998"/>
+                            <input class="form-group-sm" type="number" name="delF" min="0.0001" max="99998"/>
                         </div>
                     </fieldset>
                 </div>
@@ -52,30 +51,30 @@
             </div>
         </div>
     </div>
+    <script>
+        $(function () {
+            var variableList = JSON.parse(sessionStorage.getItem('PRIVATE_VARIABLE_LIST'));
+
+            variableList.map(function (variable, i) {
+                var depVariableWrapper = $('<span>');
+                var indVariableWrapper = $('<span>');
+                $(depVariableWrapper).addClass('variable-wrapper')
+                        .attr('name', 'dependentVariable')
+                        .attr('data-config', JSON.stringify(variable))
+                        .attr('data-toggle-select', i)
+                        .val(variable)
+                        .text(variable.varietyName);
+
+                $(indVariableWrapper).addClass('variable-wrapper')
+                        .attr('name', 'independentVariable')
+                        .attr('data-config', JSON.stringify(variable))
+                        .attr('data-toggle-select', i)
+                        .val(variable)
+                        .text(variable.varietyName);
+
+                $('[data-group-name=dependentVariable]').append(depVariableWrapper);
+                $('[data-group-name=independentVariable]').append(indVariableWrapper);
+            });
+        })
+    </script>
 </div>
-<script>
-    $(function () {
-        var variableList = JSON.parse(sessionStorage.getItem('PRIVATE_VARIABLE_LIST'));
-
-        variableList.map(function (variable, i) {
-            var depVariableWrapper = $('<span>');
-            var indVariableWrapper = $('<span>');
-            $(depVariableWrapper).addClass('variable-wrapper')
-                    .attr('name', 'dependentVariable')
-                    .attr('data-config', JSON.stringify(variable))
-                    .attr('data-toggle-select', i)
-                    .val(variable)
-                    .text(variable.varietyName);
-
-            $(indVariableWrapper).addClass('variable-wrapper active')
-                    .attr('name', 'independentVariable')
-                    .attr('data-config', JSON.stringify(variable))
-                    .attr('data-toggle-select', i)
-                    .val(variable)
-                    .text(variable.varietyName);
-
-            $('[data-group-name=dependentVariable]').append(depVariableWrapper);
-            $('[data-group-name=independentVariable]').append(indVariableWrapper);
-        });
-    })
-</script>
