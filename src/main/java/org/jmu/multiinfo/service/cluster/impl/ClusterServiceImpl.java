@@ -83,7 +83,6 @@ public class ClusterServiceImpl implements ClusterService{
 		
 		int row = dataArr.length;
 		int col = dataArr[0].length;
-		
 		switch (condition.getNormalizationMethod()) {
 		case PointGroupCondition.NORMALIZATION_RANGE:
 			for (int i = 0; i < row; i++) {
@@ -126,122 +125,113 @@ public class ClusterServiceImpl implements ClusterService{
 		default:
 			break;
 		}
+		
+		
 		List<StepClusterDTO> stepList = new ArrayList<>();
+		List<Integer> indexExist = new ArrayList<>();
+
+		for(int lo=0;lo< row-1;lo++){
 		switch (condition.getStatisticsMethod()) {
 		case PointGroupCondition.STATISTICS_CORRELATION:{
-			for (int i = 0; i < row; i++) {
-				for (int j = i+1; j < row; j++) {
-					try {
-							StepClusterDTO e =  new StepClusterDTO();
-						Double data = correlationService.pearsonRCoefficient(dataArr[i], dataArr[j]);
-						e.setData(data);
-						e.setRowIndex(i+1);
-						e.setColIndex(j+1);
-						stepList.add(e);
-					} catch (DataErrException e) {
-						e.printStackTrace();
-						pointDTO.setRet_code("-1");
-						pointDTO.setRet_err(e.getMessage());
-						return pointDTO;
-					}
-				}
-			}
-			Collections.sort(stepList,new Comparator<StepClusterDTO>() {
-				@Override
-				public int compare(StepClusterDTO o1, StepClusterDTO o2) {
-					return o2.getData().compareTo(o1.getData());
-				}
-			});
-			Map<Integer,StepClusterDTO> stepMap = new LinkedHashMap<>();
-			for (int i = 0; i < stepList.size(); i++) {
-				StepClusterDTO scDTO =	stepList.get(i);
-				if(!stepMap.containsKey(scDTO.getColIndex())){
-					stepMap.put(scDTO.getColIndex(), scDTO);
-				}
-			}
-			stepList.clear();
-			for (Entry<Integer, StepClusterDTO> entry : stepMap.entrySet()) {
-				stepList.add( entry.getValue());
-			}
-			break;}
-		case PointGroupCondition.STATISTICS_ANGLE_COSINE:{
-			for (int i = 0; i < row; i++) {
-				for (int j = i+1; j < row; j++) {
-					try {
-							StepClusterDTO e =  new StepClusterDTO();
-						Double data = basicStatisticsService.cos(dataArr[i], dataArr[j]);
-						e.setData(data);
-						e.setRowIndex(i+1);
-						e.setColIndex(j+1);
-						stepList.add(e);
-					} catch (DataErrException e) {
-						e.printStackTrace();
-						pointDTO.setRet_code("-1");
-						pointDTO.setRet_err(e.getMessage());
-						return pointDTO;
-					}
-				}
-			}
-			Collections.sort(stepList,new Comparator<StepClusterDTO>() {
-				@Override
-				public int compare(StepClusterDTO o1, StepClusterDTO o2) {
-					return o2.getData().compareTo(o1.getData());
-				}
-			});
-			Map<Integer,StepClusterDTO> stepMap = new LinkedHashMap<>();
-			for (int i = 0; i < stepList.size(); i++) {
-				StepClusterDTO scDTO =	stepList.get(i);
-				if(!stepMap.containsKey(scDTO.getColIndex())){
-					stepMap.put(scDTO.getColIndex(), scDTO);
-				}
-			}
-			stepList.clear();
-			for (Entry<Integer, StepClusterDTO> entry : stepMap.entrySet()) {
-				stepList.add( entry.getValue());
-			}
-			break;}
-		case PointGroupCondition.STATISTICS_DISTANCE:{
-			for (int i = 0; i < row; i++) {
-				for (int j = i+1; j < row; j++) {
-					try {
-							StepClusterDTO e =  new StepClusterDTO();
-						Double data = basicStatisticsService.euclideanDistance(dataArr[i], dataArr[j]);
-						e.setData(data);
-						e.setRowIndex(i+1);
-						e.setColIndex(j+1);
-						stepList.add(e);
-						
-					} catch (DataErrException e) {
-						e.printStackTrace();
-						pointDTO.setRet_code("-1");
-						pointDTO.setRet_err(e.getMessage());
-						return pointDTO;
-					}
-				}
-			}
 			
-			Collections.sort(stepList,new Comparator<StepClusterDTO>() {
-				@Override
-				public int compare(StepClusterDTO o1, StepClusterDTO o2) {
-					return o1.getData().compareTo(o2.getData());
-				}
-			});
-			Map<Integer,StepClusterDTO> stepMap = new LinkedHashMap<>();
-			for (int i = 0; i < stepList.size(); i++) {
-				StepClusterDTO scDTO =	stepList.get(i);
-				if(!stepMap.containsKey(scDTO.getColIndex())){
-					stepMap.put(scDTO.getColIndex(), scDTO);
+			StepClusterDTO maxiDTO =  null;
+			
+			
+			for (int i = 0; i < row; i++) {
+				for (int j = i+1; j < row; j++) {
+					try {
+						if(!indexExist.contains(j+1)){
+							StepClusterDTO e =  new StepClusterDTO();
+						Double data = correlationService.pearsonRCoefficient(dataArr[j], dataArr[i]);
+						e.setData(data);
+						e.setRowIndex(j+1);
+						e.setColIndex(i+1);
+						if(maxiDTO == null || e.getData()> maxiDTO.getData()) maxiDTO =e;
+						
+						}
+
+					} catch (DataErrException e) {
+						e.printStackTrace();
+						pointDTO.setRet_code("-1");
+						pointDTO.setRet_err(e.getMessage());
+						return pointDTO;
+					}
 				}
 			}
-			stepList.clear();
-			for (Entry<Integer, StepClusterDTO> entry : stepMap.entrySet()) {
-				stepList.add( entry.getValue());
+
+			stepList.add(maxiDTO);
+			indexExist.add(maxiDTO.getRowIndex());
+			break;
+			
+		}
+		case PointGroupCondition.STATISTICS_ANGLE_COSINE:{
+			
+			StepClusterDTO maxiDTO =  null;
+			
+			
+			for (int i = 0; i < row; i++) {
+				for (int j = i+1; j < row; j++) {
+					try {
+						if(!indexExist.contains(j+1)){
+							StepClusterDTO e =  new StepClusterDTO();
+						Double data = basicStatisticsService.cos(dataArr[j], dataArr[i]);
+						e.setData(data);
+						e.setRowIndex(j+1);
+						e.setColIndex(i+1);
+						if(maxiDTO == null || e.getData()> maxiDTO.getData()) maxiDTO =e;
+						
+						}
+
+					} catch (DataErrException e) {
+						e.printStackTrace();
+						pointDTO.setRet_code("-1");
+						pointDTO.setRet_err(e.getMessage());
+						return pointDTO;
+					}
+				}
 			}
-			break;}
+
+			stepList.add(maxiDTO);
+			indexExist.add(maxiDTO.getRowIndex());
+			break;
+			
+		}
+		case PointGroupCondition.STATISTICS_DISTANCE:{
+			
+			StepClusterDTO miniDTO =  null;
+			
+			
+			for (int i = 0; i < row; i++) {
+				for (int j = i+1; j < row; j++) {
+					try {
+						if(!indexExist.contains(j+1)){
+							StepClusterDTO e =  new StepClusterDTO();
+						Double data = basicStatisticsService.euclideanDistance(dataArr[j], dataArr[i]);
+						e.setData(data);
+						e.setRowIndex(j+1);
+						e.setColIndex(i+1);
+						if(miniDTO == null || e.getData()< miniDTO.getData()) miniDTO =e;
+						
+						}
+
+					} catch (DataErrException e) {
+						e.printStackTrace();
+						pointDTO.setRet_code("-1");
+						pointDTO.setRet_err(e.getMessage());
+						return pointDTO;
+					}
+				}
+			}
+
+			stepList.add(miniDTO);
+			indexExist.add(miniDTO.getRowIndex());
+			break;
+			
+		}
 		default:
 			break;
 		}
-		
+		}
 
 		pointDTO.setFactorVarList(factorVarList);
 		pointDTO.setStepList(stepList);
