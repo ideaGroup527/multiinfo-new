@@ -57,7 +57,8 @@ public static Double converToDouble(DataDTO dataDTO){
 		data = null;
 		break;	
 	case DataVariety.DATA_TYPE_NUMERIC_DOLLAL:
-		//TODO	
+		oraData = 	oraData.replaceAll("[$￥]", "");
+		data = converToDouble(oraData);
 		break;
 	case DataVariety.DATA_TYPE_NUMERIC:
 		data = converToDouble(oraData);
