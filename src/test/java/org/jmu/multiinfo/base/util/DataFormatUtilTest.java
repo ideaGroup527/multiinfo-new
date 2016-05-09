@@ -1,8 +1,8 @@
 package org.jmu.multiinfo.base.util;
 
+import org.jmu.multiinfo.core.dto.DataVariety;
 import org.jmu.multiinfo.core.util.DataFormatUtil;
 import org.jmu.multiinfo.dto.basestatistics.DataDTO;
-import org.jmu.multiinfo.dto.basestatistics.DataVariety;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

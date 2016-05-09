@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.jmu.multiinfo.core.dto.DataVariety;
 import org.jmu.multiinfo.dto.basestatistics.DataDTO;
-import org.jmu.multiinfo.dto.basestatistics.DataVariety;
 import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
 import org.jmu.multiinfo.dto.comparemean.AnovaCondition;
 import org.jmu.multiinfo.dto.comparemean.AnovaDataDTO;

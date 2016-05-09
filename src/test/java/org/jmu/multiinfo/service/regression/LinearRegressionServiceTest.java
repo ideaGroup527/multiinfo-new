@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jmu.multiinfo.base.util.MyJUnit4ClassRunner;
+import org.jmu.multiinfo.core.dto.DataVariety;
 import org.jmu.multiinfo.core.util.ExcelUtil;
 import org.jmu.multiinfo.dto.basestatistics.BiVarCondition;
 import org.jmu.multiinfo.dto.basestatistics.DataDTO;
-import org.jmu.multiinfo.dto.basestatistics.DataVariety;
 import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
 import org.jmu.multiinfo.dto.regression.MultipleLinearDTO;
 import org.jmu.multiinfo.dto.regression.SingleLinearDTO;

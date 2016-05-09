@@ -27,7 +27,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.util.IOUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.jmu.multiinfo.dto.basestatistics.DataVariety;
+import org.jmu.multiinfo.core.dto.DataVariety;
 import org.jmu.multiinfo.web.utils.CommonUtil;
 
 public class ExcelUtil {
@@ -157,8 +157,8 @@ public class ExcelUtil {
 			case DataVariety.DATA_TYPE_NUMERIC_VIRG:
 				des = "逗号型数值";
 					break;		
-			case DataVariety.DATA_TYPE_NUMERIC_DOT:
-				des = "圆点型数值";
+			case DataVariety.DATA_TYPE_FAULT:
+				des = "缺失数值";
 						break;		
 			case DataVariety.DATA_TYPE_NUMERIC_SCIENCE:
 				des = "科学型数值";
@@ -256,6 +256,7 @@ public class ExcelUtil {
 			}
 		} else {
 			cellvalue = "";
+			type = DataVariety.DATA_TYPE_FAULT;
 		}
 		map.put("value", cellvalue);
 		map.put("type", type);

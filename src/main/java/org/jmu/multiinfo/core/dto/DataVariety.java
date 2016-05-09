@@ -1,4 +1,4 @@
-package org.jmu.multiinfo.dto.basestatistics;
+package org.jmu.multiinfo.core.dto;
 
 public interface DataVariety {
 	
@@ -20,9 +20,9 @@ public interface DataVariety {
 	public final static int DATA_TYPE_NUMERIC_VIRG = 2;
 	
 	/**
-	 * 圆点型数值
+	 * 缺失数值
 	 */
-	public final static int DATA_TYPE_NUMERIC_DOT = 3;
+	public final static int DATA_TYPE_FAULT = 3;
 	
 	/**
 	 * 科学型数值
