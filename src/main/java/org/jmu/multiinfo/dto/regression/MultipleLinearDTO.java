@@ -1,6 +1,4 @@
 package org.jmu.multiinfo.dto.regression;
-
-import java.util.Arrays;
 /**
  * 
  * 
@@ -14,6 +12,8 @@ import java.util.Arrays;
  */
 public class MultipleLinearDTO extends CommonDTO{
 private Double residualSumOfSquares;
+
+private Double r;
 //R2adj = 1 - [SSR (n - 1)] / [SSTO (n - p)] 修正的可决系数，R ̅^2=1-（1-R^2）(n-1)/(n-k)，同R^2类似，若R ̅^2→1，表明解释变量X_2 、X_3对被解释变量Y影响越大，模型的拟合程度越高。
 private Double adjustedRSquared;
 // R2 = 1 - SSR / SSTO 可决系数，0≤R^2≤1，若R^2→1，表明解释变量X_2 、X_3对被解释变量Y影响越大，模型的拟合程度越高。
@@ -138,6 +138,12 @@ public Long getTotalDf() {
 }
 public void setTotalDf(Long totalDf) {
 	this.totalDf = totalDf;
+}
+public Double getR() {
+	return r;
+}
+public void setR(Double r) {
+	this.r = r;
 }
 
 

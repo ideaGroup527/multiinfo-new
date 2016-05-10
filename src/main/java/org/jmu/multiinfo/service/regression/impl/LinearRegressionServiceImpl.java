@@ -92,6 +92,7 @@ public class LinearRegressionServiceImpl implements LinearRegressionService {
 		}
 		linearDTO.setAdjustedRSquared(regression.calculateAdjustedRSquared());
 		linearDTO.setRSquared(regression.calculateRSquared());
+		linearDTO.setR(FastMath.sqrt(linearDTO.getRSquared()));
 		linearDTO.setTotalSumOfSquares(regression.calculateTotalSumOfSquares());
 		linearDTO.setErrorVariance(regression.estimateErrorVariance());
 		linearDTO.setRegressandVariance(regression.estimateRegressandVariance());
