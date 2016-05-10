@@ -122,6 +122,7 @@ public class UploadServiceImpl implements UploadService{
 						variety.setPosition(pjs);
 						variety.setVarietyName(datamap.get("value").toString());
 						variety.setType((Integer) datamap.get("type"));
+						variety.setTypeFormat(datamap.get("typeFormat").toString());
 						variety.setTypeDes(typeDes);
 						variety.setRange(pjs+2+":"+pjs+(sheet.getPhysicalNumberOfRows()-blankRow));
 						varietyList.add(variety);
@@ -132,6 +133,7 @@ public class UploadServiceImpl implements UploadService{
 						variety.setPosition(pjs);
 						variety.setVarietyName("V"+(j+1));
 						variety.setType((Integer) datamap.get("type"));
+						variety.setTypeFormat(datamap.get("typeFormat").toString());
 						variety.setTypeDes(typeDes);
 						variety.setRange(pjs+1+":"+pjs+(sheet.getPhysicalNumberOfRows()-blankRow));
 						varietyList.add(variety);
@@ -146,6 +148,7 @@ public class UploadServiceImpl implements UploadService{
 					data.setMergedRange(mergedRange);
 					data.setMergedRangeDes(mergedRangeDes);
 					data.setTypeDes(typeDes );
+					data.setTypeFormat(datamap.get("typeFormat").toString());
 					
 				}
 			}
