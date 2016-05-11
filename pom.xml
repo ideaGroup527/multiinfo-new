@@ -15,6 +15,7 @@
 		<mybatis.version>3.2.6</mybatis.version>
 		<jackson.version>2.7.2</jackson.version>
 		<druid.version>1.0.16</druid.version>
+		<springfox-swagger2.version>2.4.0</springfox-swagger2.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
@@ -36,6 +37,25 @@
 			<version>1.10.19</version>
 			<scope>test</scope>
 		</dependency>
+
+<!-- springfox-swagger2 -->
+   <dependency>
+	<groupId>io.springfox</groupId>
+	<artifactId>springfox-swagger2</artifactId>
+	<version>${springfox-swagger2.version}</version>
+</dependency>
+    <dependency>
+       <groupId>io.springfox</groupId>
+	<artifactId>springfox-swagger-ui</artifactId>
+        <version>${springfox-swagger2.version}</version>
+    </dependency>
+    <dependency>
+	<groupId>io.springfox</groupId>
+	<artifactId>springfox-staticdocs</artifactId>
+	<version>${springfox-swagger2.version}</version>
+</dependency>
+    
+    <!-- springfox-swagger2 dependencies -->
 
 		<!-- math -->
 		<dependency>

@@ -1,13 +1,10 @@
 package org.jmu.multiinfo.web.controller;
 
 import java.io.File;
-import java.io.FileOutputStream;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.jmu.multiinfo.core.controller.BaseController;
 import org.jmu.multiinfo.core.util.TokenProcessor;
 import org.jmu.multiinfo.dto.upload.DataToken;
@@ -26,6 +23,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 
 /***
  * 文件上传
@@ -35,8 +38,9 @@ import org.springframework.web.multipart.MultipartFile;
  * @date 2015年11月3日 下午3:53:33 
  * @version V1.0
  */
+@Api(value = "文件上传",tags="文件上传")  
 @Controller
-@RequestMapping("/upload.do")
+@RequestMapping("/upload")
 public class UploadController extends BaseController{
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -50,7 +54,6 @@ public class UploadController extends BaseController{
 	
 	/***
 	 * 根据token返回数据
-	 * 路径 /upload.do?method=file
 	 * @param request
 	 * @param response
 	 * @param session
@@ -61,11 +64,19 @@ public class UploadController extends BaseController{
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(params = { "method=file" })
+	@ApiOperation(value = "上传token", notes = "返回数据对象",httpMethod="GET")  
+	  @ApiResponses(value = {  
+	            @ApiResponse(code = 200, message = "上传成功", response = DataToken.class), 
+	            @ApiResponse(code = 400, message = "入参有误"),
+	            @ApiResponse(code = 500, message = "内部报错")}  
+	  )  
+	@RequestMapping(value= "/file.do")
 	@ResponseBody
-	public Object uploadFile(HttpServletRequest request, HttpServletResponse response,HttpSession session,
-			@RequestParam("token") String token,@RequestParam(required=false,value="sheetNo",defaultValue="0") int sheetNo,
-			@RequestParam("isMultiSheet") boolean isMultiSheet,@RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar) throws Exception{
+	public Object uploadFile(HttpServletRequest request, HttpServletResponse response,
+			@ApiParam(required = true, name = "token", value = "token") @RequestParam("token") String token,
+			@ApiParam(required = false, name = "sheetNo", value = "sheetNo",defaultValue="0") @RequestParam(required=false,value="sheetNo",defaultValue="0") int sheetNo,
+			@ApiParam(required = true, name = "isMultiSheet", value = "是否是多sheet") @RequestParam("isMultiSheet") boolean isMultiSheet,
+			@ApiParam(required = false, name = "isFirstRowVar", value = "是否第一行为变量") @RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar) throws Exception{
 		
 		if(isMultiSheet){
 			DataToken dataToken = tokenGenService.cacheData(token, null,null,sheetNo);
@@ -95,7 +106,6 @@ public class UploadController extends BaseController{
 	
 	/***
 	 * 上传excel
-	 * 路径 /upload.do?method=excel
 	 * @param request
 	 * @param response
 	 * @param session
@@ -104,10 +114,17 @@ public class UploadController extends BaseController{
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(params = { "method=excel" },method=RequestMethod.POST)
+	@ApiOperation(value = "上传excel", notes = "返回token对象", httpMethod="POST",consumes="index.html")  
+	  @ApiResponses(value = {  
+	            @ApiResponse(code = 200, message = "上传成功", response = TokenDTO.class),  
+	            @ApiResponse(code = 400, message = "入参有误"),
+	            @ApiResponse(code = 500, message = "内部报错")}  
+	  )  
+	@RequestMapping(value="/excel.do",method=RequestMethod.POST)
 	@ResponseBody
-	public TokenDTO uploadExcel(HttpServletRequest request, HttpServletResponse response,HttpSession session,
-			@RequestParam("data_file") MultipartFile file,@RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar) throws Exception{
+	public TokenDTO uploadExcel(HttpServletRequest request, HttpServletResponse response,
+			@ApiParam(required = true, name = "data_file", value = "excel文件") @RequestParam("data_file") MultipartFile file,
+			@ApiParam(required = false, name = "isFirstRowVar", value = "是否第一行为变量") @RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar) throws Exception{
 		TokenDTO tokenDTO = new TokenDTO();
 		Long createTime = System.nanoTime();
 		//生成token
@@ -142,7 +159,6 @@ public class UploadController extends BaseController{
 	
 	/***
 	 * 上传dat、data 二进制文本类型
-	 * 路径 /upload.do?method=text
 	 * @param request
 	 * @param response
 	 * @param session
@@ -151,11 +167,18 @@ public class UploadController extends BaseController{
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(params = { "method=text" },method=RequestMethod.POST)
+	@ApiOperation(value = "上传text", notes = "返回token对象",httpMethod="POST")  
+	  @ApiResponses(value = {  
+	            @ApiResponse(code = 200, message = "上传成功", response = TokenDTO.class), 
+	            @ApiResponse(code = 400, message = "入参有误"),
+	            @ApiResponse(code = 500, message = "内部报错")}  
+	  )  
+	@RequestMapping(value="text.do",method=RequestMethod.POST)
 	@ResponseBody
-	public TokenDTO uploadText(HttpServletRequest request, HttpServletResponse response,HttpSession session,
-			@RequestParam("data_file") MultipartFile file,@RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar,
-			@RequestParam(required = false,value="charset",defaultValue="UTF-8") String charset)throws Exception{
+	public TokenDTO uploadText(HttpServletRequest request, HttpServletResponse response,
+			@ApiParam(required = true, name = "data_file", value = "text文件") @RequestParam("data_file") MultipartFile file,
+			@ApiParam(required = false, name = "isFirstRowVar", value = "是否第一行为变量") @RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar,
+			@ApiParam(required = false, name = "charset", value = "文本编码",example="UTF-8",defaultValue="UTF-8") @RequestParam(required = false,value="charset",defaultValue="UTF-8") String charset)throws Exception{
 		TokenDTO tokenDTO = new TokenDTO();
 		Long createTime = System.nanoTime();
 		//生成token
