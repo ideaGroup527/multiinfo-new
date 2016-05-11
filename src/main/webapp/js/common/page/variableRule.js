@@ -47,7 +47,7 @@ var variableRule = function () {
 
     //变量选择规则 - 组合型
     //TODO 现在只应对两个group的情况，待后期优化
-    if ($('[data-variable-select-group]')) {
+    if ($('[data-variable-select-group]').length != 0) {
         var groupList = $('[data-variable-select-group]').attr('data-variable-select-group').split(',');
 
         $('[data-group-name=' + groupList[0] + ']').on('click', '.variable-wrapper', function (e) {
