@@ -50,7 +50,7 @@ public class UploadServiceImpl implements UploadService{
 			Workbook wb = null;
 			Map<String,Object> condition = new HashMap<String,Object>();
 				try {
-					wb = ExcelUtil.create(new FileInputStream(file),condition);
+					wb = ExcelUtil.create(FileUtils.openInputStream(file),condition);
 					excelDto.setVersion(condition.get("version").toString());
 				} catch (EncryptedDocumentException e) {
 					excelDto.setRet_msg("excel已被加密");
@@ -239,7 +239,7 @@ public class UploadServiceImpl implements UploadService{
 		Workbook wb = null;
 		Map<String,Object> condition = new HashMap<String,Object>();
 			try {
-				wb = ExcelUtil.create(new FileInputStream(file),condition);
+				wb = ExcelUtil.create(FileUtils.openInputStream(file),condition);
 				excelDto.setVersion(condition.get("version").toString());
 			} catch (EncryptedDocumentException e) {
 				excelDto.setRet_msg("excel已被加密");

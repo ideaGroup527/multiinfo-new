@@ -121,10 +121,9 @@ public class UploadController extends BaseController{
 		String prefix = request.getServletContext().getRealPath("/upload");
 		String fileName = prefix+File.separator+createTime+"";
 		File temp = new File(fileName);
-		FileOutputStream fos = FileUtils.openOutputStream(temp); 
-		IOUtils.copy(file.getInputStream(), fos); 
+		
+		file.transferTo(temp);
 		ExcelDTO  data = uploadService.jdeExcelNum(temp,file.getOriginalFilename());
-		fos.close();
 		data.setTempFileName(fileName);
 		if(1==data.getSheetNum()){
 			tokenDTO.setIsMultiSheet(false);
@@ -167,10 +166,8 @@ public class UploadController extends BaseController{
 		String prefix = request.getServletContext().getRealPath("/upload");
 		String fileName = prefix+File.separator+createTime+"";
 		File temp = new File(fileName);
-		FileOutputStream fos = FileUtils.openOutputStream(temp); 
-		IOUtils.copy(file.getInputStream(), fos); 
+		file.transferTo(temp);
 		TextDTO data= uploadService.readText(temp,file.getOriginalFilename(),isFirstRowVar);
-		fos.close();
 		FileUtils.deleteQuietly(temp);
 		tokenGenService.cacheData(token, data,tokenDTO);
 		
