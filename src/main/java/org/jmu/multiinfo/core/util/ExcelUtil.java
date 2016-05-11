@@ -3,7 +3,9 @@ package org.jmu.multiinfo.core.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +29,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.util.IOUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.jmu.multiinfo.dto.basestatistics.DataVariety;
+import org.jmu.multiinfo.core.dto.DataVariety;
 import org.jmu.multiinfo.web.utils.CommonUtil;
 
 public class ExcelUtil {
@@ -157,8 +159,8 @@ public class ExcelUtil {
 			case DataVariety.DATA_TYPE_NUMERIC_VIRG:
 				des = "逗号型数值";
 					break;		
-			case DataVariety.DATA_TYPE_NUMERIC_DOT:
-				des = "圆点型数值";
+			case DataVariety.DATA_TYPE_FAULT:
+				des = "缺失数值";
 						break;		
 			case DataVariety.DATA_TYPE_NUMERIC_SCIENCE:
 				des = "科学型数值";
@@ -192,6 +194,7 @@ public class ExcelUtil {
 
 		int type = 0;
 		Object cellvalue =null;
+		String typeFormat = null;
 		if (cell != null) {
 			// 判断当前Cell的Type
 			switch (cell.getCellType()) {
@@ -218,15 +221,19 @@ public class ExcelUtil {
 //					Date date = cell.getDateCellValue();
 //					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //					cellvalue = sdf.format(date);
-					cellvalue = HSSFDateUtil.getJavaDate(cell.getNumericCellValue()).toString(); 
-
+					typeFormat = "yyyy-MM-dd";
+					Date date = HSSFDateUtil.getJavaDate(cell.getNumericCellValue()); 
+					SimpleDateFormat sdf = new SimpleDateFormat(typeFormat);
+					cellvalue = sdf.format(date);
+					type=DataVariety.DATA_TYPE_DATE;
 				}
 				// 如果是纯数字
 				else {
 					// 取得当前Cell的数值
 					cellvalue = cell.getCellFormula();
+					type = DataVariety.DATA_TYPE_NUMERIC;
 				}
-				type = DataVariety.DATA_TYPE_NUMERIC;
+				
 				break;
 			}
 			case Cell.CELL_TYPE_BLANK:
@@ -256,8 +263,11 @@ public class ExcelUtil {
 			}
 		} else {
 			cellvalue = "";
+			type = DataVariety.DATA_TYPE_FAULT;
 		}
 		map.put("value", cellvalue);
+
+		map.put("typeFormat", typeFormat);
 		map.put("type", type);
 		String typeDes =jdType(type);
 		map.put("typeDes", typeDes);

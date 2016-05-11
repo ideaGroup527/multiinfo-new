@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.math3.util.FastMath;
+import org.jmu.multiinfo.core.dto.DataVariety;
 import org.jmu.multiinfo.dto.basestatistics.DataDTO;
-import org.jmu.multiinfo.dto.basestatistics.DataVariety;
 import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
 import org.jmu.multiinfo.web.utils.CommonUtil;
 import org.springframework.util.CollectionUtils;
@@ -53,11 +53,12 @@ public static Double converToDouble(DataDTO dataDTO){
 		Double e =	converToDouble(scienceData[1]);
 		data = 	a * FastMath.pow(10 , e );
 		break;	
-	case DataVariety.DATA_TYPE_NUMERIC_DOT:
-		//TODO
+	case DataVariety.DATA_TYPE_FAULT:
+		data = null;
 		break;	
 	case DataVariety.DATA_TYPE_NUMERIC_DOLLAL:
-		//TODO	
+		oraData = 	oraData.replaceAll("[$￥]", "");
+		data = converToDouble(oraData);
 		break;
 	case DataVariety.DATA_TYPE_NUMERIC:
 		data = converToDouble(oraData);
