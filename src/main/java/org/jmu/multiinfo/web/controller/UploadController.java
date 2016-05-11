@@ -21,10 +21,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -124,7 +126,7 @@ public class UploadController extends BaseController{
 	@RequestMapping(value="/excel.do",method=RequestMethod.POST)
 	@ResponseBody
 	public TokenDTO uploadExcel(HttpServletRequest request, HttpServletResponse response,
-			@ApiParam(required = true, name = "data_file", value = "excel文件") @RequestParam("data_file") MultipartFile file,
+			@ApiParam(required = true, name = "data_file", value = "excel文件") @RequestPart("data_file") MultipartFile file,
 			@ApiParam(required = false, name = "isFirstRowVar", value = "是否第一行为变量") @RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar) throws Exception{
 		TokenDTO tokenDTO = new TokenDTO();
 		Long createTime = System.nanoTime();
@@ -177,7 +179,7 @@ public class UploadController extends BaseController{
 	@RequestMapping(value="text.do",method=RequestMethod.POST)
 	@ResponseBody
 	public TokenDTO uploadText(HttpServletRequest request, HttpServletResponse response,
-			@ApiParam(required = true, name = "data_file", value = "text文件") @RequestParam("data_file") MultipartFile file,
+			@ApiParam(required = true, name = "data_file", value = "text文件") @RequestPart("data_file") MultipartFile file,
 			@ApiParam(required = false, name = "isFirstRowVar", value = "是否第一行为变量") @RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar,
 			@ApiParam(required = false, name = "charset", value = "文本编码",example="UTF-8",defaultValue="UTF-8") @RequestParam(required = false,value="charset",defaultValue="UTF-8") String charset)throws Exception{
 		TokenDTO tokenDTO = new TokenDTO();
