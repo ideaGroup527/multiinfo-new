@@ -148,6 +148,9 @@ var handleDescriptiveStatisticsDescriptive = function (tableResult) {
 
     var presentArea = $('.result-table');
 
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
     var algorithmConfigs = sessionStorage.getItem('PRIVATE_ALGORITHM_CONFIG').split(',');
 
     var table = $('<table>');
@@ -187,7 +190,7 @@ var handleDescriptiveStatisticsDescriptive = function (tableResult) {
 
         algorithmConfigs.map(function (config) {
             var td = $('<td>');
-            $(td).text(params[config]);
+            $(td).text(Number(params[config]).toFixed(numReservation));
             $(tr).append(td);
         });
 
@@ -200,6 +203,9 @@ var handleDescriptiveStatisticsDescriptive = function (tableResult) {
 var handleDescriptiveStatisticsFrequency = function (tableResult) {
 
     var presentArea = $('.result-table');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
 
     var frequencyData = tableResult.resDataMap;
     console.log(frequencyData);
@@ -245,15 +251,15 @@ var handleDescriptiveStatisticsFrequency = function (tableResult) {
             $(tr).append(frequencyCell);
 
             var percentageCell = $('<td>');
-            $(percentageCell).text(percentage[unique]);
+            $(percentageCell).text(Number(percentage[unique]).toFixed(numReservation));
             $(tr).append(percentageCell);
 
             var validatePercentageCell = $('<td>');
-            $(validatePercentageCell).text(percentage[unique]);
+            $(validatePercentageCell).text(Number(percentage[unique]).toFixed(numReservation));
             $(tr).append(validatePercentageCell);
 
             var accumulationPercentageCell = $('<td>');
-            $(accumulationPercentageCell).text(accumulationPercentage[unique]);
+            $(accumulationPercentageCell).text(Number(accumulationPercentage[unique]).toFixed(numReservation));
             $(tr).append(accumulationPercentageCell);
 
             $(variableTable).append(tr);
@@ -392,7 +398,7 @@ var handleCorrelationBivariate = function (tableResult) {
                                 var pearsonParamValueWrapper = $('<div>');
                                 for (var paramVariableKey in bivariateTableData[mainKey][i]) {
                                     $(pearsonParamValueWrapper).html(
-                                        (bivariateTableData[mainKey][i][paramVariableKey][alConfig] == 'Infinity') ? '&nbsp;' : bivariateTableData[mainKey][i][paramVariableKey][alConfig]
+                                        (bivariateTableData[mainKey][i][paramVariableKey][alConfig] == 'Infinity') ? '&nbsp;' : Number(bivariateTableData[mainKey][i][paramVariableKey][alConfig]).toFixed(numReservation)
                                     ).attr('data-config-type', alConfig);
                                 }
                                 $(paramValueCell).append(pearsonParamValueWrapper);
@@ -402,7 +408,7 @@ var handleCorrelationBivariate = function (tableResult) {
                                 var spearmanParamValueWrapper = $('<div>');
                                 for (var paramVariableKey in bivariateTableData[mainKey][i]) {
                                     $(spearmanParamValueWrapper).html(
-                                        (bivariateTableData[mainKey][i][paramVariableKey][alConfig] == 'Infinity') ? '&nbsp;' : bivariateTableData[mainKey][i][paramVariableKey][alConfig]
+                                        (bivariateTableData[mainKey][i][paramVariableKey][alConfig] == 'Infinity') ? '&nbsp;' : Number(bivariateTableData[mainKey][i][paramVariableKey][alConfig]).toFixed(numReservation)
                                     ).attr('data-config-type', alConfig);
                                 }
                                 $(paramValueCell).append(spearmanParamValueWrapper);
@@ -457,7 +463,7 @@ var handleCorrelationBivariate = function (tableResult) {
 
         basicAlgorithmConfig.map(function (alConfig) {
             var paramValue = $(cell).clone();
-            $(paramValue).text(basicData[mainKey][alConfig]);
+            $(paramValue).text(Number(basicData[mainKey][alConfig]).toFixed(numReservation));
             $(dataRow).append(paramValue);
         });
 

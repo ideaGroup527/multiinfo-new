@@ -25,7 +25,7 @@
     </div>
     <script>
         $(function () {
-            $('#reservation_decimal').val(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION') ? localStorage.getItem('MULTIINFO_CONFIG_RESERVATION') : 2);
+            $('#reservation_decimal').val(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
             $('.variable-submit').on('click', function () {
                 localStorage.setItem('MULTIINFO_CONFIG_RESERVATION', $('#reservation_decimal').val());
                 window.location.reload();

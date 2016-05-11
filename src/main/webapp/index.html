@@ -10,6 +10,14 @@
     <script src="js/lib/bootstrap/bootstrap-submenu.min.js"></script>
     <script src="js/common/i18n.js"></script>
     <title></title>
+    <script>
+        if (!localStorage.getItem("MULTIINFO_CONFIG_LANGUAGE")) {
+            localStorage.setItem("MULTIINFO_CONFIG_LANGUAGE", "zh-cn");
+        }
+        if (!localStorage.getItem('MULTIINFO_CONFIG_RESERVATION')) {
+            localStorage.setItem("MULTIINFO_CONFIG_RESERVATION", 5);
+        }
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-default" role="navigation">
@@ -109,6 +117,7 @@
 <script src="js/common/page/fileupload.js"></script>
 <script>
     $(document).ready(function () {
+
         sessionStorage.clear();
         $('[data-submenu]').submenupicker(); //二级子菜单
     }).on('click', '.js-menu-click', function (e) {

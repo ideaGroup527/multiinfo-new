@@ -20,6 +20,8 @@ $(function () {
     var select = $('#sheet-select');
 
     $('#file_upload_btn').click(function () {
+        $('#file_upload_btn').text((localStorage.getItem("MULTIINFO_CONFIG_LANGUAGE") == 'zh-cn') ? '正在上传...' : 'Uploading...');
+
         var fileExpected = $("#data_file")[0].files[0];
 
         var file = new FormData();
@@ -41,10 +43,7 @@ $(function () {
             processData: false,
             contentType: false,
             dataType: 'json',
-            beforeSend: function () {
-                $('#file_upload_btn').attr('data-i18n-tag', 'btn_uploading');
-                i18n();
-            }, success: function (data) {
+            success: function (data) {
 
                 sessionStorage.clear();
 
