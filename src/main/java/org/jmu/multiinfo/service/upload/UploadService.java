@@ -13,7 +13,7 @@ public ExcelDTO readExcel(File file,String name,int n) throws Exception;
 
 public ExcelDTO readExcel(File file,String name) throws Exception;
 
-public TextDTO readText(File file,String name, boolean isFirstRowVar) throws IOException;
+public TextDTO readText(File file,String name, boolean isFirstRowVar, String charset) throws IOException;
 
 public  ExcelDTO jdeExcelNum(File file,String name) ;
 

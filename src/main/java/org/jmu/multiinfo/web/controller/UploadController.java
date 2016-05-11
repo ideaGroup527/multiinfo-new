@@ -154,7 +154,8 @@ public class UploadController extends BaseController{
 	@RequestMapping(params = { "method=text" },method=RequestMethod.POST)
 	@ResponseBody
 	public TokenDTO uploadText(HttpServletRequest request, HttpServletResponse response,HttpSession session,
-			@RequestParam("data_file") MultipartFile file,@RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar)throws Exception{
+			@RequestParam("data_file") MultipartFile file,@RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar,
+			@RequestParam(required = false,value="charset",defaultValue="UTF-8") String charset)throws Exception{
 		TokenDTO tokenDTO = new TokenDTO();
 		Long createTime = System.nanoTime();
 		//生成token
@@ -167,7 +168,7 @@ public class UploadController extends BaseController{
 		String fileName = prefix+File.separator+createTime+"";
 		File temp = new File(fileName);
 		file.transferTo(temp);
-		TextDTO data= uploadService.readText(temp,file.getOriginalFilename(),isFirstRowVar);
+		TextDTO data= uploadService.readText(temp,file.getOriginalFilename(),isFirstRowVar,charset);
 		FileUtils.deleteQuietly(temp);
 		tokenGenService.cacheData(token, data,tokenDTO);
 		

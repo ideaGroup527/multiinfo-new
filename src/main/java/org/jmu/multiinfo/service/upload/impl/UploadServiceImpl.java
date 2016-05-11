@@ -166,13 +166,13 @@ public class UploadServiceImpl implements UploadService{
 	}
 
 	@Override
-	public TextDTO readText(File file,String name, boolean isFirstRowVar) throws IOException {
+	public TextDTO readText(File file,String name, boolean isFirstRowVar,String charset) throws IOException {
 		TextDTO textDto = new TextDTO();
 		SheetDTO sheetDto = new SheetDTO();
 		textDto.setFileName(name);
 		sheetDto.setFirstRowVar(isFirstRowVar);
 		String lastCellIndex ="";
-		List<String>  lines = FileUtils.readLines(file,Charset.forName("UTF-8"));
+		List<String>  lines = FileUtils.readLines(file,Charset.forName(charset));
 		Integer physicalRowNum = lines.size();
 		textDto.setPhysicalRowNum(physicalRowNum);
 		Integer physicalCellNum = lines.get(0).split("\t|\\s+").length;
