@@ -26,17 +26,18 @@ $(function () {
 
         var file = new FormData();
         file.append('data_file', fileExpected);
+        file.append('isFirstRowVar', 'true');
 
         var fileUploadUrl = '';
 
         if (fileNameSuffix.match(xlsReg)) {
-            fileUploadUrl = 'upload.do?method=excel';
+            fileUploadUrl = 'upload/excel.do';
         } else if (fileNameSuffix.match(txtReg)) {
-            fileUploadUrl = 'upload.do?method=text';
+            fileUploadUrl = 'upload/text.do';
         }
 
         $.ajax({
-            url: fileUploadUrl + '&isFirstRowVar=true',
+            url: fileUploadUrl,
             type: 'post',
             data: file,
             async: false,
