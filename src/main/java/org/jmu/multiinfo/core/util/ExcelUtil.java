@@ -202,12 +202,15 @@ public class ExcelUtil {
 			case Cell.CELL_TYPE_NUMERIC:
 			    if (HSSFDateUtil.isCellDateFormatted(cell)) {   
 			        //  如果是date类型则 ，获取该cell的date值   
-			    	cellvalue = HSSFDateUtil.getJavaDate(cell.getNumericCellValue()).toString();   
+					typeFormat = "yyyy-MM-dd";
+					Date date = HSSFDateUtil.getJavaDate(cell.getNumericCellValue()); 
+					SimpleDateFormat sdf = new SimpleDateFormat(typeFormat);
+					cellvalue = sdf.format(date);
+					type=DataVariety.DATA_TYPE_DATE;
 			    } else { // 纯数字   
 			    	cellvalue = String.valueOf(cell.getNumericCellValue()); 
-			    	
+			    	type = DataVariety.DATA_TYPE_NUMERIC;
 			    }
-			    type = DataVariety.DATA_TYPE_NUMERIC;
 			    break;
 			case Cell.CELL_TYPE_FORMULA: {
 				// 判断当前的cell是否为Date
