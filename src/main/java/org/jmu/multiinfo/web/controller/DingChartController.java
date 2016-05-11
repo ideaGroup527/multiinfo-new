@@ -63,7 +63,7 @@ public class DingChartController {
 	            @ApiResponse(code = 400, message = "入参有误"),
 	            @ApiResponse(code = 500, message = "内部报错")}  
 	  )
-	@RequestMapping(params = { "/convertForGraph.do" })
+	@RequestMapping(value =  "/convertForGraph.do" )
 	@ResponseBody
 	public GraphDTO convertForGraph(@RequestBody BiVarCondition condition){
 	return 	linearRegressionService.convertForGraph(condition);

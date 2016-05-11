@@ -16,6 +16,7 @@ import org.jmu.multiinfo.service.upload.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -114,7 +115,7 @@ public class UploadController extends BaseController{
 	 * @return
 	 * @throws Exception
 	 */
-	@ApiOperation(value = "上传excel", notes = "返回token对象", httpMethod="POST",consumes="index.html")  
+	@ApiOperation(value = "上传excel", notes = "返回token对象", httpMethod="POST")  
 	  @ApiResponses(value = {  
 	            @ApiResponse(code = 200, message = "上传成功", response = TokenDTO.class),  
 	            @ApiResponse(code = 400, message = "入参有误"),
