@@ -25,7 +25,7 @@
        <cache name="tokenCache"           
     maxElementsInMemory="10000"           
     eternal="true"          
-    overflowToDisk="false"           
+    overflowToDisk="true"           
     timeToIdleSeconds="0"           
     timeToLiveSeconds="43200"          
     memoryStoreEvictionPolicy="LFU" />  

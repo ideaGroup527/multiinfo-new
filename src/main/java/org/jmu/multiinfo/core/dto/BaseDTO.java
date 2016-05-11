@@ -1,6 +1,7 @@
 package org.jmu.multiinfo.core.dto;
 
-public class BaseDTO {
+public class BaseDTO extends BaseBean{
+
 private String ret_code = "0";
 private String ret_msg = "";
 private String ret_err = "";

@@ -1,6 +1,6 @@
 package org.jmu.multiinfo.core.dto;
 
-public class BaseQueryCondition {
+public class BaseQueryCondition extends BaseBean{
     /**
      * 当前页数
      */

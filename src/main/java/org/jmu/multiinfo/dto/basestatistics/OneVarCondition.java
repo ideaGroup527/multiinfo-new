@@ -2,7 +2,9 @@ package org.jmu.multiinfo.dto.basestatistics;
 
 import java.util.List;
 
-public class OneVarCondition {
+import org.jmu.multiinfo.core.dto.BaseBean;
+
+public class OneVarCondition extends BaseBean{
 	 //变量
 	 private List<VarietyDTO> variableList;
 	 

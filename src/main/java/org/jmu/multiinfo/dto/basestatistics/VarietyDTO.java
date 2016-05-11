@@ -1,6 +1,8 @@
 package org.jmu.multiinfo.dto.basestatistics;
 
-public class VarietyDTO {
+import org.jmu.multiinfo.core.dto.BaseBean;
+
+public class VarietyDTO extends BaseBean{
 	private String position;
 	private String typeDes;
 	private Integer type;

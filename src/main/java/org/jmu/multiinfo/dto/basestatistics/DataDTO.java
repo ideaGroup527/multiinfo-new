@@ -1,6 +1,10 @@
 package org.jmu.multiinfo.dto.basestatistics;
 
-public class DataDTO {
+import java.io.Serializable;
+
+import org.jmu.multiinfo.core.dto.BaseBean;
+
+public class DataDTO extends BaseBean{
 private String position;
 private String positionDes;
 private String typeDes;

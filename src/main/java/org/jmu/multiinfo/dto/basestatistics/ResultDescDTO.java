@@ -2,9 +2,10 @@ package org.jmu.multiinfo.dto.basestatistics;
 
 import java.util.List;
 
+import org.jmu.multiinfo.core.dto.BaseBean;
 import org.jmu.multiinfo.dto.descriptives.PercentileDTO;
 
-public class ResultDescDTO {
+public class ResultDescDTO extends BaseBean{
 private Double max;
 private Double min;
 private Double arithmeticMean;

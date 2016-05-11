@@ -2,7 +2,9 @@ package org.jmu.multiinfo.dto.basestatistics;
 
 import java.util.List;
 
-public class BiVarCondition {
+import org.jmu.multiinfo.core.dto.BaseBean;
+
+public class BiVarCondition extends BaseBean{
 	//自变量
  private List<VarietyDTO> independentVariable;
  
