@@ -77,6 +77,47 @@ public static Double converToDouble(DataDTO dataDTO){
 }
 
 
+public static Object converToObject(DataDTO dataDTO){
+	Object data = null ;
+	Integer dataType = dataDTO.getType();
+	String oraData = dataDTO.getData().toString();
+	switch (dataType) {
+	case DataVariety.DATA_TYPE_STRING:
+		if(CommonUtil.isRealNumber(oraData)) return Double.valueOf(oraData);
+		data = oraData;
+		break; 
+	case DataVariety.DATA_TYPE_NUMERIC_VIRG:
+		data = converToDouble(oraData.replaceAll(",", ""));
+		break;	
+	case DataVariety.DATA_TYPE_NUMERIC_SCIENCE:
+		String[] scienceData = oraData.split("[Ee]");
+		Double a = converToDouble(scienceData[0]);
+		Double e =	converToDouble(scienceData[1]);
+		data = 	a * FastMath.pow(10 , e );
+		break;	
+	case DataVariety.DATA_TYPE_FAULT:
+		data = null;
+		break;	
+	case DataVariety.DATA_TYPE_NUMERIC_DOLLAL:
+		oraData = 	oraData.replaceAll("[$￥]", "");
+		data = converToDouble(oraData);
+		break;
+	case DataVariety.DATA_TYPE_NUMERIC:
+		data = converToDouble(oraData);
+		break;	
+	case DataVariety.DATA_TYPE_DATE:
+		data = oraData;
+		break;	
+	case DataVariety.DATA_TYPE_CUSTOM:
+		data = oraData;
+		break;
+	default:
+		break;
+	}
+	
+	return data;
+}
+
 public static double[][] converToDouble(DataDTO[][] dataGrid){
 	int rows = dataGrid.length;
 	int cols = dataGrid[0].length;

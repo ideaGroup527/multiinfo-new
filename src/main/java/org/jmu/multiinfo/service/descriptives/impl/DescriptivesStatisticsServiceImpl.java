@@ -131,10 +131,8 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 					dataList.add(dataDTO);
 				}
 			}
-			double[] dataArr = new double[dataList.size()];
-			for (int i = 0; i < dataArr.length; i++) {
-				dataArr[i] =DataFormatUtil.converToDouble((DataDTO)dataList.get(i));
-			}
+			
+			Frequency frequency = null;
 			ResultFrequencyDTO retDto = new ResultFrequencyDTO();
 			Map<String, Long> frequencyMap = new HashMap<String, Long>();
 			Map<String, Double> percentage = new HashMap<String, Double>();
@@ -142,13 +140,27 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 			Map<String, Double> accumulationPercentage = new HashMap<String, Double>();
 			Double sumPercentage = 0.0;
 			Double sumValidatePercentage = 0.0;
-			Frequency frequency = basicStatisticsService.frequencyCount(dataArr);
-			retDto.setArithmeticMean(basicStatisticsService.arithmeticMean(dataArr));
-			retDto.setStandardDeviation(basicStatisticsService.standardDeviation(dataArr));
-			retDto.setMin(basicStatisticsService.min(dataArr));
-			retDto.setMax(basicStatisticsService.max(dataArr));
-			retDto.setCount(dataArr.length);
-			retDto.setTotal(basicStatisticsService.sum(dataArr));
+			try {
+				double[] dataArr  = new double[dataList.size()];
+				for (int i = 0; i < dataArr.length; i++) {
+					dataArr[i] =DataFormatUtil.converToDouble((DataDTO)dataList.get(i));
+				}
+				frequency = basicStatisticsService.frequencyCount(dataArr);
+				retDto.setArithmeticMean(basicStatisticsService.arithmeticMean(dataArr));
+				retDto.setStandardDeviation(basicStatisticsService.standardDeviation(dataArr));
+				retDto.setMin(basicStatisticsService.min(dataArr));
+				retDto.setMax(basicStatisticsService.max(dataArr));
+				retDto.setCount(dataArr.length);
+				retDto.setTotal(basicStatisticsService.sum(dataArr));
+			} catch (NumberFormatException e) {
+				Object[] dataArr = new Object[dataList.size()];
+				for (int i = 0; i < dataArr.length; i++) {
+					dataArr[i] =DataFormatUtil.converToObject((DataDTO)dataList.get(i));
+				}
+				frequency = basicStatisticsService.frequencyCount(dataArr );
+				retDto.setCount(dataArr.length);
+			}
+
 			List<Object> uniqList = new ArrayList<Object>();
 			Iterator<Entry<Comparable<?>, Long>>  it =	frequency.entrySetIterator();
 			while (it.hasNext()) {
