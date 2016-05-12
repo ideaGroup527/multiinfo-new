@@ -1,14 +1,16 @@
 package org.jmu.multiinfo.dto.basestatistics;
 
-import java.io.Serializable;
-
 import org.jmu.multiinfo.core.dto.BaseBean;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-@ApiModel(description = "数据", value = "data")
+@ApiModel(description = "数据(二维)", value = "dataGrid")
 public class DataDTO extends BaseBean {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9222809199231193286L;
 	@ApiModelProperty(value = "位置", example = "A2")
 	private String position;
 	@ApiModelProperty(value = "位置描述", example = "A,2")

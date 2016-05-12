@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FileUtils;
 import org.jmu.multiinfo.core.controller.BaseController;
+import org.jmu.multiinfo.core.dto.DataVariety;
 import org.jmu.multiinfo.core.util.TokenProcessor;
+import org.jmu.multiinfo.dto.basestatistics.DataDTO;
 import org.jmu.multiinfo.dto.upload.DataToken;
 import org.jmu.multiinfo.dto.upload.ExcelDTO;
 import org.jmu.multiinfo.dto.upload.TextDTO;
@@ -201,4 +203,24 @@ public class UploadController extends BaseController{
 		
 		return tokenDTO;
 	}
+	
+	@ApiOperation(value = "二维入参无法生成api。展示一下DataDTO", notes = "返回单个DataDTO对象",httpMethod="GET")  
+	  @ApiResponses(value = {  
+	            @ApiResponse(code = 200, message = "上传成功", response = DataDTO.class), 
+	            @ApiResponse(code = 400, message = "入参有误"),
+	            @ApiResponse(code = 500, message = "内部报错")}  
+	  )  
+	@RequestMapping(value="showDataDTO.do",method=RequestMethod.GET)
+	@ResponseBody
+	public DataDTO showDataDTO(){
+		DataDTO i00 =new DataDTO();
+		i00.setData("地点");
+		i00.setPosition("A1");
+		i00.setPositionDes("A,1");
+		i00.setTypeDes("字符串型");
+		i00.setType(DataVariety.DATA_TYPE_STRING);
+		return i00;
+		
+	}
+	
 }
