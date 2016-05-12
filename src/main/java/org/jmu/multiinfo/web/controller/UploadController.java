@@ -78,7 +78,7 @@ public class UploadController extends BaseController{
 	public Object uploadFile(HttpServletRequest request, HttpServletResponse response,
 			@ApiParam(required = true, name = "token", value = "token") @RequestParam("token") String token,
 			@ApiParam(required = false, name = "sheetNo", value = "sheetNo",defaultValue="0") @RequestParam(required=false,value="sheetNo",defaultValue="0") int sheetNo,
-			@ApiParam(required = true, name = "isMultiSheet", value = "是否是多sheet") @RequestParam("isMultiSheet") boolean isMultiSheet,
+			@ApiParam(required = true, name = "isMultiSheet", value = "是否是多sheet",defaultValue="false") @RequestParam("isMultiSheet") boolean isMultiSheet,
 			@ApiParam(required = false, name = "isFirstRowVar", value = "是否第一行为变量") @RequestParam(required = false,value="isFirstRowVar") boolean isFirstRowVar) throws Exception{
 		
 		if(isMultiSheet){

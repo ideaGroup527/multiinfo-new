@@ -2,14 +2,25 @@ package org.jmu.multiinfo.dto.basestatistics;
 
 import org.jmu.multiinfo.core.dto.BaseBean;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description="变量",value="Variety")
 public class VarietyDTO extends BaseBean{
+	@ApiModelProperty(value="位置",example="A")
 	private String position;
+	@ApiModelProperty(value="类型描述",example="字符串型")
 	private String typeDes;
+	@ApiModelProperty(value="类型",example="0")
 	private Integer type;
+	@ApiModelProperty(value="类型格式",example="yyyy-MM-dd")
 	private String typeFormat;
+	@ApiModelProperty(value="变量名",example="降水")
 	private String  varietyName;
+	@ApiModelProperty(value="变量描述",example="降水")
 	private String varietyDes;
 	//数据范围
+	@ApiModelProperty(value="数据范围",example="A2:A5")
 	private String range;
 	public String getPosition() {
 		return position;
