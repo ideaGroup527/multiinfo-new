@@ -152,6 +152,7 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 				retDto.setMax(basicStatisticsService.max(dataArr));
 				retDto.setCount(dataArr.length);
 				retDto.setTotal(basicStatisticsService.sum(dataArr));
+				retDto.setKsTest(calNormalDistribution(dataArr));
 			} catch (NumberFormatException e) {
 				Object[] dataArr = new Object[dataList.size()];
 				for (int i = 0; i < dataArr.length; i++) {
@@ -180,7 +181,7 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 			}
 			
 
-			//			calNormalDistribution(dataArr);
+						
 /*			if (varietyDTO.getType() == DataVariety.DATA_TYPE_NUMERIC) {
 				Collections.sort(uniqList, new Comparator<Object>() {
 					@Override

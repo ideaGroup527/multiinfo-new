@@ -25,6 +25,9 @@ private Object sumPercentage;
 //有效百分比总计
 private Object sumValidatePercentage;
 
+//ks检验结果
+private KSTestDTO ksTest;
+
 public List<Object> getUniqueData() {
 	return uniqueData;
 }
@@ -87,6 +90,14 @@ public Object getSumValidatePercentage() {
 
 public void setSumValidatePercentage(Object sumValidatePercentage) {
 	this.sumValidatePercentage = sumValidatePercentage;
+}
+
+public KSTestDTO getKsTest() {
+	return ksTest;
+}
+
+public void setKsTest(KSTestDTO ksTest) {
+	this.ksTest = ksTest;
 }
 
 }
