@@ -1,3 +1,4 @@
+org.jmu.multiinfo.api.config
 org.jmu.multiinfo.base.util
 org.jmu.multiinfo.core.aop
 org.jmu.multiinfo.core.controller

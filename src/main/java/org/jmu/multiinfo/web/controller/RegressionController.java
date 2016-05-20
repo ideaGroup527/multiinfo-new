@@ -9,6 +9,8 @@ import org.jmu.multiinfo.dto.regression.SlipStepwiseCondition;
 import org.jmu.multiinfo.dto.regression.SlipStepwiseDTO;
 import org.jmu.multiinfo.dto.regression.StepwiseCondition;
 import org.jmu.multiinfo.dto.regression.StepwiseMultipleDTO;
+import org.jmu.multiinfo.dto.upload.DataToken;
+import org.jmu.multiinfo.dto.upload.TokenDTO;
 import org.jmu.multiinfo.service.regression.LinearRegressionService;
 import org.jmu.multiinfo.service.regression.StepwiseRegressionService;
 import org.slf4j.Logger;
@@ -18,6 +20,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 
 /**
@@ -29,8 +37,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @version V1.0
  *
  */
+@Api(value = "回归分析",tags="回归分析")  
 @Controller
-@RequestMapping("/statistics/regression.do")
+@RequestMapping("/statistics/regression")
 public class RegressionController extends BaseController{
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
@@ -41,26 +50,36 @@ public class RegressionController extends BaseController{
 	
 	/***
 	 * 一元线性回归
-	 * 路径/statistics/regression.do?method=singleLinear
 	 * @param condition
 	 * @return
 	 */
-	@RequestMapping(params = { "method=singleLinear" })
+	@ApiOperation(value = "一元线性回归", notes = "返回计算结果对象",httpMethod="POST")  
+	  @ApiResponses(value = {  
+	            @ApiResponse(code = 200, message = "计算成功", response = SingleLinearDTO.class),  
+	            @ApiResponse(code = 400, message = "入参有误"),
+	            @ApiResponse(code = 500, message = "内部报错")}  
+	  )
+	@RequestMapping(value="/singleLinear.do")
 	@ResponseBody
-	public SingleLinearDTO calSingleLinearRegression(@RequestBody BiVarCondition condition){
+	public SingleLinearDTO calSingleLinearRegression(@ApiParam(required = true, name = "condition", value = "一元线性回归入参") @RequestBody BiVarCondition condition){
 		SingleLinearDTO linearDTO = 	(SingleLinearDTO)linearRegressionService.calLinearRegression(condition);
 		return linearDTO;
 	}
 	
 	/***
 	 * 多元线性回归
-	 * 路径/statistics/regression.do?method=multipleLinear
 	 * @param condition
 	 * @return
 	 */
-	@RequestMapping(params = { "method=multipleLinear" })
+	@ApiOperation(value = "多元线性回归", notes = "返回计算结果对象",httpMethod="POST")  
+	  @ApiResponses(value = {  
+	            @ApiResponse(code = 200, message = "计算成功", response = MultipleLinearDTO.class),  
+	            @ApiResponse(code = 400, message = "入参有误"),
+	            @ApiResponse(code = 500, message = "内部报错")}  
+	  )
+	@RequestMapping(value="/multipleLinear.do")
 	@ResponseBody
-	public MultipleLinearDTO calOLSMultipleLinearRegression(@RequestBody BiVarCondition condition){
+	public MultipleLinearDTO calOLSMultipleLinearRegression(@ApiParam(required = true, name = "condition", value = "多元线性回归入参")@RequestBody BiVarCondition condition){
 		MultipleLinearDTO linearDTO = 	(MultipleLinearDTO)linearRegressionService.calLinearRegression(condition);
 		return linearDTO;
 		
@@ -69,39 +88,38 @@ public class RegressionController extends BaseController{
 	
 	/***
 	 * 一般逐步回归
-	 * 路径/statistics/regression.do?method=stepwise
 	 * @param condition
 	 * @return
 	 */
-	@RequestMapping(params = { "method=stepwise" })
+	@ApiOperation(value = "一般逐步回归", notes = "返回计算结果对象",httpMethod="POST")  
+	  @ApiResponses(value = {  
+	            @ApiResponse(code = 200, message = "计算成功", response = StepwiseMultipleDTO.class),  
+	            @ApiResponse(code = 400, message = "入参有误"),
+	            @ApiResponse(code = 500, message = "内部报错")}  
+	  )
+	@RequestMapping( value="/stepwise.do")
 	@ResponseBody
 	public StepwiseMultipleDTO calStepwiseMultipleLinearRegression(@RequestBody StepwiseCondition condition){
 		return stpRegressionService.stepwise(condition);
 		
 	}
+	
 	/***
 	 * 滑移逐步回归
-	 * 路径/statistics/regression.do?method=stepwise
 	 * @param condition
 	 * @return
 	 */
-	@RequestMapping(params = { "method=slipstepwise" })
+	@ApiOperation(value = "滑移逐步回归", notes = "返回计算结果对象",httpMethod="POST")  
+	  @ApiResponses(value = {  
+	            @ApiResponse(code = 200, message = "计算成功", response = SlipStepwiseDTO.class),  
+	            @ApiResponse(code = 400, message = "入参有误"),
+	            @ApiResponse(code = 500, message = "内部报错")}  
+	  )
+	@RequestMapping(value= "/slipstepwise.do" )
 	@ResponseBody
 	public SlipStepwiseDTO calSlipStepwiseLinearRegression(@RequestBody SlipStepwiseCondition condition){
 		return stpRegressionService.slipStepwise(condition);
 		
 	}
 	
-	/***
-	 * 散点图数据转换
-	 * 路径/statistics/regression.do?method=convertForGraph
-	 * @param condition
-	 * @return
-	 */
-	@RequestMapping(params = { "method=convertForGraph" })
-	@ResponseBody
-	public GraphDTO convertForGraph(@RequestBody BiVarCondition condition){
-	return 	linearRegressionService.convertForGraph(condition);
-		
-	}
 }

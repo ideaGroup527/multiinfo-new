@@ -71,19 +71,19 @@ var handleSubmit = function (config) {
         case 'Descriptive_Statistics_Frequency':
             //描述统计 - 描述
             //描述统计 - 频率
-            handleURL = (type == 'Descriptive_Statistics_Descriptive') ? 'statistics/descriptives.do?method=descriptives' : 'statistics/descriptives.do?method=frequency';
+            handleURL = (type == 'Descriptive_Statistics_Descriptive') ? 'statistics/descriptives/descriptives.do' : 'statistics/descriptives/frequency.do';
             var descriptive = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_DESCRIPTIVE'));
             dataPackage.variableList = descriptive.variableList;
             break;
         case 'Correlation_Bivariate':
             //相关分析 - 双变量
-            handleURL = 'statistics/correlation.do?method=bivariate';
+            handleURL = 'statistics/correlation/bivariate.do';
             var bivariate = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CORRELATION_BIVARIATE'));
             dataPackage.variableList = bivariate.variableList;
             break;
         case 'Correlation_Distance':
             //相关分析 - 距离
-            handleURL = 'statistics/correlation.do?method=distance';
+            handleURL = 'statistics/correlation/distance.do';
             var distanceConfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CORRELATION_DISTANCE'));
             dataPackage.variableList = distanceConfig.variableList;
             dataPackage.minkowskiP = distanceConfig.minkowskiP[0];
@@ -91,7 +91,7 @@ var handleSubmit = function (config) {
             break;
         case 'Ding_Chart':
             //丁氏图
-            handleURL = 'statistics/chart.do?method=ding';
+            handleURL = 'statistics/chart/ding.do';
             sessionStorage.setItem('PRIVATE_GRAPH_CONFIG', 'dingchart');
             var dingChartConfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_DING_CHART'));
             dataPackage.calculateMethod = dingChartConfig.calculateMethod[0];
@@ -100,21 +100,21 @@ var handleSubmit = function (config) {
             break;
         case 'Oneway_ANOVA':
             //单因素方差分析
-            handleURL = 'statistics/comparemean.do?method=onewayanova';
+            handleURL = 'statistics/comparemean/onewayanova.do';
             var ANOVA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_ONEWAY_ANOVA'));
             dataPackage.factorVariable = ANOVA.factorVariable[0];
             dataPackage.dependentVariable = ANOVA.dependentVariable;
             break;
         case 'Means':
             //均值
-            handleURL = 'statistics/comparemean.do?method=mean';
+            handleURL = 'statistics/comparemean/mean.do';
             var means = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_MEANS'));
             dataPackage.independentVariable = means.independentVariable[0];
             dataPackage.dependentVariable = means.dependentVariable;
             break;
         case 'Principal_Component_Analysis':
             //主成分分析
-            handleURL = 'statistics/analysis.do?method=principalComponent';
+            handleURL = 'statistics/analysis/principalComponent.do';
             sessionStorage.setItem('PRIVATE_GRAPH_CONFIG', 'basicline');
             var PCA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_PRINCIPAL_COMPONENT'));
             dataPackage.variableList = PCA.variableList;
@@ -124,7 +124,7 @@ var handleSubmit = function (config) {
             break;
         case 'Gray_Correlation':
             //灰色关联度
-            handleURL = 'statistics/prediction.do?method=greydegree';
+            handleURL = 'statistics/prediction/greydegree.do';
             var GC = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_GRAY_CORRELATION'));
             dataPackage.sonSeqArr = GC.sonSeqArr;
             dataPackage.motherSeq = GC.motherSeq[0];
@@ -132,7 +132,7 @@ var handleSubmit = function (config) {
             break;
         case 'Related_Variable':
             //灰色预测 - 关联变量
-            handleURL = 'statistics/prediction.do?method=grey';
+            handleURL = 'statistics/prediction/grey.do';
             var RV = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_GRAY_PREDICTION_RELATED_VAR'));
             dataPackage.associationType = 1;
             dataPackage.factorVarVariable = JSON.parse(RV.factorVarVariable[0]);
@@ -141,7 +141,7 @@ var handleSubmit = function (config) {
             break;
         case 'Independent_Variable':
             //灰色预测 - 独立变量
-            handleURL = 'statistics/prediction.do?method=grey';
+            handleURL = 'statistics/prediction/grey.do';
             var IV = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_GRAY_PREDICTION_INDEPENDENT_VAR'));
             dataPackage.associationType = 0;
             dataPackage.factorVarVariable = JSON.parse(IV.factorVarVariable[0]);
@@ -150,21 +150,21 @@ var handleSubmit = function (config) {
             break;
         case 'Simple_Linear_Regression':
             //一元线性回归
-            handleURL = 'statistics/regression.do?method=singleLinear';
+            handleURL = 'statistics/regression/singleLinear.do';
             var SLR = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_SINGLE_LINEAR_REGRESSION'));
             dataPackage.independentVariable = SLR.independentVariable;
             dataPackage.dependentVariable = SLR.dependentVariable[0];
             break;
         case 'Multi_Linear_Regression':
             //多远线性回归
-            handleURL = 'statistics/regression.do?method=multipleLinear';
+            handleURL = 'statistics/regression/multipleLinear.do';
             var MLR = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_MULTI_LINEAR_REGRESSION'));
             dataPackage.independentVariable = MLR.independentVariable;
             dataPackage.dependentVariable = MLR.dependentVariable[0];
             break;
         case 'General_Stepwise_Regression':
             //回归 - 逐步回归 - 一般逐步回归
-            handleURL = 'statistics/regression.do?method=stepwise';
+            handleURL = 'statistics/regression/stepwise.do';
             var GSR = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_GENERAL_STEPWISE_REGRESSION'));
             dataPackage.independentVariable = GSR.independentVariable;
             dataPackage.dependentVariable = GSR.dependentVariable[0];

@@ -120,8 +120,9 @@
         });
 
         $.ajax({
-            url: 'upload.do?method=file&isFirstRowVar=true',
+            url: 'upload/file.do',
             data: {
+                'isFirstRowVar': 'true',
                 'isMultiSheet': sessionStorage.getItem('isMultiSheet'),
                 'token': sessionStorage.getItem('token'),
                 'sheetNo': sessionStorage.getItem('sheetNo')

@@ -845,7 +845,7 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
     var componentHeaderSecRow = $(row).clone();
 
     componentMatrix[0].map(function (value, index) {
-        $(componentHeaderSecRow).append($(headerCell).clone().text(index + 1).attr('align', 'center'));
+        $(componentHeaderSecRow).append($(headerCell).clone().text('F' + (index + 1)));
     });
     $(componentTable).append(componentHeaderSecRow);
 
@@ -864,6 +864,23 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
     //填充到显示区域
     $(componentArea).append(componentTable)
         .append($(block).clone().text('已提取了' + componentMatrix[0].length + '个成份'));
+    componentMatrix[0].map(function (value, index) {
+        var functionString = '<strong>F' + (index + 1) + '</strong> = ';
+
+        variableNameList.map(function (variable, index2) {
+            if (index2 != 0 && Number(componentMatrix[index2][index]) > 0) {
+                functionString += ' + ';
+            } else if (Number(componentMatrix[index2][index]) < 0) {
+                functionString += ' - ';
+            }
+            functionString += Math.abs(Number(componentMatrix[index2][index]).toFixed(numReservation)) + ' x ';
+            functionString += variable;
+        });
+
+        $(componentArea).append(
+            $(block).clone().html(functionString)
+        );
+    });
     $(presentArea).append(componentArea);
 
     //打印碎石图

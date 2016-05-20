@@ -3,6 +3,7 @@ package org.jmu.multiinfo.web.controller;
 import org.jmu.multiinfo.dto.basestatistics.OneVarCondition;
 import org.jmu.multiinfo.dto.descriptives.CommonDTO;
 import org.jmu.multiinfo.dto.descriptives.PercentileCondition;
+import org.jmu.multiinfo.dto.dingchart.DingChartDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 /***
  *  <a href="http://www.seekbio.com/biotech/soft/SPSS/2012/j819365850.html">描述统计</a>
  * @Title: DescriptivesStatisticsController.java
@@ -24,19 +30,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @version V1.0
  *
  */
+@Api(value = "描述统计",tags="描述统计")  
 @Controller
-@RequestMapping("/statistics/descriptives.do")
+@RequestMapping("/statistics/descriptives")
 public class DescriptivesStatisticsController extends BaseController{
 	@Autowired
 	private DescriptivesStatisticsService descriptivesStatisticsService;
 	
 	/***
 	 * 描述统计
-	 * 路径/statistics/descriptives.do?method=descriptives
 	 * @param condition
 	 * @return
 	 */
-	@RequestMapping(params = { "method=descriptives" })
+	@ApiOperation(value = " 描述统计", notes = " 描述统计",httpMethod="POST")  
+	  @ApiResponses(value = {  
+	            @ApiResponse(code = 200, message = "计算成功", response = CommonDTO.class),  
+	            @ApiResponse(code = 400, message = "入参有误"),
+	            @ApiResponse(code = 500, message = "内部报错")}  
+	  )
+	@RequestMapping(value =  "/descriptives.do")
 	@ResponseBody
    public CommonDTO calDesc(@RequestBody PercentileCondition condition){
 	
@@ -53,11 +65,16 @@ public class DescriptivesStatisticsController extends BaseController{
 	
 	/***
 	 * 频率分析
-	 * 路径/statistics/descriptives.do?method=frequency
 	 * @param condition
 	 * @return
 	 */
-	@RequestMapping(params = { "method=frequency" })
+	@ApiOperation(value = " 频率分析", notes = "频率分析",httpMethod="POST")  
+	  @ApiResponses(value = {  
+	            @ApiResponse(code = 200, message = "计算成功", response = CommonDTO.class),  
+	            @ApiResponse(code = 400, message = "入参有误"),
+	            @ApiResponse(code = 500, message = "内部报错")}  
+	  )
+	@RequestMapping(value= "/frequency.do")
 	@ResponseBody
    public CommonDTO calFrequency(@RequestBody OneVarCondition condition){
 		CommonDTO freDTO =	descriptivesStatisticsService.calFrequency(condition);
