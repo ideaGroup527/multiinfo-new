@@ -5,7 +5,7 @@
 </head>
 <body>
 <div id="main" style="width: 1000px;height:800px;margin:0 auto;"></div>
-
+<script src="../../lib/jquery.min.js"></script>
 <script src="../../lib/echarts.min.js"></script>
 <script src="../charts.js"></script>
 <script type="text/javascript">
@@ -35,39 +35,12 @@
             "range": "A2:A11"
         }
     };
-    var opt = {
-        "ret_code": "",
-        "ret_err": "",
-        "n": 10,
-        "slope": 0.5111229160623828,
-        "slopeStdErr": 0.027508114139822928,
-        "regressionSumSquares": 1846745.5681949866,
-        "sumSquaredErrors": 42792.531805014005,
-        "r": 0.9886116092906885,
-        "meanSquareError": 5349.066475626751,
-        "intercept": 178.0320544979826,
-        "significance": 7.259053047548036E-8,
-        "slopeConfidenceInterval": 0.06343382495810089,
-        "regressionParameters": [178.0320544979826,
-            0.5111229160623828],
-        "regressionParametersStandardErrors": [41.16160920729023,
-            0.027508114139822928],
-        "adjustedRSquared": 0.9745220282773653,
-        "predict": [178.0320544979826,
-            178.543177414045],
-        "ttests": [4.325196655976485,
-            18.580805411245578],
-        "f": 345.2463297305728,
-        "rsquare": 0.9773529140243248,
-        "xsumSquares": 7068973.6
-    };
 
-    new Scatter({
-        data: data,//数据json,
-        opt: opt,//配置json
-        container: "main",//图表容器的id
-        title: '直线图' //图表类型标题
-    }).render();
+    $('#main').charts({
+        title: '散点图和折线图和曲线图',
+        type: ['cure'],
+        data:data
+    });
 
 </script>
 </body>

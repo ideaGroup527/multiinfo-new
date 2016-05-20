@@ -1,0 +1,70 @@
+<html>
+<head>
+    <title></title>
+
+</head>
+<body>
+<div id="main" style="width: 1000px;height:800px;margin:0 auto;"></div>
+<script src="../../lib/jquery.min.js"></script>
+<script src="../../lib/echarts.min.js"></script>
+<script src="../../lib/highcharts.js"></script>
+<script src="../../lib/highcharts-3d.js"></script>
+<script src="../charts.js"></script>
+<script type="text/javascript">
+    var data = {
+        "ret_code": "0",
+        "ret_msg": "",
+        "ret_err": "",
+        "variableList": [{
+            "position": "B",
+            "typeDes": "字符串型",
+            "type": 0,
+            "typeFormat": null,
+            "varietyName": "一产增加值(亿元)",
+            "varietyDes": null,
+            "range": "B2:B25"
+        }, {
+            "position": "C",
+            "typeDes": "字符串型",
+            "type": 0,
+            "typeFormat": null,
+            "varietyName": "二产增加值(亿元)",
+            "varietyDes": null,
+            "range": "C2:C25"
+        }, {
+            "position": "D",
+            "typeDes": "字符串型",
+            "type": 0,
+            "typeFormat": null,
+            "varietyName": "三产增加值(亿元)",
+            "varietyDes": null,
+            "range": "D2:D25"
+        }],
+        "data": {
+            "sortEigenvalues": null,
+            "eigenvectors": null,
+            "eigTotalInit": [2.952778775729611, 0.03369198997429479, 0.013529234296094813],
+            "eigTotalExtra": [2.952778775729611, 0.03369198997429479, 0.013529234296094813],
+            "varEigInit": [98.42595919098702, 1.123066332476493, 0.4509744765364937],
+            "accEigInit": [98.42595919098702, 99.54902552346351, 100],
+            "varEigExtra": [98.42595919098702, 1.123066332476493, 0.4509744765364937],
+            "accEigExtra": [98.42595919098702, 99.54902552346351, 100],
+            "componentArr": [[0.9907455875251866, 0.12527186340269053, 0.05225075156387884], [0.9900675826231391, -0.13389142525182046, 0.04288668887673355], [0.9954738260586045, 0.008487429407577116, -0.09465635305828594]],
+            "correlationArr": [[1, 0.9663731222265615, 0.982378671174172], [0.9663731222265615, 1, 0.9803904729465283], [0.982378671174172, 0.9803904729465283, 1]],
+            "determinant": 0.0013459557780002697,
+            "kmo": 0.7604511536598113,
+            "kmoDesc": "0.9以上表示非常适合；0.8表示适合；0.7表示一般；0.6表示不太适合；0.5以下表示极不适合",
+            "communalityArr": [[1, 0.9999999999999998], [1, 0.9999999999999999], [1, 1.0000000000000002]]
+        }
+    };
+    console.log(data);
+    $('#main').charts({
+        title: '主成分因子平面3d图',
+        type: ['pcfp3d'],
+        data: data
+    });
+
+
+</script>
+</body>
+</html>

@@ -547,7 +547,7 @@
                 "typeDes": "字符串型",
                 "type": 0,
                 "typeFormat": null,
-                "varietyName": "198219821982198219821982",
+                "varietyName": "1982",
                 "varietyDes": null,
                 "range": "B2:O2"
             },
@@ -837,7 +837,7 @@
                 "typeDes": "字符串型",
                 "type": 0,
                 "typeFormat": null,
-                "varietyName": "阿富汗阿富汗阿富汗阿富汗阿富汗阿富汗阿富汗阿富汗",
+                "varietyName": "阿富汗中国阿富汗中国",
                 "varietyDes": null,
                 "range": "B2:B33"
             },
@@ -846,7 +846,7 @@
                 "typeDes": "字符串型",
                 "type": 0,
                 "typeFormat": null,
-                "varietyName": "阿富汗中国中国中国",
+                "varietyName": "中国",
                 "varietyDes": null,
                 "range": "C2:C33"
             },
@@ -962,11 +962,12 @@
     }
 </script>
 <script>
-    new DingChart({
+    $('#main').charts({
+        title: '丁氏图',
+        type: ['dingchart'],
         data:data,
-        container:'main',
         calculateMethod: 1//0行，1列，2全
-    }).render();
+    });
 </script>
 </body>
 </html>
