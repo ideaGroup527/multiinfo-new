@@ -278,10 +278,11 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 			List<Double> fuInpList= new ArrayList<>();
 			for (int i = 0; i < independVarDTOList.size(); i++) {
 				DataFormatUtil.copy(tempList, xMap.get(independVarDTOList.get(i).getVarietyName()));
-				Double removeData = tempList.remove(tempList.size() - 1);
+				Double removeData = 0.0;
+				
+				for(int j=0;j<moveNum;j++)
+					removeData = tempList.remove(tempList.size() - 1);
 				fuInpList.add(removeData);
-				for(int j=0;j<moveNum-1;j++)
-					tempList.remove(tempList.size() - 1);
 				dataArrXList.add(DataFormatUtil.converToDouble(tempList));
 			}
 			
@@ -314,10 +315,10 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 			List<Double> fuInpList= new ArrayList<>();
 			for (int i = 0; i < independVarDTOList.size(); i++) {
 				DataFormatUtil.copy(tempList,xMap.get(independVarDTOList.get(i).getVarietyName()));
-				Double removeData = tempList.remove(0);
-				fuInpList.add(removeData);
-				for(int j=0;j<moveNum-1;j++)
+				Double removeData = 0.0;
+				for(int j=0;j<moveNum;j++)
 					tempList.remove(0);
+				fuInpList.add(removeData);
 				dataArrXList.add(DataFormatUtil.converToDouble(tempList));
 			}
 			
@@ -356,10 +357,10 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 			List<Double> fuInpList= new ArrayList<>();
 			for (int i = 0; i < independVarDTOList.size(); i++) {
 				DataFormatUtil.copy(tempList ,	xMap.get(independVarDTOList.get(i).getVarietyName()));
-				Double removeData = tempList.remove(0);
-				fuInpList.add(removeData);
-				for(int j=0;j<moveNum-1;j++)
+				Double removeData = 0.0;
+				for(int j=0;j<moveNum;j++)
 					tempList.remove(0);
+				fuInpList.add(removeData);
 				dataArrXList.add(DataFormatUtil.converToDouble(tempList));
 			}
 			
@@ -393,10 +394,10 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 			List<Double> fuInpList= new ArrayList<>();
 			for (int i = 0; i < independVarDTOList.size(); i++) {
 				DataFormatUtil.copy( tempList ,	xMap.get(independVarDTOList.get(i).getVarietyName()));
-				Double removeData = tempList.remove(tempList.size() - 1);
-				fuInpList.add(removeData);
-				for(int j=0;j<moveNum-1;j++)
+				Double removeData = 0.0;
+				for(int j=0;j<moveNum;j++)
 					tempList.remove(tempList.size() - 1);
+				fuInpList.add(removeData);
 				dataArrXList.add(DataFormatUtil.converToDouble(tempList));
 			}
 			
