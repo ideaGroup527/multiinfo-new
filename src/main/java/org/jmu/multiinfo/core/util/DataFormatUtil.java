@@ -234,4 +234,12 @@ public static double[]  converToDouble(List<Double> dataList){
 	}
 	return dataArr;
 }
+
+public static void copy(List<Double> destList, List<Double> srcList) {
+	if(destList==null) destList = new ArrayList<>(srcList.size());
+	destList.clear();
+	for(int i=0;i<srcList.size();i++){
+		destList.add(srcList.get(i));
+	}	
+}
 }

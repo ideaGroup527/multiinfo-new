@@ -9,6 +9,8 @@ import org.jmu.multiinfo.dto.regression.SlipStepwiseCondition;
 import org.jmu.multiinfo.dto.regression.SlipStepwiseDTO;
 import org.jmu.multiinfo.dto.regression.StepwiseCondition;
 import org.jmu.multiinfo.dto.regression.StepwiseMultipleDTO;
+import org.jmu.multiinfo.dto.regression.TrendStepwiseCondition;
+import org.jmu.multiinfo.dto.regression.TrendStepwiseDTO;
 
 /***
  * 
@@ -83,5 +85,14 @@ public StepwiseMultipleDTO stepwise(StepwiseCondition condition);
  * @return
  */
 public SlipStepwiseDTO slipStepwise(SlipStepwiseCondition condition);
+
+
+
+/***
+ * 趋势逐步回归
+ * @param condition
+ * @return
+ */
+public TrendStepwiseDTO trendStepwise(TrendStepwiseCondition condition);
 
 }
