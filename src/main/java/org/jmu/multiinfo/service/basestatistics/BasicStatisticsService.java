@@ -167,6 +167,14 @@ public interface BasicStatisticsService {
 	
 	
 	/***
+	 * 离差平方和
+	 * @param dataArr
+	 * @return
+	 * @throws DataErrException
+	 */
+	public Double deviationsSumSquares(double[] dataArr) throws DataErrException;
+	
+	/***
 	 * 秩次
 	 * @param dataArr
 	 * @return

@@ -2,6 +2,7 @@ package org.jmu.multiinfo.core.util;
 
 import org.apache.commons.math3.util.FastMath;
 import org.jmu.multiinfo.core.dto.EigenvalueDTO;
+import org.jmu.multiinfo.core.exception.DataErrException;
 
 import Jama.EigenvalueDecomposition;
 import Jama.Matrix;
@@ -193,4 +194,5 @@ public class MatrixUtil {
 		if((i+j)%2 == 0) return 1;
 		return -1;
 	}
+	
 }

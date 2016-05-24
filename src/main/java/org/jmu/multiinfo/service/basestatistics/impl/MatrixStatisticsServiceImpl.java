@@ -12,12 +12,17 @@ import org.jmu.multiinfo.core.dto.EigenvalueDTO;
 import org.jmu.multiinfo.core.exception.DataErrException;
 import org.jmu.multiinfo.core.util.DataFormatUtil;
 import org.jmu.multiinfo.core.util.MatrixUtil;
+import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.jmu.multiinfo.service.basestatistics.MatrixStatisticsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MatrixStatisticsServiceImpl implements MatrixStatisticsService{
 
+	@Autowired
+	private BasicStatisticsService basicStatisticsService;
+	
 	@Override
 	public EigenvalueDTO eigenvector(double[][] dataArr) throws DataErrException {
 		//如果不是对称方阵
@@ -55,6 +60,43 @@ public class MatrixStatisticsServiceImpl implements MatrixStatisticsService{
 		return egDTO;
 		
 		
+		
+	}
+
+	@Override
+	public double[][] variation(double[][] dataArr) throws DataErrException {
+		int row = dataArr.length;
+		int col = dataArr[0].length;
+		double[][] variationArr = new double[col][col];
+		
+		for(int i=0;i<col;i++){
+			for(int j=i;j<col;j++){
+				if(i==j) variationArr[i][j]=0;
+				else{
+				double temp = 0.0;
+				for(int k=0;k<row;k++){
+					temp+=variationDij(dataArr[k],i+1,j+1);
+				}
+				variationArr[i][j]=variationArr[j][i]=temp;
+				}
+			}
+		}
+		
+		return variationArr;
+	}
+
+	@Override
+	public Double variationDij(double[] dataArr,int i, int j) throws DataErrException {
+		int size =dataArr.length;
+		if(i> size || j > size) throw new DataErrException("pos is too big for arr in variationDij");
+		int varArrSize = j-i+1;
+		if(varArrSize <= 0) throw new DataErrException("j is smaller than i in variationDij");
+		double[] varArr = new double[varArrSize];
+		int varPos = 0;
+		for(int ii=i-1;ii<j;ii++){
+			varArr[varPos++] = dataArr[ii];
+		}
+		return basicStatisticsService.deviationsSumSquares(varArr);
 		
 	}
 	

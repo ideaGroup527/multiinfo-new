@@ -491,5 +491,18 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 	}
 
 
+	@Override
+	public Double deviationsSumSquares(double[] dataArr) throws DataErrException {
+		int size = getN(dataArr);
+		if(size < 2  ) throw new DataErrException("cannot resolve for deviationsSumSquares because too little size");
+		double mean = arithmeticMean(dataArr);
+		double deviations = 0.0;
+		for(int i=0;i<size;i++){
+			deviations += (dataArr[i] - mean) * (dataArr[i] - mean);
+		}
+		return deviations;
+	}
+
+
 	
 }
