@@ -51,34 +51,39 @@ public class ClusterServiceImpl implements ClusterService{
 		
 		
 		double[][] dataArr=null;
-		switch (condition.getClusterMethod()) {
-		case PointGroupCondition.TYPE_Q:{
-			//个体间
-			 dataArr = DataFormatUtil.transposition(dataGridList);
-				// 样本号
-				PositionBean factorRange = ExcelUtil.splitRange(factorVar.getRange());
-				for (int i = factorRange.getFirstRowId() - 1; i < factorRange.getLastRowId(); i++) {
-					for (int j = factorRange.getFirstColId() - 1; j < factorRange.getLastColId(); j++) {
-						factorVarList.add(dataGrid[i][j].getData());
-					}
-				}
-			break;
-		}
-		case PointGroupCondition.TYPE_R:{
-
-			
-			dataArr = new double[dataGridList.size()][dataGridList.get(0).size()];
-			for (int i = 0; i < dataGridList.size(); i++) {
-				dataArr[i] =	DataFormatUtil.converToDouble(dataGridList.get(i));
-			}
-			
-			for (int i = 0; i < independVarList.size(); i++) {
-				factorVarList.add(independVarList.get(i).getVarietyName());
-			}
-			break;
-			}
-		default:
-			break;
+//		switch (condition.getClusterMethod()) {
+//		case PointGroupCondition.TYPE_Q:{
+//			//个体间
+//			 dataArr = DataFormatUtil.transposition(dataGridList);
+//				// 样本号
+//				PositionBean factorRange = ExcelUtil.splitRange(factorVar.getRange());
+//				for (int i = factorRange.getFirstRowId() - 1; i < factorRange.getLastRowId(); i++) {
+//					for (int j = factorRange.getFirstColId() - 1; j < factorRange.getLastColId(); j++) {
+//						factorVarList.add(dataGrid[i][j].getData());
+//					}
+//				}
+//			break;
+//		}
+//		case PointGroupCondition.TYPE_R:{
+//
+//			
+//			dataArr = new double[dataGridList.size()][dataGridList.get(0).size()];
+//			for (int i = 0; i < dataGridList.size(); i++) {
+//				dataArr[i] =	DataFormatUtil.converToDouble(dataGridList.get(i));
+//			}
+//			
+//			for (int i = 0; i < independVarList.size(); i++) {
+//				factorVarList.add(independVarList.get(i).getVarietyName());
+//			}
+//			break;
+//			}
+//		default:
+//			break;
+//		}
+		
+		dataArr = new double[dataGridList.size()][dataGridList.get(0).size()];
+		for (int i = 0; i < dataGridList.size(); i++) {
+			dataArr[i] =	DataFormatUtil.converToDouble(dataGridList.get(i));
 		}
 		
 		int row = dataArr.length;
@@ -126,6 +131,36 @@ public class ClusterServiceImpl implements ClusterService{
 			break;
 		}
 		
+		switch (condition.getClusterMethod()) {
+		case PointGroupCondition.TYPE_Q:{
+			//个体间
+			dataArr = new double[dataGridList.get(0).size()][dataGridList.size()];
+			 dataArr = DataFormatUtil.transposition(dataGridList);
+				// 样本号
+				PositionBean factorRange = ExcelUtil.splitRange(factorVar.getRange());
+				for (int i = factorRange.getFirstRowId() - 1; i < factorRange.getLastRowId(); i++) {
+					for (int j = factorRange.getFirstColId() - 1; j < factorRange.getLastColId(); j++) {
+						factorVarList.add(dataGrid[i][j].getData());
+					}
+				}
+			break;
+		}
+		case PointGroupCondition.TYPE_R:{
+
+			
+			dataArr = new double[dataGridList.size()][dataGridList.get(0).size()];
+			for (int i = 0; i < dataGridList.size(); i++) {
+				dataArr[i] =	DataFormatUtil.converToDouble(dataGridList.get(i));
+			}
+			
+			for (int i = 0; i < independVarList.size(); i++) {
+				factorVarList.add(independVarList.get(i).getVarietyName());
+			}
+			break;
+			}
+		default:
+			break;
+		}
 		
 		List<StepClusterDTO> stepList = new ArrayList<>();
 		List<Integer> indexExist = new ArrayList<>();
