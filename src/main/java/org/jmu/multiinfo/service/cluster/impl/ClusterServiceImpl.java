@@ -3,10 +3,13 @@ package org.jmu.multiinfo.service.cluster.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Stack;
+import java.util.TreeMap;
 
 import org.jmu.multiinfo.core.exception.DataErrException;
 import org.jmu.multiinfo.core.util.DataFormatUtil;
@@ -17,6 +20,7 @@ import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
 import org.jmu.multiinfo.dto.cluster.PointGroupCondition;
 import org.jmu.multiinfo.dto.cluster.PointGroupDTO;
 import org.jmu.multiinfo.dto.cluster.StepClusterDTO;
+import org.jmu.multiinfo.dto.cluster.StepNodeDTO;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.jmu.multiinfo.service.cluster.ClusterService;
 import org.jmu.multiinfo.service.correlation.CorrelationService;
@@ -267,11 +271,70 @@ public class ClusterServiceImpl implements ClusterService{
 			break;
 		}
 		}
-
+		StepBinaryTree tree = makeClusterTree(stepList,row);
+		List<Integer> orderStepList =lrd(tree);
+		pointDTO.setTree(tree );
 		pointDTO.setFactorVarList(factorVarList);
 		pointDTO.setStepList(stepList);
-		
+		pointDTO.setOrderStepList(orderStepList);
 		return pointDTO;
+	}
+	
+	
+	
+	//后续遍历求叶子
+	private List<Integer> lrd(StepBinaryTree tree) {
+		Stack<TreeNode> nodeStack = new Stack<>();
+		List<Integer> stepList = new ArrayList<>();
+		nodeStack.push(tree.getRoot());
+		while(!nodeStack.isEmpty()){
+			TreeNode topNode = nodeStack.pop();
+			if(topNode.getLefTreeNode() == null && topNode.getRightNode() ==null){
+				stepList.add(topNode.getValue().getPos());
+			}else{
+				if( topNode.getRightNode() !=null)
+				nodeStack.push(topNode.getRightNode());
+				if(topNode.getLefTreeNode() != null)
+				nodeStack.push(topNode.getLefTreeNode());
+			}
+		}
+		return stepList;
+		
+	}
+
+
+
+
+	private StepBinaryTree makeClusterTree(List<StepClusterDTO> stepList,final int N) {
+		HashMap<Integer,TreeNode> map = new HashMap<>();
+		StepBinaryTree tree = new StepBinaryTree();
+			for(int i=0;i<N;i++){
+				TreeNode node = new TreeNode();
+				node.setLefTreeNode(null);
+				node.setRightNode(null);
+				StepNodeDTO value = new StepNodeDTO();
+				value.setPos(i+1);
+				node.setValue(value );
+				map.put(i+1, node);
+			}
+			for (int i = 0; i < stepList.size(); i++) {
+				StepClusterDTO step = stepList.get(i);
+				Integer pos = Math.min(step.getRowIndex(),step.getColIndex());
+				Integer maxpos = Math.max(step.getRowIndex(),step.getColIndex());
+				TreeNode pNode = new TreeNode();
+				pNode.setLefTreeNode(map.get(pos));
+				pNode.setRightNode(map.get(maxpos));
+				StepNodeDTO value = new StepNodeDTO();
+				value.setData(step.getData());
+				value.setPos(pos);
+				pNode.setValue(value);
+				map.remove(step.getRowIndex());
+				map.remove(step.getColIndex());
+				map.put(pos, pNode);
+				if(i== stepList.size()-1) tree.setRoot(pNode);
+			}
+			return tree;
+			
 	}
 
 }
