@@ -65,6 +65,10 @@ var resultTableGenerator = function () {
             //一般逐步回归
             handleGeneralStepwiseRegression(tableResult);
             break;
+        case 'Optimal_Segmentation':
+            //最优分割
+            handleOptimalSegmentation(tableResult);
+            break;
     }
 
     //绘图区
@@ -1661,6 +1665,87 @@ var handleGeneralStepwiseRegression = function (tableResult) {
         $(block).clone().html('<strong>' + config.dependentVariable[0].varietyName + '</strong>')
             .append($(span).clone().text(' = ' + equationString))
     );
+
+    $(presentArea).append(container);
+};
+
+var handleOptimalSegmentation = function (tableResult) {
+
+    //声明打印区域
+    var presentArea = $('.result-table');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
+    //声明DOM 元素
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var tableHeader = $('<h1>');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered table-condensed');
+
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
+    var emptyCell = $(headerCell).clone();
+
+    var block = $('<div>');
+    var span = $('<span>');
+
+    $(container).append($(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'modal_title_optimal_segmentation'));
+
+    var SEGMENT_TABLES = tableResult.optRes;
+
+    //有几个表格打印几个
+    SEGMENT_TABLES.map(function (object, index) {
+        var resultTable = $(table).clone();
+
+        var titleRow = $(row).clone();
+        $(titleRow).append($(headerCell).clone().attr('colspan', '4').css('text-align', 'center').text('最优 ' + object.segNum + ' 段分割结果[Result]'));
+
+        var titleSecRow = $(row).clone();
+        $(titleSecRow).append(
+            $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'segment_number')
+        ).append(
+            $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'from')
+        ).append(
+            $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'to')
+        ).append(
+            $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'variance_of_the_segment')
+        );
+        $(resultTable).append(titleRow)
+            .append(titleSecRow);
+
+        object.segDataList.map(function (data, index) {
+            var dataRow = $(row).clone();
+            $(dataRow).append(
+                $(cell).clone().text(index + 1)
+            ).append(
+                $(cell).clone().text(data.from)
+            ).append(
+                $(cell).clone().text(data.to)
+            ).append(
+                $(cell).clone().text(Number(data.sswg).toFixed(numReservation))
+            );
+            $(resultTable).append(dataRow);
+        });
+
+        var footerRow = $(row).clone();
+        $(footerRow).append(
+            $(cell).clone().attr('colspan', '4').append(
+                $(span).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'segment')
+            ).append(
+                $(span).clone().text(': ')
+            ).append(
+                $(span).clone().text(Number(object.sst).toFixed(numReservation))
+            )
+        );
+        $(resultTable).append(footerRow);
+
+        $(container).append(resultTable);
+    });
 
     $(presentArea).append(container);
 };

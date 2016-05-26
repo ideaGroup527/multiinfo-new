@@ -257,7 +257,7 @@
       "label_del_f": "剔除",
       "label_row": "行",
       "label_col": "列",
-      "label_division_number":"分割段数"
+      "label_division_number": "分割段数"
     }
   },
   "table": {
@@ -293,7 +293,12 @@
       "t": "t",
       "unstandardized_coefficients": "Unstandardized Coefficients",
       "b": "B",
-      "constant": "(Constant)"
+      "constant": "(Constant)",
+      "segment_number": "Segment number",
+      "from": "from",
+      "to": "to",
+      "variance_of_the_segment": "Variance of the segment",
+      "segment": "Segment"
     },
     "zh-cn": {
       "pearsonR": "Pearson 相关性",
@@ -327,7 +332,12 @@
       "t": "t",
       "unstandardized_coefficients": "非标准化系数",
       "b": "B",
-      "constant": "（常量）"
+      "constant": "（常量）",
+      "segment_number": "段号",
+      "from": "起始点",
+      "to": "终点号",
+      "variance_of_the_segment": "组内离差平方和",
+      "segment": "离差平方总和"
     }
   },
   "nav": {
