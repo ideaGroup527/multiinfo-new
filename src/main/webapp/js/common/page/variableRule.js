@@ -21,7 +21,7 @@ var variableRule = function () {
 
         $(this).find('.variable-wrapper').on('click', function () {
             //选择该变量之前的所有变量
-            for (var i = variablesIndex[0]; i < $(this).index(); i++) {
+            for (var i = variablesIndex[0]; i <= $(this).index(); i++) {
                 $(variableList[i]).addClass('active');
             }
             //取消该变量之后的所有变量

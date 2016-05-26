@@ -252,5 +252,15 @@
         "script": "script.js"
       }
     ]
+  },
+  {
+    "term": "OptimalSegmentation",
+    "name": {
+      "en-us": "Optimal Segmentation",
+      "zh-cn": "最优分割"
+    },
+    "modalId": "#Optimal_Segmentation",
+    "modal": "modal.html",
+    "script": "script.js"
   }
 ]

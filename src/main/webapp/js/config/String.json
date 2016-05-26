@@ -88,6 +88,7 @@
       "modal_title_gray_correlation": "Gray Correlation",
       "modal_title_general_stepwise_regression": "General Stepwise Regression",
       "modal_title_trend_stepwise_regression": "Trend Stepwise Regression",
+      "modal_title_optimal_segmentation": "Optimal Segmentation",
       "label_choose_sheet": "Select Your Sheet",
       "label_choose_variable": "Click to choose variable(s) below",
       "label_choose_col_variable": "Click to choose Column variable(s) below",
@@ -155,7 +156,10 @@
       "label_sequence": "Sequence",
       "label_conclusion": "Conclusion",
       "label_entry_f": "Entry",
-      "label_del_f": "Excluding"
+      "label_del_f": "Excluding",
+      "label_row": "Row",
+      "label_col": "Column",
+      "label_division_number": "Division number"
     },
     "zh-cn": {
       "options": "选项",
@@ -179,6 +183,7 @@
       "modal_title_gray_correlation": "灰色关联度",
       "modal_title_general_stepwise_regression": "一般逐步回归",
       "modal_title_trend_stepwise_regression": "趋势逐步回归",
+      "modal_title_optimal_segmentation": "最优分割",
       "label_choose_sheet": "请选择待分析的表格",
       "label_choose_variable": "点击选择待选变量",
       "label_choose_col_variable": "点击选择 列变量",
@@ -249,7 +254,10 @@
       "label_sequence": "排序",
       "label_conclusion": "结论",
       "label_entry_f": "引入",
-      "label_del_f": "剔除"
+      "label_del_f": "剔除",
+      "label_row": "行",
+      "label_col": "列",
+      "label_division_number":"分割段数"
     }
   },
   "table": {

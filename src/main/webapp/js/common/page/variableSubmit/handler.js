@@ -171,6 +171,19 @@ var handleSubmit = function (config) {
             dataPackage.entryF = GSR.entryF[0];
             dataPackage.delF = GSR.delF[0];
             break;
+        case 'Optimal_Segmentation':
+            //最优分割
+            handleURL = 'statistics/optseg/optk.do';
+            var OS = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_OPTIMAL_SEGMENTATION'));
+            var COL = JSON.parse(sessionStorage.getItem('PRIVATE_OPT_SEG_COL'));
+
+            OS.variableList.map(function (variable, index) {
+                var cache = variable.range.split(':')[0];
+                variable.range = cache + ':' + variable.position + COL;
+            });
+            dataPackage.variableList = OS.variableList;
+            dataPackage.segNum = OS.segNum[0];
+            break;
     }
 
     $.ajax({

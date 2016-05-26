@@ -1,0 +1,102 @@
+<div class="modal fade in" id="Optimal_Segmentation" tabindex="-1" role="dialog"
+     aria-labelledby="Optimal_Segmentation_Label" style="display: block;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="Optimal_Segmentation_Label"
+                    data-i18n-type="page"
+                    data-i18n-tag="modal_title_optimal_segmentation">最优分割</h4>
+            </div>
+            <div class="modal-body">
+                <p data-i18n-type="page"
+                   data-i18n-tag="label_row">行</p>
+
+                <div data-config-group data-group-name="variableList" data-config-val-flag=".active"
+                     data-variable-select-rule="normal">
+
+                </div>
+                <hr/>
+                <p data-i18n-type="page"
+                   data-i18n-tag="label_col">列</p>
+
+                <div data-config-group data-group-name="col" data-config-val-flag=".active"
+                     data-variable-select-rule="consequent">
+                </div>
+
+                <div data-panel="config">
+                    <fieldset class="algorithm-config-zone">
+                        <legend data-i18n-tag="options" data-i18n-type="page">选项</legend>
+
+                        <div data-config-group data-group-name="segNum">
+                            <span data-i18n-type="page" data-i18n-tag="label_division_number">分割段数</span>
+                            <select name="segNum" id="segNum" class="form-control">
+
+                            </select>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default variable-config" data-i18n-type="page"
+                        data-i18n-tag="options">选项
+                </button>
+                <button type="button" class="btn btn-primary variable-submit"
+                        data-btn-type="Optimal_Segmentation"
+                        data-i18n-type="page" data-i18n-tag="btn_next">确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var variableList = JSON.parse(sessionStorage.getItem('PRIVATE_VARIABLE_LIST'));
+
+        variableList.map(function (variable, i) {
+            //第一栏第一列的值不要
+            if (i == 0) return;
+
+            var variableWrapper = $('<span>');
+            $(variableWrapper).addClass('variable-wrapper active')
+                    .attr('name', 'variableList')
+                    .val(variable)
+                    .text(variable.varietyName);
+
+            $('[data-group-name=variableList]').append(variableWrapper);
+        });
+
+        for (var init = 2; init < variableList.length; init++) {
+            $('#segNum').append($('<option>').val(init).text(init));
+        }
+
+        $('.multiinfo-table-display').find('td:first-child').map(function (index, elem) {
+            var variableWrapper = $('<div>');
+            var dataConfig = {};
+            dataConfig.position = $(elem).attr('data-positiondes').split(',')[1];
+            dataConfig.varietyName = $(elem).attr('data-data');
+            $(variableWrapper).addClass('variable-wrapper active')
+                    .attr('data-config', JSON.stringify(dataConfig))
+                    .attr('name', 'col')
+                    .val(dataConfig)
+                    .text($(elem).attr('data-data'));
+
+            $('[data-group-name=col]').append(variableWrapper);
+            sessionStorage.setItem('PRIVATE_OPT_SEG_COL', dataConfig.position);
+        });
+
+        $('[data-group-name=variableList]').find('.variable-wrapper').on('click', function () {
+            $('#segNum').empty();
+            var length = $('[data-group-name=variableList]').find('.variable-wrapper.active').length
+            for (var init = 2; init < length; init++) {
+                $('#segNum').append($('<option>').val(init).text(init));
+            }
+        });
+
+        $('[data-group-name=col]').find('.variable-wrapper').on('click', function () {
+            var config = JSON.parse($(this).attr('data-config'));
+            sessionStorage.setItem('PRIVATE_OPT_SEG_COL', config.position);
+        })
+    })
+</script>
