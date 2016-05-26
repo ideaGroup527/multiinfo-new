@@ -37,13 +37,12 @@ public class FactorAnalysisServiceImpl implements FactorAnalysisService{
 		List<VarietyDTO>  independVarList=	condition.getVariableList();
 		fcaDTO.setVariableList(independVarList);
 		Map<String, List<Double>> dataMap =	DataFormatUtil.converToDouble(dataGrid, independVarList);
-		List<List<Double>> dataGridList = new ArrayList<>();
+		double[][] oraArr = new double[independVarList.size()][];
+		int index = 0;
 		for (Map.Entry<String, List<Double>> entry : dataMap.entrySet()) {
 			 List<Double> dataList = entry.getValue();
-			 dataGridList.add(dataList);
+			 oraArr[index++] =  DataFormatUtil.converToDouble(dataList);
 		}
-		double[][] oraArr = DataFormatUtil.transposition(dataGridList);
-		
 		
 		PrincipalComponentAnalysisDTO pcaDTO=	pcaService.principalComponentAnalysis(condition);
 		fcaDTO.setRet_msg(pcaDTO.getRet_msg());
@@ -64,6 +63,7 @@ public class FactorAnalysisServiceImpl implements FactorAnalysisService{
 			fcaDTO.setRet_code("-1");
 		}
 		}
+		oraArr = DataFormatUtil.transposition(oraArr);
 		double[][] correlationArr =pcaEvDTO.getCorrelationArr();
 		//At * R-1 
 		double[][] atr = MatrixUtil.product(MatrixUtil.transpose(orRotaArr),MatrixUtil.inverse(correlationArr));
@@ -82,7 +82,8 @@ public class FactorAnalysisServiceImpl implements FactorAnalysisService{
 			boolean value=false;
 			int p = componentArr[0].length;
 			int m = componentArr.length;
-			double[][] aa = componentArr.clone();
+			double[][] aa = MatrixUtil.clone(componentArr);
+			
 			do{
 				double b=0,c=0;
 				for(int j=0;j<p;j++){

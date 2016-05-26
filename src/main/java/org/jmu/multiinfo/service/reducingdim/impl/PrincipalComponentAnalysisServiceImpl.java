@@ -55,7 +55,7 @@ private CorrelationService correlationService;
 			double[] accEig = accumulationContribution(sortEigenvalues);
 			eigDTO.setAccEig(accEig);
 			double[][] eigenvectors = eigDTO.getEigenvectors();
-			eigDTO.setEigenvectors(eigenvectors.clone());
+			eigDTO.setEigenvectors(MatrixUtil.clone(eigenvectors));
 			for (int i = 0; i < sortEigenvalues.length; i++) {
 				eigenvectors[i] =	principalComponentCoefficient(eigenvectors[i],sortEigenvalues[i]);
 				
@@ -222,7 +222,7 @@ double[][] oraComArr =	eigDTO.getComponentArr();
 	}
 	@Override
 	public double chiSquareBartlett(double[][] correlationArr) {
-		double[][] oraArr = correlationArr.clone();
+		double[][] oraArr = MatrixUtil.clone(correlationArr);
 		double si = 0.0;
 		double nki = 0.0;
 		int N = 0;

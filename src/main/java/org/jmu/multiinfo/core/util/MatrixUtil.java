@@ -18,6 +18,18 @@ import Jama.Matrix;
  *
  */
 public class MatrixUtil {
+	
+	public static double[][] clone(double[][] dataArr){
+		int row = dataArr.length;
+		int col = dataArr[0].length;
+		double[][] cloArr = new double[row][col];
+		for(int i=0;i<row;i++){
+			for (int j = 0; j < col; j++) {
+				cloArr[i][j] = dataArr[i][j];
+			}
+		}
+		return cloArr;
+	}
 
 
 	/***
