@@ -61,6 +61,10 @@ var resultTableGenerator = function () {
             //多元线性回归
             handleMultiLinearRegression(tableResult);
             break;
+        case 'General_Stepwise_Regression':
+            //一般逐步回归
+            handleGeneralStepwiseRegression(tableResult);
+            break;
     }
 
     //绘图区
@@ -1544,4 +1548,119 @@ var handleMultiLinearRegression = function (tableResult) {
 
     $(presentArea).append(modelSummaryArea);
 
+};
+
+var handleGeneralStepwiseRegression = function (tableResult) {
+
+    //声明打印区域
+    var presentArea = $('.result-table');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
+    //声明DOM 元素
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var tableHeader = $('<h1>');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered table-condensed');
+
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
+    var emptyCell = $(headerCell).clone();
+
+    var block = $('<div>');
+    var span = $('<span>');
+
+    //要打印两个表格：1.模型汇总表 2.系数表
+    //1.模型汇总表
+    $(container).append($(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_model_summary'));
+    var modelTable = $(table).clone();
+    var modelTitleRow = $(row).clone();
+    //1.1 打印第一行，标题：模型，R，R方，标准误差，F
+    $(modelTitleRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'model')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'r')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'rsquared')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'regressionStandardError')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'f')
+    );
+
+    //1.2 打印数据行
+    var modelDataRow = $(row).clone();
+    $(modelDataRow).append(
+        $(cell).clone().text('1')
+    ).append(
+        $(cell).clone().text(Number(Math.sqrt(tableResult.rsquared)).toFixed(numReservation))
+    ).append(
+        $(cell).clone().text(Number(tableResult.rsquared).toFixed(numReservation))
+    ).append(
+        $(cell).clone().text(Number(tableResult.regressionStandardError).toFixed(numReservation))
+    ).append(
+        $(cell).clone().text(Number(tableResult.f).toFixed(numReservation))
+    );
+    $(modelTable).append(modelTitleRow).append(modelDataRow);
+    $(container).append(modelTable);
+
+    //2.系数表
+    $(container).append($(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_coefficients'));
+    var coeffTable = $(table).clone();
+    //2.1 打印标题行
+    var coeffTitleRow = $(row).clone();
+    $(coeffTitleRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'model').attr('rowspan', '2')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'unstandardized_coefficients')
+    );
+    var coeffSecTitleRow = $(row).clone();
+    $(coeffSecTitleRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'b')
+    );
+    $(coeffTable).append(coeffTitleRow).append(coeffSecTitleRow);
+
+    //2.2 打印数据
+    var config = JSON.parse(sessionStorage.PRIVATE_CONFIG_GENERAL_STEPWISE_REGRESSION);
+    var independentVariable = config.independentVariable;
+
+    tableResult.regressionParameters.map(function (value, index) {
+        var dataRow = $(row).clone();
+
+        if (index == 0) {
+            $(dataRow).append($(cell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'constant'))
+                .append(Number(value).toFixed(numReservation));
+        } else {
+            $(dataRow).append($(cell).clone().text(independentVariable[index - 1].varietyName))
+                .append($(cell).clone().text(Number(value).toFixed(numReservation)));
+        }
+
+        $(coeffTable).append(dataRow);
+    });
+    $(container).append(coeffTable);
+
+    var equationString = '';
+    tableResult.regressionParameters.map(function (value, index) {
+        if (index == 0) {
+            equationString += '' + Number(value).toFixed(numReservation);
+        } else {
+            if (value > 0) {
+                equationString += ' + ' + Number(value).toFixed(numReservation) + ' × ' + independentVariable[index - 1].varietyName;
+            } else {
+                equationString += ' - ' + Math.abs(Number(value).toFixed(numReservation)) + ' × ' + independentVariable[index - 1].varietyName;
+            }
+        }
+    });
+
+    $(container).append(
+        $(block).clone().html('<strong>' + config.dependentVariable[0].varietyName + '</strong>')
+            .append($(span).clone().text(' = ' + equationString))
+    );
+
+    $(presentArea).append(container);
 };
