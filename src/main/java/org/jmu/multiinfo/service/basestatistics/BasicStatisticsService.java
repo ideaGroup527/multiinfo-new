@@ -408,4 +408,12 @@ public interface BasicStatisticsService {
 	 * @throws DataErrException
 	 */
 	public double sumMul(final double[]dataArrX,final double[]dataArrY) throws DataErrException;
+	
+	/**
+	 * 判断一个double类型的数是否为0
+	 * @param data
+	 * @return
+	 */
+	public boolean isZero(double data);
+	
 }

@@ -55,12 +55,13 @@ private CorrelationService correlationService;
 			double[] accEig = accumulationContribution(sortEigenvalues);
 			eigDTO.setAccEig(accEig);
 			double[][] eigenvectors = eigDTO.getEigenvectors();
+			eigDTO.setEigenvectors(eigenvectors.clone());
 			for (int i = 0; i < sortEigenvalues.length; i++) {
 				eigenvectors[i] =	principalComponentCoefficient(eigenvectors[i],sortEigenvalues[i]);
 				
 			}
 			eigDTO.setComponentArr(eigenvectors.clone());
-			eigDTO.setEigenvectors(eigenvectors);
+			
 
 		return eigDTO;
 		
@@ -139,6 +140,8 @@ double[][] oraComArr =	eigDTO.getComponentArr();
 		pcaDTO.setEigTotalInit(sortEigvalues);
 		pcaDTO.setAccEigInit(acceigs);
 		pcaDTO.setVarEigInit(vareigs);
+		pcaDTO.setEigenvectors(eigDTO.getEigenvectors());
+		pcaDTO.setSortEigenvalues(eigDTO.getSortEigenvalues());
 		switch (condition.getExtractMethod()) {
 		case PrincipalComponentAnalysisCondition.EXTRACT_METHOD_EIGENVALUE:{
 			int tmpSize = 0;

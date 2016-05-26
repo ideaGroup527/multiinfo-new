@@ -1,8 +1,11 @@
 package org.jmu.multiinfo.web.controller;
 
+import org.jmu.multiinfo.dto.reducingdim.FactorAnalysisCondition;
+import org.jmu.multiinfo.dto.reducingdim.FactorAnalysisDTO;
 import org.jmu.multiinfo.dto.reducingdim.PrincipalComponentAnalysisCondition;
 import org.jmu.multiinfo.dto.reducingdim.PrincipalComponentAnalysisDTO;
 import org.jmu.multiinfo.dto.regression.SingleLinearDTO;
+import org.jmu.multiinfo.service.reducingdim.FactorAnalysisService;
 import org.jmu.multiinfo.service.reducingdim.PrincipalComponentAnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,12 +29,15 @@ import io.swagger.annotations.ApiResponses;
  * @version V1.0
  *
  */
-@Api(value = "分析算法",tags="分析算法")  
+@Api(value = "降维算法",tags="降维算法")  
 @Controller
 @RequestMapping("/statistics/analysis")
-public class PrincipalComponentAnalysisController {
+public class ReducingDimController {
 	@Autowired
 	private PrincipalComponentAnalysisService pcaService;
+	
+	@Autowired
+	private FactorAnalysisService fcaService;
 	/***
 	 * 主成分分析
 	 * @param condition {@link org.jmu.multiinfo.dto.reducingdim.PrincipalComponentAnalysisCondition}
@@ -47,6 +53,25 @@ public class PrincipalComponentAnalysisController {
 	@ResponseBody
 	public PrincipalComponentAnalysisDTO calPrincipalComponentAnalysis(@ApiParam(required = true, name = "condition", value = "主成分分析入参") @RequestBody PrincipalComponentAnalysisCondition condition) {
 		return pcaService.principalComponentAnalysis(condition);
+	
+	}
+	
+	
+	/***
+	 * 因子分析
+	 * @param condition {@link org.jmu.multiinfo.dto.reducingdim.FactorAnalysisCondition}
+	 * @return
+	 */
+	@ApiOperation(value = "因子分析", notes = "返回计算结果对象",httpMethod="POST")  
+	  @ApiResponses(value = {  
+	            @ApiResponse(code = 200, message = "计算成功", response = FactorAnalysisDTO.class),  
+	            @ApiResponse(code = 400, message = "入参有误"),
+	            @ApiResponse(code = 500, message = "内部报错")}  
+	  )
+	@RequestMapping(value= "/Factor.do")
+	@ResponseBody
+	public FactorAnalysisDTO calFactorAnalysis(@ApiParam(required = true, name = "condition", value = "因子分析入参") @RequestBody FactorAnalysisCondition condition) {
+		return fcaService.factorAnalysis(condition);
 	
 	}
 
