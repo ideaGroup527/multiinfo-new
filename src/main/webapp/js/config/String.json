@@ -91,6 +91,7 @@
       "modal_title_optimal_segmentation": "Optimal Segmentation",
       "modal_title_factor_analysis": "Factor Analysis",
       "modal_title_slip_stepwise_regression": "Slip Stepwise Regression",
+      "modal_title_principal_correspondence_analysis": "Correspondence Analysis",
       "label_choose_sheet": "Select Your Sheet",
       "label_choose_variable": "Click to choose variable(s) below",
       "label_choose_col_variable": "Click to choose Column variable(s) below",
@@ -168,7 +169,11 @@
       "label_factor_loading_matrix": "Factor Loading Matrix",
       "label_correlation_coefficient_eigen_vector": "Correlation Coefficient Eigen Vector",
       "label_orthogonal_factor_scores": "Orthogonal Factor Scores",
-      "label_years": "Years"
+      "label_years": "Years",
+      "label_frequency_matrix": "Frequency Matrix",
+      "label_z_matrix": "Matrix Z",
+      "label_variable_covariance_matrix": "Variables Covariance Matrix",
+      "label_sample_covariance_matrix": "Samples Covariance Matrix"
     },
     "zh-cn": {
       "options": "选项",
@@ -195,6 +200,7 @@
       "modal_title_optimal_segmentation": "最优分割",
       "modal_title_factor_analysis": "因子分析",
       "modal_title_slip_stepwise_regression": "多因素滑移逐步回归",
+      "modal_title_principal_correspondence_analysis": "对应分析",
       "label_choose_sheet": "请选择待分析的表格",
       "label_choose_variable": "点击选择待选变量",
       "label_choose_col_variable": "点击选择 列变量",
@@ -275,7 +281,11 @@
       "label_factor_loading_matrix": "因子载荷矩阵",
       "label_correlation_coefficient_eigen_vector": "相关系数特征向量",
       "label_orthogonal_factor_scores": "正交因子得分",
-      "label_years": "年份"
+      "label_years": "年份",
+      "label_frequency_matrix": "概率矩阵",
+      "label_z_matrix": "Z 矩阵",
+      "label_variable_covariance_matrix": "变量间协方差矩阵",
+      "label_sample_covariance_matrix": "样本间协方差矩阵"
     }
   },
   "table": {
@@ -318,7 +328,10 @@
       "variance_of_the_segment": "Variance of the segment",
       "segment": "Segment",
       "sign_segment": "Sign \\ Segment",
-      "var_eigen": "Variable \\ Eigenvalue"
+      "var_eigen": "Variable \\ Eigenvalue",
+      "sample_var": "Sample \\ Variable",
+      "row_density": "Row Density",
+      "col_density": "Column Density"
     },
     "zh-cn": {
       "pearsonR": "Pearson 相关性",
@@ -359,7 +372,10 @@
       "variance_of_the_segment": "组内离差平方和",
       "segment": "离差平方总和",
       "sign_segment": "标识列 \\ 分割段数",
-      "var_eigen": "变量名 \\ 特征值"
+      "var_eigen": "变量名 \\ 特征值",
+      "sample_var": "样本号 \\ 变量名",
+      "row_density": "行密度",
+      "col_density": "列密度"
     }
   },
   "nav": {

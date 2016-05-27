@@ -1,13 +1,13 @@
 <div class="modal fade in" id="Trend_Stepwise_Regression" tabindex="-1" role="dialog"
-     aria-labelledby="Simple_Linear_Regression_Label" style="display: block;">
+     aria-labelledby="Trend_Stepwise_Regression_Label" style="display: block;">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="Simple_Linear_Regression_Label"
+                <h4 class="modal-title" id="Trend_Stepwise_Regression_Label"
                     data-i18n-type="page"
-                    data-i18n-tag="modal_title_trend_stepwise_regression">一元线性回归</h4>
+                    data-i18n-tag="modal_title_trend_stepwise_regression">多因素滑移逐步回归</h4>
             </div>
             <div class="modal-body">
                 <p data-i18n-type="page"
@@ -23,10 +23,64 @@
                    data-i18n-tag="label_indep_var_list">自变量列表</p>
 
                 <div data-config-group data-group-name="independentVariable" data-config-val-flag=".active"
-                     data-variable-select-rule="single">
+                     data-variable-select-rule="normal">
+                </div>
+                <hr/>
+                <p data-i18n-type="page" data-i18n-tag="label_years">年份</p>
+
+                <div data-config-group data-group-name="timeVariable" data-config-val-flag=".active:last"
+                     data-variable-select-rule="consequent">
+
+                </div>
+                <div data-panel="config">
+                    <fieldset class="algorithm-config-zone">
+                        <legend data-i18n-tag="options" data-i18n-type="page">选项</legend>
+                        <span>使用F值</span>
+
+                        <div data-config-group data-group-name="entryF">
+                            <span data-i18n-type="page" data-i18n-tag="label_entry_f">引入</span>
+                            <input class="form-control" type="number" name="entryF" min="0.0001" max="99998"
+                                   value="0.0001">
+                        </div>
+                        <div data-config-group data-group-name="delF">
+                            <span data-i18n-type="page" data-i18n-tag="label_del_f">剔除</span>
+                            <input class="form-control" type="number" name="delF" min="0.0001" max="99998"
+                                   value="0.0001">
+                        </div>
+                        <hr/>
+                        <span>前移回归法</span>
+
+                        <div data-config-group data-group-name="previousMethod"
+                             data-config-val-flag=":checked">
+                            <label>
+                                <input type="radio" name="previousMethod" checked value="0"/>
+                                <span>时间升序</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="previousMethod" value="1"/>
+                                <span>时间降序</span>
+                            </label>
+                        </div>
+                        <span>后移回归法</span>
+
+                        <div data-config-group data-group-name="backwardMethod"
+                             data-config-val-flag=":checked">
+                            <label>
+                                <input type="radio" name="backwardMethod" checked value="0"/>
+                                <span>时间升序</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="backwardMethod" value="1"/>
+                                <span>时间降序</span>
+                            </label>
+                        </div>
+                    </fieldset>
                 </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-default variable-config" data-i18n-type="page"
+                        data-i18n-tag="options">选项
+                </button>
                 <button type="button" class="btn btn-primary variable-submit"
                         data-btn-type="Trend_Stepwise_Regression"
                         data-i18n-type="page" data-i18n-tag="btn_next">确定
@@ -58,6 +112,23 @@
 
             $('[data-group-name=dependentVariable]').append(depVariableWrapper);
             $('[data-group-name=independentVariable]').append(indVariableWrapper);
+        });
+
+        $('.multiinfo-table-display').find('td:first-child').map(function (index, elem) {
+            var variableWrapper = $('<div>');
+            var dataConfig = {};
+            dataConfig.position = $(elem).attr('data-positiondes').split(',')[0];
+            dataConfig.number = $(elem).attr('data-positiondes').split(',')[1];
+            dataConfig.type = 0;
+            dataConfig.varietyName = '年份';
+            dataConfig.range = 'A2:A'+dataConfig.number;
+            $(variableWrapper).addClass('variable-wrapper active')
+                    .attr('data-config', JSON.stringify(dataConfig))
+                    .attr('name', 'timeVariable')
+                    .val(dataConfig)
+                    .text($(elem).attr('data-data'));
+
+            $('[data-group-name=timeVariable]').append(variableWrapper);
         });
     })
 </script>

@@ -1,0 +1,102 @@
+<div class="modal fade in" id="Correspondence_Analysis" tabindex="-1" role="dialog"
+     aria-labelledby="Correspondence_Analysis_Label" style="display: block;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="Correspondence_Analysis_Label" data-i18n-type="page"
+                    data-i18n-tag="modal_title_principal_correspondence_analysis">主成分分析</h4>
+            </div>
+            <div class="modal-body">
+                <p data-i18n-type="page"
+                   data-i18n-tag="label_variable">变量</p>
+
+                <div data-config-group data-group-name="variableList" data-config-val-flag=".active"
+                     data-variable-select-rule="normal">
+
+                </div>
+                <div data-panel="config">
+                    <fieldset class="algorithm-config-zone">
+                        <legend data-i18n-tag="options" data-i18n-type="page">选项</legend>
+
+                        <span data-i18n-type="page" data-i18n-tag="label_extraction">抽取</span>
+
+                        <div data-config-group data-group-name="extractMethod" data-config-val-flag=":checked">
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input type="radio" name="extractMethod" value="0" checked/>
+                                    <span data-i18n-type="page" data-i18n-tag="label_based_on_eigenvalues">基于特征值</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-inline">
+                                <label>
+                                    <input type="radio" name="extractMethod" value="1"/>
+                                    <span data-i18n-type="page" data-i18n-tag="label_factor_fixed_number">因子的固定数量</span>
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div data-config-group data-group-name="eigExtraNum">
+                    <hr/>
+                    <div class="checkbox-inline">
+                        <label>
+                            <span data-i18n-type="page" data-i18n-tag="label_eigenvalues_more_than">特征值大于</span>
+                            <input class="form-control small" type="number" name="eigExtraNum" value="1"/>
+                        </label>
+                    </div>
+                </div>
+                <div data-config-group data-group-name="factorExtraNum" style="display:none;">
+                    <hr/>
+                    <div class="checkbox-inline">
+                        <label>
+                            <span data-i18n-type="page" data-i18n-tag="label_extraction_factors_num">要提取的因子</span>
+                            <input class="form-control small" step="1" min="1" type="number" name="factorExtraNum"
+                                   value="1"/>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default variable-config" data-i18n-type="page"
+                        data-i18n-tag="options">选项
+                </button>
+                <button type="button" class="btn btn-primary variable-submit"
+                        data-btn-type="Correspondence_Analysis"
+                        data-i18n-type="page" data-i18n-tag="btn_next">确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+
+        $('[name=extractMethod]').change(function () {
+            console.log($(this).val());
+            if ($(this).val() == '0') {
+                $('[data-group-name=eigExtraNum]').show();
+                $('[data-group-name=factorExtraNum]').hide();
+            } else {
+                $('[data-group-name=eigExtraNum]').hide();
+                $('[data-group-name=factorExtraNum]').show();
+                $('[name=factorExtraNum]').attr('max', $('[data-group-name=variableList]').find('.variable-wrapper.active').length);
+            }
+        });
+
+        var variableList = JSON.parse(sessionStorage.getItem('PRIVATE_VARIABLE_LIST'));
+
+        variableList.map(function (variable, i) {
+            var variableWrapper = $('<span>');
+            $(variableWrapper).addClass('variable-wrapper')
+                    .attr('name', 'variableList')
+                    .attr('data-config', JSON.stringify(variable))
+                    .attr('data-toggle-select', i)
+                    .val(variable)
+                    .text(variable.varietyName);
+
+            $('[data-group-name=variableList]').append(variableWrapper);
+        });
+    })
+</script>

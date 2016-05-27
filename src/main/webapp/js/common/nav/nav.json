@@ -193,6 +193,16 @@
             "modalId": "#Factor_Analysis",
             "modal": "modal.html",
             "script": "script.js"
+          },
+          {
+            "term": "CorrespondenceAnalysis",
+            "name": {
+              "en-us": "Correspondence Analysis",
+              "zh-cn": "对应分析"
+            },
+            "modalId": "#Correspondence_Analysis",
+            "modal": "modal.html",
+            "script": "script.js"
           }
         ]
       }

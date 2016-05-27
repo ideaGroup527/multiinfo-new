@@ -132,6 +132,15 @@ var handleSubmit = function (config) {
             dataPackage.variance = FA.variance[0];
             console.log(FA);
             break;
+        case 'Correspondence_Analysis':
+            //降维分析 - 对应分析
+            handleURL = 'statistics/analysis/correspondence.do';
+            var CA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CORRESPONDENCE_ANALYSIS'));
+            dataPackage.variableList = CA.variableList;
+            dataPackage.extractMethod = CA.extractMethod[0];
+            dataPackage.eigExtraNum = CA.eigExtraNum[0];
+            dataPackage.factorExtraNum = CA.factorExtraNum[0];
+            break;
         case 'Gray_Correlation':
             //灰色关联度
             handleURL = 'statistics/prediction/greydegree.do';

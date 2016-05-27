@@ -41,6 +41,10 @@ var resultTableGenerator = function () {
             //降维 - 因子
             handleFactorAnalysis(tableResult);
             break;
+        case 'Correspondence_Analysis':
+            //降维 - 对应分析
+            handleCorrespondenceAnalysis(tableResult);
+            break;
         case 'Gray_Correlation':
             //灰色关联度
             handleGrayCorrelation(tableResult);
@@ -1234,6 +1238,142 @@ var handleFactorAnalysis = function (tableResult) {
 
     $(orthArea).append(orthTable);
     $(presentArea).append(orthArea);
+};
+
+var handleCorrespondenceAnalysis = function (tableResult) {
+
+    //声明放置区域
+    var presentArea = $('.result-table');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
+    //声明DOM 元素
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var tableHeader = $('<h1>');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered table-condensed');
+
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
+    var emptyCell = $(headerCell).clone();
+
+    var block = $('<div>');
+    var span = $('<span>');
+
+    var SS = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CORRESPONDENCE_ANALYSIS'));
+
+    //1 打印『概率矩阵』
+    var frequencyArea = $(container).clone();
+    $(frequencyArea).append($(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_frequency_matrix'));
+    var frequencyTable = $(table).clone();
+    //1.1 打印标题行
+    var titleRow = $(row).clone();
+    $(titleRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'sample_var')
+    );
+
+    SS.variableList.map(function (variable) {
+        $(titleRow).append(
+            $(headerCell).clone().text(variable.varietyName)
+        )
+    });
+
+    $(titleRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'row_density')
+    );
+    $(frequencyTable).append(titleRow);
+
+    //1.2 打印数据行
+    tableResult.proArr.map(function (data, index) {
+        var dataRow = $(row).clone();
+
+        if (tableResult.proArr[index + 1]) {
+            $(dataRow).append($(cell).clone().text(index + 1));
+        } else {
+            $(dataRow).append($(cell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'col_density'));
+        }
+
+        data.map(function (value) {
+            $(dataRow).append($(cell).clone().text(Number(value).toFixed(numReservation)));
+        });
+
+        $(frequencyTable).append(dataRow);
+    });
+
+    $(frequencyArea).append(frequencyTable);
+    $(presentArea).append(frequencyArea);
+
+    //2 打印『Z矩阵』
+    var zMatrixArea = $(container).clone();
+    $(zMatrixArea).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_z_matrix')
+    );
+    //2.1 打印表格
+    var zMatrixTable = $(table).clone();
+    tableResult.z.map(function (data) {
+        var dataRow = $(row).clone();
+
+        data.map(function (value) {
+            $(dataRow).append(
+                $(cell).clone().text(Number(value).toFixed(numReservation))
+            )
+        });
+
+        $(zMatrixTable).append(dataRow);
+    });
+
+    $(zMatrixArea).append(zMatrixTable);
+    $(presentArea).append(zMatrixArea);
+
+    //3 打印『变量间协方差矩阵』
+    var varCovarianceMatrixArea = $(container).clone();
+    $(varCovarianceMatrixArea).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_variable_covariance_matrix')
+    );
+    var varCovarianceMatrixTable = $(table).clone();
+
+    //3.1 打印表格
+    tableResult.sr.map(function (data) {
+        var dataRow = $(row).clone();
+
+        data.map(function (value) {
+            $(dataRow).append(
+                $(cell).clone().text(Number(value).toFixed(numReservation))
+            );
+        });
+
+        $(varCovarianceMatrixTable).append(dataRow);
+    });
+
+    $(varCovarianceMatrixArea).append(varCovarianceMatrixTable);
+    $(presentArea).append(varCovarianceMatrixArea);
+
+    //6 打印『样本间协方差矩阵』
+    var samCovarianceMatrixArea = $(container).clone();
+    $(samCovarianceMatrixArea).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_sample_covariance_matrix')
+    );
+    var samCovarianceMatrixTable = $(table).clone();
+    //6.1 打印表格
+    tableResult.sq.map(function (data) {
+        var dataRow = $(row).clone();
+
+        data.map(function (value) {
+            $(dataRow).append(
+                $(cell).clone().text(Number(value).toFixed(numReservation))
+            );
+        });
+        $(samCovarianceMatrixTable).append(dataRow);
+    });
+
+    $(samCovarianceMatrixArea).append(samCovarianceMatrixTable);
+    $(presentArea).append(samCovarianceMatrixArea);
+
 };
 
 var handleRelatedVariable = function (tableResult) {
