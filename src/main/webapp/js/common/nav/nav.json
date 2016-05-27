@@ -247,23 +247,6 @@
     ]
   },
   {
-    "term": "Graph",
-    "name": {
-      "en-us": "Graph",
-      "zh-cn": "制图"
-    },
-    "subMenu": [
-      {
-        "term": "Boxplot",
-        "name": {
-          "en-us": "Boxplot",
-          "zh-cn": "箱线图"
-        },
-        "script": "script.js"
-      }
-    ]
-  },
-  {
     "term": "OptimalSegmentation",
     "name": {
       "en-us": "Optimal Segmentation",

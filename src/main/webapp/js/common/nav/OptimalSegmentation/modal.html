@@ -67,7 +67,7 @@
             $('[data-group-name=variableList]').append(variableWrapper);
         });
 
-        for (var init = 2; init < variableList.length; init++) {
+        for (var init = 2; init <= $('.multiinfo-table-display').find('td:first-child').length; init++) {
             $('#segNum').append($('<option>').val(init).text(init));
         }
 
@@ -86,17 +86,14 @@
             sessionStorage.setItem('PRIVATE_OPT_SEG_COL', dataConfig.position);
         });
 
-        $('[data-group-name=variableList]').find('.variable-wrapper').on('click', function () {
-            $('#segNum').empty();
-            var length = $('[data-group-name=variableList]').find('.variable-wrapper.active').length
-            for (var init = 2; init < length; init++) {
-                $('#segNum').append($('<option>').val(init).text(init));
-            }
-        });
-
         $('[data-group-name=col]').find('.variable-wrapper').on('click', function () {
             var config = JSON.parse($(this).attr('data-config'));
             sessionStorage.setItem('PRIVATE_OPT_SEG_COL', config.position);
+
+            $('#segNum').empty();
+            for (var init = 2; init <= config.position - 1; init++) {
+                $('#segNum').append($('<option>').val(init).text(init));
+            }
         })
     })
 </script>

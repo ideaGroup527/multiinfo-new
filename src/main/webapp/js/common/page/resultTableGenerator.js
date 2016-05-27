@@ -1215,21 +1215,22 @@ var handleFactorAnalysis = function (tableResult) {
     //7.1 打印首行
     var orthTitleRow = $(row).clone();
     $(orthTitleRow).append($(headerCell).clone());
-    orthData.map(function (value, index) {
-        $(orthTitleRow).append($(headerCell).clone().text('F' + (index + 1)));
-    });
+
+    var colNum = orthData[0].length;
+    for (var i = 0; i < colNum; i++) {
+        $(orthTitleRow).append($(headerCell).clone().text('F' + (i + 1)));
+    }
     $(orthTable).append(orthTitleRow);
 
     //7.2 打印数据行
-    var rowNum = orthData[0].length;
-    for (var i = 0; i < rowNum; i++) {
+    orthData.map(function (data, index) {
         var dataRow = $(row).clone();
-        $(dataRow).append($(cell).clone().text(i + 1));
-        orthData.map(function (data, index) {
+        $(dataRow).append($(cell).clone().text(index + 1).css('text-align', 'center'));
+        for (var i = 0; i < colNum; i++) {
             $(dataRow).append($(cell).clone().text(Number(data[i]).toFixed(numReservation)));
-        });
+        }
         $(orthTable).append(dataRow);
-    }
+    });
 
     $(orthArea).append(orthTable);
     $(presentArea).append(orthArea);
@@ -2103,11 +2104,11 @@ var handleOptimalSegmentation = function (tableResult) {
     }
     $(divideTable).append(titleRow);
 
-    var OS_COL = OS.variableList[0].range.split(OS.variableList[0].position).reverse()[0];
+    var OS_COL = Number(sessionStorage.getItem('PRIVATE_OPT_SEG_COL'));
     for (var j = 0; j < OS_COL - 1; j++) {
         var dataRow = $(row).clone();
 
-        $(dataRow).append($(cell).clone().css('text-align', 'center').text(j + 1));
+        $(dataRow).append($(cell).clone().css('text-align', 'center').text(OS.col[j].varietyName));
 
         for (var k = 1; k < OS.segNum[0]; k++) {
             $(dataRow).append($(cell).clone().attr('id', 'target_' + (k + 1) + '_' + (j + 1)));
