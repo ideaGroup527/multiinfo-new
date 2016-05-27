@@ -1,6 +1,7 @@
 package org.jmu.multiinfo.dto.opseg;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.jmu.multiinfo.core.dto.BaseBean;
 
@@ -9,6 +10,7 @@ public class OptArrDTO extends BaseBean{
 	private int resA[][] ;
 	private double w[][] ;
 	private double resW[][] ;
+	private List<OptSegResDTO> optRes;
  	public int[][] getA() {
 		return a;
 	}
@@ -33,10 +35,11 @@ public class OptArrDTO extends BaseBean{
 	public void setResW(double[][] resW) {
 		this.resW = resW;
 	}
-	@Override
-	public String toString() {
-		return "OptArrDTO [a=" + Arrays.toString(a) + ", resA=" + Arrays.toString(resA) + ", w=" + Arrays.toString(w)
-				+ ", resW=" + Arrays.toString(resW) + "]";
+	public List<OptSegResDTO> getOptRes() {
+		return optRes;
+	}
+	public void setOptRes(List<OptSegResDTO> optRes) {
+		this.optRes = optRes;
 	}
 	
 	

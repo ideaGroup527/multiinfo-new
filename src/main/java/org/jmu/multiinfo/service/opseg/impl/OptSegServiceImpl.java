@@ -28,11 +28,13 @@ private MatrixStatisticsService matrixStatisticsService;
 	@Override
 	public OptArrDTO optimalKSegmentation(int N, int K, double[][] D) {
 		OptArrDTO optArr = new OptArrDTO();
+		List<OptSegResDTO> optRes = new ArrayList<>();
 		//k-1次分割最优
 		int a[][] = new int[K][N];
 		int resA[][] =  new int[K][N];
 		double w[][] = new double[K][N];
 		double resW[][] =  new double[K][N];
+		
 		//2次分割
 		for(int m=N ;m>=2;m-- ){
 			double min = Double.MAX_VALUE;
@@ -49,6 +51,39 @@ private MatrixStatisticsService matrixStatisticsService;
 			w[1][m-1] = min;
 			resW[1][m-1] = min;
 		}
+		//2分割结果
+		{
+		OptSegResDTO e2 = new OptSegResDTO();
+		e2.setSegNum(2);
+		List<SegDataDTO> segDataList2 = new ArrayList<>();
+		double sst = 0.0;
+		//计算每次分割所有分割点
+		List<Integer> segList = new ArrayList<>();
+		segList.add(resA[1][N-1]);
+		int initFrom = 1;
+			
+		SegDataDTO segData = new SegDataDTO();
+		int from = initFrom;
+		int to = resA[1][N-1];
+		initFrom = to+1;
+		segData.setFrom(from);
+		segData.setTo(to);
+		Double sswg = D[from-1][to-1];
+		segData.setSswg(sswg);
+		sst +=sswg;
+			
+		segDataList2.add(segData );
+		
+		SegDataDTO lastData = new SegDataDTO();
+		lastData.setFrom(initFrom);
+		lastData.setTo(N);
+		lastData.setSswg(D[lastData.getFrom()-1][lastData.getTo()-1]);
+		sst+=lastData.getSswg();
+		segDataList2.add(lastData);
+		e2.setSegDataList(segDataList2 );
+		e2.setSst(sst);
+		optRes.add(e2);
+		}
 		
 		for(int k=3;k<=K;k++){
 		for(int m=N ;m>=k;m-- ){
@@ -63,15 +98,60 @@ private MatrixStatisticsService matrixStatisticsService;
 			}
 			a[k-1][m-1]=tempQ;
 			resA[k-1][m-1]=tempQ;
-			a[k-2][m-1] = a[k-2][tempQ-1];
 			w[k-1][m-1] = min;
 			resW[k-1][m-1] = min;
+			
+			for(int n = 1;n<k-1;n++){
+				a[n][m-1] = a[n][tempQ-1];
+			}
 		}
+		
+		
+		OptSegResDTO e = new OptSegResDTO();
+		e.setSegNum(k);
+		List<SegDataDTO> segDataList = new ArrayList<>();
+		double sst = 0.0;
+		//计算每次分割所有分割点
+		List<Integer> segList = new ArrayList<>();
+		
+		for(int j=2;j<k;j++)
+			segList.add(a[j-1][N-1]);
+		segList.add(resA[k-1][N-1]);
+		int initFrom = 1;
+		for(int j=0;j<segList.size();j++){
+			
+			SegDataDTO segData = new SegDataDTO();
+			int from = initFrom;
+			int to = segList.get(j);
+			initFrom = to+1;
+			
+			segData.setFrom(from);
+			
+			segData.setTo(to);
+			Double sswg = D[from-1][to-1];
+			segData.setSswg(sswg);
+			sst +=sswg;
+			
+			segDataList.add(segData );
 		}
+		SegDataDTO lastData = new SegDataDTO();
+		lastData.setFrom(initFrom);
+		lastData.setTo(N);
+		lastData.setSswg(D[lastData.getFrom()-1][lastData.getTo()-1]);
+		sst+=lastData.getSswg();
+		segDataList.add(lastData);
+		e.setSegDataList(segDataList );
+		e.setSst(sst);
+		optRes.add(e);
+		}
+		
+		
 		optArr.setA(a);
 		optArr.setResA(resA);
 		optArr.setW(w);
 		optArr.setResW(resW);
+		
+		optArr.setOptRes(optRes);
 		return optArr;
 
 	}
@@ -113,48 +193,7 @@ private MatrixStatisticsService matrixStatisticsService;
 			double[][] D=	matrixStatisticsService.variation(dataArr);
 			osDTO.setD(D);
 			OptArrDTO optArrDTO=optimalKSegmentation(N,K,D);
-			List<OptSegResDTO> optRes = new ArrayList<>();
-			for(int i=2;i<=K;i++){
-				OptSegResDTO e = new OptSegResDTO();
-				e.setSegNum(i);
-				List<SegDataDTO> segDataList = new ArrayList<>();
-				double sst = 0.0;
-				int[][] a=	optArrDTO.getA();
-				int[][] resA=	optArrDTO.getResA();
-				//计算每次分割所有分割点
-				List<Integer> segList = new ArrayList<>();
-				
-				for(int j=2;j<i;j++)
-					segList.add(a[j-1][N-1]);
-				segList.add(resA[i-1][N-1]);
-				int initFrom = 1;
-				for(int j=0;j<segList.size();j++){
-					
-					SegDataDTO segData = new SegDataDTO();
-					int from = initFrom;
-					int to = segList.get(j);
-					initFrom = to+1;
-					
-					segData.setFrom(from);
-					
-					segData.setTo(to);
-					Double sswg = D[from-1][to-1];
-					segData.setSswg(sswg);
-					sst +=sswg;
-					
-					segDataList.add(segData );
-				}
-				SegDataDTO lastData = new SegDataDTO();
-				lastData.setFrom(initFrom);
-				lastData.setTo(N);
-				lastData.setSswg(D[lastData.getFrom()-1][lastData.getTo()-1]);
-				sst+=lastData.getSswg();
-				segDataList.add(lastData);
-				e.setSegDataList(segDataList );
-				e.setSst(sst);
-				optRes.add(e);
-			}
-			osDTO.setOptRes(optRes);
+			osDTO.setOptRes(optArrDTO.getOptRes());
 			} catch (DataErrException e) {
 				e.printStackTrace();
 				osDTO.setRet_msg(e.getMessage());
