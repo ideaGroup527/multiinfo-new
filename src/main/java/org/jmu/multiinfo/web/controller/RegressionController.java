@@ -9,6 +9,8 @@ import org.jmu.multiinfo.dto.regression.SlipStepwiseCondition;
 import org.jmu.multiinfo.dto.regression.SlipStepwiseDTO;
 import org.jmu.multiinfo.dto.regression.StepwiseCondition;
 import org.jmu.multiinfo.dto.regression.StepwiseMultipleDTO;
+import org.jmu.multiinfo.dto.regression.TrendStepwiseCondition;
+import org.jmu.multiinfo.dto.regression.TrendStepwiseDTO;
 import org.jmu.multiinfo.dto.upload.DataToken;
 import org.jmu.multiinfo.dto.upload.TokenDTO;
 import org.jmu.multiinfo.service.regression.LinearRegressionService;
@@ -99,7 +101,7 @@ public class RegressionController extends BaseController{
 	  )
 	@RequestMapping( value="/stepwise.do")
 	@ResponseBody
-	public StepwiseMultipleDTO calStepwiseMultipleLinearRegression(@RequestBody StepwiseCondition condition){
+	public StepwiseMultipleDTO calStepwiseMultipleRegression(@RequestBody StepwiseCondition condition){
 		return stpRegressionService.stepwise(condition);
 		
 	}
@@ -117,9 +119,26 @@ public class RegressionController extends BaseController{
 	  )
 	@RequestMapping(value= "/slipstepwise.do" )
 	@ResponseBody
-	public SlipStepwiseDTO calSlipStepwiseLinearRegression(@RequestBody SlipStepwiseCondition condition){
+	public SlipStepwiseDTO calSlipStepwiseRegression(@RequestBody SlipStepwiseCondition condition){
 		return stpRegressionService.slipStepwise(condition);
 		
 	}
 	
+	/***
+	 * 趋势逐步回归
+	 * @param condition
+	 * @return
+	 */
+	@ApiOperation(value = "趋势逐步回归", notes = "趋势逐步回归",httpMethod="POST")  
+	  @ApiResponses(value = {  
+	            @ApiResponse(code = 200, message = "计算成功", response = SlipStepwiseDTO.class),  
+	            @ApiResponse(code = 400, message = "入参有误"),
+	            @ApiResponse(code = 500, message = "内部报错")}  
+	  )
+	@RequestMapping(value= "/trendstepwise.do" )
+	@ResponseBody
+	public TrendStepwiseDTO calTrendStepwiseRegression(@RequestBody TrendStepwiseCondition condition){
+		return stpRegressionService.trendStepwise(condition);
+		
+	}
 }

@@ -105,6 +105,7 @@ $.fn.navGenerator = function (config) {
                                             $(level_4_item_name).addClass('js-menu-click')
                                                 .html(level_4_menu.name[lang])
                                                 .attr('href', 'javascript:')
+                                                .attr('data-modal-id', level_4_menu.modalId)
                                                 .attr('data-modal', 'js/common/nav/' + level_1_menu.term + '/' + level_2_menu.term + '/' + level_3_menu.term + '/' + level_4_menu.term + '/' + level_4_menu.modal)
                                                 .attr('data-script', 'js/common/nav/' + level_1_menu.term + '/' + level_2_menu.term + '/' + level_3_menu.term + '/' + level_4_menu.term + '/' + level_4_menu.script);
 

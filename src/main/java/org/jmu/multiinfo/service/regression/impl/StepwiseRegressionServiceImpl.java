@@ -1,10 +1,11 @@
 package org.jmu.multiinfo.service.regression.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.math3.util.FastMath;
 import org.jmu.multiinfo.core.exception.DataErrException;
@@ -18,6 +19,8 @@ import org.jmu.multiinfo.dto.regression.SlipStepwiseCondition;
 import org.jmu.multiinfo.dto.regression.SlipStepwiseDTO;
 import org.jmu.multiinfo.dto.regression.StepwiseCondition;
 import org.jmu.multiinfo.dto.regression.StepwiseMultipleDTO;
+import org.jmu.multiinfo.dto.regression.TrendStepwiseCondition;
+import org.jmu.multiinfo.dto.regression.TrendStepwiseDTO;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.jmu.multiinfo.service.correlation.CorrelationService;
 import org.jmu.multiinfo.service.regression.StepwiseRegressionService;
@@ -223,13 +226,11 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 	}
 	@Override
 	public SlipStepwiseDTO slipStepwise(SlipStepwiseCondition condition) {
-		SlipStepwiseDTO slDTO = new SlipStepwiseDTO();
+		SlipStepwiseDTO slDTO =null ;
 		VarietyDTO dependVarDTO = condition.getDependentVariable();
 		List<VarietyDTO> independVarDTOList = condition.getIndependentVariable();
 		VarietyDTO timeVarDTO =	condition.getTimeVariable();
 		DataDTO[][] dataGrid = condition.getDataGrid();
-		//自变量
-		List<double[]> dataArrXList = new ArrayList<>();
 
 		//时间变量
 		List<Double> timeVarList = new ArrayList<>();
@@ -249,30 +250,45 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 				oraDependVarList.add(DataFormatUtil.converToDouble(dataGrid[i][j]));
 			}
 		}
+		
+		Map<String, List<Double>> xMap =	DataFormatUtil.converToDouble(dataGrid, independVarDTOList);
+		
+		slDTO=	slipWise(condition,  xMap, independVarDTOList,timeArr, oraDependVarList,1);
+		return slDTO;
+	}
+	
+	
+	private SlipStepwiseDTO slipWise(SlipStepwiseCondition condition,  Map<String, List<Double>> xMap,
+			List<VarietyDTO> independVarDTOList,double[] timeArr, List<Double> oraDependVarList,int moveNum) {
+		SlipStepwiseDTO slDTO = new SlipStepwiseDTO();
+		List<double[]> dataArrXList;
+		List<Double> tempList = new ArrayList<>();
 		StepwiseMultipleDTO preDTO = new StepwiseMultipleDTO();
 		switch (condition.getPreviousMethod()) {
 		
 		case SlipStepwiseCondition.SLIP_PREVIOUS_ASC:{
 			double nextYear = timeArr[timeArr.length-1] +1;
 			List<Double> dependVarList = new ArrayList<>(); 
-			for (int i = 0; i < oraDependVarList.size(); i++) 
+			for (int i = moveNum; i < oraDependVarList.size(); i++) 
 				dependVarList.add(oraDependVarList.get(i));
 			
-			dependVarList.remove(0);
 			dataArrXList = new ArrayList<>();
 			double[] dataArrY = DataFormatUtil.converToDouble(dependVarList);
-			Map<String, List<Double>> xMap =	DataFormatUtil.converToDouble(dataGrid, independVarDTOList);
+			
 			List<Double> fuInpList= new ArrayList<>();
 			for (int i = 0; i < independVarDTOList.size(); i++) {
-				List<Double> tempList =	xMap.get(independVarDTOList.get(i).getVarietyName());
-				Double removeData = tempList.remove(tempList.size() - 1);
+				DataFormatUtil.copy(tempList, xMap.get(independVarDTOList.get(i).getVarietyName()));
+				Double removeData = 0.0;
+				
+				for(int j=0;j<moveNum;j++)
+					removeData = tempList.remove(tempList.size() - 1);
 				fuInpList.add(removeData);
 				dataArrXList.add(DataFormatUtil.converToDouble(tempList));
 			}
 			
 			try {
 				preDTO= stepwise(dataArrY , dataArrXList, condition.getEntryF(), condition.getDelF());
-				Map<String, Double> preForecast = new HashMap<>();
+				Map<String, Double> preForecast = new LinkedHashMap<>();
 				
 				double[] parameters = preDTO.getRegressionParameters();
 				double value = parameters[0];
@@ -292,23 +308,23 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 		case SlipStepwiseCondition.SLIP_PREVIOUS_DESC:{
 			double nextYear = timeArr[0] +1;
 			List<Double> dependVarList = new ArrayList<>(); 
-			for (int i = 0; i < oraDependVarList.size(); i++) 
+			for (int i = 0; i < oraDependVarList.size()-moveNum; i++) 
 				dependVarList.add(oraDependVarList.get(i));
-			dependVarList.remove(dependVarList.size()-1);
 			dataArrXList = new ArrayList<>();
 			double[] dataArrY = DataFormatUtil.converToDouble(dependVarList);
-			Map<String, List<Double>> xMap =	DataFormatUtil.converToDouble(dataGrid, independVarDTOList);
 			List<Double> fuInpList= new ArrayList<>();
 			for (int i = 0; i < independVarDTOList.size(); i++) {
-				List<Double> tempList =	xMap.get(independVarDTOList.get(i).getVarietyName());
-				Double removeData = tempList.remove(0);
+				DataFormatUtil.copy(tempList,xMap.get(independVarDTOList.get(i).getVarietyName()));
+				Double removeData = 0.0;
+				for(int j=0;j<moveNum;j++)
+					tempList.remove(0);
 				fuInpList.add(removeData);
 				dataArrXList.add(DataFormatUtil.converToDouble(tempList));
 			}
 			
 			try {
 				preDTO= stepwise(dataArrY , dataArrXList, condition.getEntryF(), condition.getDelF());
-				Map<String, Double> preForecast = new HashMap<>();
+				Map<String, Double> preForecast = new LinkedHashMap<>();
 				
 				double[] parameters = preDTO.getRegressionParameters();
 				double value = parameters[0];
@@ -334,16 +350,16 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 		case SlipStepwiseCondition.SLIP_BACKWARD_ASC:{
 			double preYear = timeArr[0] -1;
 			List<Double> dependVarList = new ArrayList<>(); 
-			for (int i = 0; i < oraDependVarList.size(); i++) 
+			for (int i = 0; i < oraDependVarList.size()-moveNum; i++) 
 				dependVarList.add(oraDependVarList.get(i));
-			dependVarList.remove(dependVarList.size()-1);
 			dataArrXList = new ArrayList<>();
 			double[] dataArrY = DataFormatUtil.converToDouble(dependVarList);
-			Map<String, List<Double>> xMap =	DataFormatUtil.converToDouble(dataGrid, independVarDTOList);
 			List<Double> fuInpList= new ArrayList<>();
 			for (int i = 0; i < independVarDTOList.size(); i++) {
-				List<Double> tempList =	xMap.get(independVarDTOList.get(i).getVarietyName());
-				Double removeData = tempList.remove(0);
+				DataFormatUtil.copy(tempList ,	xMap.get(independVarDTOList.get(i).getVarietyName()));
+				Double removeData = 0.0;
+				for(int j=0;j<moveNum;j++)
+					tempList.remove(0);
 				fuInpList.add(removeData);
 				dataArrXList.add(DataFormatUtil.converToDouble(tempList));
 			}
@@ -355,7 +371,7 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 				for (int i = 1; i < parameters.length; i++) {
 					value+=fuInpList.get(i-1) * parameters[i];
 				}
-				Map<String, Double> backForecast = new HashMap<>();
+				Map<String, Double> backForecast = new LinkedHashMap<>();
 				backForecast.put(preYear+"", value);
 				slDTO.setBackForecast(backForecast);
 			} catch (DataErrException e) {
@@ -370,16 +386,17 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 		case SlipStepwiseCondition.SLIP_BACKWARD_DESC:{
 			double preYear = timeArr[timeArr.length-1] -1;
 			List<Double> dependVarList = new ArrayList<>(); 
-			for (int i = 0; i < oraDependVarList.size(); i++) 
+			for (int i = 0; i < oraDependVarList.size()-moveNum; i++) 
 				dependVarList.add(oraDependVarList.get(i));
-			dependVarList.remove(dependVarList.size()-1);
+			
 			dataArrXList = new ArrayList<>();
 			double[] dataArrY = DataFormatUtil.converToDouble(dependVarList);
-			Map<String, List<Double>> xMap =	DataFormatUtil.converToDouble(dataGrid, independVarDTOList);
 			List<Double> fuInpList= new ArrayList<>();
 			for (int i = 0; i < independVarDTOList.size(); i++) {
-				List<Double> tempList =	xMap.get(independVarDTOList.get(i).getVarietyName());
-				Double removeData = tempList.remove(tempList.size() - 1);
+				DataFormatUtil.copy( tempList ,	xMap.get(independVarDTOList.get(i).getVarietyName()));
+				Double removeData = 0.0;
+				for(int j=0;j<moveNum;j++)
+					tempList.remove(tempList.size() - 1);
 				fuInpList.add(removeData);
 				dataArrXList.add(DataFormatUtil.converToDouble(tempList));
 			}
@@ -391,7 +408,7 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 				for (int i = 1; i < parameters.length; i++) {
 					value+=fuInpList.get(i-1) * parameters[i];
 				}
-				Map<String, Double> backForecast = new HashMap<>();
+				Map<String, Double> backForecast = new LinkedHashMap<>();
 				backForecast.put(preYear+"", value);
 				slDTO.setBackForecast(backForecast);
 			} catch (DataErrException e) {
@@ -408,6 +425,78 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 		slDTO.setPreData(preDTO);
 		slDTO.setBackData(backDTO);
 		return slDTO;
+	}
+
+	@Override
+	public TrendStepwiseDTO trendStepwise(TrendStepwiseCondition condition) {
+		TrendStepwiseDTO trDTO = new TrendStepwiseDTO();
+		
+		VarietyDTO dependVarDTO = condition.getDependentVariable();
+		List<VarietyDTO> independVarDTOList = condition.getIndependentVariable();
+		VarietyDTO timeVarDTO =	condition.getTimeVariable();
+		DataDTO[][] dataGrid = condition.getDataGrid();
+
+		//时间变量
+		List<Double> timeVarList = new ArrayList<>();
+		PositionBean timevarRange = ExcelUtil.splitRange(timeVarDTO.getRange());
+		for (int i = timevarRange.getFirstRowId() - 1; i < timevarRange.getLastRowId(); i++) {
+			for (int j = timevarRange.getFirstColId() - 1; j < timevarRange.getLastColId(); j++) {
+				timeVarList.add(DataFormatUtil.converToDouble(dataGrid[i][j]));
+			}
+		}
+		double[] timeArr = DataFormatUtil.converToDouble(timeVarList);
+		
+		// 因变量数据
+		List<Double> oraDependVarList = new ArrayList<Double>();
+		PositionBean depvarRange = ExcelUtil.splitRange(dependVarDTO.getRange());
+		for (int i = depvarRange.getFirstRowId() - 1; i < depvarRange.getLastRowId(); i++) {
+			for (int j = depvarRange.getFirstColId() - 1; j < depvarRange.getLastColId(); j++) {
+				oraDependVarList.add(DataFormatUtil.converToDouble(dataGrid[i][j]));
+			}
+		}
+		
+		Map<String, List<Double>> xMap =	DataFormatUtil.converToDouble(dataGrid, independVarDTOList);
+	int moveNum =	condition.getMoveNum();
+	List<SlipStepwiseDTO> trendWiseDTO = new ArrayList<>();
+	List<Integer> weightList = condition.getWeight();
+	Map<String, Double> preForecast = new LinkedHashMap<>();
+	Map<String, Double> backForecast = new LinkedHashMap<>();
+	for(int i=0;i<moveNum;i++){
+		SlipStepwiseDTO slDTO = null;
+		slDTO =	slipWise(condition,  xMap, independVarDTOList,timeArr, oraDependVarList,i+1);
+		trendWiseDTO.add(slDTO);
+		double weight = weightList.get(i)/10.0;
+		
+		//计算前移后加权平均值
+		Map<String, Double> preMap = slDTO.getPreForecast();
+		
+		 for (Entry<String, Double> entry : preMap.entrySet()) {
+			 if(preForecast.get(entry.getKey())==null) preForecast.put(entry.getKey(), entry.getValue() * weight);
+			 else{
+				 Double tmp = preForecast.get(entry.getKey());
+				 preForecast.remove(entry.getKey());
+				 preForecast.put(entry.getKey(), tmp+entry.getValue() * weight);
+			 }
+		 }
+
+		Map<String, Double> backMap = slDTO.getBackForecast();
+		
+		 for (Entry<String, Double> entry : backMap.entrySet()) {
+			 if(backForecast.get(entry.getKey())==null) backForecast.put(entry.getKey(), entry.getValue() * weight);
+			 else{
+				 Double tmp = backForecast.get(entry.getKey());
+				 backForecast.remove(entry.getKey());
+				 backForecast.put(entry.getKey(), tmp+entry.getValue() * weight);
+			 }
+		 }
+
+	}
+
+	trDTO.setPreForecast(preForecast);
+	trDTO.setBackForecast(backForecast);
+		trDTO.setTrendWiseDTO(trendWiseDTO );
+		return trDTO;
+	
 	}
 
 }

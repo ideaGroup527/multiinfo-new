@@ -37,6 +37,14 @@ var resultTableGenerator = function () {
             //降维 - 主成分
             handlePrincipalComponentAnalysis(tableResult);
             break;
+        case 'Factor_Analysis':
+            //降维 - 因子
+            handleFactorAnalysis(tableResult);
+            break;
+        case 'Correspondence_Analysis':
+            //降维 - 对应分析
+            handleCorrespondenceAnalysis(tableResult);
+            break;
         case 'Gray_Correlation':
             //灰色关联度
             handleGrayCorrelation(tableResult);
@@ -60,6 +68,18 @@ var resultTableGenerator = function () {
         case 'Multi_Linear_Regression':
             //多元线性回归
             handleMultiLinearRegression(tableResult);
+            break;
+        case 'General_Stepwise_Regression':
+            //一般逐步回归
+            handleGeneralStepwiseRegression(tableResult);
+            break;
+        case 'Slip_Stepwise':
+            //滑移逐步回归
+            handleSlipStepwiseRegression(tableResult);
+            break;
+        case 'Optimal_Segmentation':
+            //最优分割
+            handleOptimalSegmentation(tableResult);
             break;
     }
 
@@ -886,6 +906,480 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
     //打印碎石图
 
 };
+var handleFactorAnalysis = function (tableResult) {
+
+    //声明放置区域
+    var presentArea = $('.result-table');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
+    //声明DOM 元素
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var tableHeader = $('<h1>');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered table-condensed');
+
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
+    var emptyCell = $(headerCell).clone();
+
+    var block = $('<div>');
+    var span = $('<span>');
+
+
+    //获取参数名列表
+    var variableNameList = [];
+    tableResult.variableList.map(function (obj) {
+        variableNameList.push(obj.varietyName);
+    });
+
+    //1 打印『相关矩阵』
+    //1.1获取『相关矩阵』值
+    var correlationMatrix = tableResult.data.correlationArr;
+
+    var correlationArea = $(container).clone();
+
+    var correlationHeader = $(tableHeader).clone();
+    $(correlationHeader).attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_correlation_matrix');
+    $(correlationArea).append(correlationHeader);
+
+    var correlationMatrixTable = $(table).clone();
+
+    //1.2 打印相关矩阵头栏
+    var correlationHeaderRow = $(row).clone();
+    $(correlationHeaderRow).append(emptyCell.clone());
+
+    variableNameList.map(function (variable) {
+        var variableCell = $(headerCell).clone();
+        $(variableCell).text(variable);
+        $(correlationHeaderRow).append(variableCell);
+    });
+    $(correlationMatrixTable).append(correlationHeaderRow);
+
+    //1.3 打印相关矩阵值
+    variableNameList.map(function (variable, index) {
+        var variableRow = $(row).clone();
+
+        var variableCell = $(cell).clone();
+        $(variableCell).text(variable);
+        $(variableRow).append(variableCell);
+
+        //每行的值
+        correlationMatrix[index].map(function (value) {
+            var valueCell = $(cell).clone();
+            $(valueCell).text((Number(value) != NaN) ? Number(value).toFixed(numReservation) : value);
+            $(variableRow).append(valueCell);
+        });
+        $(correlationMatrixTable).append(variableRow);
+    });
+
+    //填充到显示区域
+    $(correlationArea).append(correlationMatrixTable);
+    //如果有行列式则填充
+    if (tableResult.data.determinant) {
+        $(correlationArea).append(
+            $(block).append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_determinant'))
+                .append($(span).text('=' + tableResult.data.determinant))
+        );
+    }
+    $(presentArea).append(correlationArea);
+
+
+    //2 打印『解释的总方差表』
+
+    //2.1 获取相关变量值
+    //2.1.1 初始合计
+    var eigTotalInit = tableResult.data.eigTotalInit;
+    //2.1.2 初始方差
+    var varEigInit = tableResult.data.varEigInit;
+    //2.1.3 初始累积
+    var accEigInit = tableResult.data.accEigInit;
+    //2.1.4 提取合计
+    var eigTotalExtra = tableResult.data.eigTotalExtra;
+    //2.1.5 提取方差
+    var varEigExtra = tableResult.data.varEigExtra;
+    //2.1.6 提取累积
+    var accEigExtra = tableResult.data.accEigExtra;
+
+    var explainTotalVarArea = $(container).clone();
+
+    var explainTotalVarHeader = $(tableHeader).clone();
+    $(explainTotalVarHeader).attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_total_variance_explained');
+    $(explainTotalVarArea).append(explainTotalVarHeader);
+
+    var explainTotalVarTable = $(table).clone();
+
+    var explainTotalVarHeaderRow = $(row).clone();
+    $(explainTotalVarHeaderRow).append($(emptyCell).clone().attr('rowspan', '2').attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_component'))
+        .append($(emptyCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_initial_eigenvalue').attr('colspan', '3').addClass('text-center'))
+        .append($(emptyCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_extraction_sums_of_squared_loading').attr('colspan', '3').addClass('text-center'));
+    $(explainTotalVarTable).append(explainTotalVarHeaderRow);
+
+    //第二行展示
+    var explainTotalVarSecHeaderRow = $(row).clone();
+    $(explainTotalVarSecHeaderRow).append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_total').addClass('text-center'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_variance').addClass('text-center'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_Cumulative').addClass('text-center'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_total').addClass('text-center'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_variance').addClass('text-center'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_Cumulative').addClass('text-center'));
+    $(explainTotalVarTable).append(explainTotalVarSecHeaderRow);
+
+    //3 打印『相关系数特征向量』
+    var correlationCoeffArea = $(container).clone();
+    $(correlationCoeffArea).append($(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_correlation_coefficient_eigen_vector'));
+    //3.2 打印表格
+    var correlationCoeffTable = $(table).clone();
+    //3.2.1 打印标题行
+    var titleRow = $(row).clone();
+    $(titleRow).append($(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'var_eigen'));
+    tableResult.data.eigenvectors.map(function (data, index) {
+        $(titleRow).append($(headerCell).clone().text('λ' + (index + 1)));
+    });
+    $(correlationCoeffTable).append(titleRow);
+
+    //3.2.2 打印值
+    variableNameList.map(function (variable, index) {
+        var dataRow = $(row).clone();
+        $(dataRow).append($(cell).clone().text(variable));
+
+        tableResult.data.eigenvectors.map(function (data, i) {
+            $(dataRow).append($(cell).clone().text(data[index]));
+        });
+        $(correlationCoeffTable).append(dataRow);
+    });
+
+    $(correlationCoeffArea).append(correlationCoeffTable);
+    $(presentArea).append(correlationCoeffArea);
+
+    //4. 打印『公因子方差表』
+    //4.1 获取『公因子方差』值
+    var communalityArr = tableResult.data.communalityArr;
+
+    var communalityArea = $(container).clone();
+
+    var communalityHeader = $(tableHeader).clone();
+    $(communalityHeader).attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_communalities');
+    $(communalityArea).append(communalityHeader);
+
+    var communalityTable = $(table).clone();
+
+    //4.2 打印公因子方差表头栏
+    var communalityHeaderRow = $(row).clone();
+    $(communalityHeaderRow).append($(emptyCell).clone())
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_initial'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_extract'));
+    $(communalityTable).append(communalityHeaderRow);
+
+    //4.3 打印公因子方差值
+    variableNameList.map(function (variable, index) {
+        var variableRow = $(row).clone();
+
+        var variableCell = $(cell).clone();
+        $(variableCell).text(variable);
+        $(variableRow).append(variableCell);
+
+        communalityArr[index].map(function (value) {
+            var valueCell = $(cell).clone();
+            $(valueCell).text((Number(value) != NaN) ? Number(value).toFixed(numReservation) : value);
+            $(variableRow).append(valueCell);
+        });
+        $(communalityTable).append(variableRow);
+    });
+
+    //填充到显示区域
+    $(communalityArea).append(communalityTable);
+    $(presentArea).append(communalityArea);
+
+
+    //4.2 开始打值
+    eigTotalInit.map(function (variable, index) {
+        var commonRow = $(row).clone();
+
+        //序号
+        var titleCell = $(cell).clone();
+        $(titleCell).text(index + 1);
+        $(commonRow).append(titleCell);
+
+        //值
+        $(commonRow).append($(cell).clone().text(Number(variable).toFixed(numReservation)))
+            .append($(cell).clone().text((varEigInit[index]) ? Number(varEigInit[index]).toFixed(numReservation) : ''))
+            .append($(cell).clone().text((accEigInit[index]) ? Number(accEigInit[index]).toFixed(numReservation) : ''))
+            .append($(cell).clone().text((eigTotalExtra[index]) ? Number(eigTotalExtra[index]).toFixed(numReservation) : ''))
+            .append($(cell).clone().text((varEigExtra[index]) ? Number(varEigExtra[index]).toFixed(numReservation) : ''))
+            .append($(cell).clone().text((accEigExtra[index]) ? Number(accEigExtra[index]).toFixed(numReservation) : ''));
+        $(explainTotalVarTable).append(commonRow);
+    });
+
+    //填充到显示区域
+    $(explainTotalVarArea).append(explainTotalVarTable);
+    $(presentArea).append(explainTotalVarArea);
+
+    //5 打印『因子载荷矩阵』
+    //5.1 获取相关值
+    var componentMatrix = tableResult.data.componentArr;
+
+    var componentArea = $(container).clone();
+
+    var componentHeader = $(tableHeader).clone();
+    $(componentHeader).attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_factor_loading_matrix');
+    $(componentArea).append(componentHeader);
+
+    var componentTable = $(table).clone();
+
+    //5.2 打印成份矩阵表头栏
+    var componentHeaderRow = $(row).clone();
+    $(componentHeaderRow).append($(emptyCell).clone().attr('rowspan', '2'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_component').addClass('text-center').attr('colspan', componentMatrix[0].length));
+    $(componentTable).append(componentHeaderRow);
+
+    var componentHeaderSecRow = $(row).clone();
+
+    componentMatrix[0].map(function (value, index) {
+        $(componentHeaderSecRow).append($(headerCell).clone().text('F' + (index + 1)));
+    });
+    $(componentTable).append(componentHeaderSecRow);
+
+    variableNameList.map(function (variable, index) {
+        var variableRow = $(row).clone();
+
+        $(variableRow).append($(cell).clone().text(variable));
+
+        componentMatrix[index].map(function (value) {
+            $(variableRow).append($(cell).clone().text((value) ? Number(value).toFixed(numReservation) : " "));
+        });
+
+        $(componentTable).append(variableRow);
+    });
+
+    //填充到显示区域
+    $(componentArea).append(componentTable)
+        .append($(block).clone().text('已提取了' + componentMatrix[0].length + '个成份'));
+    componentMatrix[0].map(function (value, index) {
+        var functionString = '<strong>F' + (index + 1) + '</strong> = ';
+
+        variableNameList.map(function (variable, index2) {
+            if (index2 != 0 && Number(componentMatrix[index2][index]) > 0) {
+                functionString += ' + ';
+            } else if (Number(componentMatrix[index2][index]) < 0) {
+                functionString += ' - ';
+            }
+            functionString += Math.abs(Number(componentMatrix[index2][index]).toFixed(numReservation)) + ' x ';
+            functionString += variable;
+        });
+
+        $(componentArea).append(
+            $(block).clone().html(functionString)
+        );
+    });
+    $(presentArea).append(componentArea);
+
+    //6 打印方差最大正交旋转矩阵
+    var varianceData = tableResult.data.orRotaArr;
+
+    var varianceArea = $(container).clone();
+
+    $(varianceArea).append($(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_factor_analysis_variance_matrix'));
+
+    var varianceTable = $(table).clone();
+
+    //6.1 打印标题行
+    var varianceHeaderRow = $(row).clone();
+    $(varianceHeaderRow).append($(emptyCell).clone().attr('rowspan', '2'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_component').addClass('text-center').attr('colspan', componentMatrix[0].length));
+    $(varianceTable).append(varianceHeaderRow);
+
+    var varianceHeaderSecRow = $(row).clone();
+    varianceData[0].map(function (value, index) {
+        $(varianceHeaderSecRow).append($(headerCell).clone().text('F' + (index + 1)));
+    });
+    $(varianceTable).append(varianceHeaderSecRow);
+
+    //6.2 打印数据行
+    variableNameList.map(function (variable, index) {
+        var dataRow = $(row).clone();
+        $(dataRow).append($(cell).clone().text(variable));
+
+        varianceData.map(function (value, i) {
+            $(dataRow).append($(cell).clone().text(Number(value[index]).toFixed(numReservation)));
+        });
+        $(varianceTable).append(dataRow);
+    });
+
+    $(varianceArea).append(varianceTable);
+    $(presentArea).append(varianceArea);
+
+    //7 打印『正交因子得分表』
+    var orthData = tableResult.data.orFacArr;
+    var orthArea = $(container).clone();
+    $(orthArea).append($(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_orthogonal_factor_scores'));
+
+    var orthTable = $(table).clone();
+    //7.1 打印首行
+    var orthTitleRow = $(row).clone();
+    $(orthTitleRow).append($(headerCell).clone());
+
+    var colNum = orthData[0].length;
+    for (var i = 0; i < colNum; i++) {
+        $(orthTitleRow).append($(headerCell).clone().text('F' + (i + 1)));
+    }
+    $(orthTable).append(orthTitleRow);
+
+    //7.2 打印数据行
+    orthData.map(function (data, index) {
+        var dataRow = $(row).clone();
+        $(dataRow).append($(cell).clone().text(index + 1).css('text-align', 'center'));
+        for (var i = 0; i < colNum; i++) {
+            $(dataRow).append($(cell).clone().text(Number(data[i]).toFixed(numReservation)));
+        }
+        $(orthTable).append(dataRow);
+    });
+
+    $(orthArea).append(orthTable);
+    $(presentArea).append(orthArea);
+};
+
+var handleCorrespondenceAnalysis = function (tableResult) {
+
+    //声明放置区域
+    var presentArea = $('.result-table');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
+    //声明DOM 元素
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var tableHeader = $('<h1>');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered table-condensed');
+
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
+    var emptyCell = $(headerCell).clone();
+
+    var block = $('<div>');
+    var span = $('<span>');
+
+    var SS = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CORRESPONDENCE_ANALYSIS'));
+
+    //1 打印『概率矩阵』
+    var frequencyArea = $(container).clone();
+    $(frequencyArea).append($(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_frequency_matrix'));
+    var frequencyTable = $(table).clone();
+    //1.1 打印标题行
+    var titleRow = $(row).clone();
+    $(titleRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'sample_var')
+    );
+
+    SS.variableList.map(function (variable) {
+        $(titleRow).append(
+            $(headerCell).clone().text(variable.varietyName)
+        )
+    });
+
+    $(titleRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'row_density')
+    );
+    $(frequencyTable).append(titleRow);
+
+    //1.2 打印数据行
+    tableResult.proArr.map(function (data, index) {
+        var dataRow = $(row).clone();
+
+        if (tableResult.proArr[index + 1]) {
+            $(dataRow).append($(cell).clone().text(index + 1));
+        } else {
+            $(dataRow).append($(cell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'col_density'));
+        }
+
+        data.map(function (value) {
+            $(dataRow).append($(cell).clone().text(Number(value).toFixed(numReservation)));
+        });
+
+        $(frequencyTable).append(dataRow);
+    });
+
+    $(frequencyArea).append(frequencyTable);
+    $(presentArea).append(frequencyArea);
+
+    //2 打印『Z矩阵』
+    var zMatrixArea = $(container).clone();
+    $(zMatrixArea).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_z_matrix')
+    );
+    //2.1 打印表格
+    var zMatrixTable = $(table).clone();
+    tableResult.z.map(function (data) {
+        var dataRow = $(row).clone();
+
+        data.map(function (value) {
+            $(dataRow).append(
+                $(cell).clone().text(Number(value).toFixed(numReservation))
+            )
+        });
+
+        $(zMatrixTable).append(dataRow);
+    });
+
+    $(zMatrixArea).append(zMatrixTable);
+    $(presentArea).append(zMatrixArea);
+
+    //3 打印『变量间协方差矩阵』
+    var varCovarianceMatrixArea = $(container).clone();
+    $(varCovarianceMatrixArea).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_variable_covariance_matrix')
+    );
+    var varCovarianceMatrixTable = $(table).clone();
+
+    //3.1 打印表格
+    tableResult.sr.map(function (data) {
+        var dataRow = $(row).clone();
+
+        data.map(function (value) {
+            $(dataRow).append(
+                $(cell).clone().text(Number(value).toFixed(numReservation))
+            );
+        });
+
+        $(varCovarianceMatrixTable).append(dataRow);
+    });
+
+    $(varCovarianceMatrixArea).append(varCovarianceMatrixTable);
+    $(presentArea).append(varCovarianceMatrixArea);
+
+    //6 打印『样本间协方差矩阵』
+    var samCovarianceMatrixArea = $(container).clone();
+    $(samCovarianceMatrixArea).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_sample_covariance_matrix')
+    );
+    var samCovarianceMatrixTable = $(table).clone();
+    //6.1 打印表格
+    tableResult.sq.map(function (data) {
+        var dataRow = $(row).clone();
+
+        data.map(function (value) {
+            $(dataRow).append(
+                $(cell).clone().text(Number(value).toFixed(numReservation))
+            );
+        });
+        $(samCovarianceMatrixTable).append(dataRow);
+    });
+
+    $(samCovarianceMatrixArea).append(samCovarianceMatrixTable);
+    $(presentArea).append(samCovarianceMatrixArea);
+
+};
+
 var handleRelatedVariable = function (tableResult) {
 
     //声明放置区域
@@ -1544,4 +2038,456 @@ var handleMultiLinearRegression = function (tableResult) {
 
     $(presentArea).append(modelSummaryArea);
 
+};
+
+var handleGeneralStepwiseRegression = function (tableResult) {
+
+    //声明打印区域
+    var presentArea = $('.result-table');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
+    //声明DOM 元素
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var tableHeader = $('<h1>');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered table-condensed');
+
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
+    var emptyCell = $(headerCell).clone();
+
+    var block = $('<div>');
+    var span = $('<span>');
+
+    //要打印两个表格：1.模型汇总表 2.系数表
+    //1.模型汇总表
+    $(container).append($(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_model_summary'));
+    var modelTable = $(table).clone();
+    var modelTitleRow = $(row).clone();
+    //1.1 打印第一行，标题：模型，R，R方，标准误差，F
+    $(modelTitleRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'model')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'r')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'rsquared')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'regressionStandardError')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'f')
+    );
+
+    //1.2 打印数据行
+    var modelDataRow = $(row).clone();
+    $(modelDataRow).append(
+        $(cell).clone().text('1')
+    ).append(
+        $(cell).clone().text(Number(Math.sqrt(tableResult.rsquared)).toFixed(numReservation))
+    ).append(
+        $(cell).clone().text(Number(tableResult.rsquared).toFixed(numReservation))
+    ).append(
+        $(cell).clone().text(Number(tableResult.regressionStandardError).toFixed(numReservation))
+    ).append(
+        $(cell).clone().text(Number(tableResult.f).toFixed(numReservation))
+    );
+    $(modelTable).append(modelTitleRow).append(modelDataRow);
+    $(container).append(modelTable);
+
+    //2.系数表
+    $(container).append($(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_coefficients'));
+    var coeffTable = $(table).clone();
+    //2.1 打印标题行
+    var coeffTitleRow = $(row).clone();
+    $(coeffTitleRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'model').attr('rowspan', '2')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'unstandardized_coefficients')
+    );
+    var coeffSecTitleRow = $(row).clone();
+    $(coeffSecTitleRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'b')
+    );
+    $(coeffTable).append(coeffTitleRow).append(coeffSecTitleRow);
+
+    //2.2 打印数据
+    var config = JSON.parse(sessionStorage.PRIVATE_CONFIG_GENERAL_STEPWISE_REGRESSION);
+    var independentVariable = config.independentVariable;
+
+    tableResult.regressionParameters.map(function (value, index) {
+        var dataRow = $(row).clone();
+
+        if (index == 0) {
+            $(dataRow).append($(cell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'constant'))
+                .append($(cell).clone().text(Number(value).toFixed(numReservation)));
+        } else {
+            $(dataRow).append($(cell).clone().text(independentVariable[index - 1].varietyName))
+                .append($(cell).clone().text(Number(value).toFixed(numReservation)));
+        }
+
+        $(coeffTable).append(dataRow);
+    });
+    $(container).append(coeffTable);
+
+    var equationString = '';
+    tableResult.regressionParameters.map(function (value, index) {
+        if (index == 0) {
+            equationString += '' + Number(value).toFixed(numReservation);
+        } else {
+            if (value > 0) {
+                equationString += ' + ' + Number(value).toFixed(numReservation) + ' × ' + independentVariable[index - 1].varietyName;
+            } else {
+                equationString += ' - ' + Math.abs(Number(value).toFixed(numReservation)) + ' × ' + independentVariable[index - 1].varietyName;
+            }
+        }
+    });
+
+    $(container).append(
+        $(block).clone().html('<strong>' + config.dependentVariable[0].varietyName + '</strong>')
+            .append($(span).clone().text(' = ' + equationString))
+    );
+
+    $(presentArea).append(container);
+};
+
+var handleSlipStepwiseRegression = function (tableResult) {
+
+    //声明打印区域
+    var presentArea = $('.result-table');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
+    //声明DOM 元素
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var tableHeader = $('<h1>');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered table-condensed');
+
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
+    var emptyCell = $(headerCell).clone();
+
+    var block = $('<div>');
+    var span = $('<span>');
+
+    //1 打印『模型汇总』表
+    var modelSummaryArea = $(container).clone();
+    $(modelSummaryArea).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_model_summary')
+    );
+
+    var modelSummaryTable = $(table).clone();
+    //1.1 打印标题行
+    var modelSummaryTitleRow = $(row).clone();
+    $(modelSummaryTitleRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'model')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'r')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'rsquared')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'regressionStandardError')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'f')
+    );
+    $(modelSummaryTable).append(modelSummaryTitleRow);
+
+    //1.2 打印数据行
+    ['forward', 'backward'].map(function (title) {
+
+        var modelDataRow = $(row).clone();
+
+        $(modelDataRow).append(
+            $(cell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', title)
+        ).append(
+            $(cell).clone().text(Number(Math.sqrt(tableResult[(title == 'forward') ? 'preData' : 'backData'].rsquared)).toFixed(numReservation))
+        ).append(
+            $(cell).clone().text(Number(tableResult[(title == 'forward') ? 'preData' : 'backData'].rsquared).toFixed(numReservation))
+        ).append(
+            $(cell).clone().text(Number(tableResult[(title == 'forward') ? 'preData' : 'backData'].regressionStandardError).toFixed(numReservation))
+        ).append(
+            $(cell).clone().text(Number(tableResult[(title == 'forward') ? 'preData' : 'backData'].f).toFixed(numReservation))
+        );
+
+        $(modelSummaryTable).append(modelDataRow)
+    });
+
+    $(modelSummaryArea).append(modelSummaryTable);
+    $(presentArea).append(modelSummaryArea);
+
+    //2 打印『前移回归系数』表
+    var forwardRegressionArea = $(container).clone();
+    $(forwardRegressionArea).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_forward_regression_coefficients')
+    );
+
+    var forwardRegressionTable = $(table).clone();
+    //2.1 打印标题行
+    var FRTitleRow = $(row).clone();
+    $(FRTitleRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'model').attr('rowspan', '2')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'unstandardized_coefficients')
+    );
+    var FRTitleSecRow = $(row).clone();
+    $(FRTitleSecRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'b')
+    );
+    $(forwardRegressionTable).append(FRTitleRow).append(FRTitleSecRow);
+
+    //2.2 打印数据行
+    var config = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_SLIP_STEPWISE_REGRESSION'));
+    var independentVariable = config.independentVariable;
+
+    tableResult.preData.regressionParameters.map(function (value, index) {
+        var dataRow = $(row).clone();
+
+        if (index == 0) {
+            $(dataRow).append($(cell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'constant'))
+                .append($(cell).clone().text(Number(value).toFixed(numReservation)));
+        } else {
+            $(dataRow).append($(cell).clone().text(independentVariable[index - 1].varietyName))
+                .append($(cell).clone().text(Number(value).toFixed(numReservation)));
+        }
+        $(forwardRegressionTable).append(dataRow);
+    });
+
+    var equationString = '';
+    tableResult.preData.regressionParameters.map(function (value, index) {
+        if (index == 0) {
+            equationString += '' + Number(value).toFixed(numReservation);
+        } else {
+            if (value > 0) {
+                equationString += ' + ' + Number(value).toFixed(numReservation) + ' × ' + independentVariable[index - 1].varietyName;
+            } else {
+                equationString += ' - ' + Math.abs(Number(value).toFixed(numReservation)) + ' × ' + independentVariable[index - 1].varietyName;
+            }
+        }
+    });
+
+    $(forwardRegressionArea).append(forwardRegressionTable)
+        .append(
+        $(block).clone().html('<strong>' + config.dependentVariable[0].varietyName + '</strong>')
+            .append($(span).clone().text(' = ' + equationString))
+    );
+    $(presentArea).append(forwardRegressionArea);
+
+    //3 打印『前移预测』
+    var forwardPredictArea = $(container).clone();
+    var key = Object.keys(tableResult.preForecast);
+
+    $(forwardPredictArea).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_forward_predict')
+    ).append(
+        $(block).clone().append(
+            $(span).clone().html(
+                (localStorage.getItem('MULTIINFO_CONFIG_LANGUAGE') == 'zh-cn') ?
+                '<strong>' + key[0] + '</strong>' + ' 年的 ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' 的预测值是：' + Number(tableResult.preForecast[key[0]]).toFixed(numReservation) :
+                'The predictive value of ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' in ' + '<strong>' + key[0] + '</strong>' + ' is: ' + Number(tableResult.preForecast[key[0]]).toFixed(numReservation))
+        )
+    );
+    $(presentArea).append(forwardPredictArea);
+
+    //4 打印『后移回归系数』表
+    var backwardRegressionArea = $(container).clone();
+    $(backwardRegressionArea).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_backward_regression_coefficients')
+    );
+
+    var backwardRegressionTable = $(table).clone();
+    //4.1 打印标题行
+    var BRTitleRow = $(row).clone();
+    $(BRTitleRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'model').attr('rowspan', '2')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'unstandardized_coefficients')
+    );
+    var BRTitleSecRow = $(row).clone();
+    $(BRTitleSecRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'b')
+    );
+    $(backwardRegressionTable).append(BRTitleRow).append(BRTitleSecRow);
+
+    //4.2 打印数据行
+    tableResult.backData.regressionParameters.map(function (value, index) {
+        var dataRow = $(row).clone();
+
+        if (index == 0) {
+            $(dataRow).append($(cell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'constant'))
+                .append($(cell).clone().text(Number(value).toFixed(numReservation)));
+        } else {
+            $(dataRow).append($(cell).clone().text(independentVariable[index - 1].varietyName))
+                .append($(cell).clone().text(Number(value).toFixed(numReservation)));
+        }
+        $(backwardRegressionTable).append(dataRow);
+    });
+
+    var _equationString = '';
+    tableResult.backData.regressionParameters.map(function (value, index) {
+        if (index == 0) {
+            _equationString += '' + Number(value).toFixed(numReservation);
+        } else {
+            if (value > 0) {
+                _equationString += ' + ' + Number(value).toFixed(numReservation) + ' × ' + independentVariable[index - 1].varietyName;
+            } else {
+                _equationString += ' - ' + Math.abs(Number(value).toFixed(numReservation)) + ' × ' + independentVariable[index - 1].varietyName;
+            }
+        }
+    });
+
+    $(backwardRegressionArea).append(backwardRegressionTable)
+        .append(
+        $(block).clone().html('<strong>' + config.dependentVariable[0].varietyName + '</strong>')
+            .append($(span).clone().text(' = ' + _equationString))
+    );
+    $(presentArea).append(backwardRegressionArea);
+
+
+    //5 打印『后移预测』
+    var backwardPredictArea = $(container).clone();
+    var _key = Object.keys(tableResult.backForecast);
+
+    $(backwardPredictArea).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_backward_predict')
+    ).append(
+        $(block).clone().append(
+            $(span).clone().html(
+                (localStorage.getItem('MULTIINFO_CONFIG_LANGUAGE') == 'zh-cn') ?
+                '<strong>' + _key[0] + '</strong>' + ' 年的 ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' 的预测值是：' + Number(tableResult.backForecast[_key[0]]).toFixed(numReservation) :
+                'The predictive value of ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' in ' + '<strong>' + _key[0] + '</strong>' + ' is: ' + Number(tableResult.backForecast[_key[0]]).toFixed(numReservation))
+        )
+    );
+    $(presentArea).append(backwardPredictArea);
+};
+
+var handleOptimalSegmentation = function (tableResult) {
+
+    //声明打印区域
+    var presentArea = $('.result-table');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
+    //声明DOM 元素
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var tableHeader = $('<h1>');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered table-condensed');
+
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
+    var emptyCell = $(headerCell).clone();
+
+    var block = $('<div>');
+    var span = $('<span>');
+
+    $(container).append($(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'modal_title_optimal_segmentation'));
+
+    var SEGMENT_TABLES = tableResult.optRes;
+
+    //有几个表格打印几个
+    SEGMENT_TABLES.map(function (object, index) {
+        var resultTable = $(table).clone();
+
+        var titleRow = $(row).clone();
+        $(titleRow).append($(headerCell).clone().attr('colspan', '4').css('text-align', 'center').text('最优 ' + object.segNum + ' 段分割结果[Result]'));
+
+        var titleSecRow = $(row).clone();
+        $(titleSecRow).append(
+            $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'segment_number')
+        ).append(
+            $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'from')
+        ).append(
+            $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'to')
+        ).append(
+            $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'variance_of_the_segment')
+        );
+        $(resultTable).append(titleRow)
+            .append(titleSecRow);
+
+        object.segDataList.map(function (data, index) {
+            var dataRow = $(row).clone();
+            $(dataRow).append(
+                $(cell).clone().text(index + 1)
+            ).append(
+                $(cell).clone().text(data.from)
+            ).append(
+                $(cell).clone().text(data.to)
+            ).append(
+                $(cell).clone().text(Number(data.sswg).toFixed(numReservation))
+            );
+            $(resultTable).append(dataRow);
+        });
+
+        var footerRow = $(row).clone();
+        $(footerRow).append(
+            $(cell).clone().attr('colspan', '4').append(
+                $(span).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'segment')
+            ).append(
+                $(span).clone().text(': ')
+            ).append(
+                $(span).clone().text(Number(object.sst).toFixed(numReservation))
+            )
+        );
+        $(resultTable).append(footerRow);
+
+        $(container).append(resultTable);
+    });
+
+    //打印第二张表：分割表
+    var OS = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_OPTIMAL_SEGMENTATION'));
+
+    $(container).append($(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_segment_table'));
+    var divideTable = $(table).clone();
+    var titleRow = $(row).clone();
+    for (var i = 0; i < OS.segNum[0]; i++) {
+        if (i == 0) {
+            $(titleRow).append($(headerCell).clone().css('text-align', 'center').attr('data-i18n-type', 'table').attr('data-i18n-tag', 'sign_segment'))
+        } else {
+            $(titleRow).append($(headerCell).clone().css('text-align', 'center').text(i + 1));
+        }
+    }
+    $(divideTable).append(titleRow);
+
+    var OS_COL = Number(sessionStorage.getItem('PRIVATE_OPT_SEG_COL'));
+    for (var j = 0; j < OS_COL - 1; j++) {
+        var dataRow = $(row).clone();
+
+        $(dataRow).append($(cell).clone().css('text-align', 'center').text(OS.col[j].varietyName));
+
+        for (var k = 1; k < OS.segNum[0]; k++) {
+            $(dataRow).append($(cell).clone().attr('id', 'target_' + (k + 1) + '_' + (j + 1)));
+        }
+        $(divideTable).append(dataRow);
+    }
+
+    $(container).append(divideTable);
+
+    $(presentArea).append(container);
+
+    SEGMENT_TABLES.map(function (object, index) {
+
+        object.segDataList.map(function (segData, i) {
+            var target = '#target_' + object.segNum + '_';
+
+            if (segData.to !== (OS_COL - 1)) {
+                target += segData.to;
+                $(target).css('text-align', 'center').html('<strong>━</strong>');
+            }
+        });
+    });
 };

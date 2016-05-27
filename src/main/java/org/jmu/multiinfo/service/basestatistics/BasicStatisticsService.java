@@ -50,6 +50,13 @@ public interface BasicStatisticsService {
 	 */
 	public Double min(double[][] dataArr);
 	
+	/***
+	 * 极差
+	 * @param dataArr
+	 * @return
+	 */
+	public Double range(double[] dataArr);
+	
 	
 	/***
 	 * 方差
@@ -165,6 +172,14 @@ public interface BasicStatisticsService {
 	 */
 	public  Double averageMulSumDeviation(double[] dataArrX,double[] dataArrY) throws DataErrException;
 	
+	
+	/***
+	 * 离差平方和
+	 * @param dataArr
+	 * @return
+	 * @throws DataErrException
+	 */
+	public Double deviationsSumSquares(double[] dataArr) throws DataErrException;
 	
 	/***
 	 * 秩次
@@ -400,4 +415,12 @@ public interface BasicStatisticsService {
 	 * @throws DataErrException
 	 */
 	public double sumMul(final double[]dataArrX,final double[]dataArrY) throws DataErrException;
+	
+	/**
+	 * 判断一个double类型的数是否为0
+	 * @param data
+	 * @return
+	 */
+	public boolean isZero(double data);
+	
 }

@@ -38,6 +38,13 @@ public class PCAEigenvalueDTO {
 	private String kmoDesc;
 	//公因子方差表
 	private double[][] communalityArr;
+	
+	//方差极大正交旋转矩阵
+	private double[][] orRotaArr;
+	
+	//正交因子得分矩阵
+	private double[][] orFacArr;
+
 
 	public double[] getSortEigenvalues() {
 		return sortEigenvalues;
@@ -151,6 +158,22 @@ public class PCAEigenvalueDTO {
 
 	public void setKmoDesc(String kmoDesc) {
 		this.kmoDesc = kmoDesc;
+	}
+
+	public double[][] getOrRotaArr() {
+		return orRotaArr;
+	}
+
+	public void setOrRotaArr(double[][] orRotaArr) {
+		this.orRotaArr = orRotaArr;
+	}
+
+	public double[][] getOrFacArr() {
+		return orFacArr;
+	}
+
+	public void setOrFacArr(double[][] orFacArr) {
+		this.orFacArr = orFacArr;
 	}
 	
 	

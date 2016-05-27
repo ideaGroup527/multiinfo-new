@@ -113,7 +113,7 @@ var handleSubmit = function (config) {
             dataPackage.dependentVariable = means.dependentVariable;
             break;
         case 'Principal_Component_Analysis':
-            //主成分分析
+            //降维分析 - 主成分分析
             handleURL = 'statistics/analysis/principalComponent.do';
             sessionStorage.setItem('PRIVATE_GRAPH_CONFIG', 'basicline');
             var PCA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_PRINCIPAL_COMPONENT'));
@@ -121,6 +121,25 @@ var handleSubmit = function (config) {
             dataPackage.extractMethod = PCA.extractMethod[0];
             dataPackage.eigExtraNum = PCA.eigExtraNum[0];
             dataPackage.factorExtraNum = PCA.factorExtraNum[0];
+            break;
+        case 'Factor_Analysis':
+            handleURL = 'statistics/analysis/Factor.do';
+            var FA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_FACTOR_ANALYSIS'));
+            dataPackage.variableList = FA.variableList;
+            dataPackage.extractMethod = FA.extractMethod[0];
+            dataPackage.eigExtraNum = FA.eigExtraNum[0];
+            dataPackage.factorExtraNum = FA.factorExtraNum[0];
+            dataPackage.variance = FA.variance[0];
+            console.log(FA);
+            break;
+        case 'Correspondence_Analysis':
+            //降维分析 - 对应分析
+            handleURL = 'statistics/analysis/correspondence.do';
+            var CA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CORRESPONDENCE_ANALYSIS'));
+            dataPackage.variableList = CA.variableList;
+            dataPackage.extractMethod = CA.extractMethod[0];
+            dataPackage.eigExtraNum = CA.eigExtraNum[0];
+            dataPackage.factorExtraNum = CA.factorExtraNum[0];
             break;
         case 'Gray_Correlation':
             //灰色关联度
@@ -170,6 +189,31 @@ var handleSubmit = function (config) {
             dataPackage.dependentVariable = GSR.dependentVariable[0];
             dataPackage.entryF = GSR.entryF[0];
             dataPackage.delF = GSR.delF[0];
+            break;
+        case 'Slip_Stepwise':
+            //回归 - 逐步回归 - 滑移回归
+            handleURL = 'statistics/regression/slipstepwise.do';
+            var SS = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_SLIP_STEPWISE_REGRESSION'));
+            dataPackage.previousMethod = SS.previousMethod[0];
+            dataPackage.backwardMethod = SS.backwardMethod[0];
+            dataPackage.delF = SS.delF[0];
+            dataPackage.entryF = SS.entryF[0];
+            dataPackage.dependentVariable = SS.dependentVariable[0];
+            dataPackage.independentVariable = SS.independentVariable;
+            dataPackage.timeVariable = SS.timeVariable[0];
+            break;
+        case 'Optimal_Segmentation':
+            //最优分割
+            handleURL = 'statistics/optseg/optk.do';
+            var OS = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_OPTIMAL_SEGMENTATION'));
+            var COL = JSON.parse(sessionStorage.getItem('PRIVATE_OPT_SEG_COL'));
+
+            OS.variableList.map(function (variable, index) {
+                var cache = variable.range.split(':')[0];
+                variable.range = cache + ':' + variable.position + COL;
+            });
+            dataPackage.variableList = OS.variableList;
+            dataPackage.segNum = OS.segNum[0];
             break;
     }
 

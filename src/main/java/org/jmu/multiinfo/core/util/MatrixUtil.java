@@ -2,6 +2,7 @@ package org.jmu.multiinfo.core.util;
 
 import org.apache.commons.math3.util.FastMath;
 import org.jmu.multiinfo.core.dto.EigenvalueDTO;
+import org.jmu.multiinfo.core.exception.DataErrException;
 
 import Jama.EigenvalueDecomposition;
 import Jama.Matrix;
@@ -17,6 +18,18 @@ import Jama.Matrix;
  *
  */
 public class MatrixUtil {
+	
+	public static double[][] clone(double[][] dataArr){
+		int row = dataArr.length;
+		int col = dataArr[0].length;
+		double[][] cloArr = new double[row][col];
+		for(int i=0;i<row;i++){
+			for (int j = 0; j < col; j++) {
+				cloArr[i][j] = dataArr[i][j];
+			}
+		}
+		return cloArr;
+	}
 
 
 	/***
@@ -156,10 +169,27 @@ public class MatrixUtil {
 		return pcArr;
 	}
 	
-	
+	/***
+	 * 点乘
+	 * @param dataArr
+	 * @param l
+	 * @return
+	 */
 	public static double[][] product(double[][] dataArr,double l){
 		Matrix mt = new Matrix(dataArr);
 		return mt.times(l).getArray();
+	}
+	
+	/***
+	 * 叉乘
+	 * @param dataArr
+	 * @param l
+	 * @return
+	 */
+	public static double[][] product(double[][] dataArrA,double[][] dataArrB){
+		Matrix mtA = new Matrix(dataArrA);
+		Matrix mtB = new Matrix(dataArrB);
+		return mtA.times(mtB).getArray();
 	}
 	
 	/***
@@ -193,4 +223,26 @@ public class MatrixUtil {
 		if((i+j)%2 == 0) return 1;
 		return -1;
 	}
+	
+	/**
+	 * 转置
+	 * @param dataArr
+	 * @return
+	 */
+	public static double[][] transpose(double[][] dataArr){
+		Matrix matrix = new Matrix(dataArr);
+		return matrix.transpose().getArray();
+	}
+	
+	/***
+	 * 逆
+	 * @param dataArr
+	 * @return
+	 */
+	public static double[][] inverse(double[][] dataArr){
+		Matrix matrix = new Matrix(dataArr);
+		return matrix.inverse().getArray();
+	}
+	
+	
 }

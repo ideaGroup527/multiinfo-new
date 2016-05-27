@@ -1,253 +1,279 @@
 [
-    {
-        "term": "Analysis",
+  {
+    "term": "Analysis",
+    "name": {
+      "zh-cn": "分析",
+      "en-us": "Analysis"
+    },
+    "subMenu": [
+      {
+        "term": "DescriptiveStatistics",
         "name": {
-            "zh-cn": "分析",
-            "en-us": "Analysis"
+          "zh-cn": "描述统计",
+          "en-us": "Descriptive Statistics"
         },
         "subMenu": [
-            {
-                "term": "DescriptiveStatistics",
-                "name": {
-                    "zh-cn": "描述统计",
-                    "en-us": "Descriptive Statistics"
-                },
-                "subMenu": [
-                    {
-                        "term": "Descriptive",
-                        "name": {
-                            "zh-cn": "描述",
-                            "en-us": "Descriptive"
-                        },
-                        "modalId": "#Descriptive_Statistics_Descriptive",
-                        "modal": "modal.html",
-                        "script": "script.js"
-                    },
-                    {
-                        "term": "Frequency",
-                        "modalId": "#Descriptive_Statistics_Frequency",
-                        "modal": "modal.html",
-                        "script": "script.js",
-                        "name": {
-                            "zh-cn": "频率",
-                            "en-us": "Frequency"
-                        }
-                    }
-                ]
+          {
+            "term": "Descriptive",
+            "name": {
+              "zh-cn": "描述",
+              "en-us": "Descriptive"
             },
-            {
-                "term": "Correlation",
-                "name": {
-                    "zh-cn": "相关",
-                    "en-us": "Correlation"
-                },
-                "subMenu": [
-                    {
-                        "term": "BivariateCorrelate",
-                        "name": {
-                            "zh-cn": "双变量",
-                            "en-us": "Bivariate Correlate"
-                        },
-                        "modalId": "#Correlation_Bivariate",
-                        "modal": "modal.html",
-                        "script": "script.js"
-                    },
-                    {
-                        "term": "PartialCorrelation",
-                        "name": {
-                            "zh-cn": "偏相关",
-                            "en-us": "Partial Correlation"
-                        }
-                    },
-                    {
-                        "term": "Distance",
-                        "name": {
-                            "zh-cn": "距离",
-                            "en-us": "Distance"
-                        },
-                        "modalId": "#Correlation_Distance",
-                        "modal": "modal.html",
-                        "script": "script.js"
-                    }
-                ]
-            },
-            {
-                "term": "CompareMeans",
-                "name": {
-                    "zh-cn": "均值比较",
-                    "en-us": "Compare Means"
-                },
-                "subMenu": [
-                    {
-                        "term": "Means",
-                        "name": {
-                            "zh-cn": "均值",
-                            "en-us": "Means"
-                        },
-                        "modalId": "#Means",
-                        "modal": "modal.html",
-                        "script": "script.js"
-                    },
-                    {
-                        "term": "OnewayANOVA",
-                        "name": {
-                            "zh-cn": "单因素方差分析",
-                            "en-us": "Oneway ANOVA"
-                        },
-                        "modalId": "#Oneway_ANOVA",
-                        "modal": "modal.html",
-                        "script": "script.js"
-                    }
-                ]
-            },
-            {
-                "term": "Regression",
-                "name": {
-                    "en-us": "Regression",
-                    "zh-cn": "回归"
-                },
-                "subMenu": [
-                    {
-                        "term": "SimpleLinearRegression",
-                        "name": {
-                            "en-us": "Simple Linear Regression",
-                            "zh-cn": "一元线性回归"
-                        },
-                        "modalId": "#Simple_Linear_Regression",
-                        "modal": "modal.html",
-                        "script": "script.js"
-                    },
-                    {
-                        "term": "MultipleLinearRegression",
-                        "name": {
-                            "en-us": "Multiple Linear Regression",
-                            "zh-cn": "多元线性回归"
-                        },
-                        "modal": "modal.html",
-                        "script": "script.js"
-                    },
-                    {
-                        "term": "StepwiseRegression",
-                        "name": {
-                            "en-us": "Stepwise Regression",
-                            "zh-cn": "逐步回归"
-                        },
-                        "subMenu": [
-                            {
-                                "term": "GeneralStepwiseRegression",
-                                "name": {
-                                    "zh-cn": "一般逐步回归",
-                                    "en-us": "General Stepwise Regression"
-                                },
-                                "modalId": "#General_Stepwise_Regression",
-                                "modal": "modal.html",
-                                "script": "script.js"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "term": "ReducingDimensions",
-                "name": {
-                    "en-us": "Reducing Dimensions",
-                    "zh-cn": "降维"
-                },
-                "subMenu": [
-                    {
-                        "term": "PrincipalComponentAnalysis",
-                        "name": {
-                            "en-us": "Principal Component Analysis",
-                            "zh-cn": "主成分分析"
-                        },
-                        "modalId": "#Principal_Component_Analysis",
-                        "modal": "modal.html",
-                        "script": "script.js"
-                    }
-                ]
-            },
-            {
-                "term": "GeneralLinerModels",
-                "name": {
-                    "zh-cn": "一般线性模型",
-                    "en-us": "General Liner Models"
-                }
+            "modalId": "#Descriptive_Statistics_Descriptive",
+            "modal": "modal.html",
+            "script": "script.js"
+          },
+          {
+            "term": "Frequency",
+            "modalId": "#Descriptive_Statistics_Frequency",
+            "modal": "modal.html",
+            "script": "script.js",
+            "name": {
+              "zh-cn": "频率",
+              "en-us": "Frequency"
             }
+          }
         ]
-    },
-    {
-        "term": "DingChart",
+      },
+      {
+        "term": "Correlation",
         "name": {
-            "en-us": "Ding Chart",
-            "zh-cn": "丁氏图"
-        },
-        "modalId": "#Ding_Chart",
-        "modal": "modal.html",
-        "script": "script.js"
-    },
-    {
-        "term": "GrayAnalysis",
-        "name": {
-            "en-us": "Gray Analysis",
-            "zh-cn": "灰色分析"
+          "zh-cn": "相关",
+          "en-us": "Correlation"
         },
         "subMenu": [
-            {
-                "term": "GrayCorrelation",
+          {
+            "term": "BivariateCorrelate",
+            "name": {
+              "zh-cn": "双变量",
+              "en-us": "Bivariate Correlate"
+            },
+            "modalId": "#Correlation_Bivariate",
+            "modal": "modal.html",
+            "script": "script.js"
+          },
+          {
+            "term": "PartialCorrelation",
+            "name": {
+              "zh-cn": "偏相关",
+              "en-us": "Partial Correlation"
+            }
+          },
+          {
+            "term": "Distance",
+            "name": {
+              "zh-cn": "距离",
+              "en-us": "Distance"
+            },
+            "modalId": "#Correlation_Distance",
+            "modal": "modal.html",
+            "script": "script.js"
+          }
+        ]
+      },
+      {
+        "term": "CompareMeans",
+        "name": {
+          "zh-cn": "均值比较",
+          "en-us": "Compare Means"
+        },
+        "subMenu": [
+          {
+            "term": "Means",
+            "name": {
+              "zh-cn": "均值",
+              "en-us": "Means"
+            },
+            "modalId": "#Means",
+            "modal": "modal.html",
+            "script": "script.js"
+          },
+          {
+            "term": "OnewayANOVA",
+            "name": {
+              "zh-cn": "单因素方差分析",
+              "en-us": "Oneway ANOVA"
+            },
+            "modalId": "#Oneway_ANOVA",
+            "modal": "modal.html",
+            "script": "script.js"
+          }
+        ]
+      },
+      {
+        "term": "Regression",
+        "name": {
+          "en-us": "Regression",
+          "zh-cn": "回归"
+        },
+        "subMenu": [
+          {
+            "term": "SimpleLinearRegression",
+            "name": {
+              "en-us": "Simple Linear Regression",
+              "zh-cn": "一元线性回归"
+            },
+            "modalId": "#Simple_Linear_Regression",
+            "modal": "modal.html",
+            "script": "script.js"
+          },
+          {
+            "term": "MultipleLinearRegression",
+            "name": {
+              "en-us": "Multiple Linear Regression",
+              "zh-cn": "多元线性回归"
+            },
+            "modal": "modal.html",
+            "script": "script.js"
+          },
+          {
+            "term": "StepwiseRegression",
+            "name": {
+              "en-us": "Stepwise Regression",
+              "zh-cn": "逐步回归"
+            },
+            "subMenu": [
+              {
+                "term": "GeneralStepwiseRegression",
                 "name": {
-                    "en-us": "Gray Correlation",
-                    "zh-cn": "灰色关联度"
+                  "zh-cn": "一般逐步回归",
+                  "en-us": "General Stepwise Regression"
                 },
-                "modalId": "#Gray_Correlation",
+                "modalId": "#General_Stepwise_Regression",
                 "modal": "modal.html",
                 "script": "script.js"
-            },
-            {
-                "term": "GrayPrediction",
+              },
+              {
+                "term": "SlipStepwise",
                 "name": {
-                    "en-us": "Gray Prediction",
-                    "zh-cn": "灰色预测"
+                  "en-us": "Slip Stepwise",
+                  "zh-cn": "多因素滑移回归"
                 },
-                "subMenu": [
-                    {
-                        "term": "RelatedVariable",
-                        "name": {
-                            "en-us": "Related Variable(s)",
-                            "zh-cn": "关联变量"
-                        },
-                        "modalId": "#Related_Variable",
-                        "modal": "modal.html",
-                        "script": "script.js"
-                    },
-                    {
-                        "term": "IndependentVariable",
-                        "name": {
-                            "en-us": "Independent Variable(s)",
-                            "zh-cn": "独立变量"
-                        },
-                        "modalId": "#Independent_Variable",
-                        "modal": "modal.html",
-                        "script": "script.js"
-                    }
-                ]
-            }
+                "modalId": "#Slip_Stepwise",
+                "modal": "modal.html",
+                "script": "script.js"
+              },
+              {
+                "term": "TrendStepwiseRegression",
+                "name": {
+                  "zh-cn": "趋势逐步回归",
+                  "en-us": "Trend Stepwise Regression"
+                },
+                "modalId": "#Trend_Stepwise_Regression",
+                "modal": "modal.html",
+                "script": "script.js"
+              }
+            ]
+          }
         ]
-    },
-    {
-        "term": "Graph",
+      },
+      {
+        "term": "ReducingDimensions",
         "name": {
-            "en-us": "Graph",
-            "zh-cn": "制图"
+          "en-us": "Reducing Dimensions",
+          "zh-cn": "降维"
         },
         "subMenu": [
-            {
-                "term": "Boxplot",
-                "name": {
-                    "en-us": "Boxplot",
-                    "zh-cn": "箱线图"
-                },
-                "script": "script.js"
-            }
+          {
+            "term": "PrincipalComponentAnalysis",
+            "name": {
+              "en-us": "Principal Component Analysis",
+              "zh-cn": "主成分分析"
+            },
+            "modalId": "#Principal_Component_Analysis",
+            "modal": "modal.html",
+            "script": "script.js"
+          },
+          {
+            "term": "FactorAnalysis",
+            "name": {
+              "en-us": "Factor Analysis",
+              "zh-cn": "因子分析"
+            },
+            "modalId": "#Factor_Analysis",
+            "modal": "modal.html",
+            "script": "script.js"
+          },
+          {
+            "term": "CorrespondenceAnalysis",
+            "name": {
+              "en-us": "Correspondence Analysis",
+              "zh-cn": "对应分析"
+            },
+            "modalId": "#Correspondence_Analysis",
+            "modal": "modal.html",
+            "script": "script.js"
+          }
         ]
-    }
+      }
+    ]
+  },
+  {
+    "term": "DingChart",
+    "name": {
+      "en-us": "Ding Chart",
+      "zh-cn": "丁氏图"
+    },
+    "modalId": "#Ding_Chart",
+    "modal": "modal.html",
+    "script": "script.js"
+  },
+  {
+    "term": "GrayAnalysis",
+    "name": {
+      "en-us": "Gray Analysis",
+      "zh-cn": "灰色分析"
+    },
+    "subMenu": [
+      {
+        "term": "GrayCorrelation",
+        "name": {
+          "en-us": "Gray Correlation",
+          "zh-cn": "灰色关联度"
+        },
+        "modalId": "#Gray_Correlation",
+        "modal": "modal.html",
+        "script": "script.js"
+      },
+      {
+        "term": "GrayPrediction",
+        "name": {
+          "en-us": "Gray Prediction",
+          "zh-cn": "灰色预测"
+        },
+        "subMenu": [
+          {
+            "term": "RelatedVariable",
+            "name": {
+              "en-us": "Related Variable(s)",
+              "zh-cn": "关联变量"
+            },
+            "modalId": "#Related_Variable",
+            "modal": "modal.html",
+            "script": "script.js"
+          },
+          {
+            "term": "IndependentVariable",
+            "name": {
+              "en-us": "Independent Variable(s)",
+              "zh-cn": "独立变量"
+            },
+            "modalId": "#Independent_Variable",
+            "modal": "modal.html",
+            "script": "script.js"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "term": "OptimalSegmentation",
+    "name": {
+      "en-us": "Optimal Segmentation",
+      "zh-cn": "最优分割"
+    },
+    "modalId": "#Optimal_Segmentation",
+    "modal": "modal.html",
+    "script": "script.js"
+  }
 ]

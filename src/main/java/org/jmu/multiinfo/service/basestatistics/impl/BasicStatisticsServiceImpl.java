@@ -313,6 +313,8 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 		for (int i = 0; i < size; i++) {
 			Double amin =  min(dataArr);
 			Double amax = max(dataArr);
+			if(isZero(amax - amin)) resData[i]=0;
+			else
 			resData[i] = ( dataArr[i] - amin) / ( amax - amin );
 		}
 		
@@ -355,6 +357,8 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 		double[][] resData = new double[rows][cols];
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++){
+				if(isZero(amax - amin)) resData[i][j]=0;
+				else
 			resData[i][j] = ( dataArr[i][j] - amin) / ( amax - amin );
 			}
 		}
@@ -470,6 +474,8 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 		Double mean =	arithmeticMean(dataArr);
 	Double sd = standardDeviation(dataArr);
 	for (int i = 0; i < size; i++) {
+		if(isZero(sd)) sdn[i]=0;
+		else
 		sdn[i] = (dataArr[i] - mean) / sd;
 	}
 		return sdn;
@@ -485,9 +491,39 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 		Double maxi = max(dataArr);
 		Double mini = min(dataArr);
 		for (int i = 0; i < size; i++) {
+			if(isZero(maxi - mini)) rn[i]=0;
+			else
 			rn[i] = (dataArr[i] - mean) / (maxi - mini);
 		}
 		return rn;
+	}
+
+
+	@Override
+	public Double deviationsSumSquares(double[] dataArr) throws DataErrException {
+		int size = getN(dataArr);
+		if(size < 2  ) throw new DataErrException("cannot resolve for deviationsSumSquares because too little size");
+		double mean = arithmeticMean(dataArr);
+		double deviations = 0.0;
+		for(int i=0;i<size;i++){
+			deviations += (dataArr[i] - mean) * (dataArr[i] - mean);
+		}
+		return deviations;
+	}
+
+
+	@Override
+	public boolean isZero(double data) {
+		BigDecimal data1 = new BigDecimal(data); 
+		BigDecimal data2 = new BigDecimal(0); 
+		if(data1.compareTo(data2)==0) return true;
+		return false;
+	}
+
+
+	@Override
+	public Double range(double[] dataArr) {
+		return max(dataArr)-min(dataArr);
 	}
 
 

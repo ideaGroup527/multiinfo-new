@@ -55,12 +55,13 @@ private CorrelationService correlationService;
 			double[] accEig = accumulationContribution(sortEigenvalues);
 			eigDTO.setAccEig(accEig);
 			double[][] eigenvectors = eigDTO.getEigenvectors();
+			eigDTO.setEigenvectors(MatrixUtil.clone(eigenvectors));
 			for (int i = 0; i < sortEigenvalues.length; i++) {
 				eigenvectors[i] =	principalComponentCoefficient(eigenvectors[i],sortEigenvalues[i]);
 				
 			}
-			eigDTO.setComponentArr(eigenvectors.clone());
-			eigDTO.setEigenvectors(eigenvectors);
+			eigDTO.setComponentArr(eigenvectors);
+			
 
 		return eigDTO;
 		
@@ -71,6 +72,8 @@ private CorrelationService correlationService;
 	double[] vareig = new double[eigenvectors.length];
 	for (int i = 0; i < eigenvectors.length; i++) {
 		vareig[i] = eigenvectors[i]/sum * 100;
+		//TODO 是否是小于0
+//		if(vareig[i] < 0) vareig[i]=0;
 		
 	}
 		return vareig;
@@ -130,7 +133,7 @@ private CorrelationService correlationService;
 			rePcaDTO.setRet_code("-1");
 			rePcaDTO.setRet_err(e.getMessage());
 			rePcaDTO.setRet_msg(e.getMessage());
-			e.printStackTrace();
+			return rePcaDTO;
 		}
 		double[]  sortEigvalues = eigDTO.getSortEigenvalues();
 	double[] vareigs =	eigDTO.getVarEig();
@@ -139,6 +142,8 @@ double[][] oraComArr =	eigDTO.getComponentArr();
 		pcaDTO.setEigTotalInit(sortEigvalues);
 		pcaDTO.setAccEigInit(acceigs);
 		pcaDTO.setVarEigInit(vareigs);
+		pcaDTO.setEigenvectors(eigDTO.getEigenvectors());
+		pcaDTO.setSortEigenvalues(eigDTO.getSortEigenvalues());
 		switch (condition.getExtractMethod()) {
 		case PrincipalComponentAnalysisCondition.EXTRACT_METHOD_EIGENVALUE:{
 			int tmpSize = 0;
@@ -219,7 +224,7 @@ double[][] oraComArr =	eigDTO.getComponentArr();
 	}
 	@Override
 	public double chiSquareBartlett(double[][] correlationArr) {
-		double[][] oraArr = correlationArr.clone();
+		double[][] oraArr = MatrixUtil.clone(correlationArr);
 		double si = 0.0;
 		double nki = 0.0;
 		int N = 0;
