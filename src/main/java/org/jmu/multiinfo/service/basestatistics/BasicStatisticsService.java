@@ -50,6 +50,13 @@ public interface BasicStatisticsService {
 	 */
 	public Double min(double[][] dataArr);
 	
+	/***
+	 * 极差
+	 * @param dataArr
+	 * @return
+	 */
+	public Double range(double[] dataArr);
+	
 	
 	/***
 	 * 方差

@@ -28,6 +28,11 @@ private Object sumValidatePercentage;
 //ks检验结果
 private KSTestDTO ksTest;
 
+//有效基本数据
+private List<UpDownDTO> uniqueInterval;
+
+private boolean isNum;
+
 public List<Object> getUniqueData() {
 	return uniqueData;
 }
@@ -99,5 +104,23 @@ public KSTestDTO getKsTest() {
 public void setKsTest(KSTestDTO ksTest) {
 	this.ksTest = ksTest;
 }
+
+public boolean getIsNum() {
+	return isNum;
+}
+
+public void setIsNum(boolean isNum) {
+	this.isNum = isNum;
+}
+
+public List<UpDownDTO> getUniqueInterval() {
+	return uniqueInterval;
+}
+
+public void setUniqueInterval(List<UpDownDTO> uniqueInterval) {
+	this.uniqueInterval = uniqueInterval;
+}
+
+
 
 }
