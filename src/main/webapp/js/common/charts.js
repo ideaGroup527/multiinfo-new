@@ -2,6 +2,7 @@
  表的顺序：
  曲线图1，折线图2，散点图3，箱线图 boxplot 4，饼图 pie 5，正态分布图 normalcurve 6，
  丁氏图 dingchart 7,碎石图 screeplot 8, 主成分因子平面图二维图 pcfp2d 9,主成分因子平面图二维图 pcfp3d 10，
+ 聚类图 clustering 11, 最优分割 fisher 12, 最优分割的折线图 fisher_cure 13
 
  */
 (function ($) {
@@ -66,11 +67,25 @@
                     _type |= 512;
                     break;
                 }
+                case "clustering":
+                {
+                    _type |= 513;
+                    break;
+                }
+                case "fisher":
+                {
+                    _type |= 514;
+                    break;
+                }
+                case "fisher_line":
+                {
+                    _type |= 515;
+                    break;
+                }
             }
         });
         _handler();
         function _handler() {
-
             switch (_type.toString(2)) {
                 case "1": //曲线图
                 {
@@ -117,7 +132,7 @@
                 case "1000000"://丁氏图
                 {
 
-                    _dingchartHandle(setting.data, setting.calculateMethod);
+                    _dingchartHandle(setting.data, setting.calculateMethod,setting.ellipsesColor,setting.cureColor);
                     break;
                 }
                 case "10000000"://碎石图
@@ -135,6 +150,23 @@
                 case "1000000000"://主成分因子平面三维图
                 {
                     _pcfp3dHandle(setting.data);
+                    break;
+                }
+                case "1000000001"://聚类图
+                {
+                    _clusteringHandle(setting.data);
+                    break;
+                }
+                case "1000000010"://最优分割图
+                {
+                    _fisherHandle(setting.data);
+                    _render();
+                    break;
+                }
+                case "1000000011"://最优分割图的折线图
+                {
+                    _lineForfisherHandle(setting.data);
+                    _render();
                     break;
                 }
                 case "11"://散点图和曲线图
@@ -563,7 +595,7 @@
         }
 
         //丁氏图
-        function _dingchartHandle(data, calculateMethod) {
+        function _dingchartHandle(data, calculateMethod,ellipsesColor,cureColor) {
 
             var col = data.colVarList.length,//行数和列数
                 row = data.rowVarList.length;
@@ -611,6 +643,7 @@
                 ctx.stroke();
             }
             //y轴
+            ctx.font="14px Verdana";
             for (var i = 0; i < row; i++) {
                 var y = (i + 1) * m_height;
                 ctx.save();
@@ -623,7 +656,7 @@
                 var x = (i + 1) * m_width;
                 ctx.save();
                 ctx.textAlign = "center";
-                wrapText(ctx, data.colVarList[i].varietyName, x + m_width / 2, m_height, m_width, 15);
+                wrapText(ctx, data.colVarList[i].varietyName, x + m_width / 2, m_height+5, 5, 15);
                 ctx.stroke();
             }
 
@@ -749,10 +782,10 @@
                         var a = getAnchors(point1.x, point1.y, x, y, point2.x, point2.y);//获取锚点
                         p = p.concat([a.x1, a.y1, x, y, a.x2, a.y2]);
                     }
-                    cirs.push(paper.circle(x, y).attr({fill: "#D48366", stroke: "#D48366", r: 1}));
+                    cirs.push(paper.circle(x, y).attr({fill: cureColor, stroke: cureColor, r: 1}));
                 }
 
-                paper.path(p.concat([x, y, x, y])).attr({stroke: "#D48366"});
+                paper.path(p.concat([x, y, x, y])).attr({stroke: cureColor});
 
                 //修改cirs层级和事件
                 for (var i = 0; i < cirs.length; i++) {
@@ -778,7 +811,7 @@
             //画一个椭圆
             function EllipseTwo(context, x, y, a, b) {
                 context.save();
-                context.fillStyle = "#CC5B58";
+                context.fillStyle = ellipsesColor;
                 var r = (a > b) ? a : b;
                 var ratioX = a / r;
                 var ratioY = b / r;
@@ -788,7 +821,8 @@
                 context.closePath();
                 context.fill();
                 context.restore();
-            };
+            }
+
             //获取锚点
             function getAnchors(p1x, p1y, p2x, p2y, p3x, p3y) {
                 var l1 = (p2x - p1x) / 2,
@@ -810,30 +844,19 @@
                 };
             }
 
-            //填充文字
-            function wrapText(context, text, x, y, maxWidth, lineHeight) {
-                var line = [], n = 0;
-                for (var i = 0; i < text.length; i++) {
-                    if (n == 2) break;
-                    if (i % 6 == 0) {
-                        line.push(text.substring(i, i + 6));
-                        n++;
-                    }
-                }
-                var len = line.length;
-                for (var ii = 0; ii < len; ii++) {
-                    context.fillText(line[ii], x, y - lineHeight * (len - ii));
-                }
-            }
         }
 
         //主成分因子平面图二维图
         function _pcfp2dHandle(data) {
-            var dataAll = [];
-            $.each(data.data.componentArr,function (i,v) {
-                dataAll.push([v[0],v[1]]);
+            var dataAll = [], markpoint = [];
+            $.each(data.data.componentArr, function (i, v) {
+                dataAll.push([v[0], v[1], data.variableList[i].varietyName]);
             });
-
+            $.each(data.variableList, function (i, v) {
+                markpoint.push(v.varietyName);
+            });
+            console.log(markpoint);
+            console.log(dataAll);
             _option = {
                 title: {
                     text: setting.title,
@@ -845,7 +868,7 @@
                     }
                 },
                 tooltip: {
-                    formatter: '{a}: ({c})'
+                    formatter: '({c})'
                 },
                 xAxis: {
                     scale: true
@@ -855,9 +878,21 @@
                 },
                 series: [
                     {
-                        name: '点',
+                        name:'点',
                         type: "scatter",
-                        data: dataAll
+                        data: dataAll,
+                        label:{
+                            normal:{
+                                show:true,
+                                position:"right",
+                                formatter: function (d) {
+                                    return d.data[2];
+                                },
+                                textStyle:{
+                                    color:"#000"
+                                }
+                            }
+                        }
                     }
                 ]
             };
@@ -894,18 +929,18 @@
                         viewDistance: 5,
 
                         frame: {
-                            bottom: { size: 1, color: 'rgba(0,0,0,0.02)' },
-                            back: { size: 1, color: 'rgba(0,0,0,0.04)' },
-                            side: { size: 1, color: 'rgba(0,0,0,0.06)' }
+                            bottom: {size: 1, color: 'rgba(0,0,0,0.02)'},
+                            back: {size: 1, color: 'rgba(0,0,0,0.04)'},
+                            side: {size: 1, color: 'rgba(0,0,0,0.06)'}
                         }
                     }
                 },
                 title: {
                     text: setting.title,
-                    x:-300,
-                    y:50,
-                    style:{
-                        "fontSize":"16px"
+                    x: -300,
+                    y: 50,
+                    style: {
+                        "fontSize": "16px"
                     }
 
                 },
@@ -922,13 +957,12 @@
                 xAxis: {
                     gridLineWidth: 1
                 },
-                zAxis: {
-                },
+                zAxis: {},
                 legend: {
                     enabled: false
                 },
                 series: [{
-                    name: 'Reading',
+                    name: '点',
                     colorByPoint: true,
                     data: data.data.componentArr
                 }]
@@ -967,9 +1001,227 @@
             });
         }
 
+        //聚类图
+        function _clusteringHandle(data) {
+
+            var len = 5;
+            var canvas = $("<canvas>");
+            $(canvas).css({
+                'display': 'block',
+                'position': "absolute",
+                "left": '50%',
+                "margin-left": "-500px",
+                "top": 0
+            });
+            $(canvas).attr('width', "1000").attr('height', len * 100 + 150);
+
+            //内容
+            var vis = new pv.Panel()
+                .width(800)
+                .height(len * 100)
+                .left(100)
+                .right(100)
+                .top(100)
+                .bottom(0)
+                .canvas(_this.attr('id'));
+
+            var layout = vis.add(pv.Layout.Cluster)
+                .nodes(pv.dom(data)
+                    .root("")
+                    .sort(function (a, b) {
+                        pv.naturalOrder(a.nodeName, b.nodeName)
+                    })
+                    .nodes()
+                )
+                .group(true)
+                .orient("right");
+
+            layout.link.add(pv.Line)
+                .strokeStyle("#2b2b2b")
+                .lineWidth(1);
+
+            // layout.node.add(pv.Dot)
+            //     .fillStyle(function (n) {
+            //         return n.firstChild ? "#aec7e8" : "#ff7f0e"
+            //     });
+
+            layout.label.add(pv.Label).textAlign("left").textBaseline('bottom').text(function (t) {
+                return Number.isInteger(+t.nodeName) ? "" : t.nodeName;
+            });
+
+            vis.render();
+
+            //坐标轴
+            $(_this).append(canvas);
+
+            var ctx = canvas[0].getContext('2d');
+
+            //坐标轴样式配置
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = "#666";
+            ctx.textAlign = 'center';
+
+            ctx.beginPath();
+            ctx.moveTo(100, 100);
+            ctx.lineTo(100, (len + 1) * 100);
+            ctx.moveTo(100, 100);
+            ctx.lineTo(1000, 100);
+            ctx.stroke();
+
+
+            //label
+            for (var i = 1; i <= 4; i++) {
+                ctx.beginPath(1000, 100);
+                ctx.moveTo(100 + i * (800 / 4), 100);
+                ctx.lineTo(100 + i * (800 / 4), 110);
+                ctx.stroke();
+
+                wrapText(ctx, "" + Number(1.0 / 4 * i).toFixed(3), 100 + i * (800 / 4), 100, 100, 15);
+            }
+
+            //title
+            ctx.font = "20px Verdana";
+            wrapText(ctx, setting.title, 50, 50, 100, 15);
+        }
+
+        //最优分割
+        function _fisherHandle(data) {
+            var dataAll = [];
+            var len = data.optRes.length;
+            var ydata = [], xdata = [];
+            for (var i = 2; i < len + 2; i++) {
+                ydata.push('分割' + i + "段");
+            }
+            for (var i = 1; i <= len + 1; i++) {
+                xdata.push('第' + i + '段');
+            }
+            for (var i = 0, v = null; (v = data.optRes[i]) != undefined; i++) {
+                for (var j = 0, f = null; (f = v.segDataList[j]) != undefined; j++) {
+                    for (var n = f.from - 1; n < f.to; n++) {
+                        dataAll.push([i, n, j + 1]);
+                    }
+                }
+            }
+            dataAll = dataAll.map(function (item) {
+                return [item[1], item[0], item[2] || '-'];
+            });
+            _option = {
+                title: {
+                    text: setting.title, //主标题文本
+                    x: 'left', //标题文本的位置
+                    y: 0,
+                    textStyle: {
+                        fontSize: 16,
+                        fontWeight: 'normal'
+                    }
+                },
+                tooltip: {
+                    position: 'top'
+                },
+                animation: false,
+                grid: {
+                    height: '50%',
+                    y: '10%'
+                },
+                xAxis: {
+                    type: 'category',
+                    axisLabel: {
+                        textStyle: {
+                            fontSize: 14
+                        }
+                    },
+                    data: xdata
+                },
+                yAxis: {
+                    type: 'category',
+                    axisLabel: {
+                        textStyle: {
+                            fontSize: 14
+                        }
+                    },
+                    data: ydata
+                },
+                visualMap: {
+                    min: 1,
+                    max: 6,
+                    calculable: true,
+                    orient: 'horizontal',
+                    left: 'center',
+                    bottom: '15%',
+                    color: ["#991b1e", "#e0c06d"]
+                },
+                series: [{
+                    name: '分段',
+                    type: 'heatmap',
+                    data: dataAll,
+                    label: {
+                        normal: {
+                            show: true
+                        }
+                    },
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }]
+            };
+        }
+
+        //最优分割的折线图
+        function _lineForfisherHandle(data) {
+            var dataAll = [], xdata = [];
+            for (var i = 0, v = null; (v = data.optRes[i]) != undefined; i++) {
+                xdata.push(v.segNum);
+                dataAll.push(v.sst);
+            }
+            _option = {
+                title: {
+                    text: setting.title, //主标题文本
+                    x: 'left', //标题文本的位置
+                    y: 0,
+                    textStyle: {
+                        fontSize: 16,
+                        fontWeight: 'normal'
+                    }
+                },
+                tooltip: {
+                    formatter: '{a}: ({c})' //鼠标移动到点的提示框
+                },
+                xAxis: {
+                    type: 'category',
+                    name: '分割段数',
+                    nameLocation: "middle",
+                    nameTextStyle: {
+                        fontSize: 16
+                    },
+                    nameGap: "30",
+                    data: xdata
+                },
+                yAxis: {
+                    name: '离差平方总和',
+                    nameLocation: "middle",
+                    nameTextStyle: {
+                        fontSize: 16
+                    },
+                    nameGap: "40"
+                },
+                series: [
+                    {
+                        smooth: false,
+                        name: '点',
+                        type: "line",
+                        data: dataAll,
+                        markLine: null
+                    }
+                ]
+            };
+        }
+
         /** 针对坐标轴字段溢出的字符串截取
          * @param title             将要换行处理x轴值
-         * @param data
+         * @param datas
          * @param fontSize          x轴数据字体大小，根据图片字体大小设置而定，此处内部默认为12
          * @param barContainerWidth         柱状图初始化所在的外层容器的宽度
          * @param xWidth            柱状图x轴左边的空白间隙 x 的值，详见echarts文档中grid属性，默认80
@@ -1041,5 +1293,20 @@
             return newTitle;
         }
 
+        /*填充文字*/
+        function wrapText(context, text, x, y, maxWidth, lineHeight) {
+            var line = [], n = 0;
+            for (var i = 0; i < text.length; i++) {
+                if (n == 2) break;
+                if (i % maxWidth == 0) {
+                    line.push(text.substring(i, i + maxWidth));
+                    n++;
+                }
+            }
+            var len = line.length;
+            for (var ii = 0; ii < len; ii++) {
+                context.fillText(line[ii], x, y - lineHeight * (len - ii));
+            }
+        }
     }
 })(jQuery);
