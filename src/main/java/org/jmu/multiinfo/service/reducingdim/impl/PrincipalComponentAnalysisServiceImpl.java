@@ -60,7 +60,7 @@ private CorrelationService correlationService;
 				eigenvectors[i] =	principalComponentCoefficient(eigenvectors[i],sortEigenvalues[i]);
 				
 			}
-			eigDTO.setComponentArr(eigenvectors.clone());
+			eigDTO.setComponentArr(eigenvectors);
 			
 
 		return eigDTO;
@@ -72,6 +72,8 @@ private CorrelationService correlationService;
 	double[] vareig = new double[eigenvectors.length];
 	for (int i = 0; i < eigenvectors.length; i++) {
 		vareig[i] = eigenvectors[i]/sum * 100;
+		//TODO 是否是小于0
+//		if(vareig[i] < 0) vareig[i]=0;
 		
 	}
 		return vareig;
@@ -131,7 +133,7 @@ private CorrelationService correlationService;
 			rePcaDTO.setRet_code("-1");
 			rePcaDTO.setRet_err(e.getMessage());
 			rePcaDTO.setRet_msg(e.getMessage());
-			e.printStackTrace();
+			return rePcaDTO;
 		}
 		double[]  sortEigvalues = eigDTO.getSortEigenvalues();
 	double[] vareigs =	eigDTO.getVarEig();

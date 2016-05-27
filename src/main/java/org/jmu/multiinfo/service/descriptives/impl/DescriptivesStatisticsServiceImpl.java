@@ -25,6 +25,7 @@ import org.jmu.multiinfo.dto.descriptives.PercentileCondition;
 import org.jmu.multiinfo.dto.descriptives.PercentileDTO;
 import org.jmu.multiinfo.dto.descriptives.ResultDataDTO;
 import org.jmu.multiinfo.dto.descriptives.ResultFrequencyDTO;
+import org.jmu.multiinfo.dto.descriptives.UpDownDTO;
 import org.jmu.multiinfo.service.basestatistics.BasicStatisticsService;
 import org.jmu.multiinfo.service.basestatistics.DistributionService;
 import org.jmu.multiinfo.service.descriptives.DescriptivesStatisticsService;
@@ -164,10 +165,16 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 
 			List<Object> uniqList = new ArrayList<Object>();
 			Iterator<Entry<Comparable<?>, Long>>  it =	frequency.entrySetIterator();
+			boolean isnum =true;
 			while (it.hasNext()) {
 				Map.Entry<java.lang.Comparable<?>, java.lang.Long> entry = (Map.Entry<java.lang.Comparable<?>, java.lang.Long>) it
 						.next();
 				uniqList.add(entry.getKey().toString());
+				try {
+					Double.parseDouble(entry.getKey().toString());
+				} catch (NumberFormatException e) {
+					isnum=false;
+				}
 				frequencyMap.put(entry.getKey().toString(), entry.getValue() );
 				Double pct = frequency.getPct(entry.getKey())  * 100 ;
 				sumPercentage += pct;
@@ -179,8 +186,28 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 				Double cumpct = frequency.getCumPct(entry.getKey())  * 100;
 				accumulationPercentage.put(entry.getKey().toString(), cumpct);
 			}
-			
-
+		List<UpDownDTO> interList = new ArrayList<>();
+		//如果为数组计算组距
+		if(isnum){
+			int uniqSize = uniqList.size();
+		double[] uniqArr = new double[uniqSize];
+		for (int i = 0; i < uniqArr.length; i++) {
+			uniqArr[i] = DataFormatUtil.converToDouble(uniqList.get(i).toString());
+		}
+		double max = basicStatisticsService.max(uniqArr);
+		double min=	basicStatisticsService.min(uniqArr);
+		double range = max-min;
+		double interval=	FastMath.ceil(range / uniqSize);
+		
+		for (int i = 0; i < uniqArr.length; i++) {
+			UpDownDTO e = new UpDownDTO();
+			Double down = uniqArr[i] - interval / 2;
+			Double up = down+interval;
+			e.setUp(up);
+			e.setDown(down);
+			interList.add(e );
+		}
+		}
 						
 /*			if (varietyDTO.getType() == DataVariety.DATA_TYPE_NUMERIC) {
 				Collections.sort(uniqList, new Comparator<Object>() {
@@ -207,6 +234,8 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 			retDto.setValidatePercentage(validatePercentage);
 			retDto.setAccumulationPercentage(accumulationPercentage);
 			retDto.setPercentage(percentage);
+			retDto.setIsNum(isnum);
+			retDto.setUniqueInterval(interList);
 			ResultDataDTO retDataDTO = new ResultDataDTO();
 			retDataDTO.setResultData(retDto);
 			resDataMap.put(varietyDTO.getVarietyName(), retDataDTO);

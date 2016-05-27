@@ -3,6 +3,7 @@ package org.jmu.multiinfo.service.base;
 import org.jmu.multiinfo.base.util.MyJUnit4ClassRunner;
 import org.jmu.multiinfo.core.dto.EigenvalueDTO;
 import org.jmu.multiinfo.core.exception.DataErrException;
+import org.jmu.multiinfo.core.util.DataFormatUtil;
 import org.jmu.multiinfo.dto.opseg.OptArrDTO;
 import org.jmu.multiinfo.service.basestatistics.MatrixStatisticsService;
 import org.jmu.multiinfo.service.opseg.OptSegService;
@@ -40,5 +41,15 @@ public class MatrixStatisticsServiceTest {
 		OptArrDTO opt = optSegService.optimalKSegmentation(6,6,D);
 		System.err.println();
 	}
+	
+	
+//	@Test
+//	public void probability() throws DataErrException{
+//		double[][] dataArr={{1,1,3},
+//				{2,1,2},
+//				{2,1,4},
+//				{3,1,2}};
+//		DataFormatUtil.print(matrixStatisticsService.probability(dataArr));
+//	}
 
 }

@@ -521,5 +521,11 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 	}
 
 
+	@Override
+	public Double range(double[] dataArr) {
+		return max(dataArr)-min(dataArr);
+	}
+
+
 	
 }
