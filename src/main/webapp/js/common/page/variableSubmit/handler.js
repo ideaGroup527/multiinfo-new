@@ -202,6 +202,21 @@ var handleSubmit = function (config) {
             dataPackage.independentVariable = SS.independentVariable;
             dataPackage.timeVariable = SS.timeVariable[0];
             break;
+        case 'Trend_Stepwise_Regression':
+            //回归 - 逐步回归 - 趋势逐步回归
+            handleURL = 'statistics/regression/trendstepwise.do';
+            var TSR = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_TREND_STEPWISE_REGRESSION'));
+            dataPackage.previousMethod = TSR.previousMethod[0];
+            dataPackage.backwardMethod = TSR.backwardMethod[0];
+            dataPackage.delF = TSR.delF[0];
+            dataPackage.entryF = TSR.entryF[0];
+            dataPackage.dependentVariable = TSR.dependentVariable[0];
+            dataPackage.independentVariable = TSR.independentVariable;
+            dataPackage.timeVariable = TSR.timeVariable[0];
+            //TODO 这两个要动态拿，以后修改
+            dataPackage.moveNum = 3;
+            dataPackage.weight = [5, 3, 2];
+            break;
         case 'Optimal_Segmentation':
             //最优分割
             handleURL = 'statistics/optseg/optk.do';

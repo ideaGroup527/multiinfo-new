@@ -178,7 +178,9 @@
       "label_backward_regression_coefficients": "Backward Regression Coefficients",
       "label_forward_predict": "Predict Forward",
       "label_backward_predict": "Predict Backward",
-      "label_predictive_value": "Predictive value"
+      "label_predictive_value": "Predictive value",
+      "label_forward_trend_regression_coefficients": "Coefficients of Forward Trend Regression",
+      "label_model_summary_of_forward_trend_regression": "Model Summary of Forward Trend Regression"
     },
     "zh-cn": {
       "options": "选项",
@@ -295,7 +297,9 @@
       "label_backward_regression_coefficients": "后移回归系数",
       "label_forward_predict": "前移预测",
       "label_backward_predict": "后移预测",
-      "label_predictive_value": "预测值"
+      "label_predictive_value": "预测值",
+      "label_forward_trend_regression_coefficients": "前移趋势回归系数",
+      "label_model_summary_of_forward_trend_regression": "前移趋势回归模型汇总"
     }
   },
   "table": {
@@ -343,7 +347,8 @@
       "row_density": "Row Density",
       "col_density": "Column Density",
       "backward": "Backward",
-      "forward": "Forward"
+      "forward": "Forward",
+      "forward_step": "Forward Step"
     },
     "zh-cn": {
       "pearsonR": "Pearson 相关性",
@@ -389,7 +394,8 @@
       "row_density": "行密度",
       "col_density": "列密度",
       "backward": "后移",
-      "forward": "前移"
+      "forward": "前移",
+      "forward_step": "前移步数"
     }
   },
   "nav": {

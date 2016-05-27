@@ -77,6 +77,10 @@ var resultTableGenerator = function () {
             //滑移逐步回归
             handleSlipStepwiseRegression(tableResult);
             break;
+        case 'Trend_Stepwise_Regression':
+            //趋势逐步回归
+            handleTrendStepwiseRegression(tableResult);
+            break;
         case 'Optimal_Segmentation':
             //最优分割
             handleOptimalSegmentation(tableResult);
@@ -2368,6 +2372,73 @@ var handleSlipStepwiseRegression = function (tableResult) {
         )
     );
     $(presentArea).append(backwardPredictArea);
+};
+
+var handleTrendStepwiseRegression = function (tableResult) {
+
+    //声明打印区域
+    var presentArea = $('.result-table');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
+    //声明DOM 元素
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var tableHeader = $('<h1>');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered table-condensed');
+
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
+
+    var block = $('<div>');
+    var span = $('<span>');
+
+    //1 打印『前移趋势回归模型汇总』
+    var container_1 = $(container).clone();
+    $(container_1).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_model_summary_of_forward_trend_regression')
+    );
+
+    var table_1 = $(table).clone();
+    var table_1_titleRow = $(row).clone();
+    $(table_1_titleRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'forward_step')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'r')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'rsquared')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'regressionStandardError')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'f')
+    );
+    $(table_1).append(table_1_titleRow);
+
+    tableResult.trendWiseDTO.map(function (data, index) {
+        var dataRow = $(row).clone();
+        $(dataRow).append(
+            $(cell).clone().text(index + 1)
+        ).append(
+            $(cell).clone().text(Number(Math.sqrt(data.preData.rsquared)).toFixed(numReservation))
+        ).append(
+            $(cell).clone().text(Number(data.preData.rsquared).toFixed(numReservation))
+        ).append(
+            $(cell).clone().text(Number(data.preData.regressionStandardError).toFixed(numReservation))
+        ).append(
+            $(cell).clone().text(Number(data.preData.f).toFixed(numReservation))
+        );
+
+        $(table_1).append(dataRow);
+    });
+
+    $(container_1).append(table_1);
+    $(presentArea).append(container_1);
+
 };
 
 var handleOptimalSegmentation = function (tableResult) {
