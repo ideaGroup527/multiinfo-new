@@ -113,7 +113,7 @@ var handleSubmit = function (config) {
             dataPackage.dependentVariable = means.dependentVariable;
             break;
         case 'Principal_Component_Analysis':
-            //主成分分析
+            //降维分析 - 主成分分析
             handleURL = 'statistics/analysis/principalComponent.do';
             sessionStorage.setItem('PRIVATE_GRAPH_CONFIG', 'basicline');
             var PCA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_PRINCIPAL_COMPONENT'));
@@ -121,6 +121,16 @@ var handleSubmit = function (config) {
             dataPackage.extractMethod = PCA.extractMethod[0];
             dataPackage.eigExtraNum = PCA.eigExtraNum[0];
             dataPackage.factorExtraNum = PCA.factorExtraNum[0];
+            break;
+        case 'Factor_Analysis':
+            handleURL = 'statistics/analysis/Factor.do';
+            var FA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_FACTOR_ANALYSIS'));
+            dataPackage.variableList = FA.variableList;
+            dataPackage.extractMethod = FA.extractMethod[0];
+            dataPackage.eigExtraNum = FA.eigExtraNum[0];
+            dataPackage.factorExtraNum = FA.factorExtraNum[0];
+            dataPackage.variance = FA.variance[0];
+            console.log(FA);
             break;
         case 'Gray_Correlation':
             //灰色关联度

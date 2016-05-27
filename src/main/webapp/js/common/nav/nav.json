@@ -173,6 +173,16 @@
             "modalId": "#Principal_Component_Analysis",
             "modal": "modal.html",
             "script": "script.js"
+          },
+          {
+            "term": "FactorAnalysis",
+            "name": {
+              "en-us": "Factor Analysis",
+              "zh-cn": "因子分析"
+            },
+            "modalId": "#Factor_Analysis",
+            "modal": "modal.html",
+            "script": "script.js"
           }
         ]
       }
