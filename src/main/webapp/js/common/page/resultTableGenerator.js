@@ -73,6 +73,10 @@ var resultTableGenerator = function () {
             //一般逐步回归
             handleGeneralStepwiseRegression(tableResult);
             break;
+        case 'Slip_Stepwise':
+            //滑移逐步回归
+            handleSlipStepwiseRegression(tableResult);
+            break;
         case 'Optimal_Segmentation':
             //最优分割
             handleOptimalSegmentation(tableResult);
@@ -2120,7 +2124,7 @@ var handleGeneralStepwiseRegression = function (tableResult) {
 
         if (index == 0) {
             $(dataRow).append($(cell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'constant'))
-                .append(Number(value).toFixed(numReservation));
+                .append($(cell).clone().text(Number(value).toFixed(numReservation)));
         } else {
             $(dataRow).append($(cell).clone().text(independentVariable[index - 1].varietyName))
                 .append($(cell).clone().text(Number(value).toFixed(numReservation)));
@@ -2149,6 +2153,221 @@ var handleGeneralStepwiseRegression = function (tableResult) {
     );
 
     $(presentArea).append(container);
+};
+
+var handleSlipStepwiseRegression = function (tableResult) {
+
+    //声明打印区域
+    var presentArea = $('.result-table');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
+    //声明DOM 元素
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var tableHeader = $('<h1>');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered table-condensed');
+
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
+    var emptyCell = $(headerCell).clone();
+
+    var block = $('<div>');
+    var span = $('<span>');
+
+    //1 打印『模型汇总』表
+    var modelSummaryArea = $(container).clone();
+    $(modelSummaryArea).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_model_summary')
+    );
+
+    var modelSummaryTable = $(table).clone();
+    //1.1 打印标题行
+    var modelSummaryTitleRow = $(row).clone();
+    $(modelSummaryTitleRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'model')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'r')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'rsquared')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'regressionStandardError')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'f')
+    );
+    $(modelSummaryTable).append(modelSummaryTitleRow);
+
+    //1.2 打印数据行
+    ['forward', 'backward'].map(function (title) {
+
+        var modelDataRow = $(row).clone();
+
+        $(modelDataRow).append(
+            $(cell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', title)
+        ).append(
+            $(cell).clone().text(Number(Math.sqrt(tableResult[(title == 'forward') ? 'preData' : 'backData'].rsquared)).toFixed(numReservation))
+        ).append(
+            $(cell).clone().text(Number(tableResult[(title == 'forward') ? 'preData' : 'backData'].rsquared).toFixed(numReservation))
+        ).append(
+            $(cell).clone().text(Number(tableResult[(title == 'forward') ? 'preData' : 'backData'].regressionStandardError).toFixed(numReservation))
+        ).append(
+            $(cell).clone().text(Number(tableResult[(title == 'forward') ? 'preData' : 'backData'].f).toFixed(numReservation))
+        );
+
+        $(modelSummaryTable).append(modelDataRow)
+    });
+
+    $(modelSummaryArea).append(modelSummaryTable);
+    $(presentArea).append(modelSummaryArea);
+
+    //2 打印『前移回归系数』表
+    var forwardRegressionArea = $(container).clone();
+    $(forwardRegressionArea).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_forward_regression_coefficients')
+    );
+
+    var forwardRegressionTable = $(table).clone();
+    //2.1 打印标题行
+    var FRTitleRow = $(row).clone();
+    $(FRTitleRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'model').attr('rowspan', '2')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'unstandardized_coefficients')
+    );
+    var FRTitleSecRow = $(row).clone();
+    $(FRTitleSecRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'b')
+    );
+    $(forwardRegressionTable).append(FRTitleRow).append(FRTitleSecRow);
+
+    //2.2 打印数据行
+    var config = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_SLIP_STEPWISE_REGRESSION'));
+    var independentVariable = config.independentVariable;
+
+    tableResult.preData.regressionParameters.map(function (value, index) {
+        var dataRow = $(row).clone();
+
+        if (index == 0) {
+            $(dataRow).append($(cell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'constant'))
+                .append($(cell).clone().text(Number(value).toFixed(numReservation)));
+        } else {
+            $(dataRow).append($(cell).clone().text(independentVariable[index - 1].varietyName))
+                .append($(cell).clone().text(Number(value).toFixed(numReservation)));
+        }
+        $(forwardRegressionTable).append(dataRow);
+    });
+
+    var equationString = '';
+    tableResult.preData.regressionParameters.map(function (value, index) {
+        if (index == 0) {
+            equationString += '' + Number(value).toFixed(numReservation);
+        } else {
+            if (value > 0) {
+                equationString += ' + ' + Number(value).toFixed(numReservation) + ' × ' + independentVariable[index - 1].varietyName;
+            } else {
+                equationString += ' - ' + Math.abs(Number(value).toFixed(numReservation)) + ' × ' + independentVariable[index - 1].varietyName;
+            }
+        }
+    });
+
+    $(forwardRegressionArea).append(forwardRegressionTable)
+        .append(
+        $(block).clone().html('<strong>' + config.dependentVariable[0].varietyName + '</strong>')
+            .append($(span).clone().text(' = ' + equationString))
+    );
+    $(presentArea).append(forwardRegressionArea);
+
+    //3 打印『前移预测』
+    var forwardPredictArea = $(container).clone();
+    var key = Object.keys(tableResult.preForecast);
+
+    $(forwardPredictArea).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_forward_predict')
+    ).append(
+        $(block).clone().append(
+            $(span).clone().html(
+                (localStorage.getItem('MULTIINFO_CONFIG_LANGUAGE') == 'zh-cn') ?
+                '<strong>' + key[0] + '</strong>' + ' 年的 ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' 的预测值是：' + Number(tableResult.preForecast[key[0]]).toFixed(numReservation) :
+                'The predictive value of ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' in ' + '<strong>' + key[0] + '</strong>' + ' is: ' + Number(tableResult.preForecast[key[0]]).toFixed(numReservation))
+        )
+    );
+    $(presentArea).append(forwardPredictArea);
+
+    //4 打印『后移回归系数』表
+    var backwardRegressionArea = $(container).clone();
+    $(backwardRegressionArea).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_backward_regression_coefficients')
+    );
+
+    var backwardRegressionTable = $(table).clone();
+    //4.1 打印标题行
+    var BRTitleRow = $(row).clone();
+    $(BRTitleRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'model').attr('rowspan', '2')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'unstandardized_coefficients')
+    );
+    var BRTitleSecRow = $(row).clone();
+    $(BRTitleSecRow).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'b')
+    );
+    $(backwardRegressionTable).append(BRTitleRow).append(BRTitleSecRow);
+
+    //4.2 打印数据行
+    tableResult.backData.regressionParameters.map(function (value, index) {
+        var dataRow = $(row).clone();
+
+        if (index == 0) {
+            $(dataRow).append($(cell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'constant'))
+                .append($(cell).clone().text(Number(value).toFixed(numReservation)));
+        } else {
+            $(dataRow).append($(cell).clone().text(independentVariable[index - 1].varietyName))
+                .append($(cell).clone().text(Number(value).toFixed(numReservation)));
+        }
+        $(backwardRegressionTable).append(dataRow);
+    });
+
+    var _equationString = '';
+    tableResult.backData.regressionParameters.map(function (value, index) {
+        if (index == 0) {
+            _equationString += '' + Number(value).toFixed(numReservation);
+        } else {
+            if (value > 0) {
+                _equationString += ' + ' + Number(value).toFixed(numReservation) + ' × ' + independentVariable[index - 1].varietyName;
+            } else {
+                _equationString += ' - ' + Math.abs(Number(value).toFixed(numReservation)) + ' × ' + independentVariable[index - 1].varietyName;
+            }
+        }
+    });
+
+    $(backwardRegressionArea).append(backwardRegressionTable)
+        .append(
+        $(block).clone().html('<strong>' + config.dependentVariable[0].varietyName + '</strong>')
+            .append($(span).clone().text(' = ' + _equationString))
+    );
+    $(presentArea).append(backwardRegressionArea);
+
+
+    //5 打印『后移预测』
+    var backwardPredictArea = $(container).clone();
+    var _key = Object.keys(tableResult.backForecast);
+
+    $(backwardPredictArea).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_backward_predict')
+    ).append(
+        $(block).clone().append(
+            $(span).clone().html(
+                (localStorage.getItem('MULTIINFO_CONFIG_LANGUAGE') == 'zh-cn') ?
+                '<strong>' + _key[0] + '</strong>' + ' 年的 ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' 的预测值是：' + Number(tableResult.backForecast[_key[0]]).toFixed(numReservation) :
+                'The predictive value of ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' in ' + '<strong>' + _key[0] + '</strong>' + ' is: ' + Number(tableResult.backForecast[_key[0]]).toFixed(numReservation))
+        )
+    );
+    $(presentArea).append(backwardPredictArea);
 };
 
 var handleOptimalSegmentation = function (tableResult) {

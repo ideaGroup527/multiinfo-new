@@ -173,7 +173,12 @@
       "label_frequency_matrix": "Frequency Matrix",
       "label_z_matrix": "Matrix Z",
       "label_variable_covariance_matrix": "Variables Covariance Matrix",
-      "label_sample_covariance_matrix": "Samples Covariance Matrix"
+      "label_sample_covariance_matrix": "Samples Covariance Matrix",
+      "label_forward_regression_coefficients": "Forward Regression Coefficients",
+      "label_backward_regression_coefficients": "Backward Regression Coefficients",
+      "label_forward_predict": "Predict Forward",
+      "label_backward_predict": "Predict Backward",
+      "label_predictive_value": "Predictive value"
     },
     "zh-cn": {
       "options": "选项",
@@ -285,7 +290,12 @@
       "label_frequency_matrix": "概率矩阵",
       "label_z_matrix": "Z 矩阵",
       "label_variable_covariance_matrix": "变量间协方差矩阵",
-      "label_sample_covariance_matrix": "样本间协方差矩阵"
+      "label_sample_covariance_matrix": "样本间协方差矩阵",
+      "label_forward_regression_coefficients": "前移回归系数",
+      "label_backward_regression_coefficients": "后移回归系数",
+      "label_forward_predict": "前移预测",
+      "label_backward_predict": "后移预测",
+      "label_predictive_value": "预测值"
     }
   },
   "table": {
@@ -331,7 +341,9 @@
       "var_eigen": "Variable \\ Eigenvalue",
       "sample_var": "Sample \\ Variable",
       "row_density": "Row Density",
-      "col_density": "Column Density"
+      "col_density": "Column Density",
+      "backward": "Backward",
+      "forward": "Forward"
     },
     "zh-cn": {
       "pearsonR": "Pearson 相关性",
@@ -375,7 +387,9 @@
       "var_eigen": "变量名 \\ 特征值",
       "sample_var": "样本号 \\ 变量名",
       "row_density": "行密度",
-      "col_density": "列密度"
+      "col_density": "列密度",
+      "backward": "后移",
+      "forward": "前移"
     }
   },
   "nav": {
