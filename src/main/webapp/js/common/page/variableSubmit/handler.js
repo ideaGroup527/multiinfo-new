@@ -181,6 +181,18 @@ var handleSubmit = function (config) {
             dataPackage.entryF = GSR.entryF[0];
             dataPackage.delF = GSR.delF[0];
             break;
+        case 'Slip_Stepwise':
+            //回归 - 逐步回归 - 滑移回归
+            handleURL = 'statistics/regression/slipstepwise.do';
+            var SS = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_SLIP_STEPWISE_REGRESSION'));
+            dataPackage.previousMethod = SS.previousMethod[0];
+            dataPackage.backwardMethod = SS.backwardMethod[0];
+            dataPackage.delF = SS.delF[0];
+            dataPackage.entryF = SS.entryF[0];
+            dataPackage.dependentVariable = SS.dependentVariable[0];
+            dataPackage.independentVariable = SS.independentVariable;
+            dataPackage.timeVariable = SS.timeVariable[0];
+            break;
         case 'Optimal_Segmentation':
             //最优分割
             handleURL = 'statistics/optseg/optk.do';

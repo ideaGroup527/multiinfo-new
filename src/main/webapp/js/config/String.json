@@ -90,6 +90,7 @@
       "modal_title_trend_stepwise_regression": "Trend Stepwise Regression",
       "modal_title_optimal_segmentation": "Optimal Segmentation",
       "modal_title_factor_analysis": "Factor Analysis",
+      "modal_title_slip_stepwise_regression": "Slip Stepwise Regression",
       "label_choose_sheet": "Select Your Sheet",
       "label_choose_variable": "Click to choose variable(s) below",
       "label_choose_col_variable": "Click to choose Column variable(s) below",
@@ -166,7 +167,8 @@
       "label_factor_analysis_variance_matrix": "The Biggest Orthogonal Rotating Precision of Variance Matrix",
       "label_factor_loading_matrix": "Factor Loading Matrix",
       "label_correlation_coefficient_eigen_vector": "Correlation Coefficient Eigen Vector",
-      "label_orthogonal_factor_scores":"Orthogonal Factor Scores"
+      "label_orthogonal_factor_scores": "Orthogonal Factor Scores",
+      "label_years": "Years"
     },
     "zh-cn": {
       "options": "选项",
@@ -192,6 +194,7 @@
       "modal_title_trend_stepwise_regression": "趋势逐步回归",
       "modal_title_optimal_segmentation": "最优分割",
       "modal_title_factor_analysis": "因子分析",
+      "modal_title_slip_stepwise_regression": "多因素滑移逐步回归",
       "label_choose_sheet": "请选择待分析的表格",
       "label_choose_variable": "点击选择待选变量",
       "label_choose_col_variable": "点击选择 列变量",
@@ -271,7 +274,8 @@
       "label_factor_analysis_variance_matrix": "方差最大正交旋转矩阵",
       "label_factor_loading_matrix": "因子载荷矩阵",
       "label_correlation_coefficient_eigen_vector": "相关系数特征向量",
-      "label_orthogonal_factor_scores":"正交因子得分"
+      "label_orthogonal_factor_scores": "正交因子得分",
+      "label_years": "年份"
     }
   },
   "table": {

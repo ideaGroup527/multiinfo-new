@@ -144,6 +144,16 @@
                 "script": "script.js"
               },
               {
+                "term": "SlipStepwise",
+                "name": {
+                  "en-us": "Slip Stepwise",
+                  "zh-cn": "多因素滑移回归"
+                },
+                "modalId": "#Slip_Stepwise",
+                "modal": "modal.html",
+                "script": "script.js"
+              },
+              {
                 "term": "TrendStepwiseRegression",
                 "name": {
                   "zh-cn": "趋势逐步回归",
