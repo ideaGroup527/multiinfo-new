@@ -132,7 +132,7 @@
                 case "1000000"://丁氏图
                 {
 
-                    _dingchartHandle(setting.data, setting.calculateMethod);
+                    _dingchartHandle(setting.data, setting.calculateMethod,setting.ellipsesColor,setting.cureColor);
                     break;
                 }
                 case "10000000"://碎石图
@@ -595,7 +595,7 @@
         }
 
         //丁氏图
-        function _dingchartHandle(data, calculateMethod) {
+        function _dingchartHandle(data, calculateMethod,ellipsesColor,cureColor) {
 
             var col = data.colVarList.length,//行数和列数
                 row = data.rowVarList.length;
@@ -782,10 +782,10 @@
                         var a = getAnchors(point1.x, point1.y, x, y, point2.x, point2.y);//获取锚点
                         p = p.concat([a.x1, a.y1, x, y, a.x2, a.y2]);
                     }
-                    cirs.push(paper.circle(x, y).attr({fill: "#D48366", stroke: "#D48366", r: 1}));
+                    cirs.push(paper.circle(x, y).attr({fill: cureColor, stroke: cureColor, r: 1}));
                 }
 
-                paper.path(p.concat([x, y, x, y])).attr({stroke: "#D48366"});
+                paper.path(p.concat([x, y, x, y])).attr({stroke: cureColor});
 
                 //修改cirs层级和事件
                 for (var i = 0; i < cirs.length; i++) {
@@ -811,7 +811,7 @@
             //画一个椭圆
             function EllipseTwo(context, x, y, a, b) {
                 context.save();
-                context.fillStyle = "#CC5B58";
+                context.fillStyle = ellipsesColor;
                 var r = (a > b) ? a : b;
                 var ratioX = a / r;
                 var ratioY = b / r;
