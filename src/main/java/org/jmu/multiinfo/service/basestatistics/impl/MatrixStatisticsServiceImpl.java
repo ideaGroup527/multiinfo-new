@@ -17,6 +17,8 @@ import org.jmu.multiinfo.service.basestatistics.MatrixStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.sf.ehcache.search.aggregator.Sum;
+
 @Service
 public class MatrixStatisticsServiceImpl implements MatrixStatisticsService{
 
@@ -99,7 +101,8 @@ public class MatrixStatisticsServiceImpl implements MatrixStatisticsService{
 		return basicStatisticsService.deviationsSumSquares(varArr);
 		
 	}
-	
+
+
 
 
 }
