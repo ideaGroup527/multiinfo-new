@@ -643,6 +643,7 @@
                 ctx.stroke();
             }
             //y轴
+            ctx.font="14px Verdana";
             for (var i = 0; i < row; i++) {
                 var y = (i + 1) * m_height;
                 ctx.save();
@@ -655,7 +656,7 @@
                 var x = (i + 1) * m_width;
                 ctx.save();
                 ctx.textAlign = "center";
-                wrapText(ctx, data.colVarList[i].varietyName, x + m_width / 2, m_height, m_width, 15);
+                wrapText(ctx, data.colVarList[i].varietyName, x + m_width / 2, m_height+5, 5, 15);
                 ctx.stroke();
             }
 
