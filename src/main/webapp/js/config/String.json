@@ -159,7 +159,8 @@
       "label_del_f": "Excluding",
       "label_row": "Row",
       "label_col": "Column",
-      "label_division_number": "Division number"
+      "label_division_number": "Division number",
+      "label_segment_table": "Segment Table"
     },
     "zh-cn": {
       "options": "选项",
@@ -257,7 +258,8 @@
       "label_del_f": "剔除",
       "label_row": "行",
       "label_col": "列",
-      "label_division_number": "分割段数"
+      "label_division_number": "分割段数",
+      "label_segment_table": "分割表"
     }
   },
   "table": {
@@ -298,7 +300,8 @@
       "from": "from",
       "to": "to",
       "variance_of_the_segment": "Variance of the segment",
-      "segment": "Segment"
+      "segment": "Segment",
+      "sign_segment": "Sign \\ Segment"
     },
     "zh-cn": {
       "pearsonR": "Pearson 相关性",
@@ -337,7 +340,8 @@
       "from": "起始点",
       "to": "终点号",
       "variance_of_the_segment": "组内离差平方和",
-      "segment": "离差平方总和"
+      "segment": "离差平方总和",
+      "sign_segment": "标识列 \\ 分割段数"
     }
   },
   "nav": {

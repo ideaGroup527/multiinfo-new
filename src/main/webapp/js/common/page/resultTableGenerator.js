@@ -1747,5 +1747,46 @@ var handleOptimalSegmentation = function (tableResult) {
         $(container).append(resultTable);
     });
 
+    //打印第二张表：分割表
+    var OS = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_OPTIMAL_SEGMENTATION'));
+
+    $(container).append($(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_segment_table'));
+    var divideTable = $(table).clone();
+    var titleRow = $(row).clone();
+    for (var i = 0; i < OS.segNum[0]; i++) {
+        if (i == 0) {
+            $(titleRow).append($(headerCell).clone().css('text-align', 'center').attr('data-i18n-type', 'table').attr('data-i18n-tag', 'sign_segment'))
+        } else {
+            $(titleRow).append($(headerCell).clone().css('text-align', 'center').text(i + 1));
+        }
+    }
+    $(divideTable).append(titleRow);
+
+    var OS_COL = OS.variableList[0].range.split(OS.variableList[0].position).reverse()[0];
+    for (var j = 0; j < OS_COL - 1; j++) {
+        var dataRow = $(row).clone();
+
+        $(dataRow).append($(cell).clone().css('text-align', 'center').text(j + 1));
+
+        for (var k = 1; k < OS.segNum[0]; k++) {
+            $(dataRow).append($(cell).clone().attr('id', 'target_' + (k + 1) + '_' + (j + 1)));
+        }
+        $(divideTable).append(dataRow);
+    }
+
+    $(container).append(divideTable);
+
     $(presentArea).append(container);
+
+    SEGMENT_TABLES.map(function (object, index) {
+
+        object.segDataList.map(function (segData, i) {
+            var target = '#target_' + object.segNum + '_';
+
+            if (segData.to !== (OS_COL - 1)) {
+                target += segData.to;
+                $(target).css('text-align', 'center').html('<strong>━</strong>');
+            }
+        });
+    });
 };
