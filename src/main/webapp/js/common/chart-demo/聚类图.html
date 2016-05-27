@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>聚类图</title>
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #main {
+            display: block;
+            position: relative;
+            left: 50%;
+            margin: 100px 0 0 -500px;
+        }
+    </style>
+</head>
+<body>
+<div id="main"></div>
+
+<script src="../../lib/jquery.min.js"></script>
+<script type="text/javascript" src="../../lib/protovis.min.js"></script>
+<script src="../charts.js"></script>
+<script>
+    var data = {
+        "0": {
+            "1": {
+                "2": {
+                    "居民可支配收入": 0,
+                    "销售量": 0
+                },
+                "3": {"社会保有量": 0}
+            },
+            "4": {
+                "5": {
+                    "该类消费品价格指数": 0,
+                    "其他消费品平均价格指数": 0
+                }
+
+            }
+        }
+    };
+    var data2 = {
+        "ret_code": "0",
+        "ret_msg": "",
+        "ret_err": "",
+        "stepList": [
+            {
+                "data": 0.9975807539040444,
+                "rowIndex": 5,
+                "colIndex": 1
+            },
+            {
+                "data": 0.991795913806776,
+                "rowIndex": 4,
+                "colIndex": 2
+            },
+            {
+                "data": 0.9887618321724948,
+                "rowIndex": 3,
+                "colIndex": 1
+            },
+            {
+                "data": 0.980817831753623,
+                "rowIndex": 2,
+                "colIndex": 1
+            }
+        ],
+        "factorVarList": [
+            "居民可支配收入",
+            "该类消费品价格指数",
+            "社会保有量",
+            "其他消费品平均价格指数",
+            "销售量"
+        ],
+        "tree": {
+            "root": {
+                "lefTreeNode": {
+                    "lefTreeNode": {
+                        "lefTreeNode": {
+                            "lefTreeNode": null,
+                            "rightNode": null,
+                            "value": {
+                                "data": null,
+                                "pos": 1
+                            }
+                        },
+                        "rightNode": {
+                            "lefTreeNode": null,
+                            "rightNode": null,
+                            "value": {
+                                "data": null,
+                                "pos": 5
+                            }
+                        },
+                        "value": {
+                            "data": 0.9975807539040444,
+                            "pos": 1
+                        }
+                    },
+                    "rightNode": {
+                        "lefTreeNode": null,
+                        "rightNode": null,
+                        "value": {
+                            "data": null,
+                            "pos": 3
+                        }
+                    },
+                    "value": {
+                        "data": 0.9887618321724948,
+                        "pos": 1
+                    }
+                },
+                "rightNode": {
+                    "lefTreeNode": {
+                        "lefTreeNode": null,
+                        "rightNode": null,
+                        "value": {
+                            "data": null,
+                            "pos": 2
+                        }
+                    },
+                    "rightNode": {
+                        "lefTreeNode": null,
+                        "rightNode": null,
+                        "value": {
+                            "data": null,
+                            "pos": 4
+                        }
+                    },
+                    "value": {
+                        "data": 0.991795913806776,
+                        "pos": 2
+                    }
+                },
+                "value": {
+                    "data": 0.980817831753623,
+                    "pos": 1
+                }
+            }
+        },
+        "orderStepList": [
+            1,
+            5,
+            3,
+            2,
+            4
+        ]
+    }
+
+</script>
+<script>
+    $('#main').charts({
+        title: '聚类分析图',
+        type: ['clustering'],
+        data: data
+    });
+</script>
+</body>
+</html>
