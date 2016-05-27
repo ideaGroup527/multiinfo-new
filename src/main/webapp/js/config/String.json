@@ -89,6 +89,7 @@
       "modal_title_general_stepwise_regression": "General Stepwise Regression",
       "modal_title_trend_stepwise_regression": "Trend Stepwise Regression",
       "modal_title_optimal_segmentation": "Optimal Segmentation",
+      "modal_title_factor_analysis": "Factor Analysis",
       "label_choose_sheet": "Select Your Sheet",
       "label_choose_variable": "Click to choose variable(s) below",
       "label_choose_col_variable": "Click to choose Column variable(s) below",
@@ -160,7 +161,12 @@
       "label_row": "Row",
       "label_col": "Column",
       "label_division_number": "Division number",
-      "label_segment_table": "Segment Table"
+      "label_segment_table": "Segment Table",
+      "label_factor_analysis_variance": "The biggest orthogonal rotating precision of variance",
+      "label_factor_analysis_variance_matrix": "The Biggest Orthogonal Rotating Precision of Variance Matrix",
+      "label_factor_loading_matrix": "Factor Loading Matrix",
+      "label_correlation_coefficient_eigen_vector": "Correlation Coefficient Eigen Vector",
+      "label_orthogonal_factor_scores":"Orthogonal Factor Scores"
     },
     "zh-cn": {
       "options": "选项",
@@ -185,6 +191,7 @@
       "modal_title_general_stepwise_regression": "一般逐步回归",
       "modal_title_trend_stepwise_regression": "趋势逐步回归",
       "modal_title_optimal_segmentation": "最优分割",
+      "modal_title_factor_analysis": "因子分析",
       "label_choose_sheet": "请选择待分析的表格",
       "label_choose_variable": "点击选择待选变量",
       "label_choose_col_variable": "点击选择 列变量",
@@ -259,7 +266,12 @@
       "label_row": "行",
       "label_col": "列",
       "label_division_number": "分割段数",
-      "label_segment_table": "分割表"
+      "label_segment_table": "分割表",
+      "label_factor_analysis_variance": "方差最大正交旋转精度",
+      "label_factor_analysis_variance_matrix": "方差最大正交旋转矩阵",
+      "label_factor_loading_matrix": "因子载荷矩阵",
+      "label_correlation_coefficient_eigen_vector": "相关系数特征向量",
+      "label_orthogonal_factor_scores":"正交因子得分"
     }
   },
   "table": {
@@ -301,7 +313,8 @@
       "to": "to",
       "variance_of_the_segment": "Variance of the segment",
       "segment": "Segment",
-      "sign_segment": "Sign \\ Segment"
+      "sign_segment": "Sign \\ Segment",
+      "var_eigen": "Variable \\ Eigenvalue"
     },
     "zh-cn": {
       "pearsonR": "Pearson 相关性",
@@ -341,7 +354,8 @@
       "to": "终点号",
       "variance_of_the_segment": "组内离差平方和",
       "segment": "离差平方总和",
-      "sign_segment": "标识列 \\ 分割段数"
+      "sign_segment": "标识列 \\ 分割段数",
+      "var_eigen": "变量名 \\ 特征值"
     }
   },
   "nav": {

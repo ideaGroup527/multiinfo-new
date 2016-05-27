@@ -37,6 +37,10 @@ var resultTableGenerator = function () {
             //降维 - 主成分
             handlePrincipalComponentAnalysis(tableResult);
             break;
+        case 'Factor_Analysis':
+            //降维 - 因子
+            handleFactorAnalysis(tableResult);
+            break;
         case 'Gray_Correlation':
             //灰色关联度
             handleGrayCorrelation(tableResult);
@@ -894,6 +898,343 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
     //打印碎石图
 
 };
+var handleFactorAnalysis = function (tableResult) {
+
+    //声明放置区域
+    var presentArea = $('.result-table');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
+    //声明DOM 元素
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var tableHeader = $('<h1>');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered table-condensed');
+
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
+    var emptyCell = $(headerCell).clone();
+
+    var block = $('<div>');
+    var span = $('<span>');
+
+
+    //获取参数名列表
+    var variableNameList = [];
+    tableResult.variableList.map(function (obj) {
+        variableNameList.push(obj.varietyName);
+    });
+
+    //1 打印『相关矩阵』
+    //1.1获取『相关矩阵』值
+    var correlationMatrix = tableResult.data.correlationArr;
+
+    var correlationArea = $(container).clone();
+
+    var correlationHeader = $(tableHeader).clone();
+    $(correlationHeader).attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_correlation_matrix');
+    $(correlationArea).append(correlationHeader);
+
+    var correlationMatrixTable = $(table).clone();
+
+    //1.2 打印相关矩阵头栏
+    var correlationHeaderRow = $(row).clone();
+    $(correlationHeaderRow).append(emptyCell.clone());
+
+    variableNameList.map(function (variable) {
+        var variableCell = $(headerCell).clone();
+        $(variableCell).text(variable);
+        $(correlationHeaderRow).append(variableCell);
+    });
+    $(correlationMatrixTable).append(correlationHeaderRow);
+
+    //1.3 打印相关矩阵值
+    variableNameList.map(function (variable, index) {
+        var variableRow = $(row).clone();
+
+        var variableCell = $(cell).clone();
+        $(variableCell).text(variable);
+        $(variableRow).append(variableCell);
+
+        //每行的值
+        correlationMatrix[index].map(function (value) {
+            var valueCell = $(cell).clone();
+            $(valueCell).text((Number(value) != NaN) ? Number(value).toFixed(numReservation) : value);
+            $(variableRow).append(valueCell);
+        });
+        $(correlationMatrixTable).append(variableRow);
+    });
+
+    //填充到显示区域
+    $(correlationArea).append(correlationMatrixTable);
+    //如果有行列式则填充
+    if (tableResult.data.determinant) {
+        $(correlationArea).append(
+            $(block).append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_determinant'))
+                .append($(span).text('=' + tableResult.data.determinant))
+        );
+    }
+    $(presentArea).append(correlationArea);
+
+
+    //2 打印『解释的总方差表』
+
+    //2.1 获取相关变量值
+    //2.1.1 初始合计
+    var eigTotalInit = tableResult.data.eigTotalInit;
+    //2.1.2 初始方差
+    var varEigInit = tableResult.data.varEigInit;
+    //2.1.3 初始累积
+    var accEigInit = tableResult.data.accEigInit;
+    //2.1.4 提取合计
+    var eigTotalExtra = tableResult.data.eigTotalExtra;
+    //2.1.5 提取方差
+    var varEigExtra = tableResult.data.varEigExtra;
+    //2.1.6 提取累积
+    var accEigExtra = tableResult.data.accEigExtra;
+
+    var explainTotalVarArea = $(container).clone();
+
+    var explainTotalVarHeader = $(tableHeader).clone();
+    $(explainTotalVarHeader).attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_total_variance_explained');
+    $(explainTotalVarArea).append(explainTotalVarHeader);
+
+    var explainTotalVarTable = $(table).clone();
+
+    var explainTotalVarHeaderRow = $(row).clone();
+    $(explainTotalVarHeaderRow).append($(emptyCell).clone().attr('rowspan', '2').attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_component'))
+        .append($(emptyCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_initial_eigenvalue').attr('colspan', '3').addClass('text-center'))
+        .append($(emptyCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_extraction_sums_of_squared_loading').attr('colspan', '3').addClass('text-center'));
+    $(explainTotalVarTable).append(explainTotalVarHeaderRow);
+
+    //第二行展示
+    var explainTotalVarSecHeaderRow = $(row).clone();
+    $(explainTotalVarSecHeaderRow).append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_total').addClass('text-center'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_variance').addClass('text-center'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_Cumulative').addClass('text-center'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_total').addClass('text-center'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_variance').addClass('text-center'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_Cumulative').addClass('text-center'));
+    $(explainTotalVarTable).append(explainTotalVarSecHeaderRow);
+
+    //3 打印『相关系数特征向量』
+    var correlationCoeffArea = $(container).clone();
+    $(correlationCoeffArea).append($(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_correlation_coefficient_eigen_vector'));
+    //3.2 打印表格
+    var correlationCoeffTable = $(table).clone();
+    //3.2.1 打印标题行
+    var titleRow = $(row).clone();
+    $(titleRow).append($(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'var_eigen'));
+    tableResult.data.eigenvectors.map(function (data, index) {
+        $(titleRow).append($(headerCell).clone().text('λ' + (index + 1)));
+    });
+    $(correlationCoeffTable).append(titleRow);
+
+    //3.2.2 打印值
+    variableNameList.map(function (variable, index) {
+        var dataRow = $(row).clone();
+        $(dataRow).append($(cell).clone().text(variable));
+
+        tableResult.data.eigenvectors.map(function (data, i) {
+            $(dataRow).append($(cell).clone().text(data[index]));
+        });
+        $(correlationCoeffTable).append(dataRow);
+    });
+
+    $(correlationCoeffArea).append(correlationCoeffTable);
+    $(presentArea).append(correlationCoeffArea);
+
+    //4. 打印『公因子方差表』
+    //4.1 获取『公因子方差』值
+    var communalityArr = tableResult.data.communalityArr;
+
+    var communalityArea = $(container).clone();
+
+    var communalityHeader = $(tableHeader).clone();
+    $(communalityHeader).attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_communalities');
+    $(communalityArea).append(communalityHeader);
+
+    var communalityTable = $(table).clone();
+
+    //4.2 打印公因子方差表头栏
+    var communalityHeaderRow = $(row).clone();
+    $(communalityHeaderRow).append($(emptyCell).clone())
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_initial'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_extract'));
+    $(communalityTable).append(communalityHeaderRow);
+
+    //4.3 打印公因子方差值
+    variableNameList.map(function (variable, index) {
+        var variableRow = $(row).clone();
+
+        var variableCell = $(cell).clone();
+        $(variableCell).text(variable);
+        $(variableRow).append(variableCell);
+
+        communalityArr[index].map(function (value) {
+            var valueCell = $(cell).clone();
+            $(valueCell).text((Number(value) != NaN) ? Number(value).toFixed(numReservation) : value);
+            $(variableRow).append(valueCell);
+        });
+        $(communalityTable).append(variableRow);
+    });
+
+    //填充到显示区域
+    $(communalityArea).append(communalityTable);
+    $(presentArea).append(communalityArea);
+
+
+    //4.2 开始打值
+    eigTotalInit.map(function (variable, index) {
+        var commonRow = $(row).clone();
+
+        //序号
+        var titleCell = $(cell).clone();
+        $(titleCell).text(index + 1);
+        $(commonRow).append(titleCell);
+
+        //值
+        $(commonRow).append($(cell).clone().text(Number(variable).toFixed(numReservation)))
+            .append($(cell).clone().text((varEigInit[index]) ? Number(varEigInit[index]).toFixed(numReservation) : ''))
+            .append($(cell).clone().text((accEigInit[index]) ? Number(accEigInit[index]).toFixed(numReservation) : ''))
+            .append($(cell).clone().text((eigTotalExtra[index]) ? Number(eigTotalExtra[index]).toFixed(numReservation) : ''))
+            .append($(cell).clone().text((varEigExtra[index]) ? Number(varEigExtra[index]).toFixed(numReservation) : ''))
+            .append($(cell).clone().text((accEigExtra[index]) ? Number(accEigExtra[index]).toFixed(numReservation) : ''));
+        $(explainTotalVarTable).append(commonRow);
+    });
+
+    //填充到显示区域
+    $(explainTotalVarArea).append(explainTotalVarTable);
+    $(presentArea).append(explainTotalVarArea);
+
+    //5 打印『因子载荷矩阵』
+    //5.1 获取相关值
+    var componentMatrix = tableResult.data.componentArr;
+
+    var componentArea = $(container).clone();
+
+    var componentHeader = $(tableHeader).clone();
+    $(componentHeader).attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_factor_loading_matrix');
+    $(componentArea).append(componentHeader);
+
+    var componentTable = $(table).clone();
+
+    //5.2 打印成份矩阵表头栏
+    var componentHeaderRow = $(row).clone();
+    $(componentHeaderRow).append($(emptyCell).clone().attr('rowspan', '2'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_component').addClass('text-center').attr('colspan', componentMatrix[0].length));
+    $(componentTable).append(componentHeaderRow);
+
+    var componentHeaderSecRow = $(row).clone();
+
+    componentMatrix[0].map(function (value, index) {
+        $(componentHeaderSecRow).append($(headerCell).clone().text('F' + (index + 1)));
+    });
+    $(componentTable).append(componentHeaderSecRow);
+
+    variableNameList.map(function (variable, index) {
+        var variableRow = $(row).clone();
+
+        $(variableRow).append($(cell).clone().text(variable));
+
+        componentMatrix[index].map(function (value) {
+            $(variableRow).append($(cell).clone().text((value) ? Number(value).toFixed(numReservation) : " "));
+        });
+
+        $(componentTable).append(variableRow);
+    });
+
+    //填充到显示区域
+    $(componentArea).append(componentTable)
+        .append($(block).clone().text('已提取了' + componentMatrix[0].length + '个成份'));
+    componentMatrix[0].map(function (value, index) {
+        var functionString = '<strong>F' + (index + 1) + '</strong> = ';
+
+        variableNameList.map(function (variable, index2) {
+            if (index2 != 0 && Number(componentMatrix[index2][index]) > 0) {
+                functionString += ' + ';
+            } else if (Number(componentMatrix[index2][index]) < 0) {
+                functionString += ' - ';
+            }
+            functionString += Math.abs(Number(componentMatrix[index2][index]).toFixed(numReservation)) + ' x ';
+            functionString += variable;
+        });
+
+        $(componentArea).append(
+            $(block).clone().html(functionString)
+        );
+    });
+    $(presentArea).append(componentArea);
+
+    //6 打印方差最大正交旋转矩阵
+    var varianceData = tableResult.data.orRotaArr;
+
+    var varianceArea = $(container).clone();
+
+    $(varianceArea).append($(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_factor_analysis_variance_matrix'));
+
+    var varianceTable = $(table).clone();
+
+    //6.1 打印标题行
+    var varianceHeaderRow = $(row).clone();
+    $(varianceHeaderRow).append($(emptyCell).clone().attr('rowspan', '2'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_component').addClass('text-center').attr('colspan', componentMatrix[0].length));
+    $(varianceTable).append(varianceHeaderRow);
+
+    var varianceHeaderSecRow = $(row).clone();
+    varianceData[0].map(function (value, index) {
+        $(varianceHeaderSecRow).append($(headerCell).clone().text('F' + (index + 1)));
+    });
+    $(varianceTable).append(varianceHeaderSecRow);
+
+    //6.2 打印数据行
+    variableNameList.map(function (variable, index) {
+        var dataRow = $(row).clone();
+        $(dataRow).append($(cell).clone().text(variable));
+
+        varianceData.map(function (value, i) {
+            $(dataRow).append($(cell).clone().text(Number(value[index]).toFixed(numReservation)));
+        });
+        $(varianceTable).append(dataRow);
+    });
+
+    $(varianceArea).append(varianceTable);
+    $(presentArea).append(varianceArea);
+
+    //7 打印『正交因子得分表』
+    var orthData = tableResult.data.orFacArr;
+    var orthArea = $(container).clone();
+    $(orthArea).append($(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_orthogonal_factor_scores'));
+
+    var orthTable = $(table).clone();
+    //7.1 打印首行
+    var orthTitleRow = $(row).clone();
+    $(orthTitleRow).append($(headerCell).clone());
+    orthData.map(function (value, index) {
+        $(orthTitleRow).append($(headerCell).clone().text('F' + (index + 1)));
+    });
+    $(orthTable).append(orthTitleRow);
+
+    //7.2 打印数据行
+    var rowNum = orthData[0].length;
+    for (var i = 0; i < rowNum; i++) {
+        var dataRow = $(row).clone();
+        $(dataRow).append($(cell).clone().text(i + 1));
+        orthData.map(function (data, index) {
+            $(dataRow).append($(cell).clone().text(Number(data[i]).toFixed(numReservation)));
+        });
+        $(orthTable).append(dataRow);
+    }
+
+    $(orthArea).append(orthTable);
+    $(presentArea).append(orthArea);
+};
+
 var handleRelatedVariable = function (tableResult) {
 
     //声明放置区域
