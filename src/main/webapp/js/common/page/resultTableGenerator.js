@@ -1417,17 +1417,17 @@ var handleCorrespondenceAnalysis = function (tableResult) {
     //5 打印『样本间解释的总方差』表
     //5.1 获取相关变量值
     //5.1.1 初始合计
-    var eigTotalInit_2 = tableResult.srPcaDTO.eigTotalInit;
+    var eigTotalInit_2 = tableResult.sqPcaDTO.eigTotalInit;
     //5.1.2 初始方差
-    var varEigInit_2 = tableResult.srPcaDTO.varEigInit;
+    var varEigInit_2 = tableResult.sqPcaDTO.varEigInit;
     //5.1.3 初始累积
-    var accEigInit_2 = tableResult.srPcaDTO.accEigInit;
+    var accEigInit_2 = tableResult.sqPcaDTO.accEigInit;
     //5.1.4 提取合计
-    var eigTotalExtra_2 = tableResult.srPcaDTO.eigTotalExtra;
+    var eigTotalExtra_2 = tableResult.sqPcaDTO.eigTotalExtra;
     //5.1.5 提取方差
-    var varEigExtra_2 = tableResult.srPcaDTO.varEigExtra;
+    var varEigExtra_2 = tableResult.sqPcaDTO.varEigExtra;
     //5.1.6 提取累积
-    var accEigExtra_2 = tableResult.srPcaDTO.accEigExtra;
+    var accEigExtra_2 = tableResult.sqPcaDTO.accEigExtra;
 
     var explainTotalVarArea_2 = $(container).clone();
 
