@@ -155,10 +155,10 @@ var resultTableGenerator = function () {
                     break;
                 case 'basicline':
                     //碎石图
-                    $('#graph_'+i).charts({
+                    $('#graph_' + i).charts({
                         title: '碎石图',
                         type: ['screeplot'],
-                        data:tableResult.data.eigTotalInit
+                        data: tableResult.data.eigTotalInit
                     });
                     break;
             }
@@ -2041,6 +2041,77 @@ var handleMultiLinearRegression = function (tableResult) {
 
     $(presentArea).append(modelSummaryArea);
 
+    //2 打印表『系数』
+    var container_2 = $(container).clone();
+    $(container_2).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_coefficients')
+    );
+    var table_2 = $(table).clone();
+    //2.1 打印标题行
+    var titleRow_1 = $(row).clone();
+    $(titleRow_1).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'model').attr('rowspan', '2')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'unstandardized_coefficients').attr('colspan', '2')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 't').attr('rowspan', '2')
+    );
+    var titleRow_2 = $(row).clone();
+    $(titleRow_2).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'b')
+    ).append(
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'regressionStandardError')
+    );
+    $(table_2).append(titleRow_1).append(titleRow_2);
+
+    //2.2 打印数据行
+    tableResult.regressionParameters.map(function (data, index) {
+        var dataRow = $(row).clone();
+
+        if (index == 0) {
+            $(dataRow).append(
+                $(cell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'constant')
+            );
+        } else {
+            $(dataRow).append(
+                $(cell).clone().text(MLRconfig.independentVariable[index - 1].varietyName)
+            )
+        }
+
+        $(dataRow).append(
+            $(cell).clone().text(Number(data).toFixed(numReservation))
+        ).append(
+            $(cell).clone().text(Number(tableResult.regressionParametersStandardErrors[index]).toFixed(numReservation))
+        ).append(
+            $(cell).clone().text(Number(tableResult.ttests[index]).toFixed(numReservation))
+        );
+
+        $(table_2).append(dataRow);
+    });
+
+    $(container_2).append(table_2);
+
+    var equationString = '';
+    tableResult.regressionParameters.map(function (value, index) {
+        if (index == 0) {
+            equationString += '' + Number(value).toFixed(numReservation);
+        } else {
+            if (value > 0) {
+                equationString += ' + ' + Number(value).toFixed(numReservation) + ' × ' + MLRconfig.independentVariable[index - 1].varietyName;
+            } else {
+                equationString += ' - ' + Math.abs(Number(value).toFixed(numReservation)) + ' × ' + MLRconfig.independentVariable[index - 1].varietyName;
+            }
+        }
+    });
+
+    $(container_2).append(
+        $(block).clone().html('<strong>' + MLRconfig.dependentVariable[0].varietyName + '</strong>')
+            .append($(span).clone().text(' = ' + equationString))
+    );
+
+    $(presentArea).append(container_2);
+
+
 };
 
 var handleGeneralStepwiseRegression = function (tableResult) {
@@ -2556,7 +2627,7 @@ var handleOptimalSegmentation = function (tableResult) {
 
             if (segData.to !== (OS_COL - 1)) {
                 target += segData.to;
-                $(target).css('text-align', 'center').html('<strong>━</strong>');
+                $(target).css('border-bottom', '2px solid black');
             }
         });
     });

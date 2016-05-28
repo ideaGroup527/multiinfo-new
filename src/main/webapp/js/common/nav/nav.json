@@ -123,6 +123,7 @@
               "en-us": "Multiple Linear Regression",
               "zh-cn": "多元线性回归"
             },
+            "modalId": "#Multi_Linear_Regression",
             "modal": "modal.html",
             "script": "script.js"
           },
