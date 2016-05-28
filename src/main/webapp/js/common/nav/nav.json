@@ -276,5 +276,13 @@
     "modalId": "#Optimal_Segmentation",
     "modal": "modal.html",
     "script": "script.js"
+  },
+  {
+    "term": "ClusterAnalysis",
+    "name": {
+      "en-us": "Cluster Analysis",
+      "zh-cn": "聚类分析"
+    },
+    "script": "script.js"
   }
 ]

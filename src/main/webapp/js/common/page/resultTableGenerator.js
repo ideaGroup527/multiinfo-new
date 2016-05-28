@@ -1322,8 +1322,21 @@ var handleCorrespondenceAnalysis = function (tableResult) {
     );
     //2.1 打印表格
     var zMatrixTable = $(table).clone();
-    tableResult.z.map(function (data) {
+
+    var zMatrixTitleRow = $(row).clone();
+    $(zMatrixTitleRow).append($(headerCell).clone());
+
+    SS.variableList.map(function (variable) {
+        $(zMatrixTitleRow).append(
+            $(headerCell).clone().text(variable.varietyName)
+        )
+    });
+
+    $(zMatrixTable).append(zMatrixTitleRow);
+
+    tableResult.z.map(function (data, index) {
         var dataRow = $(row).clone();
+        $(dataRow).append($(cell).clone().text(index + 1));
 
         data.map(function (value) {
             $(dataRow).append(
@@ -1344,10 +1357,22 @@ var handleCorrespondenceAnalysis = function (tableResult) {
     );
     var varCovarianceMatrixTable = $(table).clone();
 
-    //3.1 打印表格
-    tableResult.sr.map(function (data) {
-        var dataRow = $(row).clone();
+    var varCovarianceMatrixTitleRow = $(row).clone();
+    $(varCovarianceMatrixTitleRow).append($(headerCell).clone());
 
+    SS.variableList.map(function (variable) {
+        $(varCovarianceMatrixTitleRow).append(
+            $(headerCell).clone().text(variable.varietyName)
+        )
+    });
+
+    $(varCovarianceMatrixTable).append(varCovarianceMatrixTitleRow);
+    //3.1 打印表格
+    tableResult.sr.map(function (data, index) {
+        var dataRow = $(row).clone();
+        $(dataRow).append(
+            $(cell).clone().text(SS.variableList[index].varietyName)
+        );
         data.map(function (value) {
             $(dataRow).append(
                 $(cell).clone().text(Number(value).toFixed(numReservation))
@@ -1366,10 +1391,20 @@ var handleCorrespondenceAnalysis = function (tableResult) {
         $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_sample_covariance_matrix')
     );
     var samCovarianceMatrixTable = $(table).clone();
+    var samCovarianceTitleRow = $(row).clone();
+    $(samCovarianceTitleRow).append($(headerCell).clone());
+    for (var i = 0; i < tableResult.sq.length; i++) {
+        $(samCovarianceTitleRow).append($(headerCell).clone().text(i + 1));
+    }
+    $(samCovarianceMatrixTable).append(samCovarianceTitleRow);
     //6.1 打印表格
-    tableResult.sq.map(function (data) {
+    tableResult.sq.map(function (data, index) {
         var dataRow = $(row).clone();
 
+        $(dataRow).append(
+            $(cell).clone().text(index + 1)
+        )
+        ;
         data.map(function (value) {
             $(dataRow).append(
                 $(cell).clone().text(Number(value).toFixed(numReservation))
