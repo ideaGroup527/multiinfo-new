@@ -148,7 +148,7 @@
                 "term": "SlipStepwise",
                 "name": {
                   "en-us": "Slip Stepwise",
-                  "zh-cn": "多因素滑移回归"
+                  "zh-cn": "多因素滑移回归预测"
                 },
                 "modalId": "#Slip_Stepwise",
                 "modal": "modal.html",
@@ -157,7 +157,7 @@
               {
                 "term": "TrendStepwiseRegression",
                 "name": {
-                  "zh-cn": "趋势逐步回归",
+                  "zh-cn": "多因素趋势逐步回归预测",
                   "en-us": "Trend Stepwise Regression"
                 },
                 "modalId": "#Trend_Stepwise_Regression",
