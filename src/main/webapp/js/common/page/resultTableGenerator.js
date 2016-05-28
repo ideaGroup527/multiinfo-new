@@ -2605,10 +2605,10 @@ var handleOptimalSegmentation = function (tableResult) {
     $(divideTable).append(titleRow);
 
     var OS_COL = Number(sessionStorage.getItem('PRIVATE_OPT_SEG_COL'));
-    for (var j = 0; j < OS_COL - 1; j++) {
+    for (var j = 0; j < OS.local_var.length; j++) {
         var dataRow = $(row).clone();
 
-        $(dataRow).append($(cell).clone().css('text-align', 'center').text(OS.col[j].varietyName));
+        $(dataRow).append($(cell).clone().css('text-align', 'center').text(OS.local_var[j]));
 
         for (var k = 1; k < OS.segNum[0]; k++) {
             $(dataRow).append($(cell).clone().attr('id', 'target_' + (k + 1) + '_' + (j + 1)));
@@ -2627,7 +2627,7 @@ var handleOptimalSegmentation = function (tableResult) {
 
             if (segData.to !== (OS_COL - 1)) {
                 target += segData.to;
-                $(target).css('border-bottom', '2px solid black');
+                $(target).css('border-bottom', '1px solid black');
             }
         });
     });
