@@ -303,8 +303,8 @@
       "label_predictive_value": "预测值",
       "label_estimated_value": "推测值",
       "label_forward_trend_regression_coefficients": "前移趋势回归系数",
-      "label_backard_trend_regression_coefficients": "前移趋势回归系数",
-      "label_model_summary_of_forward_trend_regression": "后移趋势回归模型汇总",
+      "label_backward_trend_regression_coefficients": "后移趋势回归系数",
+      "label_model_summary_of_forward_trend_regression": "前移趋势回归模型汇总",
       "label_model_summary_of_backward_trend_regression": "后移趋势回归模型汇总"
     }
   },
