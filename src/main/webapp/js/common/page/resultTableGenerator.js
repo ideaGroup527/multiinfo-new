@@ -103,64 +103,63 @@ var resultTableGenerator = function () {
             switch (graph) {
                 case 'boxplot':
                     //箱线图
-                    new Boxplot({
-                        data: tableResult,
-                        opt: "",
-                        container: 'graph_' + i,
-                        title: graphName
-                    }).render();
+                    $('#graph_' + i).charts({
+                        title: graphName,
+                        type: ['boxplot'],
+                        data: tableResult
+                    });
                     break;
                 case 'piegraph':
                     //饼图
-                    new Pie({
-                        data: tableResult,//数据json,
-                        opt: "",//配置json
-                        container: 'graph_' + i,//图表容器的id
-                        title: graphName
-                    }).render();
+                    $('#graph_' + i).charts({
+                        title: graphName,
+                        type: ['pie'],
+                        data: tableResult
+                    });
                     break;
                 case 'histogram':
                     //直方图
-                    new Bar({
-                        data: tableResult,//数据json,
-                        opt: "",//配置json
-                        container: 'graph_' + i,//图表容器的id
-                        title: graphName
-                    }).render();
+                    $('#graph_' + i).charts({
+                        title: graphName,
+                        type: ['bar'],
+                        data: tableResult
+                    });
                     break;
                 case 'linechart':
                     //折线图
-                    new Line({
-                        data: tableResult,//数据json,
-                        opt: "",//配置json
-                        container: 'graph_' + i,//图表容器的id
-                        title: graphName
-                    }).render();
+                    $('#graph_' + i).charts({
+                        title: graphName,
+                        type: ['line'],
+                        data: tableResult
+                    });
                     break;
                 case 'scatterdiagram':
                     //散点图
-                    new Scatter({
-                        data: tableResult,//数据json,
-                        container: 'graph_' + i,//图表容器的id
-                        title: graphName
-                    }).render();
+                    $('#graph_' + i).charts({
+                        title: graphName,
+                        type: ['cure'],
+                        data: tableResult
+                    });
                     break;
                 case 'dingchart':
                     //丁氏图
                     var dingConfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_DING_CHART'));
-                    new DingChart({
+                    $('#graph_' + i).charts({
+                        title: graphName,
+                        type: ['dingchart'],
                         data: tableResult,
-                        container: 'graph_' + i,//图表容器的id
-                        calculateMethod: dingConfig.calculateMethod[0]//0行，1列，2全
-                    }).render();
+                        calculateMethod: dingConfig.calculateMethod[0],//0行，1列，2全
+                        ellipsesColor: "#CC5B58",
+                        cureColor: "#D48366"
+                    });
                     break;
                 case 'basicline':
                     //碎石图
-                    new BasicLine({
-                        data: tableResult.data.eigTotalInit,
-                        container: 'graph_' + i,
-                        title: graphName
-                    }).render();
+                    $('#graph_'+i).charts({
+                        title: '碎石图',
+                        type: ['screeplot'],
+                        data:tableResult.data.eigTotalInit
+                    });
                     break;
             }
         });
