@@ -12,6 +12,7 @@ org.jmu.multiinfo.dto.comparemean
 org.jmu.multiinfo.dto.correlation
 org.jmu.multiinfo.dto.descriptives
 org.jmu.multiinfo.dto.dingchart
+org.jmu.multiinfo.dto.opseg
 org.jmu.multiinfo.dto.prediction
 org.jmu.multiinfo.dto.reducingdim
 org.jmu.multiinfo.dto.regression
@@ -30,6 +31,8 @@ org.jmu.multiinfo.service.descriptives.impl
 org.jmu.multiinfo.service.dingchart
 org.jmu.multiinfo.service.dingchart.impl
 org.jmu.multiinfo.service.mean
+org.jmu.multiinfo.service.opseg
+org.jmu.multiinfo.service.opseg.impl
 org.jmu.multiinfo.service.prediction
 org.jmu.multiinfo.service.prediction.impl
 org.jmu.multiinfo.service.reducingdim
