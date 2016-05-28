@@ -2645,7 +2645,7 @@ var handleTrendStepwiseRegression = function (tableResult) {
 
     var table_4 = $(table).clone();
     var table_4_titleRow = $(row).clone();
-    ['forward_step', 'r', 'rsquared', 'regressionStandardError', 'f'].map(function (name) {
+    ['backward_step', 'r', 'rsquared', 'regressionStandardError', 'f'].map(function (name) {
         $(table_4_titleRow).append(
             $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', name)
         );
