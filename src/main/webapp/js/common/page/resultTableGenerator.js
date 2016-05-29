@@ -1600,18 +1600,21 @@ var handleCorrespondenceAnalysis = function (tableResult) {
     $(container_8).append(table_8);
     $(presentArea).append(container_8);
 
-    //9 打印『变量间载荷矩阵』
+    //9 打印『R型因子载荷矩阵』
     var container_9 = $(container).clone();
     $(container_9).append(
         $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_variable_loading_matrix')
     );
     var table_9 = $(table).clone();
     var table_9_row_1 = $(row).clone();
-    $(table_9_row_1).append($(headerCell).clone());
+    $(table_9_row_1).append($(headerCell).clone().attr('rowspan', '2'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_component').css('text-align', 'center').attr('colspan',tableResult.srPcaDTO.eigenvectors.length));
+
+    var table_9_row_2 = $(row).clone();
     tableResult.srPcaDTO.eigenvectors.map(function (data, index) {
-        $(table_9_row_1).append($(headerCell).clone().text(SS.variableList[index].varietyName));
+        $(table_9_row_2).append($(headerCell).clone().text('F' + (index + 1)));
     });
-    $(table_9).append(table_9_row_1);
+    $(table_9).append(table_9_row_1).append(table_9_row_2);
 
     tableResult.srPcaDTO.componentArr[0].map(function (val, index) {
         var dataRow = $(row).clone();
@@ -1629,7 +1632,7 @@ var handleCorrespondenceAnalysis = function (tableResult) {
     $(container_9).append(table_9);
     $(presentArea).append(container_9);
 
-    //10 打印『样本间载荷矩阵』
+    //10 打印『Q型因子载荷矩阵』
     var container_10 = $(container).clone();
     $(container_10).append(
         $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_sample_loading_matrix')
@@ -1645,7 +1648,7 @@ var handleCorrespondenceAnalysis = function (tableResult) {
     tableResult.sqPcaDTO.componentArr[0].map(function (val, index) {
         var dataRow = $(row).clone();
         $(dataRow).append(
-            $(cell).clone().text(index + 1)
+            $(cell).clone().text('F' + (index + 1))
         );
         tableResult.sqPcaDTO.componentArr.map(function (data) {
             $(dataRow).append(
