@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <title>多元信息挂接系统 - 聚类分析</title>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
+    <link href="css/bootstrap/bootstrap-submenu.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="js/lib/bootstrap/bootstrap-submenu.min.js"></script>
+    <script src="js/common/i18n.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="index.html">MultiInfo</a>
+    </div>
+    <div class="navbar-right" style="margin-right: 20px">
+        <button type="button" class="btn btn-primary"
+                style="margin-top: 7px"
+                id="btn_cluster_modal"
+                disabled
+                data-i18n-type="page" data-i18n-tag="btn_next"
+                data-modal-id="#Cluster_Analysis"
+                data-modal="js/common/nav/ClusterAnalysis/modal.html">下一步
+        </button>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row data-present-area">
+        <div class="col-md-10 col-md-offset-1">
+            <h1>
+                <span data-i18n-type="page" data-i18n-tag="modal_title_cluster_analysis">聚类分析</span>
+                <small data-i18n-type="page" data-i18n-tag="label_choose_variable">选择变量</small>
+            </h1>
+        </div>
+
+        <div class="col-md-10 col-md-offset-1">
+            <ul class="nav nav-tabs"></ul>
+        </div>
+
+        <div class="col-md-10 col-md-offset-1 table-present custom-scrollbar-grey"></div>
+    </div>
+</div>
+<script src="js/common/page/clusterDataTableGenerator.js"></script>
+<script src="js/common/page/variableSubmit/handler.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $.ajax({
+            url: 'upload/file.do',
+            data: {
+                'isFirstRowVar': sessionStorage.getItem('isFirstRowVar'),
+                'isMultiSheet': sessionStorage.getItem('isMultiSheet'),
+                'token': sessionStorage.getItem('token'),
+                'sheetNo': sessionStorage.getItem('sheetNo')
+            },
+            type: 'GET',
+            dataType: 'JSON',
+            success: function (data) {
+                dataTableGenerator(data);
+                variableList = data.sheet.variety;
+                sessionStorage.setItem('PRIVATE_VARIABLE_LIST', JSON.stringify(variableList));
+                dataGrid = data.sheet.dataGrid;
+            }
+        });
+    }).on('click', '.row-checkbox', function (e) {
+        //获取当前的位置
+        var num = $(e.target).val();
+        $('.row-checkbox').prop('checked', false);
+        $('.row-checkbox:lt(' + num + ')').prop('checked', true);
+
+    }).on('click', '.col-checkbox', function (e) {
+        var flag = false;
+        if ($('.col-checkbox:checked').length != 0) {
+            flag = true;
+        }
+
+        $('#btn_cluster_modal').prop('disabled', (!flag));
+    }).on('click', '.variable-submit', function (e) {
+        e.preventDefault();
+
+        //取值
+        var CONFIG = {};
+        $('[data-config-group]').each(function () {
+            var groupName = $(this).attr('data-group-name');
+            var checkedFlag = $(this).attr('data-config-val-flag');
+
+            var selector = '[name=' + groupName + ']';
+            if (checkedFlag) {
+                selector += checkedFlag;
+            }
+
+            var configsList = [];
+            $(selector).each(function () {
+                configsList.push($(this).val());
+            });
+            CONFIG[groupName] = configsList;
+        });
+
+        var PART_1 =JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CLUSTER_PART_1'));
+        CONFIG.independentVariable = PART_1.independentVariable;
+        sessionStorage.setItem('PRIVATE_CONFIG_CLUSTER_ANALYSIS', JSON.stringify(CONFIG));
+
+        var handlerConfig = {
+            submitType: $('.variable-submit').attr('data-btn-type'),
+            gridData: dataGrid
+        };
+        handleSubmit(handlerConfig);
+    });
+
+    $('#btn_cluster_modal').click(function () {
+
+        //保存本地参数
+        var CAConfig = {};
+        CAConfig.independentVariable = [];
+
+        //用户选到的行号
+        var rowNumFrom = $('.row-checkbox:checked:first').parent().parent().next().attr('data-positiondes').split(',')[1];
+        var rowNumTo = $('.row-checkbox:checked:last').parent().parent().next().attr('data-positiondes').split(',')[1];
+        $('.col-checkbox:checked').each(function (index, elem) {
+            var obj = JSON.parse($(elem).parent().parent().attr('data-all-params'));
+            //当前变量的列标
+            var colChar = obj.positionDes.split(',')[0];
+            obj.range = colChar + rowNumFrom + ':' + colChar + rowNumTo;
+            obj.varietyName = obj.data;
+            obj.position = obj.position.slice(0,1);
+            CAConfig.independentVariable.push(obj);
+        });
+        sessionStorage.setItem('PRIVATE_CONFIG_CLUSTER_PART_1', JSON.stringify(CAConfig));
+
+        //显示弹框
+        var modalURL = $(this).attr('data-modal');
+        var modalID = $(this).attr('data-modal-id');
+
+        $.get(modalURL, function (modalHTML) {
+            $('body').append(modalHTML);
+            $(modalID).modal({
+                'show': true,
+                'backdrop': 'static'
+            }).on('hidden.bs.modal', function (e) {
+                $(this).remove();
+                sessionStorage.removeItem('PRIVATE_MODAL_SCRIPT_URL');
+            });
+        }).done(function () {
+            i18n();
+        });
+
+
+    });
+</script>
+</body>
+</html>

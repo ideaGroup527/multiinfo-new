@@ -85,6 +85,9 @@ var resultTableGenerator = function () {
             //最优分割
             handleOptimalSegmentation(tableResult);
             break;
+        case 'Cluster_Analysis':
+            handleClusterAnalysis(tableResult);
+            break;
     }
 
     //绘图区
@@ -3196,4 +3199,74 @@ var handleOptimalSegmentation = function (tableResult) {
             }
         });
     });
+};
+
+var handleClusterAnalysis = function (tableResult) {
+
+    //声明打印区域
+    var presentArea = $('.result-table');
+
+    //保留小数配置
+    var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
+
+    //声明DOM 元素
+    var container = $('<div>');
+    $(container).addClass('frequency-table');
+
+    var tableHeader = $('<h1>');
+
+    var table = $('<table>');
+    $(table).addClass('table table-striped table-bordered table-condensed');
+
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
+    var emptyCell = $(headerCell).clone();
+
+    var block = $('<div>');
+    var span = $('<span>');
+
+    var container_1 = $(container).clone();
+    $(container_1).append(
+        $(tableHeader).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_cal_res_of_clustering_step_by_step')
+    );
+
+    var table_1 = $(table).clone();
+    $(table_1).append(
+        $(row).clone().append(
+            $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'times')
+        ).append(
+            $(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_statistics_for_clustering')
+        ).append(
+            $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'result')
+        )
+    );
+
+    var CONFIG = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CLUSTER_ANALYSIS'));
+    var statisticsMethodList = ['label_distance_coefficient', 'label_angle_cosine', 'label_correlation_coefficients'];
+
+    tableResult.stepList.map(function (step, index) {
+        var dataRow = $(row).clone();
+
+        $(dataRow).append(
+            $(cell).clone().text(index + 1).css('text-align', 'center')
+        );
+
+        $(dataRow).append(
+            $(cell).clone().append(
+                $(span).clone().text('[' + step.rowIndex + ']--[' + step.colIndex + '] ')
+            ).append(
+                $(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', statisticsMethodList[CONFIG.statisticsMethod[0]])
+            )
+        );
+
+        $(dataRow).append(
+            $(cell).clone().text(Number(step.data).toFixed(numReservation))
+        );
+
+        $(table_1).append(dataRow);
+    });
+
+    $(container_1).append(table_1);
+    $(presentArea).append(container_1);
 };

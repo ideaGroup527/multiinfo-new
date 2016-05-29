@@ -230,6 +230,17 @@ var handleSubmit = function (config) {
             dataPackage.variableList = OS.variableList;
             dataPackage.segNum = OS.segNum[0];
             break;
+        case 'Cluster_Analysis':
+            //聚类分析
+            handleURL = 'statistics/cluster/pointgroup.do';
+            var CA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CLUSTER_ANALYSIS'));
+            console.log(CA);
+            dataPackage.normalizationMethod = CA.normalizationMethod[0];
+            dataPackage.clusterMethod = CA.clusterMethod[0];
+            dataPackage.statisticsMethod = CA.statisticsMethod[0];
+            dataPackage.independentVariable = CA.independentVariable;
+            dataPackage.factorVarVariable = JSON.parse(CA.factorVarVariable[0]);
+            break;
     }
 
     $.ajax({

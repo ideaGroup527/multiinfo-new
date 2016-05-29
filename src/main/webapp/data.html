@@ -2,6 +2,7 @@
 <html>
 <head lang="zh-cn">
     <meta charset="UTF-8">
+    <title>多元信息挂接系统 - 数据展示</title>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
     <link href="css/bootstrap/bootstrap-submenu.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css"/>
@@ -51,13 +52,17 @@
                                 <a href="javascript:" class="js-menu-click"
                                    data-script="js/common/nav/Setting/Language/Chinese/script.js" data-i18n-type="nav"
                                    data-i18n-tag="lang_zh">
-                                    <strong>中文（当前）</strong>
                                 </a>
                             </li>
                             <li class="dropdown">
                                 <a href="javascript:" class="js-menu-click"
                                    data-script="js/common/nav/Setting/Language/English/script.js" data-i18n-type="nav"
-                                   data-i18n-tag="lang_en">English</a>
+                                   data-i18n-tag="lang_en"></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="javascript:" class="js-menu-click"
+                                   data-script="js/common/nav/Setting/Language/Japanese/script.js" data-i18n-type="nav"
+                                   data-i18n-tag="lang_jp"></a>
                             </li>
                         </ul>
                     </li>
@@ -122,7 +127,7 @@
         $.ajax({
             url: 'upload/file.do',
             data: {
-                'isFirstRowVar': 'true',
+                'isFirstRowVar': sessionStorage.getItem('isFirstRowVar'),
                 'isMultiSheet': sessionStorage.getItem('isMultiSheet'),
                 'token': sessionStorage.getItem('token'),
                 'sheetNo': sessionStorage.getItem('sheetNo')
