@@ -308,6 +308,7 @@ public class ClusterServiceImpl implements ClusterService{
 	private StepBinaryTree makeClusterTree(List<StepClusterDTO> stepList,final int N) {
 		HashMap<Integer,TreeNode> map = new HashMap<>();
 		StepBinaryTree tree = new StepBinaryTree();
+		List<List<Integer>>  nodeIndexList = new ArrayList<>();
 			for(int i=0;i<N;i++){
 				TreeNode node = new TreeNode();
 				node.setLefTreeNode(null);
@@ -316,6 +317,10 @@ public class ClusterServiceImpl implements ClusterService{
 				value.setPos(i+1);
 				node.setValue(value );
 				map.put(i+1, node);
+				
+			List<Integer> ea =	new ArrayList<>();
+			ea.add(i+1);
+				nodeIndexList.add(ea);
 			}
 			for (int i = 0; i < stepList.size(); i++) {
 				StepClusterDTO step = stepList.get(i);
@@ -328,9 +333,18 @@ public class ClusterServiceImpl implements ClusterService{
 				value.setData(step.getData());
 				value.setPos(pos);
 				pNode.setValue(value);
-				map.remove(step.getRowIndex());
-				map.remove(step.getColIndex());
-				map.put(pos, pNode);
+				
+				List<Integer> rowIndexList=	nodeIndexList.get(step.getRowIndex()-1);
+				
+				for(int j=0;j<rowIndexList.size();j++){
+					map.put(rowIndexList.get(j), pNode);
+				}
+				rowIndexList.add(step.getColIndex());
+				List<Integer> colIndexList=	nodeIndexList.get(step.getColIndex()-1);
+				for(int j=0;j<colIndexList.size();j++){
+					map.put(colIndexList.get(j), pNode);
+				}
+				colIndexList.add(step.getRowIndex());
 				if(i== stepList.size()-1) tree.setRoot(pNode);
 			}
 			return tree;
