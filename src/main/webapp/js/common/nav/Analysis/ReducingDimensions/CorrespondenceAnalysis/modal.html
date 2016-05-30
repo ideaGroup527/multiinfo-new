@@ -22,32 +22,17 @@
 
                         <span data-i18n-type="page" data-i18n-tag="label_extraction">抽取</span>
 
-                        <div data-config-group data-group-name="extractMethod" data-config-val-flag=":checked">
+                        <div data-config-group data-group-name="extractMethod" data-config-val-flag=":checked" style="display: none;">
                             <div class="checkbox-inline">
                                 <label>
-                                    <input type="radio" name="extractMethod" value="0" checked/>
-                                    <span data-i18n-type="page" data-i18n-tag="label_based_on_eigenvalues">基于特征值</span>
-                                </label>
-                            </div>
-                            <div class="checkbox-inline">
-                                <label>
-                                    <input type="radio" name="extractMethod" value="1"/>
+                                    <input type="radio" name="extractMethod" value="1"checked/>
                                     <span data-i18n-type="page" data-i18n-tag="label_factor_fixed_number">因子的固定数量</span>
                                 </label>
                             </div>
                         </div>
                     </fieldset>
                 </div>
-                <div data-config-group data-group-name="eigExtraNum">
-                    <hr/>
-                    <div class="checkbox-inline">
-                        <label>
-                            <span data-i18n-type="page" data-i18n-tag="label_eigenvalues_more_than">特征值大于</span>
-                            <input class="form-control small" type="number" name="eigExtraNum" value="1"/>
-                        </label>
-                    </div>
-                </div>
-                <div data-config-group data-group-name="factorExtraNum" style="display:none;">
+                <div data-config-group data-group-name="factorExtraNum">
                     <hr/>
                     <div class="checkbox-inline">
                         <label>

@@ -373,7 +373,7 @@
       "label_statistics_for_clustering": "聚类统计量",
       "label_distance_coefficient": "距离系数",
       "label_angle_cosine": "夹角余弦",
-      "label_cal_res_of_clustering_step_by_step": "分布聚类计算结果"
+      "label_cal_res_of_clustering_step_by_step": "分步聚类计算结果"
     },
     "ja-jp": {
       "options": "オプション",
@@ -511,7 +511,7 @@
       "label_statistics_for_clustering": "聚类统计量",
       "label_distance_coefficient": "距离系数",
       "label_angle_cosine": "夹角余弦",
-      "label_cal_res_of_clustering_step_by_step": "分布聚类计算结果"
+      "label_cal_res_of_clustering_step_by_step": "分步聚类计算结果"
     }
   },
   "table": {
