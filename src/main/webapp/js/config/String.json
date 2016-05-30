@@ -82,7 +82,7 @@
       "modal_title_oneway_anova": "One-way Analysis of Variance",
       "modal_title_means": "Means",
       "modal_title_principal_component_analysis": "Principal Component Analysis",
-      "modal_title_set_accuracy": "Set Value Accuracy",
+      "modal_title_set_accuracy": "Set Value Accuracy (5 - 16)",
       "modal_title_simple_linear_regression": "Simple Linear Regression",
       "modal_title_multi_linear_regression": "Multi Linear Regression",
       "modal_title_gray_correlation": "Gray Correlation",
@@ -179,8 +179,11 @@
       "label_forward_predict": "Predict Forward",
       "label_backward_predict": "Predict Backward",
       "label_predictive_value": "Predictive value",
+      "label_estimated_value": "Estimated Value",
       "label_forward_trend_regression_coefficients": "Coefficients of Forward Trend Regression",
-      "label_model_summary_of_forward_trend_regression": "Model Summary of Forward Trend Regression"
+      "label_backward_trend_regression_coefficients": "Coefficients of Backward Trend Regression",
+      "label_model_summary_of_forward_trend_regression": "Model Summary of Forward Trend Regression",
+      "label_model_summary_of_backward_trend_regression": "Model Summary of Backward Trend Regression"
     },
     "zh-cn": {
       "options": "选项",
@@ -198,7 +201,7 @@
       "modal_title_principal_component_analysis": "主成分分析",
       "modal_title_related_variable": "关联变量",
       "modal_title_independent_variable": "独立变量",
-      "modal_title_set_accuracy": "设置精确度",
+      "modal_title_set_accuracy": "设置精确度（5 - 16位）",
       "modal_title_simple_linear_regression": "一元线性回归",
       "modal_title_multi_linear_regression": "多元线性回归",
       "modal_title_gray_correlation": "灰色关联度",
@@ -298,8 +301,11 @@
       "label_forward_predict": "前移预测",
       "label_backward_predict": "后移预测",
       "label_predictive_value": "预测值",
+      "label_estimated_value": "推测值",
       "label_forward_trend_regression_coefficients": "前移趋势回归系数",
-      "label_model_summary_of_forward_trend_regression": "前移趋势回归模型汇总"
+      "label_backward_trend_regression_coefficients": "后移趋势回归系数",
+      "label_model_summary_of_forward_trend_regression": "前移趋势回归模型汇总",
+      "label_model_summary_of_backward_trend_regression": "后移趋势回归模型汇总"
     }
   },
   "table": {
@@ -348,7 +354,14 @@
       "col_density": "Column Density",
       "backward": "Backward",
       "forward": "Forward",
-      "forward_step": "Forward Step"
+      "forward_step": "Forward Steps",
+      "backward_step": "Backward Steps",
+      "forward_1_steps": "1 Step Forward",
+      "forward_2_steps": "2 Steps Forward",
+      "forward_3_steps": "3 Steps Forward",
+      "backward_1_steps": "1 Step Backward",
+      "backward_2_steps": "2 Steps Backward",
+      "backward_3_steps": "3 Steps Backward"
     },
     "zh-cn": {
       "pearsonR": "Pearson 相关性",
@@ -395,7 +408,14 @@
       "col_density": "列密度",
       "backward": "后移",
       "forward": "前移",
-      "forward_step": "前移步数"
+      "forward_step": "前移步数",
+      "backward_step": "后移步数",
+      "forward_1_steps": "前移1步",
+      "forward_2_steps": "前移2步",
+      "forward_3_steps": "前移3步",
+      "backward_1_steps": "后移1步",
+      "backward_2_steps": "后移2步",
+      "backward_3_steps": "后移3步"
     }
   },
   "nav": {

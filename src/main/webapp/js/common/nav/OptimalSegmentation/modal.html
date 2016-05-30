@@ -24,6 +24,8 @@
                 <div data-config-group data-group-name="col" data-config-val-flag=".active"
                      data-variable-select-rule="consequent">
                 </div>
+                <div data-config-group data-group-name="local_var" data-config-val-flag=".active"
+                     style="display:none"></div>
 
                 <div data-panel="config">
                     <fieldset class="algorithm-config-zone">
@@ -44,7 +46,7 @@
                 </button>
                 <button type="button" class="btn btn-primary variable-submit"
                         data-btn-type="Optimal_Segmentation"
-                        data-i18n-type="page" data-i18n-tag="btn_next">确定
+                        data-i18n-type="page" data-i18n-tag="btn_confirm">确定
                 </button>
             </div>
         </div>
@@ -83,6 +85,13 @@
                     .text($(elem).attr('data-data'));
 
             $('[data-group-name=col]').append(variableWrapper);
+
+            var _variableWrapper = $('<div>');
+            $(_variableWrapper).addClass('active')
+                    .attr('name', 'local_var')
+                    .val(dataConfig.varietyName);
+            $('[data-group-name=local_var]').append(_variableWrapper);
+
             sessionStorage.setItem('PRIVATE_OPT_SEG_COL', dataConfig.position);
         });
 
