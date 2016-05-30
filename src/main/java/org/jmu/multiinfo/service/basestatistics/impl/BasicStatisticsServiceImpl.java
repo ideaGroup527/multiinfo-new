@@ -310,9 +310,10 @@ public class BasicStatisticsServiceImpl implements BasicStatisticsService{
 		int size = getN(dataArr);
 		if(size < 1 ) throw new DataErrException("cannot resolve for regularization because too little size");
 		double[] resData = new double[size];
+		Double amin =  min(dataArr);
+		Double amax = max(dataArr);
 		for (int i = 0; i < size; i++) {
-			Double amin =  min(dataArr);
-			Double amax = max(dataArr);
+
 			if(isZero(amax - amin)) resData[i]=0;
 			else
 			resData[i] = ( dataArr[i] - amin) / ( amax - amin );
