@@ -185,7 +185,7 @@ public class ClusterServiceImpl implements ClusterService{
 			for (int i = 0; i < row; i++) {
 				for (int j = i+1; j < row; j++) {
 					try {
-						if(!indexExist.contains(j+1)){
+						if(!indexExist.contains(j+1)  && !indexExist.contains(i+1)){
 							StepClusterDTO e =  new StepClusterDTO();
 						Double data = correlationService.pearsonRCoefficient(dataArr[j], dataArr[i]);
 						e.setData(data);
@@ -222,7 +222,7 @@ public class ClusterServiceImpl implements ClusterService{
 			for (int i = 0; i < row; i++) {
 				for (int j = i+1; j < row; j++) {
 					try {
-						if(!indexExist.contains(j+1)){
+						if(!indexExist.contains(j+1)  && !indexExist.contains(i+1) ){
 							StepClusterDTO e =  new StepClusterDTO();
 						Double data = basicStatisticsService.cos(dataArr[j], dataArr[i]);
 						e.setData(data);
@@ -257,7 +257,7 @@ public class ClusterServiceImpl implements ClusterService{
 			for (int i = 0; i < row; i++) {
 				for (int j = i+1; j < row; j++) {
 					try {
-						if(!indexExist.contains(j+1)){
+						if(!indexExist.contains(j+1) && !indexExist.contains(i+1)){
 							StepClusterDTO e =  new StepClusterDTO();
 						Double data = basicStatisticsService.euclideanDistance(dataArr[j], dataArr[i]);
 						e.setData(data);
