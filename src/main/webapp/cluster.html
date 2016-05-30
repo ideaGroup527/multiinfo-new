@@ -65,6 +65,7 @@
                 variableList = data.sheet.variety;
                 sessionStorage.setItem('PRIVATE_VARIABLE_LIST', JSON.stringify(variableList));
                 dataGrid = data.sheet.dataGrid;
+                sessionStorage.setItem('PRIVATE_DATA_GRID',JSON.stringify(dataGrid));
             }
         });
     }).on('click', '.row-checkbox', function (e) {
