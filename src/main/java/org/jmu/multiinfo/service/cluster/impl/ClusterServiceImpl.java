@@ -140,6 +140,8 @@ public class ClusterServiceImpl implements ClusterService{
 			//个体间
 			dataArr = new double[dataGridList.get(0).size()][dataGridList.size()];
 			 dataArr = DataFormatUtil.transposition(dataGridList);
+				 row = dataArr.length;
+				 col = dataArr[0].length;
 				// 样本号
 				PositionBean factorRange = ExcelUtil.splitRange(factorVar.getRange());
 				for (int i = factorRange.getFirstRowId() - 1; i < factorRange.getLastRowId(); i++) {
@@ -153,6 +155,8 @@ public class ClusterServiceImpl implements ClusterService{
 
 			
 			dataArr = new double[dataGridList.size()][dataGridList.get(0).size()];
+			 row = dataArr.length;
+			 col = dataArr[0].length;
 			for (int i = 0; i < dataGridList.size(); i++) {
 				dataArr[i] =	DataFormatUtil.converToDouble(dataGridList.get(i));
 			}
