@@ -67,7 +67,7 @@ var dataTableGenerator = function (data) {
             if (sessionStorage.getItem('isFirstRowVar') && !rowIndex) {
                 $(td).append(
                     $('<label>').clone().append(
-                        $('<input>').clone().attr('type', 'checkbox').val(rowIndex + 1).addClass('col-checkbox')
+                        $('<input>').clone().attr('type', 'checkbox').val(rowIndex + 1).addClass('col-checkbox').prop('checked', true)
                     ).append(
                         $('<span>').clone().text(cell.data)
                     )
