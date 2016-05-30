@@ -186,7 +186,7 @@ PCAEigenvalueDTO pcaDTO = new PCAEigenvalueDTO();
 			pcaDTO.setEigTotalExtra(eigTotalExtra);
 			pcaDTO.setAccEigExtra(accEigExtra);
 			pcaDTO.setVarEigExtra(varEigExtra);
-			pcaDTO.setComponentArr(DataFormatUtil.transposition(componentArr));
+			pcaDTO.setComponentArr(componentArr);
 			break;
 		}
 		case CorrespAnalysisCondition.EXTRACT_METHOD_FACTOR:{
@@ -205,7 +205,7 @@ PCAEigenvalueDTO pcaDTO = new PCAEigenvalueDTO();
 			pcaDTO.setEigTotalExtra(eigTotalExtra);
 			pcaDTO.setAccEigExtra(accEigExtra);
 			pcaDTO.setVarEigExtra(varEigExtra);
-			pcaDTO.setComponentArr(DataFormatUtil.transposition(componentArr));
+			pcaDTO.setComponentArr(componentArr);
 			break;
 		}
 		default:
