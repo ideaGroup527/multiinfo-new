@@ -2,6 +2,7 @@
 <html>
 <head lang="zh-cn">
     <meta charset="UTF-8">
+    <title>多元信息挂接系统 - 文档上传</title>
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css"/>
     <link href="css/bootstrap/bootstrap-submenu.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css"/>
@@ -9,7 +10,6 @@
     <script src="js/lib/bootstrap/bootstrap.min.js"></script>
     <script src="js/lib/bootstrap/bootstrap-submenu.min.js"></script>
     <script src="js/common/i18n.js"></script>
-    <title></title>
     <script>
         if (!localStorage.getItem("MULTIINFO_CONFIG_LANGUAGE")) {
             localStorage.setItem("MULTIINFO_CONFIG_LANGUAGE", "zh-cn");
@@ -59,6 +59,11 @@
                                 <a href="javascript:" class="js-menu-click"
                                    data-script="js/common/nav/Setting/Language/English/script.js" data-i18n-type="nav"
                                    data-i18n-tag="lang_en">English</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="javascript:" class="js-menu-click"
+                                   data-script="js/common/nav/Setting/Language/Japanese/script.js" data-i18n-type="nav"
+                                   data-i18n-tag="lang_jp"></a>
                             </li>
                         </ul>
                     </li>

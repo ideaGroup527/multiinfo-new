@@ -20,13 +20,27 @@ $(function () {
     var select = $('#sheet-select');
 
     $('#file_upload_btn').click(function () {
+        sessionStorage.clear();
+
         $('#file_upload_btn').text((localStorage.getItem("MULTIINFO_CONFIG_LANGUAGE") == 'zh-cn') ? '正在上传...' : 'Uploading...');
 
         var fileExpected = $("#data_file")[0].files[0];
 
+        var isFirstRowVarString = '';
+        switch (localStorage.getItem("MULTIINFO_CONFIG_LANGUAGE")) {
+            case 'zh-cn':
+                isFirstRowVarString = '所传文件的第一行是否为变量？';
+                break;
+            case 'en-us':
+                isFirstRowVarString = 'Is the first row of this file is variable?'
+                break;
+        }
+        var isFirstRowVar = confirm(isFirstRowVarString);
+        sessionStorage.setItem('isFirstRowVar',isFirstRowVar);
+
         var file = new FormData();
         file.append('data_file', fileExpected);
-        file.append('isFirstRowVar', 'true');
+        file.append('isFirstRowVar', isFirstRowVar);
 
         var fileUploadUrl = '';
 
@@ -45,8 +59,6 @@ $(function () {
             contentType: false,
             dataType: 'json',
             success: function (data) {
-
-                sessionStorage.clear();
 
                 sessionStorage.setItem('token', data.token);
                 sessionStorage.setItem('isMultiSheet', data.isMultiSheet);

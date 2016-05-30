@@ -128,10 +128,14 @@ $.fn.navGenerator = function (config) {
                         var linkName = $('<a>');
                         $(linkName).text(level_1_menu.name[lang])
                             .addClass('js-menu-click')
-                            .attr('data-modal-id', level_1_menu.modalId)
                             .attr('href', 'javascript:')
-                            .attr('data-modal', 'js/common/nav/' + level_1_menu.term + '/' + level_1_menu.modal)
                             .attr('data-script', 'js/common/nav/' + level_1_menu.term + '/' + level_1_menu.script);
+
+                        if (level_1_menu.modal) {
+                            $(linkName).attr('data-modal-id', level_1_menu.modalId)
+                                .attr('data-modal', 'js/common/nav/' + level_1_menu.term + '/' + level_1_menu.modal);
+                        }
+
                         $(level_1_item).append(linkName);
                     }
 

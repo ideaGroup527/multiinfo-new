@@ -3,21 +3,24 @@
     "term": "Analysis",
     "name": {
       "zh-cn": "分析",
-      "en-us": "Analysis"
+      "en-us": "Analysis",
+      "ja-jp": "分析"
     },
     "subMenu": [
       {
         "term": "DescriptiveStatistics",
         "name": {
           "zh-cn": "描述统计",
-          "en-us": "Descriptive Statistics"
+          "en-us": "Descriptive Statistics",
+          "ja-jp": "記述統計"
         },
         "subMenu": [
           {
             "term": "Descriptive",
             "name": {
               "zh-cn": "描述",
-              "en-us": "Descriptive"
+              "en-us": "Descriptive",
+              "ja-jp": "記述"
             },
             "modalId": "#Descriptive_Statistics_Descriptive",
             "modal": "modal.html",
@@ -30,7 +33,8 @@
             "script": "script.js",
             "name": {
               "zh-cn": "频率",
-              "en-us": "Frequency"
+              "en-us": "Frequency",
+              "ja-jp": "頻度"
             }
           }
         ]
@@ -39,14 +43,16 @@
         "term": "Correlation",
         "name": {
           "zh-cn": "相关",
-          "en-us": "Correlation"
+          "en-us": "Correlation",
+          "ja-jp": "相関"
         },
         "subMenu": [
           {
             "term": "BivariateCorrelate",
             "name": {
               "zh-cn": "双变量",
-              "en-us": "Bivariate Correlate"
+              "en-us": "Bivariate Correlate",
+              "ja-jp": "二変量相関"
             },
             "modalId": "#Correlation_Bivariate",
             "modal": "modal.html",
@@ -63,7 +69,8 @@
             "term": "Distance",
             "name": {
               "zh-cn": "距离",
-              "en-us": "Distance"
+              "en-us": "Distance",
+              "ja-jp": "距離"
             },
             "modalId": "#Correlation_Distance",
             "modal": "modal.html",
@@ -75,14 +82,16 @@
         "term": "CompareMeans",
         "name": {
           "zh-cn": "均值比较",
-          "en-us": "Compare Means"
+          "en-us": "Compare Means",
+          "ja-jp": "平均値を比較"
         },
         "subMenu": [
           {
             "term": "Means",
             "name": {
               "zh-cn": "均值",
-              "en-us": "Means"
+              "en-us": "Means",
+              "ja-jp": "平均値"
             },
             "modalId": "#Means",
             "modal": "modal.html",
@@ -92,7 +101,8 @@
             "term": "OnewayANOVA",
             "name": {
               "zh-cn": "单因素方差分析",
-              "en-us": "Oneway ANOVA"
+              "en-us": "Oneway ANOVA",
+              "ja-jp": "ANOVA"
             },
             "modalId": "#Oneway_ANOVA",
             "modal": "modal.html",
@@ -104,14 +114,16 @@
         "term": "Regression",
         "name": {
           "en-us": "Regression",
-          "zh-cn": "回归"
+          "zh-cn": "回归",
+          "ja-jp": "回帰"
         },
         "subMenu": [
           {
             "term": "SimpleLinearRegression",
             "name": {
               "en-us": "Simple Linear Regression",
-              "zh-cn": "一元线性回归"
+              "zh-cn": "一元线性回归",
+              "ja-jp": "線形回帰"
             },
             "modalId": "#Simple_Linear_Regression",
             "modal": "modal.html",
@@ -121,7 +133,8 @@
             "term": "MultipleLinearRegression",
             "name": {
               "en-us": "Multiple Linear Regression",
-              "zh-cn": "多元线性回归"
+              "zh-cn": "多元线性回归",
+              "ja-jp": "多重線形回帰"
             },
             "modalId": "#Multi_Linear_Regression",
             "modal": "modal.html",
@@ -131,14 +144,16 @@
             "term": "StepwiseRegression",
             "name": {
               "en-us": "Stepwise Regression",
-              "zh-cn": "逐步回归"
+              "zh-cn": "逐步回归",
+              "ja-jp": "段階回帰"
             },
             "subMenu": [
               {
                 "term": "GeneralStepwiseRegression",
                 "name": {
                   "zh-cn": "一般逐步回归",
-                  "en-us": "General Stepwise Regression"
+                  "en-us": "General Stepwise Regression",
+                  "ja-jp": "一般段階回帰"
                 },
                 "modalId": "#General_Stepwise_Regression",
                 "modal": "modal.html",
@@ -148,7 +163,8 @@
                 "term": "SlipStepwise",
                 "name": {
                   "en-us": "Slip Stepwise",
-                  "zh-cn": "多因素滑移回归预测"
+                  "zh-cn": "多因素滑移回归预测",
+                  "ja-jp": "回帰予測滑り"
                 },
                 "modalId": "#Slip_Stepwise",
                 "modal": "modal.html",
@@ -158,7 +174,8 @@
                 "term": "TrendStepwiseRegression",
                 "name": {
                   "zh-cn": "多因素趋势逐步回归预测",
-                  "en-us": "Trend Stepwise Regression"
+                  "en-us": "Trend Stepwise Regression",
+                  "ja-jp": "ステップワイズ回帰トレンド予測"
                 },
                 "modalId": "#Trend_Stepwise_Regression",
                 "modal": "modal.html",
@@ -172,14 +189,16 @@
         "term": "ReducingDimensions",
         "name": {
           "en-us": "Reducing Dimensions",
-          "zh-cn": "降维"
+          "zh-cn": "降维",
+          "ja-jp": "次元縮退"
         },
         "subMenu": [
           {
             "term": "PrincipalComponentAnalysis",
             "name": {
               "en-us": "Principal Component Analysis",
-              "zh-cn": "主成分分析"
+              "zh-cn": "主成分分析",
+              "ja-jp": "主成分分析"
             },
             "modalId": "#Principal_Component_Analysis",
             "modal": "modal.html",
@@ -189,7 +208,8 @@
             "term": "FactorAnalysis",
             "name": {
               "en-us": "Factor Analysis",
-              "zh-cn": "因子分析"
+              "zh-cn": "因子分析",
+              "ja-jp": "因子分析"
             },
             "modalId": "#Factor_Analysis",
             "modal": "modal.html",
@@ -199,7 +219,8 @@
             "term": "CorrespondenceAnalysis",
             "name": {
               "en-us": "Correspondence Analysis",
-              "zh-cn": "对应分析"
+              "zh-cn": "对应分析",
+              "ja-jp": "対応分析"
             },
             "modalId": "#Correspondence_Analysis",
             "modal": "modal.html",
@@ -213,7 +234,8 @@
     "term": "DingChart",
     "name": {
       "en-us": "Ding Chart",
-      "zh-cn": "丁氏图"
+      "zh-cn": "丁氏图",
+      "ja-jp": "丁図"
     },
     "modalId": "#Ding_Chart",
     "modal": "modal.html",
@@ -223,14 +245,16 @@
     "term": "GrayAnalysis",
     "name": {
       "en-us": "Gray Analysis",
-      "zh-cn": "灰色分析"
+      "zh-cn": "灰色分析",
+      "ja-jp": "グレー分析"
     },
     "subMenu": [
       {
         "term": "GrayCorrelation",
         "name": {
           "en-us": "Gray Correlation",
-          "zh-cn": "灰色关联度"
+          "zh-cn": "灰色关联度",
+          "ja-jp": "グレーの相関"
         },
         "modalId": "#Gray_Correlation",
         "modal": "modal.html",
@@ -240,14 +264,16 @@
         "term": "GrayPrediction",
         "name": {
           "en-us": "Gray Prediction",
-          "zh-cn": "灰色预测"
+          "zh-cn": "灰色预测",
+          "ja-jp": "グレイ予測"
         },
         "subMenu": [
           {
             "term": "RelatedVariable",
             "name": {
               "en-us": "Related Variable(s)",
-              "zh-cn": "关联变量"
+              "zh-cn": "关联变量",
+              "ja-jp": "関連する変数"
             },
             "modalId": "#Related_Variable",
             "modal": "modal.html",
@@ -257,7 +283,8 @@
             "term": "IndependentVariable",
             "name": {
               "en-us": "Independent Variable(s)",
-              "zh-cn": "独立变量"
+              "zh-cn": "独立变量",
+              "ja-jp": "独立変数"
             },
             "modalId": "#Independent_Variable",
             "modal": "modal.html",
@@ -271,10 +298,20 @@
     "term": "OptimalSegmentation",
     "name": {
       "en-us": "Optimal Segmentation",
-      "zh-cn": "最优分割"
+      "zh-cn": "最优分割",
+      "ja-jp": "最適なセグメンテーション"
     },
     "modalId": "#Optimal_Segmentation",
     "modal": "modal.html",
+    "script": "script.js"
+  },
+  {
+    "term": "ClusterAnalysis",
+    "name": {
+      "en-us": "Cluster Analysis",
+      "zh-cn": "聚类分析",
+      "ja-jp": "クラスター分析"
+    },
     "script": "script.js"
   }
 ]
