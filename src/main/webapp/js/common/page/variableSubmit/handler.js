@@ -123,6 +123,7 @@ var handleSubmit = function (config) {
             dataPackage.factorExtraNum = PCA.factorExtraNum[0];
             break;
         case 'Factor_Analysis':
+            //降维分析 - 因子分析
             handleURL = 'statistics/analysis/Factor.do';
             var FA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_FACTOR_ANALYSIS'));
             dataPackage.variableList = FA.variableList;
@@ -138,7 +139,6 @@ var handleSubmit = function (config) {
             var CA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CORRESPONDENCE_ANALYSIS'));
             dataPackage.variableList = CA.variableList;
             dataPackage.extractMethod = CA.extractMethod[0];
-            dataPackage.eigExtraNum = CA.eigExtraNum[0];
             dataPackage.factorExtraNum = CA.factorExtraNum[0];
             break;
         case 'Gray_Correlation':
