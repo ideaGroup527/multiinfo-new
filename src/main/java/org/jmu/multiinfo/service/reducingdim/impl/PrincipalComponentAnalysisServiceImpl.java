@@ -37,6 +37,8 @@ private CorrelationService correlationService;
 	public double[] principalComponentCoefficient(double[] eigenvector, double lambda) {
 		double[] eigvecCoef = new double[eigenvector.length];
 		for (int i = 0; i < eigvecCoef.length; i++) {
+			if(lambda < 0 ) eigvecCoef[i] = 0;
+			else
 			eigvecCoef[i] = FastMath.sqrt(lambda) * eigenvector[i];
 		}
 		
