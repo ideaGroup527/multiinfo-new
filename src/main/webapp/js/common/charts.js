@@ -277,6 +277,7 @@
             };
         }
 
+        //柱状图
         function _barHandle(data) {
             var dataAll = [];
             var _keys = Object.keys(data.resDataMap);
@@ -1016,7 +1017,7 @@
                     $('<script>').clone().attr('type', 'text/javascript').attr('src', 'js/lib/dendrogram/' + scri + '.js')
                 )
             });
-            var rawData = [];
+            var rawData = [],_len=config.independentVariable.length;
             config.independentVariable.map(function (variable, index) {
                 var position = variable.position;
                 var positionIndex = variable.position.charCodeAt() - 'A'.charCodeAt();
@@ -1067,7 +1068,7 @@
                 dendrogram.ctx.font = dendrogram.font;
                 dendrogram.ctx.strokeStyle = "rgba(0,0,0,0.5)";
                 dendrogram.ctx.textAlign = "end";
-                dendrogram.ctx.fillText(v.title, 300, labelH + i * 145 + 10);
+                dendrogram.ctx.fillText(v.title, 290, labelH + i * 285/(_len-1) + 5);
             });
 
             //坐标轴
@@ -1088,7 +1089,7 @@
                 }
 
 
-                wrapText(dendrogram.ctx, "" + Number(clusterDataMax / 4 * i).toFixed(3), 300 + i * 110, 60, 100, 15);
+                wrapText(dendrogram.ctx, "" + Number(clusterDataMax / 4 * i).toFixed(3), 300 + i * 110, 50, 100, 15);
             }
 
             //title
