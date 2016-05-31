@@ -1,6 +1,6 @@
 //include the dependency functions
 if(!self.corr){
-	document.write("<script type='text/javascript' src='corr.js'></script>");
+	$('body').append("<script type='text/javascript' src='corr.js'></script>");
 }
 
 function pdist(x, method,p) {
