@@ -159,7 +159,7 @@
                 }
                 case "1000000001"://聚类图
                 {
-                    _clusteringHandle(setting.data);
+                    _clusteringHandle(setting.clusterData,setting.clusterConfig,setting.clusterDataMax);
                     break;
                 }
                 case "1000000010"://最优分割图
@@ -1010,7 +1010,7 @@
         }
 
         //聚类图
-        function _clusteringHandle(_data) {
+        function _clusteringHandle(_data,config,clusterDataMax) {
             ['jquery.md5', 'freq', 'squareform', 'data', 'graphs', 'pdist', 'linkage', 'dendrogram'].map(function (scri, index) {
                 console.log('../../lib/dendrogram/' + scri + '.js')
                 $('body').append(
@@ -1069,7 +1069,7 @@
                 dendrogram.ctx.strokeStyle = "rgba(0,0,0,0.5)";
                 dendrogram.ctx.textAlign = "end";
                 dendrogram.ctx.fillText(v.title, 300, labelH + i * 145 + 10);
-            })
+            });
 
             //坐标轴
 
@@ -1089,7 +1089,7 @@
                 }
 
 
-                wrapText(dendrogram.ctx, "" + Number(1.0 / 4 * i).toFixed(3), 300 + i * 110, 60, 100, 15);
+                wrapText(dendrogram.ctx, "" + Number(clusterDataMax / 4 * i).toFixed(3), 300 + i * 110, 60, 100, 15);
             }
 
             //title

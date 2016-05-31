@@ -2549,7 +2549,11 @@
         $('#main').charts({
             title: '聚类分析图',
             type: ['clustering'],
-            data: _data
+            data: _data,
+            clusterData:_data,
+            clusterConfig:config,
+            clusterDataMax:1
+
         });
 </script>
 </body>
