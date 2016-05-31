@@ -159,7 +159,7 @@
                 }
                 case "1000000001"://聚类图
                 {
-                    _clusteringHandle(setting.clusterData,setting.clusterConfig,setting.clusterDataMax);
+                    _clusteringHandle(setting.data,setting.clusterConfig,setting.clusterDataMax);
                     break;
                 }
                 case "1000000010"://最优分割图
