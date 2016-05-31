@@ -1013,7 +1013,7 @@
         function _clusteringHandle(_data,config,clusterDataMax) {
             ['jquery.md5', 'freq', 'squareform', 'data', 'graphs', 'pdist', 'linkage', 'dendrogram'].map(function (scri, index) {
                 $('body').append(
-                    $('<script>').clone().attr('type', 'text/javascript').attr('src', '../js/lib/dendrogram/' + scri + '.js')
+                    $('<script>').clone().attr('type', 'text/javascript').attr('src', 'js/lib/dendrogram/' + scri + '.js')
                 )
             });
             var rawData = [];

@@ -103,68 +103,81 @@ var resultTableGenerator = function () {
 
             var graphName = String['graph'][lang][graph];
 
-            switch (graph) {
-                case 'boxplot':
-                    //箱线图
-                    $('#graph_' + i).charts({
-                        title: graphName,
-                        type: ['boxplot'],
-                        data: tableResult
-                    });
-                    break;
-                case 'piegraph':
-                    //饼图
-                    $('#graph_' + i).charts({
-                        title: graphName,
-                        type: ['pie'],
-                        data: tableResult
-                    });
-                    break;
-                case 'histogram':
-                    //直方图
-                    $('#graph_' + i).charts({
-                        title: graphName,
-                        type: ['bar'],
-                        data: tableResult
-                    });
-                    break;
-                case 'linechart':
-                    //折线图
-                    $('#graph_' + i).charts({
-                        title: graphName,
-                        type: ['line'],
-                        data: tableResult
-                    });
-                    break;
-                case 'scatterdiagram':
-                    //散点图
-                    $('#graph_' + i).charts({
-                        title: graphName,
-                        type: ['cure'],
-                        data: tableResult
-                    });
-                    break;
-                case 'dingchart':
-                    //丁氏图
-                    var dingConfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_DING_CHART'));
-                    $('#graph_' + i).charts({
-                        title: graphName,
-                        type: ['dingchart'],
-                        data: tableResult,
-                        calculateMethod: dingConfig.calculateMethod[0],//0行，1列，2全
-                        ellipsesColor: "#CC5B58",
-                        cureColor: "#D48366"
-                    });
-                    break;
-                case 'basicline':
-                    //碎石图
-                    $('#graph_' + i).charts({
-                        title: '碎石图',
-                        type: ['screeplot'],
-                        data: tableResult.data.eigTotalInit
-                    });
-                    break;
-            }
+            //丁氏图配置
+            var dingConfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_DING_CHART'));
+
+
+            $('#graph_' + i).charts({
+                title: graphName,
+                type: [graph],
+                data: tableResult,
+                calculateMethod: (dingConfig) ? dingConfig.calculateMethod[0] : null,//0行，1列，2全
+                ellipsesColor: "#CC5B58",
+                cureColor: "#D48366"
+            });
+
+            //switch (graph) {
+            //    case 'boxplot':
+            //        //箱线图
+            //        $('#graph_' + i).charts({
+            //            title: graphName,
+            //            type: ['boxplot'],
+            //            data: tableResult
+            //        });
+            //        break;
+            //    case 'piegraph':
+            //        //饼图
+            //        $('#graph_' + i).charts({
+            //            title: graphName,
+            //            type: ['pie'],
+            //            data: tableResult
+            //        });
+            //        break;
+            //    case 'histogram':
+            //        //直方图
+            //        $('#graph_' + i).charts({
+            //            title: graphName,
+            //            type: ['bar'],
+            //            data: tableResult
+            //        });
+            //        break;
+            //    case 'linechart':
+            //        //折线图
+            //        $('#graph_' + i).charts({
+            //            title: graphName,
+            //            type: ['line'],
+            //            data: tableResult
+            //        });
+            //        break;
+            //    case 'scatterdiagram':
+            //        //散点图
+            //        $('#graph_' + i).charts({
+            //            title: graphName,
+            //            type: ['cure'],
+            //            data: tableResult
+            //        });
+            //        break;
+            //    case 'dingchart':
+            //        //丁氏图
+            //        var dingConfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_DING_CHART'));
+            //        $('#graph_' + i).charts({
+            //            title: graphName,
+            //            type: ['dingchart'],
+            //            data: tableResult,
+            //            calculateMethod: dingConfig.calculateMethod[0],//0行，1列，2全
+            //            ellipsesColor: "#CC5B58",
+            //            cureColor: "#D48366"
+            //        });
+            //        break;
+            //    case 'basicline':
+            //        //碎石图
+            //        $('#graph_' + i).charts({
+            //            title: '碎石图',
+            //            type: ['screeplot'],
+            //            data: tableResult.data.eigTotalInit
+            //        });
+            //        break;
+            //}
         });
     }
     return def.resolve().promise();
@@ -3226,10 +3239,15 @@ var handleClusterAnalysis = function (tableResult) {
     var row = $('<tr>');
     var headerCell = $('<th>');
     var cell = $('<td>');
-    var emptyCell = $(headerCell).clone();
 
     var block = $('<div>');
     var span = $('<span>');
+
+    //获取返回值中的最大data
+    var max = 0;
+    tableResult.stepList.map(function (step, index) {
+        step.data > max ? max = step.data : null;
+    });
 
     var container_1 = $(container).clone();
     $(container_1).append(
@@ -3274,4 +3292,25 @@ var handleClusterAnalysis = function (tableResult) {
 
     $(container_1).append(table_1);
     $(presentArea).append(container_1);
+
+    //制图
+    var graphArea = $('<div>');
+    $(graphArea).css({
+        'height': 800
+    }).addClass('col-md-12').attr('id', 'graph_1');
+
+    $(presentArea).append(graphArea);
+
+    var lang = localStorage.getItem('MULTIINFO_CONFIG_LANGUAGE');
+    var String = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_LANGUAGE_STRINGS'));
+
+    var graphName = String['graph'][lang]['cluster_analysis'];
+
+    $('#graph_1').charts({
+        title: graphName,
+        type: ['clustering'],
+        data: JSON.parse(sessionStorage.getItem('PRIVATE_DATA_GRID')),
+        clusterConfig: CONFIG,
+        clusterDataMax: max
+    });
 };

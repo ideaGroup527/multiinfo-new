@@ -77,26 +77,29 @@
     "en-us": {
       "barchart": "Bar Chart",
       "boxplot": "Box Plot",
-      "histogram": "Histogram",
-      "linechart": "Line Chart",
-      "piegraph": "Pie Graph",
-      "scatterdiagram": "Scatter Diagram"
+      "bar": "Histogram",
+      "line": "Line Chart",
+      "pie": "Pie Graph",
+      "scatter": "Scatter Diagram",
+      "cluster_analysis": "Cluster Analysis"
     },
     "zh-cn": {
       "barchart": "条形图",
       "boxplot": "箱线图",
-      "histogram": "直方图",
-      "linechart": "折线图",
-      "piegraph": "饼图",
-      "scatterdiagram": "散点图"
+      "bar": "直方图",
+      "line": "折线图",
+      "pie": "饼图",
+      "scatter": "散点图",
+      "cluster_analysis": "聚类分析图"
     },
     "ja-jp": {
       "barchart": "条形图",
       "boxplot": "箱线图",
-      "histogram": "直方图",
-      "linechart": "折线图",
-      "piegraph": "饼图",
-      "scatterdiagram": "散点图"
+      "bar": "直方图",
+      "line": "折线图",
+      "pie": "饼图",
+      "scatter": "散点图",
+      "cluster_analysis": "聚类分析图"
     }
   },
   "page": {
@@ -380,7 +383,7 @@
       "options": "オプション",
       "btn_upload": "アップロード",
       "btn_uploading": "アップロード...",
-      "btn_next": "次の",
+      "btn_next": "次",
       "btn_confirm": "確定し",
       "modal_title_descriptive": "記述",
       "modal_title_frequency": "頻度",
