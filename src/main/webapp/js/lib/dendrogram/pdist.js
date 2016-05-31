@@ -26,7 +26,7 @@ function pdist(x, method,p) {
 		alert('can\'t calculate pairwise distance between less than 2 points :-(');
 		return;
 	}
-	var pdist = []
+	var pdist = [];
 	for (var i=0; i<x.length; i++) {
 		//start at row 0, compare with row 1, row 2 and so on; them go to row 1, compare with row 2, row 3 and so on; the next look always starts at i+1 even though it goes only to the point of x.lengh
 		if(i+1<x.length)

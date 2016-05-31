@@ -665,7 +665,7 @@
                 var x = (i + 1) * m_width;
                 ctx.save();
                 ctx.textAlign = "center";
-                wrapText(ctx, data.colVarList[i].varietyName, x + m_width / 2, m_height + 100, 5, 15);
+                wrapText(ctx, data.colVarList[i].varietyName, x + m_width / 2, m_height + 100, 4, 15);
                 ctx.stroke();
             }
 
@@ -756,10 +756,10 @@
                         var a = getAnchors(point1.x, point1.y, x, y, point2.x, point2.y);//获取锚点
                         p = p.concat([a.x1, a.y1, x, y, a.x2, a.y2]);
                     }
-                    cirs.push(paper.circle(x, y).attr({fill: "#D48366", stroke: "#D48366", r: 1}));
+                    cirs.push(paper.circle(x, y).attr({fill: cureColor, stroke: cureColor, r: 1}));
                 }
 
-                paper.path(p.concat([x, y, x, y])).attr({stroke: "#D48366"});
+                paper.path(p.concat([x, y, x, y])).attr({stroke: cureColor});
 
                 //修改cirs层级和事件
                 for (var i = 0; i < cirs.length; i++) {
@@ -1012,12 +1012,14 @@
 
         //聚类图
         function _clusteringHandle(_data, config, clusterDataMax) {
+            labelH=0;
             ['jquery.md5', 'freq', 'squareform', 'data', 'graphs', 'pdist', 'linkage', 'dendrogram'].map(function (scri, index) {
                 $('body').append(
                     $('<script>').clone().attr('type', 'text/javascript').attr('src', 'js/lib/dendrogram/' + scri + '.js')
                 )
             });
             var rawData = [],_len=config.independentVariable.length;
+
             config.independentVariable.map(function (variable, index) {
                 var position = variable.position;
                 var positionIndex = variable.position.charCodeAt() - 'A'.charCodeAt();
@@ -1063,12 +1065,12 @@
             data.dendrogram.metric = 'euclidean';
             data.dendrogram.amalgamation = 'average';
 
-
+            var _long=[0,190,290,290,375,390,410,420,430];
             rawData.forEach(function (v, i) {
                 dendrogram.ctx.font = dendrogram.font;
                 dendrogram.ctx.strokeStyle = "rgba(0,0,0,0.5)";
                 dendrogram.ctx.textAlign = "end";
-                dendrogram.ctx.fillText(v.title, 290, labelH + i * 285/(_len-1) + 5);
+                dendrogram.ctx.fillText(v.title, 290, labelH + i * (_long[_len-1]/(_len-1)) + 5);
             });
 
             //坐标轴

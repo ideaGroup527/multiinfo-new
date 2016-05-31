@@ -246,7 +246,9 @@ var dendrogram = {
 				leftMidPointX = dendrogram.maxRight+dendrogram.groupGap*dendrogram.xpush;
 				lowerLeftH = dendrogram.floor;
 				dendrogram.maxRight = leftMidPointX;
-                labelH=leftMidPointX;
+                if(labelH==0){
+                    labelH=leftMidPointX;
+                }
 
 				//xpush reflects how much to the right the dendrogram is pushed; clusters that do not link directly to the previous cluster push the line forward by 2; other push it only by 1;
 				
@@ -270,6 +272,7 @@ var dendrogram = {
 			var point2 = [leftMidPointX, dendrogram.floor-sh];
 			var point3 = [rightMidPointX, dendrogram.floor-sh];
 			var point4 = [rightMidPointX, lowerRightH];
+            console.log(leftMidPointX);
 			//now draw
 			dendrogram.ctx.moveTo(point1[0], point1[1]);
 			dendrogram.ctx.lineTo(point2[0], point2[1]);
