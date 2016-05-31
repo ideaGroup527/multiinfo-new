@@ -85,7 +85,7 @@
       "fisher_line": "The Line chart of the sum of the squared deviations changes",
       "fisher": "Fisher",
       "pcfp2d": "Principal Component Factor Flat Two-Dimensional Map",
-      "pcfp3d":"Principal Component Factor Flat Three-Dimensional Map",
+      "pcfp3d": "Principal Component Factor Flat Three-Dimensional Map",
       "scree_plot": "Scree Plot"
     },
     "zh-cn": {
@@ -253,7 +253,9 @@
       "label_distance_coefficient": "Distance Coefficient",
       "label_angle_cosine": "Angle Cosine",
       "label_cal_res_of_clustering_step_by_step": "Calculated Results of Clustering Step by Step",
-      "label_choose_identity_column": "Select Identity Column"
+      "label_choose_identity_column": "Select Identity Column",
+      "label_choose_color": "Choose Filling Color",
+      "label_choose_curve_color": "Choose Curve Color"
     },
     "zh-cn": {
       "options": "选项",
@@ -393,7 +395,9 @@
       "label_statistics_for_clustering": "聚类统计量",
       "label_distance_coefficient": "距离系数",
       "label_angle_cosine": "夹角余弦",
-      "label_cal_res_of_clustering_step_by_step": "分步聚类计算结果"
+      "label_cal_res_of_clustering_step_by_step": "分步聚类计算结果",
+      "label_choose_color": "选择填充颜色",
+      "label_choose_curve_color": "选择曲线颜色"
     },
     "ja-jp": {
       "options": "オプション",
@@ -532,7 +536,9 @@
       "label_distance_coefficient": "距离系数",
       "label_angle_cosine": "夹角余弦",
       "label_cal_res_of_clustering_step_by_step": "分步聚类计算结果",
-      "label_choose_identity_column": "选择标识列"
+      "label_choose_identity_column": "选择标识列",
+      "label_choose_color": "选择填充颜色",
+      "label_choose_curve_color": "选择曲线颜色"
     }
   },
   "table": {

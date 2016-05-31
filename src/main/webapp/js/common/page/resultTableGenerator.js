@@ -112,8 +112,8 @@ var resultTableGenerator = function () {
                 type: [graph],
                 data: tableResult,
                 calculateMethod: (dingConfig) ? dingConfig.calculateMethod[0] : null,//0行，1列，2全
-                ellipsesColor: "#CC5B58",
-                cureColor: "#D48366"
+                ellipsesColor: (dingConfig) ? dingConfig.ellipsesColor[0] : null,
+                cureColor: (dingConfig) ? dingConfig.cureColor[0] : null
             });
 
             //switch (graph) {
