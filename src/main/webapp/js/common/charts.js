@@ -1054,7 +1054,7 @@
             }
             //transformations of the data, one var at a time
             data.rawData = rawData;
-            graphs.configureDendrogram(dendrogram.canvasid);
+            graphs.configureDendrogram(_this.attr('id'));
 
             //make Dendrogram will happen every time a variable is unselected or re-selected
             graphs.makeDendrogram(rawData);

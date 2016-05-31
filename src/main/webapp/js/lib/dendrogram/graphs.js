@@ -88,7 +88,7 @@ var graphs  = {// this variable will have elements, and methods, to manipulate t
 	configureDendrogram : function (canvasid) {
 		   
 		dendrogram.canvasid = 'cvs';
-		dendrogram.holder = 'main';
+		dendrogram.holder = canvasid;
 		dendrogram.width = 800;
 		dendrogram.height = 500;
 		dendrogram.style = '';
