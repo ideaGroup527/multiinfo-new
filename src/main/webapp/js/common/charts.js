@@ -599,7 +599,7 @@
 
             var col = data.colVarList.length,//行数和列数
                 row = data.rowVarList.length;
-            var m_width = 80, m_height = 40; //一小格子的高宽
+            var m_width = 60, m_height = 20; //一小格子的高宽
             var a = m_width / 2, b = m_height / 2;//椭圆长半轴和短半轴
 
             var width = (col + 1) * m_width,
@@ -648,7 +648,7 @@
                 var y = (i + 1) * m_height;
                 ctx.save();
                 ctx.textAlign = "right";
-                wrapText(ctx, data.rowVarList[i].varietyName, 70, y + m_height, m_width, 15);
+                wrapText(ctx, data.rowVarList[i].varietyName, m_width-10, y + m_height, m_width, 5);
                 ctx.stroke();
             }
             //x轴
@@ -656,7 +656,7 @@
                 var x = (i + 1) * m_width;
                 ctx.save();
                 ctx.textAlign = "center";
-                wrapText(ctx, data.colVarList[i].varietyName, x + m_width / 2, m_height+5, 5, 15);
+                wrapText(ctx, data.colVarList[i].varietyName, x + m_width / 2, m_height+8, 5, 15);
                 ctx.stroke();
             }
 
@@ -1002,86 +1002,92 @@
         }
 
         //聚类图
-        function _clusteringHandle(data) {
-
-            var len = 5;
-            var canvas = $("<canvas>");
-            $(canvas).css({
-                'display': 'block',
-                'position': "absolute",
-                "left": '50%',
-                "margin-left": "-500px",
-                "top": 0
-            });
-            $(canvas).attr('width', "1000").attr('height', len * 100 + 150);
-
-            //内容
-            var vis = new pv.Panel()
-                .width(800)
-                .height(len * 100)
-                .left(100)
-                .right(100)
-                .top(100)
-                .bottom(0)
-                .canvas(_this.attr('id'));
-
-            var layout = vis.add(pv.Layout.Cluster)
-                .nodes(pv.dom(data)
-                    .root("")
-                    .sort(function (a, b) {
-                        pv.naturalOrder(a.nodeName, b.nodeName)
-                    })
-                    .nodes()
+        function _clusteringHandle(_data) {
+            ['jquery.md5', 'freq', 'squareform', 'data', 'graphs', 'pdist', 'linkage', 'dendrogram'].map(function (scri, index) {
+                console.log('../../lib/dendrogram/'+scri + '.js')
+                $('body').append(
+                    $('<script>').clone().attr('type', 'text/javascript').attr('src', '../../lib/dendrogram/'+scri + '.js')
                 )
-                .group(true)
-                .orient("right");
-
-            layout.link.add(pv.Line)
-                .strokeStyle("#2b2b2b")
-                .lineWidth(1);
-
-            // layout.node.add(pv.Dot)
-            //     .fillStyle(function (n) {
-            //         return n.firstChild ? "#aec7e8" : "#ff7f0e"
-            //     });
-
-            layout.label.add(pv.Label).textAlign("left").textBaseline('bottom').text(function (t) {
-                return Number.isInteger(+t.nodeName) ? "" : t.nodeName;
             });
+            var rawData = [];
+            config.independentVariable.map(function (variable, index) {
+                var position = variable.position;
+                var positionIndex = variable.position.charCodeAt() - 'A'.charCodeAt();
+                var rangeIndex = variable.range.split(':')[1].split(position)[1];
 
-            vis.render();
+                var _obj = {};
+
+                _obj.title = variable.varietyName;
+
+                for (var i = 1; i < rangeIndex; i++) {
+                    _obj[i] = Number(_data[i][positionIndex].data);
+                }
+
+                rawData.push(_obj);
+
+            });
+            data.identifierVar = "title";
+            data.header = ['label'];
+            data.variableSelection = [];
+            for (var i in rawData[0]) {
+                if (typeof(i) !== 'undefined' && i !== data.identifierVar) {
+                    data.header.push(i);
+                    data.variableSelection.push(i);
+                }
+            }
+
+            data.instanceSelection = [];
+            //when empty, use all
+            data.labels = [];
+            data.instance_ids = [];
+            for (var i = 0; i < rawData.length; i++) {
+                data.instance_ids.push(i);
+                data.labels.push(escape(rawData[i][data.identifierVar]));
+                data.instanceSelection.push(escape(rawData[i][data.identifierVar]));
+            }
+            //transformations of the data, one var at a time
+            data.rawData = rawData;
+            graphs.configureDendrogram(dendrogram.canvasid);
+
+            //make Dendrogram will happen every time a variable is unselected or re-selected
+            graphs.makeDendrogram(rawData);
+
+            data.dendrogram.metric = 'euclidean';
+            data.dendrogram.amalgamation = 'average';
+
+
+
+            rawData.forEach(function (v, i) {
+                dendrogram.ctx.font = dendrogram.font;
+                dendrogram.ctx.strokeStyle = "rgba(0,0,0,0.5)";
+                dendrogram.ctx.textAlign = "end";
+                dendrogram.ctx.fillText(v.title, 300, labelH + i * 145 + 10);
+            })
 
             //坐标轴
-            $(_this).append(canvas);
-
-            var ctx = canvas[0].getContext('2d');
 
             //坐标轴样式配置
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = "#666";
-            ctx.textAlign = 'center';
-
-            ctx.beginPath();
-            ctx.moveTo(100, 100);
-            ctx.lineTo(100, (len + 1) * 100);
-            ctx.moveTo(100, 100);
-            ctx.lineTo(1000, 100);
-            ctx.stroke();
+            dendrogram.ctx.lineWidth = 1;
+            dendrogram.ctx.strokeStyle = "#666";
+            dendrogram.ctx.textAlign = 'center';
 
 
             //label
-            for (var i = 1; i <= 4; i++) {
-                ctx.beginPath(1000, 100);
-                ctx.moveTo(100 + i * (800 / 4), 100);
-                ctx.lineTo(100 + i * (800 / 4), 110);
-                ctx.stroke();
+            for (var i = 0; i <= 4; i++) {
+                if(i!=0){
+                    dendrogram.ctx.beginPath(1000, 100);
+                    dendrogram.ctx.moveTo(300+i * 112, 50);
+                    dendrogram.ctx.lineTo(300+i * 112, 60);
+                    dendrogram.ctx.stroke();
+                }
 
-                wrapText(ctx, "" + Number(1.0 / 4 * i).toFixed(3), 100 + i * (800 / 4), 100, 100, 15);
+
+                wrapText(dendrogram.ctx, "" + Number(1.0 / 4 * i).toFixed(3), 300 + i * 110, 60, 100, 15);
             }
 
             //title
-            ctx.font = "20px Verdana";
-            wrapText(ctx, setting.title, 50, 50, 100, 15);
+            dendrogram.ctx.font = "20px Verdana";
+            wrapText(dendrogram.ctx, setting.title, 50, 50, 100, 15);
         }
 
         //最优分割
