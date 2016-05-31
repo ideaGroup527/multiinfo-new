@@ -1012,9 +1012,8 @@
         //聚类图
         function _clusteringHandle(_data,config,clusterDataMax) {
             ['jquery.md5', 'freq', 'squareform', 'data', 'graphs', 'pdist', 'linkage', 'dendrogram'].map(function (scri, index) {
-                console.log('../../lib/dendrogram/' + scri + '.js')
                 $('body').append(
-                    $('<script>').clone().attr('type', 'text/javascript').attr('src', '../../lib/dendrogram/' + scri + '.js')
+                    $('<script>').clone().attr('type', 'text/javascript').attr('src', '../lib/dendrogram/' + scri + '.js')
                 )
             });
             var rawData = [];
