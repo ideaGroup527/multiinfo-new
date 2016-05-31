@@ -81,7 +81,12 @@
       "line": "Line Chart",
       "pie": "Pie Graph",
       "scatter": "Scatter Diagram",
-      "cluster_analysis": "Cluster Analysis"
+      "cluster_analysis": "Cluster Analysis",
+      "fisher_line": "The Line chart of the sum of the squared deviations changes",
+      "fisher": "Fisher",
+      "pcfp2d": "Principal Component Factor Flat Two-Dimensional Map",
+      "pcfp3d":"Principal Component Factor Flat Three-Dimensional Map",
+      "scree_plot": "Scree Plot"
     },
     "zh-cn": {
       "barchart": "条形图",
@@ -90,7 +95,12 @@
       "line": "折线图",
       "pie": "饼图",
       "scatter": "散点图",
-      "cluster_analysis": "聚类分析图"
+      "cluster_analysis": "聚类分析图",
+      "fisher_line": "离差平方总和变化折线图",
+      "fisher": "最优分割图",
+      "pcfp2d": "主成分因子平面二维图",
+      "pcfp3d": "主成分因子平面三维图",
+      "scree_plot": "碎石图"
     },
     "ja-jp": {
       "barchart": "条形图",
@@ -99,7 +109,13 @@
       "line": "折线图",
       "pie": "饼图",
       "scatter": "散点图",
-      "cluster_analysis": "聚类分析图"
+      "cluster_analysis": "聚类分析图",
+      "fisher_line": "Optimal Segmentation",
+      "fisher_line": "离差平方总和变化折线图",
+      "fisher": "最优分割图",
+      "pcfp2d": "主成分因子平面二维图",
+      "pcfp3d": "主成分因子平面三维图",
+      "scree_plot": "碎石图"
     }
   },
   "page": {

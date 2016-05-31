@@ -1,10 +1,10 @@
+//语言配置
+var lang = localStorage.getItem('MULTIINFO_CONFIG_LANGUAGE');
+var _String = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_LANGUAGE_STRINGS'));
+
 var resultTableGenerator = function () {
 
     var def = $.Deferred();
-
-    //语言配置
-    var lang = localStorage.getItem('MULTIINFO_CONFIG_LANGUAGE');
-    var String = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_LANGUAGE_STRINGS'));
 
     var presentArea = $('.result-table');
 
@@ -101,7 +101,7 @@ var resultTableGenerator = function () {
 
             $(presentArea).append(graphArea);
 
-            var graphName = String['graph'][lang][graph];
+            var graphName = _String['graph'][lang][graph];
 
             //丁氏图配置
             var dingConfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_DING_CHART'));
@@ -922,7 +922,50 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
     });
     $(presentArea).append(componentArea);
 
-    //打印碎石图
+    //制图
+    //碎石图
+    $(presentArea).append(
+        $(block).clone().css('height', '800px').addClass('col-md-12').attr('id', 'graph_screeplot')
+    );
+    $('#graph_screeplot').charts({
+        title: _String['graph'][lang]['scree_plot'],
+        data: tableResult.data.eigTotalInit,
+        type: ['screeplot']
+    });
+
+    if (componentMatrix[0].length == 2) {
+        //画2D图
+        var graphArea = $('<div>');
+        $(graphArea).css({
+            'height': 800
+        }).addClass('col-md-12').attr('id', 'graph_2d');
+
+        $(presentArea).append(graphArea);
+
+        var graphName = _String['graph'][lang]['pcfp2d'];
+
+        $('#graph_2d').charts({
+            title: graphName,
+            type: ['pcfp2d'],
+            data: tableResult
+        });
+    } else if (componentMatrix[0].length == 3) {
+        //画2D图
+        var graphArea = $('<div>');
+        $(graphArea).css({
+            'height': 800
+        }).addClass('col-md-12').attr('id', 'graph_3d');
+
+        $(presentArea).append(graphArea);
+
+        var graphName = _String['graph'][lang]['pcfp3d'];
+
+        $('#graph_3d').charts({
+            title: graphName,
+            type: ['pcfp3d'],
+            data: tableResult
+        });
+    }
 
 };
 var handleFactorAnalysis = function (tableResult) {
@@ -3217,6 +3260,24 @@ var handleOptimalSegmentation = function (tableResult) {
             }
         });
     });
+
+    ['fisher_line', 'fisher'].map(function (graphName, i) {
+        var graphArea = $('<div>');
+        $(graphArea).css({
+            'height': 800
+        }).addClass('col-md-12').attr('id', 'graph_' + i);
+
+        $(presentArea).append(graphArea);
+
+        var GN = _String['graph'][lang][graphName];
+
+        $('#graph_' + i).charts({
+            title: GN,
+            type: [graphName],
+            data: tableResult
+        });
+
+    });
 };
 
 var handleClusterAnalysis = function (tableResult) {
@@ -3301,10 +3362,7 @@ var handleClusterAnalysis = function (tableResult) {
 
     $(presentArea).append(graphArea);
 
-    var lang = localStorage.getItem('MULTIINFO_CONFIG_LANGUAGE');
-    var String = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_LANGUAGE_STRINGS'));
-
-    var graphName = String['graph'][lang]['cluster_analysis'];
+    var graphName = _String['graph'][lang]['cluster_analysis'];
 
     $('#graph_1').charts({
         title: graphName,
