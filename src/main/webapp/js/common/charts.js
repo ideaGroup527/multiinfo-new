@@ -82,6 +82,11 @@
                     _type |= 515;
                     break;
                 }
+                case "bar":
+                {
+                    _type |= 516;
+                    break;
+                }
             }
         });
         _handler();
@@ -90,14 +95,14 @@
                 case "1": //曲线图
                 {
 
-                    _lineHandle(setting.data);
+                    _cureHandle(setting.data);
                     _render();
                     break;
                 }
                 case "10"://折线图
                 {
 
-                    _cureHandle(setting.data);
+                    _lineHandle(setting.data);
                     _render();
                     break;
                 }
@@ -132,7 +137,7 @@
                 case "1000000"://丁氏图
                 {
 
-                    _dingchartHandle(setting.data, setting.calculateMethod,setting.ellipsesColor,setting.cureColor);
+                    _dingchartHandle(setting.data, setting.calculateMethod, setting.ellipsesColor, setting.cureColor);
                     break;
                 }
                 case "10000000"://碎石图
@@ -169,49 +174,14 @@
                     _render();
                     break;
                 }
+                case "1000000100"://最优分割图的折线图
+                {
+                    _barHandle(setting.data);
+                    _render();
+                    break;
+                }
                 case "11"://散点图和曲线图
                 {
-                    _data = _lineHandle(setting.data);
-                    _option = {
-                        title: {
-                            text: setting.title, //主标题文本
-                            x: 'left', //标题文本的位置
-                            y: 0,
-                            textStyle: {
-                                fontSize: 16,
-                                fontWeight: 'normal'
-                            }
-                        },
-                        tooltip: {
-                            formatter: '{a}: ({c})' //鼠标移动到点的提示框
-                        },
-                        xAxis: [
-                            {min: setting.data.resDataMap.xAxis.min, max: setting.data.resDataMap.xAxis.max} //x轴的最大最小值
-                        ],
-                        yAxis: [
-                            {min: setting.data.resDataMap.yAxis.min, max: setting.data.resDataMap.yAxis.max} //y轴的最大最小值
-                        ],
-                        series: [
-                            {
-                                smooth: true,
-                                name: '点',
-                                type: "line",
-                                data: _data
-                            },
-                            {
-                                smooth: true,
-                                name: '点',
-                                type: "scatter",
-                                itemStyle: {
-                                    normal: {
-                                        color: "#C43B37"
-                                    }
-                                },
-                                data: _data
-                            }
-
-                        ]
-                    };
                     break;
                 }
                 default:
@@ -230,12 +200,11 @@
         //曲线
         function _cureHandle(data) {
             var dataAll = [];
-            var depend = data.dependentVariable.varietyName,
-                independent = data.independentVariable[0].varietyName;
+            var _keys = Object.keys(data.resDataMap);
 
-            for (var i = 0; i < data.resDataMap[depend].length; i++) {
-                dataAll.push([data.resDataMap[depend][i], data.resDataMap[independent][i]]);
-            }
+            _keys.map(function (v, i) {
+                dataAll.push([i + 1, data.resDataMap[v].resultData.total])
+            })
 
             _option = {
                 title: {
@@ -250,12 +219,12 @@
                 tooltip: {
                     formatter: '{a}: ({c})' //鼠标移动到点的提示框
                 },
-                xAxis: [
-                    {min: setting.data.resDataMap.xAxis.min, max: setting.data.resDataMap.xAxis.max} //x轴的最大最小值
-                ],
-                yAxis: [
-                    {min: setting.data.resDataMap.yAxis.min, max: setting.data.resDataMap.yAxis.max} //y轴的最大最小值
-                ],
+                xAxis: {
+                    scale: true
+                },
+                yAxis: {
+                    scale: true
+                },
                 series: [
                     {
                         smooth: true,
@@ -271,12 +240,12 @@
         //折线
         function _lineHandle(data) {
             var dataAll = [];
-            var depend = data.dependentVariable.varietyName,
-                independent = data.independentVariable[0].varietyName;
+            var _keys = Object.keys(data.resDataMap);
 
-            for (var i = 0; i < data.resDataMap[depend].length; i++) {
-                dataAll.push([data.resDataMap[depend][i], data.resDataMap[independent][i]]);
-            }
+            _keys.map(function (v, i) {
+                dataAll.push([i + 1, data.resDataMap[v].resultData.total])
+            })
+
             _option = {
                 title: {
                     text: setting.title, //主标题文本
@@ -290,12 +259,12 @@
                 tooltip: {
                     formatter: '{a}: ({c})' //鼠标移动到点的提示框
                 },
-                xAxis: [
-                    {min: setting.data.resDataMap.xAxis.min, max: setting.data.resDataMap.xAxis.max} //x轴的最大最小值
-                ],
-                yAxis: [
-                    {min: setting.data.resDataMap.yAxis.min, max: setting.data.resDataMap.yAxis.max} //y轴的最大最小值
-                ],
+                xAxis: {
+                    scale: true
+                },
+                yAxis: {
+                    scale: true
+                },
                 series: [
                     {
                         smooth: false,
@@ -303,6 +272,45 @@
                         type: "line",
                         data: dataAll,
                         markLine: null
+                    }
+                ]
+            };
+        }
+
+        function _barHandle(data) {
+            var dataAll = [];
+            var _keys = Object.keys(data.resDataMap);
+            _keys.map(function (v, i) {
+                dataAll.push(data.resDataMap[v].resultData.total)
+            });
+
+            _option = {
+                title: {
+                    text: setting.title, //主标题文本
+                    x: 'left', //标题文本的位置
+                    y: 0,
+                    textStyle: {
+                        fontSize: 16,
+                        fontWeight: 'normal'
+                    }
+                },
+                tooltip: {
+                    formatter: '{a}: ({c})' //鼠标移动到点的提示框
+                },
+                xAxis: {
+                    type: 'category',
+                    data: _keys,
+                    scale: true
+                },
+                yAxis: {
+                    scale: true
+                },
+                series: [
+                    {
+                        smooth: false,
+                        name: '点',
+                        type: "bar",
+                        data: dataAll
                     }
                 ]
             };
@@ -595,7 +603,7 @@
         }
 
         //丁氏图
-        function _dingchartHandle(data, calculateMethod,ellipsesColor,cureColor) {
+        function _dingchartHandle(data, calculateMethod, ellipsesColor, cureColor) {
 
             var col = data.colVarList.length,//行数和列数
                 row = data.rowVarList.length;
@@ -643,12 +651,12 @@
                 ctx.stroke();
             }
             //y轴
-            ctx.font="14px Verdana";
+            ctx.font = "14px Verdana";
             for (var i = 0; i < row; i++) {
                 var y = (i + 1) * m_height;
                 ctx.save();
                 ctx.textAlign = "right";
-                wrapText(ctx, data.rowVarList[i].varietyName, m_width-10, y + m_height, m_width, 5);
+                wrapText(ctx, data.rowVarList[i].varietyName, m_width - 10, y + m_height, m_width, 5);
                 ctx.stroke();
             }
             //x轴
@@ -656,7 +664,7 @@
                 var x = (i + 1) * m_width;
                 ctx.save();
                 ctx.textAlign = "center";
-                wrapText(ctx, data.colVarList[i].varietyName, x + m_width / 2, m_height+8, 5, 15);
+                wrapText(ctx, data.colVarList[i].varietyName, x + m_width / 2, m_height + 8, 5, 15);
                 ctx.stroke();
             }
 
@@ -878,18 +886,18 @@
                 },
                 series: [
                     {
-                        name:'点',
+                        name: '点',
                         type: "scatter",
                         data: dataAll,
-                        label:{
-                            normal:{
-                                show:true,
-                                position:"right",
+                        label: {
+                            normal: {
+                                show: true,
+                                position: "right",
                                 formatter: function (d) {
                                     return d.data[2];
                                 },
-                                textStyle:{
-                                    color:"#000"
+                                textStyle: {
+                                    color: "#000"
                                 }
                             }
                         }
@@ -1004,9 +1012,9 @@
         //聚类图
         function _clusteringHandle(_data) {
             ['jquery.md5', 'freq', 'squareform', 'data', 'graphs', 'pdist', 'linkage', 'dendrogram'].map(function (scri, index) {
-                console.log('../../lib/dendrogram/'+scri + '.js')
+                console.log('../../lib/dendrogram/' + scri + '.js')
                 $('body').append(
-                    $('<script>').clone().attr('type', 'text/javascript').attr('src', '../../lib/dendrogram/'+scri + '.js')
+                    $('<script>').clone().attr('type', 'text/javascript').attr('src', '../../lib/dendrogram/' + scri + '.js')
                 )
             });
             var rawData = [];
@@ -1056,7 +1064,6 @@
             data.dendrogram.amalgamation = 'average';
 
 
-
             rawData.forEach(function (v, i) {
                 dendrogram.ctx.font = dendrogram.font;
                 dendrogram.ctx.strokeStyle = "rgba(0,0,0,0.5)";
@@ -1074,10 +1081,10 @@
 
             //label
             for (var i = 0; i <= 4; i++) {
-                if(i!=0){
+                if (i != 0) {
                     dendrogram.ctx.beginPath(1000, 100);
-                    dendrogram.ctx.moveTo(300+i * 112, 50);
-                    dendrogram.ctx.lineTo(300+i * 112, 60);
+                    dendrogram.ctx.moveTo(300 + i * 112, 50);
+                    dendrogram.ctx.lineTo(300 + i * 112, 60);
                     dendrogram.ctx.stroke();
                 }
 

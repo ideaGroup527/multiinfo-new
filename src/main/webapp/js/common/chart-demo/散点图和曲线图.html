@@ -10,36 +10,95 @@
 <script src="../charts.js"></script>
 <script type="text/javascript">
     var data = {
+        "ret_code": "0",
+        "ret_msg": "",
+        "ret_err": "",
         "resDataMap": {
-            "Yi": [314.0, 473.0, 563.0, 747.0, 856.0, 943.0, 1308.0, 1871.0, 2265.0, 3038.0],
-            "Xi": [308.0, 443.0, 432.0, 572.0, 603.0, 624.0, 989.0, 1164.0, 1208.0, 1764.0],
-            "xAxis": {min: 300, max: 2000}, //x轴的最大最小值
-            "yAxis": {min: 314.0, max: 3200} //y轴的最大最小值
-        },
-        "independentVariable": [
-            {
-                "position": "B1",
+            "一产增加值(亿元)": {
+                "resultData": {
+                    "max": 120.11,
+                    "min": 8.9,
+                    "arithmeticMean": 42.6425,
+                    "variance": 857.0156630434783,
+                    "standardDeviation": 29.274829855073083,
+                    "total": 1023.42,
+                    "median": 44.075,
+                    "skewness": 0.9773087898548272,
+                    "kurtosis": 0.7602836185951678,
+                    "percentiles": [{"param": 0, "data": -39.67750000000001}, {
+                        "param": 25,
+                        "data": 17.105
+                    }, {"param": 50, "data": 44.075}, {"param": 75, "data": 54.96}, {"param": 100, "data": 111.7425}],
+                    "count": 24,
+                    "errPercentiles": [120.11]
+                },
+                "dataArr": [8.9, 10.36, 10.44, 13.39, 14.8, 16.84, 17.9, 18.31, 20.84, 29.93, 35.41, 43.28, 44.87, 48.75, 48.08, 46.03, 49.67, 52.95, 55.63, 67.42, 72.08, 79.54, 97.89, 120.11],
+                "varietyName": null,
                 "typeDes": null,
                 "type": null,
-                "typeFormat": null,
-                "varietyName": "Xi",
-                "range": "B2:B11"
+                "typeFormat": null
+            },
+            "二产增加值(亿元)": {
+                "resultData": {
+                    "max": 581.24,
+                    "min": 12.12,
+                    "arithmeticMean": 134.54500000000002,
+                    "variance": 22260.419599999997,
+                    "standardDeviation": 149.19926139227366,
+                    "total": 3229.08,
+                    "median": 84.605,
+                    "skewness": 1.7464199904878406,
+                    "kurtosis": 2.739128830550301,
+                    "percentiles": [{"param": 0, "data": -211.08250000000004}, {
+                        "param": 25,
+                        "data": 25.947499999999998
+                    }, {"param": 50, "data": 84.605}, {"param": 75, "data": 183.9675}, {
+                        "param": 100,
+                        "data": 420.99750000000006
+                    }],
+                    "count": 24,
+                    "errPercentiles": [451.82, 581.24]
+                },
+                "dataArr": [12.12, 12.97, 15.77, 19.74, 24.39, 25.34, 27.77, 34.05, 45.52, 55.78, 74.67, 80.54, 88.67, 95.11, 103.82, 121.43, 135.89, 153.06, 194.27, 244.05, 281.23, 349.83, 451.82, 581.24],
+                "varietyName": null,
+                "typeDes": null,
+                "type": null,
+                "typeFormat": null
+            },
+            "三产增加值(亿元)": {
+                "resultData": {
+                    "max": 397.16,
+                    "min": 9.25,
+                    "arithmeticMean": 117.8475,
+                    "variance": 12576.814802173913,
+                    "standardDeviation": 112.14639897104995,
+                    "total": 2828.3399999999992,
+                    "median": 85.07,
+                    "skewness": 1.0913463476356917,
+                    "kurtosis": 0.34718966489300795,
+                    "percentiles": [{"param": 0, "data": -225.26375}, {"param": 25, "data": 23.5225}, {
+                        "param": 50,
+                        "data": 85.07
+                    }, {"param": 75, "data": 189.38}, {"param": 100, "data": 438.16625}],
+                    "count": 24,
+                    "errPercentiles": []
+                },
+                "dataArr": [9.25, 11.21, 13.42, 17.16, 20.02, 22.66, 26.11, 30.78, 37.46, 48.26, 65.1, 79.09, 91.05, 101.58, 112.67, 127.56, 151.89, 171.14, 195.46, 225.64, 252.79, 281.39, 339.49, 397.16],
+                "varietyName": null,
+                "typeDes": null,
+                "type": null,
+                "typeFormat": null
             }
-        ],
-        "dependentVariable": {
-            "position": "A1",
-            "typeDes": null,
-            "type": null,
-            "typeFormat": null,
-            "varietyName": "Yi",
-            "range": "A2:A11"
-        }
+        },
+        "resultType": null,
+        "reportTitle": null
     };
+
 
     $('#main').charts({
         title: '散点图和折线图和曲线图',
-        type: ['cure'],
-        data:data
+        type: ['bar'],
+        data: data
     });
 
 </script>
