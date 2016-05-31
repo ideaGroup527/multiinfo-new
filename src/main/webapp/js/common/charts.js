@@ -1155,7 +1155,7 @@
                 },
                 visualMap: {
                     min: 1,
-                    max: 6,
+                    max: len+1,
                     calculable: true,
                     orient: 'horizontal',
                     left: 'center',
