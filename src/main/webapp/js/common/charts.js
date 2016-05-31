@@ -1159,7 +1159,7 @@
                     calculable: true,
                     orient: 'horizontal',
                     left: 'center',
-                    bottom: '15%',
+                    bottom: '20%',
                     color: ["#991b1e", "#e0c06d"]
                 },
                 series: [{
