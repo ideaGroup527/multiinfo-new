@@ -54,7 +54,7 @@ public class ClusterServiceImpl implements ClusterService{
 
 		
 		
-		double[][] dataArr=null;
+		double[][] oraData=null;
 //		switch (condition.getClusterMethod()) {
 //		case PointGroupCondition.TYPE_Q:{
 //			//个体间
@@ -85,18 +85,18 @@ public class ClusterServiceImpl implements ClusterService{
 //			break;
 //		}
 		
-		dataArr = new double[dataGridList.size()][dataGridList.get(0).size()];
+		oraData = new double[dataGridList.size()][dataGridList.get(0).size()];
 		for (int i = 0; i < dataGridList.size(); i++) {
-			dataArr[i] =	DataFormatUtil.converToDouble(dataGridList.get(i));
+			oraData[i] =	DataFormatUtil.converToDouble(dataGridList.get(i));
 		}
 		
-		int row = dataArr.length;
-		int col = dataArr[0].length;
+		int row = oraData.length;
+		int col = oraData[0].length;
 		switch (condition.getNormalizationMethod()) {
 		case PointGroupCondition.NORMALIZATION_RANGE:
 			for (int i = 0; i < row; i++) {
 				try {
-					dataArr[i] = basicStatisticsService.regularizationRange(dataArr[i]);
+					oraData[i] = basicStatisticsService.regularizationRange(oraData[i]);
 				} catch (DataErrException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -108,7 +108,7 @@ public class ClusterServiceImpl implements ClusterService{
 		case PointGroupCondition.NORMALIZATION_RANGE_SD:
 			for (int i = 0; i < row; i++) {
 				try {
-					dataArr[i] = basicStatisticsService.RangeNormalization(dataArr[i]);
+					oraData[i] = basicStatisticsService.RangeNormalization(oraData[i]);
 				} catch (DataErrException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -121,7 +121,7 @@ public class ClusterServiceImpl implements ClusterService{
 		case PointGroupCondition.NORMALIZATION_STANDARD_SD:
 			for (int i = 0; i < row; i++) {
 				try {
-					dataArr[i] = basicStatisticsService.StandardDeviationNormalization(dataArr[i]);
+					oraData[i] = basicStatisticsService.StandardDeviationNormalization(oraData[i]);
 				} catch (DataErrException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -135,11 +135,14 @@ public class ClusterServiceImpl implements ClusterService{
 			break;
 		}
 		
+		double[][] dataArr=null;
 		switch (condition.getClusterMethod()) {
 		case PointGroupCondition.TYPE_Q:{
 			//个体间
 			dataArr = new double[dataGridList.get(0).size()][dataGridList.size()];
-			 dataArr = DataFormatUtil.transposition(dataGridList);
+			 dataArr = DataFormatUtil.transposition(oraData);
+				 row = dataArr.length;
+				 col = dataArr[0].length;
 				// 样本号
 				PositionBean factorRange = ExcelUtil.splitRange(factorVar.getRange());
 				for (int i = factorRange.getFirstRowId() - 1; i < factorRange.getLastRowId(); i++) {
@@ -152,10 +155,9 @@ public class ClusterServiceImpl implements ClusterService{
 		case PointGroupCondition.TYPE_R:{
 
 			
-			dataArr = new double[dataGridList.size()][dataGridList.get(0).size()];
-			for (int i = 0; i < dataGridList.size(); i++) {
-				dataArr[i] =	DataFormatUtil.converToDouble(dataGridList.get(i));
-			}
+			dataArr = oraData;
+			 row = dataArr.length;
+			 col = dataArr[0].length;
 			
 			for (int i = 0; i < independVarList.size(); i++) {
 				factorVarList.add(independVarList.get(i).getVarietyName());
@@ -168,8 +170,12 @@ public class ClusterServiceImpl implements ClusterService{
 		
 		List<StepClusterDTO> stepList = new ArrayList<>();
 		List<Integer> indexExist = new ArrayList<>();
-
+		List<Integer>  groupIndexList = new ArrayList<>();
+		for (int i = 0; i < row; i++){
+			groupIndexList.add(1);
+		}
 		for(int lo=0;lo< row-1;lo++){
+
 		switch (condition.getStatisticsMethod()) {
 		case PointGroupCondition.STATISTICS_CORRELATION:{
 			
@@ -179,7 +185,7 @@ public class ClusterServiceImpl implements ClusterService{
 			for (int i = 0; i < row; i++) {
 				for (int j = i+1; j < row; j++) {
 					try {
-						if(!indexExist.contains(j+1)){
+						if(!indexExist.contains(j+1)  && !indexExist.contains(i+1)){
 							StepClusterDTO e =  new StepClusterDTO();
 						Double data = correlationService.pearsonRCoefficient(dataArr[j], dataArr[i]);
 						e.setData(data);
@@ -197,7 +203,12 @@ public class ClusterServiceImpl implements ClusterService{
 					}
 				}
 			}
-
+			int rowIndex = maxiDTO.getRowIndex();
+			int colIndex = maxiDTO.getColIndex();
+			dataArr[colIndex - 1] =	calNewGroup(dataArr[rowIndex -1],dataArr[colIndex - 1],groupIndexList.get(rowIndex-1),groupIndexList.get(colIndex-1));
+			dataArr[rowIndex - 1] = dataArr[colIndex - 1];
+			groupIndexList.set(rowIndex-1, groupIndexList.get(rowIndex-1)+1)	;
+			groupIndexList.set(colIndex-1, groupIndexList.get(colIndex-1)+1)	;
 			stepList.add(maxiDTO);
 			indexExist.add(maxiDTO.getRowIndex());
 			break;
@@ -211,7 +222,7 @@ public class ClusterServiceImpl implements ClusterService{
 			for (int i = 0; i < row; i++) {
 				for (int j = i+1; j < row; j++) {
 					try {
-						if(!indexExist.contains(j+1)){
+						if(!indexExist.contains(j+1)  && !indexExist.contains(i+1) ){
 							StepClusterDTO e =  new StepClusterDTO();
 						Double data = basicStatisticsService.cos(dataArr[j], dataArr[i]);
 						e.setData(data);
@@ -229,7 +240,12 @@ public class ClusterServiceImpl implements ClusterService{
 					}
 				}
 			}
-
+			int rowIndex = maxiDTO.getRowIndex();
+			int colIndex = maxiDTO.getColIndex();
+			dataArr[colIndex - 1] =	calNewGroup(dataArr[rowIndex -1],dataArr[colIndex - 1],groupIndexList.get(rowIndex-1),groupIndexList.get(colIndex-1));
+			dataArr[rowIndex - 1] = dataArr[colIndex - 1];
+			groupIndexList.set(rowIndex-1, groupIndexList.get(rowIndex-1)+1)	;
+			groupIndexList.set(colIndex-1, groupIndexList.get(colIndex-1)+1)	;
 			stepList.add(maxiDTO);
 			indexExist.add(maxiDTO.getRowIndex());
 			break;
@@ -238,12 +254,10 @@ public class ClusterServiceImpl implements ClusterService{
 		case PointGroupCondition.STATISTICS_DISTANCE:{
 			
 			StepClusterDTO miniDTO =  null;
-			
-			
 			for (int i = 0; i < row; i++) {
 				for (int j = i+1; j < row; j++) {
 					try {
-						if(!indexExist.contains(j+1)){
+						if(!indexExist.contains(j+1) && !indexExist.contains(i+1)){
 							StepClusterDTO e =  new StepClusterDTO();
 						Double data = basicStatisticsService.euclideanDistance(dataArr[j], dataArr[i]);
 						e.setData(data);
@@ -261,6 +275,12 @@ public class ClusterServiceImpl implements ClusterService{
 					}
 				}
 			}
+			int rowIndex = miniDTO.getRowIndex();
+			int colIndex = miniDTO.getColIndex();
+			dataArr[colIndex - 1] =	calNewGroup(dataArr[rowIndex -1],dataArr[colIndex - 1],groupIndexList.get(rowIndex-1),groupIndexList.get(colIndex-1));
+			dataArr[rowIndex - 1] = dataArr[colIndex - 1];
+			groupIndexList.set(rowIndex-1, groupIndexList.get(rowIndex-1)+1)	;
+			groupIndexList.set(colIndex-1, groupIndexList.get(colIndex-1)+1)	;
 
 			stepList.add(miniDTO);
 			indexExist.add(miniDTO.getRowIndex());
@@ -282,6 +302,19 @@ public class ClusterServiceImpl implements ClusterService{
 	
 	
 	
+	private double[] calNewGroup(double[] ds, double[] ds2, int n1,int n2) {
+		int N = ds.length;
+		double[] newGroup = new double[N];
+		for(int i=0;i<N;i++){
+			newGroup[i]=	(ds[i] * n1 + ds2[i] * n2) / (n1 + n2);
+		}
+		
+		return newGroup;
+	}
+
+
+
+
 	//后续遍历求叶子
 	private List<Integer> lrd(StepBinaryTree tree) {
 		Stack<TreeNode> nodeStack = new Stack<>();

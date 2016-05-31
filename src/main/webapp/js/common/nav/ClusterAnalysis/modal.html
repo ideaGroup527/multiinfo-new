@@ -44,7 +44,7 @@
                 </div>
                 <div data-config-group data-group-name="factorVarVariable" style="display: none;">
                     <hr/>
-                    <p data-i18n-type="page" data-i18n-tag="label_choose_variable">选择变量</p>
+                    <p data-i18n-type="page" data-i18n-tag="label_choose_identity_column">选择标识列</p>
 
                     <select class="form-control" name="factorVarVariable"></select>
                 </div>
@@ -75,10 +75,17 @@
         </div>
     </div>
     <script>
+        var factorList = $('.col-checkbox').parent().parent();
         var config = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CLUSTER_PART_1'));
-        config.independentVariable.map(function (variable) {
+
+        factorList.each(function (index, elem) {
+            var obj = JSON.parse($(elem).attr('data-all-params'));
+            obj.range = config.independentVariable[0].range;
+            obj.varietyName = obj.data;
+            obj.position = obj.position.slice(0, 1);
+
             $('select[name=factorVarVariable]').append(
-                    $('<option>').clone().text(variable.data).val(JSON.stringify(variable))
+                    $('<option>').clone().text(obj.data).val(JSON.stringify(obj))
             );
         });
 

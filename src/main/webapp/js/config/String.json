@@ -233,7 +233,8 @@
       "label_statistics_for_clustering": "Statistics for Clustering",
       "label_distance_coefficient": "Distance Coefficient",
       "label_angle_cosine": "Angle Cosine",
-      "label_cal_res_of_clustering_step_by_step": "Calculated Results of Clustering Step by Step"
+      "label_cal_res_of_clustering_step_by_step": "Calculated Results of Clustering Step by Step",
+      "label_choose_identity_column": "Select Identity Column"
     },
     "zh-cn": {
       "options": "选项",
@@ -511,7 +512,8 @@
       "label_statistics_for_clustering": "聚类统计量",
       "label_distance_coefficient": "距离系数",
       "label_angle_cosine": "夹角余弦",
-      "label_cal_res_of_clustering_step_by_step": "分步聚类计算结果"
+      "label_cal_res_of_clustering_step_by_step": "分步聚类计算结果",
+      "label_choose_identity_column": "选择标识列"
     }
   },
   "table": {
