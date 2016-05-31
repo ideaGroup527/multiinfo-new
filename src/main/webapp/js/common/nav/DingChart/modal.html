@@ -32,27 +32,26 @@
                             <span data-i18n-type="page" data-i18n-tag="label_calculate_method">计算方法</span>
 
                             <div class="checkbox-inline">
-                                <label>
+                                <label data-toggle="tooltip"
+                                       title="" data-placement="top"
+                                       data-original-title="【横向直观图】适合于各栏目单位相同，需要横向对比。同一栏目内数据数据属性不同。各栏目内部无对比意义的情形。">
                                     <input value="0" type="radio" name="calculateMethod"/>
-                                    <span data-i18n-type="page" data-i18n-tag="label_by_row" data-toggle="tooltip"
-                                          title="" data-placement="top"
-                                          data-original-title="【横向直观图】适合于各栏目单位相同，需要横向对比。同一栏目内数据数据属性不同。各栏目内部无对比意义的情形。">按行</span>
+                                    <span data-i18n-type="page" data-i18n-tag="label_by_row">按行</span>
                                 </label>
                             </div>
                             <div class="checkbox-inline">
-                                <label>
+                                <label data-toggle="tooltip" title="" data-placement="top"
+                                       data-original-title="【纵向直观图】适合于各栏目单位不一、数据的数量级差异大、各栏目之间无对比意义的情况。">
                                     <input value="1" type="radio" name="calculateMethod" checked/>
-                                    <span data-i18n-type="page" data-i18n-tag="label_by_col" data-toggle="tooltip"
-                                          title="" data-placement="top"
-                                          data-original-title="【纵向直观图】适合于各栏目单位不一、数据的数量级差异大、各栏目之间无对比意义的情况。">按列</span>
+                                    <span data-i18n-type="page" data-i18n-tag="label_by_col">按列</span>
                                 </label>
                             </div>
                             <div class="checkbox-inline">
-                                <label>
+                                <label data-toggle="tooltip" title="" data-placement="top"
+                                       data-original-title="【全表直观图】适用于表格中的全部数据，都必须是意义相同、单位相同，纵向和横向都具有对比意义的情形。">
                                     <input value="2" type="radio" name="calculateMethod"/>
                                     <span data-i18n-type="page" data-i18n-tag="label_by_table"
-                                          data-toggle="tooltip" title="" data-placement="top"
-                                          data-original-title="【全表直观图】适用于表格中的全部数据，都必须是意义相同、单位相同，纵向和横向都具有对比意义的情形。">按全表</span>
+                                            >按全表</span>
                                 </label>
                             </div>
                         </div>
@@ -73,6 +72,9 @@
 </div>
 <script>
     $(function () {
+
+        $('[data-toggle="tooltip"]').tooltip();
+
         var variableList = JSON.parse(sessionStorage.getItem('PRIVATE_VARIABLE_LIST'));
 
         variableList.map(function (variable, i) {
