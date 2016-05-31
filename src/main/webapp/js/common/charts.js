@@ -1142,7 +1142,8 @@
                             fontSize: 14
                         }
                     },
-                    data: xdata
+                    data: xdata,
+                    scale:true
                 },
                 yAxis: {
                     type: 'category',
