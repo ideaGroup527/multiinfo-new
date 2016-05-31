@@ -159,7 +159,7 @@
                 }
                 case "1000000001"://聚类图
                 {
-                    _clusteringHandle(setting.data,setting.clusterConfig,setting.clusterDataMax);
+                    _clusteringHandle(setting.data, setting.clusterConfig, setting.clusterDataMax);
                     break;
                 }
                 case "1000000010"://最优分割图
@@ -611,7 +611,7 @@
             var a = m_width / 2, b = m_height / 2;//椭圆长半轴和短半轴
 
             var width = (col + 1) * m_width,
-                height = (row + 1) * m_height;
+                height = (row + 1) * m_height + 100;
             var canvas = document.createElement("canvas");
             $(canvas).css({
                 'display': 'block',
@@ -638,16 +638,16 @@
             for (var i = 1; i <= row + 1; i++) {
                 var y = i * m_height;
                 ctx.beginPath();
-                ctx.moveTo(m_width, y);
-                ctx.lineTo(width, y);
+                ctx.moveTo(m_width, y + 100);
+                ctx.lineTo(width, y + 100);
                 ctx.stroke();
             }
             //纵线
             for (var i = 1; i <= col + 1; i++) {
                 var x = i * m_width;
                 ctx.beginPath();
-                ctx.moveTo(x, m_height);
-                ctx.lineTo(x, height);
+                ctx.moveTo(x, 100 + m_height);
+                ctx.lineTo(x, 100 + height);
                 ctx.stroke();
             }
             //y轴
@@ -656,7 +656,7 @@
                 var y = (i + 1) * m_height;
                 ctx.save();
                 ctx.textAlign = "right";
-                wrapText(ctx, data.rowVarList[i].varietyName, m_width - 10, y + m_height, m_width, 5);
+                wrapText(ctx, data.rowVarList[i].varietyName, m_width - 10, y + m_height + 100, m_width, 5);
                 ctx.stroke();
             }
             //x轴
@@ -664,7 +664,7 @@
                 var x = (i + 1) * m_width;
                 ctx.save();
                 ctx.textAlign = "center";
-                wrapText(ctx, data.colVarList[i].varietyName, x + m_width / 2, m_height + 8, 5, 15);
+                wrapText(ctx, data.colVarList[i].varietyName, x + m_width / 2, m_height + 100, 5, 15);
                 ctx.stroke();
             }
 
@@ -674,7 +674,6 @@
             if (calculateMethod == 0) { //行
                 for (var i = 0; i < row; i++) {
                     for (var j = 0; j < col; j++) {
-
                         _a = a;
                         _b = b * data.resData[i][j];
                         _a = _a < .04 ? .04 : _a;
@@ -684,7 +683,7 @@
                         }
                         curvePoint[point].push({x: (j + 1) * m_width + a, y: (i + 1) * m_height + b - _b});
                         curvePoint2[point].push({x: (j + 1) * m_width + a, y: (i + 2) * m_height - b + _b});
-                        EllipseTwo(ctx, (j + 1) * m_width + a, (i + 1) * m_height + b, _a, _b);
+                        EllipseTwo(ctx, (j + 1) * m_width + a, (i + 1) * m_height + b + 100, _a, _b);
                     }
                 }
             } else if (calculateMethod == 1) {  //列
@@ -700,7 +699,7 @@
                         }
                         curvePoint[point].push({x: (i + 1) * m_width + a - _a, y: (j + 2) * m_height - _b});
                         curvePoint2[point].push({x: (i + 1) * m_width + a + _a, y: (j + 1) * m_height + _b});
-                        EllipseTwo(ctx, (i + 1) * m_width + a, (j + 1) * m_height + b, _a, _b);
+                        EllipseTwo(ctx, (i + 1) * m_width + a, (j + 1) * m_height + b + 100, _a, _b);
                     }
                 }
             } else if (calculateMethod == 2) {  //全
@@ -713,7 +712,7 @@
                         if ((++n_point) % row == 0) {
                             point++;
                         }
-                        EllipseTwo(ctx, (i + 1) * m_width + a, (j + 1) * m_height + b, _a, _b);
+                        EllipseTwo(ctx, (i + 1) * m_width + a, (j + 1) * m_height + b + 100, _a, _b);
                     }
                 }
             } else {
@@ -728,6 +727,7 @@
                 'z-index': '1000',
                 'position': "absolute",
                 "left": '50%',
+                "top": "100px",
                 "margin-left": "-" + width / 2 + "px"
             });
             var tip = paper.rect(10, 20, 100, 60).attr({
@@ -1010,7 +1010,7 @@
         }
 
         //聚类图
-        function _clusteringHandle(_data,config,clusterDataMax) {
+        function _clusteringHandle(_data, config, clusterDataMax) {
             ['jquery.md5', 'freq', 'squareform', 'data', 'graphs', 'pdist', 'linkage', 'dendrogram'].map(function (scri, index) {
                 $('body').append(
                     $('<script>').clone().attr('type', 'text/javascript').attr('src', 'js/lib/dendrogram/' + scri + '.js')
@@ -1143,7 +1143,7 @@
                         }
                     },
                     data: xdata,
-                    scale:true
+                    scale: true
                 },
                 yAxis: {
                     type: 'category',
@@ -1156,7 +1156,7 @@
                 },
                 visualMap: {
                     min: 1,
-                    max: len+1,
+                    max: len + 1,
                     calculable: true,
                     orient: 'horizontal',
                     left: 'center',
@@ -1308,17 +1308,17 @@
 
         /*填充文字*/
         function wrapText(context, text, x, y, maxWidth, lineHeight) {
-            var line = [], n = 0;
-            for (var i = 0; i < text.length; i++) {
-                if (n == 2) break;
-                if (i % maxWidth == 0) {
-                    line.push(text.substring(i, i + maxWidth));
-                    n++;
-                }
+            if (text.length <= 4) {
+                context.fillText(text, x, y - 5);
+                return;
+            }
+            var line = [];
+            for(var i=0;i<text.length;i+=maxWidth){
+                line.push(text.substring(i, i + maxWidth));
             }
             var len = line.length;
             for (var ii = 0; ii < len; ii++) {
-                context.fillText(line[ii], x, y - lineHeight * (len - ii));
+                context.fillText(line[ii], x, y - lineHeight * (len - ii) + 8);
             }
         }
     }
