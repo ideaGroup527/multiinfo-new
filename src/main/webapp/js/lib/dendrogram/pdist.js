@@ -1,6 +1,6 @@
 //include the dependency functions
 if(!self.corr){
-	$('body').append("<script type='text/javascript' src='corr.js'></script>");
+	$('body').append("<script type='text/javascript' src='js/lib/dendrogram/corr.js'></script>");
 }
 
 function pdist(x, method,p) {
