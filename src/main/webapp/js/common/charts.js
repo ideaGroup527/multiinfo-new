@@ -1085,7 +1085,7 @@
             data.dendrogram.metric = 'euclidean';
             data.dendrogram.amalgamation = 'average';
 
-            var _long = [0, 190, 290, 290, 375, 390, 410, 420, 515, 430, 530];
+            var _long = [0, 220, 350, 410, 450, 475, 490, 505, 515, 520, 530];
             rawData.forEach(function (v, i) {
                 dendrogram.ctx.font = dendrogram.font;
                 dendrogram.ctx.strokeStyle = "rgba(0,0,0,0.5)";
