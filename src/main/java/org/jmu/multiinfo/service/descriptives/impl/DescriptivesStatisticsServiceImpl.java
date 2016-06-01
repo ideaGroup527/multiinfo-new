@@ -207,12 +207,15 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 			e.setUp(up);
 			e.setDown(down);
 			long eFrequency = 0;
+			double ePercentage=0.0;
 while(uniqPos<uniqArr.length && uniqArr[uniqPos]<up) {
 	eFrequency+=Long.valueOf(frequencyMap.get(String.valueOf(uniqArr[uniqPos]) ).toString());
+	
+	ePercentage += Double.valueOf(percentage.get(String.valueOf(uniqArr[uniqPos]) ).toString());
 	uniqPos++;
 }
 e.setFrequency(eFrequency);	
-			
+e.setPercentage(ePercentage);
 			down=up;
 			interList.add(e );
 		}
