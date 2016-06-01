@@ -172,7 +172,7 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 		 double Sk = sdList.get(sdList.size() - 1) ;
 		 double U = Sk * (1 - Rkk);
 		 double Q = Sk -  U;
-		 smDTO.setF((U / (posList.size()))*(Q /(dataArrY.length - (posList.size()) -1.0)) );
+		 smDTO.setF((U / (posList.size()))/(Q /(dataArrY.length - (posList.size()) -1.0)) );
 		 smDTO.setRegressionParameters(DataFormatUtil.converToDouble(bList));
 		 return smDTO;
 	}
