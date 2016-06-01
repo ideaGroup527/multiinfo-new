@@ -1085,7 +1085,7 @@
             data.dendrogram.metric = 'euclidean';
             data.dendrogram.amalgamation = 'average';
 
-            var _long = [0, 190, 290, 290, 375, 390, 410, 420, 430, 430, 530];
+            var _long = [0, 190, 290, 290, 375, 390, 410, 420, 515, 430, 530];
             rawData.forEach(function (v, i) {
                 dendrogram.ctx.font = dendrogram.font;
                 dendrogram.ctx.strokeStyle = "rgba(0,0,0,0.5)";
@@ -1102,16 +1102,16 @@
 
 
             //label
+            dendrogram.ctx.font = "14px Verdana";
             for (var i = 0; i <= 4; i++) {
                 if (i != 0) {
                     dendrogram.ctx.beginPath(1000, 100);
-                    dendrogram.ctx.moveTo(300 + i * 112, 50);
-                    dendrogram.ctx.lineTo(300 + i * 112, 60);
+                    dendrogram.ctx.moveTo(199 + i * 137, 50);
+                    dendrogram.ctx.lineTo(199 + i * 137, 60);
                     dendrogram.ctx.stroke();
                 }
 
-
-                wrapText(dendrogram.ctx, "" + Number(clusterDataMax / 4 * i).toFixed(3), 300 + i * 110, 50, 100, 15);
+                wrapText(dendrogram.ctx, "" + Number(clusterDataMax / 4 * i).toFixed(3), 199 + i * 137, 50, 100, 15);
             }
 
             //title
