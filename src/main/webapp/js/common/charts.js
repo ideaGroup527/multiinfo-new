@@ -679,7 +679,7 @@
                 var y = (i + 1) * m_height;
                 ctx.save();
                 ctx.textAlign = "right";
-                wrapText(ctx, data.rowVarList[i].varietyName, m_width - 10, y + m_height + 100, m_width, 5);
+                wrapText(ctx, data.rowVarList[i].varietyName, m_width - 10, y + m_height + 95, m_width, 5);
                 ctx.stroke();
             }
             //x轴
