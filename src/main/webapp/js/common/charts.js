@@ -87,6 +87,11 @@
                     _type |= 516;
                     break;
                 }
+                case "bar_curve":
+                {
+                    _type |= 517;
+                    break;
+                }
             }
         });
         _handler();
@@ -180,10 +185,13 @@
                     _render();
                     break;
                 }
-                case "11"://散点图和曲线图
+                case "1000000101"://直方正态图
                 {
+                    _barLineHandle(setting.data);
+                    _render();
                     break;
                 }
+
                 default:
                 {
                     alert("图表类型错误，请检查!");
@@ -368,6 +376,65 @@
             };
         }
 
+        //直方正态图
+        function _barLineHandle(data) {
+            console.log(data);
+            var xdata = [];
+            var dataAll=[];
+            data.uniqueData.map(function (v, i) {
+                xdata.push(data.uniqueInterval[i].down+" "+data.uniqueInterval[i].up);
+                dataAll.push([i,v]);
+            });
+
+            console.log(xdata,data.uniqueData);
+            _option = {
+                title: {
+                    text: setting.title, //主标题文本
+                    x: 'left', //标题文本的位置
+                    y: 0,
+                    textStyle: {
+                        fontSize: 26,
+                        fontWeight: 'normal'
+                    }
+                },
+                tooltip: {
+                    formatter: '{a}: ({c})' //鼠标移动到点的提示框
+                },
+                xAxis: {
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            fontSize: 16
+                        }
+                    },
+                    type: 'category',
+                    data:xdata,
+                    scale: true
+                },
+                yAxis: {
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            fontSize: 16
+                        }
+                    },
+                    scale: true
+                },
+                series: [
+                    {
+                        name: '点',
+                        type: "bar",
+                        data: data.uniqueData
+                    },
+                    {
+                        smooth: true,
+                        name: '点',
+                        type: "line",
+                        data: dataAll
+                    }
+                ]
+            };
+        }
         //碎石
         function _screeplotHandle(data) {
 
