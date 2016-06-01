@@ -212,7 +212,7 @@
                     x: 'left', //标题文本的位置
                     y: 0,
                     textStyle: {
-                        fontSize: 16,
+                        fontSize: 26,
                         fontWeight: 'normal'
                     }
                 },
@@ -252,7 +252,7 @@
                     x: 'left', //标题文本的位置
                     y: 0,
                     textStyle: {
-                        fontSize: 16,
+                        fontSize: 26,
                         fontWeight: 'normal'
                     }
                 },
@@ -284,14 +284,13 @@
             _keys.map(function (v, i) {
                 dataAll.push(data.resDataMap[v].resultData.total)
             });
-
             _option = {
                 title: {
                     text: setting.title, //主标题文本
                     x: 'left', //标题文本的位置
                     y: 0,
                     textStyle: {
-                        fontSize: 16,
+                        fontSize: 26,
                         fontWeight: 'normal'
                     }
                 },
@@ -299,11 +298,23 @@
                     formatter: '{a}: ({c})' //鼠标移动到点的提示框
                 },
                 xAxis: {
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            fontSize: 16
+                        }
+                    },
                     type: 'category',
                     data: _keys,
                     scale: true
                 },
                 yAxis: {
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            fontSize: 16
+                        }
+                    },
                     scale: true
                 },
                 series: [
@@ -333,7 +344,7 @@
                     x: 'left', //标题文本的位置
                     y: 0,
                     textStyle: {
-                        fontSize: 16,
+                        fontSize: 26,
                         fontWeight: 'normal'
                     }
                 },
@@ -370,7 +381,7 @@
                     x: 'left', //标题文本的位置
                     y: 0,
                     textStyle: {
-                        fontSize: 16,
+                        fontSize: 26,
                         fontWeight: 'normal'
                     }
                 },
@@ -412,7 +423,7 @@
                     x: 'left', //标题文本的位置
                     y: 50,
                     textStyle: {
-                        fontSize: 16,
+                        fontSize: 26,
                         fontWeight: 'normal'
                     }
                 },
@@ -420,7 +431,10 @@
                     orient: 'vertical',
                     top: '100',
                     left: '300',
-                    data: dataAll.k
+                    data: dataAll.k,
+                    textStyle:{
+                        fontSize:14
+                    }
                 },
                 tooltip: {
                     trigger: 'item',
@@ -441,6 +455,14 @@
                                 shadowOffsetX: 0,
                                 shadowColor: 'rgba(0, 0, 0, 0.5)'
                             }
+                        },
+                        label:{
+                            normal:{
+                                textStyle:{
+                                    fontSize:16
+                                }
+                            }
+
                         }
                     }
                 ]
@@ -475,7 +497,7 @@
                     x: 'left', //标题文本的位置
                     y: 0,
                     textStyle: {
-                        fontSize: 16,
+                        fontSize: 26,
                         fontWeight: 'normal'
                     }
                 },
@@ -571,7 +593,7 @@
                     x: 'left',
                     y: 0,
                     textStyle: {
-                        fontSize: 16,
+                        fontSize: 26,
                         fontWeight: 'normal'
                     }
                 },
@@ -864,15 +886,13 @@
             $.each(data.variableList, function (i, v) {
                 markpoint.push(v.varietyName);
             });
-            console.log(markpoint);
-            console.log(dataAll);
             _option = {
                 title: {
                     text: setting.title,
                     x: 'left',
                     y: 0,
                     textStyle: {
-                        fontSize: 16,
+                        fontSize: 26,
                         fontWeight: 'normal'
                     }
                 },
@@ -1012,13 +1032,13 @@
 
         //聚类图
         function _clusteringHandle(_data, config, clusterDataMax) {
-            labelH=0;
+            labelH = 0;
             ['jquery.md5', 'freq', 'squareform', 'data', 'graphs', 'pdist', 'linkage', 'dendrogram'].map(function (scri, index) {
                 $('body').append(
                     $('<script>').clone().attr('type', 'text/javascript').attr('src', 'js/lib/dendrogram/' + scri + '.js')
                 )
             });
-            var rawData = [],_len=config.independentVariable.length;
+            var rawData = [], _len = config.independentVariable.length;
 
             config.independentVariable.map(function (variable, index) {
                 var position = variable.position;
@@ -1065,12 +1085,12 @@
             data.dendrogram.metric = 'euclidean';
             data.dendrogram.amalgamation = 'average';
 
-            var _long=[0,190,290,290,375,390,410,420,430];
+            var _long = [0, 190, 290, 290, 375, 390, 410, 420, 430, 430, 530];
             rawData.forEach(function (v, i) {
                 dendrogram.ctx.font = dendrogram.font;
                 dendrogram.ctx.strokeStyle = "rgba(0,0,0,0.5)";
                 dendrogram.ctx.textAlign = "end";
-                dendrogram.ctx.fillText(v.title, 290, labelH + i * (_long[_len-1]/(_len-1)) + 5);
+                dendrogram.ctx.fillText(v.title, 190, labelH + i * (_long[_len - 1] / (_len - 1)) + 5);
             });
 
             //坐标轴
@@ -1126,7 +1146,7 @@
                     x: 'left', //标题文本的位置
                     y: 0,
                     textStyle: {
-                        fontSize: 16,
+                        fontSize: 26,
                         fontWeight: 'normal'
                     }
                 },
@@ -1198,7 +1218,7 @@
                     x: 'left', //标题文本的位置
                     y: 0,
                     textStyle: {
-                        fontSize: 16,
+                        fontSize: 26,
                         fontWeight: 'normal'
                     }
                 },
@@ -1316,7 +1336,7 @@
                 return;
             }
             var line = [];
-            for(var i=0;i<text.length;i+=maxWidth){
+            for (var i = 0; i < text.length; i += maxWidth) {
                 line.push(text.substring(i, i + maxWidth));
             }
             var len = line.length;
