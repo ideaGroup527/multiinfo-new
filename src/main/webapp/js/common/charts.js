@@ -148,7 +148,7 @@
                 }
                 case "100000000"://主成分因子平面二维图
                 {
-                    _pcfp2dHandle(setting.data);
+                    _pcfp2dHandle(setting.data,setting.sub);
                     _render();
                     break;
                 }
@@ -878,10 +878,10 @@
         }
 
         //主成分因子平面图二维图
-        function _pcfp2dHandle(data) {
+        function _pcfp2dHandle(data,sub) {
             var dataAll = [], markpoint = [];
-            $.each(data.data.componentArr, function (i, v) {
-                dataAll.push([v[0], v[1], data.variableList[i].varietyName]);
+            $.each(sub, function (i, v) {
+                dataAll.push([data.data.componentArr[v][0], data.data.componentArr[v][1], data.variableList[v].varietyName]);
             });
             $.each(data.variableList, function (i, v) {
                 markpoint.push(v.varietyName);
