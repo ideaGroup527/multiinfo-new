@@ -197,13 +197,22 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 		double max = basicStatisticsService.max(uniqArr);
 		double min=	basicStatisticsService.min(uniqArr);
 		double range = max-min;
-		double interval=	FastMath.ceil(range / uniqSize);
+		int groupCount = 6;
+		double interval=	FastMath.ceil(range / groupCount );
 		Double down = uniqArr[0] - interval / 2;
-		for (int i = 0; i < uniqArr.length; i++) {
+		int uniqPos= 0;
+		for (int i = 0; i <groupCount; i++) {
 			UpDownDTO e = new UpDownDTO();
 			Double up = down+interval;
 			e.setUp(up);
 			e.setDown(down);
+			long eFrequency = 0;
+while(uniqPos<uniqArr.length && uniqArr[uniqPos]<up) {
+	eFrequency+=Long.valueOf(frequencyMap.get(String.valueOf(uniqArr[uniqPos]) ).toString());
+	uniqPos++;
+}
+e.setFrequency(eFrequency);	
+			
 			down=up;
 			interList.add(e );
 		}
