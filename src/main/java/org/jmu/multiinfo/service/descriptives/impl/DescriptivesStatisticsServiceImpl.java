@@ -198,16 +198,18 @@ public class DescriptivesStatisticsServiceImpl implements DescriptivesStatistics
 		double min=	basicStatisticsService.min(uniqArr);
 		double range = max-min;
 		double interval=	FastMath.ceil(range / uniqSize);
-		
+		Double down = uniqArr[0] - interval / 2;
 		for (int i = 0; i < uniqArr.length; i++) {
 			UpDownDTO e = new UpDownDTO();
-			Double down = uniqArr[i] - interval / 2;
 			Double up = down+interval;
 			e.setUp(up);
 			e.setDown(down);
+			down=up;
 			interList.add(e );
 		}
 		}
+		
+		
 						
 /*			if (varietyDTO.getType() == DataVariety.DATA_TYPE_NUMERIC) {
 				Collections.sort(uniqList, new Comparator<Object>() {
