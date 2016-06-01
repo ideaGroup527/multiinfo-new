@@ -378,7 +378,6 @@
 
         //直方正态图
         function _barLineHandle(data) {
-            console.log(data);
             var xdata = [];
             var dataAll=[];
             data.uniqueData.map(function (v, i) {
@@ -386,7 +385,6 @@
                 dataAll.push([i,v]);
             });
 
-            console.log(xdata,data.uniqueData);
             _option = {
                 title: {
                     text: setting.title, //主标题文本
@@ -947,9 +945,16 @@
         //主成分因子平面图二维图
         function _pcfp2dHandle(data,sub) {
             var dataAll = [], markpoint = [];
-            $.each(sub, function (i, v) {
-                dataAll.push([data.data.componentArr[v][0], data.data.componentArr[v][1], data.variableList[v].varietyName]);
-            });
+            var dd=[];
+            //, data.variableList[v].varietyName
+            var _len=data.data.componentArr[0].length;
+
+            for(var i=0;i<_len;i++){
+                var x=data.data.componentArr[sub[0]][i];
+                var y=data.data.componentArr[sub[1]][i];
+                dataAll.push([x,y, data.variableList[sub[0]].varietyName]);
+            }
+
             $.each(data.variableList, function (i, v) {
                 markpoint.push(v.varietyName);
             });
