@@ -203,7 +203,7 @@
             var _keys = Object.keys(data.resDataMap);
 
             _keys.map(function (v, i) {
-                dataAll.push([i + 1, data.resDataMap[v].resultData.total])
+                dataAll.push([i + 1, data.resDataMap[v].resultData.arithmeticMean])
             })
 
             _option = {
@@ -243,7 +243,7 @@
             var _keys = Object.keys(data.resDataMap);
 
             _keys.map(function (v, i) {
-                dataAll.push([i + 1, data.resDataMap[v].resultData.total])
+                dataAll.push([i + 1, data.resDataMap[v].resultData.arithmeticMean])
             })
 
             _option = {
@@ -282,7 +282,7 @@
             var dataAll = [];
             var _keys = Object.keys(data.resDataMap);
             _keys.map(function (v, i) {
-                dataAll.push(data.resDataMap[v].resultData.total)
+                dataAll.push(data.resDataMap[v].resultData.arithmeticMean)
             });
             _option = {
                 title: {
