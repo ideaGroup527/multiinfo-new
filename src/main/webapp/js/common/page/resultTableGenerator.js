@@ -59,6 +59,7 @@ var resultTableGenerator = function () {
             handleANOVA(tableResult);
             break;
         case 'Means':
+            //均值比较 - 均值
             handleMeans(tableResult);
             break;
         case 'Simple_Linear_Regression':
@@ -86,6 +87,7 @@ var resultTableGenerator = function () {
             handleOptimalSegmentation(tableResult);
             break;
         case 'Cluster_Analysis':
+            //聚类分析
             handleClusterAnalysis(tableResult);
             break;
     }
@@ -97,7 +99,9 @@ var resultTableGenerator = function () {
             var graphArea = $('<div>');
             $(graphArea).css({
                 'height': 800
-            }).addClass('col-md-12').attr('id', 'graph_' + i);
+            }).attr('id', 'graph_' + i);
+
+            (graph == 'dingchart') ? $(graphArea).addClass('col-md-12') : $(graphArea).addClass('col-md-6');
 
             $(presentArea).append(graphArea);
 
@@ -247,7 +251,7 @@ var handleDescriptiveStatisticsFrequency = function (tableResult) {
     var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
 
     var frequencyData = tableResult.resDataMap;
-    console.log(frequencyData);
+    var keys = Object.keys(frequencyData);
 
     for (var variable in frequencyData) {
         var container = $('<div>');
@@ -337,7 +341,54 @@ var handleDescriptiveStatisticsFrequency = function (tableResult) {
         $(container).append(variableTable);
         $(presentArea).append(container);
     }
+
+    //打印KS检验表
+    var container_2 = $(container).clone();
+    $(container_2).append(
+        $('<h1>').clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_one_sample_k_s_test')
+    );
+
+    var table_2 = $('<table>').clone().addClass('table table-striped table-bordered');
+    var table_2_row_1 = $('<tr>').clone();
+    $(table_2_row_1).append($('<th>').clone());
+    $(table_2).append(table_2_row_1);
+
+    keys.map(function (key, i) {
+        $(table_2_row_1).append($('<th>').clone().text(key))
+    });
+    ['n', 'mean', 'sd', 'absolute', 'positive', 'negative', 'ksz'].map(function (alg, index) {
+        var dataRow = $('<tr>').clone();
+
+        $(dataRow).append(
+            $('<td>').clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', alg).css('text-align', 'right')
+        );
+
+        keys.map(function (key) {
+            $(dataRow).append($('<td>').clone().text(Number(frequencyData[key]['resultData']['ksTest'][alg]).toFixed(numReservation)))
+        });
+
+        $(table_2).append(dataRow);
+    });
+
+    $(container_2).append(table_2);
+    $(presentArea).append(container_2);
+
+    keys.map(function (key, index) {
+        var graphArea = $('<div>');
+        $(graphArea).css({
+            'height': 800
+        }).attr('id', 'graph_' + index).addClass('col-md-6');
+
+        $(presentArea).append(graphArea);
+
+        $('#graph_' + index).charts({
+            title: key,
+            type: ['bar_curve'],
+            data: frequencyData[key]['resultData']
+        });
+    });
 };
+
 var handleCorrelationBivariate = function (tableResult) {
     var presentArea = $('.result-table');
 
@@ -925,7 +976,7 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
     //制图
     //碎石图
     $(presentArea).append(
-        $(block).clone().css('height', '800px').addClass('col-md-12').attr('id', 'graph_screeplot')
+        $(block).clone().css('height', '800px').addClass('col-md-6').attr('id', 'graph_screeplot')
     );
     $('#graph_screeplot').charts({
         title: _String['graph'][lang]['scree_plot'],
@@ -938,7 +989,7 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
         var graphArea = $('<div>');
         $(graphArea).css({
             'height': 800
-        }).addClass('col-md-12').attr('id', 'graph_2d');
+        }).addClass('col-md-6').attr('id', 'graph_2d');
 
         $(presentArea).append(graphArea);
 
@@ -954,7 +1005,7 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
         var graphArea = $('<div>');
         $(graphArea).css({
             'height': 800
-        }).addClass('col-md-12').attr('id', 'graph_3d');
+        }).addClass('col-md-6').attr('id', 'graph_3d');
 
         $(presentArea).append(graphArea);
 
@@ -967,7 +1018,35 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
         });
     }
 
+    var container_2 = $(container).clone().addClass('col-md-6');
+    var selectVar_1 = $('<select>').attr('id', 'var_1').addClass('form-control');
+    var selectVar_2 = $('<select>').attr('id', 'var_2').addClass('form-control');
+
+    var rowBlock = $('<div>').clone().addClass('row');
+    $(rowBlock).append(
+        $('<div>').clone().addClass('col-md-5').append(selectVar_1)
+    ).append(
+        $('<div>').clone().addClass('col-md-5').append(selectVar_2)
+    ).append(
+        $('<button>').clone().addClass('btn btn-primary').attr('id', 'draw_2d').attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_draw_2d')
+    );
+
+    tableResult.data.componentArr.map(function (component, index) {
+        $(selectVar_1).append(
+            $('<option>').val(index).text('F' + (index + 1))
+        );
+
+        $(selectVar_2).append(
+            $('<option>').val(index).text('F' + (index + 1))
+        );
+    });
+
+    $(container_2).append(rowBlock)
+        .append($(container).clone().attr('id', '2d_drawing').css('height', '800px'));
+
+    $(presentArea).append(container_2);
 };
+
 var handleFactorAnalysis = function (tableResult) {
 
     //声明放置区域
@@ -1111,7 +1190,7 @@ var handleFactorAnalysis = function (tableResult) {
         $(dataRow).append($(cell).clone().text(variable));
 
         tableResult.data.eigenvectors.map(function (data, i) {
-            $(dataRow).append($(cell).clone().text(data[index]));
+            $(dataRow).append($(cell).clone().text(Number(data[index]).toFixed(numReservation)));
         });
         $(correlationCoeffTable).append(dataRow);
     });
@@ -1304,6 +1383,34 @@ var handleFactorAnalysis = function (tableResult) {
 
     $(orthArea).append(orthTable);
     $(presentArea).append(orthArea);
+
+    var container_2 = $(container).clone().addClass('col-md-6');
+    var selectVar_1 = $('<select>').attr('id', 'var_1').addClass('form-control');
+    var selectVar_2 = $('<select>').attr('id', 'var_2').addClass('form-control');
+
+    var rowBlock = $('<div>').clone().addClass('row');
+    $(rowBlock).append(
+        $('<div>').clone().addClass('col-md-5').append(selectVar_1)
+    ).append(
+        $('<div>').clone().addClass('col-md-5').append(selectVar_2)
+    ).append(
+        $('<button>').clone().addClass('btn btn-primary').attr('id', 'draw_2d').attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_draw_2d')
+    );
+
+    tableResult.data.componentArr.map(function (component, index) {
+        $(selectVar_1).append(
+            $('<option>').val(index).text('F' + (index + 1))
+        );
+
+        $(selectVar_2).append(
+            $('<option>').val(index).text('F' + (index + 1))
+        );
+    });
+
+    $(container_2).append(rowBlock)
+        .append($(container).clone().attr('id', '2d_drawing').css('height', '800px'));
+
+    $(presentArea).append(container_2);
 };
 
 var handleCorrespondenceAnalysis = function (tableResult) {
@@ -1747,38 +1854,52 @@ var handleRelatedVariable = function (tableResult) {
     var span = $('<span>');
 
     //是否可预测
-    //if (tableResult.examineSuccess) {
-    //变量数组
-    var variableList = [];
-    tableResult.independVarList.map(function (variable) {
-        variableList.push(variable.varietyName);
-    });
-
-    //变量行
-    var variableRow = $(row).clone();
-    $(variableRow).append(emptyCell);
-    variableList.map(function (variableName) {
-        $(variableRow).append($(headerCell).clone().text(variableName));
-    });
-    $(table).append(variableRow);
-
-    //打印预测值
-    var predictionRow = $(row).clone();
-    $(predictionRow).append($(cell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_prediction_value'));
-    tableResult.resData.map(function (value) {
-        if (Number(value) != NaN) {
-            $(predictionRow).append($(cell).clone().text(Number(value).toFixed(numReservation)));
+    if (!tableResult.examineSuccess) {
+        var str = '';
+        switch (lang) {
+            case 'zh-cn':
+            case 'ja-jp':
+                str = '数据有误，请检查';
+                break;
+            case 'en-us':
+                str = 'Data check, please check';
+                break;
         }
-    });
-    $(table).append(predictionRow);
+        alert(str);
+        window.history.go(-1);
+    } else {
+        //变量数组
+        var variableList = [];
+        tableResult.independVarList.map(function (variable) {
+            variableList.push(variable.varietyName);
+        });
 
-    //打印表名和表格
-    $(container).append($(tableHeader).clone().text(tableResult.predictName)).append(table);
-    $(presentArea).append(container);
-    //} else {
-    //    alert('该数据不符合灰色预测的数据检验要求');
-    //    window.history.go(-1);
-    //}
+        //变量行
+        var variableRow = $(row).clone();
+        $(variableRow).append(emptyCell);
+        variableList.map(function (variableName) {
+            $(variableRow).append($(headerCell).clone().text(variableName));
+        });
+        $(table).append(variableRow);
+
+        //打印预测值
+        var predictionRow = $(row).clone();
+        $(predictionRow).append($(cell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_prediction_value'));
+        tableResult.resData.map(function (value) {
+            if (Number(value) != NaN) {
+                $(predictionRow).append($(cell).clone().text(Number(value).toFixed(numReservation)));
+            }
+        });
+        $(table).append(predictionRow);
+
+        //打印表名和表格
+        $(container).append($(tableHeader).clone().text(tableResult.predictName)).append(table);
+        $(presentArea).append(container);
+        //} else {
+        //    alert('该数据不符合灰色预测的数据检验要求');
+        //    window.history.go(-1);
+        //}
+    }
 };
 var handleGrayCorrelation = function (tableResult) {
     //声明放置区域

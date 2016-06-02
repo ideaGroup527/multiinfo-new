@@ -59,13 +59,6 @@
             "script": "script.js"
           },
           {
-            "term": "PartialCorrelation",
-            "name": {
-              "zh-cn": "偏相关",
-              "en-us": "Partial Correlation"
-            }
-          },
-          {
             "term": "Distance",
             "name": {
               "zh-cn": "距离",
