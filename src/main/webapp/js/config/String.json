@@ -77,7 +77,7 @@
     "en-us": {
       "barchart": "Bar Chart",
       "boxplot": "Box Plot",
-      "bar": "Histogram",
+      "bar": "Bar Chart",
       "line": "Line Chart",
       "pie": "Pie Graph",
       "scatter": "Scatter Diagram",
@@ -91,7 +91,7 @@
     "zh-cn": {
       "barchart": "条形图",
       "boxplot": "箱线图",
-      "bar": "直方图",
+      "bar": "条形图",
       "line": "折线图",
       "pie": "饼图",
       "scatter": "散点图",
@@ -105,7 +105,7 @@
     "ja-jp": {
       "barchart": "条形图",
       "boxplot": "箱线图",
-      "bar": "直方图",
+      "bar": "条形图",
       "line": "折线图",
       "pie": "饼图",
       "scatter": "散点图",
@@ -258,7 +258,8 @@
       "label_choose_curve_color": "Choose Curve Color",
       "label_one_sample_k_s_test": "One-Sample Kolmogorov-Smirnov Test",
       "label_draw_2d": "Draw 2D",
-      "label_choose_var_first": "Please Choose Variable(s) First"
+      "label_choose_var_first": "Please Choose Variable(s) First",
+      "label_grey_no_match": "<strong>*Note:</strong> NaN represents that data is no matching to the Grey Prediction."
     },
     "zh-cn": {
       "options": "选项",
@@ -403,7 +404,8 @@
       "label_choose_curve_color": "选择曲线颜色",
       "label_one_sample_k_s_test": "单样本 Kolmogorov-Smirnov 检验",
       "label_draw_2d": "作2d图",
-      "label_choose_var_first": "请先选择变量"
+      "label_choose_var_first": "请先选择变量",
+      "label_grey_no_match": "<strong>*注意:</strong> NaN表示该数据不符合灰色预测的数据检验。"
     },
     "ja-jp": {
       "options": "オプション",
@@ -547,7 +549,8 @@
       "label_choose_curve_color": "选择曲线颜色",
       "label_one_sample_k_s_test": "单样本 Kolmogorov-Smirnov 检验",
       "label_draw_2d": "作2d图",
-      "label_choose_var_first": "请先选择变量"
+      "label_choose_var_first": "请先选择变量",
+      "label_grey_no_match": "<strong>*注意:</strong> NaN表示该数据不符合灰色预测的数据检验。"
     }
   },
   "table": {

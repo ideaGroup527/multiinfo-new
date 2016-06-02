@@ -1268,9 +1268,10 @@ var handleFactorAnalysis = function (tableResult) {
         var dataRow = $(row).clone();
         $(dataRow).append($(cell).clone().text(variable));
 
-        varianceData.map(function (value, i) {
-            $(dataRow).append($(cell).clone().text(Number(value[index]).toFixed(numReservation)));
+        varianceData[index].map(function (value, i) {
+            $(dataRow).append($(cell).clone().text(Number(value).toFixed(numReservation)))
         });
+
         $(varianceTable).append(dataRow);
     });
 
@@ -1816,6 +1817,9 @@ var handleRelatedVariable = function (tableResult) {
 
         //打印表名和表格
         $(container).append($(tableHeader).clone().text(tableResult.predictName)).append(table);
+        $(container).append(
+            $(block).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_grey_no_match')
+        );
         $(presentArea).append(container);
         //} else {
         //    alert('该数据不符合灰色预测的数据检验要求');
@@ -2021,6 +2025,9 @@ var handleANOVA = function (tableResult) {
     });
 
     $(container).append(table);
+    $(container).append(
+        $(block).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_grey_no_match')
+    );
     $(presentArea).append(container);
 };
 var handleMeans = function (tableResult) {
