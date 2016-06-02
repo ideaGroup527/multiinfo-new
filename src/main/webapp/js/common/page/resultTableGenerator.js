@@ -119,69 +119,6 @@ var resultTableGenerator = function () {
                 ellipsesColor: (dingConfig) ? dingConfig.ellipsesColor[0] : null,
                 cureColor: (dingConfig) ? dingConfig.cureColor[0] : null
             });
-
-            //switch (graph) {
-            //    case 'boxplot':
-            //        //箱线图
-            //        $('#graph_' + i).charts({
-            //            title: graphName,
-            //            type: ['boxplot'],
-            //            data: tableResult
-            //        });
-            //        break;
-            //    case 'piegraph':
-            //        //饼图
-            //        $('#graph_' + i).charts({
-            //            title: graphName,
-            //            type: ['pie'],
-            //            data: tableResult
-            //        });
-            //        break;
-            //    case 'histogram':
-            //        //直方图
-            //        $('#graph_' + i).charts({
-            //            title: graphName,
-            //            type: ['bar'],
-            //            data: tableResult
-            //        });
-            //        break;
-            //    case 'linechart':
-            //        //折线图
-            //        $('#graph_' + i).charts({
-            //            title: graphName,
-            //            type: ['line'],
-            //            data: tableResult
-            //        });
-            //        break;
-            //    case 'scatterdiagram':
-            //        //散点图
-            //        $('#graph_' + i).charts({
-            //            title: graphName,
-            //            type: ['cure'],
-            //            data: tableResult
-            //        });
-            //        break;
-            //    case 'dingchart':
-            //        //丁氏图
-            //        var dingConfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_DING_CHART'));
-            //        $('#graph_' + i).charts({
-            //            title: graphName,
-            //            type: ['dingchart'],
-            //            data: tableResult,
-            //            calculateMethod: dingConfig.calculateMethod[0],//0行，1列，2全
-            //            ellipsesColor: "#CC5B58",
-            //            cureColor: "#D48366"
-            //        });
-            //        break;
-            //    case 'basicline':
-            //        //碎石图
-            //        $('#graph_' + i).charts({
-            //            title: '碎石图',
-            //            type: ['screeplot'],
-            //            data: tableResult.data.eigTotalInit
-            //        });
-            //        break;
-            //}
         });
     }
     return def.resolve().promise();
@@ -199,46 +136,31 @@ var handleDescriptiveStatisticsDescriptive = function (tableResult) {
     var table = $('<table>');
     $(table).addClass('table table-striped table-bordered table-condensed');
 
-    var tr = $('<tr>');
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
 
-    var emptyCell = $('<td>');
-    $(tr).append(emptyCell);
+    var table_1_row_1 = $(row).clone();
+    $(table_1_row_1).append($(headerCell).clone());
 
-    var countHeaderCell = $('<th>');
-    $(countHeaderCell).text('N');
-    $(tr).append(countHeaderCell);
+    var keys = Object.keys(tableResult.resDataMap);
+    keys.map(function (key) {
+        $(table_1_row_1).append($(headerCell).clone().text(key));
+    });
+    $(table).append(table_1_row_1);
 
     algorithmConfigs.map(function (config) {
-        var th = $('<th>');
-        $(th).attr('data-i18n-type', 'algorithm')
-            .attr('data-i18n-tag', config)
-            .attr('data-config', config);
-        $(tr).append(th);
-    });
-    $(table).append(tr);
+        var dataRow = $(row).clone();
+        $(dataRow).append($(cell).clone().attr('data-i18n-type','algorithm').attr('data-i18n-tag',config));
 
-
-    for (var key in tableResult.resDataMap) {
-        var params = tableResult.resDataMap[key].resultData;
-
-        var tr = $('<tr>');
-
-        var keyCell = $('<td>');
-        $(keyCell).text(key);
-        $(tr).append(keyCell);
-
-        var countCell = $('<td>');
-        $(countCell).text(params.count);
-        $(tr).append(countCell);
-
-        algorithmConfigs.map(function (config) {
-            var td = $('<td>');
-            $(td).text(Number(params[config]).toFixed(numReservation));
-            $(tr).append(td);
+        keys.map(function (key) {
+            $(dataRow).append(
+                $(cell).clone().text(Number(tableResult.resDataMap[key]['resultData'][config]).toFixed(numReservation))
+            );
         });
 
-        $(table).append(tr);
-    }
+        $(table).append(dataRow);
+    });
 
     $(presentArea).append(table);
 
@@ -840,7 +762,7 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
 
         communalityArr[index].map(function (value) {
             var valueCell = $(cell).clone();
-            $(valueCell).text((Number(value) != NaN) ? Number(value).toFixed(numReservation) : value);
+            $(valueCell).text(Number(value).toFixed(numReservation));
             $(variableRow).append(valueCell);
         });
         $(communalityTable).append(variableRow);
@@ -2876,8 +2798,10 @@ var handleSlipStepwiseRegression = function (tableResult) {
         } else {
             if (value > 0) {
                 _equationString += ' + ' + Number(value).toFixed(numReservation) + ' × ' + independentVariable[index - 1].varietyName;
-            } else {
+            } else if (value < 0) {
                 _equationString += ' - ' + Math.abs(Number(value).toFixed(numReservation)) + ' × ' + independentVariable[index - 1].varietyName;
+            } else {
+                return;
             }
         }
     });
@@ -2900,7 +2824,7 @@ var handleSlipStepwiseRegression = function (tableResult) {
         $(block).clone().append(
             $(span).clone().html(
                 (localStorage.getItem('MULTIINFO_CONFIG_LANGUAGE') == 'zh-cn') ?
-                '<strong>' + _key[0] + '</strong>' + ' 年的 ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' 的预测值是：' + Number(tableResult.backForecast[_key[0]]).toFixed(numReservation) :
+                '<strong>' + _key[0] + '</strong>' + ' 年的 ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' 的推测值是：' + Number(tableResult.backForecast[_key[0]]).toFixed(numReservation) :
                 'The predictive value of ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' in ' + '<strong>' + _key[0] + '</strong>' + ' is: ' + Number(tableResult.backForecast[_key[0]]).toFixed(numReservation))
         )
     );
@@ -3243,11 +3167,11 @@ var handleTrendStepwiseRegression = function (tableResult) {
     var trendEstimatedString_2 = '';
 
     if (localStorage.getItem('MULTIINFO_CONFIG_LANGUAGE') == 'zh-cn') {
-        trendEstimatedString_1 = '前移趋势回归按5:3:2的权重得到 <strong>' + backKey + '</strong> 的 <strong>' + TSRConfig.dependentVariable[0].varietyName + '</strong> 为' + Number(tableResult.backForecast[backKey]).toFixed(numReservation);
-        trendEstimatedString_2 = '前移趋势回归按1:1:1的权重得到 <strong>' + backKey + '</strong> 的 <strong>' + TSRConfig.dependentVariable[0].varietyName + '</strong> 为' + Number(backwardAverageWeightValue).toFixed(numReservation);
+        trendEstimatedString_1 = '后移趋势回归按5:3:2的权重得到 <strong>' + backKey + '</strong> 的 <strong>' + TSRConfig.dependentVariable[0].varietyName + '</strong> 为' + Number(tableResult.backForecast[backKey]).toFixed(numReservation);
+        trendEstimatedString_2 = '后移趋势回归按1:1:1的权重得到 <strong>' + backKey + '</strong> 的 <strong>' + TSRConfig.dependentVariable[0].varietyName + '</strong> 为' + Number(backwardAverageWeightValue).toFixed(numReservation);
     } else {
-        trendEstimatedString_1 = 'Using the Weight ratio of 5:3:2, the forward trend regression returns the value of <strong>' + TSRConfig.dependentVariable[0].varietyName + '</strong> in <strong>' + backKey + '</strong> is: ' + Number(tableResult.backForecast[backKey]).toFixed(numReservation);
-        trendEstimatedString_2 = 'Using the Weight ratio of 1:1:1, the forward trend regression returns the value of <strong>' + TSRConfig.dependentVariable[0].varietyName + '</strong> in <strong>' + backKey + '</strong> is: ' + Number(backwardAverageWeightValue).toFixed(numReservation);
+        trendEstimatedString_1 = 'Using the Weight ratio of 5:3:2, the backward trend regression returns the value of <strong>' + TSRConfig.dependentVariable[0].varietyName + '</strong> in <strong>' + backKey + '</strong> is: ' + Number(tableResult.backForecast[backKey]).toFixed(numReservation);
+        trendEstimatedString_2 = 'Using the Weight ratio of 1:1:1, the backward trend regression returns the value of <strong>' + TSRConfig.dependentVariable[0].varietyName + '</strong> in <strong>' + backKey + '</strong> is: ' + Number(backwardAverageWeightValue).toFixed(numReservation);
     }
 
     $(container_6).append(
