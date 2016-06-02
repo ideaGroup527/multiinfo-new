@@ -162,7 +162,9 @@ public class GreyPredictionServiceImpl implements GreyPredictionService{
 		gpDTO.setPredictName((DataFormatUtil.converToDouble(factNameList.get(factNameList.size()-1))+1) +"");
 		Map<String, List<Double>> dataMap = DataFormatUtil.converToDouble(dataGrid, independVarList);
 		double[] sumArr = new double[independVarList.size()];
+		 boolean[] examArr= new boolean[independVarList.size()];
 	    int pos=0;
+	    gpDTO.setExamineSuccess(true);
 		for (VarietyDTO indepDto : independVarList) {
 			double[] dataArrTmp = 	DataFormatUtil.converToDouble(dataMap.get(indepDto.getVarietyName()));
 			double[] dataArr = new double[factNameList.size()];
@@ -171,8 +173,12 @@ public class GreyPredictionServiceImpl implements GreyPredictionService{
 			}
 			
 	    	try {
-				gpDTO.setExamineSuccess(examineGrey(dataArr));
-				if(!gpDTO.getExamineSuccess()) return gpDTO;
+				boolean tempExam = examineGrey(dataArr);
+				examArr[pos] = tempExam;
+				if(!tempExam) {
+					 sumArr[pos++] = Double.NaN;
+					continue;
+				}
 			} catch (DataErrException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -191,6 +197,7 @@ public class GreyPredictionServiceImpl implements GreyPredictionService{
 				gpDTO.setRet_code("-1");
 			}
 		}
+		gpDTO.setExamArr(examArr);
 	   gpDTO.setResData(sumArr);
 	   gpDTO.setRet_code("0");
 		return gpDTO;

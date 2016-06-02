@@ -8,6 +8,7 @@ import org.jmu.multiinfo.dto.basestatistics.VarietyDTO;
 public class GreyPredictionDTO extends BaseDTO{
 private boolean examineSuccess;
 private double[] resData;
+private boolean[] examArr;
 private String predictName;
 private List<VarietyDTO> independVarList;
 public boolean getExamineSuccess() {
@@ -41,6 +42,14 @@ public List<VarietyDTO> getIndependVarList() {
 
 public void setIndependVarList(List<VarietyDTO> independVarList) {
 	this.independVarList = independVarList;
+}
+
+public boolean[] getExamArr() {
+	return examArr;
+}
+
+public void setExamArr(boolean[] examArr) {
+	this.examArr = examArr;
 }
 
 
