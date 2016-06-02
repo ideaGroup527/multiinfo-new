@@ -42,7 +42,7 @@
                         </label>
                     </div>
                 </div>
-                <div data-config-group data-group-name="factorVarVariable" style="display: none;">
+                <div data-config-group data-group-name="factorVarVariable">
                     <hr/>
                     <p data-i18n-type="page" data-i18n-tag="label_choose_identity_column">选择标识列</p>
 
@@ -92,12 +92,12 @@
         $(function () {
             $('#q_type').change(function () {
                 $('select[name=statisticsMethod]').val(2);
-                $('[data-group-name=factorVarVariable]').show();
+                $('[data-group-name=factorVarVariable]').hide();
             });
 
             $('#r_type').change(function () {
                 $('select[name=statisticsMethod]').val(0);
-                $('[data-group-name=factorVarVariable]').hide();
+                $('[data-group-name=factorVarVariable]').show();
             });
         })
     </script>
