@@ -257,7 +257,8 @@
       "label_choose_color": "Choose Filling Color",
       "label_choose_curve_color": "Choose Curve Color",
       "label_one_sample_k_s_test": "One-Sample Kolmogorov-Smirnov Test",
-      "label_draw_2d": "Draw 2D"
+      "label_draw_2d": "Draw 2D",
+      "label_choose_var_first": "Please Choose Variable(s) First"
     },
     "zh-cn": {
       "options": "选项",
@@ -401,7 +402,8 @@
       "label_choose_color": "选择填充颜色",
       "label_choose_curve_color": "选择曲线颜色",
       "label_one_sample_k_s_test": "单样本 Kolmogorov-Smirnov 检验",
-      "label_draw_2d": "作2d图"
+      "label_draw_2d": "作2d图",
+      "label_choose_var_first": "请先选择变量"
     },
     "ja-jp": {
       "options": "オプション",
@@ -544,7 +546,8 @@
       "label_choose_color": "选择填充颜色",
       "label_choose_curve_color": "选择曲线颜色",
       "label_one_sample_k_s_test": "单样本 Kolmogorov-Smirnov 检验",
-      "label_draw_2d": "作2d图"
+      "label_draw_2d": "作2d图",
+      "label_choose_var_first": "请先选择变量"
     }
   },
   "table": {

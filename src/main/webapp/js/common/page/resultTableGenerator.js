@@ -151,7 +151,7 @@ var handleDescriptiveStatisticsDescriptive = function (tableResult) {
 
     algorithmConfigs.map(function (config) {
         var dataRow = $(row).clone();
-        $(dataRow).append($(cell).clone().attr('data-i18n-type','algorithm').attr('data-i18n-tag',config));
+        $(dataRow).append($(cell).clone().attr('data-i18n-type', 'algorithm').attr('data-i18n-tag', config));
 
         keys.map(function (key) {
             $(dataRow).append(
@@ -753,19 +753,16 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
     $(communalityTable).append(communalityHeaderRow);
 
     //2.3 打印公因子方差值
-    variableNameList.map(function (variable, index) {
-        var variableRow = $(row).clone();
+    communalityArr.map(function (data, index) {
+        var dataRow = $(row).clone();
 
-        var variableCell = $(cell).clone();
-        $(variableCell).text(variable);
-        $(variableRow).append(variableCell);
+        $(dataRow).append($(cell).clone().text(variableNameList[index]));
 
-        communalityArr[index].map(function (value) {
-            var valueCell = $(cell).clone();
-            $(valueCell).text(Number(value).toFixed(numReservation));
-            $(variableRow).append(valueCell);
+        data.map(function (val, i) {
+            $(dataRow).append($(cell).clone().text(Number(val).toFixed(numReservation)))
         });
-        $(communalityTable).append(variableRow);
+
+        $(communalityTable).append(dataRow);
     });
 
     //填充到显示区域
@@ -920,7 +917,8 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
         $('#graph_2d').charts({
             title: graphName,
             type: ['pcfp2d'],
-            data: tableResult
+            data: tableResult,
+            sub: ['0', '1']
         });
     } else if (componentMatrix[0].length == 3) {
         //画2D图
@@ -938,35 +936,37 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
             type: ['pcfp3d'],
             data: tableResult
         });
+    } else if (componentMatrix[0].length > 3) {
+        var container_2 = $(container).clone().addClass('col-md-6');
+        var selectVar_1 = $('<select>').attr('id', 'var_1').addClass('form-control');
+        var selectVar_2 = $('<select>').attr('id', 'var_2').addClass('form-control');
+
+        var rowBlock = $('<div>').clone().addClass('row');
+        $(rowBlock).append(
+            $('<div>').clone().addClass('col-md-5').append(selectVar_1)
+        ).append(
+            $('<div>').clone().addClass('col-md-5').append(selectVar_2)
+        ).append(
+            $('<button>').clone().addClass('btn btn-primary').attr('id', 'draw_2d').attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_draw_2d')
+        );
+
+        tableResult.data.componentArr.map(function (component, index) {
+            $(selectVar_1).append(
+                $('<option>').val(index).text('F' + (index + 1))
+            );
+
+            $(selectVar_2).append(
+                $('<option>').val(index).text('F' + (index + 1))
+            );
+        });
+
+        $(container_2).append(rowBlock)
+            .append($(container).clone().attr('id', '2d_drawing').css('height', '800px'));
+
+        $(presentArea).append(container_2);
     }
 
-    var container_2 = $(container).clone().addClass('col-md-6');
-    var selectVar_1 = $('<select>').attr('id', 'var_1').addClass('form-control');
-    var selectVar_2 = $('<select>').attr('id', 'var_2').addClass('form-control');
 
-    var rowBlock = $('<div>').clone().addClass('row');
-    $(rowBlock).append(
-        $('<div>').clone().addClass('col-md-5').append(selectVar_1)
-    ).append(
-        $('<div>').clone().addClass('col-md-5').append(selectVar_2)
-    ).append(
-        $('<button>').clone().addClass('btn btn-primary').attr('id', 'draw_2d').attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_draw_2d')
-    );
-
-    tableResult.data.componentArr.map(function (component, index) {
-        $(selectVar_1).append(
-            $('<option>').val(index).text('F' + (index + 1))
-        );
-
-        $(selectVar_2).append(
-            $('<option>').val(index).text('F' + (index + 1))
-        );
-    });
-
-    $(container_2).append(rowBlock)
-        .append($(container).clone().attr('id', '2d_drawing').css('height', '800px'));
-
-    $(presentArea).append(container_2);
 };
 
 var handleFactorAnalysis = function (tableResult) {
@@ -1781,10 +1781,10 @@ var handleRelatedVariable = function (tableResult) {
         switch (lang) {
             case 'zh-cn':
             case 'ja-jp':
-                str = '数据有误，请检查';
+                str = '该数据灰色预测检验不通过';
                 break;
             case 'en-us':
-                str = 'Data check, please check';
+                str = 'This Data Doesn\'t pass the Grey Prediction Test;'
                 break;
         }
         alert(str);
@@ -2369,7 +2369,7 @@ var handleMultiLinearRegression = function (tableResult) {
     //打印三个表格
     //第一个表格：模型汇总
     //需要打印的变量列表
-    var modelSummaryList = ['r', 'rsquared', 'adjustedRSquared', 'regressionStandardError', 'f'];
+    var modelSummaryList = ['r', 'rsquare', 'adjustedRSquared', 'regressionStandardError', 'f'];
     var modelSummaryArea = $(container).clone();
     $(modelSummaryArea).append(
         $(tableHeader).clone()
@@ -2531,7 +2531,7 @@ var handleGeneralStepwiseRegression = function (tableResult) {
     ).append(
         $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'r')
     ).append(
-        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'rsquared')
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'rsquare')
     ).append(
         $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'regressionStandardError')
     ).append(
@@ -2651,7 +2651,7 @@ var handleSlipStepwiseRegression = function (tableResult) {
     ).append(
         $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'r')
     ).append(
-        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'rsquared')
+        $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'rsquare')
     ).append(
         $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', 'regressionStandardError')
     ).append(
@@ -3028,7 +3028,7 @@ var handleTrendStepwiseRegression = function (tableResult) {
 
     var table_4 = $(table).clone();
     var table_4_titleRow = $(row).clone();
-    ['backward_step', 'r', 'rsquared', 'regressionStandardError', 'f'].map(function (name) {
+    ['backward_step', 'r', 'rsquare', 'regressionStandardError', 'f'].map(function (name) {
         $(table_4_titleRow).append(
             $(headerCell).clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', name)
         );
