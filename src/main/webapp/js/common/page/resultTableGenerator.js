@@ -2026,7 +2026,7 @@ var handleANOVA = function (tableResult) {
 
     $(container).append(table);
     $(container).append(
-        $(block).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_grey_no_match')
+        $(block).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_pri_no_match')
     );
     $(presentArea).append(container);
 };

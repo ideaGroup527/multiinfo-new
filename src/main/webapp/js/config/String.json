@@ -259,7 +259,8 @@
       "label_one_sample_k_s_test": "One-Sample Kolmogorov-Smirnov Test",
       "label_draw_2d": "Draw 2D",
       "label_choose_var_first": "Please Choose Variable(s) First",
-      "label_grey_no_match": "<strong>*Note:</strong> NaN represents that data is no matching to the Grey Prediction."
+      "label_grey_no_match": "<strong>*Note:</strong> NaN represents that data is no matching to the Grey Prediction.",
+      "label_pri_no_match": "<strong>*Note:</strong> NaN represents that data is no matching to the ANOVA."
     },
     "zh-cn": {
       "options": "选项",
@@ -405,7 +406,8 @@
       "label_one_sample_k_s_test": "单样本 Kolmogorov-Smirnov 检验",
       "label_draw_2d": "作2d图",
       "label_choose_var_first": "请先选择变量",
-      "label_grey_no_match": "<strong>*注意:</strong> NaN表示该数据不符合灰色预测的数据检验。"
+      "label_grey_no_match": "<strong>*注意:</strong> NaN表示该数据不符合灰色预测的数据检验。",
+      "label_pri_no_match": "<strong>*注意:</strong> NaN表示该数据不符合单因素方差的数据检验。"
     },
     "ja-jp": {
       "options": "オプション",
@@ -550,7 +552,8 @@
       "label_one_sample_k_s_test": "单样本 Kolmogorov-Smirnov 检验",
       "label_draw_2d": "作2d图",
       "label_choose_var_first": "请先选择变量",
-      "label_grey_no_match": "<strong>*注意:</strong> NaN表示该数据不符合灰色预测的数据检验。"
+      "label_grey_no_match": "<strong>*注意:</strong> NaN表示该数据不符合灰色预测的数据检验。",
+      "label_pri_no_match": "<strong>*注意:</strong> NaN表示该数据不符合单因素方差的数据检验。"
     }
   },
   "table": {
