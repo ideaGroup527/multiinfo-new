@@ -164,7 +164,23 @@ public class GreyPredictionServiceImpl implements GreyPredictionService{
 		double[] sumArr = new double[independVarList.size()];
 	    int pos=0;
 		for (VarietyDTO indepDto : independVarList) {
-			double[] dataArr = 	DataFormatUtil.converToDouble(dataMap.get(indepDto.getVarietyName()));
+			double[] dataArrTmp = 	DataFormatUtil.converToDouble(dataMap.get(indepDto.getVarietyName()));
+			double[] dataArr = new double[factNameList.size()];
+			for(int i=0;i<factNameList.size();i++){
+				dataArr[i] = dataArrTmp[i];
+			}
+			
+	    	try {
+				gpDTO.setExamineSuccess(examineGrey(dataArr));
+				if(!gpDTO.getExamineSuccess()) return gpDTO;
+			} catch (DataErrException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				gpDTO.setRet_err(e.getMessage());
+				gpDTO.setRet_code("-1");
+				gpDTO.setRet_msg("数据检验失败");
+			}
+			
 		    try {
 		    	 xlast =  gm(formCoefficient, dataArr);
 		    	 sumArr[pos++] = xlast;
