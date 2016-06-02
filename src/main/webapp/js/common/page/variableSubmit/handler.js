@@ -123,7 +123,7 @@ var handleSubmit = function (config) {
             break;
         case 'Factor_Analysis':
             //降维分析 - 因子分析
-            handleURL = 'statistics/analysis/Factor.do';
+            handleURL = 'statistics/analysis/factor.do';
             var FA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_FACTOR_ANALYSIS'));
             dataPackage.variableList = FA.variableList;
             dataPackage.extractMethod = FA.extractMethod[0];

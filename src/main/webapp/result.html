@@ -134,6 +134,22 @@
     }).on('click', '.variable-config', function (e) {
         e.preventDefault();
         $('[data-panel="config"]').toggle();
+    }).on('click', '#draw_2d', function (e) {
+        e.preventDefault();
+
+        var var_1 = $('#var_1').val();
+        var var_2 = $('#var_2').val();
+
+        var resultData = JSON.parse(sessionStorage.getItem('PRIVATE_TABLE_RESULT'));
+
+        var graphName = _String['graph'][lang]['pcfp2d'];
+
+        $('#2d_drawing').charts({
+            title: graphName,
+            data: resultData,
+            sub: [var_1, var_2],
+            type: ['pcfp2d']
+        });
     });
 </script>
 </body>

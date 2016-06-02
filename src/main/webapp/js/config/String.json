@@ -84,7 +84,7 @@
       "cluster_analysis": "Cluster Analysis",
       "fisher_line": "The Line chart of the sum of the squared deviations changes",
       "fisher": "Fisher",
-      "pcfp2d": "Principal Component Factor Flat Two-Dimensional Map",
+      "pcfp2d": "Factor Flat Two-Dimensional Map",
       "pcfp3d": "Principal Component Factor Flat Three-Dimensional Map",
       "scree_plot": "Scree Plot"
     },
@@ -98,7 +98,7 @@
       "cluster_analysis": "聚类分析图",
       "fisher_line": "离差平方总和变化折线图",
       "fisher": "最优分割图",
-      "pcfp2d": "主成分因子平面二维图",
+      "pcfp2d": "因子平面二维图",
       "pcfp3d": "主成分因子平面三维图",
       "scree_plot": "碎石图"
     },
@@ -113,7 +113,7 @@
       "fisher_line": "Optimal Segmentation",
       "fisher_line": "离差平方总和变化折线图",
       "fisher": "最优分割图",
-      "pcfp2d": "主成分因子平面二维图",
+      "pcfp2d": "因子平面二维图",
       "pcfp3d": "主成分因子平面三维图",
       "scree_plot": "碎石图"
     }
@@ -255,7 +255,9 @@
       "label_cal_res_of_clustering_step_by_step": "Calculated Results of Clustering Step by Step",
       "label_choose_identity_column": "Select Identity Column",
       "label_choose_color": "Choose Filling Color",
-      "label_choose_curve_color": "Choose Curve Color"
+      "label_choose_curve_color": "Choose Curve Color",
+      "label_one_sample_k_s_test": "One-Sample Kolmogorov-Smirnov Test",
+      "label_draw_2d": "Draw 2D"
     },
     "zh-cn": {
       "options": "选项",
@@ -378,7 +380,7 @@
       "label_forward_regression_coefficients": "前移回归系数",
       "label_backward_regression_coefficients": "后移回归系数",
       "label_forward_predict": "前移预测",
-      "label_backward_predict": "后移预测",
+      "label_backward_predict": "后移推测",
       "label_predictive_value": "预测值",
       "label_estimated_value": "推测值",
       "label_forward_trend_regression_coefficients": "前移趋势回归系数",
@@ -397,7 +399,9 @@
       "label_angle_cosine": "夹角余弦",
       "label_cal_res_of_clustering_step_by_step": "分步聚类计算结果",
       "label_choose_color": "选择填充颜色",
-      "label_choose_curve_color": "选择曲线颜色"
+      "label_choose_curve_color": "选择曲线颜色",
+      "label_one_sample_k_s_test": "单样本 Kolmogorov-Smirnov 检验",
+      "label_draw_2d": "作2d图"
     },
     "ja-jp": {
       "options": "オプション",
@@ -518,7 +522,7 @@
       "label_forward_regression_coefficients": "前移回归系数",
       "label_backward_regression_coefficients": "后移回归系数",
       "label_forward_predict": "前移预测",
-      "label_backward_predict": "后移预测",
+      "label_backward_predict": "后移推测",
       "label_predictive_value": "预测值",
       "label_estimated_value": "推测值",
       "label_forward_trend_regression_coefficients": "前移趋势回归系数",
@@ -538,7 +542,9 @@
       "label_cal_res_of_clustering_step_by_step": "分步聚类计算结果",
       "label_choose_identity_column": "选择标识列",
       "label_choose_color": "选择填充颜色",
-      "label_choose_curve_color": "选择曲线颜色"
+      "label_choose_curve_color": "选择曲线颜色",
+      "label_one_sample_k_s_test": "单样本 Kolmogorov-Smirnov 检验",
+      "label_draw_2d": "作2d图"
     }
   },
   "table": {
@@ -565,7 +571,7 @@
       "f": "F",
       "r": "R",
       "model": "Model",
-      "rsquared": "R Square",
+      "rsquare": "R Square",
       "adjustedRSquared": "Adjusted R Squared",
       "linear": "Linear",
       "regression": "Regression",
@@ -597,7 +603,13 @@
       "backward_3_steps": "3 Steps Backward",
       "serial_number": "Serial Number",
       "times": "Time(s)",
-      "result": "Result"
+      "result": "Result",
+      "mean": "Mean",
+      "sd": "Std. Deviation",
+      "absolute": "Absolute",
+      "positive": "Positive",
+      "negative": "Negative",
+      "ksz": "Kolmogorov-Smirnov Z"
     },
     "zh-cn": {
       "pearsonR": "Pearson 相关性",
@@ -622,7 +634,7 @@
       "f": "F",
       "r": "R",
       "model": "模型",
-      "rsquared": "R方",
+      "rsquare": "R方",
       "adjustedRSquared": "调整R方",
       "linear": "线性",
       "regression": "回归",
@@ -654,7 +666,13 @@
       "backward_3_steps": "后移3步",
       "serial_number": "序号",
       "times": "次数",
-      "result": "结果"
+      "result": "结果",
+      "mean": "均值",
+      "sd": "标准差",
+      "absolute": "绝对值",
+      "positive": "正",
+      "negative": "负",
+      "ksz": "Kolmogorov-Smirnov Z"
     },
     "ja-jp": {
       "pearsonR": "Pearson 相关性",
@@ -679,7 +697,7 @@
       "f": "F",
       "r": "R",
       "model": "模型",
-      "rsquared": "R方",
+      "rsquare": "R方",
       "adjustedRSquared": "调整R方",
       "linear": "线性",
       "regression": "回归",
@@ -711,7 +729,13 @@
       "backward_3_steps": "后移3步",
       "serial_number": "番号",
       "times": "次数",
-      "result": "结果"
+      "result": "结果",
+      "mean": "均值",
+      "sd": "标准差",
+      "absolute": "绝对值",
+      "positive": "正",
+      "negative": "负",
+      "ksz": "Kolmogorov-Smirnov Z"
     }
   },
   "nav": {

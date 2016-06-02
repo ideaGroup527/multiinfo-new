@@ -59,6 +59,7 @@ var resultTableGenerator = function () {
             handleANOVA(tableResult);
             break;
         case 'Means':
+            //均值比较 - 均值
             handleMeans(tableResult);
             break;
         case 'Simple_Linear_Regression':
@@ -86,6 +87,7 @@ var resultTableGenerator = function () {
             handleOptimalSegmentation(tableResult);
             break;
         case 'Cluster_Analysis':
+            //聚类分析
             handleClusterAnalysis(tableResult);
             break;
     }
@@ -97,7 +99,9 @@ var resultTableGenerator = function () {
             var graphArea = $('<div>');
             $(graphArea).css({
                 'height': 800
-            }).addClass('col-md-12').attr('id', 'graph_' + i);
+            }).attr('id', 'graph_' + i);
+
+            (graph == 'dingchart') ? $(graphArea).addClass('col-md-12') : $(graphArea).addClass('col-md-6');
 
             $(presentArea).append(graphArea);
 
@@ -115,69 +119,6 @@ var resultTableGenerator = function () {
                 ellipsesColor: (dingConfig) ? dingConfig.ellipsesColor[0] : null,
                 cureColor: (dingConfig) ? dingConfig.cureColor[0] : null
             });
-
-            //switch (graph) {
-            //    case 'boxplot':
-            //        //箱线图
-            //        $('#graph_' + i).charts({
-            //            title: graphName,
-            //            type: ['boxplot'],
-            //            data: tableResult
-            //        });
-            //        break;
-            //    case 'piegraph':
-            //        //饼图
-            //        $('#graph_' + i).charts({
-            //            title: graphName,
-            //            type: ['pie'],
-            //            data: tableResult
-            //        });
-            //        break;
-            //    case 'histogram':
-            //        //直方图
-            //        $('#graph_' + i).charts({
-            //            title: graphName,
-            //            type: ['bar'],
-            //            data: tableResult
-            //        });
-            //        break;
-            //    case 'linechart':
-            //        //折线图
-            //        $('#graph_' + i).charts({
-            //            title: graphName,
-            //            type: ['line'],
-            //            data: tableResult
-            //        });
-            //        break;
-            //    case 'scatterdiagram':
-            //        //散点图
-            //        $('#graph_' + i).charts({
-            //            title: graphName,
-            //            type: ['cure'],
-            //            data: tableResult
-            //        });
-            //        break;
-            //    case 'dingchart':
-            //        //丁氏图
-            //        var dingConfig = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_DING_CHART'));
-            //        $('#graph_' + i).charts({
-            //            title: graphName,
-            //            type: ['dingchart'],
-            //            data: tableResult,
-            //            calculateMethod: dingConfig.calculateMethod[0],//0行，1列，2全
-            //            ellipsesColor: "#CC5B58",
-            //            cureColor: "#D48366"
-            //        });
-            //        break;
-            //    case 'basicline':
-            //        //碎石图
-            //        $('#graph_' + i).charts({
-            //            title: '碎石图',
-            //            type: ['screeplot'],
-            //            data: tableResult.data.eigTotalInit
-            //        });
-            //        break;
-            //}
         });
     }
     return def.resolve().promise();
@@ -195,46 +136,31 @@ var handleDescriptiveStatisticsDescriptive = function (tableResult) {
     var table = $('<table>');
     $(table).addClass('table table-striped table-bordered table-condensed');
 
-    var tr = $('<tr>');
+    var row = $('<tr>');
+    var headerCell = $('<th>');
+    var cell = $('<td>');
 
-    var emptyCell = $('<td>');
-    $(tr).append(emptyCell);
+    var table_1_row_1 = $(row).clone();
+    $(table_1_row_1).append($(headerCell).clone());
 
-    var countHeaderCell = $('<th>');
-    $(countHeaderCell).text('N');
-    $(tr).append(countHeaderCell);
+    var keys = Object.keys(tableResult.resDataMap);
+    keys.map(function (key) {
+        $(table_1_row_1).append($(headerCell).clone().text(key));
+    });
+    $(table).append(table_1_row_1);
 
     algorithmConfigs.map(function (config) {
-        var th = $('<th>');
-        $(th).attr('data-i18n-type', 'algorithm')
-            .attr('data-i18n-tag', config)
-            .attr('data-config', config);
-        $(tr).append(th);
-    });
-    $(table).append(tr);
+        var dataRow = $(row).clone();
+        $(dataRow).append($(cell).clone().attr('data-i18n-type','algorithm').attr('data-i18n-tag',config));
 
-
-    for (var key in tableResult.resDataMap) {
-        var params = tableResult.resDataMap[key].resultData;
-
-        var tr = $('<tr>');
-
-        var keyCell = $('<td>');
-        $(keyCell).text(key);
-        $(tr).append(keyCell);
-
-        var countCell = $('<td>');
-        $(countCell).text(params.count);
-        $(tr).append(countCell);
-
-        algorithmConfigs.map(function (config) {
-            var td = $('<td>');
-            $(td).text(Number(params[config]).toFixed(numReservation));
-            $(tr).append(td);
+        keys.map(function (key) {
+            $(dataRow).append(
+                $(cell).clone().text(Number(tableResult.resDataMap[key]['resultData'][config]).toFixed(numReservation))
+            );
         });
 
-        $(table).append(tr);
-    }
+        $(table).append(dataRow);
+    });
 
     $(presentArea).append(table);
 
@@ -247,7 +173,7 @@ var handleDescriptiveStatisticsFrequency = function (tableResult) {
     var numReservation = Number(localStorage.getItem('MULTIINFO_CONFIG_RESERVATION'));
 
     var frequencyData = tableResult.resDataMap;
-    console.log(frequencyData);
+    var keys = Object.keys(frequencyData);
 
     for (var variable in frequencyData) {
         var container = $('<div>');
@@ -337,7 +263,54 @@ var handleDescriptiveStatisticsFrequency = function (tableResult) {
         $(container).append(variableTable);
         $(presentArea).append(container);
     }
+
+    //打印KS检验表
+    var container_2 = $(container).clone();
+    $(container_2).append(
+        $('<h1>').clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_one_sample_k_s_test')
+    );
+
+    var table_2 = $('<table>').clone().addClass('table table-striped table-bordered');
+    var table_2_row_1 = $('<tr>').clone();
+    $(table_2_row_1).append($('<th>').clone());
+    $(table_2).append(table_2_row_1);
+
+    keys.map(function (key, i) {
+        $(table_2_row_1).append($('<th>').clone().text(key))
+    });
+    ['n', 'mean', 'sd', 'absolute', 'positive', 'negative', 'ksz'].map(function (alg, index) {
+        var dataRow = $('<tr>').clone();
+
+        $(dataRow).append(
+            $('<td>').clone().attr('data-i18n-type', 'table').attr('data-i18n-tag', alg).css('text-align', 'right')
+        );
+
+        keys.map(function (key) {
+            $(dataRow).append($('<td>').clone().text(Number(frequencyData[key]['resultData']['ksTest'][alg]).toFixed(numReservation)))
+        });
+
+        $(table_2).append(dataRow);
+    });
+
+    $(container_2).append(table_2);
+    $(presentArea).append(container_2);
+
+    keys.map(function (key, index) {
+        var graphArea = $('<div>');
+        $(graphArea).css({
+            'height': 800
+        }).attr('id', 'graph_' + index).addClass('col-md-6');
+
+        $(presentArea).append(graphArea);
+
+        $('#graph_' + index).charts({
+            title: key,
+            type: ['bar_curve'],
+            data: frequencyData[key]['resultData']
+        });
+    });
 };
+
 var handleCorrelationBivariate = function (tableResult) {
     var presentArea = $('.result-table');
 
@@ -789,7 +762,7 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
 
         communalityArr[index].map(function (value) {
             var valueCell = $(cell).clone();
-            $(valueCell).text((Number(value) != NaN) ? Number(value).toFixed(numReservation) : value);
+            $(valueCell).text(Number(value).toFixed(numReservation));
             $(variableRow).append(valueCell);
         });
         $(communalityTable).append(variableRow);
@@ -925,7 +898,7 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
     //制图
     //碎石图
     $(presentArea).append(
-        $(block).clone().css('height', '800px').addClass('col-md-12').attr('id', 'graph_screeplot')
+        $(block).clone().css('height', '800px').addClass('col-md-6').attr('id', 'graph_screeplot')
     );
     $('#graph_screeplot').charts({
         title: _String['graph'][lang]['scree_plot'],
@@ -938,7 +911,7 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
         var graphArea = $('<div>');
         $(graphArea).css({
             'height': 800
-        }).addClass('col-md-12').attr('id', 'graph_2d');
+        }).addClass('col-md-6').attr('id', 'graph_2d');
 
         $(presentArea).append(graphArea);
 
@@ -954,7 +927,7 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
         var graphArea = $('<div>');
         $(graphArea).css({
             'height': 800
-        }).addClass('col-md-12').attr('id', 'graph_3d');
+        }).addClass('col-md-6').attr('id', 'graph_3d');
 
         $(presentArea).append(graphArea);
 
@@ -967,7 +940,35 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
         });
     }
 
+    var container_2 = $(container).clone().addClass('col-md-6');
+    var selectVar_1 = $('<select>').attr('id', 'var_1').addClass('form-control');
+    var selectVar_2 = $('<select>').attr('id', 'var_2').addClass('form-control');
+
+    var rowBlock = $('<div>').clone().addClass('row');
+    $(rowBlock).append(
+        $('<div>').clone().addClass('col-md-5').append(selectVar_1)
+    ).append(
+        $('<div>').clone().addClass('col-md-5').append(selectVar_2)
+    ).append(
+        $('<button>').clone().addClass('btn btn-primary').attr('id', 'draw_2d').attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_draw_2d')
+    );
+
+    tableResult.data.componentArr.map(function (component, index) {
+        $(selectVar_1).append(
+            $('<option>').val(index).text('F' + (index + 1))
+        );
+
+        $(selectVar_2).append(
+            $('<option>').val(index).text('F' + (index + 1))
+        );
+    });
+
+    $(container_2).append(rowBlock)
+        .append($(container).clone().attr('id', '2d_drawing').css('height', '800px'));
+
+    $(presentArea).append(container_2);
 };
+
 var handleFactorAnalysis = function (tableResult) {
 
     //声明放置区域
@@ -1111,7 +1112,7 @@ var handleFactorAnalysis = function (tableResult) {
         $(dataRow).append($(cell).clone().text(variable));
 
         tableResult.data.eigenvectors.map(function (data, i) {
-            $(dataRow).append($(cell).clone().text(data[index]));
+            $(dataRow).append($(cell).clone().text(Number(data[index]).toFixed(numReservation)));
         });
         $(correlationCoeffTable).append(dataRow);
     });
@@ -1304,6 +1305,34 @@ var handleFactorAnalysis = function (tableResult) {
 
     $(orthArea).append(orthTable);
     $(presentArea).append(orthArea);
+
+    var container_2 = $(container).clone().addClass('col-md-6');
+    var selectVar_1 = $('<select>').attr('id', 'var_1').addClass('form-control');
+    var selectVar_2 = $('<select>').attr('id', 'var_2').addClass('form-control');
+
+    var rowBlock = $('<div>').clone().addClass('row');
+    $(rowBlock).append(
+        $('<div>').clone().addClass('col-md-5').append(selectVar_1)
+    ).append(
+        $('<div>').clone().addClass('col-md-5').append(selectVar_2)
+    ).append(
+        $('<button>').clone().addClass('btn btn-primary').attr('id', 'draw_2d').attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_draw_2d')
+    );
+
+    tableResult.data.componentArr.map(function (component, index) {
+        $(selectVar_1).append(
+            $('<option>').val(index).text('F' + (index + 1))
+        );
+
+        $(selectVar_2).append(
+            $('<option>').val(index).text('F' + (index + 1))
+        );
+    });
+
+    $(container_2).append(rowBlock)
+        .append($(container).clone().attr('id', '2d_drawing').css('height', '800px'));
+
+    $(presentArea).append(container_2);
 };
 
 var handleCorrespondenceAnalysis = function (tableResult) {
@@ -1747,38 +1776,52 @@ var handleRelatedVariable = function (tableResult) {
     var span = $('<span>');
 
     //是否可预测
-    //if (tableResult.examineSuccess) {
-    //变量数组
-    var variableList = [];
-    tableResult.independVarList.map(function (variable) {
-        variableList.push(variable.varietyName);
-    });
-
-    //变量行
-    var variableRow = $(row).clone();
-    $(variableRow).append(emptyCell);
-    variableList.map(function (variableName) {
-        $(variableRow).append($(headerCell).clone().text(variableName));
-    });
-    $(table).append(variableRow);
-
-    //打印预测值
-    var predictionRow = $(row).clone();
-    $(predictionRow).append($(cell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_prediction_value'));
-    tableResult.resData.map(function (value) {
-        if (Number(value) != NaN) {
-            $(predictionRow).append($(cell).clone().text(Number(value).toFixed(numReservation)));
+    if (!tableResult.examineSuccess) {
+        var str = '';
+        switch (lang) {
+            case 'zh-cn':
+            case 'ja-jp':
+                str = '数据有误，请检查';
+                break;
+            case 'en-us':
+                str = 'Data check, please check';
+                break;
         }
-    });
-    $(table).append(predictionRow);
+        alert(str);
+        window.history.go(-1);
+    } else {
+        //变量数组
+        var variableList = [];
+        tableResult.independVarList.map(function (variable) {
+            variableList.push(variable.varietyName);
+        });
 
-    //打印表名和表格
-    $(container).append($(tableHeader).clone().text(tableResult.predictName)).append(table);
-    $(presentArea).append(container);
-    //} else {
-    //    alert('该数据不符合灰色预测的数据检验要求');
-    //    window.history.go(-1);
-    //}
+        //变量行
+        var variableRow = $(row).clone();
+        $(variableRow).append(emptyCell);
+        variableList.map(function (variableName) {
+            $(variableRow).append($(headerCell).clone().text(variableName));
+        });
+        $(table).append(variableRow);
+
+        //打印预测值
+        var predictionRow = $(row).clone();
+        $(predictionRow).append($(cell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_prediction_value'));
+        tableResult.resData.map(function (value) {
+            if (Number(value) != NaN) {
+                $(predictionRow).append($(cell).clone().text(Number(value).toFixed(numReservation)));
+            }
+        });
+        $(table).append(predictionRow);
+
+        //打印表名和表格
+        $(container).append($(tableHeader).clone().text(tableResult.predictName)).append(table);
+        $(presentArea).append(container);
+        //} else {
+        //    alert('该数据不符合灰色预测的数据检验要求');
+        //    window.history.go(-1);
+        //}
+    }
 };
 var handleGrayCorrelation = function (tableResult) {
     //声明放置区域
@@ -2755,8 +2798,10 @@ var handleSlipStepwiseRegression = function (tableResult) {
         } else {
             if (value > 0) {
                 _equationString += ' + ' + Number(value).toFixed(numReservation) + ' × ' + independentVariable[index - 1].varietyName;
-            } else {
+            } else if (value < 0) {
                 _equationString += ' - ' + Math.abs(Number(value).toFixed(numReservation)) + ' × ' + independentVariable[index - 1].varietyName;
+            } else {
+                return;
             }
         }
     });
@@ -2779,7 +2824,7 @@ var handleSlipStepwiseRegression = function (tableResult) {
         $(block).clone().append(
             $(span).clone().html(
                 (localStorage.getItem('MULTIINFO_CONFIG_LANGUAGE') == 'zh-cn') ?
-                '<strong>' + _key[0] + '</strong>' + ' 年的 ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' 的预测值是：' + Number(tableResult.backForecast[_key[0]]).toFixed(numReservation) :
+                '<strong>' + _key[0] + '</strong>' + ' 年的 ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' 的推测值是：' + Number(tableResult.backForecast[_key[0]]).toFixed(numReservation) :
                 'The predictive value of ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' in ' + '<strong>' + _key[0] + '</strong>' + ' is: ' + Number(tableResult.backForecast[_key[0]]).toFixed(numReservation))
         )
     );
@@ -3122,11 +3167,11 @@ var handleTrendStepwiseRegression = function (tableResult) {
     var trendEstimatedString_2 = '';
 
     if (localStorage.getItem('MULTIINFO_CONFIG_LANGUAGE') == 'zh-cn') {
-        trendEstimatedString_1 = '前移趋势回归按5:3:2的权重得到 <strong>' + backKey + '</strong> 的 <strong>' + TSRConfig.dependentVariable[0].varietyName + '</strong> 为' + Number(tableResult.backForecast[backKey]).toFixed(numReservation);
-        trendEstimatedString_2 = '前移趋势回归按1:1:1的权重得到 <strong>' + backKey + '</strong> 的 <strong>' + TSRConfig.dependentVariable[0].varietyName + '</strong> 为' + Number(backwardAverageWeightValue).toFixed(numReservation);
+        trendEstimatedString_1 = '后移趋势回归按5:3:2的权重得到 <strong>' + backKey + '</strong> 的 <strong>' + TSRConfig.dependentVariable[0].varietyName + '</strong> 为' + Number(tableResult.backForecast[backKey]).toFixed(numReservation);
+        trendEstimatedString_2 = '后移趋势回归按1:1:1的权重得到 <strong>' + backKey + '</strong> 的 <strong>' + TSRConfig.dependentVariable[0].varietyName + '</strong> 为' + Number(backwardAverageWeightValue).toFixed(numReservation);
     } else {
-        trendEstimatedString_1 = 'Using the Weight ratio of 5:3:2, the forward trend regression returns the value of <strong>' + TSRConfig.dependentVariable[0].varietyName + '</strong> in <strong>' + backKey + '</strong> is: ' + Number(tableResult.backForecast[backKey]).toFixed(numReservation);
-        trendEstimatedString_2 = 'Using the Weight ratio of 1:1:1, the forward trend regression returns the value of <strong>' + TSRConfig.dependentVariable[0].varietyName + '</strong> in <strong>' + backKey + '</strong> is: ' + Number(backwardAverageWeightValue).toFixed(numReservation);
+        trendEstimatedString_1 = 'Using the Weight ratio of 5:3:2, the backward trend regression returns the value of <strong>' + TSRConfig.dependentVariable[0].varietyName + '</strong> in <strong>' + backKey + '</strong> is: ' + Number(tableResult.backForecast[backKey]).toFixed(numReservation);
+        trendEstimatedString_2 = 'Using the Weight ratio of 1:1:1, the backward trend regression returns the value of <strong>' + TSRConfig.dependentVariable[0].varietyName + '</strong> in <strong>' + backKey + '</strong> is: ' + Number(backwardAverageWeightValue).toFixed(numReservation);
     }
 
     $(container_6).append(
