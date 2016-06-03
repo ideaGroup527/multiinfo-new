@@ -63,17 +63,8 @@
 			<artifactId>commons-math3</artifactId>
 			<version>3.6</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.4</version>
-		</dependency>
 
-		<dependency>
-			<groupId>org.jgrapht</groupId>
-			<artifactId>jgrapht-core</artifactId>
-			<version>0.9.1</version>
-		</dependency>
+
 		<!-- <dependency> <groupId>org.jscience</groupId> <artifactId>jscience</artifactId> 
 			<version>4.3.1</version> </dependency> -->
 		<dependency>
@@ -82,11 +73,6 @@
 			<version>1.0.3</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.googlecode.matrix-toolkits-java</groupId>
-			<artifactId>mtj</artifactId>
-			<version>1.0.2</version>
-		</dependency>
 		<!-- math END -->
 
 
@@ -249,12 +235,6 @@
 			<version>${druid.version}</version>
 		</dependency>
 
-		<!-- JSTL标签类 -->
-		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
 		<!-- 日志文件管理包 -->
 		<!-- log start -->
 		<dependency>
