@@ -801,10 +801,10 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
 
     //第二行展示
     var explainTotalVarSecHeaderRow = $(row).clone();
-    $(explainTotalVarSecHeaderRow).append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_total').addClass('text-center'))
+    $(explainTotalVarSecHeaderRow).append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_eigenvalue').addClass('text-center'))
         .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_variance').addClass('text-center'))
         .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_Cumulative').addClass('text-center'))
-        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_total').addClass('text-center'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_eigenvalue').addClass('text-center'))
         .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_variance').addClass('text-center'))
         .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_Cumulative').addClass('text-center'));
     $(explainTotalVarTable).append(explainTotalVarSecHeaderRow);
@@ -1085,10 +1085,10 @@ var handleFactorAnalysis = function (tableResult) {
 
     //第二行展示
     var explainTotalVarSecHeaderRow = $(row).clone();
-    $(explainTotalVarSecHeaderRow).append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_total').addClass('text-center'))
+    $(explainTotalVarSecHeaderRow).append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_eigenvalue').addClass('text-center'))
         .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_variance').addClass('text-center'))
         .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_Cumulative').addClass('text-center'))
-        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_total').addClass('text-center'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_eigenvalue').addClass('text-center'))
         .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_variance').addClass('text-center'))
         .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_Cumulative').addClass('text-center'));
     $(explainTotalVarTable).append(explainTotalVarSecHeaderRow);
@@ -1470,10 +1470,10 @@ var handleCorrespondenceAnalysis = function (tableResult) {
 
     //第二行展示
     var explainTotalVarSecHeaderRow = $(row).clone();
-    $(explainTotalVarSecHeaderRow).append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_total').addClass('text-center'))
+    $(explainTotalVarSecHeaderRow).append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_eigenvalue').addClass('text-center'))
         .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_variance').addClass('text-center'))
         .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_Cumulative').addClass('text-center'))
-        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_total').addClass('text-center'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_eigenvalue').addClass('text-center'))
         .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_variance').addClass('text-center'))
         .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_Cumulative').addClass('text-center'));
     $(explainTotalVarTable).append(explainTotalVarSecHeaderRow);
@@ -1534,10 +1534,10 @@ var handleCorrespondenceAnalysis = function (tableResult) {
 
     //第二行展示
     var explainTotalVarSecHeaderRow_2 = $(row).clone();
-    $(explainTotalVarSecHeaderRow_2).append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_total').addClass('text-center'))
+    $(explainTotalVarSecHeaderRow_2).append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_eigenvalue').addClass('text-center'))
         .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_variance').addClass('text-center'))
         .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_Cumulative').addClass('text-center'))
-        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_total').addClass('text-center'))
+        .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_eigenvalue').addClass('text-center'))
         .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_variance').addClass('text-center'))
         .append($(headerCell).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_percent_of_Cumulative').addClass('text-center'));
     $(explainTotalVarTable_2).append(explainTotalVarSecHeaderRow_2);
