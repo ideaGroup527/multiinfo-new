@@ -20,27 +20,17 @@
                     <fieldset class="algorithm-config-zone">
                         <legend data-i18n-tag="options" data-i18n-type="page">选项</legend>
 
-                        <span data-i18n-type="page" data-i18n-tag="label_extraction">抽取</span>
-
-                        <div data-config-group data-group-name="extractMethod" data-config-val-flag=":checked" style="display: none;">
+                        <div data-config-group data-group-name="factorExtraNum">
                             <div class="checkbox-inline">
                                 <label>
-                                    <input type="radio" name="extractMethod" value="1"checked/>
-                                    <span data-i18n-type="page" data-i18n-tag="label_factor_fixed_number">因子的固定数量</span>
+                                    <span data-i18n-type="page" data-i18n-tag="label_extraction_factors_num">要提取的因子</span>
+                                    <select class="form-control" name="factorExtraNum">
+                                        <option value="-1" data-i18n-type="page" data-i18n-tag="label_choose_var_first"></option>
+                                    </select>
                                 </label>
                             </div>
                         </div>
                     </fieldset>
-                </div>
-                <div data-config-group data-group-name="factorExtraNum">
-                    <hr/>
-                    <div class="checkbox-inline">
-                        <label>
-                            <span data-i18n-type="page" data-i18n-tag="label_extraction_factors_num">要提取的因子</span>
-                            <input class="form-control small" step="1" min="1" type="number" name="factorExtraNum"
-                                   value="1"/>
-                        </label>
-                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -58,18 +48,6 @@
 <script>
     $(function () {
 
-        $('[name=extractMethod]').change(function () {
-            console.log($(this).val());
-            if ($(this).val() == '0') {
-                $('[data-group-name=eigExtraNum]').show();
-                $('[data-group-name=factorExtraNum]').hide();
-            } else {
-                $('[data-group-name=eigExtraNum]').hide();
-                $('[data-group-name=factorExtraNum]').show();
-                $('[name=factorExtraNum]').attr('max', $('[data-group-name=variableList]').find('.variable-wrapper.active').length);
-            }
-        });
-
         var variableList = JSON.parse(sessionStorage.getItem('PRIVATE_VARIABLE_LIST'));
 
         variableList.map(function (variable, i) {
@@ -82,6 +60,18 @@
                     .text(variable.varietyName);
 
             $('[data-group-name=variableList]').append(variableWrapper);
+        });
+
+        $('[data-group-name=variableList]').find('.variable-wrapper').on('click', function (e) {
+            setTimeout(function () {
+                var max = $('[data-group-name=variableList]').find('.active').length;
+                $('[name=factorExtraNum]').empty();
+                for (var i = 0; i < max; i++) {
+                    $('[name=factorExtraNum]').append(
+                            $('<option>').clone().text(i + 1)
+                    )
+                }
+            }, 100);
         });
     })
 </script>

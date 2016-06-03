@@ -172,7 +172,7 @@ double[][] oraComArr =	eigDTO.getComponentArr();
 			pcaDTO.setEigTotalExtra(eigTotalExtra);
 			pcaDTO.setAccEigExtra(accEigExtra);
 			pcaDTO.setVarEigExtra(varEigExtra);
-			pcaDTO.setComponentArr(componentArr);
+			pcaDTO.setComponentArr(DataFormatUtil.transposition(componentArr));
 			break;
 		}
 		case PrincipalComponentAnalysisCondition.EXTRACT_METHOD_FACTOR:{
@@ -191,7 +191,7 @@ double[][] oraComArr =	eigDTO.getComponentArr();
 			pcaDTO.setEigTotalExtra(eigTotalExtra);
 			pcaDTO.setAccEigExtra(accEigExtra);
 			pcaDTO.setVarEigExtra(varEigExtra);
-			pcaDTO.setComponentArr(componentArr);
+			pcaDTO.setComponentArr(DataFormatUtil.transposition(componentArr));
 			break;
 		}
 		default:

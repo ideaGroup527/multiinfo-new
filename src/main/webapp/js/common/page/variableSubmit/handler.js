@@ -123,11 +123,11 @@ var handleSubmit = function (config) {
             break;
         case 'Factor_Analysis':
             //降维分析 - 因子分析
-            handleURL = 'statistics/analysis/Factor.do';
+            handleURL = 'statistics/analysis/factor.do';
             var FA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_FACTOR_ANALYSIS'));
             dataPackage.variableList = FA.variableList;
-            dataPackage.extractMethod = FA.extractMethod[0];
-            dataPackage.eigExtraNum = FA.eigExtraNum[0];
+            dataPackage.extractMethod = '1';
+            dataPackage.eigExtraNum = '1';
             dataPackage.factorExtraNum = FA.factorExtraNum[0];
             dataPackage.variance = FA.variance[0];
             console.log(FA);
@@ -137,7 +137,7 @@ var handleSubmit = function (config) {
             handleURL = 'statistics/analysis/correspondence.do';
             var CA = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CORRESPONDENCE_ANALYSIS'));
             dataPackage.variableList = CA.variableList;
-            dataPackage.extractMethod = CA.extractMethod[0];
+            dataPackage.extractMethod = '1';
             dataPackage.factorExtraNum = CA.factorExtraNum[0];
             break;
         case 'Gray_Correlation':

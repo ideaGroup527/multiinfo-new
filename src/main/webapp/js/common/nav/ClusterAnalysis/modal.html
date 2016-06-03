@@ -14,14 +14,14 @@
 
                 <div data-config-group data-group-name="normalizationMethod">
                     <select class="form-control" name="normalizationMethod">
-                        <option data-i18n-type="page" data-i18n-tag="label_standard_deviation_standardization"
-                                value="0">标准差标准化
+                        <option data-i18n-type="page" data-i18n-tag="label_range_normalization"
+                                value="0">极差正规化
                         </option>
                         <option data-i18n-type="page" data-i18n-tag="label_range_standardization"
                                 value="1">极差标准化
                         </option>
-                        <option data-i18n-type="page" data-i18n-tag="label_range_normalization"
-                                value="2">极差正规化
+                        <option data-i18n-type="page" data-i18n-tag="label_standard_deviation_standardization"
+                                value="2">标准差标准化
                         </option>
                     </select>
                 </div>
@@ -61,7 +61,7 @@
                                 value="1">夹角余弦
                         </option>
                         <option data-i18n-type="page" data-i18n-tag="label_correlation_coefficients"
-                                value="2">相关系数
+                                value="2" selected>相关系数
                         </option>
                     </select>
                 </div>
@@ -80,7 +80,11 @@
 
         factorList.each(function (index, elem) {
             var obj = JSON.parse($(elem).attr('data-all-params'));
-            obj.range = config.independentVariable[0].range;
+            var position = obj.positionDes.split(',');
+            var from = config.independentVariable[0].range.split(':')[0].split(position)[1];
+            var to = config.independentVariable[0].range.split(':')[1].split(position)[1];
+
+            obj.range = '' + position + from + ':' + position + to;
             obj.varietyName = obj.data;
             obj.position = obj.position.slice(0, 1);
 
@@ -91,12 +95,12 @@
 
         $(function () {
             $('#q_type').change(function () {
-                $('select[name=statisticsMethod]').val(2);
+                $('select[name=statisticsMethod]').val(0);
                 $('[data-group-name=factorVarVariable]').show();
             });
 
             $('#r_type').change(function () {
-                $('select[name=statisticsMethod]').val(0);
+                $('select[name=statisticsMethod]').val(2);
                 $('[data-group-name=factorVarVariable]').hide();
             });
         })

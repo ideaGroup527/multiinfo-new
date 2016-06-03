@@ -37,24 +37,25 @@
                             </div>
                         </div>
                     </fieldset>
-                </div>
-                <div data-config-group data-group-name="eigExtraNum">
-                    <hr/>
-                    <div class="checkbox-inline">
-                        <label>
-                            <span data-i18n-type="page" data-i18n-tag="label_eigenvalues_more_than">特征值大于</span>
-                            <input class="form-control small" type="number" name="eigExtraNum" value="1"/>
-                        </label>
+                    <div data-config-group data-group-name="eigExtraNum">
+                        <hr/>
+                        <div class="checkbox-inline">
+                            <label>
+                                <span data-i18n-type="page" data-i18n-tag="label_eigenvalues_more_than">特征值大于</span>
+                                <input class="form-control small" type="number" name="eigExtraNum" value="1"/>
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div data-config-group data-group-name="factorExtraNum" style="display:none;">
-                    <hr/>
-                    <div class="checkbox-inline">
-                        <label>
-                            <span data-i18n-type="page" data-i18n-tag="label_extraction_factors_num">要提取的因子</span>
-                            <input class="form-control small" step="1" min="1" type="number" name="factorExtraNum"
-                                   value="1"/>
-                        </label>
+                    <div data-config-group data-group-name="factorExtraNum" style="display:none;">
+                        <hr/>
+                        <div class="checkbox-inline">
+                            <label>
+                                <span data-i18n-type="page" data-i18n-tag="label_extraction_factors_num">要提取的因子</span>
+                                <select class="form-control" name="factorExtraNum">
+                                    <option value="-1" data-i18n-type="page" data-i18n-tag="label_choose_var_first"></option>
+                                </select>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -74,14 +75,12 @@
     $(function () {
 
         $('[name=extractMethod]').change(function () {
-            console.log($(this).val());
-            if ($(this).val() == '0') {
-                $('[data-group-name=eigExtraNum]').show();
-                $('[data-group-name=factorExtraNum]').hide();
-            } else {
-                $('[data-group-name=eigExtraNum]').hide();
+            if ($(this).val() == 1) {
                 $('[data-group-name=factorExtraNum]').show();
-                $('[name=factorExtraNum]').attr('max', $('[data-group-name=variableList]').find('.variable-wrapper.active').length);
+                $('[data-group-name=eigExtraNum]').hide();
+            } else {
+                $('[data-group-name=factorExtraNum]').hide();
+                $('[data-group-name=eigExtraNum]').show();
             }
         });
 
@@ -97,6 +96,18 @@
                     .text(variable.varietyName);
 
             $('[data-group-name=variableList]').append(variableWrapper);
+        });
+
+        $('[data-group-name=variableList]').find('.variable-wrapper').on('click', function (e) {
+            setTimeout(function () {
+                var max = $('[data-group-name=variableList]').find('.active').length;
+                $('[name=factorExtraNum]').empty();
+                for (var i = 0; i < max; i++) {
+                    $('[name=factorExtraNum]').append(
+                            $('<option>').clone().text(i + 1)
+                    )
+                }
+            }, 100);
         });
     })
 </script>
