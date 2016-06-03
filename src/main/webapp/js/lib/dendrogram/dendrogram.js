@@ -22,7 +22,7 @@ var dendrogram = {
     grid: 0,
 
 
-    draw: function (l) {
+    draw: function (l,len,flag) {
         //l is a variable as returned by linkage
         //v is an object with the parameters for build the dendrogram;
         //accepted parameters are LineWidth; Labels; Font;canvas
@@ -69,9 +69,13 @@ var dendrogram = {
             dendrogram.maxDeep = dendrogram.canvas.width;
             dendrogram.wallR = dendrogram.canvas.width - dendrogram.leftOffset;
             dendrogram.ceil = dendrogram.rightOffset;
-            dendrogram.floor = dendrogram.canvas.height - dendrogram.bottomOffset;
+            dendrogram.floor = dendrogram.canvas.height;
             dendrogram.wallL = dendrogram.topOffset;
-            dendrogram.ctx.translate(dendrogram.canvas.width, 0);
+            if(flag==0){
+                dendrogram.ctx.translate(dendrogram.canvas.width-len*10+100, 0);
+            }else{
+                dendrogram.ctx.translate(dendrogram.canvas.width, 0);
+            }
             dendrogram.ctx.rotate(Math.PI / 2);
         }
         else if (dendrogram.orientation == 'right') {
@@ -201,8 +205,8 @@ var dendrogram = {
     canvasConfigure: function (ctx) {
         if (dendrogram.border) {
             //ctx.beginPath();
-            ctx.moveTo(dendrogram.wallL + 199, dendrogram.floor);
-            ctx.lineTo(dendrogram.wallL + 199, dendrogram.ceil);
+            ctx.moveTo(dendrogram.wallL+200, dendrogram.floor);
+            ctx.lineTo(dendrogram.wallL+200, dendrogram.ceil);
             ctx.lineTo(dendrogram.wallR, dendrogram.ceil);
             ctx.stroke();
         }
@@ -256,7 +260,6 @@ var dendrogram = {
             if (labelH == 0) {
                 labelH = leftMidPointX;
             }
-
             //xpush reflects how much to the right the dendrogram is pushed; clusters that do not link directly to the previous cluster push the line forward by 2; other push it only by 1;
 
         }

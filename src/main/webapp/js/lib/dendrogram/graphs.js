@@ -85,17 +85,22 @@ var graphs  = {// this variable will have elements, and methods, to manipulate t
 
 	},
 	
-	configureDendrogram : function (canvasid) {
-		   
+	configureDendrogram : function (canvasid,len,flag) {
 		dendrogram.canvasid = 'cvs';
 		dendrogram.holder = canvasid;
-		dendrogram.width = 800;
-		dendrogram.height = 600;
+        if(flag==0){
+            dendrogram.width = len*40+100;
+            dendrogram.height = len*30;
+            dendrogram.groupGap=28;
+        }else{
+            dendrogram.width = 800;
+            dendrogram.height = 600;
+        }
 		dendrogram.style = '';
 		dendrogram.LineWidth = 1;
 		dendrogram.orientation = 'left';
 		dendrogram.topOffset = 1;
-		dendrogram.bottomOffset = 0;
+		dendrogram.bottomOffset = 150;
 		dendrogram.leftOffset = 50;
 		dendrogram.rightOffset = 50;
 		dendrogram.border = 1;
@@ -104,7 +109,7 @@ var graphs  = {// this variable will have elements, and methods, to manipulate t
 		dendrogram.grid = 0;
 	},
 	
-	makeDendrogram : function (rawData) {
+	makeDendrogram : function (rawData,len,flag) {
 			
 			//data for the dendrogram
 			data.makeValueMatrix(rawData);
@@ -126,7 +131,7 @@ var graphs  = {// this variable will have elements, and methods, to manipulate t
 				dendrogram.ctx =  dendrogram.canvas.getContext('2d');
 				dendrogram.ctx.clearRect(0,0,cW,cH);
 			}
-			dendrogram.draw(dendrogram.L);
+			dendrogram.draw(dendrogram.L,len,flag);
 
 			//restore the ctx after rotate
 			dendrogram.ctx.restore();

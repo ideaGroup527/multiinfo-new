@@ -92,7 +92,13 @@
                     _type |= 517;
                     break;
                 }
+                case "correspondence" :
+                {
+                    _type |= 518;
+                    break;
+                }
             }
+
         });
         _handler();
         function _handler() {
@@ -153,7 +159,7 @@
                 }
                 case "100000000"://主成分因子平面二维图
                 {
-                    _pcfp2dHandle(setting.data,setting.sub);
+                    _pcfp2dHandle(setting.data, setting.sub);
                     _render();
                     break;
                 }
@@ -164,7 +170,7 @@
                 }
                 case "1000000001"://聚类图
                 {
-                    _clusteringHandle(setting.data, setting.clusterConfig, setting.clusterDataMax);
+                    _clusteringHandle(setting.data, setting.clusterConfig, setting.clusterDataMax, setting.clusterMethod);
                     break;
                 }
                 case "1000000010"://最优分割图
@@ -191,7 +197,12 @@
                     _render();
                     break;
                 }
-
+                case "1000000110"://对应分析图
+                {
+                    _correspondenceHandle(setting.data, setting.sub, setting.variableList);
+                    _render();
+                    break;
+                }
                 default:
                 {
                     alert("图表类型错误，请检查!");
@@ -378,13 +389,13 @@
 
         //直方正态图
         function _barLineHandle(data) {
-            var xdata = [];
-            var dataAll=[];
-            data.uniqueData.map(function (v, i) {
-                xdata.push(data.uniqueInterval[i].down+" "+data.uniqueInterval[i].up);
-                dataAll.push([i,v]);
+            var xdata = [], ydata = [];
+            var dataAll = [];
+            data.uniqueInterval.map(function (v, i) {
+                xdata.push(Number(v.down).toFixed(3) + " " + Number(v.up).toFixed(3));
+                ydata.push(v.frequency);
+                dataAll.push([i, v.frequency]);
             });
-
             _option = {
                 title: {
                     text: setting.title, //主标题文本
@@ -400,39 +411,42 @@
                 },
                 xAxis: {
                     axisLabel: {
+                        interval: 0,
                         show: true,
                         textStyle: {
                             fontSize: 16
                         }
                     },
                     type: 'category',
-                    data:xdata,
-                    scale: true
+                    data: xdata
                 },
-                yAxis: {
-                    axisLabel: {
-                        show: true,
-                        textStyle: {
-                            fontSize: 16
-                        }
-                    },
-                    scale: true
-                },
+                yAxis: [
+                    {
+                        axisLabel: {
+                            show: true,
+                            textStyle: {
+                                fontSize: 16
+                            }
+                        },
+                        scale: true
+                    }
+                ],
                 series: [
                     {
                         name: '点',
                         type: "bar",
-                        data: data.uniqueData
+                        data: dataAll
                     },
                     {
                         smooth: true,
                         name: '点',
                         type: "line",
-                        data: dataAll
+                        data: ydata
                     }
                 ]
             };
         }
+
         //碎石
         function _screeplotHandle(data) {
 
@@ -497,8 +511,8 @@
                     top: '100',
                     left: '300',
                     data: dataAll.k,
-                    textStyle:{
-                        fontSize:14
+                    textStyle: {
+                        fontSize: 14
                     }
                 },
                 tooltip: {
@@ -521,10 +535,10 @@
                                 shadowColor: 'rgba(0, 0, 0, 0.5)'
                             }
                         },
-                        label:{
-                            normal:{
-                                textStyle:{
-                                    fontSize:16
+                        label: {
+                            normal: {
+                                textStyle: {
+                                    fontSize: 16
                                 }
                             }
 
@@ -744,7 +758,7 @@
                 var y = (i + 1) * m_height;
                 ctx.save();
                 ctx.textAlign = "right";
-                wrapText(ctx, data.rowVarList[i].varietyName, m_width - 10, y + m_height + 95, m_width, 5);
+                wrapText(ctx, data.rowVarList[i].varietyName, m_width - 5, y + m_height + 95, m_width, 5);
                 ctx.stroke();
             }
             //x轴
@@ -942,19 +956,108 @@
 
         }
 
-        //主成分因子平面图二维图
-        function _pcfp2dHandle(data,sub) {
-            var dataAll = [], markpoint = [];
-            var dd=[];
-            //, data.variableList[v].varietyName
-            var _len=data.data.componentArr[0].length;
+        //对应分析图
+        function _correspondenceHandle(data, sub, variableList) {
+            var dataAll1 = [], dataAll2 = [];
+            var _len1 = data.srPcaDTO.componentArr[0].length;
+            var _len2 = data.sqPcaDTO.componentArr[0].length;
 
-            for(var i=0;i<_len;i++){
-                var x=data.data.componentArr[sub[0]][i];
-                var y=data.data.componentArr[sub[1]][i];
-                dataAll.push([x,y, data.variableList[sub[0]].varietyName]);
+            for (var i = 0; i < _len1; i++) {
+                var x = data.srPcaDTO.componentArr[sub[0]][i];
+                var y = data.srPcaDTO.componentArr[sub[1]][i];
+                dataAll1.push([x, y, variableList[i].varietyName]);
             }
+            for (var i = 0; i < _len2; i++) {
+                var x = data.sqPcaDTO.componentArr[sub[0]][i];
+                var y = data.sqPcaDTO.componentArr[sub[1]][i];
+                dataAll2.push([x, y, (i + 1)]);
+            }
+            _option = {
+                title: {
+                    text: setting.title,
+                    x: 'left',
+                    y: 0,
+                    textStyle: {
+                        fontSize: 26,
+                        fontWeight: 'normal'
+                    }
+                },
+                legend: {
+                    data: ['R型', 'Q型']
+                },
+                tooltip: {
+                    formatter: '({c})'
+                },
+                xAxis: [
+                    {
+                        type: 'value',
+                        scale: true
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        scale: true
+                    }
+                ],
+                series: [
+                    {
+                        name: 'R型',
+                        type: "scatter",
+                        data: dataAll1,
+                        label: {
+                            normal: {
+                                show: true,
+                                position: "right",
+                                formatter: function (d) {
+                                    return d.data[2];
+                                },
+                                textStyle: {
+                                    color: "#000"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        name: 'Q型',
+                        type: "scatter",
+                        data: dataAll2,
+                        large: true,
+                        itemStyle: {
+                            normal: {
+                                show: true,
+                                color: '#aaa'
+                            }
+                        },
+                        label: {
+                            normal: {
+                                show: true,
+                                position: "right",
+                                formatter: function (d) {
+                                    return d.data[2];
+                                },
+                                textStyle: {
+                                    color: "#000"
+                                }
+                            }
+                        }
+                    }
+                ]
+            };
+        }
 
+        //主成分因子平面图二维图
+        function _pcfp2dHandle(data, sub) {
+            var dataAll = [], markpoint = [];
+            var dd = [];
+            //, data.variableList[v].varietyName
+            var _len = data.data.componentArr[0].length;
+
+            for (var i = 0; i < _len; i++) {
+                var x = data.data.componentArr[sub[0]][i];
+                var y = data.data.componentArr[sub[1]][i];
+                dataAll.push([x, y, data.variableList[i].varietyName]);
+            }
             $.each(data.variableList, function (i, v) {
                 markpoint.push(v.varietyName);
             });
@@ -1103,31 +1206,46 @@
         }
 
         //聚类图
-        function _clusteringHandle(_data, config, clusterDataMax) {
+        function _clusteringHandle(_data, config, clusterDataMax, clusterMethod) {
             labelH = 0;
             ['jquery.md5', 'freq', 'squareform', 'data', 'graphs', 'pdist', 'linkage', 'dendrogram'].map(function (scri, index) {
                 $('body').append(
                     $('<script>').clone().attr('type', 'text/javascript').attr('src', 'js/lib/dendrogram/' + scri + '.js')
                 )
             });
-            var rawData = [], _len = config.independentVariable.length;
+            var rawData = [], _len;
+            if (clusterMethod == 0) {
+                var _dd = JSON.parse(config.factorVarVariable);
+                var _index = _dd.position.charCodeAt() - 'A'.charCodeAt();
+                _len = _dd.range.split(':')[1].split(_dd.position)[1];
 
-            config.independentVariable.map(function (variable, index) {
-                var position = variable.position;
-                var positionIndex = variable.position.charCodeAt() - 'A'.charCodeAt();
-                var rangeIndex = variable.range.split(':')[1].split(position)[1];
-
-                var _obj = {};
-
-                _obj.title = variable.varietyName;
-
-                for (var i = 1; i < rangeIndex; i++) {
-                    _obj[i] = Number(_data[i][positionIndex].data);
+                for (var i = 1; i < _len; i++) {
+                    var _obj = {};
+                    _obj.title = i;
+                    _obj[0] = _data[i][_index].data;
+                    rawData.push(_obj);
                 }
 
-                rawData.push(_obj);
+            } else {
+                _len = config.independentVariable.length;
+                config.independentVariable.map(function (variable, index) {
+                    var position = variable.position;
+                    var positionIndex = variable.position.charCodeAt() - 'A'.charCodeAt();
+                    var rangeIndex = variable.range.split(':')[1].split(position)[1];
 
-            });
+                    var _obj = {};
+
+                    _obj.title = variable.varietyName;
+
+                    for (var i = 1; i < rangeIndex; i++) {
+                        _obj[i] = Number(_data[i][positionIndex].data);
+                    }
+
+                    rawData.push(_obj);
+
+                });
+            }
+
             data.identifierVar = "title";
             data.header = ['label'];
             data.variableSelection = [];
@@ -1149,21 +1267,31 @@
             }
             //transformations of the data, one var at a time
             data.rawData = rawData;
-            graphs.configureDendrogram(_this.attr('id'));
+            graphs.configureDendrogram(_this.attr('id'), _len, clusterMethod);
 
             //make Dendrogram will happen every time a variable is unselected or re-selected
-            graphs.makeDendrogram(rawData);
+            graphs.makeDendrogram(rawData, _len, clusterMethod);
 
             data.dendrogram.metric = 'euclidean';
             data.dendrogram.amalgamation = 'average';
 
-            var _long = [0, 220, 350, 410, 450, 475, 490, 505, 515, 520, 530];
-            rawData.forEach(function (v, i) {
-                dendrogram.ctx.font = dendrogram.font;
-                dendrogram.ctx.strokeStyle = "rgba(0,0,0,0.5)";
-                dendrogram.ctx.textAlign = "end";
-                dendrogram.ctx.fillText(v.title, 190, labelH + i * (_long[_len - 1] / (_len - 1)) + 5);
-            });
+            if (clusterMethod == 0) {
+                rawData.forEach(function (v, i) {
+                    dendrogram.ctx.font = dendrogram.font;
+                    dendrogram.ctx.strokeStyle = "rgba(0,0,0,0.5)";
+                    dendrogram.ctx.textAlign = "end";
+                    dendrogram.ctx.fillText(v.title, 190, labelH+28*i+5);
+                });
+            } else {
+                var _long = [0, 220, 350, 410, 450, 475, 490, 505, 515, 520, 530];
+                rawData.forEach(function (v, i) {
+                    dendrogram.ctx.font = dendrogram.font;
+                    dendrogram.ctx.strokeStyle = "rgba(0,0,0,0.5)";
+                    dendrogram.ctx.textAlign = "end";
+                    dendrogram.ctx.fillText(v.title, 190, labelH + i * (_long[_len - 1] / (_len - 1)) + 5);
+                });
+            }
+
 
             //坐标轴
 
@@ -1172,18 +1300,17 @@
             dendrogram.ctx.strokeStyle = "#666";
             dendrogram.ctx.textAlign = 'center';
 
-
             //label
             dendrogram.ctx.font = "14px Verdana";
             for (var i = 0; i <= 4; i++) {
                 if (i != 0) {
                     dendrogram.ctx.beginPath(1000, 100);
-                    dendrogram.ctx.moveTo(199 + i * 137, 50);
-                    dendrogram.ctx.lineTo(199 + i * 137, 60);
+                    dendrogram.ctx.moveTo(200 + i * (_len*30-55)/4, 50);
+                    dendrogram.ctx.lineTo(200 + i * (_len*30-55)/4, 60);
                     dendrogram.ctx.stroke();
                 }
 
-                wrapText(dendrogram.ctx, "" + Number(clusterDataMax / 4 * i).toFixed(3), 199 + i * 137, 50, 100, 15);
+                wrapText(dendrogram.ctx, "" + Number(clusterDataMax / 4 * i).toFixed(3), 199 + i * (_len*30-55)/4, 50, 100, 15);
             }
 
             //title
@@ -1247,7 +1374,8 @@
                             fontSize: 14
                         }
                     },
-                    data: ydata
+                    data: ydata,
+                    scale: true
                 },
                 visualMap: {
                     min: 1,
