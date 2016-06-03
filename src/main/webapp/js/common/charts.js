@@ -105,21 +105,18 @@
             switch (_type.toString(2)) {
                 case "1": //曲线图
                 {
-
                     _cureHandle(setting.data);
                     _render();
                     break;
                 }
                 case "10"://折线图
                 {
-
                     _lineHandle(setting.data);
                     _render();
                     break;
                 }
                 case "100"://散点图
                 {
-
                     _scatterHandle(setting.data);
                     _render();
                     break;
@@ -1280,7 +1277,7 @@
                     dendrogram.ctx.font = dendrogram.font;
                     dendrogram.ctx.strokeStyle = "rgba(0,0,0,0.5)";
                     dendrogram.ctx.textAlign = "end";
-                    dendrogram.ctx.fillText(v.title, 190, labelH+28*i+5);
+                    dendrogram.ctx.fillText(v.title, 190, labelH + 28 * i + 5);
                 });
             } else {
                 var _long = [0, 220, 350, 410, 450, 475, 490, 505, 515, 520, 530];
@@ -1305,12 +1302,12 @@
             for (var i = 0; i <= 4; i++) {
                 if (i != 0) {
                     dendrogram.ctx.beginPath(1000, 100);
-                    dendrogram.ctx.moveTo(200 + i * (_len*30-55)/4, 50);
-                    dendrogram.ctx.lineTo(200 + i * (_len*30-55)/4, 60);
+                    dendrogram.ctx.moveTo(200 + i * (_len * 30 - 55) / 4, 50);
+                    dendrogram.ctx.lineTo(200 + i * (_len * 30 - 55) / 4, 60);
                     dendrogram.ctx.stroke();
                 }
 
-                wrapText(dendrogram.ctx, "" + Number(clusterDataMax / 4 * i).toFixed(3), 199 + i * (_len*30-55)/4, 50, 100, 15);
+                wrapText(dendrogram.ctx, "" + Number(clusterDataMax / 4 * i).toFixed(3), 199 + i * (_len * 30 - 55) / 4, 50, 100, 15);
             }
 
             //title
