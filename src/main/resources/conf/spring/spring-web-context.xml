@@ -76,11 +76,11 @@
 		<property name="contentType" value="text/html;charset=UTF-8" />
 	</bean> -->
 
-	<mvc:interceptors>
+<!-- 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="org.jmu.multiinfo.web.interceptor.LogInterceptor" />
 		</mvc:interceptor>
-	</mvc:interceptors>
+	</mvc:interceptors> -->
 
 </beans>
