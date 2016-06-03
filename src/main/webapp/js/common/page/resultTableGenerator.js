@@ -936,7 +936,7 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
             type: ['pcfp3d'],
             data: tableResult
         });
-    } else if (componentMatrix[0].length > 3) {
+    } else if (componentMatrix[0].length >= 3) {
         var container_2 = $(container).clone().addClass('col-md-6');
         var selectVar_1 = $('<select>').attr('id', 'var_1').addClass('form-control');
         var selectVar_2 = $('<select>').attr('id', 'var_2').addClass('form-control');
@@ -947,7 +947,7 @@ var handlePrincipalComponentAnalysis = function (tableResult) {
         ).append(
             $('<div>').clone().addClass('col-md-5').append(selectVar_2)
         ).append(
-            $('<button>').clone().addClass('btn btn-primary').attr('id', 'draw_2d').attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_draw_2d')
+            $('<button>').clone().addClass('btn btn-primary').attr('id', 'draw_2d').attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_draw_2d').attr('data-drawing-type','pcfp2d')
         );
 
         tableResult.data.componentArr.map(function (component, index) {
@@ -1317,7 +1317,7 @@ var handleFactorAnalysis = function (tableResult) {
     ).append(
         $('<div>').clone().addClass('col-md-5').append(selectVar_2)
     ).append(
-        $('<button>').clone().addClass('btn btn-primary').attr('id', 'draw_2d').attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_draw_2d')
+        $('<button>').clone().addClass('btn btn-primary').attr('id', 'draw_2d').attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_draw_2d').attr('data-drawing-type','pcfp2d')
     );
 
     tableResult.data.componentArr.map(function (component, index) {
@@ -1749,6 +1749,33 @@ var handleCorrespondenceAnalysis = function (tableResult) {
     $(container_10).append(table_10);
     $(presentArea).append(container_10);
 
+    var container_11 = $(container).clone().addClass('col-md-12');
+    var selectVar_1 = $('<select>').attr('id', 'var_1').addClass('form-control');
+    var selectVar_2 = $('<select>').attr('id', 'var_2').addClass('form-control');
+
+    var rowBlock = $('<div>').clone().addClass('row');
+    $(rowBlock).append(
+        $('<div>').clone().addClass('col-md-5').append(selectVar_1)
+    ).append(
+        $('<div>').clone().addClass('col-md-5').append(selectVar_2)
+    ).append(
+        $('<button>').clone().addClass('btn btn-primary').attr('id', 'draw_2d').attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_draw_2d').attr('data-drawing-type','correspondence')
+    );
+
+    tableResult.srPcaDTO.componentArr.map(function (component, index) {
+        $(selectVar_1).append(
+            $('<option>').val(index).text('F' + (index + 1))
+        );
+
+        $(selectVar_2).append(
+            $('<option>').val(index).text('F' + (index + 1))
+        );
+    });
+
+    $(container_11).append(rowBlock)
+        .append($(container).clone().attr('id', '2d_drawing').css('height', '800px'));
+
+    $(presentArea).append(container_11);
 };
 
 var handleRelatedVariable = function (tableResult) {
@@ -2330,9 +2357,9 @@ var handleSimpleLinearRegression = function (tableResult) {
     $(coefficientTable).append(valueFirstRow).append(valueSecondRow);
     $(coefficientArea).append(coefficientTable)
         .append($(block).clone().css({
-                'font-weight': '700',
-                'margin-bottom': '10px'
-            })
+            'font-weight': '700',
+            'margin-bottom': '10px'
+        })
             .append($(span).clone().text(SLRconfig.dependentVariable[0].varietyName))
             .append($(span).clone().text(' = '))
             .append($(span).clone().text(Number(tableResult.regressionParameters[0]).toFixed(numReservation)))
@@ -2340,7 +2367,7 @@ var handleSimpleLinearRegression = function (tableResult) {
             .append($(span).clone().text(Number(tableResult.regressionParameters[1]).toFixed(numReservation)))
             .append($(span).clone().text(' × '))
             .append($(span).clone().text(SLRconfig.independentVariable[0].varietyName))
-        )
+    )
         .append($(block).clone()
             .append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_dependent_variable_is'))
             .append($(span).clone().text(SLRconfig.dependentVariable[0].varietyName)))
@@ -2743,9 +2770,9 @@ var handleSlipStepwiseRegression = function (tableResult) {
 
     $(forwardRegressionArea).append(forwardRegressionTable)
         .append(
-            $(block).clone().html('<strong>' + config.dependentVariable[0].varietyName + '</strong>')
-                .append($(span).clone().text(' = ' + equationString))
-        );
+        $(block).clone().html('<strong>' + config.dependentVariable[0].varietyName + '</strong>')
+            .append($(span).clone().text(' = ' + equationString))
+    );
     $(presentArea).append(forwardRegressionArea);
 
     //3 打印『前移预测』
@@ -2758,8 +2785,8 @@ var handleSlipStepwiseRegression = function (tableResult) {
         $(block).clone().append(
             $(span).clone().html(
                 (localStorage.getItem('MULTIINFO_CONFIG_LANGUAGE') == 'zh-cn') ?
-                '<strong>' + key[0] + '</strong>' + ' 年的 ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' 的预测值是：' + Number(tableResult.preForecast[key[0]]).toFixed(numReservation) :
-                'The predictive value of ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' in ' + '<strong>' + key[0] + '</strong>' + ' is: ' + Number(tableResult.preForecast[key[0]]).toFixed(numReservation))
+                    '<strong>' + key[0] + '</strong>' + ' 年的 ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' 的预测值是：' + Number(tableResult.preForecast[key[0]]).toFixed(numReservation) :
+                    'The predictive value of ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' in ' + '<strong>' + key[0] + '</strong>' + ' is: ' + Number(tableResult.preForecast[key[0]]).toFixed(numReservation))
         )
     );
     $(presentArea).append(forwardPredictArea);
@@ -2815,9 +2842,9 @@ var handleSlipStepwiseRegression = function (tableResult) {
 
     $(backwardRegressionArea).append(backwardRegressionTable)
         .append(
-            $(block).clone().html('<strong>' + config.dependentVariable[0].varietyName + '</strong>')
-                .append($(span).clone().text(' = ' + _equationString))
-        );
+        $(block).clone().html('<strong>' + config.dependentVariable[0].varietyName + '</strong>')
+            .append($(span).clone().text(' = ' + _equationString))
+    );
     $(presentArea).append(backwardRegressionArea);
 
 
@@ -2831,8 +2858,8 @@ var handleSlipStepwiseRegression = function (tableResult) {
         $(block).clone().append(
             $(span).clone().html(
                 (localStorage.getItem('MULTIINFO_CONFIG_LANGUAGE') == 'zh-cn') ?
-                '<strong>' + _key[0] + '</strong>' + ' 年的 ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' 的推测值是：' + Number(tableResult.backForecast[_key[0]]).toFixed(numReservation) :
-                'The predictive value of ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' in ' + '<strong>' + _key[0] + '</strong>' + ' is: ' + Number(tableResult.backForecast[_key[0]]).toFixed(numReservation))
+                    '<strong>' + _key[0] + '</strong>' + ' 年的 ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' 的推测值是：' + Number(tableResult.backForecast[_key[0]]).toFixed(numReservation) :
+                    'The predictive value of ' + '<strong>' + config.dependentVariable[0].varietyName + '</strong>' + ' in ' + '<strong>' + _key[0] + '</strong>' + ' is: ' + Number(tableResult.backForecast[_key[0]]).toFixed(numReservation))
         )
     );
     $(presentArea).append(backwardPredictArea);

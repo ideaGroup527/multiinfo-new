@@ -110,7 +110,6 @@
       "pie": "饼图",
       "scatter": "散点图",
       "cluster_analysis": "聚类分析图",
-      "fisher_line": "Optimal Segmentation",
       "fisher_line": "离差平方总和变化折线图",
       "fisher": "最优分割图",
       "pcfp2d": "因子平面二维图",
@@ -789,3 +788,6 @@
     }
   }
 }
+
+
+

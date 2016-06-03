@@ -27,8 +27,7 @@
     <div class="navbar-right" style="margin-right: 20px">
         <ul class="nav navbar-nav">
             <li class="dropdown">
-                <a class="js-menu-click" href="javascript:"
-                   data-script="js/common/nav/Print/script.js">
+                <a href="javascript:" onclick="printResult()">
                     <span data-i18n-type="nav" data-i18n-tag="print">打印</span>
                 </a>
             </li>
@@ -102,6 +101,11 @@
 <script src="js/common/page/resultTableGenerator.js"></script>
 <script src="js/common/page/print.js"></script>
 <script>
+    var printResult = function () {
+        printData('#print_target');
+    }
+</script>
+<script>
     var variableList, dataGrid;
 
     $(document).ready(function () {
@@ -150,12 +154,16 @@
 
         var graphName = _String['graph'][lang]['pcfp2d'];
 
-        $('#2d_drawing').charts({
-            title: graphName,
-            data: resultData,
-            sub: [var_1, var_2],
-            type: ['pcfp2d']
-        });
+        if ($(this).attr('data-drawing-type')) {
+
+            $('#2d_drawing').charts({
+                title: graphName,
+                data: resultData,
+                sub: [var_1, var_2],
+                variableList:JSON.parse(sessionStorage.getItem('PRIVATE_VARIABLE_LIST')),
+                type: [$(this).attr('data-drawing-type')]
+            });
+        }
     });
 </script>
 </body>
