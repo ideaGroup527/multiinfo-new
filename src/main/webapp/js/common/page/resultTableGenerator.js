@@ -2330,9 +2330,9 @@ var handleSimpleLinearRegression = function (tableResult) {
     $(coefficientTable).append(valueFirstRow).append(valueSecondRow);
     $(coefficientArea).append(coefficientTable)
         .append($(block).clone().css({
-            'font-weight': '700',
-            'margin-bottom': '10px'
-        })
+                'font-weight': '700',
+                'margin-bottom': '10px'
+            })
             .append($(span).clone().text(SLRconfig.dependentVariable[0].varietyName))
             .append($(span).clone().text(' = '))
             .append($(span).clone().text(Number(tableResult.regressionParameters[0]).toFixed(numReservation)))
@@ -2340,7 +2340,7 @@ var handleSimpleLinearRegression = function (tableResult) {
             .append($(span).clone().text(Number(tableResult.regressionParameters[1]).toFixed(numReservation)))
             .append($(span).clone().text(' × '))
             .append($(span).clone().text(SLRconfig.independentVariable[0].varietyName))
-    )
+        )
         .append($(block).clone()
             .append($(span).clone().attr('data-i18n-type', 'page').attr('data-i18n-tag', 'label_dependent_variable_is'))
             .append($(span).clone().text(SLRconfig.dependentVariable[0].varietyName)))
@@ -2743,9 +2743,9 @@ var handleSlipStepwiseRegression = function (tableResult) {
 
     $(forwardRegressionArea).append(forwardRegressionTable)
         .append(
-        $(block).clone().html('<strong>' + config.dependentVariable[0].varietyName + '</strong>')
-            .append($(span).clone().text(' = ' + equationString))
-    );
+            $(block).clone().html('<strong>' + config.dependentVariable[0].varietyName + '</strong>')
+                .append($(span).clone().text(' = ' + equationString))
+        );
     $(presentArea).append(forwardRegressionArea);
 
     //3 打印『前移预测』
@@ -2815,9 +2815,9 @@ var handleSlipStepwiseRegression = function (tableResult) {
 
     $(backwardRegressionArea).append(backwardRegressionTable)
         .append(
-        $(block).clone().html('<strong>' + config.dependentVariable[0].varietyName + '</strong>')
-            .append($(span).clone().text(' = ' + _equationString))
-    );
+            $(block).clone().html('<strong>' + config.dependentVariable[0].varietyName + '</strong>')
+                .append($(span).clone().text(' = ' + _equationString))
+        );
     $(presentArea).append(backwardRegressionArea);
 
 
@@ -3421,6 +3421,7 @@ var handleClusterAnalysis = function (tableResult) {
         type: ['clustering'],
         data: JSON.parse(sessionStorage.getItem('PRIVATE_DATA_GRID')),
         clusterConfig: CONFIG,
-        clusterDataMax: max
+        clusterDataMax: max,
+        clusterMethod: CONFIG.clusterMethod[0]
     });
 };

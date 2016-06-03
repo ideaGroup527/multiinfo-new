@@ -78,11 +78,12 @@
         var factorList = $('.col-checkbox').parent().parent();
         var config = JSON.parse(sessionStorage.getItem('PRIVATE_CONFIG_CLUSTER_PART_1'));
 
+        var from = config.independentVariable[0].range.split(':')[0].split(config.independentVariable[0].position)[1];
+        var to = config.independentVariable[0].range.split(':')[1].split(config.independentVariable[0].position)[1];
+
         factorList.each(function (index, elem) {
             var obj = JSON.parse($(elem).attr('data-all-params'));
-            var position = obj.positionDes.split(',')[1];
-            var from = config.independentVariable[0].range.split(':')[0].split(position)[1];
-            var to = config.independentVariable[0].range.split(':')[1].split(position)[1];
+            var position = obj.positionDes.split(',')[0];
 
             obj.range = '' + position + from + ':' + position + to;
             obj.varietyName = obj.data;
