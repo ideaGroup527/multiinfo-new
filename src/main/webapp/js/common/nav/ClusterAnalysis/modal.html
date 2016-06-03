@@ -42,7 +42,7 @@
                         </label>
                     </div>
                 </div>
-                <div data-config-group data-group-name="factorVarVariable">
+                <div data-config-group data-group-name="factorVarVariable" style="display: none;">
                     <hr/>
                     <p data-i18n-type="page" data-i18n-tag="label_choose_identity_column">选择标识列</p>
 
@@ -61,7 +61,7 @@
                                 value="1">夹角余弦
                         </option>
                         <option data-i18n-type="page" data-i18n-tag="label_correlation_coefficients"
-                                value="2">相关系数
+                                value="2" selected>相关系数
                         </option>
                     </select>
                 </div>
@@ -80,7 +80,7 @@
 
         factorList.each(function (index, elem) {
             var obj = JSON.parse($(elem).attr('data-all-params'));
-            var position = obj.position.slice(0, 1);
+            var position = obj.positionDes.split(',');
             var from = config.independentVariable[0].range.split(':')[0].split(position)[1];
             var to = config.independentVariable[0].range.split(':')[1].split(position)[1];
 
@@ -95,13 +95,13 @@
 
         $(function () {
             $('#q_type').change(function () {
-                $('select[name=statisticsMethod]').val(2);
-                $('[data-group-name=factorVarVariable]').hide();
+                $('select[name=statisticsMethod]').val(0);
+                $('[data-group-name=factorVarVariable]').show();
             });
 
             $('#r_type').change(function () {
-                $('select[name=statisticsMethod]').val(0);
-                $('[data-group-name=factorVarVariable]').show();
+                $('select[name=statisticsMethod]').val(2);
+                $('[data-group-name=factorVarVariable]').hide();
             });
         })
     </script>
