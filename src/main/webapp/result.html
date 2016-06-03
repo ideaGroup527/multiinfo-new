@@ -15,7 +15,6 @@
     <script src="js/common/i18n.js"></script>
     <script src="js/lib/highcharts.js"></script>
     <script src="js/lib/highcharts-3d.js"></script>
-    <title></title>
 </head>
 <body>
 <nav class="navbar navbar-default" role="navigation">
@@ -27,6 +26,12 @@
     </div>
     <div class="navbar-right" style="margin-right: 20px">
         <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a class="js-menu-click" href="javascript:"
+                   data-script="js/common/nav/Print/script.js">
+                    <span data-i18n-type="nav" data-i18n-tag="print">打印</span>
+                </a>
+            </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                    aria-expanded="true" data-submenu>
@@ -90,11 +95,12 @@
     </div>
 </nav>
 <div class="container-fluid">
-    <div class="col-md-10 col-md-offset-1 result-table"></div>
+    <div class="col-md-10 col-md-offset-1 result-table" id="print_target"></div>
 </div>
 
 <script src="js/common/navGenerator.js"></script>
 <script src="js/common/page/resultTableGenerator.js"></script>
+<script src="js/common/page/print.js"></script>
 <script>
     var variableList, dataGrid;
 

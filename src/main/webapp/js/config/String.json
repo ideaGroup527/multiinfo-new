@@ -751,6 +751,7 @@
     "en-us": {
       "switch_sheet": "Switch Sheet",
       "setting": "Setting",
+      "print": "Print",
       "setting_accuracy": "<i class='glyphicon glyphicon-dashboard'></i> Accuracy",
       "setting_language": " <i class='glyphicon glyphicon-globe'></i> Language",
       "lang_zh": "中文",
@@ -763,6 +764,7 @@
     "zh-cn": {
       "switch_sheet": "切换表格",
       "setting": "设置",
+      "print": "打印",
       "setting_accuracy": "<i class='glyphicon glyphicon-dashboard'></i> 精确度",
       "setting_language": " <i class='glyphicon glyphicon-globe'></i> 语言",
       "lang_zh": "<strong>中文（当前）</strong>",
@@ -775,6 +777,7 @@
     "ja-jp": {
       "switch_sheet": "シートスイッチ",
       "setting": "設定",
+      "print": "印刷",
       "setting_accuracy": "<i class='glyphicon glyphicon-dashboard'></i> 精度",
       "setting_language": " <i class='glyphicon glyphicon-globe'></i> 言語",
       "lang_zh": "中文",
