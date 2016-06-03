@@ -8,6 +8,6 @@ function printData(id)
     var oldstr = document.body.innerHTML;
     document.body.innerHTML = headstr+newstr+'<img src="'+img+'"/>'+footstr;
     window.print();
-    document.body.innerHTML = oldstr;
+    location.reload();
     return false;
 }
