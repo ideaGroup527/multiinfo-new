@@ -80,7 +80,7 @@
 
         factorList.each(function (index, elem) {
             var obj = JSON.parse($(elem).attr('data-all-params'));
-            var position = obj.positionDes.split(',');
+            var position = obj.positionDes.split(',')[1];
             var from = config.independentVariable[0].range.split(':')[0].split(position)[1];
             var to = config.independentVariable[0].range.split(':')[1].split(position)[1];
 
